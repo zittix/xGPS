@@ -158,11 +158,12 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 243777512;
-			PBXWorkspaceStateSaveDate = 243777512;
+			PBXPerProjectTemplateStateSaveDate = 243777779;
+			PBXWorkspaceStateSaveDate = 243777779;
 		};
 		perUserProjectItems = {
 			4E0BE6480E6C94FE008CF18A = 4E0BE6480E6C94FE008CF18A /* PBXTextBookmark */;
+			4E0F04C10E87C0F700D75E7D /* PlistBookmark */ = 4E0F04C10E87C0F700D75E7D /* PlistBookmark */;
 			4E864FDA0E7EBC58005954EE = 4E864FDA0E7EBC58005954EE /* PBXTextBookmark */;
 			4E8DADE90E855E820025D8ED = 4E8DADE90E855E820025D8ED /* PBXTextBookmark */;
 			4E8DAF0B0E8571790025D8ED = 4E8DAF0B0E8571790025D8ED /* PBXTextBookmark */;
@@ -266,6 +267,17 @@
 		rType = 0;
 		vrLen = 1355;
 		vrLoc = 3064;
+	};
+	4E0F04C10E87C0F700D75E7D /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/mathieu/Desktop/xGPS/Info.plist;
+		rLen = 0;
+		rLoc = 2147483647;
 	};
 	4E0F46960E85019A001B6F51 /* GPSManager.m:26 */ = {
 		isa = PBXFileBreakpoint;
