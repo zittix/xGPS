@@ -12,10 +12,11 @@
 @implementation SearchPlacesView
 
 
-- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller {
+- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)_map{
     if (self = [super initWithFrame:frame]) {
 		controller=_controller;
         // Initialization code
+		
 		searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(0,0,frame.size.width,50)];
 		dummyView=[[UIView alloc] initWithFrame:CGRectMake(0,50,frame.size.width,frame.size.height-50)];
 				   dummyView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -27,18 +28,43 @@
 		[self addSubview:searchBar];
 		[self addSubview:dummyView];
 		[searchBar becomeFirstResponder];
-
+		map=_map;
 		self.backgroundColor=[UIColor clearColor];
-		
+		geocoder=[[GeoEncoder alloc] init];
+		geocoder.delegate=self;
     }
     return self;
 }
 - (void)didMoveToSuperview {
-	searchBar.text=@"";
+	searchBar.text=@"Ch. du Marais 9, Mex 1031, Switzerland";
 	[searchBar becomeFirstResponder];
 }
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+-(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req {
+	//CFShow(result);
+	if([result count]>0) {
+		NSEnumerator *enumerator = [result keyEnumerator];
+		if([result count]==1) {
+				//Automatic show result
+			id key = [enumerator nextObject];
+	
+			
+			[map updateCurrentPos:[result objectForKey:key]];
+			[self searchBarCancelButtonClicked:searchBar];
+		} else {
+			id key=nil;
+			while ((key = [enumerator nextObject])) {
+				/* code that uses the returned key */
+			}
+		}
+	}
+	//[result release];
+	//[req release];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar_ {
 	NSLog(@"Search");
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+	[geocoder geoencode:searchBar_.text];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	[UIView beginAnimations:nil context:nil];

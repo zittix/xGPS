@@ -18,6 +18,7 @@
 #define kSettingsLastPosY @"gpslastposy"
 #define vSettingsConditionsUse @"1.0"
 #define kSettingsMapsOffline @"mapsofflinemode"
+#define kSettingsMapsLanguage @"mapslanguage"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;

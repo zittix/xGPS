@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GeoEncoder.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-@interface SearchPlacesView : UIView<UISearchBarDelegate,ABPeoplePickerNavigationControllerDelegate> {
+#import "MapView.h"
+@interface SearchPlacesView : UIView<UISearchBarDelegate,ABPeoplePickerNavigationControllerDelegate,GeoEncoderDelegate> {
 	UIView *dummyView;
 	UISearchBar *searchBar;
 	UIViewController* controller;
+	GeoEncoder *geocoder;
+	MapView *map;
 }
-- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller;
+- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)map;
 @end

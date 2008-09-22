@@ -9,7 +9,7 @@
 #import "TileDB.h"
 
 #include <sqlite3.h>
-
+#import "xGPSAppDelegate.h"
 @implementation TileDB
 
 -(void)loadDB {
@@ -196,6 +196,7 @@
 
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
 	NSString *mapType=@"w2.83"; //Normal
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat

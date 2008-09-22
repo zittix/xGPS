@@ -30,8 +30,9 @@
 	//Set the View to a UIView
 	viewRect=[[UIScreen mainScreen] applicationFrame];
 	viewRect.size.height=viewRect.size.height-44.0f;
+
 	self.view=[[UIView alloc] initWithFrame:viewRect];
-		//viewRect.origin.y=0;
+		
 	//self.navigationController.navigationBarHidden=YES;
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight ;
 	self.view.autoresizesSubviews=YES;
@@ -65,6 +66,10 @@
 	//92x100
 	if(settingsController==nil) {
 		settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
+	}
+	if(searchPlacesView==nil) {
+		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) andController:self.navigationController andMap:mapview];
+		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	}
 	NSLog(@"View height:  %f",self.view.frame.size.height);
 //[self.view addSubview:debug];
@@ -105,8 +110,7 @@
 	[mapview updateCurrentPos:p];
 }
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	//self.navigationController.navigationBarHidden=NO;
-	
+	[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (void)viewDidAppear:(BOOL)animated {
 	//CGRect viewRect2=[[UIScreen mainScreen] applicationFrame];
@@ -127,15 +131,11 @@
 	//mapview.transform=CGAffineTransformMakeRotation(M_PI/2.0);
 	//mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0);
 	//[UIView commitAnimations];
-	
+	//[self actionSheet:nil willDismissWithButtonIndex:0];
 	[super viewDidAppear:animated];
 }
 -(void) endRotation:(NSString*)animationID finished:(BOOL)finished context:(NSString*)context {
 	[mapview setNeedsDisplay];
-}
--(void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration {
-	[mapview setNeedsDisplay];
-	[super willAnimateSecondHalfOfRotationFromInterfaceOrientation:fromInterfaceOrientation duration:duration];
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	//[self.view setNeedsLayout];
@@ -181,12 +181,10 @@
 	//0 cities,1 directions,2 cancel
 	switch(buttonIndex) {
 		case 0: {
-			if(searchPlacesView==nil) {
-				searchPlacesView=[[SearchPlacesView alloc] initWithFrame:self.view.frame andController:self.navigationController];
-				searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-			}
-			[UIView beginAnimations:nil context:nil];
+			searchPlacesView.alpha=0;
 			[self.view addSubview:searchPlacesView];
+			[UIView beginAnimations:nil context:nil];
+			searchPlacesView.alpha=1;
 			[UIView commitAnimations];
 		}break;
 		case 1: {
@@ -240,7 +238,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	// Return YES for supported orientations
 	//return (interfaceOrientation == UIInterfaceOrientationPortrait);
-	[self.navigationController setNavigationBarHidden:NO animated:NO];
+
 	return YES;
 }
 

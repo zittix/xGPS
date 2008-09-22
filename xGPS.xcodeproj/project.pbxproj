@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		4E0B8CF90E812A74009A2F86 /* iGPSDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */; };
 		4E0B8D440E812DDD009A2F86 /* GPSLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0B8D430E812DDD009A2F86 /* GPSLicenseViewController.m */; };
+		4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F05000E87C49000D75E7D /* GeoEncoder.m */; };
 		4E0F487B0E8518EC001B6F51 /* license.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F487A0E8518EC001B6F51 /* license.html */; };
 		4E0F48E30E851C3C001B6F51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F48E20E851C3C001B6F51 /* Localizable.strings */; };
 		4E23964B0E40EF800062A352 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E2396490E40EF800062A352 /* icon.png */; };
@@ -76,6 +77,8 @@
 		4E0B8CF80E812A74009A2F86 /* iGPSDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGPSDController.m; sourceTree = "<group>"; };
 		4E0B8D420E812DDD009A2F86 /* GPSLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSLicenseViewController.h; sourceTree = "<group>"; };
 		4E0B8D430E812DDD009A2F86 /* GPSLicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSLicenseViewController.m; sourceTree = "<group>"; };
+		4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoEncoder.h; sourceTree = "<group>"; };
+		4E0F05000E87C49000D75E7D /* GeoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoEncoder.m; sourceTree = "<group>"; };
 		4E0F48950E8519E6001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = French.lproj/license.html; sourceTree = "<group>"; };
 		4E0F48E00E851C30001B6F51 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E40E851C43001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -165,40 +168,19 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				4E8C97350E6CBEF7001F5317 /* SpeedView.h */,
-				4E8C97360E6CBEF7001F5317 /* SpeedView.m */,
-				4EE0F2D70E6AAA0100BBA3FD /* ProgressView.h */,
-				4EE0F2D80E6AAA0100BBA3FD /* ProgressView.m */,
-				4EE0F2D90E6AAA0100BBA3FD /* ZoomView.h */,
-				4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */,
-				4EE0F2D30E6AA9C500BBA3FD /* MapsManagerView.h */,
-				4EE0F2D00E6AA97600BBA3FD /* MapsManagerView.m */,
+				4E0F04FE0E87C44600D75E7D /* UI */,
 				4E79293E0E58E7F500CAF1B2 /* GPS */,
 				4E23969B0E40F7DA0062A352 /* LocationWrapper.h */,
 				4E2396780E40F7750062A352 /* TileDB.h */,
 				4E2396790E40F7750062A352 /* TileDB.m */,
-				4E23966E0E40F6AB0062A352 /* MapTile.h */,
-				4E23966F0E40F6AB0062A352 /* MapTile.m */,
-				4E2396700E40F6AB0062A352 /* MapView.h */,
-				4E2396710E40F6AB0062A352 /* MapView.m */,
 				4E2396720E40F6AB0062A352 /* Position.h */,
 				4E2396730E40F6AB0062A352 /* Position.m */,
-				4E7929620E58EAE100CAF1B2 /* MainViewController.m */,
-				28216C950DB411BC00E5133A /* MainViewController.h */,
 				1D3623240D0F684500981E51 /* xGPSAppDelegate.h */,
 				1D3623250D0F684500981E51 /* xGPSAppDelegate.m */,
 				4E2398210E4106610062A352 /* DirectionsViewController.h */,
 				4E2398220E4106610062A352 /* DirectionsViewController.m */,
-				4E941A070E6A92330037F8C1 /* SettingsViewController.h */,
-				4E941A080E6A92330037F8C1 /* SettingsViewController.m */,
-				4E864FA40E7EBC58005954EE /* GPSSelectorViewController.h */,
-				4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */,
-				4E0B8D420E812DDD009A2F86 /* GPSLicenseViewController.h */,
-				4E0B8D430E812DDD009A2F86 /* GPSLicenseViewController.m */,
-				4E90BD610E82E95F007D8F7C /* LicenseViewController.h */,
-				4E90BD620E82E95F007D8F7C /* LicenseViewController.m */,
-				4E8DAF2C0E85737C0025D8ED /* SearchPlacesView.h */,
-				4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */,
+				4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */,
+				4E0F05000E87C49000D75E7D /* GeoEncoder.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -262,6 +244,37 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4E0F04FE0E87C44600D75E7D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				4E8C97350E6CBEF7001F5317 /* SpeedView.h */,
+				4E8C97360E6CBEF7001F5317 /* SpeedView.m */,
+				4EE0F2D70E6AAA0100BBA3FD /* ProgressView.h */,
+				4EE0F2D80E6AAA0100BBA3FD /* ProgressView.m */,
+				4EE0F2D90E6AAA0100BBA3FD /* ZoomView.h */,
+				4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */,
+				4EE0F2D30E6AA9C500BBA3FD /* MapsManagerView.h */,
+				4EE0F2D00E6AA97600BBA3FD /* MapsManagerView.m */,
+				4E23966E0E40F6AB0062A352 /* MapTile.h */,
+				4E23966F0E40F6AB0062A352 /* MapTile.m */,
+				4E2396700E40F6AB0062A352 /* MapView.h */,
+				4E2396710E40F6AB0062A352 /* MapView.m */,
+				4E7929620E58EAE100CAF1B2 /* MainViewController.m */,
+				28216C950DB411BC00E5133A /* MainViewController.h */,
+				4E941A070E6A92330037F8C1 /* SettingsViewController.h */,
+				4E941A080E6A92330037F8C1 /* SettingsViewController.m */,
+				4E864FA40E7EBC58005954EE /* GPSSelectorViewController.h */,
+				4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */,
+				4E0B8D420E812DDD009A2F86 /* GPSLicenseViewController.h */,
+				4E0B8D430E812DDD009A2F86 /* GPSLicenseViewController.m */,
+				4E90BD610E82E95F007D8F7C /* LicenseViewController.h */,
+				4E90BD620E82E95F007D8F7C /* LicenseViewController.m */,
+				4E8DAF2C0E85737C0025D8ED /* SearchPlacesView.h */,
+				4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		4E79293E0E58E7F500CAF1B2 /* GPS */ = {
@@ -416,6 +429,7 @@
 				4E0B8D440E812DDD009A2F86 /* GPSLicenseViewController.m in Sources */,
 				4E90BD630E82E95F007D8F7C /* LicenseViewController.m in Sources */,
 				4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */,
+				4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,13 +501,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "28EF57E8-19D0-4591-AE5A-979E1A262AE1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Deploy;
@@ -516,18 +530,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-lm",
-					"-lsqlite3",
-				);
+				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "796DCA27-69A9-4F00-A6B0-1CDE8B5E071D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Debug;
@@ -536,13 +547,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "28EF57E8-19D0-4591-AE5A-979E1A262AE1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Release;
