@@ -17,9 +17,24 @@
 		_mapview=mapview;
 		db=_db;
 		self.title=NSLocalizedString(@"Settings",@"Settings Button");
-		NSLog(@"View center: %f %f",self.view.center.x,self.view.center.y);
+		//NSLog(@"View center: %f %f",self.view.center.x,self.view.center.y);
+		enabled=YES;
 	}
 	return self;
+}
+
+
+- (void)dealloc {
+	[super dealloc];
+	if(mapsmanager!=nil) {
+		[mapsmanager release];
+	}
+	if(gpsselector!=nil) {
+		[gpsselector release];
+	}
+	if(dirLangView!=nil) {
+		[dirLangView release];
+	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -52,11 +67,7 @@
 	if(mapsmanager==nil) {
 		mapsmanager=[[MapsManagerView alloc] initWithDB:db];
 	}
-	//PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosY]];
-	
 		
-		
-	
 	[self.navigationController pushViewController:mapsmanager animated:YES];
 		[mapsmanager updateCurrentPos:[_mapview getCurrentPos]];
 	}
@@ -74,6 +85,7 @@
 -(void)switchOfflineChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsMapsOffline];
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *id=@"";
 	switch(indexPath.section) {
@@ -282,16 +294,24 @@
 						[cell.contentView addSubview:value];
 						value.textAlignment=UITextAlignmentRight;
 						label.text=NSLocalizedString(@"Language",@"Language to use for driving directions");	
-						value.text=NSLocalizedString(@"French",@"French");
-						value.text=NSLocalizedString(@"Italian",@"Italian");
-						value.text=NSLocalizedString(@"German",@"German");
-						value.text=NSLocalizedString(@"English",@"English");
+						NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
+						value.text=@"English";
+						if(lang!=nil) {
+							if([lang isEqualToString:@"fr"])
+								value.text=@"Français";
+							else if([lang isEqualToString:@"de"])
+								value.text=@"Deutsch";
+							else if([lang isEqualToString:@"it"])
+								value.text=@"Italiano";
+						}
+						
+						
 						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
 						
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
 				}
-			}
+			}break;
 		}
 		
 	} else {
@@ -310,6 +330,7 @@
 				case 4:	
 				{
 					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
+					((UISwitch*)[cell viewWithTag:1]).enabled=enabled;
 				}
 					break;
 			} break;
@@ -334,6 +355,23 @@
 					} break;
 				}
 			} break;
+			case 2: {
+				switch(indexPath.row) {
+					case 0: {
+						UILabel *value=(UILabel*)[cell.contentView viewWithTag:1];	
+						NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
+						value.text=@"English";
+						if(lang!=nil) {
+							if([lang isEqualToString:@"fr"])
+								value.text=@"Français";
+							else if([lang isEqualToString:@"de"])
+								value.text=@"Deutsch";
+							else if([lang isEqualToString:@"it"])
+								value.text=@"Italiano";
+						}
+					} break;
+				}
+			}
 		}	
 	}
 	
@@ -341,15 +379,33 @@
 	// Configure the cell
 	return cell;
 }
+-(void) setEnabled:(BOOL)v {
+	[self.tableView setScrollEnabled:v];
+	enabled=v;
+	[self.tableView reloadData];
+}
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if(buttonIndex==1) {
 		[[xGPSAppDelegate tiledb] flushMaps];
 		[self.tableView reloadData];
 	}
 }
-
+-(void)showLangDirSelector:(id)sender {
+	#define picker_height 260.0f
+	if(dirLangView==nil) {
+		dirLangView=[[DirectionsLanguageViewController alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-picker_height,self.view.frame.size.width,picker_height+44.0f) andController:self];
+	}
+	//NSLog(@"Height: %f, y=%f height=%f",self.view.bounds.size.height,self.view.bounds.size.height-picker_height-44.0f,picker_height+44.0f);
+	[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+	//[self.navigationController presentModalViewController:dirLangView animated:YES];
+	[UIView beginAnimations:nil context:nil];
+	
+	[self.view addSubview:dirLangView];
+	[UIView commitAnimations];
+	[self setEnabled:NO];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+	if(!enabled) return;
 	if(indexPath.section==0 && indexPath.row==0) {
 			[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		[self showMapsManager:self];
@@ -365,12 +421,9 @@
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the downloaded maps ?",@"Delete downloaded maps question") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"No",@"No") otherButtonTitles:NSLocalizedString(@"Yes",@"Yes"),nil];
 		[act showInView:self.view];
+	}else if(indexPath.section==2 && indexPath.row==0) {
+		[self showLangDirSelector:self];	
 	}
-}
-
-
-- (void)dealloc {
-	[super dealloc];
 }
 
 
