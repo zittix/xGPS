@@ -11,13 +11,9 @@
 @interface SpeedView : UIView {
 	float _speed;
 	MapTile *speedbgd;
-	CGSize cachedFontSize;
-	CGSize cachedUnitFontSize;
-	CGRect rect;
-	BOOL visible;
-	float _lastDrawSpeed;
+	UILabel *lblspeed;
+	UILabel *lblunit;
 }
 -(id) initWithFrame:(CGRect)f;
 -(void)setSpeed:(float)speed;
--(void)setSpeedVisible:(BOOL)state;
 @end

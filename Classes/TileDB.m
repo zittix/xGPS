@@ -185,12 +185,12 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
-	NSLog(@"Getting file size %@",path);
+	//NSLog(@"Getting file size %@",path);
 	NSFileManager * fm = [NSFileManager defaultManager];
 	
 	NSDictionary *fattrs = [fm fileAttributesAtPath:path traverseLink:YES];
 	NSNumber *nb=[fattrs objectForKey:NSFileSize];
-	NSLog(@"file size: %f",[nb unsignedLongLongValue]/1024.0/1024.0);
+	//NSLog(@"file size: %f",[nb unsignedLongLongValue]/1024.0/1024.0);
 	return [nb unsignedLongLongValue]/1024.0/1024.0;	
 }
 

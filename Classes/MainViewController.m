@@ -36,7 +36,7 @@
 	//self.navigationController.navigationBarHidden=YES;
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight ;
 	self.view.autoresizesSubviews=YES;
-	NSLog(@"View center: %f %f",self.view.center.x,self.view.center.y);
+
 	
 	//Inside the view:
 
@@ -48,7 +48,7 @@
 	[self.view addSubview:zoomview];
 	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-44.0f-95.0f-2.0f,92.0f,100.0f)];
 	[speedview setSpeed:0];
-	[speedview setSpeedVisible:YES];
+
 	[self.view addSubview:speedview];
 	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin;
 	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0f,viewRect.size.width,44.0f)];
@@ -71,7 +71,7 @@
 		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) andController:self.navigationController andMap:mapview];
 		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	}
-	NSLog(@"View height:  %f",self.view.frame.size.height);
+
 //[self.view addSubview:debug];
 }
 - (void)viewWillDisappear:(BOOL)animated {

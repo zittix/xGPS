@@ -164,8 +164,8 @@
 			return NO;
 		}
 		//[dataR release];
-		//[xmlParser release];
-		return YES;
+		///[xmlParser release];
+				return YES;
 	}
 	else return NO;
 }

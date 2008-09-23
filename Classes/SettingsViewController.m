@@ -23,14 +23,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 2;
+	return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch(section) {
 		case 0: return NSLocalizedString(@"Maps",@"Maps title in settings");
 		case 1: return NSLocalizedString(@"GPS Device",@"GPS Device title in settings");
-			
+		case 2: return NSLocalizedString(@"Driving directions",@"Diriving directions title");
 			
 		default: return @"";
 	}
@@ -39,6 +39,7 @@
 	switch(section) {
 		case 0: return 5;
 		case 1: return 3;
+		case 2: return 1;
 		default: return 0;
 	}
 }
@@ -88,6 +89,11 @@
 				case 0:	id=@"sectGPS_gpstype"; break;
 					case 1:	id=@"sectGPS_gpsstate"; break;
 					case 2:	id=@"sectGPS_gpsreset"; break;
+			}break;
+		}
+		case 2: {
+			switch(indexPath.row) {
+				case 0:	id=@"sectDrvDir_lang"; break;
 			}break;
 		}
 	}
@@ -252,6 +258,40 @@
 						break;
 				}
 			} break;
+			case 2: {
+				switch(indexPath.row) {
+					case 0: {
+						UILabel *label;
+						UILabel *value;
+						
+						label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0,150.0, 25.0)] autorelease];
+						label.tag = 2;
+						label.font = [UIFont boldSystemFontOfSize:16.0];
+						label.textAlignment = UITextAlignmentLeft;
+						label.backgroundColor=[UIColor clearColor];
+						label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						[cell.contentView addSubview:label];
+						
+						
+						value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
+						value.tag = 1;
+						
+						value.font = [UIFont systemFontOfSize:16.0];
+						value.backgroundColor=[UIColor clearColor];
+						value.textColor=VALUE_COLOR;
+						[cell.contentView addSubview:value];
+						value.textAlignment=UITextAlignmentRight;
+						label.text=NSLocalizedString(@"Language",@"Language to use for driving directions");	
+						value.text=NSLocalizedString(@"French",@"French");
+						value.text=NSLocalizedString(@"Italian",@"Italian");
+						value.text=NSLocalizedString(@"German",@"German");
+						value.text=NSLocalizedString(@"English",@"English");
+						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+					} break;
+				}
+			}
 		}
 		
 	} else {

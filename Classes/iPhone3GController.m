@@ -61,11 +61,13 @@
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	if(oldLocation!=nil) {
-	CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
+		CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
 		NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
-		if(dt>0)
-	gps_data.fix.speed=dx/dt;
-		else
+		if(dt>0) {
+			gps_data.fix.speed=dx/dt;
+			if(gps_data.fix.speed>60)
+				gps_data.fix.speed=0;
+		}else
 			gps_data.fix.speed=0;
 	}
 	else
