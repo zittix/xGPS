@@ -126,11 +126,15 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 	if(waitingForLicense) {
+		
 		waitingForLicense=NO;
-		if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense && ![[xGPSAppDelegate gpsmanager] GetCurrentGPS].started) {
+		
+		if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense) {
+		if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].started) {
 			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] start];
 		}
 		[self.navigationController popViewControllerAnimated:YES];
+		}
 	}
 }
 
@@ -151,6 +155,7 @@
 - (void)dealloc {
     [super dealloc];
 	[gpsList release];
+	if(licenseView!=nil)
 	[licenseView release];
 }
 

@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Position.h"
 @protocol GeoEncoderDelegate
--(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req;
+-(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req error:(NSError*)err;
 
+@end
+@interface GeoEncoderResult : NSObject
+{
+	NSString *name;
+	PositionObj* pos;
+}
+@property (nonatomic,retain) NSString* name;
+@property (nonatomic,retain) PositionObj* pos;
++(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos;
 @end
 
 
@@ -20,7 +30,8 @@
 	NSString *currentPlacename;
 	NSString *currentPos;
 	BOOL parsingPlace;
-	NSString *currentProp;
+	NSMutableString *currentProp;
+	NSMutableData *resultData;
 }
 @property (nonatomic,assign) id delegate;
 -(BOOL)geoencode:(NSString*)toEncode;

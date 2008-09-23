@@ -42,6 +42,13 @@
 	self.navigationItem.rightBarButtonItem = addButton;
 	[addButton release];
 }
+-(void)dealloc {
+	[super dealloc];
+	[progress release];
+	[mapview release];
+	[zoomview release];
+	
+}
 -(void)updateCurrentPos:(PositionObj*)pos {
 	[mapview updateCurrentPos: pos];
 	[mapview setNeedsDisplay];

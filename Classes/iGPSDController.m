@@ -104,6 +104,9 @@
 }
 -(void)dealloc {
 	[super dealloc];
+	if(license!=nil) {
+		[license release];	
+	}
 }
 
 

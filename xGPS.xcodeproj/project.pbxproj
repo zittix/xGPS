@@ -23,7 +23,6 @@
 		4E23967A0E40F7750062A352 /* TileDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2396790E40F7750062A352 /* TileDB.m */; };
 		4E2397000E40F95D0062A352 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */; };
 		4E2397010E40F95D0062A352 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FF0E40F95D0062A352 /* QuartzCore.framework */; };
-		4E2398230E4106610062A352 /* DirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2398220E4106610062A352 /* DirectionsViewController.m */; };
 		4E7929630E58EAE100CAF1B2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7929620E58EAE100CAF1B2 /* MainViewController.m */; };
 		4E864FA60E7EBC58005954EE /* GPSSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */; };
 		4E864FB90E7EBC58005954EE /* GPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E864FB80E7EBC58005954EE /* GPSController.m */; };
@@ -31,6 +30,7 @@
 		4E8650300E7EBC58005954EE /* ChangedState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E86502F0E7EBC58005954EE /* ChangedState.m */; };
 		4E86515B0E7EC237005954EE /* iPhone3GController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E86515A0E7EC237005954EE /* iPhone3GController.m */; };
 		4E86516D0E7EC361005954EE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E86516C0E7EC361005954EE /* CoreLocation.framework */; };
+		4E8BBC290E89786800BADF0C /* gps_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E8BBC280E89786800BADF0C /* gps_ball.png */; };
 		4E8C97370E6CBEF7001F5317 /* SpeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8C97360E6CBEF7001F5317 /* SpeedView.m */; };
 		4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */; };
 		4E90BD630E82E95F007D8F7C /* LicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E90BD620E82E95F007D8F7C /* LicenseViewController.m */; };
@@ -50,6 +50,7 @@
 		4EE0F2DB0E6AAA0100BBA3FD /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F2D80E6AAA0100BBA3FD /* ProgressView.m */; };
 		4EE0F2DC0E6AAA0100BBA3FD /* ZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */; };
 		4EE1356A0E7E63D800A5E181 /* GoogleBadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE135690E7E63D800A5E181 /* GoogleBadge.png */; };
+		4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,8 +97,6 @@
 		4E23969B0E40F7DA0062A352 /* LocationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationWrapper.h; sourceTree = "<group>"; };
 		4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4E2396FF0E40F95D0062A352 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		4E2398210E4106610062A352 /* DirectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsViewController.h; sourceTree = "<group>"; };
-		4E2398220E4106610062A352 /* DirectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsViewController.m; sourceTree = "<group>"; };
 		4E7929620E58EAE100CAF1B2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4E864FA40E7EBC58005954EE /* GPSSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSSelectorViewController.h; sourceTree = "<group>"; };
 		4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSSelectorViewController.m; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		4E8651590E7EC237005954EE /* iPhone3GController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhone3GController.h; sourceTree = "<group>"; };
 		4E86515A0E7EC237005954EE /* iPhone3GController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPhone3GController.m; sourceTree = "<group>"; };
 		4E86516C0E7EC361005954EE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4E8BBC280E89786800BADF0C /* gps_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gps_ball.png; sourceTree = "<group>"; };
 		4E8C97350E6CBEF7001F5317 /* SpeedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedView.h; sourceTree = "<group>"; };
 		4E8C97360E6CBEF7001F5317 /* SpeedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedView.m; sourceTree = "<group>"; };
 		4E8DAF2C0E85737C0025D8ED /* SearchPlacesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPlacesView.h; sourceTree = "<group>"; };
@@ -145,6 +145,8 @@
 		4EE0F2D90E6AAA0100BBA3FD /* ZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomView.h; sourceTree = "<group>"; };
 		4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomView.m; sourceTree = "<group>"; };
 		4EE135690E7E63D800A5E181 /* GoogleBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleBadge.png; sourceTree = "<group>"; };
+		4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsLanguageViewController.h; sourceTree = "<group>"; };
+		4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsLanguageViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,8 +180,6 @@
 				4E2396730E40F6AB0062A352 /* Position.m */,
 				1D3623240D0F684500981E51 /* xGPSAppDelegate.h */,
 				1D3623250D0F684500981E51 /* xGPSAppDelegate.m */,
-				4E2398210E4106610062A352 /* DirectionsViewController.h */,
-				4E2398220E4106610062A352 /* DirectionsViewController.m */,
 				4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */,
 				4E0F05000E87C49000D75E7D /* GeoEncoder.m */,
 			);
@@ -218,6 +218,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E8BBC280E89786800BADF0C /* gps_ball.png */,
 				4E0F48E20E851C3C001B6F51 /* Localizable.strings */,
 				4E90BD7B0E82E95F007D8F7C /* whiteButton.png */,
 				4EE135690E7E63D800A5E181 /* GoogleBadge.png */,
@@ -274,6 +275,8 @@
 				4E90BD620E82E95F007D8F7C /* LicenseViewController.m */,
 				4E8DAF2C0E85737C0025D8ED /* SearchPlacesView.h */,
 				4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */,
+				4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */,
+				4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				4E0F487B0E8518EC001B6F51 /* license.html in Resources */,
 				4E90BD7C0E82E95F007D8F7C /* whiteButton.png in Resources */,
 				4E0F48E30E851C3C001B6F51 /* Localizable.strings in Resources */,
+				4E8BBC290E89786800BADF0C /* gps_ball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,7 +415,6 @@
 				4E2396750E40F6AB0062A352 /* MapView.m in Sources */,
 				4E2396760E40F6AB0062A352 /* Position.m in Sources */,
 				4E23967A0E40F7750062A352 /* TileDB.m in Sources */,
-				4E2398230E4106610062A352 /* DirectionsViewController.m in Sources */,
 				4E7929630E58EAE100CAF1B2 /* MainViewController.m in Sources */,
 				4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */,
 				4EE0F1CD0E6A958000BBA3FD /* nmea_parse.c in Sources */,
@@ -431,6 +434,7 @@
 				4E90BD630E82E95F007D8F7C /* LicenseViewController.m in Sources */,
 				4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */,
 				4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */,
+				4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,7 @@
 -(id)init {
 	NSLog(@"MainView controller init...");
 	tiledb=[xGPSAppDelegate tiledb];
-	debug=[[UILabel alloc] initWithFrame:CGRectMake(40,0,290,50)];
+
 	[[xGPSAppDelegate gpsmanager] setDelegate:self];
 	
 	
@@ -25,7 +25,7 @@
 }
 - (void)loadView {
 	NSLog(@"MainView controller loadView...");
-	self.title=NSLocalizedString(@"Map","Map Title");
+	self.title=@"xGPS";
 	
 	//Set the View to a UIView
 	viewRect=[[UIScreen mainScreen] applicationFrame];
@@ -40,7 +40,7 @@
 	
 	//Inside the view:
 
-	self.view.backgroundColor=[UIColor blueColor];
+	//self.view.backgroundColor=[UIColor blueColor];
 	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height-44.0) withDB:tiledb];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	[self.view addSubview:mapview];
@@ -64,24 +64,38 @@
 	NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
 	[toolbar setItems:btn animated:YES];	
 	//92x100
-	if(settingsController==nil) {
 		settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
-	}
-	if(searchPlacesView==nil) {
-		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) andController:self.navigationController andMap:mapview];
+		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
 		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-	}
 
 //[self.view addSubview:debug];
+	//self.navigationController.navigationBarHidden=YES;
 }
+
+- (void)dealloc {
+	[super dealloc];
+	[mapview release];
+	[zoomview release];
+	[speedview release];
+	[toolbar release];
+	[btnEnableGPS release];
+	[btnSettings release];
+	[btnSearch release];
+	[space1 release];
+	[space2 release];
+	[settingsController release];
+	[searchPlacesView release];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:YES];
-	
+	self.title=NSLocalizedString(@"Map","Map Title");
 	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
 	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].y forKey:kSettingsLastPosY];
 
 }
 -(void)viewWillAppear:(BOOL)animated {
+	self.title=@"xGPS";
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense) {
 		NSArray *btn=[NSArray arrayWithObjects:btnEnableGPS,space1,btnSearch,space2,btnSettings,nil];
 		[toolbar setItems:btn animated:YES];	
@@ -131,23 +145,20 @@
 	//mapview.transform=CGAffineTransformMakeRotation(M_PI/2.0);
 	//mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0);
 	//[UIView commitAnimations];
-	//[self actionSheet:nil willDismissWithButtonIndex:0];
+
 	[super viewDidAppear:animated];
 }
 -(void) endRotation:(NSString*)animationID finished:(BOOL)finished context:(NSString*)context {
-	[mapview setNeedsDisplay];
+	[self.navigationController pushViewController:settingsController animated:YES];
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	//[self.view setNeedsLayout];
-	//self.view.frame=[[UIScreen mainScreen] applicationFrame];
-	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
+
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview setNeedsDisplay];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 -(void)gpsEnableBtnPressed:(id)sender {
-	//[self settingsBtnPressed:self];
-	//return;
+
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled)
 		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] DisableGPS];
 		else
@@ -162,12 +173,22 @@
 	}
 }
 -(void)settingsBtnPressed:(id)sender {
-	[self.navigationController setNavigationBarHidden:NO animated:YES];
+	[UIView beginAnimations:nil context:nil];	
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(endRotation:finished:context:)];
+	[self.navigationController setNavigationBarHidden:NO animated:NO];
+	[UIView commitAnimations];
 	
-	[self.navigationController pushViewController:settingsController animated:YES];
+	
 }
 -(void)searchBtnPressed:(id)sender {
 	//Let the user choose between directions and place search
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) {
+		UIAlertView *msg=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button.",@"Error search offline") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		[msg show];
+		return;
+	}
+	
 	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Search for:",@"Search actionsheet title") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),nil];
 	[action showFromToolbar:toolbar];
 }
@@ -181,14 +202,14 @@
 	//0 cities,1 directions,2 cancel
 	switch(buttonIndex) {
 		case 0: {
-			searchPlacesView.alpha=0;
-			[self.view addSubview:searchPlacesView];
 			[UIView beginAnimations:nil context:nil];
-			searchPlacesView.alpha=1;
+			[self.view addSubview:searchPlacesView];
 			[UIView commitAnimations];
 		}break;
 		case 1: {
-			
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+
 		}break;
 	}
 }
@@ -248,9 +269,5 @@
 	// Release anything that's not essential, such as cached data
 }
 
-
-- (void)dealloc {
-	[super dealloc];
-}
 
 @end

@@ -30,6 +30,10 @@
 -(NSString*)name {
 	return @"iPhone 3G GPS";
 }
+-(void) dealloc {
+	[super dealloc];
+	[locManager release];
+}
 - (id)initWithDelegate:(id)del {
 	self=[super initWithDelegate:del];
 	locManager=[[CLLocationManager alloc] init];
@@ -60,18 +64,20 @@
 	}
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-	if(oldLocation!=nil) {
+	if(oldLocation!=nil && lastTimeStamp!=oldLocation.timestamp.timeIntervalSince1970) {
 		CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
 		NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
-		if(dt>0) {
+		if(dt>0.0f && dx>2.0f) {
 			gps_data.fix.speed=dx/dt;
 			if(gps_data.fix.speed>60)
-				gps_data.fix.speed=0;
+				gps_data.fix.speed=0.0;
 		}else
-			gps_data.fix.speed=0;
+			gps_data.fix.speed=0.0;
+		lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
 	}
 	else
-		gps_data.fix.speed=0;
+		gps_data.fix.speed=0.0;
+	
 	gps_data.fix.latitude=newLocation.coordinate.latitude;
 	gps_data.fix.longitude=newLocation.coordinate.longitude;
 	gps_data.fix.altitude=newLocation.altitude;

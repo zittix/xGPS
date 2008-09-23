@@ -50,16 +50,20 @@
 	currentDelegate=nil;
 	return self;
 }
+- (void)dealloc {
+	[ progressBar release ];
+	[ ltext release ];
+	[ prctext release ];
+	[ button release ];
+	[ super dealloc ];
+}
 -(void)hideCancelButton  {
 	[button removeFromSuperview];
 }
 -(void)hideProgressText {
 	[prctext removeFromSuperview];
 }
-- (void)dealloc {
-	[ progressBar release ];
-	[ super dealloc ];
-}
+
 -(void)setBtnSelector:(SEL)sel withDelegate:(id)del {
 	if(currentDelegate!=nil) {
 		[button removeTarget:del action:sel forControlEvents:UIControlEventTouchUpInside];

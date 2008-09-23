@@ -17,7 +17,6 @@
 	PositionObj* pos;
 	PositionObj* posGPS;
 	PositionObj *nextDirection;
-	NSTimer* fakeGPS;
 
 	NSMutableDictionary* tilescache;
 	BOOL hasGPSfix;

@@ -79,7 +79,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	NSData *noTileImg = [NSData dataWithContentsOfFile:imageFileName];
 	tileNoMap=[[MapTile alloc] initWithData: noTileImg];
 	
-	imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pin_pos.png"];
+	imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gps_ball.png"];
 	NSData *data = [NSData dataWithContentsOfFile:imageFileName];
 	
 	imgPinRef=[[MapTile alloc] initWithData: data];
@@ -94,29 +94,24 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	posGPS.x=pos.x;
 	posGPS.y=pos.y;
 	[self setMultipleTouchEnabled:YES];
-	//fakeGPS=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(fakeGPS) userInfo:nil repeats:YES];
 
 	return self;
 }
+- (void)dealloc {
+	[lines release];
+	[tileNoMap release];
+	[imgPinRef release];
+	[pos release];
+	[imgGoogleLogo release];
+	[posGPS release];
+	[tilescache release];
+	[super dealloc];
+}
+
 -(void)setDirection:(int)dir {
 	direction=dir;
 	[self setNeedsDisplay];
 }
-/*
--(void)view:(UIView *)view handleTapWithCount:(int)count event: (GSEvent *)event fingerCount:(int)fcount {
-	if(count==2) {
-		//TODO: center on tap
-
-		if(fcount==1) {
-			[self zoomin];
-		} else if(fcount==2) {
-			[self zoomout];
-		}
-	}
-	//NSLog(@"%d taps with %d fingers zoom: %d",count,fcount,zoom);
-}
-*/
-
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -213,7 +208,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 
 	[MapView getXYfrom:pos.x andLon:pos.y toPositionX:&tx andY:&ty withZoom:zoom];
 	[self getXYOffsetfrom:pos.x andLon:pos.y toPositionX:&xoff andY:&yoff withZoom:zoom];
-	NSLog(@"x y %d %d",tx,ty);
+	//NSLog(@"x y %d %d",tx,ty);
 	//Calculate the x and y offset of the first tile corresponding to the correct lat/lon
 	//The pos.x and pos.y will be the center of the screen
 	CGRect rect=[self frame];
@@ -222,7 +217,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 
 	float diffx=(x-centerTilePosX);
 	float diffy=(y-centerTilePosY);
-	NSLog(@"diffx diffy %f %f",diffx,diffy);
+	//NSLog(@"diffx diffy %f %f",diffx,diffy);
 	int nbplusX=diffx/dynTileSize;
 	int nbplusY=diffy/dynTileSize;
 	tx+=nbplusX;
@@ -238,7 +233,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 		ty--;
 		diffy=dynTileSize+diffy;
 	}
-	NSLog(@"x y diffx diffy: %d %d %f %f",tx,ty,diffx,diffy);
+	//NSLog(@"x y diffx diffy: %d %d %f %f",tx,ty,diffx,diffy);
 	xoff=diffx;
 	yoff=diffy;
 	float lat,lon;
@@ -396,14 +391,14 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 			//Try to load the tile from cache
 			NSString *key=[NSString stringWithFormat:@"%d:%d",x,y];
 
-			MapTile* t=[tilescache valueForKey:key];
+			MapTile* t=[tilescache objectForKey:key];
 			//NSLog(@"Getting x y: %d;%d",x,y);
 			if(t==nil && dragging==NO) {
 				t=[db getTile:x atY:y withZoom:zoom];
 				
 				if(t!=nil) {
 					//Add to the cache
-					[tilescache setValue:t forKey:key];
+					[tilescache setObject:t forKey:key];
 					[t release];
 				} else {
 					NSLog(@"Error getting tile from TileDB engine %@",db);
@@ -418,9 +413,6 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 
 				[t drawInRect: CGRectMake(org.x,org.y + dynTileSize,dynTileSize,dynTileSize) withContext:context];
 				//[t drawInRect: CGRectMake(-org.y - dynTileSize,org.x,dynTileSize,dynTileSize) withContext:context];
-			} else {
-				//NSLog(@"No map");
-				//[tileNoMap drawAtPoint: CGPointMake(org.x,org.y + TILE_SIZE) withContext:context];
 			}
 				}
 			y++;
@@ -450,7 +442,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	}
 
 	//Flush memory cache if too big
-	if([tilescache count]>64) {
+	if([tilescache count]>4) {
 		[tilescache removeAllObjects];
 	}
 
@@ -470,7 +462,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	//NSLog(@"Pos: %f %f",posXPin,posYPin);
 	if(posXPin>=0 && posXPin<rect.size.width && posYPin>=0 && posYPin<rect.size.height) {
 
-		[imgPinRef drawAtPoint: CGPointMake(posXPin-7, posYPin+4) withContext:context];
+		[imgPinRef drawAtPoint: CGPointMake(posXPin-7.5, posYPin+7.5) withContext:context];
 
 		//NSLog(@"Pos: %f %f",posXPin,posYPin);
 	}
@@ -481,8 +473,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	CGContextClosePath(context);
 	CGContextSetRGBFillColor(context, 1, 0, 0, 1);
 	CGContextDrawPath(context,kCGPathFill);
-
-	*/
+*/
 
 	//Draw lines
 
@@ -595,15 +586,6 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	nextDirection=nil;
 	
 	[lines removeAllObjects];
-}
-- (void)dealloc {
-	[lines release];
-	[tileNoMap release];
-	[imgPinRef release];
-	[pos release];
-	[posGPS release];
-	[tilescache release];
-	[super dealloc];
 }
 
 @end

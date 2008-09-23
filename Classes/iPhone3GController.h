@@ -19,6 +19,7 @@
 
 @interface iPhone3GController : GPSController<CLLocationManagerDelegate> {
 	CLLocationManager* locManager;
+	NSTimeInterval lastTimeStamp;
 }
 - (id)initWithDelegate:(id)del;
 @end

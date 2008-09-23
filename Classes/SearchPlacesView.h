@@ -11,12 +11,14 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MapView.h"
-@interface SearchPlacesView : UIView<UISearchBarDelegate,ABPeoplePickerNavigationControllerDelegate,GeoEncoderDelegate> {
-	UIView *dummyView;
+@interface SearchPlacesView : UIView<UISearchBarDelegate,ABPeoplePickerNavigationControllerDelegate,GeoEncoderDelegate,UITableViewDelegate,UITableViewDataSource> {
 	UISearchBar *searchBar;
 	UIViewController* controller;
 	GeoEncoder *geocoder;
 	MapView *map;
+	UITableView *tblView;
+	float keyboardHeight;
+	NSDictionary *_result;
 }
 - (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)map;
 @end

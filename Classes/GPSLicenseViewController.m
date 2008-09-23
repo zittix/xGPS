@@ -20,6 +20,7 @@
 		value.keyboardType=UIKeyboardTypeNamePhonePad;
 		value.returnKeyType=UIReturnKeySend;
 		value.delegate=self;
+		value.autocorrectionType=UITextAutocorrectionTypeNo;
 		CGRect viewRect=[[UIScreen mainScreen] applicationFrame];
 		viewRect.origin.y=0;
 		progress=[[ProgressView alloc] initWithFrame:viewRect];
@@ -28,6 +29,13 @@
 		[progress hideProgressText];
     }
     return self;
+}
+
+
+- (void)dealloc {
+    [super dealloc];
+	[value release];
+	[progress release];
 }
 -(void)setLicenseValue:(NSString*)val {
 	value.text=val;	
@@ -116,39 +124,6 @@
     return cell;
 }
 
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-}
-*/
-
-/*
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-    }
-    if (editingStyle == UITableViewCellEditingStyleInsert) {
-    }
-}
-*/
-
-/*
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -161,29 +136,6 @@
 	
 }
 
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-}
-*/
-/*
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-*/
-
-- (void)dealloc {
-    [super dealloc];
-	[value release];
-}
 
 
 @end

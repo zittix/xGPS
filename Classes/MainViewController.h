@@ -29,7 +29,6 @@
 	TileDB* tiledb;
 	ZoomView* zoomview;
 	SpeedView* speedview;
-	UILabel *debug;
 	LicenseViewController* licenseView;
 	SearchPlacesView *searchPlacesView;
 }
