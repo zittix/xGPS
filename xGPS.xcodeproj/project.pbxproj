@@ -128,6 +128,7 @@
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		4EDABC700E89115A009AF7C2 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = German; path = German.lproj/license.html; sourceTree = "<group>"; };
 		4EE0F1C40E6A958000BBA3FD /* gps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gps.h; sourceTree = "<group>"; };
 		4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nmea_parse.c; sourceTree = "<group>"; };
 		4EE0F1C60E6A958000BBA3FD /* packet_names.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = packet_names.h; sourceTree = "<group>"; };
@@ -442,6 +443,7 @@
 				4E90BD640E82E95F007D8F7C /* English */,
 				4E0F48950E8519E6001B6F51 /* French */,
 				4EDA9EB60E8791710020E8AF /* Italian */,
+				4EDABC700E89115A009AF7C2 /* German */,
 			);
 			name = license.html;
 			sourceTree = "<group>";
