@@ -442,7 +442,7 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	}
 
 	//Flush memory cache if too big
-	if([tilescache count]>4) {
+	if([tilescache count]>128) {
 		[tilescache removeAllObjects];
 	}
 

@@ -45,7 +45,7 @@
 	switch(section) {
 		case 0: return NSLocalizedString(@"Maps",@"Maps title in settings");
 		case 1: return NSLocalizedString(@"GPS Device",@"GPS Device title in settings");
-		case 2: return NSLocalizedString(@"Driving directions",@"Diriving directions title");
+		case 2: return NSLocalizedString(@"Driving directions",@"Driving directions");
 			
 		default: return @"";
 	}
@@ -60,7 +60,7 @@
 }
 -(void)showMapsManager:(id)sender {
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) {
-		UIAlertView *msg=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"You cannot download maps while you are in in the offline mode.",@"Error download maps offline") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		UIAlertView *msg=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"You cannot download maps while you are in the offline mode.",@"Error download maps offline") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[msg show];
 	}else{
 	
@@ -193,6 +193,7 @@
 					[value addTarget:self action:@selector(switchOfflineChanged:) forControlEvents:UIControlEventValueChanged];
 					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
 					[cell.contentView addSubview:value];
+					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
 										
 				}break;
 					} break;
@@ -385,7 +386,7 @@
 	[self.tableView reloadData];
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(buttonIndex==1) {
+	if(buttonIndex==0) {
 		[[xGPSAppDelegate tiledb] flushMaps];
 		[self.tableView reloadData];
 	}
@@ -419,7 +420,7 @@
 		[self showMapsTypeSelector:self];	
 	}else if(indexPath.section==0 && indexPath.row==3) {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the downloaded maps ?",@"Delete downloaded maps question") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"No",@"No") otherButtonTitles:NSLocalizedString(@"Yes",@"Yes"),nil];
+		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the downloaded maps ?",@"Delete downloaded maps question") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"Yes",@"Yes") otherButtonTitles:NSLocalizedString(@"No",@"No"),nil];
 		[act showInView:self.view];
 	}else if(indexPath.section==2 && indexPath.row==0) {
 		[self showLangDirSelector:self];	

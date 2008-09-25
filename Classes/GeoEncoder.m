@@ -14,10 +14,12 @@
 @implementation GeoEncoderResult
 @synthesize name;
 @synthesize pos;
-+(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos {
+@synthesize addr;
++(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr{
 	GeoEncoderResult*r=[[GeoEncoderResult alloc] init];
 	r.pos=pos;
 	r.name=name;
+	r.addr=addr;
 	return [r autorelease];
 }
 @end
@@ -43,11 +45,17 @@
 	NSLog(@"Parser start...");
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
-	NSLog(@"Found start element %@",elementName);
+	//NSLog(@"Found start element %@",elementName);
 	if([elementName isEqualToString:@"Placemark"] && parsingPlace==NO) {
 		parsingPlace=YES;
 	}
 	if([elementName isEqualToString:@"name"] && parsingPlace==YES && currentPlacename==nil) {
+		currentProp=[[NSMutableString alloc] init];
+	}
+	if([elementName isEqualToString:@"address"] && parsingPlace==YES && currentAddr==nil) {
+		currentProp=[[NSMutableString alloc] init];
+	}
+	if([elementName isEqualToString:@"Snippet"] && parsingPlace==YES && currentAddr==nil) {
 		currentProp=[[NSMutableString alloc] init];
 	}
 	if([elementName isEqualToString:@"coordinates"] && parsingPlace==YES && currentPos==nil) {
@@ -65,7 +73,12 @@
 				float lat=[[p_arr objectAtIndex:1] floatValue];
 				PositionObj *p=[PositionObj positionWithX:lat y:lon];
 				
-				GeoEncoderResult *r=[GeoEncoderResult resultWithName:currentPlacename pos:p];
+				if(currentAddr!=nil) {
+					NSMutableString *tmp=(NSMutableString*)currentAddr;
+					[tmp replaceOccurrencesOfString:@"<br/>" withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
+				}
+				
+				GeoEncoderResult *r=[GeoEncoderResult resultWithName:currentPlacename pos:p addr:currentAddr];
 				NSString *key=[NSString stringWithFormat:@"%d",[result count]];
 				[result setObject:r forKey:key];
 			}
@@ -77,17 +90,30 @@
 		currentPlacename=nil;
 		if(currentPos!=nil)
 			[currentPos release];
+		if(currentAddr!=nil)
+			[currentAddr release];
+		currentAddr=nil;
 		currentPos=nil;
 		parsingPlace=NO;
 		if(currentProp!=nil)
 			[currentProp release];
 		currentProp=nil;
 	}
-	if([elementName isEqualToString:@"name"] && parsingPlace==YES) {
+	if([elementName isEqualToString:@"name"] && parsingPlace==YES && currentPlacename==nil) {
 		currentPlacename=currentProp;
 		currentProp=nil;
 	}
-	if([elementName isEqualToString:@"coordinates"] && parsingPlace==YES) {
+	if([elementName isEqualToString:@"address"] && parsingPlace==YES && currentAddr==nil) {
+		NSLog(@"Found Address");
+		currentAddr=currentProp;
+		currentProp=nil;
+	}
+	if([elementName isEqualToString:@"Snippet"] && parsingPlace==YES && currentAddr==nil) {
+		NSLog(@"Found Snippet");
+		currentAddr=currentProp;
+		currentProp=nil;
+	}
+	if([elementName isEqualToString:@"coordinates"] && parsingPlace==YES && currentPos==nil) {
 		currentPos=currentProp;
 		currentProp=nil;
 	}
@@ -111,7 +137,9 @@
 	
 	if(currentProp!=nil)
 		[currentProp release];
-	
+	if(currentAddr!=nil)
+		[currentAddr release];
+	currentAddr=nil;
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
@@ -129,7 +157,9 @@
 	currentPlacename=nil;
 	if(currentPos!=nil)
 		[currentPos release];
-	
+	if(currentAddr!=nil)
+		[currentAddr release];
+	currentAddr=nil;
 	if(currentProp!=nil)
 		[currentProp release];
 	
@@ -164,7 +194,9 @@
 	
 	if(currentProp!=nil)
 		[currentProp release];
-	
+	if(currentAddr!=nil)
+		[currentAddr release];
+	currentAddr=nil;
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
@@ -251,6 +283,7 @@
 		currentPlacename=nil;
 		currentPos=nil;
 		currentProp=nil;
+		currentAddr=nil;
 		return YES;
 	} else {
 		// inform the user that the download could not be made

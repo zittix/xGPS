@@ -239,7 +239,7 @@ error:
 			if(![self hasAlreadyShownSerialError]) {
 				
 #ifdef USE_UI
-				//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error message title") message:NSLocalizedString(@"Unable to open the serial port. Make sure that no other GPS software is running in background.",@"GPS serial port error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Close button of message box") otherButtonTitles:nil];
+				//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to open the serial port. Make sure that no other GPS software is running in background.",@"GPS serial port error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 				//[alert show];
 #endif
 				[self setHasAlreadyShownSerialError];

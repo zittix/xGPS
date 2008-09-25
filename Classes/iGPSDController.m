@@ -48,7 +48,7 @@
 }
 -(BOOL)checkLicense:(NSString*)s {
 	NSLog(@"Unique ID:%@",[UIDevice currentDevice].uniqueIdentifier);
-	NSString *url=[NSString stringWithFormat:@"http://license.xwaves.net/checkLicense.php?license=%@&prod=xgps&%@",s,[UIDevice currentDevice].uniqueIdentifier];
+	NSString *url=[NSString stringWithFormat:@"http://license.xwaves.net/checkLicense.php?license=%@&prod=xgps&device=%@",s,[UIDevice currentDevice].uniqueIdentifier];
 	NSString* hash=[self downloadPage:url];
 	if(hash==nil) return NO;
 	//NSLog(@"License hash: %@",hash);

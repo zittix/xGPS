@@ -16,10 +16,12 @@
 {
 	NSString *name;
 	PositionObj* pos;
+	NSString *addr;
 }
 @property (nonatomic,retain) NSString* name;
+@property (nonatomic,retain) NSString* addr;
 @property (nonatomic,retain) PositionObj* pos;
-+(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos;
++(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr;
 @end
 
 
@@ -29,6 +31,7 @@
 	NSMutableDictionary* result;
 	NSString *currentPlacename;
 	NSString *currentPos;
+	NSString *currentAddr;
 	BOOL parsingPlace;
 	NSMutableString *currentProp;
 	NSMutableData *resultData;

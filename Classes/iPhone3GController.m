@@ -46,7 +46,7 @@
 	if(!locManager.locationServicesEnabled) {
 		NSLog(@"Unable to use CoreLocation framework: Not enabled");
 #ifdef USE_UI
-		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"xGPS Error",@"Error message title") message:NSLocalizedString(@"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem.",@"GPS iphone 3G error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Close button of message box") otherButtonTitles:nil];
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"xGPS Error",@"Error title") message:NSLocalizedString(@"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem.",@"GPS iphone 3G error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[alert show];
 #endif
 		return self;

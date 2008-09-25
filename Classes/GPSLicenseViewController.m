@@ -73,7 +73,7 @@
 		msg=NSLocalizedString(@"Your license number is valid. You can now use the selected GPS.",@"Confirm valid license");
 	else 
 		msg=NSLocalizedString(@"Your license number is invalid. Please verify and retry",@"Confirm invalid license");
-	alert=[alert initWithTitle:NSLocalizedString(@"License checking",@"Title of the message box of the result of the checking..") message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Close button of message box") otherButtonTitles:nil];
+	alert=[alert initWithTitle:NSLocalizedString(@"License checking",@"Title of the message box of the result of the checking..") message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 	[alert show];
 	[progress hide];
 	NSLog(@"Final checking license connected:%d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected);

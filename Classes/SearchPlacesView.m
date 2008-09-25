@@ -22,7 +22,7 @@
 		searchBar.showsCancelButton=YES;
 		searchBar.showsBookmarkButton=YES;
 		searchBar.autocorrectionType=UITextAutocorrectionTypeNo;
-		
+		self.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.autoresizesSubviews=YES;
 		searchBar.delegate=self;
 		searchBar.placeholder=NSLocalizedString(@"City name / Address",@"Placeholder for search bar of cities");
@@ -68,9 +68,36 @@
 	
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:key] autorelease];
+		UILabel *label;
+		UILabel *value;
+		cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+		label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 5.0, self.frame.size.width-50.0, 20.0f)] autorelease];
+		label.tag = 2;
+		label.font = [UIFont boldSystemFontOfSize:16.0];
+		label.textAlignment = UITextAlignmentLeft;
+		label.backgroundColor=[UIColor clearColor];
+		label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+		value = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 20.0, self.frame.size.width-50.0, 35.0f)] autorelease];
+		value.tag = 1;
+		
+		value.font = [UIFont systemFontOfSize:12.0];
+		value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+		value.backgroundColor=[UIColor clearColor];
+		value.lineBreakMode=UILineBreakModeWordWrap;
+		value.textColor=[UIColor darkGrayColor];
+		value.textAlignment=UITextAlignmentLeft;
+		value.numberOfLines=0;
+		[cell.contentView addSubview:value];
+		[cell.contentView addSubview:label];
+		
 	}
 	GeoEncoderResult *r=[_result objectForKey:key];
-	cell.text=r.name;
+	
+	if(r.addr!=nil)
+	((UILabel*)[cell viewWithTag:1]).text=r.addr;
+	else
+	((UILabel*)[cell viewWithTag:1]).text=@"";	
+	((UILabel*)[cell viewWithTag:2]).text=r.name;
 	
 	// Configure the cell
 	return cell;
@@ -88,10 +115,11 @@
 	[[notif.userInfo objectForKey:UIKeyboardBoundsUserInfoKey]  getValue:&keyboard];
 	keyboardHeight=keyboard.size.height;
 	if(tblView==nil) {
-			tblView=[[UITableView alloc] initWithFrame:CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight) style:UITableViewStylePlain];
+		tblView=[[UITableView alloc] initWithFrame:CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight) style:UITableViewStylePlain];
 		tblView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		tblView.delegate=self;
 		tblView.dataSource=self;
+		tblView.rowHeight=60.0f;
 		[self addSubview:tblView];
 	} else {
 		tblView.frame=CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight);

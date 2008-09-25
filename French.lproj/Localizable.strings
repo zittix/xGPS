@@ -118,3 +118,41 @@
 /* Confirm valid license */
 "Your license number is valid. You can now use the selected GPS." = "Votre numéro de license est valide. Vous pouvez dès lors utiliser le GPS sélectionné.";
 
+/* Size of the map, MB=MegaBytes */
+"%.1f MB" = "%.1f Mo";
+
+/* Placeholder for search bar of cities */
+"City name / Address" = "Ville / Addresse";
+
+/* Delete downloaded maps in settings */
+"Delete downloaded maps" = "Supprimer les cartes téléchargées";
+
+"Downloaded maps size" = "Taille des cartes téléchargées";
+
+/* Driving directions */
+"Driving directions" = "Instructions routières";
+
+"Language" = "Langue";
+
+/* No location found error message */
+"No location has been found according to your query." = "Votre recherche n'a donné aucun résultat.";
+
+/* Search for places */
+"Places / Cities" = "Endroits / Villes";
+
+/* Search actionsheet title */
+"Search for:" = "Rechercher:";
+
+/* Not yet implemented message. */
+"This feature will be implemented in a future version." = "Cette fonctionnalité sera disponible dans une future version.";
+
+/* Network error message */
+"Unable to retrieve the required information from the server: %@" = "Impossible d'obtenir les informations requises: %@";
+
+/* Unknown error */
+"Unknown error" = "Erreur inconnue";
+
+/* Error search offline */
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Vous ne pouvez pas faire de recherche lorsque vous êtes dans le mode hors-ligne. Désactivez ce mode en cliquant sur le bouton Paramètres.";
+
+"You cannot download maps while you are in the offline mode." = "Vous ne pouvez pas télécharger de cartes lorsque vous êtes dans le mode hors-ligne.";

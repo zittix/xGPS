@@ -124,7 +124,7 @@
 							 initWithTitle:NSLocalizedString(@"Maps Download",@"Maps Download title message box")
 							 message: msg
 							 delegate:nil
-							 cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Close button of message box")
+							 cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
 							 otherButtonTitles:nil];
 
 	[hotSheet show];	
@@ -168,8 +168,8 @@
 				initWithTitle:NSLocalizedString(@"Maps Download",@"Maps Download title message box")
 										  message:msg
 										  delegate:self
-										  cancelButtonTitle:NSLocalizedString(@"No",@"No button")
-										  otherButtonTitles:NSLocalizedString(@"Yes",@"Yes Button"),nil];
+										  cancelButtonTitle:NSLocalizedString(@"No",@"No")
+										  otherButtonTitles:NSLocalizedString(@"Yes",@"Yes"),nil];
 				
 				[hotSheet show];
 

@@ -44,7 +44,7 @@
 	[self addSubview: progressBar];
 
 	button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[button setTitle:NSLocalizedString(@"Cancel",@"Cancel button") forState:UIControlStateNormal];
+	[button setTitle:NSLocalizedString(@"Cancel",@"Cancel") forState:UIControlStateNormal];
 	button.frame=CGRectMake((frame.size.width-100)/2,300,100,50);
 	[self addSubview: button];
 	currentDelegate=nil;
