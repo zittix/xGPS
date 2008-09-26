@@ -67,9 +67,10 @@
 		settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
 		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
 		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-
-//[self.view addSubview:debug];
-	//self.navigationController.navigationBarHidden=YES;
+	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-52,5,47,40)];
+	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+	[self.view addSubview:signalView];
+	[signalView setQuality:0];
 }
 
 - (void)dealloc {
@@ -169,6 +170,7 @@
 	} else{
 		[mapview setHasGPSPos:NO];
 		[mapview setNeedsDisplay];
+		[signalView setQuality:0];
 		btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 	}
 }
@@ -226,6 +228,7 @@
 				NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
 				[toolbar setItems:btn animated:YES];	
 				[mapview setHasGPSPos:NO];
+				[signalView setQuality:0];
 			}
 
 			break;
@@ -250,7 +253,11 @@
 			} else{
 				[mapview setHasGPSPos:NO];
 				btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
+				[signalView setQuality:0];
 			}
+			break;
+		case SIGNAL_QUALITY:
+			[signalView setQuality:[[xGPSAppDelegate gpsmanager] GetCurrentGPS].signalQuality];
 			break;
 		case SERIAL:
 			break;

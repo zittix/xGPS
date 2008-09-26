@@ -63,6 +63,7 @@
 		}break;
 	}
 }
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	if(oldLocation!=nil && lastTimeStamp!=oldLocation.timestamp.timeIntervalSince1970) {
 		CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
@@ -88,5 +89,25 @@
 	[delegate gpsChanged:[ChangedState objWithState:POS andParent:self]];
 	[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
 #endif
+	
+	//Update signal quality
+	signalQuality=100;
+	if(newLocation.verticalAccuracy<0) signalQuality-=40;
+	if(newLocation.horizontalAccuracy<0) signalQuality-=90;
+	
+	if(newLocation.horizontalAccuracy==kCLLocationAccuracyNearestTenMeters) {
+		signalQuality-=10;
+	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyHundredMeters) {
+		signalQuality-=40;
+	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyKilometer) {
+		signalQuality-=50;
+	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyThreeKilometers) {
+		signalQuality-=70;
+	}
+			
+	if(signalQuality<0) signalQuality=0;
+
+	
+	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SIGNAL_QUALITY andParent:self] waitUntilDone:YES];
 }
 @end

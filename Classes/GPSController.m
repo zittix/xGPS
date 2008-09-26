@@ -42,6 +42,7 @@ void writeDebugSerial(const char*msg,int len) {
 @synthesize validLicense;
 @synthesize license;
 @synthesize started;
+@synthesize signalQuality;
 -(BOOL)hasAlreadyShownSerialError {
 	return hasAlreadyShownSerialError;
 }
@@ -259,6 +260,9 @@ error:
 }
 -(BOOL)checkLicense:(NSString*)s {
 	return YES;
+}
+-(int)getGPSSignalQuality {
+	return 0;
 }
 - (void)stop {
 	stopGPSSerial=YES;

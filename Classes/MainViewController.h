@@ -16,6 +16,7 @@
 #import "SpeedView.h"
 #import "LicenseViewController.h"
 #import "SearchPlacesView.h"
+#import "GPSSignalView.h"
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;
@@ -31,6 +32,7 @@
 	SpeedView* speedview;
 	LicenseViewController* licenseView;
 	SearchPlacesView *searchPlacesView;
+	GPSSignalView* signalView;
 }
 - (void)gpsChanged:(ChangedState*)msg;
 @property (nonatomic,retain,readonly) MapView* mapview;

@@ -29,6 +29,7 @@ void writeDebugMessage(const char*msg);
 	NSString *license;
 	BOOL validLicense;
 	BOOL started;
+	int signalQuality;
 }
 - (int)_openSerialPort:(const char*)port speed:(speed_t)s;
 - (void)changeSerialSpeed:(speed_t)s;
@@ -62,4 +63,5 @@ void writeDebugMessage(const char*msg);
 @property(readonly) BOOL validLicense;
 @property(readonly) BOOL started;
 @property(readonly) NSString* license;
+@property(readonly) int signalQuality;
 @end

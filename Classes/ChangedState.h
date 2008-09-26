@@ -15,7 +15,8 @@ typedef enum {
 	POS,
 	SPEED,
 	STATE_CHANGE,
-	SERIAL
+	SERIAL,
+	SIGNAL_QUALITY
 } MSG_TYPE;
 @interface ChangedState : NSObject {
 	MSG_TYPE state;

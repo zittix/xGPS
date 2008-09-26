@@ -175,6 +175,13 @@
 #else
 				[delegate gpsChanged:[ChangedState objWithState:POS andParent:self]];
 #endif
+				if(gps_data.fix.mode<2)
+					signalQuality=0;
+				else if(gps_data.fix.mode==2)
+					signalQuality=40;
+				else if(gps_data.fix.mode==3)
+					signalQuality=80;
+				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SIGNAL_QUALITY andParent:self] waitUntilDone:YES];
 			}
 
 			//packet_reset(&packet);

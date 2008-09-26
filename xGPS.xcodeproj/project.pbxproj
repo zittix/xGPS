@@ -35,6 +35,10 @@
 		4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */; };
 		4E90BD630E82E95F007D8F7C /* LicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E90BD620E82E95F007D8F7C /* LicenseViewController.m */; };
 		4E90BD7C0E82E95F007D8F7C /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90BD7B0E82E95F007D8F7C /* whiteButton.png */; };
+		4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */; };
+		4E90C0F80E8D3CD0003F6B23 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F50E8D3CD0003F6B23 /* green.png */; };
+		4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F60E8D3CD0003F6B23 /* orange.png */; };
+		4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F70E8D3CD0003F6B23 /* red.png */; };
 		4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E941A080E6A92330037F8C1 /* SettingsViewController.m */; };
 		4EBAF8F70E58CA84008916E9 /* notile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F20E58CA84008916E9 /* notile.png */; };
 		4EBAF8F80E58CA84008916E9 /* pin_pos.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F30E58CA84008916E9 /* pin_pos.png */; };
@@ -118,6 +122,11 @@
 		4E90BD620E82E95F007D8F7C /* LicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseViewController.m; sourceTree = "<group>"; };
 		4E90BD640E82E95F007D8F7C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = English; path = English.lproj/license.html; sourceTree = "<group>"; };
 		4E90BD7B0E82E95F007D8F7C /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
+		4E90C0F10E8D3CAE003F6B23 /* GPSSignalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSSignalView.h; sourceTree = "<group>"; };
+		4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSSignalView.m; sourceTree = "<group>"; };
+		4E90C0F50E8D3CD0003F6B23 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		4E90C0F60E8D3CD0003F6B23 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		4E90C0F70E8D3CD0003F6B23 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		4E941A070E6A92330037F8C1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4E941A080E6A92330037F8C1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4EBAF8F20E58CA84008916E9 /* notile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notile.png; sourceTree = "<group>"; };
@@ -218,6 +227,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E90C0F50E8D3CD0003F6B23 /* green.png */,
+				4E90C0F60E8D3CD0003F6B23 /* orange.png */,
+				4E90C0F70E8D3CD0003F6B23 /* red.png */,
 				4E8BBC280E89786800BADF0C /* gps_ball.png */,
 				4E0F48E20E851C3C001B6F51 /* Localizable.strings */,
 				4E90BD7B0E82E95F007D8F7C /* whiteButton.png */,
@@ -277,6 +289,8 @@
 				4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */,
 				4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */,
 				4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */,
+				4E90C0F10E8D3CAE003F6B23 /* GPSSignalView.h */,
+				4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -370,6 +384,9 @@
 				4E90BD7C0E82E95F007D8F7C /* whiteButton.png in Resources */,
 				4E0F48E30E851C3C001B6F51 /* Localizable.strings in Resources */,
 				4E8BBC290E89786800BADF0C /* gps_ball.png in Resources */,
+				4E90C0F80E8D3CD0003F6B23 /* green.png in Resources */,
+				4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */,
+				4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +452,7 @@
 				4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */,
 				4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */,
 				4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */,
+				4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

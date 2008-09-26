@@ -86,7 +86,7 @@
 		value.lineBreakMode=UILineBreakModeWordWrap;
 		value.textColor=[UIColor darkGrayColor];
 		value.textAlignment=UITextAlignmentLeft;
-		value.numberOfLines=0;
+		value.numberOfLines=2;
 		[cell.contentView addSubview:value];
 		[cell.contentView addSubview:label];
 		
