@@ -2,10 +2,10 @@
 "An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly.";
 
 /* in kilo bytes */
-"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Are you sure you want to download the selected map area (%1$d tiles ~ %2$d KB) ?";
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?";
 
 /* Make sure to let the %d etc... */
-"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Are you sure you want to download the selected map area (%1$d tiles ~ %2$d MB) ?";
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?";
 
 /* Cancel button */
 "Cancel" = "Annuler";
@@ -125,9 +125,9 @@
 "City name / Address" = "Ville / Addresse";
 
 /* Delete downloaded maps in settings */
-"Delete downloaded maps" = "Supprimer les cartes téléchargées";
+"Delete downloaded maps" = "Supprimer les cartes";
 
-"Downloaded maps size" = "Taille des cartes téléchargées";
+"Downloaded maps size" = "Taille des cartes";
 
 /* Driving directions */
 "Driving directions" = "Instructions routières";

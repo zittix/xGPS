@@ -40,6 +40,7 @@
 		4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F60E8D3CD0003F6B23 /* orange.png */; };
 		4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F70E8D3CD0003F6B23 /* red.png */; };
 		4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E941A080E6A92330037F8C1 /* SettingsViewController.m */; };
+		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
 		4EBAF8F70E58CA84008916E9 /* notile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F20E58CA84008916E9 /* notile.png */; };
 		4EBAF8F80E58CA84008916E9 /* pin_pos.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F30E58CA84008916E9 /* pin_pos.png */; };
 		4EBAF8F90E58CA84008916E9 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F40E58CA84008916E9 /* speed.png */; };
@@ -129,6 +130,10 @@
 		4E90C0F70E8D3CD0003F6B23 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		4E941A070E6A92330037F8C1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4E941A080E6A92330037F8C1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		4E9A00900E8D4A530076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Dutch; path = Dutch.lproj/license.html; sourceTree = "<group>"; };
+		4E9A00920E8D4A9D0076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E9A00940E8D51B90076EE44 /* FakeGPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeGPSController.h; sourceTree = "<group>"; };
+		4E9A00950E8D51B90076EE44 /* FakeGPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeGPSController.m; sourceTree = "<group>"; };
 		4EBAF8F20E58CA84008916E9 /* notile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notile.png; sourceTree = "<group>"; };
 		4EBAF8F30E58CA84008916E9 /* pin_pos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin_pos.png; sourceTree = "<group>"; };
 		4EBAF8F40E58CA84008916E9 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
@@ -317,6 +322,8 @@
 				4E86502F0E7EBC58005954EE /* ChangedState.m */,
 				4E8651590E7EC237005954EE /* iPhone3GController.h */,
 				4E86515A0E7EC237005954EE /* iPhone3GController.m */,
+				4E9A00940E8D51B90076EE44 /* FakeGPSController.h */,
+				4E9A00950E8D51B90076EE44 /* FakeGPSController.m */,
 			);
 			name = GPS;
 			sourceTree = "<group>";
@@ -358,6 +365,7 @@
 				French,
 				German,
 				Italian,
+				Dutch,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* xGPS */;
 			projectDirPath = "";
@@ -453,6 +461,7 @@
 				4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */,
 				4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */,
 				4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */,
+				4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +475,7 @@
 				4E0F48950E8519E6001B6F51 /* French */,
 				4EDA9EB60E8791710020E8AF /* Italian */,
 				4EDABC700E89115A009AF7C2 /* German */,
+				4E9A00900E8D4A530076EE44 /* Dutch */,
 			);
 			name = license.html;
 			sourceTree = "<group>";
@@ -477,6 +487,7 @@
 				4E0F48E40E851C43001B6F51 /* French */,
 				4E0F48E50E851C47001B6F51 /* Italian */,
 				4E0F48E60E851C4B001B6F51 /* German */,
+				4E9A00920E8D4A9D0076EE44 /* Dutch */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

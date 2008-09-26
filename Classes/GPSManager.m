@@ -11,6 +11,7 @@
 #import "iGPSDController.h"
 #import "iPhone3GController.h"
 #import "xGPSAppDelegate.h"
+#import "FakeGPSController.h"
 @implementation GPSManager
 @synthesize idGPS;
 -(id)init {
@@ -82,6 +83,11 @@
 				if(gpsControllers3==nil)
 				gpsControllers3=[[iGPSDController alloc] initWithDelegate:del];
 				gps=gpsControllers3;
+				break;
+			case 4:
+				if(gpsControllers4==nil)
+					gpsControllers4=[[FakeGPSController alloc] initWithDelegate:del];
+				gps=gpsControllers4;
 				break;
 	}
 	gps.delegate=delegate;

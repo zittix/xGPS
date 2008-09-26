@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#include <stdio.h>
-#define LAST_VERSION_MAJOR 1
-#define LAST_VERSION_MINOR 0
-#define VERSION_INTEGER	LAST_VERSION_MAJOR*10+LAST_VERSION_MINOR
+
 
 #import "ChangedState.h"
 #import "GPSController.h"
