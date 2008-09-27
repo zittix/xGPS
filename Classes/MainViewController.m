@@ -142,11 +142,6 @@
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (void)viewDidAppear:(BOOL)animated {
-	//CGRect viewRect2=[[UIScreen mainScreen] applicationFrame];
-	//viewRect2.origin.y=0;
-	//[UIView beginAnimations:nil context:nil];	
-	//self.navigationController.navigationBarHidden=YES;
-	//[UIView commitAnimations];
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview setNeedsDisplay];
 	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);

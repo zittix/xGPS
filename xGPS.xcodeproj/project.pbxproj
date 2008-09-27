@@ -40,6 +40,7 @@
 		4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F60E8D3CD0003F6B23 /* orange.png */; };
 		4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F70E8D3CD0003F6B23 /* red.png */; };
 		4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E941A080E6A92330037F8C1 /* SettingsViewController.m */; };
+		4E94F97F0E8E2B650012B377 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E94F97E0E8E2B650012B377 /* Default.png */; };
 		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
 		4EBAF8F70E58CA84008916E9 /* notile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F20E58CA84008916E9 /* notile.png */; };
 		4EBAF8F80E58CA84008916E9 /* pin_pos.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F30E58CA84008916E9 /* pin_pos.png */; };
@@ -130,6 +131,7 @@
 		4E90C0F70E8D3CD0003F6B23 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		4E941A070E6A92330037F8C1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4E941A080E6A92330037F8C1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		4E94F97E0E8E2B650012B377 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		4E9A00900E8D4A530076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Dutch; path = Dutch.lproj/license.html; sourceTree = "<group>"; };
 		4E9A00920E8D4A9D0076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E9A00940E8D51B90076EE44 /* FakeGPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeGPSController.h; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E94F97E0E8E2B650012B377 /* Default.png */,
 				4E90C0F50E8D3CD0003F6B23 /* green.png */,
 				4E90C0F60E8D3CD0003F6B23 /* orange.png */,
 				4E90C0F70E8D3CD0003F6B23 /* red.png */,
@@ -395,6 +398,7 @@
 				4E90C0F80E8D3CD0003F6B23 /* green.png in Resources */,
 				4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */,
 				4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */,
+				4E94F97F0E8E2B650012B377 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

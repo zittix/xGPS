@@ -54,7 +54,7 @@
 	//NSLog(@"License hash: %@",hash);
 	unsigned char hashedChars[50];
 	memset(hashedChars,50,0);
-	NSString* inputString=[NSString stringWithFormat:@"xgpslicensenumbervalid:%@",s];
+	NSString* inputString=[NSString stringWithFormat:@"xgpslicensenumbervalid:%@device:%@",s,[UIDevice currentDevice].uniqueIdentifier];
 	CC_SHA1([inputString UTF8String],
 			  [inputString lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
 			  hashedChars);
