@@ -21,11 +21,13 @@
 -(void)loadView {
 	viewRect=[[UIScreen mainScreen] applicationFrame];
 	self.view=[[OverlayView alloc] initWithFrame:viewRect];
+	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	viewOverlay=(OverlayView*)self.view;
-	viewRect.origin.y=0;
-	progress=[[ProgressView alloc] initWithFrame:viewRect];
-	mapview=[[MapView alloc] initWithFrame: CGRectMake(viewRect.origin.x, viewRect.origin.y, viewRect.size.width, viewRect.size.height-48.0f) withDB:db];
+	progress=[[ProgressView alloc] initWithFrame:CGRectMake(0, 0, viewRect.size.width, viewRect.size.height)];
+	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height) withDB:db];
+	mapview.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.title=NSLocalizedString(@"Maps Manager",@"Maps manager title");
+	self.view.autoresizesSubviews=YES;
 	[mapview setZoom: 7];
 	self.view.multipleTouchEnabled=YES;
 	[self.view addSubview: mapview];
@@ -96,7 +98,7 @@
 
 	int res=[db downloadTiles:x1 fromY:y1 toX:x2 toY:y2 withZoom:0 withDelegate:progress];
 
-	NSLog(@"End of download thread");
+	//NSLog(@"End of download thread");
 	[progress performSelectorOnMainThread:@selector(hide) withObject:nil waitUntilDone:NO];
 
 	NSString *msg=nil;
@@ -136,9 +138,14 @@
 		downloading=YES;
 		[progress setProgress:0];
 		[progress showFrom:self.view];
-
+		self.navigationItem.rightBarButtonItem.enabled=NO;
 		[NSThread detachNewThreadSelector:@selector(downloadTiles) toTarget:self withObject:nil];
 	}
+}
+- (void)viewWillDisappear:(BOOL)animated {
+	[db cancelDownload];
+	[progress hide];
+	[self clearSelection];
 }
 - (void)startDownloadButton:(id)sender
 {
@@ -177,6 +184,14 @@
 				[self showEndDownloadMessage:NSLocalizedString(@"Please select a greater map area by touching the screen with two fingers.",@"Error map select message")];
 			}
 }
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	[mapview setNeedsDisplay];
+	[viewOverlay setNeedsDisplay];
+}
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
 @end
 @implementation OverlayView
 @synthesize pDep;

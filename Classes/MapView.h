@@ -26,6 +26,7 @@
 	float prevDist;
 	float dynTileSize;
 	MapTile* imgPinRef;
+	MapTile* imgPinSearch;
 	MapTile* imgGoogleLogo;
 	int _orientation;
 	CGPoint drawOrigin;
@@ -33,7 +34,9 @@
 	BOOL passDoubleFingersEvent;
 	NSMutableArray *lines;
 	int direction;
+	PositionObj *posSearch;
 }
+@property(retain,nonatomic) PositionObj *pos;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)setOrientation:(int)orientation;
 -(void)setNextDirection:(PositionObj*)p;
@@ -42,6 +45,7 @@
 -(void)setDir:(id)d;
 -(void)zoomout:(id)sender;
 -(void)clearPoints;
+-(void)setPosSearch:(PositionObj*)p;
 +(float)getMetersPerPixel:(float)latitude zoom:(int)zoom;
 -(float)getMetersPerPixel:(float)latitude;
 -(void)addDrawPoint:(PositionObj*)p;

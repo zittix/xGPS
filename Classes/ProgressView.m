@@ -12,8 +12,7 @@
 	}
 
 	float translucentBlack[4] = {0, 0, 0, .8};
-	self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	
+	self.autoresizesSubviews=YES;
 
 	[self setBackgroundColor: [UIColor colorWithCGColor:CGColorCreate(CGColorSpaceCreateDeviceRGB(), translucentBlack)]];
 

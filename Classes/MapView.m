@@ -10,8 +10,9 @@
 #import "MapView.h"
 #undef NAN
 #define NAN -10e8
-extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
+
 @implementation MapView
+@synthesize pos;
 -(void)setHasGPSPos:(BOOL)val {
 	hasGPSfix=val;
 }
@@ -88,11 +89,12 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	
 	imgGoogleLogo=[[MapTile alloc] initWithData: data];
 	
+	imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pin_pos.png"];
+	data = [NSData dataWithContentsOfFile:imageFileName];
 	
-	pos.x=46.5833333;
-	pos.y=6.55;
-	posGPS.x=pos.x;
-	posGPS.y=pos.y;
+	imgPinSearch=[[MapTile alloc] initWithData: data];
+	posSearch=[[PositionObj alloc] init];
+	
 	[self setMultipleTouchEnabled:YES];
 
 	return self;
@@ -102,8 +104,10 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	[tileNoMap release];
 	[imgPinRef release];
 	[pos release];
+	[posSearch release];
 	[imgGoogleLogo release];
 	[posGPS release];
+	[imgPinSearch release];
 	[tilescache release];
 	[super dealloc];
 }
@@ -113,7 +117,11 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 	[self setNeedsDisplay];
 }
 
-
+-(void)setPosSearch:(PositionObj*)p {
+	posSearch.x=p.x;
+	posSearch.y=p.y;
+	[self setNeedsDisplay];
+}
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesEnded:touches	withEvent:event];
 	dragging=NO;
@@ -467,6 +475,23 @@ extern float UIDistanceBetweenPoints(CGPoint a, CGPoint b);
 		//NSLog(@"Pos: %f %f",posXPin,posYPin);
 	}
 	}
+	if(posSearch.x!=0.0f && posSearch.y!=0.0f) {
+		int xoff2,yoff2;
+		[MapView getXYfrom:posSearch.x andLon:posSearch.y toPositionX:&x andY:&y withZoom:zoom];
+		[self getXYOffsetfrom:posSearch.x andLon:posSearch.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
+		
+		float posXPin=rect.size.width/2+(x-centerTileX)*dynTileSize-(xoff/TILE_SIZE)*dynTileSize+(xoff2/TILE_SIZE)*dynTileSize;
+		float posYPin=(rect.size.height/2+(y-centerTileY)*dynTileSize-(yoff/TILE_SIZE)*dynTileSize+(yoff2/TILE_SIZE)*dynTileSize);
+		
+		posXPin+=drawOrigin.x;
+		posYPin+=drawOrigin.y;
+		//NSLog(@"Pos: %f %f",posXPin,posYPin);
+		if(posXPin>=0 && posXPin<rect.size.width && posYPin>=0 && posYPin<rect.size.height) {		
+			[imgPinSearch drawAtPoint: CGPointMake(posXPin-7.5, posYPin+5) withContext:context];
+
+		}
+	}
+	
 	CGContextScaleCTM(context, 1, -1);
 	/*CGContextBeginPath(context);
 	CGContextAddArc(context,rect.size.width/2,rect.size.height/2,4,0,2*M_PI,0);

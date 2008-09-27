@@ -107,7 +107,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	GeoEncoderResult* r=[_result objectForKey:key];
 	
-	[map updateCurrentPos:r.pos];
+	map.pos=r.pos;
+	[map setPosSearch:r.pos];
 	[self searchBarCancelButtonClicked:searchBar];
 }
 - (void)keyboardWillShow:(NSNotification *)notif{
@@ -160,7 +161,8 @@
 			id key = [enumerator nextObject];
 			GeoEncoderResult* r=[result objectForKey:key];
 			
-			[map updateCurrentPos:r.pos];
+			map.pos=r.pos;
+			[map setPosSearch:r.pos];
 			[self searchBarCancelButtonClicked:searchBar];
 		} else {
 			_result=[result retain];

@@ -46,10 +46,10 @@
 	[self.view addSubview:mapview];
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,100,100) withDelegate:mapview];
 	[self.view addSubview:zoomview];
-	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-44.0f-95.0f-2.0f,92.0f,100.0f)];
+	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-95.0f-2.0f,92.0f,100.0f)];
 	[speedview setSpeed:0];
 
-	[self.view addSubview:speedview];
+	//[self.view addSubview:speedview];
 	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin;
 	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0f,viewRect.size.width,44.0f)];
 	[self.view addSubview:toolbar];
@@ -66,13 +66,23 @@
 	//92x100
 		settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
 		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
-		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	searchPlacesView.autoresizesSubviews=YES;
 	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-52,5,47,40)];
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
 	[signalView setQuality:0];
 }
-
+-(void)hideSpeed {
+	[UIView beginAnimations:nil context:nil];
+	[speedview removeFromSuperview];
+	[UIView commitAnimations];
+}
+-(void)showSpeed {
+	[UIView beginAnimations:nil context:nil];
+	[self.view addSubview:speedview];
+	[UIView commitAnimations];
+}
 - (void)dealloc {
 	[super dealloc];
 	[mapview release];
@@ -122,7 +132,11 @@
 	[self presentModalViewController:licenseView animated:YES];
 	}
 	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosY]];
-	[mapview updateCurrentPos:p];
+	if(p.x==0.0f && p.y==0.0f) {
+		p.x=46.5833333;
+		p.y=6.55;
+	}
+	mapview.pos=p;
 }
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -167,9 +181,11 @@
 	
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 		btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
+		[self showSpeed];
 	} else{
 		[mapview setHasGPSPos:NO];
 		[mapview setNeedsDisplay];
+		[self hideSpeed];
 		[signalView setQuality:0];
 		btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 	}
@@ -229,6 +245,7 @@
 				[toolbar setItems:btn animated:YES];	
 				[mapview setHasGPSPos:NO];
 				[signalView setQuality:0];
+				[self hideSpeed];
 			}
 
 			break;
@@ -249,9 +266,11 @@
 		}break;
 		case STATE_CHANGE:
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
+				[self showSpeed];
 				btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
 			} else{
 				[mapview setHasGPSPos:NO];
+				[self hideSpeed];
 				btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 				[signalView setQuality:0];
 			}
