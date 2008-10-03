@@ -46,14 +46,14 @@
 	[self.view addSubview:mapview];
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,100,100) withDelegate:mapview];
 	[self.view addSubview:zoomview];
-	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-95.0f-2.0f,92.0f,100.0f)];
+	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-95.0f-2.0f-44.0f,92.0f,100.0f)];
 	[speedview setSpeed:0];
 
 	//[self.view addSubview:speedview];
-	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin;
+	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0f,viewRect.size.width,44.0f)];
 	[self.view addSubview:toolbar];
-	
+	[self.view addSubview:speedview];
 	btnEnableGPS=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Enable GPS",@"Enable GPS Button") style:UIBarButtonItemStyleBordered target:self action:@selector(gpsEnableBtnPressed:)];
 	toolbar.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
 	btnSettings=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",@"Settings Button") style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
@@ -72,15 +72,18 @@
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
 	[signalView setQuality:0];
+	speedview.hidden=YES;
 }
 -(void)hideSpeed {
 	[UIView beginAnimations:nil context:nil];
-	[speedview removeFromSuperview];
+	//[speedview removeFromSuperview];
+	speedview.hidden=YES;
 	[UIView commitAnimations];
 }
 -(void)showSpeed {
 	[UIView beginAnimations:nil context:nil];
-	[self.view addSubview:speedview];
+	//[self.view addSubview:speedview];
+	speedview.hidden=NO;
 	[UIView commitAnimations];
 }
 - (void)dealloc {
@@ -112,6 +115,9 @@
 		[toolbar setItems:btn animated:YES];	
 		if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 			btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
+			[mapview setHasGPSPos:YES];
+			[mapview setNeedsDisplay];
+			[self showSpeed];
 		} else{
 			[mapview setHasGPSPos:NO];
 			btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");

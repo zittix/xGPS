@@ -304,6 +304,8 @@
 								value.text=@"Deutsch";
 							else if([lang isEqualToString:@"it"])
 								value.text=@"Italiano";
+							else if([lang isEqualToString:@"iw"])
+								value.text=@"עברית";
 						}
 						
 						
@@ -369,6 +371,8 @@
 								value.text=@"Deutsch";
 							else if([lang isEqualToString:@"it"])
 								value.text=@"Italiano";
+							else if([lang isEqualToString:@"iw"])
+								value.text=@"עברית";
 						}
 					} break;
 				}

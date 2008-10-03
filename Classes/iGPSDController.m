@@ -47,11 +47,11 @@
 	return YES;
 }
 -(BOOL)checkLicense:(NSString*)s {
-	NSLog(@"Unique ID:%@",[UIDevice currentDevice].uniqueIdentifier);
+	//NSLog(@"Unique ID:%@",[UIDevice currentDevice].uniqueIdentifier);
 	NSString *url=[NSString stringWithFormat:@"http://license.xwaves.net/checkLicense.php?license=%@&prod=xgps&device=%@",s,[UIDevice currentDevice].uniqueIdentifier];
 	NSString* hash=[self downloadPage:url];
 	if(hash==nil) return NO;
-	//NSLog(@"License hash: %@",hash);
+	//NSLog(@"License hash: '%@'",hash);
 	unsigned char hashedChars[50];
 	memset(hashedChars,50,0);
 	NSString* inputString=[NSString stringWithFormat:@"xgpslicensenumbervalid:%@device:%@",s,[UIDevice currentDevice].uniqueIdentifier];
@@ -64,7 +64,7 @@
 		computed=[computed stringByAppendingFormat:@"%02x",hashedChars[i]];
 	}
 	//hashedChars[20]=0;	
-	//NSLog(@"Computed hash %@\n",computed);
+	//NSLog(@"Computed hash '%@'\n",computed);
 	if([computed isEqualToString:hash]){
 		license=[s retain];
 		validLicense=YES;

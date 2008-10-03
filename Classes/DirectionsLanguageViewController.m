@@ -61,6 +61,8 @@
 				row=1;
 			else if([lang isEqualToString:@"it"])
 				row=3;
+			else if([lang isEqualToString:@"iw"])
+				row=4;
 	}
 	
 	[picker selectRow:row inComponent:0 animated:YES];
@@ -71,6 +73,7 @@
 		case 2: return @"Français";
 		case 1: return @"Deutsch";
 		case 3: return @"Italiano";
+		case 4: return @"עברית";
 	}
 	return @"Invalid";
 }
@@ -78,7 +81,7 @@
 	return 1;
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-	return 4;
+	return 5;
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 	switch(row) {
@@ -86,6 +89,7 @@
 		case 2: [[NSUserDefaults standardUserDefaults] setObject:@"fr" forKey:kSettingsMapsLanguage]; break;
 		case 1: [[NSUserDefaults standardUserDefaults] setObject:@"de" forKey:kSettingsMapsLanguage]; break;
 		case 3: [[NSUserDefaults standardUserDefaults] setObject:@"it" forKey:kSettingsMapsLanguage]; break;
+		case 4: [[NSUserDefaults standardUserDefaults] setObject:@"iw" forKey:kSettingsMapsLanguage]; break;
 	}
 }
 

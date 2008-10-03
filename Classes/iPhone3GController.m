@@ -14,6 +14,8 @@
 - (BOOL)EnableGPS {
 	
 	if(locManager.locationServicesEnabled){
+		speedHasBeenUpdated=NO;
+		speedCheck=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(checkSpeed) userInfo:nil repeats:YES];
 		[locManager startUpdatingLocation];
 		isEnabled=YES;
 	}
@@ -23,12 +25,25 @@
 	
 	if(locManager.locationServicesEnabled){
 		[locManager stopUpdatingLocation];
+		[speedCheck invalidate];
+		speedCheck=nil;
 		isEnabled=NO;
 	}
 	return YES;
 }
 -(NSString*)name {
 	return @"iPhone 3G GPS";
+}
+-(void)checkSpeed {
+	if(!speedHasBeenUpdated) {
+		gps_data.fix.speed=0.0;
+#ifdef USE_UI
+		[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
+#else
+		[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
+#endif
+	}
+	speedHasBeenUpdated=NO;
 }
 -(void) dealloc {
 	[super dealloc];
@@ -75,10 +90,11 @@
 		}else
 			gps_data.fix.speed=0.0;
 		lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
+		speedHasBeenUpdated=YES;
 	}
 	else
-		gps_data.fix.speed=0.0;
-	
+		
+	speedHasBeenUpdated=YES;
 	gps_data.fix.latitude=newLocation.coordinate.latitude;
 	gps_data.fix.longitude=newLocation.coordinate.longitude;
 	gps_data.fix.altitude=newLocation.altitude;

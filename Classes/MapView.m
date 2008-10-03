@@ -397,7 +397,7 @@
 				
 			
 			//Try to load the tile from cache
-			NSString *key=[NSString stringWithFormat:@"%d:%d",x,y];
+			NSString *key=[NSString stringWithFormat:@"%d:%d:%d",x,y,zoom];
 
 			MapTile* t=[tilescache objectForKey:key];
 			//NSLog(@"Getting x y: %d;%d",x,y);
@@ -498,7 +498,7 @@
 	CGContextClosePath(context);
 	CGContextSetRGBFillColor(context, 1, 0, 0, 1);
 	CGContextDrawPath(context,kCGPathFill);
-*/
+
 
 	//Draw lines
 
@@ -562,17 +562,10 @@
 		CGContextBeginPath(context);
 		CGContextAddArc(context,posXStart,posYStart,35,0,2*M_PI,0);
 		CGContextFillPath(context);
-	}
+	}*/
 	CGContextScaleCTM(context, 1, -1);
 
 	
-	/*CGContextSetShouldAntialias(context,YES);
-	CGContextSelectFont(context, "Helvetica",10, kCGEncodingMacRoman);
-
-		CGContextSetTextPosition(
-								 context, 80,-rect.size.height+6);
-	NSString *txt=@"(C) 2008 Google, Map Data (C) TeleAtlas";
-	CGContextShowText(context,[txt UTF8String],[txt length]);*/
 	[imgGoogleLogo drawAtPoint:CGPointMake(rect.size.width-72,rect.size.height-2) withContext:context];
 	CGContextScaleCTM(context, 1, -1);
 

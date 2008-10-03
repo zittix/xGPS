@@ -197,11 +197,15 @@
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
+	
+	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
+	if(lang==nil) lang=@"en";
+	
 	NSString *mapType=@"w2.83"; //Normal
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat
 	//int zoom=0;
-	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=en",(x+y)&3,mapType,x,y,zoom];
+	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=%@",(x+y)&3,mapType,x,y,zoom,lang];
 	//NSString *url=@"http://mt0.google.com/mt?n=404&v=w2.75&hl=en&x=67918&s=&y=46321&zoom=0";
 	//NSLog(@"Getting tile at %@",url);
 	NSURL *imageURL = [NSURL URLWithString:url];

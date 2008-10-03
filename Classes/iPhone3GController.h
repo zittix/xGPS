@@ -17,6 +17,8 @@
 @interface iPhone3GController : GPSController<CLLocationManagerDelegate> {
 	CLLocationManager* locManager;
 	NSTimeInterval lastTimeStamp;
+	NSTimer* speedCheck;
+	BOOL speedHasBeenUpdated;
 }
 - (id)initWithDelegate:(id)del;
 @end

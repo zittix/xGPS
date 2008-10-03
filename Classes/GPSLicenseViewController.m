@@ -20,6 +20,7 @@
 		value.keyboardType=UIKeyboardTypeNamePhonePad;
 		value.returnKeyType=UIReturnKeySend;
 		value.delegate=self;
+		value.autocapitalizationType=UITextAutocapitalizationTypeAllCharacters;
 		value.autocorrectionType=UITextAutocorrectionTypeNo;
 		CGRect viewRect=[[UIScreen mainScreen] applicationFrame];
 		viewRect.origin.y=0;
@@ -76,7 +77,7 @@
 	alert=[alert initWithTitle:NSLocalizedString(@"License checking",@"Title of the message box of the result of the checking..") message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 	[alert show];
 	[progress hide];
-	NSLog(@"Final checking license connected:%d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected);
+	//NSLog(@"Final checking license connected:%d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected);
 	if([valid boolValue])
 		[self.navigationController popViewControllerAnimated:YES];
 	else
