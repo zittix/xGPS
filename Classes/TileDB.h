@@ -10,14 +10,26 @@
 #import <sqlite3.h>
 #import "MapTile.h"
 #import "ProgressView.h"
+
+@protocol TileDownloadProtocol
+-(void)tileDownloaded;
+@end
+
+
 @interface TileDB : NSObject {
- sqlite3 *database;
+	sqlite3 *database;
 	sqlite3_stmt* getTileStmt;
 	sqlite3_stmt* checkTileStmt;
 	sqlite3_stmt* insertTileStmt;
 	BOOL cancelDownload;
+	NSMutableArray* tileHeap;
+	NSLock *tileHeapLock;
+	NSLock *dbLock;
+	NSCondition *hasTileToDLlock;
+	BOOL runAsync;
+	BOOL offline;
 }
--(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom;
+-(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom withDelegate:(id)delegate;
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom;
 -(void)cancelDownload;
 -(float)mapsize;

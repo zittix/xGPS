@@ -11,7 +11,7 @@
 #import "TileDB.h"
 #import "LocationWrapper.h"
 #import "ZoomView.h"
-@interface MapView : UIView<LocationWrapperProtocol,ZoomingProtocol> {
+@interface MapView : UIView<LocationWrapperProtocol,ZoomingProtocol,TileDownloadProtocol> {
 	//MapTile
 	TileDB *db;
 	PositionObj* pos;
@@ -35,9 +35,12 @@
 	NSMutableArray *lines;
 	int direction;
 	PositionObj *posSearch;
+	//UITouch *lastTouch;
+
 }
 @property(retain,nonatomic) PositionObj *pos;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
+-(void)tileDownloaded;
 -(void)setOrientation:(int)orientation;
 -(void)setNextDirection:(PositionObj*)p;
 -(void)setZoom:(int)z;

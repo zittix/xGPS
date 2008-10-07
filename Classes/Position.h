@@ -17,6 +17,21 @@
 @property (nonatomic) float y;
 +(PositionObj*)positionWithX:(float)x y:(float)y;
 @end
+
+@interface TileCoord : NSObject
+{
+	int x;
+	int y;
+	unsigned char zoom;
+	id delegate;
+}
+@property (nonatomic) int x;
+@property (nonatomic) int y;
+@property (nonatomic,retain) id delegate;
+@property (nonatomic) unsigned char zoom;
++(TileCoord*)tileCoordWithX:(int)x y:(int)y zoom:(int)zoom delegate:(id)delegate;
+@end
+
 @interface LineObj : NSObject
 {
 	PositionObj *start;

@@ -94,7 +94,7 @@
 	
 	imgPinSearch=[[MapTile alloc] initWithData: data];
 	posSearch=[[PositionObj alloc] init];
-	
+
 	[self setMultipleTouchEnabled:YES];
 
 	return self;
@@ -116,7 +116,9 @@
 	direction=dir;
 	[self setNeedsDisplay];
 }
-
+-(void)tileDownloaded {
+	[self setNeedsDisplay];
+}
 -(void)setPosSearch:(PositionObj*)p {
 	posSearch.x=p.x;
 	posSearch.y=p.y;
@@ -128,6 +130,15 @@
 
 	//Update the lat / lon with the org offset
 
+	
+	NSSet *events=[event allTouches];
+	NSEnumerator *enumerator = [events objectEnumerator];
+	UITouch* value;
+
+	while ((value = [enumerator nextObject])) {
+		
+	}
+	
 	int x,y,xoff,yoff;
 	//NSLog(@"Draw org: %f %f",drawOrigin.x,drawOrigin.y);
 	//NSLog(@"Current pos: %f %f",pos.x,pos.y);
@@ -177,6 +188,12 @@
 	if([events count]>1)
 		return;
 	while ((value = [enumerator nextObject])) {
+		/*if(lastTouch!=nil){
+			CGPoint c = [value locationInView:self];
+			CGPoint c2 = [lastTouch locationInView:self];
+			NSLog(@"Delta T: %f",lastTouch.timestamp-value.timestamp);
+			NSLog(@"Delta D: %f",sqrt((c.x-c2.x)*(c.x-c2.x)+(c.y-c2.y)*(c.y-c2.y)));
+		}*/
 		CGPoint c = [value locationInView:self];
 
 		dragging=YES;
@@ -205,7 +222,10 @@
 			drawOrigin.x-=diffx;
 			drawOrigin.y-=diffy;
 		}
+		/*if(lastTouch!=nil) [lastTouch release];
+		lastTouch=[value retain];*/
 		[self setNeedsDisplay];
+		break;
 	}
 
 }
@@ -402,14 +422,14 @@
 			MapTile* t=[tilescache objectForKey:key];
 			//NSLog(@"Getting x y: %d;%d",x,y);
 			if(t==nil && dragging==NO) {
-				t=[db getTile:x atY:y withZoom:zoom];
+				t=[db getTile:x atY:y withZoom:zoom withDelegate:self];
 				
 				if(t!=nil) {
 					//Add to the cache
 					[tilescache setObject:t forKey:key];
 					[t release];
 				} else {
-					NSLog(@"Error getting tile from TileDB engine %@",db);
+					//NSLog(@"Error getting tile from TileDB engine %@",db);
 					t=tileNoMap;
 				}
 			}

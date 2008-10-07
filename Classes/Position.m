@@ -11,6 +11,7 @@
 @implementation PositionObj
 @synthesize x;
 @synthesize y;
+
 +(PositionObj*)positionWithX:(float)x y:(float)y {
 	PositionObj *p=[[PositionObj alloc] init];
 	p.x=x;
@@ -18,6 +19,22 @@
 	return [p autorelease];
 }
 @end
+@implementation TileCoord
+@synthesize x;
+@synthesize y;
+@synthesize zoom;
+@synthesize delegate;
++(TileCoord*)tileCoordWithX:(int)x y:(int)y zoom:(int)zoom  delegate:(id)delegate{
+	TileCoord *p=[[TileCoord alloc] init];
+	p.x=x;
+	p.y=y;
+	p.delegate=delegate;
+	p.zoom=zoom	;
+	return [p autorelease];
+}
+@end
+
+
 @implementation LineObj
 - (PositionObj *)start {
 	return start;
