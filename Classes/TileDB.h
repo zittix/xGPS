@@ -28,6 +28,7 @@
 	NSCondition *hasTileToDLlock;
 	BOOL runAsync;
 	BOOL offline;
+	NSString *langMap;
 }
 -(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom withDelegate:(id)delegate;
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom;

@@ -42,7 +42,7 @@
 			4E0F46960E85019A001B6F51 /* GPSManager.m:27 */,
 			4E0F47280E85062A001B6F51 /* MainViewController.m:18 */,
 			4E0F47320E850633001B6F51 /* MainViewController.m:19 */,
-			4EDA9EE90E87985A0020E8AF /* TileDB.m:269 */,
+			4EDA9EE90E87985A0020E8AF /* TileDB.m:286 */,
 			4EDAA0320E87A9570020E8AF /* SettingsViewController.m:62 */,
 			4EDAA03A0E87A9700020E8AF /* MapsManagerView.m:22 */,
 			4EDAA03D0E87A98D0020E8AF /* SettingsViewController.m:60 */,
@@ -321,6 +321,14 @@
 			4E8EF3570E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3570E9BCD52006F19DB /* PBXTextBookmark */;
 			4E8EF3590E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3590E9BCD52006F19DB /* PBXTextBookmark */;
 			4E8EF35B0E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF35B0E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF3610E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3610E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF3620E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3620E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF3630E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3630E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF3640E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3640E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF3650E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3650E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF3690E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF3690E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF36A0E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF36A0E9BCD52006F19DB /* PBXTextBookmark */;
+			4E8EF36B0E9BCD52006F19DB /* PBXTextBookmark */ = 4E8EF36B0E9BCD52006F19DB /* PBXTextBookmark */;
 			4E90C1140E8D3CD0003F6B23 = 4E90C1140E8D3CD0003F6B23 /* PBXTextBookmark */;
 			4E90C12C0E8D3CD0003F6B23 = 4E90C12C0E8D3CD0003F6B23 /* PBXTextBookmark */;
 			4E90C15F0E8D3CD0003F6B23 = 4E90C15F0E8D3CD0003F6B23 /* PBXTextBookmark */;
@@ -705,17 +713,17 @@
 	};
 	4E2396780E40F7750062A352 /* TileDB.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1411, 738}}";
-			sepNavSelRange = "{543, 0}";
-			sepNavVisRange = "{0, 889}";
+			sepNavIntBoundsRect = "{{0, 0}, {1411, 715}}";
+			sepNavSelRange = "{576, 0}";
+			sepNavVisRange = "{0, 909}";
 			sepNavWindowFrame = "{{1695, 302}, {906, 743}}";
 		};
 	};
 	4E2396790E40F7750062A352 /* TileDB.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1411, 4788}}";
-			sepNavSelRange = "{3330, 0}";
-			sepNavVisRange = "{2243, 1885}";
+			sepNavIntBoundsRect = "{{0, 0}, {2436, 5152}}";
+			sepNavSelRange = "{7770, 0}";
+			sepNavVisRange = "{6955, 1652}";
 			sepNavWindowFrame = "{{1695, 302}, {906, 743}}";
 		};
 	};
@@ -1017,7 +1025,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 24";
 		rLen = 0;
-		rLoc = 757;
+		rLoc = 777;
 		rType = 0;
 		vrLen = 672;
 		vrLoc = 0;
@@ -1027,7 +1035,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 96";
 		rLen = 0;
-		rLoc = 5717;
+		rLoc = 6107;
 		rType = 0;
 		vrLen = 1170;
 		vrLoc = 2577;
@@ -1047,7 +1055,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 96";
 		rLen = 0;
-		rLoc = 5717;
+		rLoc = 6107;
 		rType = 0;
 		vrLen = 1174;
 		vrLoc = 2577;
@@ -1057,7 +1065,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 24";
 		rLen = 0;
-		rLoc = 757;
+		rLoc = 777;
 		rType = 0;
 		vrLen = 672;
 		vrLoc = 0;
@@ -1077,7 +1085,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 97";
 		rLen = 0;
-		rLoc = 5717;
+		rLoc = 6107;
 		rType = 0;
 		vrLen = 2092;
 		vrLoc = 0;
@@ -1149,7 +1157,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 91";
 		rLen = 0;
-		rLoc = 4182;
+		rLoc = 4530;
 		rType = 0;
 		vrLen = 1520;
 		vrLoc = 1984;
@@ -1159,7 +1167,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 24";
 		rLen = 0;
-		rLoc = 757;
+		rLoc = 777;
 		rType = 0;
 		vrLen = 672;
 		vrLoc = 0;
@@ -1169,7 +1177,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 91";
 		rLen = 0;
-		rLoc = 4182;
+		rLoc = 4530;
 		rType = 0;
 		vrLen = 1520;
 		vrLoc = 1984;
@@ -1179,7 +1187,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 21";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 739;
 		vrLoc = 0;
@@ -1189,7 +1197,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 21";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 739;
 		vrLoc = 0;
@@ -1199,7 +1207,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 91";
 		rLen = 0;
-		rLoc = 4182;
+		rLoc = 4530;
 		rType = 0;
 		vrLen = 1410;
 		vrLoc = 2094;
@@ -1209,7 +1217,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 21";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 739;
 		vrLoc = 0;
@@ -1219,7 +1227,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 187";
 		rLen = 0;
-		rLoc = 7919;
+		rLoc = 8531;
 		rType = 0;
 		vrLen = 1585;
 		vrLoc = 4430;
@@ -1229,7 +1237,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 278";
 		rLen = 0;
-		rLoc = 11826;
+		rLoc = 12429;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 4258;
@@ -1239,7 +1247,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 278";
 		rLen = 0;
-		rLoc = 11826;
+		rLoc = 12429;
 		rType = 0;
 		vrLen = 1544;
 		vrLoc = 4258;
@@ -1289,7 +1297,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 23";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 781;
 		vrLoc = 0;
@@ -1309,7 +1317,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 115";
 		rLen = 0;
-		rLoc = 5653;
+		rLoc = 6043;
 		rType = 0;
 		vrLen = 1215;
 		vrLoc = 2999;
@@ -1319,7 +1327,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 104";
 		rLen = 0;
-		rLoc = 5717;
+		rLoc = 6107;
 		rType = 0;
 		vrLen = 2193;
 		vrLoc = 632;
@@ -1359,7 +1367,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 105";
 		rLen = 0;
-		rLoc = 4247;
+		rLoc = 4595;
 		rType = 0;
 		vrLen = 1039;
 		vrLoc = 3417;
@@ -1379,7 +1387,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 107";
 		rLen = 0;
-		rLoc = 5655;
+		rLoc = 6045;
 		rType = 0;
 		vrLen = 1144;
 		vrLoc = 2790;
@@ -1399,7 +1407,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 110";
 		rLen = 0;
-		rLoc = 5653;
+		rLoc = 6043;
 		rType = 0;
 		vrLen = 1193;
 		vrLoc = 3060;
@@ -1419,7 +1427,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 115";
 		rLen = 0;
-		rLoc = 5653;
+		rLoc = 6043;
 		rType = 0;
 		vrLen = 1215;
 		vrLoc = 2999;
@@ -1429,7 +1437,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 23";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 781;
 		vrLoc = 0;
@@ -1449,7 +1457,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 119";
 		rLen = 0;
-		rLoc = 5650;
+		rLoc = 6040;
 		rType = 0;
 		vrLen = 1246;
 		vrLoc = 3053;
@@ -1459,7 +1467,7 @@
 		comments = "warning: 'TileDB' may not respond to '-getTile:atY:withZoom:'";
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		rLen = 1;
-		rLoc = 257;
+		rLoc = 274;
 		rType = 1;
 	};
 	4E8EF2CA0E9BCD52006F19DB /* PBXTextBookmark */ = {
@@ -1467,7 +1475,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 230";
 		rLen = 43;
-		rLoc = 8129;
+		rLoc = 8780;
 		rType = 0;
 		vrLen = 263;
 		vrLoc = 6742;
@@ -1507,7 +1515,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 31";
 		rLen = 26;
-		rLoc = 614;
+		rLoc = 634;
 		rType = 0;
 		vrLen = 869;
 		vrLoc = 0;
@@ -1527,7 +1535,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 233";
 		rLen = 0;
-		rLoc = 8282;
+		rLoc = 8933;
 		rType = 0;
 		vrLen = 1655;
 		vrLoc = 5429;
@@ -1537,7 +1545,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 124";
 		rLen = 0;
-		rLoc = 5526;
+		rLoc = 5916;
 		rType = 0;
 		vrLen = 1203;
 		vrLoc = 3287;
@@ -1567,7 +1575,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 23";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 781;
 		vrLoc = 0;
@@ -1577,7 +1585,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 126";
 		rLen = 0;
-		rLoc = 5650;
+		rLoc = 6040;
 		rType = 0;
 		vrLen = 1249;
 		vrLoc = 3287;
@@ -1587,7 +1595,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 23";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 781;
 		vrLoc = 0;
@@ -1597,7 +1605,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 126";
 		rLen = 0;
-		rLoc = 5650;
+		rLoc = 6040;
 		rType = 0;
 		vrLen = 1249;
 		vrLoc = 3287;
@@ -1657,7 +1665,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 126";
 		rLen = 0;
-		rLoc = 5650;
+		rLoc = 6040;
 		rType = 0;
 		vrLen = 1249;
 		vrLoc = 3287;
@@ -1707,7 +1715,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 131";
 		rLen = 0;
-		rLoc = 5531;
+		rLoc = 5921;
 		rType = 0;
 		vrLen = 1593;
 		vrLoc = 5406;
@@ -1717,7 +1725,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 31";
 		rLen = 26;
-		rLoc = 614;
+		rLoc = 634;
 		rType = 0;
 		vrLen = 869;
 		vrLoc = 0;
@@ -1727,7 +1735,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 233";
 		rLen = 0;
-		rLoc = 8282;
+		rLoc = 8933;
 		rType = 0;
 		vrLen = 1655;
 		vrLoc = 5429;
@@ -1747,7 +1755,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 125";
 		rLen = 0;
-		rLoc = 5231;
+		rLoc = 5621;
 		rType = 0;
 		vrLen = 1101;
 		vrLoc = 3728;
@@ -1757,7 +1765,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 230";
 		rLen = 43;
-		rLoc = 8129;
+		rLoc = 8780;
 		rType = 0;
 		vrLen = 416;
 		vrLoc = 6744;
@@ -1767,7 +1775,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 125";
 		rLen = 0;
-		rLoc = 5231;
+		rLoc = 5621;
 		rType = 0;
 		vrLen = 1101;
 		vrLoc = 3728;
@@ -1777,7 +1785,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 230";
 		rLen = 43;
-		rLoc = 8129;
+		rLoc = 8780;
 		rType = 0;
 		vrLen = 402;
 		vrLoc = 6744;
@@ -1795,7 +1803,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 230";
 		rLen = 43;
-		rLoc = 8129;
+		rLoc = 8780;
 		rType = 0;
 		vrLen = 402;
 		vrLoc = 6744;
@@ -1815,7 +1823,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 125";
 		rLen = 0;
-		rLoc = 5231;
+		rLoc = 5621;
 		rType = 0;
 		vrLen = 1101;
 		vrLoc = 3728;
@@ -1825,7 +1833,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 117";
 		rLen = 0;
-		rLoc = 4657;
+		rLoc = 5005;
 		rType = 0;
 		vrLen = 1316;
 		vrLoc = 3442;
@@ -1845,7 +1853,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 117";
 		rLen = 0;
-		rLoc = 4657;
+		rLoc = 5005;
 		rType = 0;
 		vrLen = 1333;
 		vrLoc = 3442;
@@ -1865,7 +1873,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 117";
 		rLen = 0;
-		rLoc = 4657;
+		rLoc = 5005;
 		rType = 0;
 		vrLen = 1319;
 		vrLoc = 3442;
@@ -1875,7 +1883,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 117";
 		rLen = 0;
-		rLoc = 4657;
+		rLoc = 5005;
 		rType = 0;
 		vrLen = 1333;
 		vrLoc = 3442;
@@ -1895,7 +1903,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 235";
 		rLen = 0;
-		rLoc = 8339;
+		rLoc = 8990;
 		rType = 0;
 		vrLen = 1807;
 		vrLoc = 6249;
@@ -1915,7 +1923,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 30";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 876;
 		vrLoc = 0;
@@ -1935,7 +1943,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 235";
 		rLen = 0;
-		rLoc = 8339;
+		rLoc = 8990;
 		rType = 0;
 		vrLen = 1809;
 		vrLoc = 6249;
@@ -1945,7 +1953,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 235";
 		rLen = 0;
-		rLoc = 8339;
+		rLoc = 8990;
 		rType = 0;
 		vrLen = 1809;
 		vrLoc = 6249;
@@ -1955,7 +1963,7 @@
 		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
 		name = "TileDB.h: 30";
 		rLen = 0;
-		rLoc = 556;
+		rLoc = 576;
 		rType = 0;
 		vrLen = 876;
 		vrLoc = 0;
@@ -1975,7 +1983,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 221";
 		rLen = 0;
-		rLoc = 7558;
+		rLoc = 8131;
 		rType = 0;
 		vrLen = 1516;
 		vrLoc = 5920;
@@ -1985,7 +1993,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 221";
 		rLen = 0;
-		rLoc = 7558;
+		rLoc = 8131;
 		rType = 0;
 		vrLen = 1516;
 		vrLoc = 5920;
@@ -2005,7 +2013,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 221";
 		rLen = 0;
-		rLoc = 7558;
+		rLoc = 8131;
 		rType = 0;
 		vrLen = 1516;
 		vrLoc = 5920;
@@ -2035,7 +2043,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 221";
 		rLen = 0;
-		rLoc = 7558;
+		rLoc = 8131;
 		rType = 0;
 		vrLen = 1615;
 		vrLoc = 5919;
@@ -2055,7 +2063,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 138";
 		rLen = 0;
-		rLoc = 5044;
+		rLoc = 5392;
 		rType = 0;
 		vrLen = 1301;
 		vrLoc = 4017;
@@ -2065,7 +2073,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 159";
 		rLen = 0;
-		rLoc = 5649;
+		rLoc = 6039;
 		rType = 0;
 		vrLen = 1481;
 		vrLoc = 3828;
@@ -2085,7 +2093,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 159";
 		rLen = 0;
-		rLoc = 5649;
+		rLoc = 6039;
 		rType = 0;
 		vrLen = 1481;
 		vrLoc = 3828;
@@ -2115,7 +2123,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 159";
 		rLen = 0;
-		rLoc = 5649;
+		rLoc = 6039;
 		rType = 0;
 		vrLen = 1480;
 		vrLoc = 3829;
@@ -2135,7 +2143,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 150";
 		rLen = 0;
-		rLoc = 5415;
+		rLoc = 5805;
 		rType = 0;
 		vrLen = 1509;
 		vrLoc = 3829;
@@ -2145,7 +2153,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 145";
 		rLen = 0;
-		rLoc = 5249;
+		rLoc = 5639;
 		rType = 0;
 		vrLen = 1515;
 		vrLoc = 3829;
@@ -2155,7 +2163,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 154";
 		rLen = 0;
-		rLoc = 5531;
+		rLoc = 5921;
 		rType = 0;
 		vrLen = 1466;
 		vrLoc = 4038;
@@ -2225,7 +2233,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 75";
 		rLen = 0;
-		rLoc = 3040;
+		rLoc = 3171;
 		rType = 0;
 		vrLen = 1847;
 		vrLoc = 2243;
@@ -2235,7 +2243,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 154";
 		rLen = 0;
-		rLoc = 5531;
+		rLoc = 5921;
 		rType = 0;
 		vrLen = 1466;
 		vrLoc = 4038;
@@ -2325,7 +2333,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 74";
 		rLen = 0;
-		rLoc = 3053;
+		rLoc = 3184;
 		rType = 0;
 		vrLen = 1647;
 		vrLoc = 2243;
@@ -2345,7 +2353,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 75";
 		rLen = 0;
-		rLoc = 3040;
+		rLoc = 3171;
 		rType = 0;
 		vrLen = 1847;
 		vrLoc = 2243;
@@ -2375,7 +2383,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 75";
 		rLen = 0;
-		rLoc = 2998;
+		rLoc = 3129;
 		rType = 0;
 		vrLen = 1857;
 		vrLoc = 2243;
@@ -2385,7 +2393,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 82";
 		rLen = 0;
-		rLoc = 3330;
+		rLoc = 3463;
 		rType = 0;
 		vrLen = 1883;
 		vrLoc = 2243;
@@ -2395,10 +2403,90 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 82";
 		rLen = 0;
-		rLoc = 3330;
+		rLoc = 3463;
 		rType = 0;
 		vrLen = 1885;
 		vrLoc = 2243;
+	};
+	4E8EF3610E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
+		name = "TileDB.h: 31";
+		rLen = 0;
+		rLoc = 576;
+		rType = 0;
+		vrLen = 909;
+		vrLoc = 0;
+	};
+	4E8EF3620E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
+		name = "TileDB.m: 285";
+		rLen = 23;
+		rLoc = 9696;
+		rType = 0;
+		vrLen = 1994;
+		vrLoc = 8064;
+	};
+	4E8EF3630E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
+		name = "TileDB.m: 285";
+		rLen = 23;
+		rLoc = 9696;
+		rType = 0;
+		vrLen = 1994;
+		vrLoc = 8064;
+	};
+	4E8EF3640E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396780E40F7750062A352 /* TileDB.h */;
+		name = "TileDB.h: 31";
+		rLen = 0;
+		rLoc = 576;
+		rType = 0;
+		vrLen = 909;
+		vrLoc = 0;
+	};
+	4E8EF3650E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
+		name = "TileDB.m: 342";
+		rLen = 17;
+		rLoc = 11978;
+		rType = 0;
+		vrLen = 2202;
+		vrLoc = 9972;
+	};
+	4E8EF3690E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
+		name = "TileDB.m: 157";
+		rLen = 0;
+		rLoc = 5511;
+		rType = 0;
+		vrLen = 2251;
+		vrLoc = 653;
+	};
+	4E8EF36A0E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
+		name = "TileDB.m: 32";
+		rLen = 0;
+		rLoc = 1005;
+		rType = 0;
+		vrLen = 2365;
+		vrLoc = 156;
+	};
+	4E8EF36B0E9BCD52006F19DB /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
+		name = "TileDB.m: 242";
+		rLen = 0;
+		rLoc = 7770;
+		rType = 0;
+		vrLen = 1652;
+		vrLoc = 6955;
 	};
 	4E90BD610E82E95F007D8F7C /* LicenseViewController.h */ = {
 		uiCtxt = {
@@ -3167,7 +3255,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 208";
 		rLen = 0;
-		rLoc = 9438;
+		rLoc = 10016;
 		rType = 0;
 		vrLen = 1458;
 		vrLoc = 5532;
@@ -3207,7 +3295,7 @@
 		fRef = 4E2396790E40F7750062A352 /* TileDB.m */;
 		name = "TileDB.m: 208";
 		rLen = 0;
-		rLoc = 9438;
+		rLoc = 10016;
 		rType = 0;
 		vrLen = 1458;
 		vrLoc = 5532;
@@ -3231,7 +3319,7 @@
 			sepNavWindowFrame = "{{1787, 307}, {906, 743}}";
 		};
 	};
-	4EDA9EE90E87985A0020E8AF /* TileDB.m:269 */ = {
+	4EDA9EE90E87985A0020E8AF /* TileDB.m:286 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
 		);
@@ -3243,7 +3331,7 @@
 		functionName = "-mapsize";
 		hitCount = 0;
 		ignoreCount = 0;
-		lineNumber = 269;
+		lineNumber = 286;
 		location = xGPS;
 		modificationTime = 245087941.853648;
 		state = 2;

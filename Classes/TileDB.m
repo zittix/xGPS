@@ -72,6 +72,9 @@
 	hasTileToDLlock.name=@"hasTileToDLlock";
 	runAsync=YES;
 	offline=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
+	langMap=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
+	if(langMap!=nil)
+		langMap=[langMap retain];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(offlineModeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	[NSThread detachNewThreadSelector:@selector(asyncTileGet) toTarget:self withObject:nil];
 		// Open the database. The database was prepared outside the application.
@@ -79,11 +82,19 @@
 	return self;
 }
 -(void)offlineModeChanged:(NSNotification *)notif {
-	NSLog(@"Offline changed");
+	//NSLog(@"Offline changed");
 	offline=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
+	if(langMap!=nil)
+		[langMap release];
+	langMap=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
+	if(langMap!=nil)
+		langMap=[langMap retain];
 }
 -(void) dealloc {
 	runAsync=NO;
+	if(langMap!=nil) {
+		[langMap release];	
+	}
 	[hasTileToDLlock unlock];
 	sqlite3_finalize(getTileStmt);
 	sqlite3_finalize(insertTileStmt);
@@ -143,6 +154,7 @@
 			sqlite3_bind_int(checkTileStmt,3,p.zoom);
 			int r=sqlite3_step(checkTileStmt);
 			sqlite3_reset(checkTileStmt);
+			sqlite3_clear_bindings(checkTileStmt);
 			[dbLock unlock];
 			if (r != SQLITE_ROW) {
 				if([self downloadTile:p.x atY:p.y withZoom:p.zoom]) {
@@ -170,6 +182,7 @@
 	int i,j;
 	int ret=1;
 	cancelDownload=NO;
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 	if(toY<fY)
 	{
 		int tmp=fY;
@@ -199,6 +212,7 @@
 		sqlite3_bind_int(checkTileStmt,3,zoom);
 		int r=sqlite3_step(checkTileStmt);
 		sqlite3_reset(checkTileStmt);
+		sqlite3_clear_bindings(checkTileStmt);
 		[dbLock unlock];
 		if (r != SQLITE_ROW) {
 			if(![self downloadTile:i atY:j withZoom:zoom]) {
@@ -212,7 +226,7 @@
 		nbDownloadedTotal++;
 		float prc=((float)nbDownloadedTotal/(float)nbToDownload);
 		//[progress setProgressObj:[NSNumber numberWithFloat:prc]];
-		[progress performSelectorOnMainThread:@selector(setProgressObj:) withObject:[NSNumber numberWithFloat:prc] waitUntilDone:YES];
+		[progress performSelectorOnMainThread:@selector(setProgressObj:) withObject:[NSNumber numberWithFloat:prc] waitUntilDone:NO];
 
 		//if(i*j%20==0) {
 		//	NSLog(@"Download status: %f %%",prc*100.0);
@@ -225,6 +239,7 @@
 		}
 	}
 	//NSLog(@"Tiles downloaded !");
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	return ret;
 }
 -(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom  withDelegate:(id)delegate{
@@ -245,10 +260,12 @@
 		//NSLog(@"Tile of %d bytes",length);
 		t=[[MapTile alloc] initWithData: [NSData dataWithBytes:data length:length]];
 		sqlite3_reset(getTileStmt);
+		sqlite3_clear_bindings(getTileStmt);
 		[dbLock unlock];
 	} else {
 		[dbLock lock];
 		sqlite3_reset(getTileStmt);
+		sqlite3_clear_bindings(getTileStmt);
 		[dbLock unlock];
 		//NSLog(@"Downloading tile...");
 		/*if(![self downloadTile:x atY:y withZoom:zoom]) {
@@ -282,14 +299,14 @@
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
 	if(offline) return NO;
 	
-	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
+	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
 	NSString *mapType=@"w2.83"; //Normal
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat
 	//int zoom=0;
-	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=%@",(x+y)&3,mapType,x,y,zoom,lang];
+	NSString *url=[NSString stringWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=%@",(x+y)&3,mapType,x,y,zoom,lang];
 	//NSString *url=@"http://mt0.google.com/mt?n=404&v=w2.75&hl=en&x=67918&s=&y=46321&zoom=0";
 	//NSLog(@"Getting tile at %@",url);
 	NSURL *imageURL = [NSURL URLWithString:url];
@@ -315,7 +332,6 @@ Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q;
 	
 	NSHTTPURLResponse *rep;
 	NSData *imageData = [NSURLConnection sendSynchronousRequest:urlReq returningResponse:&rep error:NULL];
-	[url release];
 
 	if(imageData==nil || [imageData length]==0 || [rep statusCode]!=200) {
 		NSLog(@"Download error: Rep code: %d",[rep statusCode]);
@@ -334,6 +350,7 @@ Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q;
 
 	int r=sqlite3_step(insertTileStmt);
 	sqlite3_reset(insertTileStmt);
+	sqlite3_clear_bindings(insertTileStmt);
 	if(r!=SQLITE_DONE) {
 		NSLog(@"Unable to insert tile (%d,%d): %s. Err. code=%d",x,y,sqlite3_errmsg(database),r);
 		return NO;
