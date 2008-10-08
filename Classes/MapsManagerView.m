@@ -35,7 +35,8 @@
 	[progress setBtnSelector:@selector(cancelDownload) withDelegate:db];
 	
 	downloading=NO;
-	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,70,100,100) withDelegate:mapview];
+	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,100,100) withDelegate:mapview];
+
 	[self.view addSubview:zoomview];
 	// add our custom add button as the nav bar's custom right view
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Download",@"Download button")
@@ -43,6 +44,9 @@
 																			   action:@selector(startDownloadButton:)];
 	self.navigationItem.rightBarButtonItem = addButton;
 	[addButton release];
+	[zoomview setZoominState:YES];
+	[zoomview setZoomoutState:YES];
+
 }
 -(void)dealloc {
 	[super dealloc];
@@ -53,13 +57,9 @@
 }
 -(void)updateCurrentPos:(PositionObj*)pos {
 	[mapview updateCurrentPos: pos];
-	[mapview setNeedsDisplay];
+	[mapview refreshMap];
 }
 
--(void)setOrientation:(int)_orientation {
-	[mapview setOrientation:_orientation];
-	orientation=_orientation;
-}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesBegan:touches withEvent:event];
 		[self touchesMoved:touches withEvent:event];
@@ -82,7 +82,7 @@
 	pEnd = c2;
 	viewOverlay.pDep=pDep;
 	viewOverlay.pEnd=pEnd;
-	[mapview setNeedsDisplay];	
+	[mapview refreshMap];	
 }
 
 -(void)downloadTiles {
@@ -119,7 +119,7 @@
 	pDep.x=pDep.y=pEnd.x=pEnd.y=0.0f;
 	viewOverlay.pDep=pDep;
 	viewOverlay.pEnd=pEnd;
-	[mapview setNeedsDisplay];
+	[mapview refreshMap];
 }
 -(void)showEndDownloadMessage:(NSString*)msg {
 	UIAlertView* hotSheet = [[UIAlertView alloc]
@@ -185,7 +185,7 @@
 			}
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-	[mapview setNeedsDisplay];
+	[mapview refreshMap];
 	[viewOverlay setNeedsDisplay];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

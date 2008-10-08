@@ -36,7 +36,6 @@
 	OverlayView* viewOverlay;
 }
 -(void)clearSelection;
--(void)setOrientation:(int)_orientation;
 -(void)updateCurrentPos:(PositionObj*)pos;
 -(id) initWithDB:(TileDB*)_db;
 

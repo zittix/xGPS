@@ -15,7 +15,7 @@
 	
 	if(locManager.locationServicesEnabled){
 		speedHasBeenUpdated=NO;
-		speedCheck=[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(checkSpeed) userInfo:nil repeats:YES];
+	//	speedCheck=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkSpeed) userInfo:nil repeats:YES];
 		[locManager startUpdatingLocation];
 		isEnabled=YES;
 	}
@@ -25,7 +25,7 @@
 	
 	if(locManager.locationServicesEnabled){
 		[locManager stopUpdatingLocation];
-		[speedCheck invalidate];
+		//[speedCheck invalidate];
 		speedCheck=nil;
 		isEnabled=NO;
 	}
@@ -35,7 +35,9 @@
 	return @"iPhone 3G GPS";
 }
 -(void)checkSpeed {
+	NSLog(@"Checking speed");
 	if(!speedHasBeenUpdated) {
+		NSLog(@"Wrong speed");
 		gps_data.fix.speed=0.0;
 #ifdef USE_UI
 		[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
@@ -80,21 +82,34 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+	//NSLog(@"SPeed: %f",[newLocation speed]);
 	if(oldLocation!=nil && lastTimeStamp!=oldLocation.timestamp.timeIntervalSince1970) {
 		CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
 		NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
+		lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
 		if(dt>0.0f && dx>2.0f) {
-			gps_data.fix.speed=dx/dt;
+			//NSLog(@"Available speed");
+			
+			double speed=dx/dt;
+			if(speed!=gps_data.fix.speed) {
+				//NSLog(@"speed different OK");
+				
+				gps_data.fix.speed=speed;
+				speedHasBeenUpdated=YES;
+			} else {
+				gps_data.fix.speed=0.0;
+			}
+			
 			if(gps_data.fix.speed>60)
 				gps_data.fix.speed=0.0;
-		}else
+		}else {
 			gps_data.fix.speed=0.0;
-		lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
-		speedHasBeenUpdated=YES;
-	}
-	else
+		}
 		
-	speedHasBeenUpdated=YES;
+	}else {
+		gps_data.fix.speed=0.0;
+	}
+
 	gps_data.fix.latitude=newLocation.coordinate.latitude;
 	gps_data.fix.longitude=newLocation.coordinate.longitude;
 	gps_data.fix.altitude=newLocation.altitude;
@@ -116,7 +131,7 @@
 	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyHundredMeters) {
 		signalQuality-=40;
 	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyKilometer) {
-		signalQuality-=50;
+		signalQuality-=70;
 	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyThreeKilometers) {
 		signalQuality-=70;
 	}

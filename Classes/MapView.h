@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "MapTile.h"
 #import "TileDB.h"
 #import "LocationWrapper.h"
 #import "ZoomView.h"
+
 @interface MapView : UIView<LocationWrapperProtocol,ZoomingProtocol,TileDownloadProtocol> {
 	//MapTile
 	TileDB *db;
@@ -28,7 +30,7 @@
 	MapTile* imgPinRef;
 	MapTile* imgPinSearch;
 	MapTile* imgGoogleLogo;
-	int _orientation;
+
 	CGPoint drawOrigin;
 	MapTile* tileNoMap;
 	BOOL passDoubleFingersEvent;
@@ -36,12 +38,17 @@
 	int direction;
 	PositionObj *posSearch;
 	//UITouch *lastTouch;
+	
+	
+	float mapRotation;
+	BOOL gpsTracking;
 
 }
 @property(retain,nonatomic) PositionObj *pos;
+-(void)refreshMap;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)tileDownloaded;
--(void)setOrientation:(int)orientation;
+-(void)setGPSTracking:(BOOL)val;
 -(void)setNextDirection:(PositionObj*)p;
 -(void)setZoom:(int)z;
 -(void)zoomin:(id)sender;

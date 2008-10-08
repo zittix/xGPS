@@ -30,7 +30,7 @@
 
 /* Enable GPS Button */
 "Enable GPS" = "Activer le GPS";
-
+"About xGPS" = "A propos de xGPS";
 /* Error message title */
 "Error" = "Erreur";
 

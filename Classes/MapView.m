@@ -35,16 +35,12 @@
 	//NSLog(@"MapView - updateCurrentPos() - IN with %f %f",[p x],[p y]);
 	posGPS.x=[p x];
 	posGPS.y=[p y];
-	if(!dragging) {
+	if(!dragging && gpsTracking) {
 		pos.x=posGPS.x;
 		pos.y=posGPS.y;
 	}
-	[self setNeedsDisplay];
+	[self refreshMap];
 	//NSLog(@"MapView - updateCurrentPos() - OUT");
-}
--(void)setOrientation:(int)orientation {
-	_orientation=orientation;
-	[self setNeedsDisplay];
 }
 
 -(void)setZoom:(int)z {
@@ -53,10 +49,10 @@
 -(void)fakeGPS {
 		pos.x+=0.0001;
 		pos.y+=0.0001;
-	[self setNeedsDisplay];
+	[self refreshMap];
 }
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db {
-	self=[super initWithFrame:f];
+	if((self=[super initWithFrame:f])) {
 	NSLog(@"Loading MapView");
 	db=_db;
 	hasGPSfix=NO;
@@ -94,10 +90,18 @@
 	
 	imgPinSearch=[[MapTile alloc] initWithData: data];
 	posSearch=[[PositionObj alloc] init];
-
+		mapRotation=0;
 	[self setMultipleTouchEnabled:YES];
-
+	//	self.backgroundColor=[UIColor redColor];
+	}
 	return self;
+}
+
+- (void)layoutSubviews {
+		//tiledLayer.frame=self.frame;
+}
+-(void)refreshMap {
+	[self setNeedsDisplay];
 }
 - (void)dealloc {
 	[lines release];
@@ -114,15 +118,15 @@
 
 -(void)setDirection:(int)dir {
 	direction=dir;
-	[self setNeedsDisplay];
+	[self refreshMap];
 }
 -(void)tileDownloaded {
-	[self setNeedsDisplay];
+	[self refreshMap];
 }
 -(void)setPosSearch:(PositionObj*)p {
 	posSearch.x=p.x;
 	posSearch.y=p.y;
-	[self setNeedsDisplay];
+	[self refreshMap];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesEnded:touches	withEvent:event];
@@ -175,7 +179,7 @@
 	lastDragPoint.x=NAN;
 	lastDragPoint.y=NAN;
 	prevDist=NAN;
-	[self setNeedsDisplay];[self setNeedsDisplay];[self setNeedsDisplay];
+	[self refreshMap];
 
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -209,22 +213,14 @@
 		lastDragPoint.x=c.x;
 		lastDragPoint.y=c.y;
 
-		if(_orientation==0) {
-			drawOrigin.x+=diffx;
-			drawOrigin.y+=diffy;
-		} else if(_orientation==90) {
-			drawOrigin.x+=diffy;
-			drawOrigin.y-=diffx;
-		} else if(_orientation==-90) {
-			drawOrigin.x-=diffy;
-			drawOrigin.y+=diffx;
-		} else { //180
-			drawOrigin.x-=diffx;
-			drawOrigin.y-=diffy;
-		}
+			drawOrigin.x+=diffy*sin(mapRotation)+diffx*cos(mapRotation);
+			drawOrigin.y+=diffy*cos(mapRotation)-diffx*sin(mapRotation);
+
 		/*if(lastTouch!=nil) [lastTouch release];
 		lastTouch=[value retain];*/
-		[self setNeedsDisplay];
+		[self refreshMap];
+		//tiledLayer.position=CGPointMake(tiledLayer.position.x+diffx,tiledLayer.position.y+diffy);
+
 		break;
 	}
 
@@ -295,6 +291,9 @@
 -(PositionObj*)getCurrentPos {
 	return pos;
 }
+-(void)setGPSTracking:(BOOL)val {
+	gpsTracking=val;
+}
 + (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom {
 	int zl = 17 - zoom;
 	float DegreePerPixel = 360.0 / (1 << (zl + 8));
@@ -349,7 +348,8 @@
 	
 	*y=(int)fmod(tmpy,TILE_SIZE);
 }
-- (void)drawRect:(CGRect)rect {
+#if 1
+- (void)drawRect:(CGRect)rect{
 	
 	//TODO: we currently assume that rect if the full screen !
 	int winWidth=rect.size.width;
@@ -358,6 +358,18 @@
 	// Drawing code
 	//NSLog(@"Drawing Map with rect size: %f %f and pos %f %f",rect.size.width,rect.size.height,rect.origin.x,rect.origin.y);
 	CGContextRef context = UIGraphicsGetCurrentContext();
+
+	
+	
+	
+	
+	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
+	CGAffineTransform rot=CGAffineTransformMakeRotation(mapRotation);
+	CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
+	CGContextConcatCTM(context, rot);
+	CGContextConcatCTM(context, trans);
+	//NSLog(@"CTM Done");
+		
 	CGPoint org;
 	int x,y;
 	int xoff,yoff;
@@ -376,6 +388,10 @@
 	float centerTilePosY=winHeight/2.0-(yoff/TILE_SIZE)*dynTileSize;
 	float centerTilePosX=winWidth/2.0-(xoff/TILE_SIZE)*dynTileSize;
 
+	float centerTilePosX2=centerTilePosY*sin(mapRotation)+centerTilePosX*cos(mapRotation);
+	float centerTilePosY2=centerTilePosY*cos(mapRotation)-centerTilePosX*sin(mapRotation);
+	centerTilePosX=centerTilePosX2;
+	centerTilePosY=centerTilePosY2;
 	//Try to search the tile x,y which will be put in the top left corner and where exactly.
 	int nbTileInX=ceil((float)centerTilePosX/dynTileSize);
 	int nbTileInY=ceil((float)centerTilePosY/dynTileSize);
@@ -393,17 +409,26 @@
 	//	NSLog(@"lat lon: %g;%g and x y: %ld;%ld",pos.x,pos.y,x,y);
 	//CGContextRotateCTM(context,_orientation*M_PI/180.0);
 
-	float widthDraw=rect.size.width;
-	float heightDraw=rect.size.height;
+	float widthDraw=rect.size.width/cos(mapRotation);
+	float heightDraw=rect.size.height/cos(mapRotation);
+	
+	float orgAngleY=cos(M_PI/2-mapRotation)*rect.size.width;
+	float orgAngleX=cos(M_PI/2-mapRotation)*rect.size.height;
+	//float orgAngleX=
+	org.y-=orgAngleY;
+	org.x-=orgAngleX;
 	CGContextScaleCTM(context, 1, -1);
 		
 	//NSLog(@"Before x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
 	int nbTiles=pow(2,17-zoom);
 	//NSLog(@"x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
 	//CGContextRotateCTM(context,M_PI/2.0);
+	float marginx=0;
+	
 	while(org.x<widthDraw) {
 		int orgyTile=y;
 		int orgy=org.y;
+		float marginy=0;
 		while(org.y<heightDraw) {
 			if(x<0) {
 				x=nbTiles+x;
@@ -439,12 +464,15 @@
 			if(t!=nil) {
 				//[t drawAtPoint: CGPointMake(org.x,org.y + dynTileSize) withContext:context];
 
-				[t drawInRect: CGRectMake(org.x,org.y + dynTileSize,dynTileSize,dynTileSize) withContext:context];
+				[t drawInRect: CGRectMake(org.x+marginx,org.y+marginy + dynTileSize,dynTileSize,dynTileSize) withContext:context];
+				
+				
 				//[t drawInRect: CGRectMake(-org.y - dynTileSize,org.x,dynTileSize,dynTileSize) withContext:context];
 			}
 				}
-			y++;
-			/*CGContextScaleCTM(context, 1, -1);
+			marginy-=1;
+			y++;/*
+			CGContextScaleCTM(context, 1, -1);
 			 CGContextBeginPath(context);
 			 CGPoint points[5];
 			 points[0]=org;
@@ -462,6 +490,7 @@
 			 CGContextScaleCTM(context, 1, -1);*/
 			org.y+=dynTileSize;
 		}
+		marginx-=1;
 		x++;
 		y=orgyTile;
 		org.y=orgy;
@@ -470,7 +499,7 @@
 	}
 
 	//Flush memory cache if too big
-	if([tilescache count]>128) {
+	if([tilescache count]>256) {
 		[tilescache removeAllObjects];
 	}
 
@@ -582,14 +611,35 @@
 		CGContextBeginPath(context);
 		CGContextAddArc(context,posXStart,posYStart,35,0,2*M_PI,0);
 		CGContextFillPath(context);
-	}*/
+	}
+	CGContextBeginPath(context);
+	CGContextAddArc(context,0,0,4,0,2*M_PI,0);
+	CGContextClosePath(context);
+	CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+	CGContextDrawPath(context,kCGPathFill);
+	CGContextBeginPath(context);
+	CGContextAddArc(context,20,0,4,0,2*M_PI,0);
+	CGContextClosePath(context);
+	CGContextSetRGBFillColor(context, 0, 1, 0, 1);
+	CGContextDrawPath(context,kCGPathFill);
+	CGContextBeginPath(context);
+	CGContextAddArc(context,0,20,4,0,2*M_PI,0);
+	CGContextClosePath(context);
+	CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+	CGContextDrawPath(context,kCGPathFill);
+	*/
+	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
+	 rot=CGAffineTransformMakeRotation(-mapRotation);
+	 trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
+	CGContextConcatCTM(context, rot);
+	CGContextConcatCTM(context, trans);
 	CGContextScaleCTM(context, 1, -1);
 
 	
 	[imgGoogleLogo drawAtPoint:CGPointMake(rect.size.width-72,rect.size.height-2) withContext:context];
 	CGContextScaleCTM(context, 1, -1);
 
-	
+		
 	
 	//CGContextSetRGBFillColor(context, 1, 0, 0, 1);
 	//CGContextFillRect(context,CGRectMake(-30,30,10,10));
@@ -601,24 +651,32 @@
 	[[self superview] drawRect:rect];
 
 }
+#endif
 -(void)setDir:(id)d {
 	//dirC=d;
 }
 -(void)zoomin:(id)sender {
 	if(zoom>0) zoom--;
-	[self setNeedsDisplay];
+	
+	[UIView beginAnimations:nil context:nil];
+	self.transform=CGAffineTransformMakeScale(0.5,0.5);
+	[UIView commitAnimations];
+	
+	//[self refreshMap];
+
 	[sender setZoominState:zoom!=0];
 	[sender setZoomoutState:zoom!=17];
 }
 -(void)zoomout:(id)sender {
 	if(zoom<17) zoom++;
-	[self setNeedsDisplay];
+	[self refreshMap];
+	
 	[sender setZoomoutState:zoom!=17];
 	[sender setZoominState:zoom!=0];
 }
 -(void)addDrawPoint:(PositionObj*)p {
 	[lines addObject:p];
-	[self setNeedsDisplay];
+	[self refreshMap];
 }
 -(void)clearPoints {
 	nextDirection=nil;

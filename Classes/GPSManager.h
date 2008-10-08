@@ -12,12 +12,14 @@
 #define iGPSD_ID 3
 #define FakeGPS_ID 4
 #define iPhone3G_ID 2
-#define NBGPS 3
+#define iGPS360_ID 5
+#define NBGPS 4
 @interface GPSManager : NSObject<UpdateProtocol> {
 	GPSController* gpsControllers1;
 	GPSController* gpsControllers2;
 	GPSController* gpsControllers3;
 	GPSController* gpsControllers4;
+	GPSController* gpsControllers5;
 	int idGPS;
 	id delegate;
 	

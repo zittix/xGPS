@@ -115,18 +115,21 @@
 		[toolbar setItems:btn animated:YES];	
 		if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 			btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
+			btnEnableGPS.style=UIBarButtonItemStyleDone;
 			[mapview setHasGPSPos:YES];
-			[mapview setNeedsDisplay];
+			[mapview setGPSTracking:YES];
+			[mapview refreshMap];
 			[self showSpeed];
 		} else{
 			[mapview setHasGPSPos:NO];
+			btnEnableGPS.style=UIBarButtonItemStyleBordered;
 			btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 		}
 	}else {
 		NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
 		[toolbar setItems:btn animated:YES];	
 		[mapview setHasGPSPos:NO];
-		[mapview setNeedsDisplay];
+		[mapview refreshMap];
 	}	
 	
 	if(![[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsConditionsUse] isEqualToString:vSettingsConditionsUse]) {
@@ -149,7 +152,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
-	[mapview setNeedsDisplay];
+	[mapview refreshMap];
 	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
 	//NSLog(@"CENTER size: %f %f of view",self.view.center.x,self.view.center.y);
 	
@@ -170,24 +173,40 @@
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
-	[mapview setNeedsDisplay];
+	[mapview refreshMap];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 -(void)gpsEnableBtnPressed:(id)sender {
-
-	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled)
-		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] DisableGPS];
-		else
-			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
 	
+	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled && btnEnableGPS.style!=UIBarButtonItemStyleDone) {
+		NSLog(@"Enabled et pas done");
+		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] DisableGPS];
+		btnEnableGPS.style=UIBarButtonItemStyleBordered;
+		[mapview setGPSTracking:NO];
+	}
+	else if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled && btnEnableGPS.style==UIBarButtonItemStyleDone){
+		btnEnableGPS.style=UIBarButtonItemStyleBordered;
+		NSLog(@"Enabled et done");
+		[mapview setGPSTracking:NO];
+		
+	} else {
+			NSLog(@"Disabled");
+			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
+			btnEnableGPS.style=UIBarButtonItemStyleDone;
+			[mapview setGPSTracking:YES];
+	}
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 		btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
 		[self showSpeed];
+
+		[mapview setHasGPSPos:YES];
+
 	} else{
 		[mapview setHasGPSPos:NO];
-		[mapview setNeedsDisplay];
+		[mapview refreshMap];
 		[self hideSpeed];
 		[signalView setQuality:0];
+		btnEnableGPS.style=UIBarButtonItemStyleBordered;
 		btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 	}
 }
@@ -269,11 +288,15 @@
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 				[self showSpeed];
 				btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
+				[mapview setGPSTracking:YES];
+				btnEnableGPS.style=UIBarButtonItemStyleDone;
 			} else{
 				[mapview setHasGPSPos:NO];
 				[self hideSpeed];
+				btnEnableGPS.style=UIBarButtonItemStyleBordered;
 				btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 				[signalView setQuality:0];
+				[mapview setGPSTracking:NO];
 			}
 			break;
 		case SIGNAL_QUALITY:

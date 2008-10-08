@@ -38,7 +38,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 3;
+	return 4;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -46,7 +46,8 @@
 		case 0: return NSLocalizedString(@"Maps",@"Maps title in settings");
 		case 1: return NSLocalizedString(@"GPS Device",@"GPS Device title in settings");
 		case 2: return NSLocalizedString(@"Driving directions",@"Driving directions");
-			
+		case 3: return NSLocalizedString(@"General",@"General title in settings");
+
 		default: return @"";
 	}
 }
@@ -55,6 +56,7 @@
 		case 0: return 5;
 		case 1: return 3;
 		case 2: return 1;
+		case 3: return 2;
 		default: return 0;
 	}
 }
@@ -106,6 +108,12 @@
 		case 2: {
 			switch(indexPath.row) {
 				case 0:	id=@"sectDrvDir_lang"; break;
+			}break;
+		}
+		case 3: {
+			switch(indexPath.row) {
+				case 0:	id=@"sectGen_about"; break;
+				case 1:	id=@"sectGen_ver"; break;
 			}break;
 		}
 	}
@@ -315,6 +323,46 @@
 					} break;
 				}
 			}break;
+			case 3: {
+				switch(indexPath.row) {
+					case 0: {
+						cell.text=NSLocalizedString(@"About xGPS",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+					} break;
+					case 1: {
+						UILabel *label;
+						UILabel *value;
+						
+						label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0, 120.0, 25.0)] autorelease];
+						label.tag = 2;
+						label.font = [UIFont boldSystemFontOfSize:16.0];
+						label.textAlignment = UITextAlignmentLeft;
+						label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						
+						
+						[cell.contentView addSubview:label];
+						
+						value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
+						value.tag = 1;
+						
+						value.font = [UIFont systemFontOfSize:16.0];
+						value.textAlignment = UITextAlignmentLeft;
+						
+						value.textColor=VALUE_COLOR;
+						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						
+						
+						label.text=NSLocalizedString(@"Version",@"Version string");
+						
+					
+						value.text=@"1.0.1-3";	
+						
+						value.textAlignment=UITextAlignmentRight;
+						[cell.contentView addSubview:value];
+						
+					} break;
+				}
+			}break;
 		}
 		
 	} else {
@@ -428,6 +476,10 @@
 		[act showInView:self.view];
 	}else if(indexPath.section==2 && indexPath.row==0) {
 		[self showLangDirSelector:self];	
+	}else if(indexPath.section==3 && indexPath.row==0) {
+		if(aboutView==nil)
+			aboutView=[[AboutViewController alloc] init];
+		[self.navigationController pushViewController:aboutView animated:YES];
 	}
 }
 

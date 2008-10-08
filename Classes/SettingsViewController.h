@@ -14,12 +14,14 @@
 #import "GPSSelectorViewController.h"
 #import "TileDB.h"
 #import "DirectionsLanguageViewController.h"
+#import "AboutViewController.h"
 @interface SettingsViewController : UITableViewController<UIActionSheetDelegate> {
 	MapsManagerView* mapsmanager;
 	MapView *_mapview;
 	GPSSelectorViewController *gpsselector;
 	TileDB *db;
 	DirectionsLanguageViewController *dirLangView;
+	AboutViewController* aboutView;
 	BOOL enabled;
 }
 - (id)initWithStyle:(UITableViewStyle)style withMap:(MapView*)mapview withDB:(TileDB*)_db;
