@@ -15,6 +15,7 @@
 #import "TileDB.h"
 #import "DirectionsLanguageViewController.h"
 #import "AboutViewController.h"
+#import "NetworkReceiverViewController.h"
 @interface SettingsViewController : UITableViewController<UIActionSheetDelegate> {
 	MapsManagerView* mapsmanager;
 	MapView *_mapview;
@@ -23,6 +24,7 @@
 	DirectionsLanguageViewController *dirLangView;
 	AboutViewController* aboutView;
 	BOOL enabled;
+	NetworkReceiverViewController *receiverView;
 }
 - (id)initWithStyle:(UITableViewStyle)style withMap:(MapView*)mapview withDB:(TileDB*)_db;
 -(void) setEnabled:(BOOL)v;

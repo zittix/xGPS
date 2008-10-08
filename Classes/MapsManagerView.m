@@ -26,6 +26,7 @@
 	progress=[[ProgressView alloc] initWithFrame:CGRectMake(0, 0, viewRect.size.width, viewRect.size.height)];
 	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height) withDB:db];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	[mapview setGPSTracking:YES];
 	self.title=NSLocalizedString(@"Maps Manager",@"Maps manager title");
 	self.view.autoresizesSubviews=YES;
 	[mapview setZoom: 7];

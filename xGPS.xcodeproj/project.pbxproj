@@ -30,6 +30,8 @@
 		4E8650300E7EBC58005954EE /* ChangedState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E86502F0E7EBC58005954EE /* ChangedState.m */; };
 		4E86515B0E7EC237005954EE /* iPhone3GController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E86515A0E7EC237005954EE /* iPhone3GController.m */; };
 		4E86516D0E7EC361005954EE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E86516C0E7EC361005954EE /* CoreLocation.framework */; };
+		4E8A01770E9D441C00E58774 /* NetworkReceiverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8A01760E9D441C00E58774 /* NetworkReceiverViewController.m */; };
+		4E8A01990E9D445A00E58774 /* wireless_future.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E8A01980E9D445A00E58774 /* wireless_future.jpg */; };
 		4E8BBC290E89786800BADF0C /* gps_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E8BBC280E89786800BADF0C /* gps_ball.png */; };
 		4E8C97370E6CBEF7001F5317 /* SpeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8C97360E6CBEF7001F5317 /* SpeedView.m */; };
 		4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */; };
@@ -117,6 +119,14 @@
 		4E8651590E7EC237005954EE /* iPhone3GController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhone3GController.h; sourceTree = "<group>"; };
 		4E86515A0E7EC237005954EE /* iPhone3GController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPhone3GController.m; sourceTree = "<group>"; };
 		4E86516C0E7EC361005954EE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4E8A01750E9D441C00E58774 /* NetworkReceiverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReceiverViewController.h; sourceTree = "<group>"; };
+		4E8A01760E9D441C00E58774 /* NetworkReceiverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReceiverViewController.m; sourceTree = "<group>"; };
+		4E8A01980E9D445A00E58774 /* wireless_future.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wireless_future.jpg; sourceTree = "<group>"; };
+		4E8AAAF80E9CE99900271B56 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = French.lproj/about.html; sourceTree = "<group>"; };
+		4E8AAAF90E9CE99E00271B56 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/about.html; sourceTree = "<group>"; };
+		4E8AAAFA0E9CE9A300271B56 /* Hebrew */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Hebrew; path = Hebrew.lproj/about.html; sourceTree = "<group>"; };
+		4E8AAAFB0E9CE9A800271B56 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Dutch; path = Dutch.lproj/about.html; sourceTree = "<group>"; };
+		4E8AAAFC0E9CE9B500271B56 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = German; path = German.lproj/about.html; sourceTree = "<group>"; };
 		4E8BBC280E89786800BADF0C /* gps_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gps_ball.png; sourceTree = "<group>"; };
 		4E8C97350E6CBEF7001F5317 /* SpeedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedView.h; sourceTree = "<group>"; };
 		4E8C97360E6CBEF7001F5317 /* SpeedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedView.m; sourceTree = "<group>"; };
@@ -241,6 +251,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E8A01980E9D445A00E58774 /* wireless_future.jpg */,
 				4E9078190E9CE69900B0F6BC /* about.html */,
 				4E94F97E0E8E2B650012B377 /* Default.png */,
 				4E90C0F50E8D3CD0003F6B23 /* green.png */,
@@ -279,6 +290,8 @@
 		4E0F04FE0E87C44600D75E7D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4E8A01750E9D441C00E58774 /* NetworkReceiverViewController.h */,
+				4E8A01760E9D441C00E58774 /* NetworkReceiverViewController.m */,
 				4E8C97350E6CBEF7001F5317 /* SpeedView.h */,
 				4E8C97360E6CBEF7001F5317 /* SpeedView.m */,
 				4EE0F2D70E6AAA0100BBA3FD /* ProgressView.h */,
@@ -411,6 +424,7 @@
 				4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */,
 				4E94F97F0E8E2B650012B377 /* Default.png in Resources */,
 				4E90781B0E9CE69900B0F6BC /* about.html in Resources */,
+				4E8A01990E9D445A00E58774 /* wireless_future.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +493,7 @@
 				4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */,
 				4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */,
 				4E9077FB0E9CE48800B0F6BC /* AboutViewController.m in Sources */,
+				4E8A01770E9D441C00E58774 /* NetworkReceiverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +530,11 @@
 			isa = PBXVariantGroup;
 			children = (
 				4E90781A0E9CE69900B0F6BC /* English */,
+				4E8AAAF80E9CE99900271B56 /* French */,
+				4E8AAAF90E9CE99E00271B56 /* Italian */,
+				4E8AAAFA0E9CE9A300271B56 /* Hebrew */,
+				4E8AAAFB0E9CE9A800271B56 /* Dutch */,
+				4E8AAAFC0E9CE9B500271B56 /* German */,
 			);
 			name = about.html;
 			sourceTree = "<group>";

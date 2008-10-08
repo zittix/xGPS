@@ -658,11 +658,11 @@
 -(void)zoomin:(id)sender {
 	if(zoom>0) zoom--;
 	
-	[UIView beginAnimations:nil context:nil];
-	self.transform=CGAffineTransformMakeScale(0.5,0.5);
-	[UIView commitAnimations];
+	//[UIView beginAnimations:nil context:nil];
+	//self.transform=CGAffineTransformMakeScale(0.5,0.5);
+	//[UIView commitAnimations];
 	
-	//[self refreshMap];
+	[self refreshMap];
 
 	[sender setZoominState:zoom!=0];
 	[sender setZoomoutState:zoom!=17];

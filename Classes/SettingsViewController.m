@@ -53,7 +53,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
-		case 0: return 5;
+		case 0: return 6;
 		case 1: return 3;
 		case 2: return 1;
 		case 3: return 2;
@@ -97,6 +97,7 @@
 				case 2:	id=@"sectMaps_size"; break;
 				case 3:	id=@"sectMaps_delete"; break;
 				case 4:	id=@"sectMaps_offline"; break;
+				case 5:	id=@"sectMaps_receive"; break;
 		} break;
 		case 1: {
 			switch(indexPath.row) {
@@ -203,6 +204,10 @@
 					[cell.contentView addSubview:value];
 					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
 										
+				}break;
+				case 5: {
+					cell.text=NSLocalizedString(@"Receive maps",@"Receive maps");
+					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 				}break;
 					} break;
 			case 1: {
@@ -480,6 +485,10 @@
 		if(aboutView==nil)
 			aboutView=[[AboutViewController alloc] init];
 		[self.navigationController pushViewController:aboutView animated:YES];
+	}else if(indexPath.section==0 && indexPath.row==5) {
+		if(receiverView==nil)
+			receiverView=[[NetworkReceiverViewController alloc] init];
+		[self.navigationController pushViewController:receiverView animated:YES];
 	}
 }
 
