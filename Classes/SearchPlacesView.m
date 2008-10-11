@@ -29,7 +29,7 @@
 
 		[self addSubview:searchBar];
 		
-		//[searchBar becomeFirstResponder];
+
 		map=_map;
 		self.backgroundColor=[UIColor clearColor];
 		geocoder=[[GeoEncoder alloc] init];
@@ -125,8 +125,6 @@
 	} else {
 		tblView.frame=CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight);
 	}
-	
-	//NSLog(@"Show");
 }
 - (void)keyboardWillHide:(NSNotification *)notif{
 	if(tblView==nil) {
@@ -138,11 +136,9 @@
 	} else {
 		tblView.frame=CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50);
 	}
-	
-	//NSLog(@"Show");
 }
 - (void)didMoveToSuperview {
-	searchBar.text=@"";
+	searchBar.text=@"Ch. du Marais 9 1031 Mex";
 	if(_result!=nil) {
 		[_result release];
 		_result=nil;
@@ -223,7 +219,20 @@
 	
 	ABMultiValueRef multi=ABRecordCopyValue(person,property);
 	NSDictionary *dic=(NSDictionary*)ABMultiValueCopyValueAtIndex(multi,identifier);
-	NSString *out=[NSString stringWithFormat:@"%@, %@ %@ %@, %@",[dic objectForKey:(NSString*)kABPersonAddressStreetKey],[dic objectForKey:(NSString*)kABPersonAddressCityKey],[dic objectForKey:(NSString*)kABPersonAddressStateKey],[dic objectForKey:(NSString*)kABPersonAddressZIPKey],[dic objectForKey:(NSString*)kABPersonAddressCountryKey]];
+	NSString *out=@"";
+	
+	if([dic objectForKey:(NSString*)kABPersonAddressStreetKey]!=nil)
+		out=[NSString stringWithFormat:@"%@, ",[dic objectForKey:(NSString*)kABPersonAddressStreetKey]];
+	if([dic objectForKey:(NSString*)kABPersonAddressCityKey]!=nil)
+		out=[NSString stringWithFormat:@"%@%@ ",out,[dic objectForKey:(NSString*)kABPersonAddressCityKey]];
+	if([dic objectForKey:(NSString*)kABPersonAddressStateKey]!=nil)
+		out=[NSString stringWithFormat:@"%@%@ ",out,[dic objectForKey:(NSString*)kABPersonAddressStateKey]];
+	if([dic objectForKey:(NSString*)kABPersonAddressZIPKey]!=nil)
+		out=[NSString stringWithFormat:@"%@%@ ",out,[dic objectForKey:(NSString*)kABPersonAddressZIPKey]];
+	if([dic objectForKey:(NSString*)kABPersonAddressCountryKey]!=nil)
+		out=[NSString stringWithFormat:@"%@%@",out,[dic objectForKey:(NSString*)kABPersonAddressCountryKey]];
+
+	
 	searchBar.text=out;
 	
 	CFRelease(dic);

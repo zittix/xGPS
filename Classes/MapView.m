@@ -90,7 +90,7 @@
 	
 	imgPinSearch=[[MapTile alloc] initWithData: data];
 	posSearch=[[PositionObj alloc] init];
-		mapRotation=0;
+		mapRotation=M_PI/4;
 	[self setMultipleTouchEnabled:YES];
 	//	self.backgroundColor=[UIColor redColor];
 	}
@@ -365,9 +365,9 @@
 	
 	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 	CGAffineTransform rot=CGAffineTransformMakeRotation(mapRotation);
-	CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
+	//CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
 	CGContextConcatCTM(context, rot);
-	CGContextConcatCTM(context, trans);
+	//CGContextConcatCTM(context, trans);
 	//NSLog(@"CTM Done");
 		
 	CGPoint org;
@@ -611,7 +611,7 @@
 		CGContextBeginPath(context);
 		CGContextAddArc(context,posXStart,posYStart,35,0,2*M_PI,0);
 		CGContextFillPath(context);
-	}
+	}	*/
 	CGContextBeginPath(context);
 	CGContextAddArc(context,0,0,4,0,2*M_PI,0);
 	CGContextClosePath(context);
@@ -625,14 +625,14 @@
 	CGContextBeginPath(context);
 	CGContextAddArc(context,0,20,4,0,2*M_PI,0);
 	CGContextClosePath(context);
-	CGContextSetRGBFillColor(context, 1, 0, 0, 1);
+	CGContextSetRGBFillColor(context, 0, 0, 1, 1);
 	CGContextDrawPath(context,kCGPathFill);
-	*/
+
 	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 	 rot=CGAffineTransformMakeRotation(-mapRotation);
-	 trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
+	 //trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
 	CGContextConcatCTM(context, rot);
-	CGContextConcatCTM(context, trans);
+	//CGContextConcatCTM(context, trans);
 	CGContextScaleCTM(context, 1, -1);
 
 	

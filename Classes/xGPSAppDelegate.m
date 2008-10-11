@@ -35,6 +35,8 @@ static GPSManager* gpsmanager;
 	[window addSubview:navController.view];
 
 	[window makeKeyAndVisible];
+	
+	self.idleTimerDisabled=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode];
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[[gpsmanager GetCurrentGPS] stop];

@@ -56,7 +56,7 @@
 		case 0: return 6;
 		case 1: return 3;
 		case 2: return 1;
-		case 3: return 2;
+		case 3: return 3;
 		default: return 0;
 	}
 }
@@ -83,6 +83,10 @@
 
 -(void)showMapsTypeSelector:(id)parent {
 	
+}
+-(void)switchSleepMode:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSleepMode];
+	[UIApplication sharedApplication].idleTimerDisabled=sender.on;
 }
 -(void)switchOfflineChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsMapsOffline];
@@ -115,6 +119,7 @@
 			switch(indexPath.row) {
 				case 0:	id=@"sectGen_about"; break;
 				case 1:	id=@"sectGen_ver"; break;
+				case 2:	id=@"sectGen_Idle"; break;
 			}break;
 		}
 	}
@@ -360,12 +365,24 @@
 						label.text=NSLocalizedString(@"Version",@"Version string");
 						
 					
-						value.text=@"1.0.1-3";	
+						value.text=@"1.0.1-4";	
 						
 						value.textAlignment=UITextAlignmentRight;
 						[cell.contentView addSubview:value];
 						
 					} break;
+					case 2: {
+						cell.text=NSLocalizedString(@"Prevent Sleep Mode",@"Prevent Sleep Mode");
+						UISwitch *value;
+						
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+						value.tag = 1;
+						[value addTarget:self action:@selector(switchSleepMode:) forControlEvents:UIControlEventValueChanged];
+						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						[cell.contentView addSubview:value];
+						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode];
+						
+					}break;
 				}
 			}break;
 		}

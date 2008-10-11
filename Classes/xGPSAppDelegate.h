@@ -19,6 +19,7 @@
 #define vSettingsConditionsUse @"1.0"
 #define kSettingsMapsOffline @"mapsofflinemode"
 #define kSettingsMapsLanguage @"mapslanguage"
+#define kSettingsSleepMode @"preventsleepmode"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;
