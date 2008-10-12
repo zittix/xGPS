@@ -1,0 +1,160 @@
+﻿/* Error message download maps */
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Een fout is opgetreden tijdens het laden van de kaarten. Vermoedelijk zijn delen van de kaart niet correct geladen";
+
+/* in kilo bytes */
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Bent u er zeker van het geselecteerde kaartgebied (%d Paginafragmenten ~ %d KB) ?";
+
+/* Make sure to let the %d etc... */
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Bent u er zeker van het geselecteerde kaartgebied (%d Paginafragmenten ~ %d MB) ?";
+
+/* Cancel button */
+"Cancel" = "Afbreken";
+
+/* GPS State */
+"Connected" = "Verbonden";
+
+/* Disable GPS Button */
+"Disable GPS" = "GPS Deactiveren";
+
+/* GPS State - */
+"Disconnected" = "Verbroken";
+
+/* Close button of message box */
+"Dismiss" = "Sluiten";
+
+/* Download button */
+"Download" = "Laden";
+
+/* Downloading maps title view */
+"Downloading maps..." = "Laden Kaarten...";
+
+/* Enable GPS Button */
+"Enable GPS" = "GPS Activeren";
+
+/* Error message title */
+"Error" = "Fout";
+
+/* GPS Device title in settings */
+"GPS Device" = "GPS Apparaat";
+
+/* Title in setting for gps state */
+"GPS state" = "GPS Status";
+
+/* Title in setting for gps to use */
+"GPS to use" = "GPS voor gebruik";
+
+/* Title of the message box of the result of the checking.. */
+"License checking" = "Licentie controle";
+
+/* License number title */
+"License number" = "Licentie Nummer";
+
+/* Title section in license view */
+"License number for %@" = "Licentie nummer voor %@";
+
+/* License number title for cell */
+"License:" = "Licentie:";
+
+/* Manage maps row in settings */
+"Manage maps" = "Kaarten Management";
+
+/* Map Title */
+"Map" = "Kaart";
+
+/* Maps title in settings */
+"Maps" = "Kaarten";
+
+/* Maps Download title message box */
+"Maps Download" = "Laden Kaarten";
+
+/* Download maps ok */
+"Maps downloaded successfully !" = "Kaarten succesvol geladen !";
+
+/* Maps manager title */
+"Maps Manager" = "Kaarten Manager";
+
+/* Manage maps row in settings */
+"Maps type" = "Kaarten soort";
+
+/* No button */
+"No" = "Nee";
+
+/* GPS State */
+"No License" = "Geen Licentie";
+
+/* Offline mode */
+"Offline mode" = "Off-line mode";
+
+/* Title gps picker */
+"Pick a GPS" = "Select GPS Unit"; 
+
+/* Error map select message */
+"Please select a greater map area by touching the screen with two fingers." = "Selecteer een groter kaart gebied door met twee vingers over het scherm te bewegen.";
+
+/* Reset GPS Button */
+"Reset GPS" = "Reset GPS";
+
+/* Settings Button */
+"Settings" = "Instellingen";
+
+/* GPS iphone 3G error */
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "De Locatievoorzieningen op uw apparaat staat uit. Ga naar Home-Instellingen-Algemeen-Locatievoorzieningen en schuif knop op I om dit probleem op te lossen";
+
+/* GPS serial port error */
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Niet in staat de seriepoort te openen. Overtuig u er van dat geen andere GPS-Software op de achtergrond actief is.";
+
+/* Verify license text */
+"Verifying license number..." = "Controle Licentie nummer...";
+
+/* Error message title */
+"xGPS Error" = "xGPS Fout";
+
+/* Yes Button */
+"Yes" = "Ja";
+
+/* Confirm invalid license */
+"Your license number is invalid. Please verify and retry" = "Uw licentie nummer is niet geldig. Controleer dit nogmaals en voer het opnieuw in";
+
+/* Confirm valid license */
+"Your license number is valid. You can now use the selected GPS." = "Uw licentie nummer is geldig. U kunt nu de geselecteerde GPS gebruiken.";
+
+/* TO TRANSLATE FROM HERE */
+
+/* Size of the map, MB=MegaBytes */
+"%.1f MB" = "%.1f MB";
+
+/* Placeholder for search bar of cities */
+"City name / Address" = "Plaatsnaam / Adres";
+
+/* Delete downloaded maps in settings */
+"Delete downloaded maps" = "Verwijder kaarten";
+
+"Downloaded maps size" = "Opgeslagen kaarten";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Bent u er zeker van de geladen kaarten te verwijderen?";
+
+/* Driving directions */
+"Driving directions" = "Route";
+
+"Language" = "Taal";
+
+/* No location found error message */
+"No location has been found according to your query." = "Geen locatie is gevonden overeenkomstig uw verzoek.";
+
+/* Search for places */
+"Places / Cities" = "Plekken / Steden";
+
+/* Search actionsheet title */
+"Search for:" = "Zoeken naar:";
+
+/* Not yet implemented message. */
+"This feature will be implemented in a future version." = "Deze funktie zal in een toekomstige versie beschikbaar zijn";
+
+/* Network error message */
+"Unable to retrieve the required information from the server: %@" = " Niet in staat de vereiste informatie van server op te vragen: %@";
+
+/* Unknown error */
+"Unknown error" = "Onbekende fout";
+
+/* Error search offline */
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "U kunt geen zoekopdracht doen terwijl u in off-line mode staat.U kunt de off-line mode uitschakelen onder de Instellingen knop ";

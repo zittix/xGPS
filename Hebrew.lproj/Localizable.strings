@@ -1,0 +1,317 @@
+/* Error message download maps */
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "ארעה שגיאה בזמן הורדת המפות המבוקשות. עשוי להיות כי חלקים של המפות לא הורדו בצורה תקינה.";
+
+
+
+/* in kilo bytes */
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "האם אתה בטוח שברצונך להוריד את אזור המפה הנבחר (%d קבצים ~ %d KB) ?";
+
+
+
+/* Make sure to let the %d etc... */
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "האם אתה בטוח שברצונך להוריד את אזור המפה הנבחר (%d קבצים ~ %d MB) ?";
+
+
+
+/* Cancel button */
+
+"Cancel" = "ביטול";
+
+
+
+/* GPS State */
+
+"Connected" = "מחובר";
+
+
+
+/* Disable GPS Button */
+
+"Disable GPS" = "נטרול GPS";
+
+
+
+/* GPS State - */
+
+"Disconnected" = "מנותק";
+
+
+
+/* Close button of message box */
+
+"Dismiss" = "ביטול";
+
+
+
+/* Download button */
+
+"Download" = "הורדה";
+
+
+
+/* Downloading maps title view */
+
+"Downloading maps..." = "מוריד מפות...";
+
+
+
+/* Enable GPS Button */
+
+"Enable GPS" = "הפעל GPS";
+
+
+
+/* Error message title */
+
+"Error" = "שגיאה";
+
+
+
+/* GPS Device title in settings */
+
+"Pick a GPS" = "בחר GPS"; 
+
+"GPS Device" = "התקן GPS";
+
+/* Title in setting for gps state */
+
+"GPS state" = "מצב GPS";
+
+
+
+/* Title in setting for gps to use */
+
+"GPS to use" = "GPS בשימוש";
+
+
+
+/* Title of the message box of the result of the checking.. */
+
+"License checking" = "בדיקת רישיון";
+
+
+
+/* License number title */
+
+"License number" = "מספר רישיון";
+
+
+
+/* Title section in license view */
+
+"License number for %@" = "מספר רישיון עבור %@";
+
+
+
+/* License number title for cell */
+
+"License:" = "רישיון:";
+
+
+
+/* Manage maps row in settings */
+
+"Manage maps" = "נהל מפות";
+
+
+
+/* Map Title */
+
+"Map" = "מפה";
+
+
+
+/* Maps title in settings */
+
+"Maps" = "מפות";
+
+
+
+/* Maps Download title message box */
+
+"Maps Download" = "הורדת מפות";
+
+
+
+/* Download maps ok */
+
+"Maps downloaded successfully !" = "מפות הורדו בהצלחה!";
+
+
+
+/* Maps manager title */
+
+"Maps Manager" = "ניהול מפות";
+
+
+
+/* Manage maps row in settings */
+
+"Maps type" = "סוג מפות";
+
+
+
+/* No button */
+
+"No" = "לא";
+
+
+
+/* GPS State */
+
+"No License" = "אין רישיון";
+
+
+
+/* Offline mode */
+
+"Offline mode" = "מצב לא מחובר";
+
+
+
+/* Error map select message */
+
+"Please select a greater map area by touching the screen with two fingers." = "אנא בחר אזור מפה גדול יותר בעזרת מגע של שתי אצבעות במסך.";
+
+
+
+/* Reset GPS Button */
+
+"Reset GPS" = "איפוס GPS";
+
+
+
+/* Settings Button */
+
+"Settings" = "הגדרות";
+
+
+
+/* GPS iphone 3G error */
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "שרותי המיקום אינם פעילים במכשיר שלך. אנא השתמש בהגדרות אשר נמצאות כל המסך הראשי על מנת לשנות מצב זה.";
+
+
+
+/* GPS serial port error */
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "לא ניתן לפתוח את הפורט המיועדץ אנא וודא כי שום תוכנת הקשורה ל GPS אינה רצה ברקע.";
+
+
+
+/* Verify license text */
+
+"Verifying license number..." = "מוודא מספר רישיון...";
+
+
+
+/* Error message title */
+
+"xGPS Error" = "xGPS שגיאת";
+
+
+
+/* Yes Button */
+
+"Yes" = "כן";
+
+
+
+/* Confirm invalid license */
+
+"Your license number is invalid. Please verify and retry" = "מספר הרישיון אינו תקין. אנא וודא ונסה שנית.";
+
+
+
+/* Confirm valid license */
+
+"Your license number is valid. You can now use the selected GPS." = "מספר הרשיון שלך תקין. אתה יכול כעת להשתמש ב GPS הנבחר.";
+
+
+
+/* TO TRANSLATE FROM HERE */
+
+
+
+/* Size of the map, MB=MegaBytes */
+
+"%.1f MB" = "%.1f MB";
+
+
+
+/* Placeholder for search bar of cities */
+
+"City name / Address" = "שם עיר / כתובת";
+
+
+
+/* Delete downloaded maps in settings */
+
+"Delete downloaded maps" = "מחיקת מפות שהורדו";
+
+
+
+"Downloaded maps size" = "נפח מפות שהורדו";
+
+
+
+"Are you sure you want to delete all the downloaded maps ?" = "האם אתה בטוח שברצונך למחוק את המפות שהורדו?";
+
+
+
+/* Driving directions */
+
+"Driving directions" = "הכוונת נהיגה";
+
+
+
+"Language" = "שפה";
+
+
+
+/* No location found error message */
+
+"No location has been found according to your query." = "לא נמצא מיקום התואם את המידע שהוקלד.";
+
+
+
+/* Search for places */
+
+"Places / Cities" = "מקומות / ערים";
+
+
+
+/* Search actionsheet title */
+
+"Search for:" = "חיפוש:";
+
+
+
+/* Not yet implemented message. */
+
+"This feature will be implemented in a future version." = "אפשרות זו תיושם בגרסה עתידית.";
+
+
+
+/* Network error message */
+
+"Unable to retrieve the required information from the server: %@" = "לא ניתן לאחזר את המידע הנדרש מהשרת: %@";
+
+
+
+/* Unknown error */
+
+"Unknown error" = "שגיאה לא ידועה";
+
+
+
+/* Error search offline */
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "לא ניתן לבצע חיפוש במצב מנותק. ניתו לשנות מצב זה ע\"י שינוי בהגדרות.";
+
+
+
+"You cannot download maps while you are in the offline mode." = "לא ניתן להוריד מפות בזמן שאתה במצב מנותק.";

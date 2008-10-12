@@ -90,15 +90,21 @@
 	
 	imgPinSearch=[[MapTile alloc] initWithData: data];
 	posSearch=[[PositionObj alloc] init];
-		mapRotation=M_PI/4;
-	[self setMultipleTouchEnabled:YES];
+		mapRotation=0;
+[self setMultipleTouchEnabled:YES];
+	//	[NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(updateAngle) userInfo:nil repeats:YES];
 	//	self.backgroundColor=[UIColor redColor];
 	}
 	return self;
 }
-
+-(void)updateAngle {
+	mapRotation+=M_PI/32.0;
+	mapRotation=fmod(mapRotation,2*M_PI);
+	[self setNeedsDisplay];
+}
 - (void)layoutSubviews {
 		//tiledLayer.frame=self.frame;
+	
 }
 -(void)refreshMap {
 	[self setNeedsDisplay];
@@ -128,20 +134,14 @@
 	posSearch.y=p.y;
 	[self refreshMap];
 }
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	lastInitMove=NO;
+}
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesEnded:touches	withEvent:event];
 	dragging=NO;
 
 	//Update the lat / lon with the org offset
-
-	
-	NSSet *events=[event allTouches];
-	NSEnumerator *enumerator = [events objectEnumerator];
-	UITouch* value;
-
-	while ((value = [enumerator nextObject])) {
-		
-	}
 	
 	int x,y,xoff,yoff;
 	//NSLog(@"Draw org: %f %f",drawOrigin.x,drawOrigin.y);
@@ -183,14 +183,17 @@
 
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	static CGPoint lastT1, lastT2;
+
 	[super touchesMoved:touches withEvent:event];
 	
 	NSSet *events=[event allTouches];
 	NSEnumerator *enumerator = [events objectEnumerator];
 	UITouch* value;
 	//NSLog(@"Nb finger mapview: %d",[events count]);
-	if([events count]>1)
+	if([events count]>2)
 		return;
+	if([events count]==1) {
 	while ((value = [enumerator nextObject])) {
 		/*if(lastTouch!=nil){
 			CGPoint c = [value locationInView:self];
@@ -223,7 +226,42 @@
 
 		break;
 	}
-
+	} else if([events count]==2) {
+		UITouch* t1=[enumerator nextObject];
+		UITouch* t2=[enumerator nextObject];
+		CGPoint c1 = [t1 locationInView:self];
+		CGPoint c2 = [t2 locationInView:self];
+		if(lastInitMove==NO) {
+			lastInitMove=YES;	
+			lastT1.x=c1.x;
+			lastT1.y=c1.y;
+			lastT2.x=c2.x;
+			lastT2.y=c2.y;
+			return;
+		}
+	
+		
+		//Angle between the two vectors
+		CGPoint v1=CGPointMake(c1.x-c2.x,c1.y-c2.y);
+		CGPoint v2=CGPointMake(lastT1.x-lastT2.x,lastT1.y-lastT2.y);
+		float cos_a=(v1.x*v2.x+v1.y*v2.y)/(sqrt(v1.x*v1.x+v1.y*v1.y)*sqrt(v2.x*v2.x+v2.y*v2.y));
+		float a=acos(cos_a);
+		
+		//Check the rotation "sense"
+		//Vectorial product
+		float vectProd=v1.x*v2.y-v2.x*v1.y;
+		if(vectProd>=0)
+			a*=-1;
+		//NSLog(@"Alpha=%f",a);
+		mapRotation+=a;
+		mapRotation=fmod(mapRotation,2*M_PI);
+		lastT1.x=c1.x;
+		lastT1.y=c1.y;
+		lastT2.x=c2.x;
+		lastT2.y=c2.y;
+		[self refreshMap];
+		
+	}
 }
 
 - (PositionObj*)getPositionFromPixel:(float)x andY:(float)y {
@@ -350,7 +388,7 @@
 }
 #if 1
 - (void)drawRect:(CGRect)rect{
-	
+	//NSLog(@"Drawing at %f°",mapRotation/M_PI*180.0);
 	//TODO: we currently assume that rect if the full screen !
 	int winWidth=rect.size.width;
 	int winHeight=rect.size.height;
@@ -360,7 +398,8 @@
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
 	
-	
+	CGContextSetRGBFillColor(context, 0.53, 0.53, 0.53, 1);
+	CGContextFillRect(context,rect);
 	
 	
 	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
@@ -374,76 +413,83 @@
 	int x,y;
 	int xoff,yoff;
 
-	CGContextSetRGBFillColor(context, 0.53, 0.53, 0.53, 1);
-	CGContextFillRect(context,rect);
-
 	[MapView getXYfrom:pos.x andLon:pos.y toPositionX:&x andY:&y withZoom:zoom];
 	[self getXYOffsetfrom:pos.x andLon:pos.y toPositionX:&xoff andY:&yoff withZoom:zoom];
 	
 	int centerTileX=x;
 	int centerTileY=y;
-
-	//Calculate the x and y offset of the first tile corresponding to the correct lat/lon
+	
 	//The pos.x and pos.y will be the center of the screen
-	float centerTilePosY=winHeight/2.0-(yoff/TILE_SIZE)*dynTileSize;
-	float centerTilePosX=winWidth/2.0-(xoff/TILE_SIZE)*dynTileSize;
+	//The center tile position will then be at the following position:s
+	//float centerTilePosY=winHeight/2.0-(yoff/TILE_SIZE)*dynTileSize;
+	//float centerTilePosX=winWidth/2.0-(xoff/TILE_SIZE)*dynTileSize;
+	float centerTilePosX=drawOrigin.x-(xoff/TILE_SIZE)*dynTileSize;
+	float centerTilePosY=drawOrigin.y-(yoff/TILE_SIZE)*dynTileSize;
 
-	float centerTilePosX2=centerTilePosY*sin(mapRotation)+centerTilePosX*cos(mapRotation);
-	float centerTilePosY2=centerTilePosY*cos(mapRotation)-centerTilePosX*sin(mapRotation);
-	centerTilePosX=centerTilePosX2;
-	centerTilePosY=centerTilePosY2;
+	//float centerTilePosX2=centerTilePosY*sin(mapRotation)+centerTilePosX*cos(mapRotation);
+	//float centerTilePosY2=centerTilePosY*cos(mapRotation)-centerTilePosX*sin(mapRotation);
+	//centerTilePosX=centerTilePosX2;
+	//centerTilePosY=centerTilePosY2;
 	//Try to search the tile x,y which will be put in the top left corner and where exactly.
-	int nbTileInX=ceil((float)centerTilePosX/dynTileSize);
-	int nbTileInY=ceil((float)centerTilePosY/dynTileSize);
+	//int nbTileInX=ceil((float)centerTilePosX/dynTileSize);
+	//int nbTileInY=ceil((float)centerTilePosY/dynTileSize);
 	//NSLog(@"nb x y: %d;%d",nbTileInX,nbTileInY);
-	x=x-nbTileInX;
-	y=y-nbTileInY;
+	//x=x-nbTileInX;
+	//y=y-nbTileInY;
 
 	//Try to search the pos of the left top tile
-	org.x=centerTilePosX-nbTileInX*dynTileSize;
-	org.y=centerTilePosY-nbTileInY*dynTileSize;
+	//org.x=centerTilePosX-nbTileInX*dynTileSize;
+	//org.y=centerTilePosY-nbTileInY*dynTileSize;
 
 	//Move the origin
-	org.x+=drawOrigin.x;
-	org.y+=drawOrigin.y;
+	org.x=centerTilePosX;
+	org.y=centerTilePosY;
 	//	NSLog(@"lat lon: %g;%g and x y: %ld;%ld",pos.x,pos.y,x,y);
 	//CGContextRotateCTM(context,_orientation*M_PI/180.0);
 
-	float widthDraw=rect.size.width/cos(mapRotation);
-	float heightDraw=rect.size.height/cos(mapRotation);
+	float widthDraw=0;
+	float heightDraw=0;
+
+
+	float widthDraw2=0;
+	float heightDraw2=0;
+
+	widthDraw2=widthDraw=heightDraw=heightDraw2=sqrt(winWidth*winWidth/4+winHeight*winHeight/4);
 	
-	float orgAngleY=cos(M_PI/2-mapRotation)*rect.size.width;
-	float orgAngleX=cos(M_PI/2-mapRotation)*rect.size.height;
+	int nbTileInX=ceil((float)widthDraw2/dynTileSize);
+	int nbTileInY=ceil((float)heightDraw2/dynTileSize);
+	x=x-nbTileInX;
+	y=y-nbTileInY;
+	org.x=centerTilePosX-nbTileInX*dynTileSize;
+	org.y=centerTilePosY-nbTileInY*dynTileSize;
+	
+	//float heightDraw=sqrt(winWidth*winWidth+winHeight*winHeight)/2;
+	
+	//float orgAngleY=cos(M_PI/2-mapRotation)*rect.size.width;
+	//float orgAngleX=cos(M_PI/2-mapRotation)*rect.size.height;
 	//float orgAngleX=
-	org.y-=orgAngleY;
-	org.x-=orgAngleX;
+	//org.y-=orgAngleY;
+	//org.x-=orgAngleX;
 	CGContextScaleCTM(context, 1, -1);
 		
 	//NSLog(@"Before x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
 	int nbTiles=pow(2,17-zoom);
 	//NSLog(@"x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
 	//CGContextRotateCTM(context,M_PI/2.0);
-	float marginx=0;
+	float marginy=0;
 	
-	while(org.x<widthDraw) {
-		int orgyTile=y;
-		int orgy=org.y;
-		float marginy=0;
-		while(org.y<heightDraw) {
+	while(org.y<heightDraw) {
+		int orgxTile=x;
+		float orgx=org.x;
+		float marginx=0;
+		if(y<nbTiles && y>=0) {
+		while(org.x<widthDraw) {
 			if(x<0) {
 				x=nbTiles+x;
-				
 			}
 			x = fmod(x,nbTiles);
-			//y= fmod(y,nbTiles);
-			
-			if(y<nbTiles && y>=0) {
-				
-				
-			
-			//Try to load the tile from cache
 			NSString *key=[NSString stringWithFormat:@"%d:%d:%d",x,y,zoom];
-
+			
 			MapTile* t=[tilescache objectForKey:key];
 			//NSLog(@"Getting x y: %d;%d",x,y);
 			if(t==nil && dragging==NO) {
@@ -458,21 +504,14 @@
 					t=tileNoMap;
 				}
 			}
-				
 			
 			
 			if(t!=nil) {
-				//[t drawAtPoint: CGPointMake(org.x,org.y + dynTileSize) withContext:context];
-
 				[t drawInRect: CGRectMake(org.x+marginx,org.y+marginy + dynTileSize,dynTileSize,dynTileSize) withContext:context];
-				
-				
-				//[t drawInRect: CGRectMake(-org.y - dynTileSize,org.x,dynTileSize,dynTileSize) withContext:context];
 			}
-				}
-			marginy-=1;
-			y++;/*
-			CGContextScaleCTM(context, 1, -1);
+			marginx-=1;
+			
+			/* CGContextScaleCTM(context, 1, -1);
 			 CGContextBeginPath(context);
 			 CGPoint points[5];
 			 points[0]=org;
@@ -488,18 +527,20 @@
 			 CGContextClosePath(context);
 			 CGContextDrawPath(context,kCGPathStroke);
 			 CGContextScaleCTM(context, 1, -1);*/
-			org.y+=dynTileSize;
+			org.x+=dynTileSize;
+			x++;
 		}
-		marginx-=1;
-		x++;
-		y=orgyTile;
-		org.y=orgy;
-		org.x+=dynTileSize;
-
+		}
+		org.x=orgx;
+		marginy-=1;
+		org.y+=dynTileSize;
+		x=orgxTile;
+		y++;
+		
 	}
 
 	//Flush memory cache if too big
-	if([tilescache count]>256) {
+	if([tilescache count]>128) {
 		[tilescache removeAllObjects];
 	}
 
@@ -612,6 +653,7 @@
 		CGContextAddArc(context,posXStart,posYStart,35,0,2*M_PI,0);
 		CGContextFillPath(context);
 	}	*/
+	/*
 	CGContextBeginPath(context);
 	CGContextAddArc(context,0,0,4,0,2*M_PI,0);
 	CGContextClosePath(context);
@@ -622,17 +664,19 @@
 	CGContextClosePath(context);
 	CGContextSetRGBFillColor(context, 0, 1, 0, 1);
 	CGContextDrawPath(context,kCGPathFill);
+	
 	CGContextBeginPath(context);
 	CGContextAddArc(context,0,20,4,0,2*M_PI,0);
 	CGContextClosePath(context);
 	CGContextSetRGBFillColor(context, 0, 0, 1, 1);
 	CGContextDrawPath(context,kCGPathFill);
-
-	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
-	 rot=CGAffineTransformMakeRotation(-mapRotation);
-	 //trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
+*/
+	
+	//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
+	rot=CGAffineTransformMakeRotation(-mapRotation);
+	CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
 	CGContextConcatCTM(context, rot);
-	//CGContextConcatCTM(context, trans);
+	CGContextConcatCTM(context, trans);
 	CGContextScaleCTM(context, 1, -1);
 
 	

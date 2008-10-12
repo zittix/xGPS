@@ -38,7 +38,7 @@
 	int direction;
 	PositionObj *posSearch;
 	//UITouch *lastTouch;
-	
+	BOOL lastInitMove;
 	
 	float mapRotation;
 	BOOL gpsTracking;
