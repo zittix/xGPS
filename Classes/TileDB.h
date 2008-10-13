@@ -29,11 +29,15 @@
 	BOOL runAsync;
 	BOOL offline;
 	NSString *langMap;
+	BOOL closed;
+	int type;
 }
 -(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom withDelegate:(id)delegate;
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom;
 -(void)cancelDownload;
 -(float)mapsize;
 -(void)flushMaps;
+-(void)closeDB;
+-(void)loadDB;
 -(int)downloadTiles:(int)fX fromY:(int)fY toX:(int)toX toY:(int)toY withZoom:(int)zoom  withDelegate:(ProgressView*)progress;
 @end

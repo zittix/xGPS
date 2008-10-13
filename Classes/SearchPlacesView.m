@@ -34,7 +34,12 @@
 		self.backgroundColor=[UIColor clearColor];
 		geocoder=[[GeoEncoder alloc] init];
 		geocoder.delegate=self;
-		
+		tblView=[[UITableView alloc] initWithFrame:CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50) style:UITableViewStylePlain];
+		tblView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		tblView.delegate=self;
+		tblView.dataSource=self;
+		tblView.rowHeight=60.0f;
+		[self addSubview:tblView];
     }
     return self;
 }
@@ -115,16 +120,7 @@
 	CGRect keyboard;
 	[[notif.userInfo objectForKey:UIKeyboardBoundsUserInfoKey]  getValue:&keyboard];
 	keyboardHeight=keyboard.size.height;
-	if(tblView==nil) {
-		tblView=[[UITableView alloc] initWithFrame:CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight) style:UITableViewStylePlain];
-		tblView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		tblView.delegate=self;
-		tblView.dataSource=self;
-		tblView.rowHeight=60.0f;
-		[self addSubview:tblView];
-	} else {
-		tblView.frame=CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight);
-	}
+	tblView.frame=CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50-keyboardHeight);
 }
 - (void)keyboardWillHide:(NSNotification *)notif{
 	if(tblView==nil) {

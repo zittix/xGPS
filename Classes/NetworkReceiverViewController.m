@@ -8,7 +8,7 @@
 
 #import "NetworkReceiverViewController.h"
 
-
+#import "xGPSAppDelegate.h"
 @implementation NetworkReceiverViewController
 
 /*
@@ -53,8 +53,12 @@
     [super viewDidLoad];
 }
 */
-
-
+-(void)viewWillAppear:(BOOL)animated {
+	[APPDELEGATE.tiledb closeDB];
+}
+-(void)viewWillDisappear:(BOOL)animated {
+	[APPDELEGATE.tiledb loadDB];
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

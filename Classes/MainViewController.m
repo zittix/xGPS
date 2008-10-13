@@ -73,6 +73,7 @@
 	[self.view addSubview:signalView];
 	[signalView setQuality:0];
 	speedview.hidden=YES;
+	mapview.mapRotationEnabled=YES;
 }
 -(void)hideSpeed {
 	[UIView beginAnimations:nil context:nil];
@@ -155,7 +156,7 @@
 	[mapview refreshMap];
 	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
 	//NSLog(@"CENTER size: %f %f of view",self.view.center.x,self.view.center.y);
-	
+	[self settingsBtnPressed:btnSettings];
 	//[UIView beginAnimations:nil context:nil];	
 	//[UIView setAnimationDidStopSelector:@selector(endRotation:::)];
 	//float sx=self.view.frame.size.width/mapview.frame.size.height;

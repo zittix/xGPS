@@ -10,9 +10,13 @@
 #import "MapView.h"
 #undef NAN
 #define NAN -10e8
-
+#define DEG_TO_RAD (M_PI/180.0f)
+#define DEG2RAD(x) (x*M_PI/180.0f)
+/// @brief Earth's quatratic mean radius for WGS-84
+#define EARTH_RADIUS_IN_METERS 6372797.560856
 @implementation MapView
 @synthesize pos;
+@synthesize mapRotationEnabled;
 -(void)setHasGPSPos:(BOOL)val {
 	hasGPSfix=val;
 }
@@ -30,6 +34,16 @@
 - (double)viewDoubleTapDelay:(UIView *)view {
 	return 0.7;
 }
+-(float)distanceBetween:(PositionObj*)p and:(PositionObj*)p2 {
+	double latitudeArc  = (p.x - p2.x) * DEG_TO_RAD;
+	double longitudeArc = (p.y - p2.y) * DEG_TO_RAD;
+    double latitudeH = sin(latitudeArc * 0.5);
+    latitudeH *= latitudeH;
+    double lontitudeH = sin(longitudeArc * 0.5);
+    lontitudeH *= lontitudeH;
+    double tmp = cos(p.x*DEG_TO_RAD) * cos(p2.x*DEG_TO_RAD);
+    return EARTH_RADIUS_IN_METERS * 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));	
+}
 - (void)updateCurrentPos:(PositionObj*) p {
 	//NSLog(@"MapView - updateCurrentPos() - IN");
 	//NSLog(@"MapView - updateCurrentPos() - IN with %f %f",[p x],[p y]);
@@ -39,6 +53,36 @@
 		pos.x=posGPS.x;
 		pos.y=posGPS.y;
 	}
+	
+	if(mapRotationEnabled) {
+		
+		if(lastPos.x==0.0 && lastPos.y==0.0) {
+			lastPos.x=p.x;
+			lastPos.y=p.y;
+		} else {
+		
+		float d=[self distanceBetween:p and:lastPos];
+			if(d>2) {
+	//	float header=fmod(atan2(sin(DEG2RAD(p.y-lastPos.y))*cos(DEG2RAD(p.x)),cos(DEG2RAD(lastPos.x))*sin(DEG2RAD(p.x))-sin(DEG2RAD(lastPos.x))*cos(DEG2RAD(p.x))*cos(DEG2RAD(p.y-lastPos.y))),2*M_PI);
+				float lat1=lastPos.x*M_PI/180.0;
+				float lat2=p.x*M_PI/180.0;
+				float lon2=p.y*M_PI/180.0;
+				float lon1=lastPos.y*M_PI/180.0;
+				//float dLat = (lat2-lat1);
+				float dLon = (lon2-lon1);
+				float y = sin(dLon) * cos(lat2);
+				float x = cos(lat1)*sin(lat2) -
+				sin(lat1)*cos(lat2)*cos(dLon);
+				float brng = atan2(y, x);
+		
+				//NSLog(@"Heading: %f",brng*180.0/M_PI);
+				mapRotation=(2*M_PI-brng);
+				lastPos.x=p.x;
+				lastPos.y=p.y;
+			}
+		}
+	}
+	
 	[self refreshMap];
 	//NSLog(@"MapView - updateCurrentPos() - OUT");
 }
@@ -84,13 +128,15 @@
 	data = [NSData dataWithContentsOfFile:imageFileName];
 	
 	imgGoogleLogo=[[MapTile alloc] initWithData: data];
-	
+		mapRotationEnabled=NO;
 	imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pin_pos.png"];
 	data = [NSData dataWithContentsOfFile:imageFileName];
 	
 	imgPinSearch=[[MapTile alloc] initWithData: data];
 	posSearch=[[PositionObj alloc] init];
+		lastPos=[[PositionObj alloc] init];
 		mapRotation=0;
+		
 [self setMultipleTouchEnabled:YES];
 	//	[NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(updateAngle) userInfo:nil repeats:YES];
 	//	self.backgroundColor=[UIColor redColor];
@@ -140,13 +186,14 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[super touchesEnded:touches	withEvent:event];
 	dragging=NO;
-
+	NSSet *events=[event allTouches];
+	if([events count]!=1)  return;
 	//Update the lat / lon with the org offset
 	
 	int x,y,xoff,yoff;
 	//NSLog(@"Draw org: %f %f",drawOrigin.x,drawOrigin.y);
 	//NSLog(@"Current pos: %f %f",pos.x,pos.y);
-	[MapView getXYfrom:pos.x andLon:pos.y toPositionX:&x andY:&y withZoom:zoom];
+	[self getXYfrom:pos.x andLon:pos.y toPositionX:&x andY:&y withZoom:zoom];
 	[self getXYOffsetfrom:pos.x andLon:pos.y toPositionX:&xoff andY:&yoff withZoom:zoom];
 
 	int topleftx=floor((-drawOrigin.x+xoff)/TILE_SIZE);
@@ -162,7 +209,7 @@
 		//NSLog(@"After (x,y): %d %d with offset %d %d",x,y,offx_after,offy_after);
 	float lat,lon;
 
-	[MapView getLatLonfromXY:x andY:y withXOffset:offx_after andYOffset:offy_after toLat:&lat andLon:&lon withZoom:zoom];
+	[self getLatLonfromXY:x andY:y withXOffset:offx_after andYOffset:offy_after toLat:&lat andLon:&lon withZoom:zoom];
 	//	NSLog(@"Dyn tile size: %f",dynTileSize/TILE_SIZE);
 	if(dynTileSize/TILE_SIZE>=1.4 && zoom < 17) {
 		dynTileSize=TILE_SIZE;
@@ -226,7 +273,7 @@
 
 		break;
 	}
-	} else if([events count]==2) {
+	} else if([events count]==2 && mapRotationEnabled) {
 		UITouch* t1=[enumerator nextObject];
 		UITouch* t2=[enumerator nextObject];
 		CGPoint c1 = [t1 locationInView:self];
@@ -268,7 +315,7 @@
 	PositionObj *ret=[[[PositionObj alloc] init ] autorelease];
 	int tx,ty,xoff,yoff;
 
-	[MapView getXYfrom:pos.x andLon:pos.y toPositionX:&tx andY:&ty withZoom:zoom];
+	[self getXYfrom:pos.x andLon:pos.y toPositionX:&tx andY:&ty withZoom:zoom];
 	[self getXYOffsetfrom:pos.x andLon:pos.y toPositionX:&xoff andY:&yoff withZoom:zoom];
 	//NSLog(@"x y %d %d",tx,ty);
 	//Calculate the x and y offset of the first tile corresponding to the correct lat/lon
@@ -299,7 +346,7 @@
 	xoff=diffx;
 	yoff=diffy;
 	float lat,lon;
-	[MapView getLatLonfromXY:tx andY:ty withXOffset:xoff andYOffset:yoff toLat:&lat andLon:&lon withZoom:zoom];
+	[self getLatLonfromXY:tx andY:ty withXOffset:xoff andYOffset:yoff toLat:&lat andLon:&lon withZoom:zoom];
 	//	NSLog(@"Dyn tile size: %f",dynTileSize/TILE_SIZE);
 
 	//NSLog(@"Before: %f %f, after: %f %f",pos.x,pos.y,lat,lon);
@@ -332,11 +379,11 @@
 -(void)setGPSTracking:(BOOL)val {
 	gpsTracking=val;
 }
-+ (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom {
-	int zl = 17 - zoom;
+- (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom2 {
+	int zl = 17 - zoom2;
 	float DegreePerPixel = 360.0 / (1 << (zl + 8));
 
-	float tmp = xoff * DegreePerPixel+((x<<zoom)*360.0)/131072.0 - 180.0; //131072.0=2^17
+	float tmp = xoff * DegreePerPixel+((x<<zoom2)*360.0)/131072.0 - 180.0; //131072.0=2^17
 	*lon = tmp;
 
 	float iY = y;
@@ -347,22 +394,25 @@
 	float LatRad = 2 *atan(exp(iY));
 	*lat = LatRad * (180 / M_PI) - 90;
 }
-+ (void)getXYfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom {
+- (void)getXYfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2 {
 	float ty;
 
 	while (lon> 180) lon -= 360;
 	while (lon<-180) lon += 360;
 
 	int tmpx = (int)(((lon+180.0) / 360.0) * 131072.0); //131072.0=2^17
-	*x = (tmpx >> zoom);
+	*x = (tmpx >> zoom2);
 
 	if (lat> 90) lat = lat - 180;
 	if (lat < -90) lat = lat + 180;
 
 	lat = lat / 180.0 * M_PI;
-	ty = M_PI - 0.5 * log((1.0 + sin(lat)) / (1.0 - sin(lat)));
+	ty=(1.0 + sin(lat)) / (1.0 - sin(lat));
+	ty=log(ty);
+	ty = 0.5 * ty;
+	ty=M_PI-ty;
 	int tmpy = (int)((ty / 2.0 / M_PI) * 131072.0);
-	tmpy=tmpy >> zoom;
+	tmpy=tmpy >> zoom2;
 
 	*y=tmpy;
 }
@@ -413,7 +463,7 @@
 	int x,y;
 	int xoff,yoff;
 
-	[MapView getXYfrom:pos.x andLon:pos.y toPositionX:&x andY:&y withZoom:zoom];
+	[self getXYfrom:pos.x andLon:pos.y toPositionX:&x andY:&y withZoom:zoom];
 	[self getXYOffsetfrom:pos.x andLon:pos.y toPositionX:&xoff andY:&yoff withZoom:zoom];
 	
 	int centerTileX=x;
@@ -545,44 +595,65 @@
 	}
 
 	//NSLog(@"Cache size: %d",[tilescache count]);
-
+	
 	//Draw gps pos
 	if(hasGPSfix) {
 	int xoff2,yoff2;
-	[MapView getXYfrom:posGPS.x andLon:posGPS.y toPositionX:&x andY:&y withZoom:zoom];
+	[self getXYfrom:posGPS.x andLon:posGPS.y toPositionX:&x andY:&y withZoom:zoom];
 	[self getXYOffsetfrom:posGPS.x andLon:posGPS.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
 
-	float posXPin=rect.size.width/2+(x-centerTileX)*dynTileSize-(xoff/TILE_SIZE)*dynTileSize+(xoff2/TILE_SIZE)*dynTileSize;
-	float posYPin=(rect.size.height/2+(y-centerTileY)*dynTileSize-(yoff/TILE_SIZE)*dynTileSize+(yoff2/TILE_SIZE)*dynTileSize);
-
-	posXPin+=drawOrigin.x;
-	posYPin+=drawOrigin.y;
+	float posXPin=drawOrigin.x+(x-centerTileX)*dynTileSize-(xoff/TILE_SIZE)*dynTileSize+(xoff2/TILE_SIZE)*dynTileSize;
+	float posYPin=drawOrigin.y+(y-centerTileY)*dynTileSize-(yoff/TILE_SIZE)*dynTileSize+(yoff2/TILE_SIZE)*dynTileSize;
 	//NSLog(@"Pos: %f %f",posXPin,posYPin);
-	if(posXPin>=0 && posXPin<rect.size.width && posYPin>=0 && posYPin<rect.size.height) {
+		float posXPin2=cos(mapRotation)*posXPin - posYPin*sin(mapRotation);
+		float posYPin2=sin(mapRotation)*posXPin + posYPin*cos(mapRotation);
+	if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
 
-		[imgPinRef drawAtPoint: CGPointMake(posXPin-7.5, posYPin+7.5) withContext:context];
+		//Project
+		//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 
+		
+
+		CGContextScaleCTM(context, 1, -1);
+		CGContextRotateCTM(context, -mapRotation);
+		CGContextScaleCTM(context, 1, -1);
+		[imgPinRef drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+7.5) withContext:context];
+		CGContextScaleCTM(context, 1, -1);
+		CGContextRotateCTM(context, mapRotation);
+		CGContextScaleCTM(context, 1, -1);
 		//NSLog(@"Pos: %f %f",posXPin,posYPin);
 	}
 	}
 	if(posSearch.x!=0.0f && posSearch.y!=0.0f) {
 		int xoff2,yoff2;
-		[MapView getXYfrom:posSearch.x andLon:posSearch.y toPositionX:&x andY:&y withZoom:zoom];
+		[self getXYfrom:posSearch.x andLon:posSearch.y toPositionX:&x andY:&y withZoom:zoom];
 		[self getXYOffsetfrom:posSearch.x andLon:posSearch.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
 		
-		float posXPin=rect.size.width/2+(x-centerTileX)*dynTileSize-(xoff/TILE_SIZE)*dynTileSize+(xoff2/TILE_SIZE)*dynTileSize;
-		float posYPin=(rect.size.height/2+(y-centerTileY)*dynTileSize-(yoff/TILE_SIZE)*dynTileSize+(yoff2/TILE_SIZE)*dynTileSize);
 		
-		posXPin+=drawOrigin.x;
-		posYPin+=drawOrigin.y;
+		float posXPin=drawOrigin.x+(x-centerTileX)*dynTileSize-(xoff/TILE_SIZE)*dynTileSize+(xoff2/TILE_SIZE)*dynTileSize;
+		float posYPin=drawOrigin.y+(y-centerTileY)*dynTileSize-(yoff/TILE_SIZE)*dynTileSize+(yoff2/TILE_SIZE)*dynTileSize;
+		float posXPin2=cos(mapRotation)*posXPin - posYPin*sin(mapRotation);
+		float posYPin2=sin(mapRotation)*posXPin + posYPin*cos(mapRotation);
+		
+		
 		//NSLog(@"Pos: %f %f",posXPin,posYPin);
-		if(posXPin>=0 && posXPin<rect.size.width && posYPin>=0 && posYPin<rect.size.height) {		
-			[imgPinSearch drawAtPoint: CGPointMake(posXPin-7.5, posYPin+5) withContext:context];
+		if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {		
+			CGContextScaleCTM(context, 1, -1);
+			CGContextRotateCTM(context, -mapRotation);
+			CGContextScaleCTM(context, 1, -1);
+			[imgPinSearch drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+5) withContext:context];
+			CGContextScaleCTM(context, 1, -1);
+			CGContextRotateCTM(context, mapRotation);
+			CGContextScaleCTM(context, 1, -1);
 
 		}
 	}
 	
 	CGContextScaleCTM(context, 1, -1);
+	CGContextRotateCTM(context, -mapRotation);
+
+
+
 	/*CGContextBeginPath(context);
 	CGContextAddArc(context,rect.size.width/2,rect.size.height/2,4,0,2*M_PI,0);
 	CGContextClosePath(context);
@@ -673,9 +744,9 @@
 */
 	
 	//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
-	rot=CGAffineTransformMakeRotation(-mapRotation);
+	//rot=CGAffineTransformMakeRotation(-mapRotation);
 	CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
-	CGContextConcatCTM(context, rot);
+	//CGContextConcatCTM(context, rot);
 	CGContextConcatCTM(context, trans);
 	CGContextScaleCTM(context, 1, -1);
 
@@ -696,6 +767,7 @@
 
 }
 #endif
+
 -(void)setDir:(id)d {
 	//dirC=d;
 }

@@ -39,12 +39,13 @@
 	PositionObj *posSearch;
 	//UITouch *lastTouch;
 	BOOL lastInitMove;
-	
+	PositionObj *lastPos;
 	float mapRotation;
 	BOOL gpsTracking;
-
+	BOOL mapRotationEnabled;
 }
 @property(retain,nonatomic) PositionObj *pos;
+@property(nonatomic) BOOL mapRotationEnabled;
 -(void)refreshMap;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)tileDownloaded;
@@ -65,7 +66,7 @@
 -(void)setDirection:(int)dir;
 - (void)updateCurrentPos:(PositionObj*) p;
 - (PositionObj*)getPositionFromPixel:(float)x andY:(float)y;
-+ (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom;
-+ (void)getXYfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom;
+- (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom2;
+- (void)getXYfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2;
 - (void)getXYOffsetfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2;
 @end

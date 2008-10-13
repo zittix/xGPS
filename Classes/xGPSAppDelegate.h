@@ -20,14 +20,17 @@
 #define kSettingsMapsOffline @"mapsofflinemode"
 #define kSettingsMapsLanguage @"mapslanguage"
 #define kSettingsSleepMode @"preventsleepmode"
+#define kSettingsDBVersion @"dbversion"
+#define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;
 }
+
 +(TileDB*)tiledb;
 +(GPSManager*)gpsmanager;
 +(xGPSAppDelegate*)appdelegate;
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
-
+@property (nonatomic, retain,readonly,getter=tiledb) TileDB* tiledb;
 @end

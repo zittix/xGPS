@@ -22,20 +22,44 @@
 	//NSLog(@"Sqlite library thread-safe option: %@",(sqlite3_threadsafe() ? @"Yes" : @"No"));
 	NSLog(@"Loading DB %@...",path);
 	
+	//Check DB version
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]!=2) {
+		
+		UIAlertView * hotSheet = [[UIAlertView alloc]
+								  initWithTitle:NSLocalizedString(@"Maps data",@"Maps data title")
+								  message:NSLocalizedString(@"Your downloaded maps are not compatible with this version of xGPS. They have been deleted.",@"")
+								  delegate:nil
+								  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
+								  otherButtonTitles:nil];
+		
+		[hotSheet show];
+		NSFileManager * fm = [NSFileManager defaultManager];
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+		NSString *documentsDirectory = [paths objectAtIndex:0];
+		NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
+		
+		NSError *err;
+		[fm removeItemAtPath:path error:&err];
+		[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
+		
+	}
+	
 	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 		//Check if table exist
 		char *error;
 		
 		//IF NOT EXISTS doesn't exist on 1.1.4
-		int ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3",-1,&getTileStmt,NULL);
+		int ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 		if(ret!=SQLITE_OK) { //Create Table
-			char *tMap="CREATE TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, PRIMARY KEY(x,y,zoom))";
+			char *tMap="CREATE TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, PRIMARY KEY(x,y,zoom,type))";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 			NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
 			
-			ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3",-1,&getTileStmt,NULL);
+			ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
 		}
+		
+		//Migrate the DB if wrong Primary index
 		
 		//tMap="DELETE FROM tiles";
 		//ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
@@ -46,11 +70,11 @@
 		
 		
 		//PRepare the insert query for speedup
-		ret=sqlite3_prepare(database,"INSERT INTO tiles (x,y,zoom,type,img) VALUES(?1,?2,?3,0,?4)",-1,&insertTileStmt,NULL);
+		ret=sqlite3_prepare(database,"INSERT INTO tiles (x,y,zoom,type,img) VALUES(?1,?2,?3,?4,?5)",-1,&insertTileStmt,NULL);
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
 		
 		//PRepare the check query for speedup
-		ret=sqlite3_prepare(database,"SELECT x FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3",-1,&checkTileStmt,NULL);
+		ret=sqlite3_prepare(database,"SELECT x FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&checkTileStmt,NULL);
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare check query with message '%s'.",sqlite3_errmsg(database));
 		
 	} else {
@@ -60,9 +84,11 @@
 		// Additional error handling, as appropriate...
 	}
 	//[dbLock unlock];
+	closed=NO;
 }
 
 -(id)init {
+	closed=YES;
 	tileHeap=[[NSMutableArray arrayWithCapacity:10] retain];
 	tileHeapLock=[[NSLock alloc] init];
 	tileHeapLock.name=@"TileHeapLock";
@@ -75,11 +101,24 @@
 	langMap=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(langMap!=nil)
 		langMap=[langMap retain];
+	type=0;
+	[self loadDB];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(offlineModeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	[NSThread detachNewThreadSelector:@selector(asyncTileGet) toTarget:self withObject:nil];
 		// Open the database. The database was prepared outside the application.
-	[self loadDB];
+	
 	return self;
+}
+-(void)closeDB {
+	if(closed) return;
+	[dbLock lock];
+	sqlite3_finalize(getTileStmt);
+	sqlite3_finalize(insertTileStmt);
+	sqlite3_finalize(checkTileStmt);
+	sqlite3_close(database);
+	[dbLock unlock];
+	closed=YES;
 }
 -(void)offlineModeChanged:(NSNotification *)notif {
 	//NSLog(@"Offline changed");
@@ -106,6 +145,7 @@
 	cancelDownload=YES;
 }
 -(void)flushMaps {
+	if(closed) return;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
@@ -134,7 +174,7 @@
 		[tileHeapLock lock];
 		int nb=[tileHeap count];
 		[tileHeapLock unlock];
-		while(nb==0) {
+		while(nb==0 || closed) {
 			[hasTileToDLlock wait];
 			[tileHeapLock lock];
 			nb=[tileHeap count];
@@ -152,6 +192,7 @@
 			sqlite3_bind_int(checkTileStmt,1,p.x);
 			sqlite3_bind_int(checkTileStmt,2,p.y);
 			sqlite3_bind_int(checkTileStmt,3,p.zoom);
+			sqlite3_bind_int(checkTileStmt,4,type);
 			int r=sqlite3_step(checkTileStmt);
 			sqlite3_reset(checkTileStmt);
 			sqlite3_clear_bindings(checkTileStmt);
@@ -179,9 +220,11 @@
 }
 
 -(int)downloadTiles:(int)fX fromY:(int)fY toX:(int)toX toY:(int)toY withZoom:(int)zoom  withDelegate:(ProgressView*)progress{
+	if(closed) return -1;
 	int i,j;
 	int ret=1;
 	cancelDownload=NO;
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 	if(toY<fY)
 	{
@@ -204,19 +247,23 @@
 	for(i=fX;i<=toX;i++)
 	for(j=fY;j<=toY;j++) {
 		if(cancelDownload) {
+			[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+			NSLog(@"Canceled");
+			[pool release];
 			return -1;
 		}
 		[dbLock lock];
 		sqlite3_bind_int(checkTileStmt,1,i);
 		sqlite3_bind_int(checkTileStmt,2,j);
 		sqlite3_bind_int(checkTileStmt,3,zoom);
+		sqlite3_bind_int(checkTileStmt,4,type);
 		int r=sqlite3_step(checkTileStmt);
 		sqlite3_reset(checkTileStmt);
 		sqlite3_clear_bindings(checkTileStmt);
 		[dbLock unlock];
 		if (r != SQLITE_ROW) {
 			if(![self downloadTile:i atY:j withZoom:zoom]) {
-				ret=0;
+			ret=0;
 
 			} else {
 				nbDownloaded++;
@@ -231,24 +278,40 @@
 		//if(i*j%20==0) {
 		//	NSLog(@"Download status: %f %%",prc*100.0);
 		//}
-		if(nbDownloaded%100==0 && !cancelDownload) {
+		if(nbDownloaded%300==0 && !cancelDownload) {
 			nbDownloaded=0;
 			NSLog(@"Sleeping...");
-			[NSThread sleepUntilDate:[[NSDate date] addTimeInterval: 3]]; //Sleep 3s.. Google seems more happy :-)
+			//[NSThread sleepUntilDate:[[NSDate date] addTimeInterval: 3]]; //Sleep 3s.. Google seems more happy :-)
 			NSLog(@"Go to WORK !");
 		}
+
+		if(cancelDownload) {
+			[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+			NSLog(@"Canceled");
+			[pool release];
+			return -1;
+		}
+		
+		if(nbDownloadedTotal%100==0) {
+			[pool release];
+			pool=[[NSAutoreleasePool alloc] init];
+			NSLog(@"Flushed");
+		}
 	}
-	//NSLog(@"Tiles downloaded !");
+	NSLog(@"Tiles downloaded !");
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+	[pool release];
 	return ret;
 }
 -(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom  withDelegate:(id)delegate{
+	if(closed) return nil;
 	//NSLog(@"TileDB- getTile()- IN");
 	if(x<0 || y<0) return nil;
 	[dbLock lock];
 	sqlite3_bind_int(getTileStmt,1,x);
 	sqlite3_bind_int(getTileStmt,2,y);
 	sqlite3_bind_int(getTileStmt,3,zoom);
+	sqlite3_bind_int(getTileStmt,4,type);
 	int r=sqlite3_step(getTileStmt);
 	[dbLock unlock];
 	MapTile *t=nil;
@@ -283,6 +346,7 @@
 
 }
 -(float)mapsize {
+	if(closed) return -1;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
@@ -297,12 +361,17 @@
 
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
-	if(offline) return NO;
+	if(offline || closed) return NO;
 	
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
 	NSString *mapType=@"w2.83"; //Normal
+	switch(type){
+		case 0: mapType=@"w2.83"; break;
+		case 1: mapType=@"w2t.83"; break; //Hybrid
+		case 2: mapType=@"w2p.83"; break; //Satellite
+	}
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat
 	//int zoom=0;
@@ -329,7 +398,7 @@ Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q;
 	[urlReq setValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" forHTTPHeaderField:@"User-Agent"];
 	[urlReq setValue:@"image/png,image/*;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
 	[urlReq setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
-	
+	[urlReq setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
 	NSHTTPURLResponse *rep;
 	NSData *imageData = [NSURLConnection sendSynchronousRequest:urlReq returningResponse:&rep error:NULL];
 
@@ -345,7 +414,9 @@ Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q;
 	goto err;
 	if(sqlite3_bind_int(insertTileStmt,3,zoom)!=SQLITE_OK)
 	goto err;
-	if(sqlite3_bind_blob(insertTileStmt, 4, [imageData bytes], [imageData length], SQLITE_STATIC)!=SQLITE_OK)
+	if(sqlite3_bind_int(insertTileStmt,4,type)!=SQLITE_OK)
+		goto err;
+	if(sqlite3_bind_blob(insertTileStmt, 5, [imageData bytes], [imageData length], SQLITE_STATIC)!=SQLITE_OK)
 	goto err;
 
 	int r=sqlite3_step(insertTileStmt);
@@ -356,12 +427,15 @@ Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q;
 		return NO;
 	}
 	[dbLock unlock];
+	[rep release];
+	[urlReq release];
 	//NSLog(@"Tile downloaded and saved !");
 	return YES;
 	err:
 	[dbLock unlock];
 	NSLog(@"Error while getting tile.");
 	sqlite3_reset(insertTileStmt);
+	sqlite3_clear_bindings(insertTileStmt);
 	return NO;
 }
 @end

@@ -34,6 +34,8 @@
 	ZoomView *zoomview;
 	CGRect viewRect;
 	OverlayView* viewOverlay;
+	UIToolbar *toolbar;
+	UISegmentedControl* maptype;
 }
 -(void)clearSelection;
 -(void)updateCurrentPos:(PositionObj*)pos;

@@ -42,7 +42,9 @@ static GPSManager* gpsmanager;
 	[[gpsmanager GetCurrentGPS] stop];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
-
+-(TileDB*)tiledb {
+	return tiledb;
+}
 +(TileDB*)tiledb {
 	return tiledb;
 }

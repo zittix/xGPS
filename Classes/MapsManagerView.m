@@ -24,7 +24,7 @@
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	viewOverlay=(OverlayView*)self.view;
 	progress=[[ProgressView alloc] initWithFrame:CGRectMake(0, 0, viewRect.size.width, viewRect.size.height)];
-	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height) withDB:db];
+	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height-44.0f) withDB:db];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[mapview setGPSTracking:YES];
 	self.title=NSLocalizedString(@"Maps Manager",@"Maps manager title");
@@ -34,7 +34,7 @@
 	[self.view addSubview: mapview];
 	[mapview setPassDoubleFingersEvent:YES];
 	[progress setBtnSelector:@selector(cancelDownload) withDelegate:db];
-	
+	mapview.mapRotationEnabled=NO;
 	downloading=NO;
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,100,100) withDelegate:mapview];
 
@@ -47,7 +47,20 @@
 	[addButton release];
 	[zoomview setZoominState:YES];
 	[zoomview setZoomoutState:YES];
-
+	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0,viewRect.size.width,44.0f)];
+	toolbar.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+	[self.view addSubview:toolbar];
+	NSArray *arr=[NSArray arrayWithObjects:NSLocalizedString(@"Map",@"Map"),NSLocalizedString(@"Satellite",@"Satellite"),NSLocalizedString(@"Hybrid",@"Map Hybrid"),nil];
+	maptype=[[UISegmentedControl alloc] initWithItems:arr];
+	maptype.segmentedControlStyle=UISegmentedControlStyleBar;
+	UIBarButtonItem *barmaptype=[[UIBarButtonItem alloc] initWithCustomView:maptype];
+	UIBarButtonItem *space=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+	//UIBarButtonItem *space2=[[UIBarButtonItem alloc] initWithCustomView:maptype];
+	[toolbar setItems:[NSArray arrayWithObjects:space,barmaptype,space,nil]];
+	[maptype setEnabled:NO forSegmentAtIndex:1];
+	[maptype setEnabled:NO forSegmentAtIndex:2];
+	maptype.selectedSegmentIndex=0;
+	
 }
 -(void)dealloc {
 	[super dealloc];
@@ -94,11 +107,12 @@
 	int x1,y1,x2,y2;
 
 	//TODO: Let the user choosing the zoom
-	[MapView getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
-	[MapView getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
+	[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
+	[mapview getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
+	//[pool release];
 
 	int res=[db downloadTiles:x1 fromY:y1 toX:x2 toY:y2 withZoom:0 withDelegate:progress];
-
+	//pool = [[NSAutoreleasePool alloc] init];
 	//NSLog(@"End of download thread");
 	[progress performSelectorOnMainThread:@selector(hide) withObject:nil waitUntilDone:NO];
 
@@ -108,7 +122,11 @@
 	} else if(res==1) {
 		msg=NSLocalizedString(@"Maps downloaded successfully !",@"Download maps ok");
 	}
+	
+	[self performSelectorOnMainThread:@selector(enableDownload) withObject:nil waitUntilDone:NO];
+	
 	if(msg!=nil) {
+		
 		[self performSelectorOnMainThread:@selector(showEndDownloadMessage:) withObject:msg waitUntilDone:YES];
 		if(res==1)
 		[self performSelectorOnMainThread:@selector(clearSelection) withObject:nil waitUntilDone:YES];
@@ -121,6 +139,9 @@
 	viewOverlay.pDep=pDep;
 	viewOverlay.pEnd=pEnd;
 	[mapview refreshMap];
+}
+-(void)enableDownload {
+	self.navigationItem.rightBarButtonItem.enabled=YES;
 }
 -(void)showEndDownloadMessage:(NSString*)msg {
 	UIAlertView* hotSheet = [[UIAlertView alloc]
@@ -146,6 +167,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[db cancelDownload];
 	[progress hide];
+	self.navigationItem.rightBarButtonItem.enabled=YES;
 	[self clearSelection];
 }
 - (void)startDownloadButton:(id)sender
@@ -157,8 +179,8 @@
 			int x1,y1,x2,y2;
 
 			//TODO: Let the user choosing the zoom
-			[MapView getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
-			[MapView getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
+			[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
+			[mapview getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
 
 			if(abs(x2-x1)>0 && abs(y2-y1)>0 ) {
 
