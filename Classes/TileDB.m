@@ -18,13 +18,14 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
+	NSFileManager * fm = [NSFileManager defaultManager];
 	NSLog(@"Using Sqlite Version %s",sqlite3_libversion());
 	//NSLog(@"Sqlite library thread-safe option: %@",(sqlite3_threadsafe() ? @"Yes" : @"No"));
 	NSLog(@"Loading DB %@...",path);
 	
 	//Check DB version
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]!=2) {
-		
+		if([fm fileExistsAtPath:path]) {
 		UIAlertView * hotSheet = [[UIAlertView alloc]
 								  initWithTitle:NSLocalizedString(@"Maps data",@"Maps data title")
 								  message:NSLocalizedString(@"Your downloaded maps are not compatible with this version of xGPS. They have been deleted.",@"")
@@ -33,13 +34,11 @@
 								  otherButtonTitles:nil];
 		
 		[hotSheet show];
-		NSFileManager * fm = [NSFileManager defaultManager];
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-		NSString *documentsDirectory = [paths objectAtIndex:0];
-		NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
 		
+				
 		NSError *err;
 		[fm removeItemAtPath:path error:&err];
+		}
 		[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
 		
 	}
@@ -106,7 +105,7 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(offlineModeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	[NSThread detachNewThreadSelector:@selector(asyncTileGet) toTarget:self withObject:nil];
-		// Open the database. The database was prepared outside the application.
+
 	
 	return self;
 }
@@ -149,7 +148,7 @@
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
-
+	
 	NSFileManager * fm = [NSFileManager defaultManager];
 	[dbLock lock];
 	sqlite3_finalize(getTileStmt);
@@ -209,7 +208,7 @@
 				}	
 			}
 		}
-
+		
 		[copy release];
 		//[arrD removeAllObjects];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
@@ -224,7 +223,7 @@
 	int i,j;
 	int ret=1;
 	cancelDownload=NO;
-	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 	if(toY<fY)
 	{
@@ -244,63 +243,61 @@
 	
 	
 	int nbDownloadedTotal=0;
-	for(i=fX;i<=toX;i++)
-	for(j=fY;j<=toY;j++) {
-		if(cancelDownload) {
-			[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-			NSLog(@"Canceled");
-			[pool release];
-			return -1;
-		}
-		[dbLock lock];
-		sqlite3_bind_int(checkTileStmt,1,i);
-		sqlite3_bind_int(checkTileStmt,2,j);
-		sqlite3_bind_int(checkTileStmt,3,zoom);
-		sqlite3_bind_int(checkTileStmt,4,type);
-		int r=sqlite3_step(checkTileStmt);
-		sqlite3_reset(checkTileStmt);
-		sqlite3_clear_bindings(checkTileStmt);
-		[dbLock unlock];
-		if (r != SQLITE_ROW) {
-			if(![self downloadTile:i atY:j withZoom:zoom]) {
-			ret=0;
-
-			} else {
-				nbDownloaded++;
+	for(i=fX;i<=toX;i++) {
+		for(j=fY;j<=toY;j++) {
+			NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+			if(cancelDownload) {
+				[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+				NSLog(@"Canceled");
+				[pool release];
+				return -1;
+			}
+			[dbLock lock];
+			sqlite3_bind_int(checkTileStmt,1,i);
+			sqlite3_bind_int(checkTileStmt,2,j);
+			sqlite3_bind_int(checkTileStmt,3,zoom);
+			sqlite3_bind_int(checkTileStmt,4,type);
+			int r=sqlite3_step(checkTileStmt);
+			sqlite3_reset(checkTileStmt);
+			sqlite3_clear_bindings(checkTileStmt);
+			[dbLock unlock];
+			if (r != SQLITE_ROW) {
+				if(![self downloadTile:i atY:j withZoom:zoom]) {
+					ret=0;
+					
+				} else {
+					nbDownloaded++;
+				}
+				
+			}
+			nbDownloadedTotal++;
+			float prc=((float)nbDownloadedTotal/(float)nbToDownload);
+			//[progress setProgressObj:[NSNumber numberWithFloat:prc]];
+			[progress performSelectorOnMainThread:@selector(setProgressObj:) withObject:[NSNumber numberWithFloat:prc] waitUntilDone:NO];
+			
+			//if(i*j%20==0) {
+			//	NSLog(@"Download status: %f %%",prc*100.0);
+			//}
+			if(nbDownloaded%300==0 && !cancelDownload) {
+				nbDownloaded=0;
+				NSLog(@"Sleeping...");
+				//[NSThread sleepUntilDate:[[NSDate date] addTimeInterval: 3]]; //Sleep 3s.. Google seems more happy :-)
+				NSLog(@"Go to WORK !");
 			}
 			
-		}
-		nbDownloadedTotal++;
-		float prc=((float)nbDownloadedTotal/(float)nbToDownload);
-		//[progress setProgressObj:[NSNumber numberWithFloat:prc]];
-		[progress performSelectorOnMainThread:@selector(setProgressObj:) withObject:[NSNumber numberWithFloat:prc] waitUntilDone:NO];
-
-		//if(i*j%20==0) {
-		//	NSLog(@"Download status: %f %%",prc*100.0);
-		//}
-		if(nbDownloaded%300==0 && !cancelDownload) {
-			nbDownloaded=0;
-			NSLog(@"Sleeping...");
-			//[NSThread sleepUntilDate:[[NSDate date] addTimeInterval: 3]]; //Sleep 3s.. Google seems more happy :-)
-			NSLog(@"Go to WORK !");
-		}
-
-		if(cancelDownload) {
-			[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-			NSLog(@"Canceled");
+			if(cancelDownload) {
+				[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+				NSLog(@"Canceled");
+				[pool release];
+				return -1;
+			}
+			
 			[pool release];
-			return -1;
-		}
-		
-		if(nbDownloadedTotal%100==0) {
-			[pool release];
-			pool=[[NSAutoreleasePool alloc] init];
-			NSLog(@"Flushed");
 		}
 	}
 	NSLog(@"Tiles downloaded !");
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-	[pool release];
+	
 	return ret;
 }
 -(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom  withDelegate:(id)delegate{
@@ -332,18 +329,18 @@
 		[dbLock unlock];
 		//NSLog(@"Downloading tile...");
 		/*if(![self downloadTile:x atY:y withZoom:zoom]) {
-			NSLog(@"Unable to download tile !");
-			return nil;
-		} else {
-			t=[self getTile:x atY:y withZoom:zoom];
-		}*/
+		 NSLog(@"Unable to download tile !");
+		 return nil;
+		 } else {
+		 t=[self getTile:x atY:y withZoom:zoom];
+		 }*/
 		[tileHeapLock lock];
 		[tileHeap addObject:[TileCoord tileCoordWithX:x y:y zoom:zoom delegate:delegate]];
 		[tileHeapLock unlock];
 		[hasTileToDLlock broadcast];
 	}
 	return t;
-
+	
 }
 -(float)mapsize {
 	if(closed) return -1;
@@ -362,7 +359,7 @@
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
 	if(offline || closed) return NO;
-	
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
@@ -375,67 +372,74 @@
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat
 	//int zoom=0;
-	NSString *url=[NSString stringWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=%@",(x+y)&3,mapType,x,y,zoom,lang];
+	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=%@",(x+y)&3,mapType,x,y,zoom,lang];
 	//NSString *url=@"http://mt0.google.com/mt?n=404&v=w2.75&hl=en&x=67918&s=&y=46321&zoom=0";
 	//NSLog(@"Getting tile at %@",url);
-	NSURL *imageURL = [NSURL URLWithString:url];
-	NSMutableURLRequest *urlReq=[NSMutableURLRequest requestWithURL:imageURL];
-	
+	NSURL *imageURL = [[NSURL alloc] initWithString:url];
+	[url release];
+	NSMutableURLRequest *urlReq=[[NSMutableURLRequest alloc] initWithURL:imageURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30 ];
+	[imageURL release];
 	/*
 	 GET /mt/v=w2.80&hl=en&x=0&y=0&zoom=15&s= HTTP/1.1
 	 Host: mt0.google.com
 	 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1
 	 Accept: image/png,image/*;q=0.8,**;q=0.5
-	Accept-Language: en-us,en;q=0.5
-	Accept-Encoding: gzip,deflate
-	Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
-	Keep-Alive: 300
-Connection: keep-alive
-Referer: http://maps.google.com/maps
-Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q; SID=DQAAAHcAAADIzxH2zbbXeJtwYZKKQ8pg4X01CLuTyV0xykkDu7QvE1MdLHs-88fSNqZQO9YMBxRcDn3-O-Pc3iTTtu0GAeKhQX5DgCj-4nPDrPlAd0GdJw6lk1ZJebsJzQbGbT8hlnTsHch6kz6J5-Lt0gii3MWi09RqHTj_t-7qciC3-NjH_A; NID=13=ldPtTZQ7_bC01w2WqhpLM0zHNEY4CCTrXWePjNrfSYciNMhVYxXnbztKlxE5-h7ccjB5OiWWmp0UrOnlOwUTPjyaZIlgjkRQhPX6Z-_P-dlPn0zcQbEOFXxn3a-57Wzi
-*/	
+	 Accept-Language: en-us,en;q=0.5
+	 Accept-Encoding: gzip,deflate
+	 Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+	 Keep-Alive: 300
+	 Connection: keep-alive
+	 Referer: http://maps.google.com/maps
+	 Cookie: PREF=ID=6fe38e914f29d8bd:TM=1216826938:LM=1216826938:S=nHb12aTqCzjBVE5Q; SID=DQAAAHcAAADIzxH2zbbXeJtwYZKKQ8pg4X01CLuTyV0xykkDu7QvE1MdLHs-88fSNqZQO9YMBxRcDn3-O-Pc3iTTtu0GAeKhQX5DgCj-4nPDrPlAd0GdJw6lk1ZJebsJzQbGbT8hlnTsHch6kz6J5-Lt0gii3MWi09RqHTj_t-7qciC3-NjH_A; NID=13=ldPtTZQ7_bC01w2WqhpLM0zHNEY4CCTrXWePjNrfSYciNMhVYxXnbztKlxE5-h7ccjB5OiWWmp0UrOnlOwUTPjyaZIlgjkRQhPX6Z-_P-dlPn0zcQbEOFXxn3a-57Wzi
+	 */	
 	
 	[urlReq setValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" forHTTPHeaderField:@"User-Agent"];
 	[urlReq setValue:@"image/png,image/*;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
 	[urlReq setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
-	[urlReq setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+
 	NSHTTPURLResponse *rep;
 	NSData *imageData = [NSURLConnection sendSynchronousRequest:urlReq returningResponse:&rep error:NULL];
-
+	
 	if(imageData==nil || [imageData length]==0 || [rep statusCode]!=200) {
 		NSLog(@"Download error: Rep code: %d",[rep statusCode]);
+		[urlReq release];
+		[pool release];
 		return NO;
 	}
 	//NSLog(@"Tile got at (%d bytes)!",[imageData length]);
 	[dbLock lock];
 	if(sqlite3_bind_int(insertTileStmt,1,x)!=SQLITE_OK)
-	goto err;
+		goto err;
 	if(sqlite3_bind_int(insertTileStmt,2,y)!=SQLITE_OK)
-	goto err;
+		goto err;
 	if(sqlite3_bind_int(insertTileStmt,3,zoom)!=SQLITE_OK)
-	goto err;
+		goto err;
 	if(sqlite3_bind_int(insertTileStmt,4,type)!=SQLITE_OK)
 		goto err;
 	if(sqlite3_bind_blob(insertTileStmt, 5, [imageData bytes], [imageData length], SQLITE_STATIC)!=SQLITE_OK)
-	goto err;
-
+		goto err;
+	
 	int r=sqlite3_step(insertTileStmt);
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);
+	[urlReq release];
 	if(r!=SQLITE_DONE) {
 		NSLog(@"Unable to insert tile (%d,%d): %s. Err. code=%d",x,y,sqlite3_errmsg(database),r);
+		[pool release];
 		return NO;
 	}
 	[dbLock unlock];
-	[rep release];
-	[urlReq release];
+
+	[pool release];
 	//NSLog(@"Tile downloaded and saved !");
 	return YES;
-	err:
+err:
 	[dbLock unlock];
+	[urlReq release];
 	NSLog(@"Error while getting tile.");
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);
+	[pool release];
 	return NO;
 }
 @end

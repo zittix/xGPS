@@ -14,14 +14,24 @@
 @synthesize mapview;
 
 @synthesize tiledb;
+-(id)initWithPool:(NSAutoreleasePool*)p {
+	if((self=[self init])) {
+		pool=p;
+		[NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(flushPool) userInfo:nil repeats:YES];
+	}
+	return self;
+}
 -(id)init {
 	NSLog(@"MainView controller init...");
 	tiledb=[xGPSAppDelegate tiledb];
 
 	[[xGPSAppDelegate gpsmanager] setDelegate:self];
-	
-	
-	return self;
+		return self;
+}
+-(void)flushPool {
+	[pool release];
+	//NSLog(@"Releasing pool");
+	pool=[[NSAutoreleasePool alloc] init];
 }
 - (void)loadView {
 	NSLog(@"MainView controller loadView...");
@@ -156,7 +166,7 @@
 	[mapview refreshMap];
 	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
 	//NSLog(@"CENTER size: %f %f of view",self.view.center.x,self.view.center.y);
-	[self settingsBtnPressed:btnSettings];
+
 	//[UIView beginAnimations:nil context:nil];	
 	//[UIView setAnimationDidStopSelector:@selector(endRotation:::)];
 	//float sx=self.view.frame.size.width/mapview.frame.size.height;

@@ -54,7 +54,7 @@
 		pos.y=posGPS.y;
 	}
 	
-	if(mapRotationEnabled) {
+	if(mapRotationEnabled && gpsTracking) {
 		
 		if(lastPos.x==0.0 && lastPos.y==0.0) {
 			lastPos.x=p.x;
@@ -62,7 +62,7 @@
 		} else {
 		
 		float d=[self distanceBetween:p and:lastPos];
-			if(d>2) {
+			if(d>4) {
 	//	float header=fmod(atan2(sin(DEG2RAD(p.y-lastPos.y))*cos(DEG2RAD(p.x)),cos(DEG2RAD(lastPos.x))*sin(DEG2RAD(p.x))-sin(DEG2RAD(lastPos.x))*cos(DEG2RAD(p.x))*cos(DEG2RAD(p.y-lastPos.y))),2*M_PI);
 				float lat1=lastPos.x*M_PI/180.0;
 				float lat2=p.x*M_PI/180.0;

@@ -523,7 +523,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self showMapsManager:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

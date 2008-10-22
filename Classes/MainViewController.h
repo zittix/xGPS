@@ -33,7 +33,9 @@
 	LicenseViewController* licenseView;
 	SearchPlacesView *searchPlacesView;
 	GPSSignalView* signalView;
+	NSAutoreleasePool *pool;
 }
+-(id)initWithPool:(NSAutoreleasePool*)p;
 - (void)gpsChanged:(ChangedState*)msg;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;

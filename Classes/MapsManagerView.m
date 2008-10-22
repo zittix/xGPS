@@ -109,10 +109,10 @@
 	//TODO: Let the user choosing the zoom
 	[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
 	[mapview getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
-	//[pool release];
+
 
 	int res=[db downloadTiles:x1 fromY:y1 toX:x2 toY:y2 withZoom:0 withDelegate:progress];
-	//pool = [[NSAutoreleasePool alloc] init];
+
 	//NSLog(@"End of download thread");
 	[progress performSelectorOnMainThread:@selector(hide) withObject:nil waitUntilDone:NO];
 

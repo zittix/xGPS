@@ -25,7 +25,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	NSString *path=[[request URL] path];
-	NSLog([[request URL] scheme]);
+	//NSLog([[request URL] scheme]);
 	if(path!=nil && [path isEqualToString:@"/iagree"]) {
 		[self.navigationController dismissModalViewControllerAnimated:YES];
 		return NO;

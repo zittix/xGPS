@@ -83,22 +83,18 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	//NSLog(@"SPeed: %f",[newLocation speed]);
-	if(oldLocation!=nil && lastTimeStamp!=oldLocation.timestamp.timeIntervalSince1970) {
+	if(oldLocation!=nil) {
 		CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
 		NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
 		lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
-		if(dt>0.0f && dx>2.0f) {
+		if(dt>0.0f && dx>3.0f) {
 			//NSLog(@"Available speed");
 			
 			double speed=dx/dt;
-			if(speed!=gps_data.fix.speed) {
-				//NSLog(@"speed different OK");
-				
+							
 				gps_data.fix.speed=speed;
 				speedHasBeenUpdated=YES;
-			} else {
-				gps_data.fix.speed=0.0;
-			}
+
 			
 			if(gps_data.fix.speed>60)
 				gps_data.fix.speed=0.0;
@@ -127,13 +123,13 @@
 	if(newLocation.horizontalAccuracy<0) signalQuality-=90;
 	
 	if(newLocation.horizontalAccuracy==kCLLocationAccuracyNearestTenMeters) {
-		signalQuality-=10;
-	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyHundredMeters) {
 		signalQuality-=40;
+	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyHundredMeters) {
+		signalQuality-=70;
 	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyKilometer) {
 		signalQuality-=70;
 	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyThreeKilometers) {
-		signalQuality-=70;
+		signalQuality-=80;
 	}
 			
 	if(signalQuality<0) signalQuality=0;
