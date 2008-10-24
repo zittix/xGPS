@@ -46,6 +46,7 @@
 		4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E941A080E6A92330037F8C1 /* SettingsViewController.m */; };
 		4E94F97F0E8E2B650012B377 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E94F97E0E8E2B650012B377 /* Default.png */; };
 		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
+		4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */; };
 		4EBAF8F70E58CA84008916E9 /* notile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F20E58CA84008916E9 /* notile.png */; };
 		4EBAF8F80E58CA84008916E9 /* pin_pos.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F30E58CA84008916E9 /* pin_pos.png */; };
 		4EBAF8F90E58CA84008916E9 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F40E58CA84008916E9 /* speed.png */; };
@@ -151,6 +152,8 @@
 		4E9A00920E8D4A9D0076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E9A00940E8D51B90076EE44 /* FakeGPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeGPSController.h; sourceTree = "<group>"; };
 		4E9A00950E8D51B90076EE44 /* FakeGPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeGPSController.m; sourceTree = "<group>"; };
+		4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDownloader.h; sourceTree = "<group>"; };
+		4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDownloader.m; sourceTree = "<group>"; };
 		4EB3A5330E93B1FA004A643A /* Hebrew */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Hebrew; path = Hebrew.lproj/license.html; sourceTree = "<group>"; };
 		4EB3A5340E93B1FA004A643A /* Hebrew */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Hebrew; path = Hebrew.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EBAF8F20E58CA84008916E9 /* notile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notile.png; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				1D3623250D0F684500981E51 /* xGPSAppDelegate.m */,
 				4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */,
 				4E0F05000E87C49000D75E7D /* GeoEncoder.m */,
+				4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */,
+				4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -494,6 +499,7 @@
 				4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */,
 				4E9077FB0E9CE48800B0F6BC /* AboutViewController.m in Sources */,
 				4E8A01770E9D441C00E58774 /* NetworkReceiverViewController.m in Sources */,
+				4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

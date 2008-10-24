@@ -11,6 +11,7 @@
 #include <sqlite3.h>
 #import "xGPSAppDelegate.h"
 #import "Position.h"
+#import "SyncDownloader.h"
 @implementation TileDB
 
 -(void)loadDB {
@@ -359,7 +360,7 @@
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
 	if(offline || closed) return NO;
-	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+	
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
@@ -397,13 +398,18 @@
 	[urlReq setValue:@"image/png,image/*;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
 	[urlReq setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
 
-	NSHTTPURLResponse *rep;
-	NSData *imageData = [NSURLConnection sendSynchronousRequest:urlReq returningResponse:&rep error:NULL];
+	NSData *imageData=nil;
 	
-	if(imageData==nil || [imageData length]==0 || [rep statusCode]!=200) {
-		NSLog(@"Download error: Rep code: %d",[rep statusCode]);
-		[urlReq release];
-		[pool release];
+	SyncDownloader *dl=[[SyncDownloader alloc] init];
+	
+	BOOL res=[dl download:urlReq toData:&imageData];
+	[urlReq release];
+	
+	
+	if(imageData==nil || !res) {
+		NSLog(@"Download error");
+		
+
 		return NO;
 	}
 	//NSLog(@"Tile got at (%d bytes)!",[imageData length]);
@@ -422,24 +428,22 @@
 	int r=sqlite3_step(insertTileStmt);
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);
-	[urlReq release];
+	[dl release];
+	[dbLock unlock];
 	if(r!=SQLITE_DONE) {
 		NSLog(@"Unable to insert tile (%d,%d): %s. Err. code=%d",x,y,sqlite3_errmsg(database),r);
-		[pool release];
+	
 		return NO;
 	}
-	[dbLock unlock];
-
-	[pool release];
 	//NSLog(@"Tile downloaded and saved !");
 	return YES;
 err:
 	[dbLock unlock];
-	[urlReq release];
+	[dl release];
 	NSLog(@"Error while getting tile.");
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);
-	[pool release];
+
 	return NO;
 }
 @end

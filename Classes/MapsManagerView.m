@@ -8,6 +8,7 @@
 
 #import "MapsManagerView.h"
 #import "Position.h"
+#import "xGPSAppDelegate.h"
 @implementation MapsManagerView
 -(id) initWithDB:(TileDB*)_db {
 	self=[super init];
@@ -101,6 +102,9 @@
 
 -(void)downloadTiles {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
+	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode])
+	APPDELEGATE.idleTimerDisabled=YES;
 	PositionObj *pos1=[mapview getPositionFromPixel:pDep.x andY:pDep.y-48.0f];
 	PositionObj *pos2=[mapview getPositionFromPixel:pEnd.x andY:pEnd.y-48.0f];
 
@@ -132,6 +136,8 @@
 		[self performSelectorOnMainThread:@selector(clearSelection) withObject:nil waitUntilDone:YES];
 	}
 	downloading=NO;
+	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode])
+		APPDELEGATE.idleTimerDisabled=NO;
 	[pool release];
 }
 -(void)clearSelection {
