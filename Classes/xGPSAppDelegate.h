@@ -21,6 +21,7 @@
 #define kSettingsMapsLanguage @"mapslanguage"
 #define kSettingsSleepMode @"preventsleepmode"
 #define kSettingsDBVersion @"dbversion"
+#define kSettingsMapRotation @"maprotation"
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;

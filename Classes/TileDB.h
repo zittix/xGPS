@@ -13,6 +13,7 @@
 
 @protocol TileDownloadProtocol
 -(void)tileDownloaded;
+-(void)allTileDownloaded;
 @end
 
 

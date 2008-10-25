@@ -50,6 +50,7 @@
 -(void) dealloc {
 	[super dealloc];
 	[locManager release];
+	[chMsg release];
 }
 - (id)initWithDelegate:(id)del {
 	self=[super initWithDelegate:del];
@@ -69,6 +70,7 @@
 		return self;
 	}
 	isConnected=YES;
+	chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 	return self;
 }
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -109,13 +111,12 @@
 	gps_data.fix.latitude=newLocation.coordinate.latitude;
 	gps_data.fix.longitude=newLocation.coordinate.longitude;
 	gps_data.fix.altitude=newLocation.altitude;
-#ifdef USE_UI
-	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:POS andParent:self] waitUntilDone:YES];
-	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
-#else
-	[delegate gpsChanged:[ChangedState objWithState:POS andParent:self]];
-	[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
-#endif
+	chMsg.state=POS;
+
+	[delegate gpsChanged:chMsg];
+	chMsg.state=SPEED;
+	[delegate gpsChanged:chMsg];
+
 	
 	//Update signal quality
 	signalQuality=100;
@@ -134,7 +135,7 @@
 			
 	if(signalQuality<0) signalQuality=0;
 
-	
-	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SIGNAL_QUALITY andParent:self] waitUntilDone:YES];
+	chMsg.state=SIGNAL_QUALITY;
+	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 }
 @end

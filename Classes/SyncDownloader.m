@@ -69,7 +69,8 @@
 	}
 	receivedData=[[NSMutableData alloc] init];
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:NO];
-	
+	//NSLog(@"Current run loop: %@",[NSRunLoop currentRunLoop]);
+	//NSLog(@"Main run loop: %@",[NSRunLoop mainRunLoop]);
 	if (theConnection) {
 		[theConnection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:[[NSRunLoop mainRunLoop] currentMode]];
 		[finished lock];
@@ -84,6 +85,8 @@
 	} else {
 		error=YES;
 	}
+	//[theConnection unscheduleFromRunLoop:[NSRunLoop mainRunLoop] forMode:[[NSRunLoop mainRunLoop] currentMode]];
+	[theConnection cancel];
 	[theConnection release];
 	
 	if(error) {
@@ -94,7 +97,6 @@
 	} else {
 		*data=receivedData;
 	}
-	
 	return !error;
 }
 @end

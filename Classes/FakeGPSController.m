@@ -33,6 +33,7 @@
 -(void) dealloc {
 	[pos release];
 	[super dealloc];
+	[chMsg release];
 }
 - (id)initWithDelegate:(id)del {
 	self=[super initWithDelegate:del];
@@ -43,6 +44,7 @@
 	version_major=1;
 	validLicense=YES;
 	isConnected=YES;
+	chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 	return self;
 }
 - (void)gpsUpdate {
@@ -51,12 +53,15 @@
 	gps_data.fix.latitude=pos.x;
 	gps_data.fix.longitude=pos.y;
 	gps_data.fix.altitude=500;
+	chMsg.state=POS;
 #ifdef USE_UI
-	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:POS andParent:self] waitUntilDone:YES];
-	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
+	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+	chMsg.state=SPEED;
+	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
-	[delegate gpsChanged:[ChangedState objWithState:POS andParent:self]];
-	[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
+	[delegate gpsChanged:chMsg];
+	chMsg.state=SPEED;
+	[delegate gpsChanged:chMsg];
 #endif
 	
 	//Update signal quality
@@ -64,8 +69,8 @@
 	
 	if(signalQuality<0) signalQuality=0;
 	
-	
-	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SIGNAL_QUALITY andParent:self] waitUntilDone:YES];
+	chMsg.state=SIGNAL_QUALITY;
+	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 	pos.x+=0.0001;
 	pos.y+=0.0001;
 }

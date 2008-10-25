@@ -38,9 +38,9 @@
 - (BOOL)canUpdateFirmware {
 	if(isConnected && version_major>0 && version_minor>=0) {
 		if(version_major*10+version_minor<VERSION_INTEGER)
-		return YES;
+			return YES;
 		else
-		return NO;
+			return NO;
 	}
 	else {
 		return NO;
@@ -83,7 +83,7 @@
 	hasReceivedOK=NO;
 	[lockReceivedOk unlock];
 	[self sendCommand:"t"];
-
+	
 	//Reset the timer to a longer interval if connected
 	if(isConnected && checkTimer.timeInterval!=12) {
 		[checkTimer invalidate];
@@ -145,28 +145,28 @@
 
 -(void) threadSerialGPS {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-
+	
+	
 	if(self.serialHandle>0)
 	{
 		struct gps_packet_t packet;
 		packet_reset(&packet);
-
+		ChangedState* chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 		NSLog(@"threadSerial(): started...");
 		while(!stopGPSSerial) {
-
-
+			
+			
 			while(packet.type<0 && !stopGPSSerial) {
 				ssize_t recvd;
-
+				
 				/*@ -modobserver @*/
 				recvd = read(self.serialHandle, packet.inbuffer + packet.inbuflen, sizeof(packet.inbuffer) - (packet.inbuflen));
-
+				
 				//printf("%d raw bytes read: %s\n",
 				//		(int)recvd,packet.inbuffer+packet.inbuflen);
-
+				
 				if(recvd<0)
-				printf("Receive error: %s\n", strerror(errno));
+					printf("Receive error: %s\n", strerror(errno));
 				/*@ +modobserver @*/
 				if (recvd == -1) {
 					if ((errno == EAGAIN) || (errno == EINTR)) {
@@ -175,174 +175,191 @@
 						continue;
 					}
 				}
-
+				
 				if (recvd == 0) continue;
-
+				
 				
 				writeDebugSerial((const char*)(packet.inbuffer + packet.inbuflen),recvd);
-			
-
+				
+				
 				packet_parse(&packet, (size_t) recvd);
 			}
-
+			
 			//NSLog(@"End loop recept.");
-
+			
 			//NSLog(@"Packet type: %d",packet.type);
 			while(packet.type>=0 && !stopGPSSerial) {
-			if(packet.type==0) {
-				//XGPS PARSER
-				writeDebugMessage([[NSString stringWithFormat:@"Received command: '%s'",packet.outbuffer] UTF8String]);
-				//printf("Command: '%s'\n",packet.outbuffer);
-				if(*packet.outbuffer!='#') continue;
-				char *cmd=(char*)packet.outbuffer;
-				//Check where is the first $
-
-
-				//Check if xgps command
-				if(cmd!=NULL) {
-					if(strncmp(cmd,"#Version",8)==0 && strlen(cmd)>11) {
-						[lockReceivedOk lock];
-						hasReceivedOK=YES;
-						[lockReceivedOk unlock];
-						cmd+=9;
-						sscanf(cmd,"%d.%d\r\n",&version_major,&version_minor);
-						firstStart=NO;
-						//NSLog(@"threadSerial(): #Version  got: %d.%d",version_major,version_minor);
-						if(version_major>=0 && version_minor>=0) {
+				if(packet.type==0) {
+					//XGPS PARSER
+					writeDebugMessage([[NSString stringWithFormat:@"Received command: '%s'",packet.outbuffer] UTF8String]);
+					//printf("Command: '%s'\n",packet.outbuffer);
+					if(*packet.outbuffer!='#') continue;
+					char *cmd=(char*)packet.outbuffer;
+					//Check where is the first $
+					
+					
+					//Check if xgps command
+					if(cmd!=NULL) {
+						if(strncmp(cmd,"#Version",8)==0 && strlen(cmd)>11) {
+							[lockReceivedOk lock];
+							hasReceivedOK=YES;
+							[lockReceivedOk unlock];
+							cmd+=9;
+							sscanf(cmd,"%d.%d\r\n",&version_major,&version_minor);
+							firstStart=NO;
+							//NSLog(@"threadSerial(): #Version  got: %d.%d",version_major,version_minor);
+							if(version_major>=0 && version_minor>=0) {
+								chMsg.state=VERSION_CHANGE;
 #ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:VERSION_CHANGE andParent:self] waitUntilDone:YES];
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
-							[delegate gpsChanged:[ChangedState objWithState:VERSION_CHANGE andParent:self]];
+								[delegate gpsChanged:chMsg];
 #endif
-						}
-						if(!isConnected) {
+							}
+							if(!isConnected) {
+								isConnected=YES;
+								[self sendCommand:"s"];
+								chMsg.state=CONNECTION_CHANGE;
+#ifdef USE_UI
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+								[delegate gpsChanged:chMsg];
+#endif
+							}
+						} else if(strncmp(cmd,"#xgpsBoot",9)==0) {
+							[lockReceivedOk lock];
+							hasReceivedOK=YES;
+							[lockReceivedOk unlock];
 							isConnected=YES;
 							[self sendCommand:"s"];
+							chMsg.state=CONNECTION_CHANGE;
 #ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:YES];
+							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
-							[delegate gpsChanged:[ChangedState objWithState:CONNECTION_CHANGE andParent:self]];
+							[delegate gpsChanged:chMsg];
 #endif
+						} else if(strncmp(cmd,"#xgpsOK",7)==0) {
+							[lockReceivedOk lock];
+							hasReceivedOK=YES;
+							[lockReceivedOk unlock];
+							
+							if(!isConnected) {
+								isConnected=YES;
+								chMsg.state=CONNECTION_CHANGE;
+#ifdef USE_UI
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+								[delegate gpsChanged:chMsg];
+#endif
+							}
+						} else if(strncmp(cmd,"#xgpsON",7)==0) {
+							isEnabled=YES;
+							chMsg.state=STATE_CHANGE;
+#ifdef USE_UI
+							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+							[delegate gpsChanged:chMsg];
+#endif
+							if(!isConnected) {
+								isConnected=YES;
+								chMsg.state=CONNECTION_CHANGE;
+#ifdef USE_UI
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+								[delegate gpsChanged:chMsg];
+#endif
+							}
+						} else if(strncmp(cmd,"#xgpsOFF",8)==0) {
+							isEnabled=NO;
+							chMsg.state=STATE_CHANGE;
+#ifdef USE_UI
+							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+							[delegate gpsChanged:chMsg];
+#endif
+							if(!isConnected) {
+								isConnected=YES;
+								chMsg.state=CONNECTION_CHANGE;
+#ifdef USE_UI
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+								[delegate gpsChanged:chMsg];
+#endif
+							}
+						} else if(strncmp(cmd,"#Serial ",8)==0 && strlen(cmd)>15) {
+							char c1[2],c2[2],c3[2],c4[2];
+							cmd+=8;
+							sscanf(cmd,"%2c%2c%2c%2c\r\n",c1,c2,c3,c4);
+							char serialt[14];
+							snprintf(serialt,14,"%c%c-%c%c-%c%c-%c%c",*c1,*(c1+1),*c2,*(c2+1),*c3,*(c3+1),*c4,*(c4+1));
+							//NSLog(@"threadSerial(): #Serial  got: %s",serialt);
+							[serial release];
+							serial=[[NSString alloc] initWithCString:serialt];
+							if([serial length]>0) {
+								chMsg.state=SERIAL;
+#ifdef USE_UI
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+								[delegate gpsChanged:chMsg];
+#endif
+							}
+							if(!isConnected) {
+								isConnected=YES;
+								chMsg.state=CONNECTION_CHANGE;
+#ifdef USE_UI
+								[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+								[delegate gpsChanged:chMsg];
+#endif
+							}
+							[self sendCommand:"q"];
 						}
-					} else if(strncmp(cmd,"#xgpsBoot",9)==0) {
-						[lockReceivedOk lock];
-						hasReceivedOK=YES;
-						[lockReceivedOk unlock];
-						isConnected=YES;
-						[self sendCommand:"s"];
-#ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:YES];
-#else
-						[delegate gpsChanged:[ChangedState objWithState:CONNECTION_CHANGE andParent:self]];
-#endif
-					} else if(strncmp(cmd,"#xgpsOK",7)==0) {
-						[lockReceivedOk lock];
-						hasReceivedOK=YES;
-						[lockReceivedOk unlock];
-						if(!isConnected) {
-							isConnected=YES;
-#ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:YES];
-#else
-							[delegate gpsChanged:[ChangedState objWithState:CONNECTION_CHANGE andParent:self]];
-#endif
-						}
-					} else if(strncmp(cmd,"#xgpsON",7)==0) {
-						isEnabled=YES;
-#ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:STATE_CHANGE andParent:self] waitUntilDone:YES];
-#else
-						[delegate gpsChanged:[ChangedState objWithState:STATE_CHANGE andParent:self]];
-#endif
-						if(!isConnected) {
-							isConnected=YES;
-#ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:YES];
-#else
-							[delegate gpsChanged:[ChangedState objWithState:CONNECTION_CHANGE andParent:self]];
-#endif
-						}
-					} else if(strncmp(cmd,"#xgpsOFF",8)==0) {
-						isEnabled=NO;
-#ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:STATE_CHANGE andParent:self] waitUntilDone:YES];
-#else
-						[delegate gpsChanged:[ChangedState objWithState:STATE_CHANGE andParent:self]];
-#endif
-						if(!isConnected) {
-							isConnected=YES;
-#ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:YES];
-#else
-							[delegate gpsChanged:[ChangedState objWithState:CONNECTION_CHANGE andParent:self]];
-#endif
-						}
-					} else if(strncmp(cmd,"#Serial ",8)==0 && strlen(cmd)>15) {
-						char c1[2],c2[2],c3[2],c4[2];
-						cmd+=8;
-						sscanf(cmd,"%2c%2c%2c%2c\r\n",c1,c2,c3,c4);
-						char serialt[14];
-						snprintf(serialt,14,"%c%c-%c%c-%c%c-%c%c",*c1,*(c1+1),*c2,*(c2+1),*c3,*(c3+1),*c4,*(c4+1));
-						//NSLog(@"threadSerial(): #Serial  got: %s",serialt);
-						[serial release];
-						serial=[[NSString alloc] initWithCString:serialt];
-						if([serial length]>0) {
-#ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SERIAL andParent:self] waitUntilDone:YES];
-#else
-							[delegate gpsChanged:[ChangedState objWithState:SERIAL andParent:self]];
-#endif
-						}
-						if(!isConnected) {
-							isConnected=YES;
-#ifdef USE_UI
-							[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:YES];
-#else
-							[delegate gpsChanged:[ChangedState objWithState:CONNECTION_CHANGE andParent:self]];
-#endif
-						}
-						[self sendCommand:"q"];
+						
 					}
-
+				} else if(packet.type==1) {
+					//NMEA
+					//[self writeDebugMessage:[NSString stringWithFormat:@"Received data: '%s'",packet.outbuffer]];
+					unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);
+					//printf("Sat %d - Lat/Lon: %f %f - Alt: %f - Speed: %f m/s\n",gps_data.satellites,gps_data.fix.latitude,gps_data.fix.longitude,gps_data.fix.altitude,gps_data.fix.speed);
+					if((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET){
+						chMsg.state=SPEED;
+#ifdef USE_UI
+						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+						[delegate gpsChanged:chMsg];
+#endif
+					}
+					if((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET){
+						chMsg.state=POS;
+#ifdef USE_UI
+						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+						[delegate gpsChanged:chMsg];
+#endif
+					}
+					
+					if(gps_data.fix.mode<2)
+						signalQuality=0;
+					else if(gps_data.fix.mode==2)
+						signalQuality=40;
+					else if(gps_data.fix.mode==3)
+						signalQuality=80;
+					chMsg.state=SIGNAL_QUALITY;
+					[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 				}
-			} else if(packet.type==1) {
-				//NMEA
-				//[self writeDebugMessage:[NSString stringWithFormat:@"Received data: '%s'",packet.outbuffer]];
-				unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);
-				//printf("Sat %d - Lat/Lon: %f %f - Alt: %f - Speed: %f m/s\n",gps_data.satellites,gps_data.fix.latitude,gps_data.fix.longitude,gps_data.fix.altitude,gps_data.fix.speed);
-				if((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET)
-#ifdef USE_UI
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
-#else
-				[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
-#endif
-				if((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET)
-#ifdef USE_UI
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:POS andParent:self] waitUntilDone:YES];
-#else
-				[delegate gpsChanged:[ChangedState objWithState:POS andParent:self]];
-#endif
 				
-				if(gps_data.fix.mode<2)
-					signalQuality=0;
-				else if(gps_data.fix.mode==2)
-					signalQuality=40;
-				else if(gps_data.fix.mode==3)
-					signalQuality=80;
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SIGNAL_QUALITY andParent:self] waitUntilDone:YES];
-			}
-
-			//packet_reset(&packet);
-			packet.type = BAD_PACKET;
+				//packet_reset(&packet);
+				packet.type = BAD_PACKET;
 				packet_parse(&packet, 0);
 			}
 			//NSLog(@"threadSerial(): End of analysing -> Next command");
 		}
+		[chMsg release];
 		NSLog(@"threadSerial(): End of thread of xGPS");
 	} else {
 		NSLog(@"threadSerial(): Serial port error !");
 	}
-
+	
 	stopGPSSerial=NO;
 	[pool release];
 }

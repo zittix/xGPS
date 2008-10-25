@@ -118,7 +118,7 @@
 	{
 		struct gps_packet_t packet;
 		packet_reset(&packet);
-
+		ChangedState* chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 		NSLog(@"threadSerial(): started...");
 		while(!stopGPSSerial) {
 		
@@ -163,25 +163,29 @@
 				//NMEA
 				 writeDebugMessage([[NSString stringWithFormat:@"Received data: '%s'",packet.outbuffer] UTF8String]);
 				unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);
-				if(((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET) && validLicense)
+				if(((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET) && validLicense){
+					chMsg.state=SPEED;
 #ifdef USE_UI
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
+					[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
-				[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
+					[delegate gpsChanged:chMsg];
 #endif
-				if(((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET) && validLicense)
+				}
+				if(((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET) && validLicense){
+					chMsg.state=POS;
 #ifdef USE_UI
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:POS andParent:self] waitUntilDone:YES];
+					[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
-				[delegate gpsChanged:[ChangedState objWithState:POS andParent:self]];
+					[delegate gpsChanged:chMsg];
 #endif
+				}
 				if(gps_data.fix.mode<2)
 					signalQuality=0;
 				else if(gps_data.fix.mode==2)
 					signalQuality=40;
 				else if(gps_data.fix.mode==3)
 					signalQuality=80;
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SIGNAL_QUALITY andParent:self] waitUntilDone:YES];
+				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 			}
 
 			//packet_reset(&packet);
@@ -192,6 +196,7 @@
 			}
 			//NSLog(@"threadSerial(): End of analysing -> Next command");
 		}
+		[chMsg release];
 		NSLog(@"threadSerial(): End of thread");
 	} else {
 		NSLog(@"threadSerial(): Serial port error !");

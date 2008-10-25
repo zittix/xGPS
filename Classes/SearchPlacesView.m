@@ -134,7 +134,7 @@
 	}
 }
 - (void)didMoveToSuperview {
-	searchBar.text=@"Ch. du Marais 9 1031 Mex";
+	searchBar.text=@"";
 	if(_result!=nil) {
 		[_result release];
 		_result=nil;

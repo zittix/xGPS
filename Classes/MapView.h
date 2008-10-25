@@ -41,6 +41,7 @@
 	BOOL lastInitMove;
 	PositionObj *lastPos;
 	float mapRotation;
+	float gpsHeading;
 	BOOL gpsTracking;
 	BOOL mapRotationEnabled;
 }

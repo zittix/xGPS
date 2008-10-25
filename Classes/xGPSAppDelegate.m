@@ -12,21 +12,21 @@ static xGPSAppDelegate* staticObj=nil;
 @implementation xGPSAppDelegate
 static TileDB* tiledb;
 static GPSManager* gpsmanager;
-static NSAutoreleasePool *pool;
+
 @synthesize window;
 @synthesize navController;
 +(xGPSAppDelegate*)appdelegate {
 	return staticObj;
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-	pool=[[NSAutoreleasePool alloc] init];
+
 	staticObj=self;
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
 	tiledb=[[TileDB alloc] init];
 	gpsmanager=[[[GPSManager alloc] init] retain];
 	[[gpsmanager GetCurrentGPS] start];
-	MainViewController *navControllerMain = [[MainViewController alloc] initWithPool:pool];
+	MainViewController *navControllerMain = [[MainViewController alloc] init];
 	
 	// create a navigation controller using the new controller
 	navController = [[UINavigationController alloc] initWithRootViewController:navControllerMain];
@@ -59,7 +59,6 @@ static NSAutoreleasePool *pool;
 	[window release];
 	[tiledb release];
 	[gpsmanager release];
-	[pool release];
 	[super dealloc];
 }
 

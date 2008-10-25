@@ -12,6 +12,7 @@
 #import "iPhone3GController.h"
 #import "xGPSAppDelegate.h"
 #import "FakeGPSController.h"
+#import "iGPS360Controller.h"
 @implementation GPSManager
 @synthesize idGPS;
 -(id)init {
@@ -38,7 +39,11 @@
 -(void)dealloc {
 	NSLog(@"Deallocate gpsmanager");
 	[[self GetCurrentGPS] stop];
-	
+	[gpsControllers1 release];
+	[gpsControllers2 release];
+	[gpsControllers3 release];
+	[gpsControllers4 release];
+	[gpsControllers5 release];
 	[super dealloc];
 }
 -(void)setCurrentGPS:(int)_id {
@@ -86,8 +91,14 @@
 				break;
 			case 4:
 				if(gpsControllers4==nil)
-					gpsControllers4=[[FakeGPSController alloc] initWithDelegate:del];
+					gpsControllers4=[[iGPS360Controller alloc] initWithDelegate:del];
 				gps=gpsControllers4;
+				break;
+			case 5:
+				if(gpsControllers5==nil)
+					gpsControllers5=[[FakeGPSController alloc] initWithDelegate:del];
+				gps=gpsControllers5;
+				
 				break;
 	}
 	gps.delegate=delegate;

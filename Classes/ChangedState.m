@@ -18,4 +18,17 @@
 	c.parent=p;
 	return [c autorelease];
 }
++(NSString*)stringForState:(MSG_TYPE)s {
+	switch(s) {
+		case POS: return @"POS";
+			case VERSION_CHANGE: return @"VERSION_CHANGE";
+			case CONNECTION_CHANGE: return @"CONNECTION_CHANGE";
+			case SPEED: return @"SPEED";
+			case STATE_CHANGE: return @"STATE_CHANGE";
+			case SERIAL: return @"SERIAL";
+			case SIGNAL_QUALITY: return @"SIGNAL_QUALITY";
+			
+	}
+	return @"";
+}
 @end

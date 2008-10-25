@@ -14,27 +14,15 @@
 @synthesize mapview;
 
 @synthesize tiledb;
--(id)initWithPool:(NSAutoreleasePool*)p {
-	if((self=[self init])) {
-		pool=p;
-		[NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(flushPool) userInfo:nil repeats:YES];
-	}
-	return self;
-}
 -(id)init {
-	NSLog(@"MainView controller init...");
+	//NSLog(@"MainView controller init...");
 	tiledb=[xGPSAppDelegate tiledb];
-
+	gpsPos=[[PositionObj alloc] init];
 	[[xGPSAppDelegate gpsmanager] setDelegate:self];
 		return self;
 }
--(void)flushPool {
-	[pool release];
-	//NSLog(@"Releasing pool");
-	pool=[[NSAutoreleasePool alloc] init];
-}
 - (void)loadView {
-	NSLog(@"MainView controller loadView...");
+	//NSLog(@"MainView controller loadView...");
 	self.title=@"xGPS";
 	
 	//Set the View to a UIView
@@ -83,7 +71,8 @@
 	[self.view addSubview:signalView];
 	[signalView setQuality:0];
 	speedview.hidden=YES;
-	mapview.mapRotationEnabled=YES;
+	
+	
 }
 -(void)hideSpeed {
 	[UIView beginAnimations:nil context:nil];
@@ -109,7 +98,9 @@
 	[space1 release];
 	[space2 release];
 	[settingsController release];
+	[signalView release];
 	[searchPlacesView release];
+	[gpsPos release];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -157,6 +148,7 @@
 		p.y=6.55;
 	}
 	mapview.pos=p;
+	mapview.mapRotationEnabled=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
 }
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -263,7 +255,7 @@
 	}
 }
 - (void)gpsChanged:(ChangedState*)msg {
-	
+	//NSLog(@"Receiving change for state: %@",[ChangedState stringForState:msg.state]);
 	switch(msg.state) {
 		case VERSION_CHANGE:
 			break;
@@ -281,10 +273,10 @@
 
 			break;
 		case POS: {
-			PositionObj *p=[[PositionObj alloc] init];
-			p.x=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude;
-			p.y=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude;
-			[mapview updateCurrentPos:p];
+			if(gpsPos==nil) return;
+			gpsPos.x=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude;
+			gpsPos.y=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude;
+			[mapview updateCurrentPos:gpsPos];
 			[mapview setHasGPSPos:YES];
 
 			break;

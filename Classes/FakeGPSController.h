@@ -14,6 +14,7 @@
 @interface FakeGPSController : GPSController {
 	NSTimer *tmrGPS;
 	PositionObj *pos;
+	ChangedState* chMsg;
 }
 - (id)initWithDelegate:(id)del;
 @end

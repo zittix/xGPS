@@ -170,6 +170,7 @@
 	NSLog(@"Async Tile Get Thread - Started");
 	//NSMutableArray *arrD=[NSMutableArray arrayWithCapacity:5];
 	while(runAsync) {
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		[hasTileToDLlock lock];
 		[tileHeapLock lock];
 		int nb=[tileHeap count];
@@ -212,6 +213,7 @@
 		
 		[copy release];
 		//[arrD removeAllObjects];
+		[pool release];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	}
 	
@@ -274,8 +276,9 @@
 			nbDownloadedTotal++;
 			float prc=((float)nbDownloadedTotal/(float)nbToDownload);
 			//[progress setProgressObj:[NSNumber numberWithFloat:prc]];
-			[progress performSelectorOnMainThread:@selector(setProgressObj:) withObject:[NSNumber numberWithFloat:prc] waitUntilDone:NO];
-			
+			NSNumber *nb=[[NSNumber alloc] initWithFloat:prc];
+			[progress performSelectorOnMainThread:@selector(setProgressObj:) withObject:nb waitUntilDone:YES];
+			[nb release];
 			//if(i*j%20==0) {
 			//	NSLog(@"Download status: %f %%",prc*100.0);
 			//}
@@ -360,7 +363,7 @@
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
 	if(offline || closed) return NO;
-	
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
@@ -407,9 +410,9 @@
 	
 	
 	if(imageData==nil || !res) {
-		NSLog(@"Download error");
-		
-
+	//	NSLog(@"Download error");
+		[dl release];
+		[pool release];
 		return NO;
 	}
 	//NSLog(@"Tile got at (%d bytes)!",[imageData length]);
@@ -432,14 +435,16 @@
 	[dbLock unlock];
 	if(r!=SQLITE_DONE) {
 		NSLog(@"Unable to insert tile (%d,%d): %s. Err. code=%d",x,y,sqlite3_errmsg(database),r);
-	
+		[pool release];
 		return NO;
 	}
+	[pool release];
 	//NSLog(@"Tile downloaded and saved !");
 	return YES;
 err:
 	[dbLock unlock];
 	[dl release];
+	[pool release];
 	NSLog(@"Error while getting tile.");
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);

@@ -19,6 +19,7 @@
 	NSTimeInterval lastTimeStamp;
 	NSTimer* speedCheck;
 	BOOL speedHasBeenUpdated;
+	ChangedState* chMsg;
 }
 - (id)initWithDelegate:(id)del;
 @end
