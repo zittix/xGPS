@@ -277,6 +277,18 @@
 			4E9671840EBA6714008E7917 /* PBXTextBookmark */ = 4E9671840EBA6714008E7917 /* PBXTextBookmark */;
 			4E9671860EBA6714008E7917 /* PBXTextBookmark */ = 4E9671860EBA6714008E7917 /* PBXTextBookmark */;
 			4E9671870EBA6714008E7917 /* PBXTextBookmark */ = 4E9671870EBA6714008E7917 /* PBXTextBookmark */;
+			4E96718D0EBA68B9008E7917 /* PBXTextBookmark */ = 4E96718D0EBA68B9008E7917 /* PBXTextBookmark */;
+			4E96718E0EBA68B9008E7917 /* PBXTextBookmark */ = 4E96718E0EBA68B9008E7917 /* PBXTextBookmark */;
+			4E96718F0EBA68B9008E7917 /* PBXTextBookmark */ = 4E96718F0EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671900EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671900EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671910EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671910EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671920EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671920EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671930EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671930EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671940EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671940EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671950EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671950EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671960EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671960EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671970EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671970EBA68B9008E7917 /* PBXTextBookmark */;
+			4E9671980EBA68B9008E7917 /* PBXTextBookmark */ = 4E9671980EBA68B9008E7917 /* PBXTextBookmark */;
 			4EAF77630EB3A3910078B697 = 4EAF77630EB3A3910078B697 /* PBXTextBookmark */;
 			4EAF786C0EB3A8850078B697 = 4EAF786C0EB3A8850078B697 /* PBXTextBookmark */;
 			4EAF786D0EB3A8850078B697 = 4EAF786D0EB3A8850078B697 /* PBXTextBookmark */;
@@ -359,9 +371,9 @@
 	};
 	4E0B8CF80E812A74009A2F86 /* iGPSDController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1411, 2926}}";
-			sepNavSelRange = "{5371, 0}";
-			sepNavVisRange = "{3940, 1752}";
+			sepNavIntBoundsRect = "{{0, 0}, {1411, 2954}}";
+			sepNavSelRange = "{5423, 0}";
+			sepNavVisRange = "{4098, 1670}";
 		};
 	};
 	4E0B8D420E812DDD009A2F86 /* GPSLicenseViewController.h */ = {
@@ -504,9 +516,9 @@
 	};
 	4E2396710E40F6AB0062A352 /* MapView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1411, 12068}}";
-			sepNavSelRange = "{4027, 0}";
-			sepNavVisRange = "{654, 1702}";
+			sepNavIntBoundsRect = "{{0, 0}, {1411, 11956}}";
+			sepNavSelRange = "{17606, 0}";
+			sepNavVisRange = "{19398, 2167}";
 			sepNavWindowFrame = "{{1695, 302}, {906, 743}}";
 		};
 	};
@@ -647,7 +659,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2304, 1988}}";
 			sepNavSelRange = "{4193, 0}";
-			sepNavVisRange = "{2487, 1734}";
+			sepNavVisRange = "{2502, 1719}";
 		};
 	};
 	4E8A01750E9D441C00E58774 /* NetworkReceiverViewController.h */ = {
@@ -895,7 +907,7 @@
 		fRef = 4E2396710E40F6AB0062A352 /* MapView.m */;
 		name = "MapView.m: 630";
 		rLen = 0;
-		rLoc = 18835;
+		rLoc = 18828;
 		rType = 0;
 		vrLen = 2275;
 		vrLoc = 17576;
@@ -905,7 +917,7 @@
 		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
 		name = "iGPSDController.m: 188";
 		rLen = 0;
-		rLoc = 5371;
+		rLoc = 5403;
 		rType = 0;
 		vrLen = 1766;
 		vrLoc = 3923;
@@ -969,7 +981,7 @@
 		fRef = 4E2396710E40F6AB0062A352 /* MapView.m */;
 		name = "MapView.m: 630";
 		rLen = 0;
-		rLoc = 18835;
+		rLoc = 18828;
 		rType = 0;
 		vrLen = 2275;
 		vrLoc = 17576;
@@ -989,7 +1001,7 @@
 		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
 		name = "iGPSDController.m: 188";
 		rLen = 0;
-		rLoc = 5371;
+		rLoc = 5403;
 		rType = 0;
 		vrLen = 1766;
 		vrLoc = 3923;
@@ -1107,7 +1119,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2076, 854}}";
 			sepNavSelRange = "{1468, 0}";
-			sepNavVisRange = "{19, 1768}";
+			sepNavVisRange = "{28, 1759}";
 		};
 	};
 	4E96711D0EBA6528008E7917 /* PBXTextBookmark */ = {
@@ -1213,7 +1225,7 @@
 		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
 		name = "iGPSDController.m: 188";
 		rLen = 0;
-		rLoc = 5371;
+		rLoc = 5403;
 		rType = 0;
 		vrLen = 1752;
 		vrLoc = 3940;
@@ -1673,7 +1685,7 @@
 		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
 		name = "iGPSDController.m: 188";
 		rLen = 0;
-		rLoc = 5371;
+		rLoc = 5403;
 		rType = 0;
 		vrLen = 1752;
 		vrLoc = 3940;
@@ -2018,6 +2030,126 @@
 		vrLen = 1768;
 		vrLoc = 19;
 	};
+	4E96718D0EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E9670FD0EBA5840008E7917 /* GPXLogger.c */;
+		name = "GPXLogger.c: 50";
+		rLen = 0;
+		rLoc = 1468;
+		rType = 0;
+		vrLen = 1759;
+		vrLoc = 28;
+	};
+	4E96718E0EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396710E40F6AB0062A352 /* MapView.m */;
+		name = "MapView.m: 603";
+		rLen = 0;
+		rLoc = 17606;
+		rType = 0;
+		vrLen = 2167;
+		vrLoc = 19398;
+	};
+	4E96718F0EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EE0F1CC0E6A958000BBA3FD /* xGPSController.m */;
+		name = "xGPSController.m: 341";
+		rLen = 300;
+		rLoc = 9775;
+		rType = 0;
+		vrLen = 2049;
+		vrLoc = 8281;
+	};
+	4E9671900EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
+		name = "iGPSDController.m: 189";
+		rLen = 0;
+		rLoc = 5423;
+		rType = 0;
+		vrLen = 1670;
+		vrLoc = 4098;
+	};
+	4E9671910EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */;
+		name = "iGPS360Controller.m: 54";
+		rLen = 0;
+		rLoc = 1331;
+		rType = 0;
+		vrLen = 1780;
+		vrLoc = 2847;
+	};
+	4E9671920EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E9670FD0EBA5840008E7917 /* GPXLogger.c */;
+		name = "GPXLogger.c: 50";
+		rLen = 0;
+		rLoc = 1468;
+		rType = 0;
+		vrLen = 1759;
+		vrLoc = 28;
+	};
+	4E9671930EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E2396710E40F6AB0062A352 /* MapView.m */;
+		name = "MapView.m: 603";
+		rLen = 0;
+		rLoc = 17606;
+		rType = 0;
+		vrLen = 2167;
+		vrLoc = 19398;
+	};
+	4E9671940EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
+		name = "iGPSDController.m: 188";
+		rLen = 0;
+		rLoc = 5403;
+		rType = 0;
+		vrLen = 1715;
+		vrLoc = 3977;
+	};
+	4E9671950EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EE0F1CC0E6A958000BBA3FD /* xGPSController.m */;
+		name = "xGPSController.m: 341";
+		rLen = 300;
+		rLoc = 9775;
+		rType = 0;
+		vrLen = 2049;
+		vrLoc = 8281;
+	};
+	4E9671960EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */;
+		name = "iGPSDController.m: 189";
+		rLen = 0;
+		rLoc = 5423;
+		rType = 0;
+		vrLen = 1670;
+		vrLoc = 4098;
+	};
+	4E9671970EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */;
+		name = "iGPS360Controller.m: 54";
+		rLen = 0;
+		rLoc = 1331;
+		rType = 0;
+		vrLen = 1780;
+		vrLoc = 2847;
+	};
+	4E9671980EBA68B9008E7917 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 4E86515A0E7EC237005954EE /* iPhone3GController.m */;
+		name = "iPhone3GController.m: 139";
+		rLen = 0;
+		rLoc = 4193;
+		rType = 0;
+		vrLen = 1719;
+		vrLoc = 2502;
+	};
 	4E9A00900E8D4A530076EE44 /* Dutch */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {2994, 980}}";
@@ -2151,7 +2283,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1411, 2464}}";
 			sepNavSelRange = "{1331, 0}";
-			sepNavVisRange = "{694, 1185}";
+			sepNavVisRange = "{2847, 1780}";
 		};
 	};
 	4EAF78CD0EB3AF6F0078B697 /* PBXTextBookmark */ = {
@@ -2783,9 +2915,9 @@
 	};
 	4EE0F1CC0E6A958000BBA3FD /* xGPSController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1411, 5278}}";
-			sepNavSelRange = "{9590, 0}";
-			sepNavVisRange = "{5608, 1920}";
+			sepNavIntBoundsRect = "{{0, 0}, {1411, 5124}}";
+			sepNavSelRange = "{9775, 300}";
+			sepNavVisRange = "{8281, 2049}";
 			sepNavWindowFrame = "{{15, 243}, {1191, 780}}";
 		};
 	};

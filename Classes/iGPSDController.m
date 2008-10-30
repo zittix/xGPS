@@ -185,6 +185,7 @@
 					signalQuality=40;
 				else if(gps_data.fix.mode==3)
 					signalQuality=80;
+				chMsg.state=SIGNAL_QUALITY;
 				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 			}
 

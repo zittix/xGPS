@@ -600,7 +600,7 @@
 	//NSLog(@"Cache size: %d",[tilescache count]);
 	
 	//Draw gps pos
-	if(hasGPSfix || YES) {
+	if(hasGPSfix) {
 		int xoff2,yoff2;
 		[self getXYfrom:posGPS.x andLon:posGPS.y toPositionX:&x andY:&y withZoom:zoom];
 		[self getXYOffsetfrom:posGPS.x andLon:posGPS.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
