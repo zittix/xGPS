@@ -9,16 +9,19 @@
 #import "MainViewController.h"
 #import "Position.h"
 #import "xGPSAppDelegate.h"
+#import "GPXLogger.h"
 @implementation MainViewController
 
 @synthesize mapview;
 
 @synthesize tiledb;
 -(id)init {
+	if((self=[super init])) {
 	//NSLog(@"MainView controller init...");
 	tiledb=[xGPSAppDelegate tiledb];
 	gpsPos=[[PositionObj alloc] init];
 	[[xGPSAppDelegate gpsmanager] setDelegate:self];
+	}
 		return self;
 }
 - (void)loadView {
@@ -105,7 +108,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:YES];
-	self.title=NSLocalizedString(@"Map","Map Title");
+	self.title=NSLocalizedString(@"Map","Map");
 	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
 	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].y forKey:kSettingsLastPosY];
 
@@ -278,7 +281,8 @@
 			gpsPos.y=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude;
 			[mapview updateCurrentPos:gpsPos];
 			[mapview setHasGPSPos:YES];
-
+			logGPXPoint([[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.time);
+			
 			break;
 		}case SPEED: {
 			float speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;

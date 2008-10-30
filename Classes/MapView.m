@@ -562,7 +562,7 @@
 				if(t!=nil) {
 					[t drawInRect: CGRectMake(org.x+marginx,org.y+marginy + dynTileSize,dynTileSize,dynTileSize) withContext:context];
 				}
-				marginx-=1;
+				marginx-=0.5;
 				
 				/* CGContextScaleCTM(context, 1, -1);
 				 CGContextBeginPath(context);
@@ -585,7 +585,7 @@
 			}
 		}
 		org.x=orgx;
-		marginy-=1;
+		marginy-=0.5;
 		org.y+=dynTileSize;
 		x=orgxTile;
 		y++;
@@ -600,14 +600,13 @@
 	//NSLog(@"Cache size: %d",[tilescache count]);
 	
 	//Draw gps pos
-	if(hasGPSfix) {
+	if(hasGPSfix || YES) {
 		int xoff2,yoff2;
 		[self getXYfrom:posGPS.x andLon:posGPS.y toPositionX:&x andY:&y withZoom:zoom];
 		[self getXYOffsetfrom:posGPS.x andLon:posGPS.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
 		
 		float posXPin=drawOrigin.x+(x-centerTileX)*dynTileSize-(xoff/TILE_SIZE)*dynTileSize+(xoff2/TILE_SIZE)*dynTileSize;
 		float posYPin=drawOrigin.y+(y-centerTileY)*dynTileSize-(yoff/TILE_SIZE)*dynTileSize+(yoff2/TILE_SIZE)*dynTileSize;
-		//NSLog(@"Pos: %f %f",posXPin,posYPin);
 		float posXPin2=cos(mapRotation)*posXPin - posYPin*sin(mapRotation);
 		float posYPin2=sin(mapRotation)*posXPin + posYPin*cos(mapRotation);
 		if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
@@ -615,36 +614,53 @@
 			//Project
 			//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 			
-			
-			
+			CGContextScaleCTM(context, 1, -1);
+			CGContextRotateCTM(context, -mapRotation);
 			CGContextScaleCTM(context, 1, -1);
 			//CGContextRotateCTM(context, -mapRotation);
 			// CGContextScaleCTM(context, 1, -1);
 			// [imgPinRef drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+7.5) withContext:context];
 			// CGContextScaleCTM(context, 1, -1);
-			CGContextRotateCTM(context, gpsHeading);
+		//	CGContextRotateCTM(context, gpsHeading);
 			
 			CGPoint ind[4];
-			ind[0].x=posXPin;
-			ind[0].y=posYPin+10;
-			ind[1].x=posXPin-20;
-			ind[1].y=posYPin+20*0.666+10;
-			ind[2].x=posXPin;
-			ind[2].y=posYPin-40+10;
-			ind[3].x=posXPin+20;
-			ind[3].y=posYPin+20*0.666+10;
+			ind[0].x=0;
+			ind[0].y=10;
+			ind[1].x=-20;
+			ind[1].y=20*0.666+10;
+			ind[2].x=0;
+			ind[2].y=-40+10;
+			ind[3].x=20;
+			ind[3].y=20*0.666+10;
+			float alpha=gpsHeading+mapRotation-2*M_PI;
+			float cosa=cos(alpha);
+			float sina=sin(alpha);
+			for(int i=0;i<4;i++) {
+				float posx=ind[i].x;
+				float posy=ind[i].y;
+				
+				ind[i].x=-cosa*posx -posy*sina;
+				ind[i].y=+sina*posx - posy*cosa;
+				
+				//Translate to correct plage
+				ind[i].x+=posXPin2;
+				ind[i].y-=posYPin2;
+			}
+			
 			CGContextBeginPath(context);
 			CGContextAddLines(context,ind,4);
 			CGContextClosePath(context);
 			CGContextSetRGBFillColor(context,0,1,0,0.6);
 			CGContextFillPath(context);
 			CGContextBeginPath(context);
-			CGContextAddArc(context,posXPin,posYPin,6,0,2*M_PI,0);
+			CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
 			CGContextClosePath(context);
 			CGContextSetRGBFillColor(context,0,1,0,1);
 			CGContextFillPath(context);
-			CGContextRotateCTM(context, -gpsHeading);
+			//CGContextRotateCTM(context, -gpsHeading);
 			// CGContextRotateCTM(context, mapRotation);
+			CGContextScaleCTM(context, 1, -1);
+			CGContextRotateCTM(context, mapRotation);
 			CGContextScaleCTM(context, 1, -1);
 			
 			//NSLog(@"Pos: %f %f",posXPin,posYPin);
@@ -749,8 +765,8 @@
 	 CGContextBeginPath(context);
 	 CGContextAddArc(context,posXStart,posYStart,35,0,2*M_PI,0);
 	 CGContextFillPath(context);
-	 }	*/
-	/*
+	 }	
+	
 	 CGContextBeginPath(context);
 	 CGContextAddArc(context,0,0,4,0,2*M_PI,0);
 	 CGContextClosePath(context);

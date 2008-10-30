@@ -17,6 +17,7 @@
 #import "LicenseViewController.h"
 #import "SearchPlacesView.h"
 #import "GPSSignalView.h"
+
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;

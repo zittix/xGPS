@@ -8,6 +8,7 @@
 
 #import "xGPSAppDelegate.h"
 #import "MainViewController.h"
+#import "GPXLogger.h"
 static xGPSAppDelegate* staticObj=nil;
 @implementation xGPSAppDelegate
 static TileDB* tiledb;
@@ -19,7 +20,10 @@ static GPSManager* gpsmanager;
 	return staticObj;
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-
+	
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog])
+	startGPXLogEngine();
+	
 	staticObj=self;
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
@@ -43,6 +47,7 @@ static GPSManager* gpsmanager;
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[[gpsmanager GetCurrentGPS] stop];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+	stopGPXLogEngine();
 }
 -(TileDB*)tiledb {
 	return tiledb;

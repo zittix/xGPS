@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 
 #import "xGPSAppDelegate.h"
+#include "GPXLogger.h"
 @implementation SettingsViewController
 #define VALUE_COLOR [UIColor colorWithRed:0.235 green:0.2549 blue:0.49019 alpha:1]
 
@@ -54,7 +55,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
 		case 0: return 7;
-		case 1: return 3;
+		case 1: return 4;
 		case 2: return 1;
 		case 3: return 3;
 		default: return 0;
@@ -94,6 +95,13 @@
 -(void)switchRotationChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:!sender.on forKey:kSettingsMapRotation];
 }
+-(void)switchGPSLoggingChanged:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsGPSLog];
+	if(sender.on)
+		startGPXLogEngine();
+	else
+		stopGPXLogEngine();
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *id=@"";
@@ -111,6 +119,7 @@
 				case 0:	id=@"sectGPS_gpstype"; break;
 				case 1:	id=@"sectGPS_gpsstate"; break;
 				case 2:	id=@"sectGPS_gpsreset"; break;
+				case 3:	id=@"sectGPS_gpslog"; break;
 			}break;
 		}
 		case 2: {
@@ -312,7 +321,21 @@
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						cell.accessoryAction=@selector(resetGPS:);
 						break;
-				}
+						
+					case 3: {
+						cell.text=NSLocalizedString(@"GPX Logging",@"Activate GPX Logging");
+						UISwitch *value;
+						
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+						value.tag = 1;
+						[value addTarget:self action:@selector(switchGPSLoggingChanged:) forControlEvents:UIControlEventValueChanged];
+						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						[cell.contentView addSubview:value];
+						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog];
+						//[value release];
+						
+					}
+				}break;
 			} break;
 			case 2: {
 				switch(indexPath.row) {
