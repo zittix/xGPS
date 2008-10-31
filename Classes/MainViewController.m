@@ -57,7 +57,8 @@
 	[self.view addSubview:speedview];
 	btnEnableGPS=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Enable GPS",@"Enable GPS Button") style:UIBarButtonItemStyleBordered target:self action:@selector(gpsEnableBtnPressed:)];
 	toolbar.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-	btnSettings=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",@"Settings Button") style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
+	//btnSettings=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",@"Settings Button") style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
+	btnSettings=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settingsIcon.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
 	btnSearch=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnPressed:)];
 	btnSearch.style=UIBarButtonItemStyleBordered;
 	space1=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -69,13 +70,18 @@
 		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
 		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	searchPlacesView.autoresizesSubviews=YES;
+
+	drivingSearchView=[[DrivingDirectionsSearchView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
+	drivingSearchView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	drivingSearchView.autoresizesSubviews=YES;
+	
 	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-52,5,47,40)];
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
 	[signalView setQuality:0];
 	speedview.hidden=YES;
 	
-	
+	cancelSearch=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelDrivingSearch:)];
 }
 -(void)hideSpeed {
 	[UIView beginAnimations:nil context:nil];
@@ -114,7 +120,11 @@
 
 }
 -(void)viewWillAppear:(BOOL)animated {
+	if(!directionSearch)
 	self.title=@"xGPS";
+	else
+	self.title=NSLocalizedString(@"Driving Directions",@"");
+
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense) {
 		NSArray *btn=[NSArray arrayWithObjects:btnEnableGPS,space1,btnSearch,space2,btnSettings,nil];
 		[toolbar setItems:btn animated:YES];	
@@ -157,6 +167,7 @@
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (void)viewDidAppear:(BOOL)animated {
+	if(!directionSearch)
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
 	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
@@ -177,7 +188,7 @@
 	[self.navigationController pushViewController:settingsController animated:YES];
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-
+	if(!directionSearch)
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
@@ -238,9 +249,19 @@
 }
 -(void)cancelSearchPressed:(id)sender {
 	[UIView beginAnimations:nil context:nil];	
-	self.navigationController.navigationBarHidden=YES;
 	[searchPlacesView removeFromSuperview];
 	[UIView commitAnimations];
+}
+-(void)cancelDrivingSearch:(id)sender {
+	[UIView beginAnimations:nil context:nil];	
+	[drivingSearchView removeFromSuperview];
+	
+	self.navigationItem.title=@"xGPS";
+	self.navigationItem.rightBarButtonItem=nil;
+	[UIView commitAnimations];
+	directionSearch=NO;
+	[self.navigationController setNavigationBarHidden:YES animated:YES];
+	
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
 	//0 cities,1 directions,2 cancel
@@ -251,8 +272,16 @@
 			[UIView commitAnimations];
 		}break;
 		case 1: {
-			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-			[alert show];
+			directionSearch=YES;
+			
+			//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			//[alert show];
+			[UIView beginAnimations:nil context:nil];
+			[self.view addSubview:drivingSearchView];
+			self.navigationController.navigationBarHidden=NO;
+			self.navigationItem.title=NSLocalizedString(@"Driving Directions",@"");
+			self.navigationItem.rightBarButtonItem=cancelSearch;
+			[UIView commitAnimations];
 
 		}break;
 	}

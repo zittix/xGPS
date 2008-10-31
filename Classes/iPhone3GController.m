@@ -15,7 +15,6 @@
 	
 	if(locManager.locationServicesEnabled){
 		speedHasBeenUpdated=NO;
-	//	speedCheck=[NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkSpeed) userInfo:nil repeats:YES];
 		[locManager startUpdatingLocation];
 		isEnabled=YES;
 	}
@@ -25,8 +24,6 @@
 	
 	if(locManager.locationServicesEnabled){
 		[locManager stopUpdatingLocation];
-		//[speedCheck invalidate];
-		speedCheck=nil;
 		isEnabled=NO;
 	}
 	return YES;
