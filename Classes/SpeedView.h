@@ -13,6 +13,8 @@
 	MapTile *speedbgd;
 	UILabel *lblspeed;
 	UILabel *lblunit;
+	
+	BOOL miles;
 }
 -(id) initWithFrame:(CGRect)f;
 -(void)setSpeed:(float)speed;

@@ -13,7 +13,7 @@ static xGPSAppDelegate* staticObj=nil;
 @implementation xGPSAppDelegate
 static TileDB* tiledb;
 static GPSManager* gpsmanager;
-
+static DirectionsController* directions;
 @synthesize window;
 @synthesize navController;
 +(xGPSAppDelegate*)appdelegate {
@@ -35,7 +35,7 @@ static GPSManager* gpsmanager;
 	// create a navigation controller using the new controller
 	navController = [[UINavigationController alloc] initWithRootViewController:navControllerMain];
 	[navControllerMain release];
-	
+	directions=[[DirectionsController alloc] init];
 	
 	// Add the tab bar controller's current view as a subview of the window
 	[window addSubview:navController.view];
@@ -51,6 +51,9 @@ static GPSManager* gpsmanager;
 }
 -(TileDB*)tiledb {
 	return tiledb;
+}
+-(DirectionsController*)directions {
+	return directions;
 }
 +(TileDB*)tiledb {
 	return tiledb;

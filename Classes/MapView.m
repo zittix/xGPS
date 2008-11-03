@@ -138,16 +138,12 @@
 		mapRotation=0;
 		
 		[self setMultipleTouchEnabled:YES];
-		//	[NSTimer scheduledTimerWithTimeInterval:0.4 target:self selector:@selector(updateAngle) userInfo:nil repeats:YES];
+
 		//	self.backgroundColor=[UIColor redColor];
 	}
 	return self;
 }
--(void)updateAngle {
-	mapRotation+=M_PI/32.0;
-	mapRotation=fmod(mapRotation,2*M_PI);
-	[self setNeedsDisplay];
-}
+
 - (void)layoutSubviews {
 	//tiledLayer.frame=self.frame;
 	

@@ -6,17 +6,17 @@
 //  Copyright 2008 Xwaves. All rights reserved.
 //
 
-#import "GeoEncoder.h"
+#import "DirectionsController.h"
 
 #import "xGPSAppDelegate.h"
 
 
-@implementation GeoEncoderResult
+@implementation AGeoEncoderResult
 @synthesize name;
 @synthesize pos;
 @synthesize addr;
-+(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr{
-	GeoEncoderResult*r=[[GeoEncoderResult alloc] init];
++(AGeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr{
+	AGeoEncoderResult*r=[[AGeoEncoderResult alloc] init];
 	r.pos=pos;
 	r.name=name;
 	r.addr=addr;
@@ -26,7 +26,7 @@
 
 
 
-@implementation GeoEncoder
+@implementation DirectionsController
 @synthesize delegate;
 
 + (NSString *) urlencode: (NSString *) url encoding:(NSString*)enc
@@ -78,7 +78,7 @@
 					[tmp replaceOccurrencesOfString:@"<br/>" withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
 				}
 				
-				GeoEncoderResult *r=[GeoEncoderResult resultWithName:currentPlacename pos:p addr:currentAddr];
+				AGeoEncoderResult *r=[AGeoEncoderResult resultWithName:currentPlacename pos:p addr:currentAddr];
 				NSString *key=[NSString stringWithFormat:@"%d",[result count]];
 				[result setObject:r forKey:key];
 			}
@@ -125,7 +125,7 @@
 }
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End geocode ok with %d results",[result count]);
-	if(req==nil) return;
+	//if(req==nil) return;
 	[delegate geoEncodeGot:[result autorelease] forRequest:[req autorelease] error:nil];
 	result=nil;
 	req=nil;
@@ -147,7 +147,7 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Parse error from delegate");
-	if(req==nil) return;
+	//if(req==nil) return;
 	
 	[delegate geoEncodeGot:result forRequest:req  error:nil];
 	result=nil;
@@ -181,9 +181,9 @@
           [error localizedDescription],
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	
-	if(req==nil) return;
+	//if(req==nil) return;
 	
-	[delegate geoEncodeGot:result forRequest:req  error:error];
+	//[delegate geoEncodeGot:result forRequest:req  error:error];
 	result=nil;
 	req=nil;
 	if(currentPlacename!=nil)
@@ -245,14 +245,14 @@
 }
 -(BOOL)geoencode:(NSString*)toEncode {
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
-	if(req!=nil) return NO;
+	//if(req!=nil) return NO;
 	
 
 	
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
 	NSLog(@"Using %@ language",lang);
-	NSString* encURL=[GeoEncoder urlencode:toEncode encoding:@"utf8"];
+	NSString* encURL=[DirectionsController urlencode:toEncode encoding:@"utf8"];
 	
 	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&q=%@&hl=%@",encURL,lang];
 	NSLog(@"Getting geoencode at %@",urlT);
@@ -279,7 +279,7 @@
 		// receivedData is declared as a method instance elsewhere
 		resultData=[[NSMutableData data] retain];
 		parsingPlace=NO;
-		req=[toEncode retain];
+		//req=[toEncode retain];
 		currentPlacename=nil;
 		currentPos=nil;
 		currentProp=nil;

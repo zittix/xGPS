@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TileDB.h"
+#import "DirectionsController.h"
 #import "GPSManager.h"
 
 #define kSettingsCurrentGPS @"gpsinuse"
@@ -23,6 +24,7 @@
 #define kSettingsDBVersion @"dbversion"
 #define kSettingsMapRotation @"maprotation"
 #define kSettingsGPSLog @"gpslog"
+#define kSettingsSpeedUnit @"speedunit"
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
@@ -32,7 +34,9 @@
 +(TileDB*)tiledb;
 +(GPSManager*)gpsmanager;
 +(xGPSAppDelegate*)appdelegate;
++(xGPSAppDelegate*)appdelegate;
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
 @property (nonatomic, retain,readonly,getter=tiledb) TileDB* tiledb;
+@property (nonatomic, retain,readonly,getter=directions) DirectionsController* directions;
 @end

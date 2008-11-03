@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Position.h"
-@protocol GeoEncoderDelegate
+@protocol ADirectionsControllerDelegate
 -(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req error:(NSError*)err;
 
 @end
-@interface GeoEncoderResult : NSObject
+@interface AGeoEncoderResult : NSObject
 {
 	NSString *name;
 	PositionObj* pos;
@@ -21,12 +21,13 @@
 @property (nonatomic,retain) NSString* name;
 @property (nonatomic,retain) NSString* addr;
 @property (nonatomic,retain) PositionObj* pos;
-+(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr;
++(AGeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr;
 @end
 
 
-@interface GeoEncoder : NSObject {
-	NSString *req;
+@interface DirectionsController : NSObject {
+	NSString *from;
+	NSString *to;
 	id delegate;
 	NSMutableDictionary* result;
 	NSString *currentPlacename;
@@ -34,6 +35,7 @@
 	NSString *currentAddr;
 	BOOL parsingPlace;
 	NSMutableString *currentProp;
+	NSString * req;
 	NSMutableData *resultData;
 }
 @property (nonatomic,assign) id delegate;

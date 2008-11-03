@@ -7,10 +7,11 @@
 //
 
 #import "SpeedView.h"
-
+#import "xGPSAppDelegate.h"
 @implementation SpeedView
 -(id) initWithFrame:(CGRect)f {
 	if((self = [super initWithFrame:f])) {
+		miles=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
 		NSString* imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"speed.png"];
 		NSData *noTileImg = [NSData dataWithContentsOfFile:imageFileName];
 		speedbgd=[[MapTile alloc] initWithData: noTileImg];
@@ -27,12 +28,25 @@
 		lblunit.textAlignment=UITextAlignmentCenter;
 		lblunit.adjustsFontSizeToFitWidth=YES;
 		lblunit.font=[UIFont fontWithName:@"Helvetica" size:12];
+		if(miles)
+		lblunit.text=@"mph";
+			else
 		lblunit.text=@"km/h";
 
 		[self addSubview:lblspeed];
 		[self addSubview:lblunit];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unitChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	}
 	return self;
+}
+-(void)unitChanged:(NSNotification *)notif {
+	miles=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
+	lblspeed.text=@"0";
+	_speed=0;
+	if(miles)
+		lblunit.text=@"mph";
+	else
+		lblunit.text=@"km/h";
 }
 -(void)dealloc {
 	[speedbgd release];
@@ -43,6 +57,9 @@
 
 
 -(void)setSpeed:(float)speed {
+	//1 mph = 1.609 km/h
+	if(miles)
+		speed*=0.62150404f;
 	_speed=speed;
 	lblspeed.text=[NSString stringWithFormat:@"%.0f",speed];
 }

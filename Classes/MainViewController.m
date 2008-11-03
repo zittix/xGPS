@@ -194,20 +194,17 @@
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 -(void)gpsEnableBtnPressed:(id)sender {
-	
+	BOOL wasEnabled=NO;
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled && btnEnableGPS.style!=UIBarButtonItemStyleDone) {
-		NSLog(@"Enabled et pas done");
 		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] DisableGPS];
 		btnEnableGPS.style=UIBarButtonItemStyleBordered;
 		[mapview setGPSTracking:NO];
+		wasEnabled=YES;
 	}
 	else if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled && btnEnableGPS.style==UIBarButtonItemStyleDone){
 		btnEnableGPS.style=UIBarButtonItemStyleBordered;
-		NSLog(@"Enabled et done");
 		[mapview setGPSTracking:NO];
-		
 	} else {
-			NSLog(@"Disabled");
 			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
 			btnEnableGPS.style=UIBarButtonItemStyleDone;
 			[mapview setGPSTracking:YES];
@@ -217,7 +214,10 @@
 		[self showSpeed];
 
 		[mapview setHasGPSPos:YES];
-
+		if(wasEnabled) {
+			btnEnableGPS.style=UIBarButtonItemStyleDone;
+			[mapview setGPSTracking:YES];
+		}
 	} else{
 		[mapview setHasGPSPos:NO];
 		[mapview refreshMap];

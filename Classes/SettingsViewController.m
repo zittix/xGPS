@@ -57,7 +57,7 @@
 		case 0: return 7;
 		case 1: return 4;
 		case 2: return 1;
-		case 3: return 3;
+		case 3: return 4;
 		default: return 0;
 	}
 }
@@ -95,6 +95,10 @@
 -(void)switchRotationChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:!sender.on forKey:kSettingsMapRotation];
 }
+-(void)switchUnit:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSpeedUnit];
+}
+
 -(void)switchGPSLoggingChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsGPSLog];
 	if(sender.on)
@@ -132,6 +136,7 @@
 				case 0:	id=@"sectGen_about"; break;
 				case 1:	id=@"sectGen_ver"; break;
 				case 2:	id=@"sectGen_Idle"; break;
+				case 3: id=@"sectGen_speedunit"; break;
 			}break;
 		}
 	}
@@ -433,6 +438,19 @@
 						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
 						[cell.contentView addSubview:value];
 						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode];
+						//[value release];
+						
+					}break;
+					case 3: {
+						cell.text=NSLocalizedString(@"Use Miles unit",@"Use Miles unit");
+						UISwitch *value;
+						
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+						value.tag = 1;
+						[value addTarget:self action:@selector(switchUnit:) forControlEvents:UIControlEventValueChanged];
+						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						[cell.contentView addSubview:value];
+						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
 						//[value release];
 						
 					}break;
