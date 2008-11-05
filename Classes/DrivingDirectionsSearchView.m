@@ -7,7 +7,7 @@
 //
 
 #import "DrivingDirectionsSearchView.h"
-
+#import "xGPSAppDelegate.h"
 
 @implementation DrivingDirectionsSearchView
 
@@ -47,10 +47,16 @@
 - (void)dealloc {
     [super dealloc];
 }
--(void)drive {
-
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar_ {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+	if(![APPDELEGATE.directions drive:from.text to:to.text]) {
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the required information from the server: %@",@"Network error message"),NSLocalizedString(@"Unknown error",@"Unknown error")] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		[alert show];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+		return;
+	}
+	[searchBar_ resignFirstResponder];
 }
-
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {
 	ABPeoplePickerNavigationController *picker =
 	[[ABPeoplePickerNavigationController alloc] init];
@@ -61,8 +67,8 @@
     [picker release];
 }
 - (void)didMoveToSuperview {
-	from.text=@"";
-	to.text=@"";
+	from.text=@"Ch. du Marais 9 1031 Mex";
+	to.text=@"Ch. de la Raisse 77 1040 Echallens";
 
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -95,7 +101,7 @@
 	if(bookmarkClicked==from)
 		[to becomeFirstResponder];
 	else
-		[self drive];
+		[self searchBarBookmarkButtonClicked:to];
 	
 	bookmarkClicked=nil;
 	

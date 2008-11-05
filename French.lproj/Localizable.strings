@@ -36,6 +36,8 @@
 
 "Error" = "Erreur";
 
+"From / Departure" = "Depuis / Départ";
+
 "General" = "Général";
 
 "GPS Device" = "GPS";
@@ -44,10 +46,12 @@
 
 "GPS to use" = "GPS à utiliser";
 
+"GPX Logging" = "Traçage GPX";
+
 "Hybrid" = "Hybride";
 
 "Language" = "Langue";
-"GPX Logging" = "Traçage GPX";
+
 "License checking" = "Vérification license";
 
 "License number" = "Numéro de license";
@@ -108,11 +112,15 @@
 
 "This feature will be implemented in a future version." = "Cette fonctionnalité sera disponible dans une future version.";
 
+"To / Destination" = "A / Destination";
+
 "Unable to open the serial port. Make sure that no other GPS software is running in background." = "Impossible d'ouvrir le port série. Veuillez vérifier qu'aucun autre logiciel de GPS ne tourne en arrière-plan.";
 
 "Unable to retrieve the required information from the server: %@" = "Impossible d'obtenir les informations requises: %@";
 
 "Unknown error" = "Erreur inconnue";
+
+"Use Miles unit" = "Utiliser les Miles";
 
 "Verifying license number..." = "Vérification du numéro de license...";
 

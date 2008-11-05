@@ -8,36 +8,38 @@
 
 #import <UIKit/UIKit.h>
 #import "Position.h"
-@protocol ADirectionsControllerDelegate
+@protocol DirectionsControllerDelegate
 -(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req error:(NSError*)err;
 
 @end
-@interface AGeoEncoderResult : NSObject
+@interface Instruction : NSObject
 {
 	NSString *name;
+	NSString *descr;
 	PositionObj* pos;
-	NSString *addr;
 }
 @property (nonatomic,retain) NSString* name;
-@property (nonatomic,retain) NSString* addr;
+@property (nonatomic,retain) NSString* descr;
 @property (nonatomic,retain) PositionObj* pos;
-+(AGeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr;
++(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr;
 @end
 
 
 @interface DirectionsController : NSObject {
-	NSString *from;
-	NSString *to;
+	NSString *_from;
+	NSString *_to;
 	id delegate;
-	NSMutableDictionary* result;
+	NSMutableDictionary* instructions;
+	NSMutableArray* roadPoints;
 	NSString *currentPlacename;
 	NSString *currentPos;
-	NSString *currentAddr;
+	NSString *currentDescr;
 	BOOL parsingPlace;
 	NSMutableString *currentProp;
-	NSString * req;
 	NSMutableData *resultData;
+	BOOL computing;
+	BOOL parsingLinestring;
 }
 @property (nonatomic,assign) id delegate;
--(BOOL)geoencode:(NSString*)toEncode;
+-(BOOL)drive:(NSString*)from to:(NSString*)to;
 @end

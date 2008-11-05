@@ -61,16 +61,13 @@
 		
 		float d=[self distanceBetween:p and:lastPos];
 		if(d>4) {
-			//	float header=fmod(atan2(sin(DEG2RAD(p.y-lastPos.y))*cos(DEG2RAD(p.x)),cos(DEG2RAD(lastPos.x))*sin(DEG2RAD(p.x))-sin(DEG2RAD(lastPos.x))*cos(DEG2RAD(p.x))*cos(DEG2RAD(p.y-lastPos.y))),2*M_PI);
 			float lat1=lastPos.x*M_PI/180.0;
 			float lat2=p.x*M_PI/180.0;
 			float lon2=p.y*M_PI/180.0;
 			float lon1=lastPos.y*M_PI/180.0;
-			//float dLat = (lat2-lat1);
 			float dLon = (lon2-lon1);
-			float y = sin(dLon) * cos(lat2);
-			float x = cos(lat1)*sin(lat2) -
-			sin(lat1)*cos(lat2)*cos(dLon);
+			float y = sin(dLon) *cos(lat2);
+			float x = cos(lat1)*sin(lat2) - sin(lat1)*cos(lat2)*cos(dLon);
 			float brng = atan2(y, x);
 			gpsHeading=(brng);
 			//NSLog(@"Heading: %f",brng*180.0/M_PI);

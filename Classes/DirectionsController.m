@@ -11,16 +11,22 @@
 #import "xGPSAppDelegate.h"
 
 
-@implementation AGeoEncoderResult
+@implementation Instruction
 @synthesize name;
 @synthesize pos;
-@synthesize addr;
-+(AGeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr{
-	AGeoEncoderResult*r=[[AGeoEncoderResult alloc] init];
+@synthesize descr;
++(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr {
+	Instruction*r=[[Instruction alloc] init];
 	r.pos=pos;
 	r.name=name;
-	r.addr=addr;
+	r.descr=descr;
 	return [r autorelease];
+}
+-(void)dealloc {
+	[pos release];
+	[name release];
+	[descr release];
+	[super dealloc];
 }
 @end
 
@@ -41,7 +47,8 @@
 	//return url;
 }
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-	result=[[NSMutableDictionary alloc] initWithCapacity:5];
+	instructions=[[NSMutableDictionary alloc] initWithCapacity:5];
+	roadPoints=[[NSMutableArray alloc] initWithCapacity:5];
 	NSLog(@"Parser start...");
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
@@ -52,20 +59,20 @@
 	if([elementName isEqualToString:@"name"] && parsingPlace==YES && currentPlacename==nil) {
 		currentProp=[[NSMutableString alloc] init];
 	}
-	if([elementName isEqualToString:@"address"] && parsingPlace==YES && currentAddr==nil) {
+	if([elementName isEqualToString:@"description"] && parsingPlace==YES && currentDescr==nil) {
 		currentProp=[[NSMutableString alloc] init];
 	}
-	if([elementName isEqualToString:@"Snippet"] && parsingPlace==YES && currentAddr==nil) {
+	if([elementName isEqualToString:@"coordinates"] && ((parsingPlace==YES && currentPos==nil) || (parsingLinestring==YES))) {
 		currentProp=[[NSMutableString alloc] init];
 	}
-	if([elementName isEqualToString:@"coordinates"] && parsingPlace==YES && currentPos==nil) {
-		currentProp=[[NSMutableString alloc] init];
+	if([elementName isEqualToString:@"LineString"] && !parsingLinestring && parsingPlace==YES) {
+		parsingLinestring=YES;
 	}
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	if([elementName isEqualToString:@"Placemark"]) {
-		if( parsingPlace && currentPlacename!=nil && currentPos!=nil) {
+		if( parsingPlace && currentPlacename!=nil && currentPos!=nil && !parsingLinestring) {
 			NSArray *p_arr=[currentPos componentsSeparatedByString:@","];
 			
 			if([p_arr count]==3) {
@@ -73,48 +80,60 @@
 				float lat=[[p_arr objectAtIndex:1] floatValue];
 				PositionObj *p=[PositionObj positionWithX:lat y:lon];
 				
-				if(currentAddr!=nil) {
-					NSMutableString *tmp=(NSMutableString*)currentAddr;
+				if(currentDescr!=nil) {
+					NSMutableString *tmp=(NSMutableString*)currentDescr;
 					[tmp replaceOccurrencesOfString:@"<br/>" withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
 				}
 				
-				AGeoEncoderResult *r=[AGeoEncoderResult resultWithName:currentPlacename pos:p addr:currentAddr];
-				NSString *key=[NSString stringWithFormat:@"%d",[result count]];
-				[result setObject:r forKey:key];
+				Instruction *r=[Instruction instrWithName:currentPlacename pos:p descr:currentDescr];
+				NSString *key=[NSString stringWithFormat:@"%d",[instructions count]];
+				[instructions setObject:r forKey:key];
 			}
+		} else if(parsingLinestring) {
+			
 		} else {
 			NSLog(@"Invalid placemark");
 		}
-		if(currentPlacename!=nil)
-			[currentPlacename release];
+		[currentPlacename release];
 		currentPlacename=nil;
-		if(currentPos!=nil)
-			[currentPos release];
-		if(currentAddr!=nil)
-			[currentAddr release];
-		currentAddr=nil;
+		[currentPos release];
+		
+		[currentDescr release];
+		currentDescr=nil;
 		currentPos=nil;
 		parsingPlace=NO;
-		if(currentProp!=nil)
-			[currentProp release];
+			parsingLinestring=NO;
+		[currentProp release];
 		currentProp=nil;
 	}
 	if([elementName isEqualToString:@"name"] && parsingPlace==YES && currentPlacename==nil) {
 		currentPlacename=currentProp;
 		currentProp=nil;
 	}
-	if([elementName isEqualToString:@"address"] && parsingPlace==YES && currentAddr==nil) {
-		NSLog(@"Found Address");
-		currentAddr=currentProp;
+	if([elementName isEqualToString:@"description"] && parsingPlace==YES && currentDescr==nil) {
+		currentDescr=currentProp;
 		currentProp=nil;
 	}
-	if([elementName isEqualToString:@"Snippet"] && parsingPlace==YES && currentAddr==nil) {
-		NSLog(@"Found Snippet");
-		currentAddr=currentProp;
-		currentProp=nil;
-	}
-	if([elementName isEqualToString:@"coordinates"] && parsingPlace==YES && currentPos==nil) {
+	if([elementName isEqualToString:@"coordinates"] && !parsingLinestring && parsingPlace==YES && currentPos==nil) {
 		currentPos=currentProp;
+		currentProp=nil;
+	}
+	if([elementName isEqualToString:@"coordinates"] && parsingLinestring && parsingPlace==YES) {
+		[roadPoints removeAllObjects];
+		
+		NSArray *p_arr=[currentProp componentsSeparatedByString:@" "];
+		for(NSString* prop in p_arr) {
+			NSArray *p_arr2=[prop componentsSeparatedByString:@","];
+			if([p_arr2 count]==3) {
+				float lon=[[p_arr2 objectAtIndex:0] floatValue];
+				float lat=[[p_arr2 objectAtIndex:1] floatValue];
+				PositionObj *p=[PositionObj positionWithX:lat y:lon];
+
+				[roadPoints addObject:p];
+			}
+		}
+
+		[currentProp release];
 		currentProp=nil;
 	}
 }
@@ -124,49 +143,52 @@
     }
 }
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-	NSLog(@"End geocode ok with %d results",[result count]);
+	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
 	//if(req==nil) return;
-	[delegate geoEncodeGot:[result autorelease] forRequest:[req autorelease] error:nil];
-	result=nil;
-	req=nil;
-	if(currentPlacename!=nil)
-		[currentPlacename release];
-	currentPlacename=nil;
-	if(currentPos!=nil)
-		[currentPos release];
+	//[delegate geoEncodeGot:[result autorelease] forRequest:[req autorelease] error:nil];
+	instructions=nil;
 	
-	if(currentProp!=nil)
-		[currentProp release];
-	if(currentAddr!=nil)
-		[currentAddr release];
-	currentAddr=nil;
+	
+	[currentPlacename release];
+	currentPlacename=nil;
+	
+	[currentPos release];
+	
+	
+	[currentProp release];
+	
+	[currentDescr release];
+	currentDescr=nil;
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
+	computing=NO;
+	parsingLinestring=NO;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Parse error from delegate");
 	//if(req==nil) return;
 	
-	[delegate geoEncodeGot:result forRequest:req  error:nil];
-	result=nil;
-	req=nil;
-	if(currentPlacename!=nil)
-		[currentPlacename release];
+	//[delegate geoEncodeGot:result forRequest:req  error:nil];
+	instructions=nil;
+	
+	
+	[currentPlacename release];
 	currentPlacename=nil;
-	if(currentPos!=nil)
-		[currentPos release];
-	if(currentAddr!=nil)
-		[currentAddr release];
-	currentAddr=nil;
-	if(currentProp!=nil)
-		[currentProp release];
+	
+	[currentPos release];
+	
+	[currentDescr release];
+	currentDescr=nil;
+	
+	[currentProp release];
 	
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
-	
+	computing=NO;
+	parsingLinestring=NO;
 }
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
@@ -184,22 +206,19 @@
 	//if(req==nil) return;
 	
 	//[delegate geoEncodeGot:result forRequest:req  error:error];
-	result=nil;
-	req=nil;
-	if(currentPlacename!=nil)
-		[currentPlacename release];
-	currentPlacename=nil;
-	if(currentPos!=nil)
-		[currentPos release];
+	instructions=nil;
 	
-	if(currentProp!=nil)
-		[currentProp release];
-	if(currentAddr!=nil)
-		[currentAddr release];
-	currentAddr=nil;
+	[currentPlacename release];
+	currentPlacename=nil;
+	[currentPos release];
+	[currentProp release];
+	[currentDescr release];
+	currentDescr=nil;
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
+	computing=NO;
+	parsingLinestring=NO;
 }	
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -222,54 +241,67 @@
     // do something with the data
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[resultData length]);
-
+	
 	NSXMLParser *xmlParser=[[NSXMLParser alloc] initWithData:resultData];
 	[xmlParser setShouldProcessNamespaces:NO];
 	[xmlParser setShouldReportNamespacePrefixes:NO];
 	[xmlParser setShouldResolveExternalEntities:NO];
-		
+	
 	if(xmlParser==nil) {
+		computing=NO;
 		NSLog(@"Parsing error");
 	} else {
 		xmlParser.delegate=self;
 		if(![xmlParser parse]) {
+			computing=NO;
 			NSLog(@"Parsing error 2");
 		}
-		//[dataR release];
 		[xmlParser release];
 	}
-
+	
     // release the connection, and the data object
     [connection release];
     [resultData release];
 }
--(BOOL)geoencode:(NSString*)toEncode {
+-(BOOL)drive:(NSString*)from to:(NSString*)to {
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
-	//if(req!=nil) return NO;
 	
-
+	if(computing) return NO;
+	
+	_from=[from retain];
+	_to=[to retain];
 	
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
 	NSLog(@"Using %@ language",lang);
-	NSString* encURL=[DirectionsController urlencode:toEncode encoding:@"utf8"];
 	
-	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&q=%@&hl=%@",encURL,lang];
-	NSLog(@"Getting geoencode at %@",urlT);
+	NSString* fromE=[DirectionsController urlencode:from encoding:@"utf8"];
+	NSString* toE=[DirectionsController urlencode:to encoding:@"utf8"];
+	
+	NSString *unit;
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit])
+		unit=@"ptm";
+	else
+		unit=@"ptk";
+	
+	
+	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&hl=%@&saddr=%@&daddr=%@&doflg=%@",lang,fromE,toE,unit];
+	
+	NSLog(@"Getting directions at %@",urlT);
 	
 	NSURL *url = [NSURL URLWithString:urlT];
 	
-	//NSMutableURLRequest *urlReq=[NSMutableURLRequest requestWithURL:url];
-
-	
-	//[urlReq setValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" forHTTPHeaderField:@"User-Agent"];
-	//[urlReq setValue:@"image/png,image/*;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
-	//[urlReq setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
 	
 	// create the request
-	NSURLRequest *theRequest=[NSMutableURLRequest requestWithURL:url
-											  cachePolicy:NSURLRequestUseProtocolCachePolicy
-										  timeoutInterval:30.0];
+	NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:url
+															cachePolicy:NSURLRequestUseProtocolCachePolicy
+														timeoutInterval:30.0];
+	
+	[theRequest setValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" forHTTPHeaderField:@"User-Agent"];
+	[theRequest setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
+	
+	
+	
 	// create the connection with the request
 	// and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -283,11 +315,13 @@
 		currentPlacename=nil;
 		currentPos=nil;
 		currentProp=nil;
-		currentAddr=nil;
+		currentDescr=nil;
+		parsingLinestring=NO;
 		return YES;
 	} else {
 		// inform the user that the download could not be made
 		return NO;
 	}
+	
 }
 @end

@@ -276,11 +276,13 @@
 			
 			//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 			//[alert show];
+			//return;
 			[UIView beginAnimations:nil context:nil];
 			[self.view addSubview:drivingSearchView];
 			self.navigationController.navigationBarHidden=NO;
 			self.navigationItem.title=NSLocalizedString(@"Driving Directions",@"");
 			self.navigationItem.rightBarButtonItem=cancelSearch;
+			[mapview refreshMap];
 			[UIView commitAnimations];
 
 		}break;
