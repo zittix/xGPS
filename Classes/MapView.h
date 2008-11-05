@@ -26,7 +26,7 @@
 	CGPoint lastDragPoint;
 	int zoom;
 	float prevDist;
-	float dynTileSize;
+
 	MapTile* imgPinRef;
 	MapTile* imgPinSearch;
 	MapTile* imgGoogleLogo;
@@ -34,7 +34,6 @@
 	CGPoint drawOrigin;
 	MapTile* tileNoMap;
 	BOOL passDoubleFingersEvent;
-	NSMutableArray *lines;
 	int direction;
 	PositionObj *posSearch;
 	//UITouch *lastTouch;
@@ -48,6 +47,7 @@
 @property(retain,nonatomic) PositionObj *pos;
 @property(nonatomic) BOOL mapRotationEnabled;
 -(void)refreshMap;
+-(void)computeCachedRoad;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)tileDownloaded;
 -(void)setGPSTracking:(BOOL)val;

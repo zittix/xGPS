@@ -53,6 +53,7 @@
 	gps_data.fix.latitude=pos.x;
 	gps_data.fix.longitude=pos.y;
 	gps_data.fix.altitude=500;
+	gps_data.fix.mode=3;
 	chMsg.state=POS;
 #ifdef USE_UI
 	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
@@ -66,8 +67,6 @@
 	
 	//Update signal quality
 	signalQuality=100;
-	
-	if(signalQuality<0) signalQuality=0;
 	
 	chMsg.state=SIGNAL_QUALITY;
 	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];

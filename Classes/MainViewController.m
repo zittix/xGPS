@@ -17,12 +17,13 @@
 @synthesize tiledb;
 -(id)init {
 	if((self=[super init])) {
-	//NSLog(@"MainView controller init...");
-	tiledb=[xGPSAppDelegate tiledb];
-	gpsPos=[[PositionObj alloc] init];
-	[[xGPSAppDelegate gpsmanager] setDelegate:self];
+		NSLog(@"MainView controller init...");
+		tiledb=[xGPSAppDelegate tiledb];
+		gpsPos=[[PositionObj alloc] init];
+		[[xGPSAppDelegate gpsmanager] setDelegate:self];
+
 	}
-		return self;
+	return self;
 }
 - (void)loadView {
 	//NSLog(@"MainView controller loadView...");
@@ -31,16 +32,16 @@
 	//Set the View to a UIView
 	viewRect=[[UIScreen mainScreen] applicationFrame];
 	viewRect.size.height=viewRect.size.height-44.0f;
-
+	
 	self.view=[[UIView alloc] initWithFrame:viewRect];
-		
+	
 	//self.navigationController.navigationBarHidden=YES;
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight ;
 	self.view.autoresizesSubviews=YES;
-
+	
 	
 	//Inside the view:
-
+	
 	//self.view.backgroundColor=[UIColor blueColor];
 	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height-44.0) withDB:tiledb];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -49,7 +50,7 @@
 	[self.view addSubview:zoomview];
 	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-95.0f-2.0f-44.0f,92.0f,100.0f)];
 	[speedview setSpeed:0];
-
+	
 	//[self.view addSubview:speedview];
 	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0f,viewRect.size.width,44.0f)];
@@ -66,11 +67,11 @@
 	NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
 	[toolbar setItems:btn animated:YES];	
 	//92x100
-		settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
-		searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
-		searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
+	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
+	searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	searchPlacesView.autoresizesSubviews=YES;
-
+	
 	drivingSearchView=[[DrivingDirectionsSearchView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController andMap:mapview];
 	drivingSearchView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	drivingSearchView.autoresizesSubviews=YES;
@@ -117,14 +118,14 @@
 	self.title=NSLocalizedString(@"Map","Map");
 	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
 	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].y forKey:kSettingsLastPosY];
-
+	
 }
 -(void)viewWillAppear:(BOOL)animated {
 	if(!directionSearch)
-	self.title=@"xGPS";
+		self.title=@"xGPS";
 	else
-	self.title=NSLocalizedString(@"Driving Directions",@"");
-
+		self.title=NSLocalizedString(@"Driving Directions",@"");
+	
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense) {
 		NSArray *btn=[NSArray arrayWithObjects:btnEnableGPS,space1,btnSearch,space2,btnSettings,nil];
 		[toolbar setItems:btn animated:YES];	
@@ -150,10 +151,10 @@
 	if(![[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsConditionsUse] isEqualToString:vSettingsConditionsUse]) {
 		[[NSUserDefaults standardUserDefaults] setObject:vSettingsConditionsUse forKey:kSettingsConditionsUse];
 		
-	if(licenseView==nil) {
-		licenseView=[[LicenseViewController alloc] init];
-	}
-	[self presentModalViewController:licenseView animated:YES];
+		if(licenseView==nil) {
+			licenseView=[[LicenseViewController alloc] init];
+		}
+		[self presentModalViewController:licenseView animated:YES];
 	}
 	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosY]];
 	if(p.x==0.0f && p.y==0.0f) {
@@ -168,11 +169,11 @@
 }
 - (void)viewDidAppear:(BOOL)animated {
 	if(!directionSearch)
-	[self.navigationController setNavigationBarHidden:YES animated:YES];
+		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
 	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
 	//NSLog(@"CENTER size: %f %f of view",self.view.center.x,self.view.center.y);
-
+	
 	//[UIView beginAnimations:nil context:nil];	
 	//[UIView setAnimationDidStopSelector:@selector(endRotation:::)];
 	//float sx=self.view.frame.size.width/mapview.frame.size.height;
@@ -181,7 +182,7 @@
 	//mapview.transform=CGAffineTransformMakeRotation(M_PI/2.0);
 	//mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0);
 	//[UIView commitAnimations];
-
+	
 	[super viewDidAppear:animated];
 }
 -(void) endRotation:(NSString*)animationID finished:(BOOL)finished context:(NSString*)context {
@@ -189,7 +190,7 @@
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	if(!directionSearch)
-	[self.navigationController setNavigationBarHidden:YES animated:YES];
+		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
@@ -205,14 +206,14 @@
 		btnEnableGPS.style=UIBarButtonItemStyleBordered;
 		[mapview setGPSTracking:NO];
 	} else {
-			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
-			btnEnableGPS.style=UIBarButtonItemStyleDone;
-			[mapview setGPSTracking:YES];
+		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
+		btnEnableGPS.style=UIBarButtonItemStyleDone;
+		[mapview setGPSTracking:YES];
 	}
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 		btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
 		[self showSpeed];
-
+		
 		[mapview setHasGPSPos:YES];
 		if(wasEnabled) {
 			btnEnableGPS.style=UIBarButtonItemStyleDone;
@@ -255,7 +256,7 @@
 -(void)cancelDrivingSearch:(id)sender {
 	[UIView beginAnimations:nil context:nil];	
 	[drivingSearchView removeFromSuperview];
-	
+	[mapview refreshMap];
 	self.navigationItem.title=@"xGPS";
 	self.navigationItem.rightBarButtonItem=nil;
 	[UIView commitAnimations];
@@ -284,9 +285,40 @@
 			self.navigationItem.rightBarButtonItem=cancelSearch;
 			[mapview refreshMap];
 			[UIView commitAnimations];
-
+			
 		}break;
 	}
+}
+-(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
+	if(err==nil) {
+		
+		//Search the first instruction
+		if([APPDELEGATE.directions.instructions count]>0) {
+			Instruction *p=[APPDELEGATE.directions.instructions objectAtIndex:0];
+			mapview.pos.x=p.pos.x;
+			mapview.pos.y=p.pos.y;
+		
+		[UIView beginAnimations:nil context:nil];	
+		[drivingSearchView removeFromSuperview];
+		
+		self.navigationItem.title=@"xGPS";
+		self.navigationItem.rightBarButtonItem=nil;
+		[UIView commitAnimations];
+		directionSearch=NO;
+		[mapview computeCachedRoad];
+		[self.navigationController setNavigationBarHidden:YES animated:YES];
+		} else {
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"No driving direction can be computed using your query.",@"No driving dir. found error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+			[drivingSearchView setEdit];
+		}
+	}
+	else {
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions ∫from the server: %@",@"Network error message"),[err localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		[alert show];
+		[drivingSearchView setEdit];
+	}
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 }
 - (void)gpsChanged:(ChangedState*)msg {
 	//NSLog(@"Receiving change for state: %@",[ChangedState stringForState:msg.state]);
@@ -304,7 +336,7 @@
 				[signalView setQuality:0];
 				[self hideSpeed];
 			}
-
+			
 			break;
 		case POS: {
 			if(gpsPos==nil) return;
@@ -320,7 +352,7 @@
 			//TODO: settings based
 			speedms*=3.6f;
 			if(speedms>3)
-			[speedview setSpeed:speedms];
+				[speedview setSpeed:speedms];
 		}break;
 		case STATE_CHANGE:
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
@@ -347,7 +379,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	// Return YES for supported orientations
 	//return (interfaceOrientation == UIInterfaceOrientationPortrait);
-
+	
 	return YES;
 }
 

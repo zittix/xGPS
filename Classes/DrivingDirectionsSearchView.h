@@ -11,7 +11,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MapView.h"
-@interface DrivingDirectionsSearchView : UIView<ABPeoplePickerNavigationControllerDelegate,UISearchBarDelegate> {
+@interface DrivingDirectionsSearchView : UIView<ABPeoplePickerNavigationControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate> {
 	UIViewController* controller;
 	MapView *map;
 	float keyboardHeight;
@@ -22,4 +22,5 @@
 	UISearchBar *bookmarkClicked;
 }
 - (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)map;
+-(void)setEdit;
 @end

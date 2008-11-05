@@ -34,7 +34,8 @@
 
 @implementation DirectionsController
 @synthesize delegate;
-
+@synthesize roadPoints;
+@synthesize instructions;
 + (NSString *) urlencode: (NSString *) url encoding:(NSString*)enc
 {
 	CFStringEncoding cEnc= kCFStringEncodingUTF8;
@@ -47,7 +48,7 @@
 	//return url;
 }
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-	instructions=[[NSMutableDictionary alloc] initWithCapacity:5];
+	instructions=[[NSMutableArray alloc] initWithCapacity:5];
 	roadPoints=[[NSMutableArray alloc] initWithCapacity:5];
 	NSLog(@"Parser start...");
 }
@@ -86,8 +87,8 @@
 				}
 				
 				Instruction *r=[Instruction instrWithName:currentPlacename pos:p descr:currentDescr];
-				NSString *key=[NSString stringWithFormat:@"%d",[instructions count]];
-				[instructions setObject:r forKey:key];
+
+				[instructions addObject:r];
 			}
 		} else if(parsingLinestring) {
 			
@@ -119,7 +120,7 @@
 		currentProp=nil;
 	}
 	if([elementName isEqualToString:@"coordinates"] && parsingLinestring && parsingPlace==YES) {
-		[roadPoints removeAllObjects];
+		//[roadPoints removeAllObjects];
 		
 		NSArray *p_arr=[currentProp componentsSeparatedByString:@" "];
 		for(NSString* prop in p_arr) {
@@ -128,7 +129,7 @@
 				float lon=[[p_arr2 objectAtIndex:0] floatValue];
 				float lat=[[p_arr2 objectAtIndex:1] floatValue];
 				PositionObj *p=[PositionObj positionWithX:lat y:lon];
-
+				//NSLog(@"Point %f %f",lat,lon);
 				[roadPoints addObject:p];
 			}
 		}
@@ -145,7 +146,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
 	//if(req==nil) return;
-	//[delegate geoEncodeGot:[result autorelease] forRequest:[req autorelease] error:nil];
+	[delegate directionsGot:_from to:_to  error:nil];
 	instructions=nil;
 	
 	
@@ -170,7 +171,7 @@
 	NSLog(@"Parse error from delegate");
 	//if(req==nil) return;
 	
-	//[delegate geoEncodeGot:result forRequest:req  error:nil];
+	[delegate directionsGot:_from to:_to  error:parseError];
 	instructions=nil;
 	
 	
@@ -204,8 +205,9 @@
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	
 	//if(req==nil) return;
-	
-	//[delegate geoEncodeGot:result forRequest:req  error:error];
+
+	[delegate directionsGot:_from to:_to  error:error];
+
 	instructions=nil;
 	
 	[currentPlacename release];
@@ -241,7 +243,7 @@
     // do something with the data
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[resultData length]);
-	
+	if([resultData length]>0) {
 	NSXMLParser *xmlParser=[[NSXMLParser alloc] initWithData:resultData];
 	[xmlParser setShouldProcessNamespaces:NO];
 	[xmlParser setShouldReportNamespacePrefixes:NO];
@@ -258,7 +260,10 @@
 		}
 		[xmlParser release];
 	}
-	
+	} else {
+		computing=NO;
+		[delegate directionsGot:_from to:_to  error:nil];
+	}
     // release the connection, and the data object
     [connection release];
     [resultData release];

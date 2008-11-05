@@ -12,9 +12,17 @@
 {
 	float x;
 	float y;
+	int tileX;
+	int tileY;
+	int xoff;
+	int yoff;
 }
 @property (nonatomic) float x;
 @property (nonatomic) float y;
+@property (nonatomic) int yoff;
+@property (nonatomic) int xoff;
+@property (nonatomic) int tileX;
+@property (nonatomic) int tileY;
 +(PositionObj*)positionWithX:(float)x y:(float)y;
 @end
 

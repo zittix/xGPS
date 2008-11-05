@@ -38,12 +38,14 @@
 		[bigbar addSubview:from];
 		[bigbar addSubview:to];
 		bookmarkClicked=nil;
-	
+		
 		[self addSubview:bigbar];
 	}
     return self;
 }
-
+-(void)setEdit {
+	[from becomeFirstResponder];	
+}
 - (void)dealloc {
     [super dealloc];
 }
@@ -58,22 +60,54 @@
 	[searchBar_ resignFirstResponder];
 }
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {
-	ABPeoplePickerNavigationController *picker =
-	[[ABPeoplePickerNavigationController alloc] init];
-    picker.peoplePickerDelegate = self;
+
 	bookmarkClicked=searchBar;
-	picker.displayedProperties=[NSArray arrayWithObject:[NSNumber numberWithInt: kABPersonAddressProperty]];
-    [controller presentModalViewController:picker animated:YES];
-    [picker release];
+	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Take position from:",@"Directions") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Address book",@""),NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS"),nil];
+	[action showInView:[self superview]];
 }
 - (void)didMoveToSuperview {
 	from.text=@"Ch. du Marais 9 1031 Mex";
-	to.text=@"Ch. de la Raisse 77 1040 Echallens";
-
+	to.text=@"Zermatt";
+	
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	[from becomeFirstResponder];
 }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	//0 cities,1 directions,2 cancel
+	switch(buttonIndex) {
+		case 0: {
+			ABPeoplePickerNavigationController *picker =
+			[[ABPeoplePickerNavigationController alloc] init];
+			picker.peoplePickerDelegate = self;
+			picker.displayedProperties=[NSArray arrayWithObject:[NSNumber numberWithInt: kABPersonAddressProperty]];
+			[controller presentModalViewController:picker animated:YES];
+			[picker release];			
+		}break;
+		case 1: {
+			GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
+
+			if(g.gps_data.fix.mode>1) {
+				float lat=g.gps_data.fix.latitude;
+				float lon=g.gps_data.fix.longitude;
+				char latD='N';
+				char lonD='E';
+				if(lat<0) {
+					lat*=-1;
+					latD='S';
+				}
+				if(lon<0) {
+					lon*=-1;
+					lonD='S';
+				}
+
+				//bookmarkClicked.text=[NSString stringWithFormat:@"loc:%f%c,%f%c",lat,latD,lon,lonD];
+			}
+		}break;
+	}
+}
+
 - (BOOL)peoplePickerNavigationController:
 (ABPeoplePickerNavigationController *)peoplePicker
       shouldContinueAfterSelectingPerson:(ABRecordRef)person
@@ -94,14 +128,14 @@
 		out=[NSString stringWithFormat:@"%@%@ ",out,[dic objectForKey:(NSString*)kABPersonAddressZIPKey]];
 	if([dic objectForKey:(NSString*)kABPersonAddressCountryKey]!=nil)
 		out=[NSString stringWithFormat:@"%@%@",out,[dic objectForKey:(NSString*)kABPersonAddressCountryKey]];
-
+	
 	
 	bookmarkClicked.text=out;
 	
 	if(bookmarkClicked==from)
 		[to becomeFirstResponder];
 	else
-		[self searchBarBookmarkButtonClicked:to];
+		[self searchBarSearchButtonClicked:to];
 	
 	bookmarkClicked=nil;
 	
@@ -109,8 +143,8 @@
 	CFRelease(multi);
 	
 	[controller dismissModalViewControllerAnimated:YES];
-
-
+	
+	
     return NO;
 }
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {

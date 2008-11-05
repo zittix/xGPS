@@ -11,7 +11,10 @@
 @implementation PositionObj
 @synthesize x;
 @synthesize y;
-
+@synthesize yoff;
+@synthesize xoff;
+@synthesize tileX;
+@synthesize tileY;
 +(PositionObj*)positionWithX:(float)x y:(float)y {
 	PositionObj *p=[[PositionObj alloc] init];
 	p.x=x;

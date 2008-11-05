@@ -195,6 +195,7 @@
 		4EE0F2D90E6AAA0100BBA3FD /* ZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomView.h; sourceTree = "<group>"; };
 		4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomView.m; sourceTree = "<group>"; };
 		4EE135690E7E63D800A5E181 /* GoogleBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleBadge.png; sourceTree = "<group>"; };
+		4EEC564F0EC1FCE00093386D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsLanguageViewController.h; sourceTree = "<group>"; };
 		4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsLanguageViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -421,6 +422,7 @@
 				Italian,
 				Dutch,
 				Hebrew,
+				zh_TW,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* xGPS */;
 			projectDirPath = "";
@@ -556,6 +558,7 @@
 				4E0F48E60E851C4B001B6F51 /* German */,
 				4E9A00920E8D4A9D0076EE44 /* Dutch */,
 				4EB3A5340E93B1FA004A643A /* Hebrew */,
+				4EEC564F0EC1FCE00093386D /* zh_TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

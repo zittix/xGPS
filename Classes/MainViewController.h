@@ -18,7 +18,8 @@
 #import "SearchPlacesView.h"
 #import "GPSSignalView.h"
 #import "DrivingDirectionsSearchView.h"
-@interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate> {
+#import "DirectionsController.h"
+@interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;
 	UIBarButtonItem* btnSettings;

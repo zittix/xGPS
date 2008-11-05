@@ -36,7 +36,7 @@ static DirectionsController* directions;
 	navController = [[UINavigationController alloc] initWithRootViewController:navControllerMain];
 	[navControllerMain release];
 	directions=[[DirectionsController alloc] init];
-	
+	directions.delegate=navControllerMain;
 	// Add the tab bar controller's current view as a subview of the window
 	[window addSubview:navController.view];
 

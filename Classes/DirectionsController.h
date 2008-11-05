@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Position.h"
 @protocol DirectionsControllerDelegate
--(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req error:(NSError*)err;
-
+-(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
 @end
 @interface Instruction : NSObject
 {
@@ -29,7 +28,7 @@
 	NSString *_from;
 	NSString *_to;
 	id delegate;
-	NSMutableDictionary* instructions;
+	NSMutableArray* instructions;
 	NSMutableArray* roadPoints;
 	NSString *currentPlacename;
 	NSString *currentPos;
@@ -40,6 +39,8 @@
 	BOOL computing;
 	BOOL parsingLinestring;
 }
-@property (nonatomic,assign) id delegate;
+@property (nonatomic,retain) id delegate;
+@property (nonatomic,readonly) NSMutableArray* roadPoints;
+@property (nonatomic,readonly) NSMutableArray* instructions;
 -(BOOL)drive:(NSString*)from to:(NSString*)to;
 @end
