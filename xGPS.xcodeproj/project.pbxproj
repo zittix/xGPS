@@ -155,6 +155,8 @@
 		4E90C0F50E8D3CD0003F6B23 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		4E90C0F60E8D3CD0003F6B23 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		4E90C0F70E8D3CD0003F6B23 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		4E917DA40EC39EE4005ACCA9 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = zh_TW; path = zh_TW.lproj/about.html; sourceTree = "<group>"; };
+		4E917E760EC39EE4005ACCA9 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = zh_TW; path = zh_TW.lproj/license.html; sourceTree = "<group>"; };
 		4E941A070E6A92330037F8C1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4E941A080E6A92330037F8C1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4E9670FC0EBA5840008E7917 /* GPXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLogger.h; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				4EDABC700E89115A009AF7C2 /* German */,
 				4E9A00900E8D4A530076EE44 /* Dutch */,
 				4EB3A5330E93B1FA004A643A /* Hebrew */,
+				4E917E760EC39EE4005ACCA9 /* zh_TW */,
 			);
 			name = license.html;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				4E8AAAFA0E9CE9A300271B56 /* Hebrew */,
 				4E8AAAFB0E9CE9A800271B56 /* Dutch */,
 				4E8AAAFC0E9CE9B500271B56 /* German */,
+				4E917DA40EC39EE4005ACCA9 /* zh_TW */,
 			);
 			name = about.html;
 			sourceTree = "<group>";

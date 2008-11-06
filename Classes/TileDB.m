@@ -367,17 +367,18 @@
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
-	NSString *mapType=@"w2.83"; //Normal
+	NSString *mapType=@"w2.86"; //Normal
 	switch(type){
-		case 0: mapType=@"w2.83"; break;
-		case 1: mapType=@"w2t.83"; break; //Hybrid
-		case 2: mapType=@"w2p.83"; break; //Satellite
+		case 0: mapType=@"w2.86"; break;
+		case 1: mapType=@"w2t.86"; break; //Hybrid
+		case 2: mapType=@"w2p.86"; break; //Satellite
 	}
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat
 	//int zoom=0;
-	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?n=404&v=%@&x=%d&y=%d&zoom=%d&hl=%@",(x+y)&3,mapType,x,y,zoom,lang];
-	//NSString *url=@"http://mt0.google.com/mt?n=404&v=w2.75&hl=en&x=67918&s=&y=46321&zoom=0";
+	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+
+
 	//NSLog(@"Getting tile at %@",url);
 	NSURL *imageURL = [[NSURL alloc] initWithString:url];
 	[url release];
@@ -410,7 +411,7 @@
 	
 	
 	if(imageData==nil || !res) {
-	//	NSLog(@"Download error");
+		//NSLog(@"Download error");
 		[dl release];
 		[pool release];
 		return NO;

@@ -100,7 +100,7 @@
 		hasGPSfix=NO;
 		dragging=NO;
 		//_orientation=90;
-		zoom=12;
+		zoom=0;
 		direction=0;
 		passDoubleFingersEvent=NO;
 		prevDist=NAN;
@@ -223,7 +223,7 @@
 			}
 			if([events count]==2) {
 				UITouch *value2 = [enumerator nextObject];
-				if(zoom<17 && (value2.tapCount==2 || value.tapCount==2))
+				if(zoom<16 && (value2.tapCount==2 || value.tapCount==2))
 					zoom++;
 			}
 	}
@@ -890,14 +890,14 @@
 	[self refreshMap];
 	
 	[sender setZoominState:zoom!=0];
-	[sender setZoomoutState:zoom!=17];
+	[sender setZoomoutState:zoom!=16];
 	[self computeCachedRoad];
 }
 -(void)zoomout:(id)sender {
-	if(zoom<17) zoom++;
+	if(zoom<16) zoom++;
 	[self refreshMap];
 	
-	[sender setZoomoutState:zoom!=17];
+	[sender setZoomoutState:zoom!=16];
 	[sender setZoominState:zoom!=0];
 	[self computeCachedRoad];
 }
