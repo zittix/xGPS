@@ -377,6 +377,9 @@
 								value.text=@"Italiano";
 							else if([lang isEqualToString:@"iw"])
 								value.text=@"עברית";
+							/*else if([lang isEqualToString:@"iw"])
+								value.text=@"繁體中文";*/
+							
 						}
 						
 						
@@ -420,7 +423,7 @@
 						label.text=NSLocalizedString(@"Version",@"Version string");
 						
 						
-						value.text=@"1.0.1-4";	
+						value.text=@"1.0.1-5";	
 						
 						value.textAlignment=UITextAlignmentRight;
 						[cell.contentView addSubview:value];
@@ -514,6 +517,8 @@
 								value.text=@"Italiano";
 							else if([lang isEqualToString:@"iw"])
 								value.text=@"עברית";
+							/*else if([lang isEqualToString:@"iw"])
+								value.text=@"繁體中文";*/
 						}
 					} break;
 				}

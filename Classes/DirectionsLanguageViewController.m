@@ -74,6 +74,7 @@
 		case 1: return @"Deutsch";
 		case 3: return @"Italiano";
 		case 4: return @"עברית";
+		/*case 5: return @"繁體中文";*/
 	}
 	return @"Invalid";
 }
@@ -90,6 +91,7 @@
 		case 1: [[NSUserDefaults standardUserDefaults] setObject:@"de" forKey:kSettingsMapsLanguage]; break;
 		case 3: [[NSUserDefaults standardUserDefaults] setObject:@"it" forKey:kSettingsMapsLanguage]; break;
 		case 4: [[NSUserDefaults standardUserDefaults] setObject:@"iw" forKey:kSettingsMapsLanguage]; break;
+		/*case 5: [[NSUserDefaults standardUserDefaults] setObject:@"zh" forKey:kSettingsMapsLanguage]; break;*/
 	}
 }
 

@@ -132,7 +132,7 @@
 					
 					//Call callbacks according to data changes
 					if((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET){
-						chMsg.state=SPEED_SET;
+						chMsg.state=SPEED;
 #ifdef USE_UI
 						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
