@@ -187,8 +187,9 @@
 		[tileHeap removeAllObjects];
 		[tileHeapLock unlock];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-		for(TileCoord *p in copy) {
-			
+		
+		for(int i=[copy count]-1;i>=0;i--) {
+			TileCoord *p=[copy objectAtIndex:i];
 			[dbLock lock];
 			sqlite3_bind_int(checkTileStmt,1,p.x);
 			sqlite3_bind_int(checkTileStmt,2,p.y);

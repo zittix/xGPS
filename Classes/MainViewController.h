@@ -19,6 +19,7 @@
 #import "GPSSignalView.h"
 #import "DrivingDirectionsSearchView.h"
 #import "DirectionsController.h"
+#import "NavigationInstructionView.h"
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;
@@ -39,6 +40,7 @@
 	GPSSignalView* signalView;
 	PositionObj *gpsPos;
 	BOOL directionSearch;
+	NavigationInstructionView *navView;
 }
 - (void)gpsChanged:(ChangedState*)msg;
 @property (nonatomic,retain,readonly) MapView* mapview;

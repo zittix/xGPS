@@ -12,14 +12,13 @@
 #import "TileDB.h"
 #import "LocationWrapper.h"
 #import "ZoomView.h"
-
+#import "DirectionsController.h"
 @interface MapView : UIView<LocationWrapperProtocol,ZoomingProtocol,TileDownloadProtocol> {
 	//MapTile
 	TileDB *db;
 	PositionObj* pos;
 	PositionObj* posGPS;
-	PositionObj *nextDirection;
-
+	PositionObj* posDrivingInstruction;
 	NSMutableDictionary* tilescache;
 	BOOL hasGPSfix;
 	BOOL dragging;
@@ -34,9 +33,9 @@
 	CGPoint drawOrigin;
 	MapTile* tileNoMap;
 	BOOL passDoubleFingersEvent;
-	int direction;
+
 	PositionObj *posSearch;
-	//UITouch *lastTouch;
+
 	BOOL lastInitMove;
 	PositionObj *lastPos;
 	float mapRotation;
@@ -51,12 +50,11 @@
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)tileDownloaded;
 -(void)setGPSTracking:(BOOL)val;
--(void)setNextDirection:(PositionObj*)p;
+-(void)setNextInstruction:(Instruction*)i updatePos:(BOOL)b;
 -(void)setZoom:(int)z;
 -(void)zoomin:(id)sender;
 -(void)setDir:(id)d;
 -(void)zoomout:(id)sender;
--(void)clearPoints;
 -(void)setPosSearch:(PositionObj*)p;
 +(float)getMetersPerPixel:(float)latitude zoom:(int)zoom;
 -(float)getMetersPerPixel:(float)latitude;
@@ -64,7 +62,6 @@
 -(PositionObj*)getCurrentPos;
 - (void)setHasGPSPos:(BOOL)val;
 -(void)setPassDoubleFingersEvent:(BOOL)val;
--(void)setDirection:(int)dir;
 - (void)updateCurrentPos:(PositionObj*) p;
 - (PositionObj*)getPositionFromPixel:(float)x andY:(float)y;
 - (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom2;

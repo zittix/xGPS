@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Position.h"
-@protocol DirectionsControllerDelegate
--(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
-@end
+#import "NavigationInstructionView.h"
+@class MapView;
 @interface Instruction : NSObject
 {
 	NSString *name;
@@ -22,9 +21,12 @@
 @property (nonatomic,retain) PositionObj* pos;
 +(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr;
 @end
+@protocol DirectionsControllerDelegate
+-(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
+-(void)nextDirectionChanged:(Instruction*)instr;
+@end
 
-
-@interface DirectionsController : NSObject {
+@interface DirectionsController: NSObject<DrivingInstructionMovingProtocol> {
 	NSString *_from;
 	NSString *_to;
 	id delegate;
@@ -38,9 +40,14 @@
 	NSMutableData *resultData;
 	BOOL computing;
 	BOOL parsingLinestring;
+	PositionObj* pos;
+	int instrIndex;
+	MapView *map;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;
 @property (nonatomic,readonly) NSMutableArray* instructions;
+@property (nonatomic,assign) MapView* map;
+@property (nonatomic,setter=updatePos:,assign) PositionObj* pos;
 -(BOOL)drive:(NSString*)from to:(NSString*)to;
 @end

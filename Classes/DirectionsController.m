@@ -10,7 +10,7 @@
 
 #import "xGPSAppDelegate.h"
 
-
+#import "MapView.h"
 @implementation Instruction
 @synthesize name;
 @synthesize pos;
@@ -36,6 +36,7 @@
 @synthesize delegate;
 @synthesize roadPoints;
 @synthesize instructions;
+
 + (NSString *) urlencode: (NSString *) url encoding:(NSString*)enc
 {
 	CFStringEncoding cEnc= kCFStringEncodingUTF8;
@@ -46,6 +47,48 @@
 	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)url, NULL, CFSTR("?=&+"), cEnc);
 	return [result autorelease];
 	//return url;
+}
+-(id)init {
+	if((self=[super init])) {
+		pos=[[PositionObj alloc] init];
+	}
+	return self;
+}
+-(void)dealloc {
+	[super dealloc];
+	[pos release];
+}
+-(void)updatePos:(PositionObj*)p {
+	pos.x=p.x;
+	pos.y=p.y;
+	NSLog(@"DIr update pos");
+	//Check the next directions
+	if(instructions==nil) return;
+	if([instructions count]>0) {
+		if(instrIndex<[instructions count]-1)
+			instrIndex++;
+		Instruction *s=[instructions objectAtIndex:instrIndex];
+		[delegate nextDirectionChanged:s];
+		[map setNextInstruction:s updatePos:NO];
+	}
+}
+-(void)nextDrivingInstructions {
+	if(instructions==nil) return;
+	if([instructions count]>0 && instrIndex<[instructions count]-1) {
+		instrIndex++;
+		Instruction *s=[instructions objectAtIndex:instrIndex];
+		[delegate nextDirectionChanged:s];
+		[map setNextInstruction:s updatePos:YES];
+	}
+}
+-(void)previousDrivingInstructions {
+	if(instructions==nil) return;
+	if([instructions count]>0 && instrIndex>0) {
+		instrIndex--;
+		Instruction *s=[instructions objectAtIndex:instrIndex];
+		[delegate nextDirectionChanged:s];
+		[map setNextInstruction:s updatePos:YES];
+	}
 }
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	instructions=[[NSMutableArray alloc] initWithCapacity:5];
@@ -145,11 +188,17 @@
 }
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
+	
+	if([instructions count]>0){
+		Instruction *s=[instructions objectAtIndex:instrIndex];
+		[delegate nextDirectionChanged:s];
+		[map setNextInstruction:s updatePos:YES];
+	}
 	//if(req==nil) return;
 	[delegate directionsGot:_from to:_to  error:nil];
-	instructions=nil;
+	//instructions=nil;
 	
-	
+
 	[currentPlacename release];
 	currentPlacename=nil;
 	
@@ -172,7 +221,7 @@
 	//if(req==nil) return;
 	
 	[delegate directionsGot:_from to:_to  error:parseError];
-	instructions=nil;
+	//instructions=nil;
 	
 	
 	[currentPlacename release];
@@ -275,7 +324,7 @@
 	
 	_from=[from retain];
 	_to=[to retain];
-	
+		instrIndex=0;
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
 	NSLog(@"Using %@ language",lang);
@@ -329,4 +378,8 @@
 	}
 	
 }
+-(PositionObj*)pos {
+	return pos;
+}
+@synthesize map;
 @end

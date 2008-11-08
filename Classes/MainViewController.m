@@ -21,7 +21,7 @@
 		tiledb=[xGPSAppDelegate tiledb];
 		gpsPos=[[PositionObj alloc] init];
 		[[xGPSAppDelegate gpsmanager] setDelegate:self];
-
+		
 	}
 	return self;
 }
@@ -43,7 +43,7 @@
 	//Inside the view:
 	
 	//self.view.backgroundColor=[UIColor blueColor];
-	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height-44.0) withDB:tiledb];
+	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height) withDB:tiledb];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	[self.view addSubview:mapview];
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,100,100) withDelegate:mapview];
@@ -83,6 +83,10 @@
 	speedview.hidden=YES;
 	
 	cancelSearch=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelDrivingSearch:)];
+	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
+	navView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+	navView.delegate=APPDELEGATE.directions;
+	APPDELEGATE.directions.map=mapview;
 }
 -(void)hideSpeed {
 	[UIView beginAnimations:nil context:nil];
@@ -192,6 +196,9 @@
 	if(!directionSearch)
 		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
+	[UIView beginAnimations:nil context:nil];
+	[navView sizeToFit];
+	[UIView commitAnimations];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 -(void)gpsEnableBtnPressed:(id)sender {
@@ -275,9 +282,9 @@
 		case 1: {
 			directionSearch=YES;
 			
-			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-			[alert show];
-			return;
+			//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			//[alert show];
+			//return;
 			[UIView beginAnimations:nil context:nil];
 			[self.view addSubview:drivingSearchView];
 			self.navigationController.navigationBarHidden=NO;
@@ -289,24 +296,27 @@
 		}break;
 	}
 }
+-(void)nextDirectionChanged:(Instruction*)instr {
+	[navView setText:instr.name];
+}
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
 	if(err==nil) {
 		
 		//Search the first instruction
 		if([APPDELEGATE.directions.instructions count]>0) {
-			Instruction *p=[APPDELEGATE.directions.instructions objectAtIndex:0];
-			mapview.pos.x=p.pos.x;
-			mapview.pos.y=p.pos.y;
-		
-		[UIView beginAnimations:nil context:nil];	
-		[drivingSearchView removeFromSuperview];
-		
-		self.navigationItem.title=@"xGPS";
-		self.navigationItem.rightBarButtonItem=nil;
-		[UIView commitAnimations];
-		directionSearch=NO;
-		[mapview computeCachedRoad];
-		[self.navigationController setNavigationBarHidden:YES animated:YES];
+			
+			
+			[UIView beginAnimations:nil context:nil];	
+			[drivingSearchView removeFromSuperview];
+			
+			self.navigationItem.title=@"xGPS";
+			self.navigationItem.rightBarButtonItem=nil;
+			[self.view addSubview:navView];
+			[UIView commitAnimations];
+			directionSearch=NO;
+			[mapview computeCachedRoad];
+			[self.navigationController setNavigationBarHidden:YES animated:YES];
+			
 		} else {
 			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"No driving direction can be computed using your query.",@"No driving dir. found error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 			[alert show];
@@ -345,7 +355,7 @@
 			[mapview updateCurrentPos:gpsPos];
 			[mapview setHasGPSPos:YES];
 			logGPXPoint([[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.time);
-			
+			APPDELEGATE.directions.pos=gpsPos;
 			break;
 		}case SPEED: {
 			float speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;
