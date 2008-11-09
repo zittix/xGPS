@@ -14,7 +14,7 @@ all:	xGPS
 
 xGPS: 	$(CLASSES) $(C_FILE)
 	$(CC) $(LDFLAGS) -o xGPS $^
-	#ldid -S xGPS
+	ldid -S xGPS
 
 %.o:	%.m
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@

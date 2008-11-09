@@ -15,7 +15,7 @@ export csu=/iphone/src/csu
 export CODESIGN_ALLOCATE=/iphone/pre/bin/arm-apple-darwin9-codesign_allocate
 
 # Clean up build area
-[ -f Makefile ] && make -k clean ||:
+#[ -f Makefile ] && make -k clean ||:
 
 # Make & install 
 make
