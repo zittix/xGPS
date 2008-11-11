@@ -30,6 +30,6 @@ echo "Version: 1.1-$AUTOBUILD_COUNTER" >> debian/DEBIAN/control
 make dist
 
 #Copy files
-cp xGPSBeta.zip $AUTOBUILD_PACKAGE_ROOT/zips
-cp xGPSBeta.deb $AUTOBUILD_PACKAGE_ROOT/debian
+cp xGPSBeta.zip $AUTOBUILD_PACKAGE_ROOT/zips/xGPSBeta-$AUTOBUILD_TIMESTAMP.zip
+cp xGPSBeta.deb $AUTOBUILD_PACKAGE_ROOT/debian/xGPSBeta-$AUTOBUILD_TIMESTAMP.deb
 
