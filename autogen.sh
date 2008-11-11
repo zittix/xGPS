@@ -13,14 +13,23 @@ export cctools=/iphone/src/cctools
 export gcc=/iphone/src/gcc
 export csu=/iphone/src/csu
 export CODESIGN_ALLOCATE=/iphone/pre/bin/arm-apple-darwin9-codesign_allocate
-
+AUTOBUILD_COUNTER=15432454534
 # Clean up build area
 [ -f Makefile ] && make -k clean ||:
 
-# Make & install 
+# Make 
 make
-#make install
 
-# Create source code dist
-#make dist
+#create version file
+rm -f -R debian/
+mkdir -p debian/DEBIAN/
+cp debian_control debian/DEBIAN/control
+echo "Version: 1.1-$AUTOBUILD_COUNTER" >> debian/DEBIAN/control
+
+
+make dist
+
+#Copy files
+cp xGPSBeta.zip $AUTOBUILD_PACKAGE_ROOT/zips
+cp xGPSBeta.deb $AUTOBUILD_PACKAGE_ROOT/debian
 

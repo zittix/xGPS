@@ -1,0 +1,11 @@
+Package: com.xwaves.xgpsbeta
+Name: xGPS Beta
+Architecture: iphoneos-arm
+Description: Maps application which can be used with different GPS devices (including iPhone 3G)
+ Powerful maps application to display its own GPS position on a map.
+ Can download maps for offline use. Driving directions support. Nightly built version!
+Homepage: http://xgps.xwaves.net
+Maintainer: Xwaves <adm@xwaves.net>
+Author: Xwaves <adm@xwaves.net>
+Section: Navigation
+Icon: http://xgps.xwaves.net/xgpsicon.png

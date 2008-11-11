@@ -20,20 +20,25 @@ xGPS: 	$(CLASSES) $(C_FILE)
 	$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
 	
 package:
-	rm -fr xGPSUtil/Applications
-	mkdir -p xGPSUtil/Applications/xGPSUtil.app
-	cp xgpsutil xGPSUtil/Applications/xGPSUtil.app/
-	cp Resources/Info.plist xGPSUtil/Applications/xGPSUtil.app/Info.plist
-	cp Resources/icon.png xGPSUtil/Applications/xGPSUtil.app/icon.png
-	cp Resources/Default.png xGPSUtil/Applications/xGPSUtil.app/Default.png
-	chmod +r xGPSUtil/Applications/xGPSUtil.app/*
-	chmod +x xGPSUtil/Applications/xGPSUtil.app/xgpsutil
-
-dist: package
-	cd xGPSUtil && zip -r xGPS.zip xGPSUtil.app/ && mv xGPSUtil.zip ../
-deb:
-	dpkg-deb -b xGPS
+	rm -fr debian/Applications
+	mkdir -p debian/Applications/xGPSBeta.app
+	cp xGPS debian/Applications/xGPSBeta.app/
+	cp Info_beta.plist debian/Applications/xGPSBeta.app/Info.plist
+	cp *.png debian/Applications/xGPSBeta.app
+	cp -r *.lproj debian/Applications/xGPSBeta.app/
+	chmod a+r debian/Applications/xGPSBeta.app/*
+	chmod a+x debian/Applications/xGPSBeta.app/xGPS
+	#Remove .svn folder
+	find ./debian -name ".svn" | xargs rm -Rf
+dist: package deb
+	cd debian/Applications && zip -r xGPSBeta.zip xGPSBeta.app/ && mv xGPSBeta.zip ../../
+deb: package
+	dpkg-deb -b debian
+	mv debian.deb xGPSBeta.deb
 
 clean:	
 	rm -fr *.o xGPS Classes/*.o
+	rm -fr debian/Applications
+	rm -f xGPSBeta.zip xGPSBeta.deb
+	rm -fr debian/
 	rm -f *~
