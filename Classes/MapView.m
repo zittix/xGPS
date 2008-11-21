@@ -674,12 +674,12 @@
 			CGContextBeginPath(context);
 			CGContextAddLines(context,ind,4);
 			CGContextClosePath(context);
-			CGContextSetRGBFillColor(context,0,1,0,0.6);
+			CGContextSetRGBFillColor(context,0,0,1,0.6);
 			CGContextFillPath(context);
 			CGContextBeginPath(context);
 			CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
 			CGContextClosePath(context);
-			CGContextSetRGBFillColor(context,0,1,0,1);
+			CGContextSetRGBFillColor(context,0,0,1,1);
 			CGContextFillPath(context);
 			
 			CGContextScaleCTM(context, 1, -1);

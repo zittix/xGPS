@@ -57,9 +57,9 @@
     {
         // It appears to be a swipe.
         if (startTouchPosition.x < currentTouchPosition.x)
-			swipeDir=1;
+			swipeDir=-1;
         else
-            swipeDir=-1;
+            swipeDir=1;
     }
    
 }
