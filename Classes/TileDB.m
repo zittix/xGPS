@@ -25,7 +25,7 @@
 	NSLog(@"Loading DB %@...",path);
 	
 	//Check DB version
-	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]!=2) {
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<2 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
 		if([fm fileExistsAtPath:path]) {
 		UIAlertView * hotSheet = [[UIAlertView alloc]
 								  initWithTitle:NSLocalizedString(@"Maps data",@"Maps data title")
@@ -368,11 +368,11 @@
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
-	NSString *mapType=@"w2.86"; //Normal
+	NSString *mapType=@"w2.88"; //Normal
 	switch(type){
-		case 0: mapType=@"w2.86"; break;
-		case 1: mapType=@"w2t.86"; break; //Hybrid
-		case 2: mapType=@"w2p.86"; break; //Satellite
+		case 0: mapType=@"w2.88"; break;
+		case 1: mapType=@"w2t.88"; break; //Hybrid
+		case 2: mapType=@"w2p.88"; break; //Satellite
 	}
 	//NSString *mapType=@"w2t.75"; //Hybrid
 	//NSString *mapType=@"w2p.75"; //Sat

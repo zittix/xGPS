@@ -12,11 +12,30 @@
 #define LOG_FILE "/tmp/xgps_gpxtrack.log"
 static FILE* fp=NULL;
 void startGPXLogEngine() {
+	BOOL newFile=NO;
 	if(fp!=NULL) return;
+	
 	fp = fopen (LOG_FILE,"w");
+	if(fp==NULL) 
+		newFile=YES;
+	else 
+		fclose(fp);
+	
+	
+	
+	fp = fopen (LOG_FILE,"a");
 	if(fp!=NULL) {
+		
+		if(!newFile) {
+				//Delete the </gpx>
+			fseek(fp,6,SEEK_END);
+			fprintf(fp,"<trk><trkseg>\n");
+			
+		}
+		else {
 		//GPX Header
-		fprintf(fp,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"xGPS - http://xgps.xwaves.net\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/1\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n<trk><trkseg>");
+		fprintf(fp,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"xGPS - http://xgps.xwaves.net\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/1\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n<trk><trkseg>\n");
+		}
 		fflush(fp);
 	}
 }
@@ -55,7 +74,7 @@ void logGPXPoint(float lat, float lon, float alt, float speed, int fix, int sat,
 }
 void stopGPXLogEngine() {
 	if(fp==NULL) return;
-	fprintf(fp,"\n</trkseg></trk></gpx>");
+	fprintf(fp,"\n</trkseg></trk>\n</gpx>");
 	fclose(fp);
 	fp=NULL;
 }
