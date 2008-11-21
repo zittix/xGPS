@@ -18,6 +18,7 @@
 @implementation MapView
 @synthesize pos;
 @synthesize mapRotationEnabled;
+@synthesize assocZoomview;
 -(void)setHasGPSPos:(BOOL)val {
 	hasGPSfix=val;
 }
@@ -176,6 +177,8 @@
 		if(value.tapCount==2 && [events count]==1) {
 			if(zoom>0) {
 				zoom--;
+				[assocZoomview setZoomoutState:zoom!=16];
+				[assocZoomview setZoominState:zoom!=0];
 				[self computeCachedRoad];
 				[self refreshMap];
 			}
@@ -184,6 +187,8 @@
 			UITouch *value2 = [enumerator nextObject];
 			if(zoom<16 && (value2.tapCount==2 || value.tapCount==2)) {
 				zoom++;
+				[assocZoomview setZoomoutState:zoom!=16];
+				[assocZoomview setZoominState:zoom!=0];
 				[self computeCachedRoad];
 				[self refreshMap];
 			}

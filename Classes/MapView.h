@@ -42,9 +42,11 @@
 	float gpsHeading;
 	BOOL gpsTracking;
 	BOOL mapRotationEnabled;
+	ZoomView *assocZoomview;
 }
 @property(retain,nonatomic) PositionObj *pos;
 @property(nonatomic) BOOL mapRotationEnabled;
+@property(nonatomic,assign) ZoomView *assocZoomview;
 -(void)refreshMap;
 -(void)computeCachedRoad;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;

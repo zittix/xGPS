@@ -423,7 +423,7 @@
 						label.text=NSLocalizedString(@"Version",@"Version string");
 						
 						
-						value.text=@"1.0.1-5";	
+						value.text=@"1.1.0 Test";	
 						
 						value.textAlignment=UITextAlignmentRight;
 						[cell.contentView addSubview:value];

@@ -7,7 +7,7 @@
 //
 
 #import "ZoomView.h"
-
+#import "MapView.h"
 @implementation ZoomView
 -(id) initWithFrame:(CGRect)f withDelegate:(id)_delegate {
 	if((self = [super initWithFrame:f])) {
@@ -32,6 +32,7 @@
 		[self addSubview:zoomout];
 		[zoomin addTarget:self action:@selector(zoomoutPressed) forControlEvents:UIControlEventTouchUpInside];
 		[zoomout addTarget:self action:@selector(zoominPressed) forControlEvents:UIControlEventTouchUpInside];
+		((MapView*)(_delegate)).assocZoomview=self;
 	}
 	return self;
 }

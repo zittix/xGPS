@@ -12,12 +12,12 @@
 #define LOG_FILE "/tmp/xgps_gpxtrack.log"
 static FILE* fp=NULL;
 void startGPXLogEngine() {
-	BOOL newFile=NO;
+	char newFile=0;
 	if(fp!=NULL) return;
 	
 	fp = fopen (LOG_FILE,"w");
 	if(fp==NULL) 
-		newFile=YES;
+		newFile=1;
 	else 
 		fclose(fp);
 	
@@ -26,7 +26,7 @@ void startGPXLogEngine() {
 	fp = fopen (LOG_FILE,"a");
 	if(fp!=NULL) {
 		
-		if(!newFile) {
+		if(newFile==0) {
 				//Delete the </gpx>
 			fseek(fp,6,SEEK_END);
 			fprintf(fp,"<trk><trkseg>\n");
