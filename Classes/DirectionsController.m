@@ -179,7 +179,11 @@
 	c.x=cx+offxc/256.0;
 	c.y=cy+offyc/256.0;
 	float remainingDist=-1;
+	PositionObj *groad1=nil;
+	PositionObj *groad2=nil;
 	int i;
+	float minDist=-1;
+	int found=-1;
 	for(i=0;i<[roadPoints count];i++) {
 		if(i>=[roadPoints count]-1) continue;
 		road1=[roadPoints objectAtIndex:i];
@@ -202,10 +206,15 @@
 		float r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
 		float r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
 		float r = r_numerator / (r_denomenator);
-		if(r>0 && r<1) {
+		if(r>0 && r<1 || r_numerator==0 && b.x-a.x!=0) {
 			//
 			float px = a.x + r*(b.x-a.x);
 			float py = a.y + r*(b.y-a.y);
+			
+			if(r_numerator==0) {
+				px=c.x;
+				py=c.y;
+			}
 			
 			//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
 			float p2lat,p2lon;
@@ -220,14 +229,18 @@
 			
 			double dist=fabs([c_p getDistanceFrom:c_p2]);
 			
-			if(dist<=8) {
-				NSLog(@"Found road segments at %d m",dist);
+			if(dist<=15 && (minDist>dist || minDist==-1)) {
+				NSLog(@"Found road segments at %f m",dist);
 				c_b=[c_b initWithLatitude:road2.x longitude:road2.y];
 				//Projection
 				remainingDist=fabs([c_b getDistanceFrom:c_p2]);
-				break;
+				minDist=dist;
+				found=i;
+				groad1=road1;
+				groad2=road2;
+				//break;
 			} else {
-				NSLog(@"Found !!!!bad road segments at %d m",dist);
+				NSLog(@"Found !!!!bad road segments at %f m",dist);
 				road1=nil;
 				road2=nil;
 			}
@@ -241,14 +254,14 @@
 	[c_p2 release];
 	[c_p release];
 	
-	if(road1==nil || road2==nil) {
+	if(groad1==nil || groad2==nil ||found==-1) {
 		NSLog(@"Wrong way!!!");
 		[c_b release];
 		return;
 	}
-	
-	
-	
+	i=found;
+	//map.debugRoadStep=i+2;
+	//[map refreshMap];
 	
 	
 	/*3*/

@@ -43,10 +43,12 @@
 	BOOL gpsTracking;
 	BOOL mapRotationEnabled;
 	ZoomView *assocZoomview;
+	int debugRoadStep;
 }
 @property(retain,nonatomic) PositionObj *pos;
 @property(nonatomic) BOOL mapRotationEnabled;
 @property(nonatomic,assign) ZoomView *assocZoomview;
+@property(nonatomic) int debugRoadStep;
 -(void)refreshMap;
 -(void)computeCachedRoad;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
