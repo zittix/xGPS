@@ -576,8 +576,8 @@
 				4E0F48E60E851C4B001B6F51 /* German */,
 				4E9A00920E8D4A9D0076EE44 /* Dutch */,
 				4EB3A5340E93B1FA004A643A /* Hebrew */,
-				4EEC564F0EC1FCE00093386D /* zh_TW */,
 				4E109D950EDAEDE1009617FC /* pl */,
+				4EEC564F0EC1FCE00093386D /* zh_TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

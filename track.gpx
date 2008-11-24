@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1" creator="xGPS - http://xgps.xwaves.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
-<trk><trkseg><trkpt lat="46.577015" lon="6.568730">
+<trk><trkseg>
+<!--<trkpt lat="46.577015" lon="6.568730">
 <ele>567.000000</ele>
 <time>2008-10-24T15:43:5Z</time>
 <speed>0.102889</speed>
@@ -41,7 +42,7 @@
 <speed>0.200633</speed>
 <fix>3d</fix>
 <sat>4</sat>
-</trkpt>
+</trkpt
 <trkpt lat="46.577011" lon="6.568737">
 <ele>571.500000</ele>
 <time>2008-10-24T15:43:9Z</time>
@@ -62,7 +63,7 @@
 <speed>2.032056</speed>
 <fix>3d</fix>
 <sat>4</sat>
-</trkpt>
+</trkpt>-->
 <trkpt lat="46.576965" lon="6.568745">
 <ele>575.000000</ele>
 <time>2008-10-24T15:43:11Z</time>

@@ -13,7 +13,7 @@
 
 - (BOOL)EnableGPS {
 	if(tmrGPS==nil)
-	tmrGPS=[NSTimer scheduledTimerWithTimeInterval:0.8 target:self selector:@selector(gpsUpdate) userInfo:nil repeats:YES];
+	tmrGPS=[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(gpsUpdate) userInfo:nil repeats:YES];
 	
 	isEnabled=YES;
 	currentIndex=0;

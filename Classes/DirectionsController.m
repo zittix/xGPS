@@ -73,8 +73,8 @@
  of AC and AB divided by the square of the length of AB:
  
  (1)    AC dot AB
-	r = ---------  
-         ||AB||^2
+ r = ---------  
+ ||AB||^2
  
  r has the following meaning:
  
@@ -162,13 +162,14 @@
 	//We compute: 
 	/*
 	 (1)    AC dot AB
-	     r = ---------  
-	          ||AB||^2
+	 r = ---------  
+	 ||AB||^2
 	 for each segement and take the one where 0<r<1 where AB is the road and C the GPS pos
 	 */
 	PositionObj *road1=nil;
 	CLLocation *c_p=[[CLLocation alloc] initWithLatitude:p.x longitude:p.y];
 	CLLocation *c_p2=[[CLLocation alloc] init];
+	CLLocation *c_b=[[CLLocation alloc] init];
 	PositionObj *road2=nil;
 	CGPoint c;
 	int cx,cy;
@@ -176,10 +177,10 @@
 	[MapView getXYfrom:p.x andLon:p.y toPositionX:&cx andY:&cy withZoom:0];
 	[MapView getXYOffsetfrom:p.x andLon:p.y toPositionX:&offxc andY:&offyc withZoom:0];
 	c.x=cx+offxc/256.0;
-	c.y=cx+offyc/256.0;
+	c.y=cy+offyc/256.0;
 	float remainingDist=-1;
-	
-	for(int i=0;i<[roadPoints count];i++) {
+	int i;
+	for(i=0;i<[roadPoints count];i++) {
 		if(i>=[roadPoints count]-1) continue;
 		road1=[roadPoints objectAtIndex:i];
 		road2=[roadPoints objectAtIndex:i+1];
@@ -194,13 +195,13 @@
 		
 		CGPoint a,b;
 		a.x=ax+offxa/256.0;
-		a.y=ax+offya/256.0;
+		a.y=ay+offya/256.0;
 		b.x=bx+offxb/256.0;
-		b.y=bx+offyb/256.0;
-				
+		b.y=by+offyb/256.0;
+		
 		float r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
 		float r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
-		float r = r_numerator / r_denomenator;
+		float r = r_numerator / (r_denomenator);
 		if(r>0 && r<1) {
 			//
 			float px = a.x + r*(b.x-a.x);
@@ -208,58 +209,76 @@
 			
 			//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
 			float p2lat,p2lon;
-			[MapView getLatLonfromXY:(int)px	andY:(int)py withXOffset:(px-(int)px)*256 andYOffset:(py-(int)py)*256 toLat:&p2lat andLon:&p2lon withZoom:0];
+			int to_x=(int)px;
+			int to_y=(int)py;
+			int to_offx=(int)((px-to_x)*256.0);
+			int to_offy=(int)((py-to_y)*256.0);
+			[MapView getLatLonfromXY:to_x andY:to_y withXOffset:to_offx andYOffset:to_offy toLat:&p2lat andLon:&p2lon withZoom:0];
 			c_p2=[c_p2 initWithLatitude:p2lat longitude:p2lon];
-
+			
 			//float dist=[self distanceBetween:p and:p2];
 			
-			float dist=fabs([c_p getDistanceFrom:c_p2]);
+			double dist=fabs([c_p getDistanceFrom:c_p2]);
 			
 			if(dist<=8) {
 				NSLog(@"Found road segments at %d m",dist);
-				
+				c_b=[c_b initWithLatitude:road2.x longitude:road2.y];
 				//Projection
-				remainingDist=r_numerator/sqrt(r_denomenator);
+				remainingDist=fabs([c_b getDistanceFrom:c_p2]);
 				break;
 			} else {
+				NSLog(@"Found !!!!bad road segments at %d m",dist);
 				road1=nil;
 				road2=nil;
 			}
 			
 			
+		}else {
+			road1=nil;
+			road2=nil;
 		}
 	}
+	[c_p2 release];
+	[c_p release];
 	
 	if(road1==nil || road2==nil) {
 		NSLog(@"Wrong way!!!");
+		[c_b release];
 		return;
 	}
 	
 	
 	
-	[c_p2 release];
-	[c_p release];
-
+	
+	
 	/*3*/
 	Instruction *next=nil;
 	float distNext=-1;
-	for(Instruction *i in instructions) {
-		float dist=fabs([self distanceBetween:road2 and:i.pos]);
-		if(distNext>dist || distNext==-1){
-			distNext=dist;
-			next=i;
+	
+	for(i=i+1;i<[roadPoints count];i++) {
+		for(Instruction *instr in instructions) {
+			float dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
+			if(dist>=0 && dist<=2){
+				distNext=dist;
+				next=instr;
+				break;
+			}
 		}
+		if(next!=nil) break;
 	}
+	[delegate nextDirectionChanged:next];
+	[map setNextInstruction:next updatePos:NO];
+	[c_b release];
 	/*
-	
-	
-	if([instructions count]>0) {
-		if(instrIndex<[instructions count]-1)
-			instrIndex++;
-		Instruction *s=[instructions objectAtIndex:instrIndex];
-		[delegate nextDirectionChanged:s];
-		[map setNextInstruction:s updatePos:NO];
-	}*/
+	 
+	 
+	 if([instructions count]>0) {
+	 if(instrIndex<[instructions count]-1)
+	 instrIndex++;
+	 Instruction *s=[instructions objectAtIndex:instrIndex];
+	 [delegate nextDirectionChanged:s];
+	 [map setNextInstruction:s updatePos:NO];
+	 }*/
 }
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;
@@ -319,7 +338,7 @@
 				}
 				
 				Instruction *r=[Instruction instrWithName:currentPlacename pos:p descr:currentDescr];
-
+				
 				[instructions addObject:r];
 			}
 		} else if(parsingLinestring) {
@@ -335,7 +354,7 @@
 		currentDescr=nil;
 		currentPos=nil;
 		parsingPlace=NO;
-			parsingLinestring=NO;
+		parsingLinestring=NO;
 		[currentProp release];
 		currentProp=nil;
 	}
@@ -365,7 +384,7 @@
 				[roadPoints addObject:p];
 			}
 		}
-
+		
 		[currentProp release];
 		currentProp=nil;
 	}
@@ -387,7 +406,7 @@
 	[delegate directionsGot:_from to:_to  error:nil];
 	//instructions=nil;
 	
-
+	
 	[currentPlacename release];
 	currentPlacename=nil;
 	
@@ -443,9 +462,9 @@
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	
 	//if(req==nil) return;
-
+	
 	[delegate directionsGot:_from to:_to  error:error];
-
+	
 	instructions=nil;
 	
 	[currentPlacename release];
@@ -482,22 +501,22 @@
     // receivedData is declared as a method instance elsewhere
     NSLog(@"Succeeded! Received %d bytes of data",[resultData length]);
 	if([resultData length]>0) {
-	NSXMLParser *xmlParser=[[NSXMLParser alloc] initWithData:resultData];
-	[xmlParser setShouldProcessNamespaces:NO];
-	[xmlParser setShouldReportNamespacePrefixes:NO];
-	[xmlParser setShouldResolveExternalEntities:NO];
-	
-	if(xmlParser==nil) {
-		computing=NO;
-		NSLog(@"Parsing error");
-	} else {
-		xmlParser.delegate=self;
-		if(![xmlParser parse]) {
+		NSXMLParser *xmlParser=[[NSXMLParser alloc] initWithData:resultData];
+		[xmlParser setShouldProcessNamespaces:NO];
+		[xmlParser setShouldReportNamespacePrefixes:NO];
+		[xmlParser setShouldResolveExternalEntities:NO];
+		
+		if(xmlParser==nil) {
 			computing=NO;
-			NSLog(@"Parsing error 2");
+			NSLog(@"Parsing error");
+		} else {
+			xmlParser.delegate=self;
+			if(![xmlParser parse]) {
+				computing=NO;
+				NSLog(@"Parsing error 2");
+			}
+			[xmlParser release];
 		}
-		[xmlParser release];
-	}
 	} else {
 		computing=NO;
 		[delegate directionsGot:_from to:_to  error:nil];
@@ -513,7 +532,7 @@
 	
 	_from=[from retain];
 	_to=[to retain];
-		instrIndex=0;
+	instrIndex=0;
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
 	NSLog(@"Using %@ language",lang);
