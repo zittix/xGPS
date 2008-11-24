@@ -15,6 +15,18 @@
 	NSTimer *tmrGPS;
 	PositionObj *pos;
 	ChangedState* chMsg;
+	int currentIndex;
+	NSMutableArray *posArray;
+	BOOL gpxLoaded;
+	NSString *currentAlt;
+	NSString *currentSpeed;
+	NSString *currentLat;
+	NSString *currentLon;
+	NSString* currentFix;
+	BOOL parsingTrackPoint;
+	BOOL parsingTrackSeg;
+	NSMutableString *currentProp;
 }
 - (id)initWithDelegate:(id)del;
+-(void)loadGPX;
 @end

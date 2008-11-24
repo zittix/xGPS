@@ -9,7 +9,8 @@
 #import "DirectionsController.h"
 
 #import "xGPSAppDelegate.h"
-
+#import <CoreLocation/CoreLocation.h>
+#import <CoreLocation/CLLocationManager.h>
 #import "MapView.h"
 @implementation Instruction
 @synthesize name;
@@ -36,6 +37,9 @@
 @synthesize delegate;
 @synthesize roadPoints;
 @synthesize instructions;
+#define DEG_TO_RAD (M_PI/180.0f)
+/// @brief Earth's quatratic mean radius for WGS-84
+#define EARTH_RADIUS_IN_METERS 6372797.560856
 
 + (NSString *) urlencode: (NSString *) url encoding:(NSString*)enc
 {
@@ -58,19 +62,204 @@
 	[super dealloc];
 	[pos release];
 }
+/*
+ 
+ Subject 1.02: How do I find the distance from a point to a line?
+ 
+ 
+ Let the point be C (Cx,Cy) and the line be AB (Ax,Ay) to (Bx,By).
+ Let P be the point of perpendicular projection of C on AB.  The parameter
+ r, which indicates P's position along AB, is computed by the dot product 
+ of AC and AB divided by the square of the length of AB:
+ 
+ (1)    AC dot AB
+	r = ---------  
+         ||AB||^2
+ 
+ r has the following meaning:
+ 
+ r=0      P = A
+ r=1      P = B
+ r<0      P is on the backward extension of AB
+ r>1      P is on the forward extension of AB
+ 0<r<1    P is interior to AB
+ 
+ The length of a line segment in d dimensions, AB is computed by:
+ 
+ L = sqrt( (Bx-Ax)^2 + (By-Ay)^2 + ... + (Bd-Ad)^2)
+ 
+ so in 2D:  
+ 
+ L = sqrt( (Bx-Ax)^2 + (By-Ay)^2 )
+ 
+ and the dot product of two vectors in d dimensions, U dot V is computed:
+ 
+ D = (Ux * Vx) + (Uy * Vy) + ... + (Ud * Vd)
+ 
+ so in 2D:  
+ 
+ D = (Ux * Vx) + (Uy * Vy) 
+ 
+ So (1) expands to:
+ 
+ (Cx-Ax)(Bx-Ax) + (Cy-Ay)(By-Ay)
+ r = -------------------------------
+ L^2
+ 
+ The point P can then be found:
+ 
+ Px = Ax + r(Bx-Ax)
+ Py = Ay + r(By-Ay)
+ 
+ And the distance from A to P = r*L.
+ 
+ Use another parameter s to indicate the location along PC, with the 
+ following meaning:
+ s<0      C is left of AB
+ s>0      C is right of AB
+ s=0      C is on AB
+ 
+ Compute s as follows:
+ 
+ (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
+ s = -----------------------------
+ L^2
+ 
+ 
+ Then the distance from C to P = |s|*L.
+ 
+ */
+-(float)distanceBetween:(PositionObj*)p and:(PositionObj*)p2 {
+	double latitudeArc  = (p.x - p2.x) * DEG_TO_RAD;
+	double longitudeArc = (p.y - p2.y) * DEG_TO_RAD;
+    double latitudeH = sin(latitudeArc * 0.5);
+    latitudeH *= latitudeH;
+    double lontitudeH = sin(longitudeArc * 0.5);
+    lontitudeH *= lontitudeH;
+    double tmp = cos(p.x*DEG_TO_RAD) * cos(p2.x*DEG_TO_RAD);
+    return EARTH_RADIUS_IN_METERS * 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));	
+}
 -(void)updatePos:(PositionObj*)p {
 	pos.x=p.x;
 	pos.y=p.y;
-	NSLog(@"DIr update pos");
+	//NSLog(@"DIr update pos");
 	//Check the next directions
+	
 	if(instructions==nil) return;
+	
+	
+	//We work in 4 phases
+	/*
+	 1. Find the road step where the position belong to
+	 2. Project the position onto the road to get the remaining distance to do on this road step
+	 3. Compute the length of each further road steps until the next instruction
+	 4. Update display
+	 */
+	
+	/*1,2*/
+	//In order to accept a road step as the one where we are, we must be at +-8 meters of the road step
+	
+	//We compute: 
+	/*
+	 (1)    AC dot AB
+	     r = ---------  
+	          ||AB||^2
+	 for each segement and take the one where 0<r<1 where AB is the road and C the GPS pos
+	 */
+	PositionObj *road1=nil;
+	CLLocation *c_p=[[CLLocation alloc] initWithLatitude:p.x longitude:p.y];
+	CLLocation *c_p2=[[CLLocation alloc] init];
+	PositionObj *road2=nil;
+	CGPoint c;
+	int cx,cy;
+	int offyc,offxc;
+	[MapView getXYfrom:p.x andLon:p.y toPositionX:&cx andY:&cy withZoom:0];
+	[MapView getXYOffsetfrom:p.x andLon:p.y toPositionX:&offxc andY:&offyc withZoom:0];
+	c.x=cx+offxc/256.0;
+	c.y=cx+offyc/256.0;
+	float remainingDist=-1;
+	
+	for(int i=0;i<[roadPoints count];i++) {
+		if(i>=[roadPoints count]-1) continue;
+		road1=[roadPoints objectAtIndex:i];
+		road2=[roadPoints objectAtIndex:i+1];
+		
+		//Convert to mercator (cartersian)
+		int ax,ay,bx,by;
+		int offxa,offxb,offya,offyb;
+		[MapView getXYfrom:road1.x andLon:road1.y toPositionX:&ax andY:&ay withZoom:0];
+		[MapView getXYfrom:road2.x andLon:road2.y toPositionX:&bx andY:&by withZoom:0];
+		[MapView getXYOffsetfrom:road1.x andLon:road1.y toPositionX:&offxa andY:&offya withZoom:0];
+		[MapView getXYOffsetfrom:road2.x andLon:road2.y toPositionX:&offxb andY:&offyb withZoom:0];
+		
+		CGPoint a,b;
+		a.x=ax+offxa/256.0;
+		a.y=ax+offya/256.0;
+		b.x=bx+offxb/256.0;
+		b.y=bx+offyb/256.0;
+				
+		float r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
+		float r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
+		float r = r_numerator / r_denomenator;
+		if(r>0 && r<1) {
+			//
+			float px = a.x + r*(b.x-a.x);
+			float py = a.y + r*(b.y-a.y);
+			
+			//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
+			float p2lat,p2lon;
+			[MapView getLatLonfromXY:(int)px	andY:(int)py withXOffset:(px-(int)px)*256 andYOffset:(py-(int)py)*256 toLat:&p2lat andLon:&p2lon withZoom:0];
+			c_p2=[c_p2 initWithLatitude:p2lat longitude:p2lon];
+
+			//float dist=[self distanceBetween:p and:p2];
+			
+			float dist=fabs([c_p getDistanceFrom:c_p2]);
+			
+			if(dist<=8) {
+				NSLog(@"Found road segments at %d m",dist);
+				
+				//Projection
+				remainingDist=r_numerator/sqrt(r_denomenator);
+				break;
+			} else {
+				road1=nil;
+				road2=nil;
+			}
+			
+			
+		}
+	}
+	
+	if(road1==nil || road2==nil) {
+		NSLog(@"Wrong way!!!");
+		return;
+	}
+	
+	
+	
+	[c_p2 release];
+	[c_p release];
+
+	/*3*/
+	Instruction *next=nil;
+	float distNext=-1;
+	for(Instruction *i in instructions) {
+		float dist=fabs([self distanceBetween:road2 and:i.pos]);
+		if(distNext>dist || distNext==-1){
+			distNext=dist;
+			next=i;
+		}
+	}
+	/*
+	
+	
 	if([instructions count]>0) {
 		if(instrIndex<[instructions count]-1)
 			instrIndex++;
 		Instruction *s=[instructions objectAtIndex:instrIndex];
 		[delegate nextDirectionChanged:s];
 		[map setNextInstruction:s updatePos:NO];
-	}
+	}*/
 }
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;

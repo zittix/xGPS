@@ -67,6 +67,7 @@
 		4EE0F2DB0E6AAA0100BBA3FD /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F2D80E6AAA0100BBA3FD /* ProgressView.m */; };
 		4EE0F2DC0E6AAA0100BBA3FD /* ZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */; };
 		4EE1356A0E7E63D800A5E181 /* GoogleBadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE135690E7E63D800A5E181 /* GoogleBadge.png */; };
+		4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1D57C0EDB0BA80007AEAE /* track.gpx */; };
 		4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +103,9 @@
 		4E0F48E40E851C43001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E50E851C47001B6F51 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E60E851C4B001B6F51 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E109D940EDAEDB0009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pl; path = pl.lproj/about.html; sourceTree = "<group>"; };
+		4E109D950EDAEDE1009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E109D960EDAEDEE009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pl; path = pl.lproj/license.html; sourceTree = "<group>"; };
 		4E2396490E40EF800062A352 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		4E23966E0E40F6AB0062A352 /* MapTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTile.h; sourceTree = "<group>"; };
 		4E23966F0E40F6AB0062A352 /* MapTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTile.m; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 		4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomView.m; sourceTree = "<group>"; };
 		4EE135690E7E63D800A5E181 /* GoogleBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleBadge.png; sourceTree = "<group>"; };
 		4EEC564F0EC1FCE00093386D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4EF1D57C0EDB0BA80007AEAE /* track.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = track.gpx; sourceTree = "<group>"; };
 		4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsLanguageViewController.h; sourceTree = "<group>"; };
 		4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsLanguageViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -280,6 +285,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
 				4E8F03310EBB5BD000994EA3 /* settingsIcon.png */,
 				4E8A01980E9D445A00E58774 /* wireless_future.jpg */,
 				4E9078190E9CE69900B0F6BC /* about.html */,
@@ -430,6 +436,7 @@
 				Dutch,
 				Hebrew,
 				zh_TW,
+				pl,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* xGPS */;
 			projectDirPath = "";
@@ -463,6 +470,7 @@
 				4E8A01990E9D445A00E58774 /* wireless_future.jpg in Resources */,
 				4EAF79FF0EB3C3750078B697 /* Default.png in Resources */,
 				4E8F03320EBB5BD000994EA3 /* settingsIcon.png in Resources */,
+				4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +562,7 @@
 				4E9A00900E8D4A530076EE44 /* Dutch */,
 				4EB3A5330E93B1FA004A643A /* Hebrew */,
 				4E917E760EC39EE4005ACCA9 /* zh_TW */,
+				4E109D960EDAEDEE009617FC /* pl */,
 			);
 			name = license.html;
 			sourceTree = "<group>";
@@ -568,6 +577,7 @@
 				4E9A00920E8D4A9D0076EE44 /* Dutch */,
 				4EB3A5340E93B1FA004A643A /* Hebrew */,
 				4EEC564F0EC1FCE00093386D /* zh_TW */,
+				4E109D950EDAEDE1009617FC /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -582,6 +592,7 @@
 				4E8AAAFB0E9CE9A800271B56 /* Dutch */,
 				4E8AAAFC0E9CE9B500271B56 /* German */,
 				4E917DA40EC39EE4005ACCA9 /* zh_TW */,
+				4E109D940EDAEDB0009617FC /* pl */,
 			);
 			name = about.html;
 			sourceTree = "<group>";

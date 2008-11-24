@@ -390,6 +390,9 @@
 	gpsTracking=val;
 }
 - (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom2 {
+	[MapView getLatLonfromXY:x andY:y withXOffset:xoff andYOffset:yoff toLat:lat andLon:lon withZoom:zoom2];
+}
++ (void)getLatLonfromXY:(int)x andY:(int)y withXOffset:(int)xoff andYOffset:(int)yoff toLat:(float*)lat andLon:(float*)lon withZoom:(int)zoom2 {
 	int zl = 17 - zoom2;
 	float DegreePerPixel = 360.0 / (1 << (zl + 8));
 	
@@ -405,6 +408,9 @@
 	*lat = LatRad * (180 / M_PI) - 90;
 }
 - (void)getXYfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2 {
+	[MapView getXYfrom:lat andLon:lon toPositionX:x andY:y withZoom:zoom2];
+}
++ (void)getXYfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2 {
 	double ty;
 	
 	while (lon> 180) lon -= 360;
@@ -430,6 +436,9 @@
 	*y=tmpy;
 }
 - (void)getXYOffsetfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2 {
+	[MapView getXYOffsetfrom:lat andLon:lon toPositionX:x andY:y withZoom:zoom2];
+}
++ (void)getXYOffsetfrom:(float)lat andLon:(float)lon toPositionX:(int*)x andY:(int*)y withZoom:(int)zoom2 {
 	float ty;
 	float latici=lat;
 	float pow2zoom=pow(2,zoom2);
