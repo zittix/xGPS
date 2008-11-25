@@ -21,7 +21,7 @@
 	return YES;
 }
 - (BOOL)DisableGPS {
-	
+	memset(&gps_data,0,sizeof(struct gps_data_t));
 	if(locManager.locationServicesEnabled){
 		[locManager stopUpdatingLocation];
 		isEnabled=NO;

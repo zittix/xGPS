@@ -47,11 +47,19 @@
 	[from becomeFirstResponder];	
 }
 - (void)dealloc {
+	[currentPosition release];
     [super dealloc];
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar_ {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-	if(![APPDELEGATE.directions drive:from.text to:to.text]) {
+	
+	NSString *fromT;
+	if([from.text  isEqualToString:NSLocalizedString(@"Current Position",@"")])
+		fromT=currentPosition;
+	else
+		fromT=from.text;
+	
+	if(![APPDELEGATE.directions drive:fromT to:to.text]) {
 		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the required information from the server: %@",@"Network error message"),NSLocalizedString(@"Unknown error",@"Unknown error")] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[alert show];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
@@ -60,18 +68,39 @@
 	[searchBar_ resignFirstResponder];
 }
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {
-
+	
 	bookmarkClicked=searchBar;
 	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Take position from:",@"Directions") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Address book",@""),NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS"),nil];
 	[action showInView:[self superview]];
 }
 - (void)didMoveToSuperview {
-	from.text=@"Ch. du Marais 9 1031 Mex";
+	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
+	
+	if(g.gps_data.fix.mode>1) {
+		float lat=g.gps_data.fix.latitude;
+		float lon=g.gps_data.fix.longitude;
+		char latD='N';
+		char lonD='E';
+		if(lat<0) {
+			lat*=-1;
+			latD='S';
+		}
+		if(lon<0) {
+			lon*=-1;
+			lonD='S';
+		}
+		[currentPosition release];
+		currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+		from.text=NSLocalizedString(@"Current Position",@"");
+	}
 	to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
 	
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-	[from becomeFirstResponder];
+	if(g.gps_data.fix.mode>1)
+		[to becomeFirstResponder];
+	else
+		[from becomeFirstResponder];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -87,7 +116,7 @@
 		}break;
 		case 1: {
 			GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
-
+			
 			if(g.gps_data.fix.mode>1) {
 				float lat=g.gps_data.fix.latitude;
 				float lon=g.gps_data.fix.longitude;
@@ -101,8 +130,12 @@
 					lon*=-1;
 					lonD='S';
 				}
-
-				//bookmarkClicked.text=[NSString stringWithFormat:@"loc:%f%c,%f%c",lat,latD,lon,lonD];
+				[currentPosition release];
+				currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+				bookmarkClicked.text=NSLocalizedString(@"Current Position",@"");
+			} else {
+				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to get the GPS position. The GPS is not currently giving any position information.",@"GPS Dir Pos error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+				[alert show];
 			}
 		}break;
 	}

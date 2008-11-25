@@ -43,6 +43,8 @@
 	PositionObj* pos;
 	int instrIndex;
 	MapView *map;
+	int previousSegement;
+	int previousInstruction;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;

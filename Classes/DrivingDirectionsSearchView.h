@@ -20,6 +20,7 @@
 	UISearchBar *from;
 	UISearchBar *to;
 	UISearchBar *bookmarkClicked;
+		NSString *currentPosition;
 }
 - (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)map;
 -(void)setEdit;

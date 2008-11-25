@@ -134,7 +134,7 @@
 					if((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET){
 						chMsg.state=SPEED;
 #ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
 #else
 						[delegate gpsChanged:chMsg];
 #endif
@@ -143,7 +143,7 @@
 						chMsg.state=POS;
 
 #ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
 #else
 					[delegate gpsChanged:chMsg];
 #endif
@@ -156,7 +156,7 @@
 				else if(gps_data.fix.mode==3)
 					signalQuality=80;
 				chMsg.state=SIGNAL_QUALITY;
-				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
 				}
 				
 				//Parse the next packet

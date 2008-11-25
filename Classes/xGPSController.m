@@ -53,6 +53,7 @@
 }
 - (BOOL)DisableGPS {
 	isEnabled=NO;
+	memset(&gps_data,0,sizeof(struct gps_data_t));
 	return [self sendCommand:"f"];
 }
 - (BOOL)PutBootloaderMode {

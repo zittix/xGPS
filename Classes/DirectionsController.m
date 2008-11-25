@@ -145,7 +145,7 @@
 	//NSLog(@"DIr update pos");
 	//Check the next directions
 	
-	if(instructions==nil) return;
+	if(instructions==nil || [instructions count]==0) return;
 	
 	
 	//We work in 4 phases
@@ -182,87 +182,100 @@
 	PositionObj *groad1=nil;
 	PositionObj *groad2=nil;
 	int i;
-	float minDist=-1;
-	int found=-1;
-	for(i=0;i<[roadPoints count];i++) {
-		if(i>=[roadPoints count]-1) continue;
-		road1=[roadPoints objectAtIndex:i];
-		road2=[roadPoints objectAtIndex:i+1];
+	
+	for(int j=0;j<2;j++) {
+		//float minDist=-1;
+		//int found=-1;
 		
-		//Convert to mercator (cartersian)
-		int ax,ay,bx,by;
-		int offxa,offxb,offya,offyb;
-		[MapView getXYfrom:road1.x andLon:road1.y toPositionX:&ax andY:&ay withZoom:0];
-		[MapView getXYfrom:road2.x andLon:road2.y toPositionX:&bx andY:&by withZoom:0];
-		[MapView getXYOffsetfrom:road1.x andLon:road1.y toPositionX:&offxa andY:&offya withZoom:0];
-		[MapView getXYOffsetfrom:road2.x andLon:road2.y toPositionX:&offxb andY:&offyb withZoom:0];
-		
-		CGPoint a,b;
-		a.x=ax+offxa/256.0;
-		a.y=ay+offya/256.0;
-		b.x=bx+offxb/256.0;
-		b.y=by+offyb/256.0;
-		
-		float r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
-		float r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
-		float r = r_numerator / (r_denomenator);
-		if(r>0 && r<1 || r_numerator==0 && b.x-a.x!=0) {
-			//
-			float px = a.x + r*(b.x-a.x);
-			float py = a.y + r*(b.y-a.y);
+		if(previousSegement>=0)
+			i=previousSegement;
+		else
+			i=0;
+		for(i;i<[roadPoints count];i++) {
+			if(i>=[roadPoints count]-1) continue;
+			road1=[roadPoints objectAtIndex:i];
+			road2=[roadPoints objectAtIndex:i+1];
 			
-			if(r_numerator==0) {
-				px=c.x;
-				py=c.y;
-			}
+			//Convert to mercator (cartersian)
+			int ax,ay,bx,by;
+			int offxa,offxb,offya,offyb;
+			[MapView getXYfrom:road1.x andLon:road1.y toPositionX:&ax andY:&ay withZoom:0];
+			[MapView getXYfrom:road2.x andLon:road2.y toPositionX:&bx andY:&by withZoom:0];
+			[MapView getXYOffsetfrom:road1.x andLon:road1.y toPositionX:&offxa andY:&offya withZoom:0];
+			[MapView getXYOffsetfrom:road2.x andLon:road2.y toPositionX:&offxb andY:&offyb withZoom:0];
 			
-			//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
-			float p2lat,p2lon;
-			int to_x=(int)px;
-			int to_y=(int)py;
-			int to_offx=(int)((px-to_x)*256.0);
-			int to_offy=(int)((py-to_y)*256.0);
-			[MapView getLatLonfromXY:to_x andY:to_y withXOffset:to_offx andYOffset:to_offy toLat:&p2lat andLon:&p2lon withZoom:0];
-			c_p2=[c_p2 initWithLatitude:p2lat longitude:p2lon];
+			CGPoint a,b;
+			a.x=ax+offxa/256.0;
+			a.y=ay+offya/256.0;
+			b.x=bx+offxb/256.0;
+			b.y=by+offyb/256.0;
 			
-			//float dist=[self distanceBetween:p and:p2];
-			
-			double dist=fabs([c_p getDistanceFrom:c_p2]);
-			
-			if(dist<=15 && (minDist>dist || minDist==-1)) {
-				NSLog(@"Found road segments at %f m",dist);
-				c_b=[c_b initWithLatitude:road2.x longitude:road2.y];
-				//Projection
-				remainingDist=fabs([c_b getDistanceFrom:c_p2]);
-				minDist=dist;
-				found=i;
-				groad1=road1;
-				groad2=road2;
-				//break;
-			} else {
-				NSLog(@"Found !!!!bad road segments at %f m",dist);
+			float r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
+			float r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
+			float r = r_numerator / (r_denomenator);
+			if(r>0 && r<1 || r_numerator==0 && b.x-a.x!=0) {
+				//
+				float px = a.x + r*(b.x-a.x);
+				float py = a.y + r*(b.y-a.y);
+				
+				if(r_numerator==0) {
+					px=c.x;
+					py=c.y;
+				}
+				
+				//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
+				float p2lat,p2lon;
+				int to_x=(int)px;
+				int to_y=(int)py;
+				int to_offx=(int)((px-to_x)*256.0);
+				int to_offy=(int)((py-to_y)*256.0);
+				[MapView getLatLonfromXY:to_x andY:to_y withXOffset:to_offx andYOffset:to_offy toLat:&p2lat andLon:&p2lon withZoom:0];
+				c_p2=[c_p2 initWithLatitude:p2lat longitude:p2lon];
+				
+				//float dist=[self distanceBetween:p and:p2];
+				
+				double dist=fabs([c_p getDistanceFrom:c_p2]);
+				
+				if(dist<=15) {
+					//NSLog(@"Found road segments at %f m",dist);
+					c_b=[c_b initWithLatitude:road2.x longitude:road2.y];
+					//Projection
+					remainingDist=fabs([c_b getDistanceFrom:c_p2]);
+					//minDist=dist;
+					//found=i;
+					groad1=road1;
+					groad2=road2;
+					break;
+				} else {
+					//NSLog(@"Found !!!!bad road segments at %f m",dist);
+					road1=nil;
+					road2=nil;
+				}
+				
+				
+			}else {
 				road1=nil;
 				road2=nil;
 			}
-			
-			
-		}else {
-			road1=nil;
-			road2=nil;
 		}
+		if((groad1==nil || groad2==nil) && previousSegement>=0) {
+			previousSegement=-1;
+			NSLog(@"Second pas!!!!!!!!!!!!!!!!!");
+		} else
+			break;
 	}
 	[c_p2 release];
 	[c_p release];
 	
-	if(groad1==nil || groad2==nil ||found==-1) {
+	if(groad1==nil || groad2==nil) {
 		NSLog(@"Wrong way!!!");
 		[c_b release];
 		return;
 	}
-	i=found;
-	//map.debugRoadStep=i+2;
-	//[map refreshMap];
-	
+	//i=found;
+	map.debugRoadStep=i+2;
+	[map refreshMap];
+	previousSegement=i;
 	
 	/*3*/
 	Instruction *next=nil;
@@ -282,16 +295,7 @@
 	[delegate nextDirectionChanged:next];
 	[map setNextInstruction:next updatePos:NO];
 	[c_b release];
-	/*
-	 
-	 
-	 if([instructions count]>0) {
-	 if(instrIndex<[instructions count]-1)
-	 instrIndex++;
-	 Instruction *s=[instructions objectAtIndex:instrIndex];
-	 [delegate nextDirectionChanged:s];
-	 [map setNextInstruction:s updatePos:NO];
-	 }*/
+
 }
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;
@@ -418,7 +422,7 @@
 	//if(req==nil) return;
 	[delegate directionsGot:_from to:_to  error:nil];
 	//instructions=nil;
-	
+	previousSegement=previousInstruction=-1;
 	
 	[currentPlacename release];
 	currentPlacename=nil;
@@ -548,7 +552,7 @@
 	instrIndex=0;
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
-	NSLog(@"Using %@ language",lang);
+	//NSLog(@"Using %@ language",lang);
 	
 	NSString* fromE=[DirectionsController urlencode:from encoding:@"utf8"];
 	NSString* toE=[DirectionsController urlencode:to encoding:@"utf8"];

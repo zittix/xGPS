@@ -13,6 +13,7 @@
 	UIPickerView *picker;
 	UIToolbar* toolbar;
 	UITableViewController* _cnt;
+
 }
 -(id)initWithFrame:(CGRect)f andController:(UITableViewController*)cnt;
 @end
