@@ -25,7 +25,7 @@ rm -f -R debian/
 mkdir -p debian/DEBIAN/
 cp debian_control debian/DEBIAN/control
 echo "Version: 1.1-$AUTOBUILD_COUNTER" >> debian/DEBIAN/control
-
+chmod -R 0755 debian/DEBIAN
 
 make dist
 
