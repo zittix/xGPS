@@ -23,6 +23,7 @@
 		4E23967A0E40F7750062A352 /* TileDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2396790E40F7750062A352 /* TileDB.m */; };
 		4E2397000E40F95D0062A352 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */; };
 		4E2397010E40F95D0062A352 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FF0E40F95D0062A352 /* QuartzCore.framework */; };
+		4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */; };
 		4E7929630E58EAE100CAF1B2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7929620E58EAE100CAF1B2 /* MainViewController.m */; };
 		4E864FA60E7EBC58005954EE /* GPSSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */; };
 		4E864FB90E7EBC58005954EE /* GPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E864FB80E7EBC58005954EE /* GPSController.m */; };
@@ -58,6 +59,7 @@
 		4EBAF8F90E58CA84008916E9 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F40E58CA84008916E9 /* speed.png */; };
 		4EBAF8FA0E58CA84008916E9 /* zoomin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F50E58CA84008916E9 /* zoomin.png */; };
 		4EBAF8FB0E58CA84008916E9 /* zoomout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F60E58CA84008916E9 /* zoomout.png */; };
+		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
 		4EE0F1CD0E6A958000BBA3FD /* nmea_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */; };
@@ -118,6 +120,8 @@
 		4E23969B0E40F7DA0062A352 /* LocationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationWrapper.h; sourceTree = "<group>"; };
 		4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4E2396FF0E40F95D0062A352 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarksViewController.h; sourceTree = "<group>"; };
+		4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarksViewController.m; sourceTree = "<group>"; };
 		4E7929620E58EAE100CAF1B2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4E864FA40E7EBC58005954EE /* GPSSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSSelectorViewController.h; sourceTree = "<group>"; };
 		4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSSelectorViewController.m; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 		4EBAF8F40E58CA84008916E9 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
 		4EBAF8F50E58CA84008916E9 /* zoomin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomin.png; sourceTree = "<group>"; };
 		4EBAF8F60E58CA84008916E9 /* zoomout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomout.png; sourceTree = "<group>"; };
+		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
+		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -249,6 +255,8 @@
 				4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */,
 				4E9670FC0EBA5840008E7917 /* GPXLogger.h */,
 				4E9670FD0EBA5840008E7917 /* GPXLogger.c */,
+				4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */,
+				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -362,6 +370,8 @@
 				4E9077FA0E9CE48800B0F6BC /* AboutViewController.m */,
 				4E8F26500EC5F51600401A4E /* NavigationInstructionView.h */,
 				4E8F26510EC5F51600401A4E /* NavigationInstructionView.m */,
+				4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */,
+				4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -546,6 +556,8 @@
 				4E8F02B60EBB544F00994EA3 /* DrivingDirectionsSearchView.m in Sources */,
 				4E8F033D0EBB5CA100994EA3 /* DirectionsController.m in Sources */,
 				4E8F26520EC5F51600401A4E /* NavigationInstructionView.m in Sources */,
+				4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */,
+				4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,7 +645,7 @@
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = xGPS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5CB2FB-5A40-4FBF-9149-20AF336D1770";
 			};
 			name = Release;
 		};
@@ -696,7 +708,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5CB2FB-5A40-4FBF-9149-20AF336D1770";
 				SDKROOT = iphoneos2.0;
 			};
 			name = Release;

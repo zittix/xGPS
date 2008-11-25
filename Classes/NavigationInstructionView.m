@@ -13,7 +13,7 @@
 @synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    if ((self = [super initWithFrame:frame])) {
         // Initialization code
 		//132 152 179
 		self.backgroundColor=[UIColor colorWithRed:0.51764705f green:0.5960784314f blue:0.7019607843 alpha:0.8];
@@ -26,7 +26,6 @@
 		lbl.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		lbl.numberOfLines=0;
 		lbl.shadowColor=[UIColor blackColor];
-		//lbl.shadowOffset
 		
     }
     return self;

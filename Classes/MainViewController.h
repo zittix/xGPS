@@ -20,6 +20,7 @@
 #import "DrivingDirectionsSearchView.h"
 #import "DirectionsController.h"
 #import "NavigationInstructionView.h"
+#import "DirectionsBookmarksViewController.h"
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;
@@ -32,6 +33,7 @@
 	UIBarButtonItem* space2;
 	TileDB* tiledb;
 	UIBarButtonItem* cancelSearch;
+	UIBarButtonItem* savedDirections;
 	ZoomView* zoomview;
 	SpeedView* speedview;
 	LicenseViewController* licenseView;
@@ -41,9 +43,11 @@
 	PositionObj *gpsPos;
 	BOOL directionSearch;
 	NavigationInstructionView *navView;
+	DirectionsBookmarksViewController *dirBookmarks;
+	int currentSearchType; //1= search, 2=directions
 }
 - (void)gpsChanged:(ChangedState*)msg;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;
-
+@property (nonatomic) int currentSearchType;
 @end

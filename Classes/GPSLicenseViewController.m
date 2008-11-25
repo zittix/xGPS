@@ -14,7 +14,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+    if ((self = [super initWithStyle:style])) {
 		self.navigationItem.title=NSLocalizedString(@"License number",@"License number title");
 		value = [[UITextField alloc] initWithFrame:CGRectMake(115.0, 10.0, 170.0, 25.0)];
 		value.keyboardType=UIKeyboardTypeNamePhonePad;

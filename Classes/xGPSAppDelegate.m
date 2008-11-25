@@ -14,8 +14,10 @@ static xGPSAppDelegate* staticObj=nil;
 static TileDB* tiledb;
 static GPSManager* gpsmanager;
 static DirectionsController* directions;
+static DirectionsBookmarks* dirbookmarks;
 @synthesize window;
 @synthesize navController;
+
 +(xGPSAppDelegate*)appdelegate {
 	return staticObj;
 }
@@ -26,7 +28,7 @@ static DirectionsController* directions;
 	
 	staticObj=self;
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-
+	dirbookmarks=[[DirectionsBookmarks alloc] init];
 	tiledb=[[TileDB alloc] init];
 	gpsmanager=[[[GPSManager alloc] init] retain];
 	[[gpsmanager GetCurrentGPS] start];
@@ -52,6 +54,9 @@ static DirectionsController* directions;
 -(TileDB*)tiledb {
 	return tiledb;
 }
+-(DirectionsBookmarks*)dirbookmarks {
+	return dirbookmarks;
+}
 -(DirectionsController*)directions {
 	return directions;
 }
@@ -66,6 +71,7 @@ static DirectionsController* directions;
 	[navController release];
 	[window release];
 	[tiledb release];
+	[dirbookmarks release];
 	[gpsmanager release];
 	[super dealloc];
 }

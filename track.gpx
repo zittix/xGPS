@@ -63,7 +63,7 @@
 <speed>2.032056</speed>
 <fix>3d</fix>
 <sat>4</sat>
-</trkpt>-->
+</trkpt>
 <trkpt lat="46.576965" lon="6.568745">
 <ele>575.000000</ele>
 <time>2008-10-24T15:43:11Z</time>
@@ -596,6 +596,7 @@
 <fix>2d</fix>
 <sat>3</sat>
 </trkpt>
+-->
 <trkpt lat="46.576488" lon="6.567052">
 <ele>562.000000</ele>
 <time>2008-10-24T15:43:49Z</time>

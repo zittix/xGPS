@@ -37,7 +37,7 @@
 	[progress setBtnSelector:@selector(cancelDownload) withDelegate:db];
 	mapview.mapRotationEnabled=NO;
 	downloading=NO;
-	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,100,100) withDelegate:mapview];
+	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,38,83) withDelegate:mapview];
 
 	[self.view addSubview:zoomview];
 	// add our custom add button as the nav bar's custom right view

@@ -7,14 +7,14 @@
 //
 
 #import "SearchPlacesView.h"
-
+#import "MainViewController.h"
 
 @implementation SearchPlacesView
 
 
-- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)_map{
-    if (self = [super initWithFrame:frame]) {
-		controller=_controller;
+- (id)initWithFrame:(CGRect)frame andController:(MainViewController*)_controller andMap:(MapView*)_map{
+    if ((self = [super initWithFrame:frame])) {
+		controller=_controller.navigationController;
         // Initialization code
 		
 		searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(0,0,frame.size.width,50)];
@@ -40,6 +40,7 @@
 		tblView.dataSource=self;
 		tblView.rowHeight=60.0f;
 		[self addSubview:tblView];
+		viewController=_controller;
     }
     return self;
 }
@@ -114,6 +115,7 @@
 	
 	map.pos=r.pos;
 	[map setPosSearch:r.pos];
+	((MainViewController*)viewController).currentSearchType=1;
 	[self searchBarCancelButtonClicked:searchBar];
 }
 - (void)keyboardWillShow:(NSNotification *)notif{
@@ -154,6 +156,7 @@
 			GeoEncoderResult* r=[result objectForKey:key];
 			
 			map.pos=r.pos;
+			((MainViewController*)viewController).currentSearchType=1;
 			[map setPosSearch:r.pos];
 			[self searchBarCancelButtonClicked:searchBar];
 		} else {

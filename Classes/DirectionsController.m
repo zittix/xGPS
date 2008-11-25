@@ -182,7 +182,8 @@
 	PositionObj *groad1=nil;
 	PositionObj *groad2=nil;
 	int i;
-	
+	//int counterIterRoad=0;
+	//int counterIterInstr=0;
 	for(int j=0;j<2;j++) {
 		//float minDist=-1;
 		//int found=-1;
@@ -195,7 +196,7 @@
 			if(i>=[roadPoints count]-1) continue;
 			road1=[roadPoints objectAtIndex:i];
 			road2=[roadPoints objectAtIndex:i+1];
-			
+			//counterIterRoad++;
 			//Convert to mercator (cartersian)
 			int ax,ay,bx,by;
 			int offxa,offxb,offya,offyb;
@@ -210,18 +211,14 @@
 			b.x=bx+offxb/256.0;
 			b.y=by+offyb/256.0;
 			
-			float r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
-			float r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
-			float r = r_numerator / (r_denomenator);
-			if(r>0 && r<1 || r_numerator==0 && b.x-a.x!=0) {
+			double r_numerator=(c.x-a.x)*(b.x-a.x)+(c.y-a.y)*(b.y-a.y);
+			double r_denomenator=pow((b.y-a.y),2)+pow((b.x-a.x),2);
+			double r = r_numerator / (r_denomenator);
+			if(r>0 && r<1) {
 				//
 				float px = a.x + r*(b.x-a.x);
 				float py = a.y + r*(b.y-a.y);
 				
-				if(r_numerator==0) {
-					px=c.x;
-					py=c.y;
-				}
 				
 				//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
 				float p2lat,p2lon;
@@ -237,7 +234,7 @@
 				double dist=fabs([c_p getDistanceFrom:c_p2]);
 				
 				if(dist<=15) {
-					//NSLog(@"Found road segments at %f m",dist);
+					//NSLog(@"Found road segments at %f m with r=%f",dist,r);
 					c_b=[c_b initWithLatitude:road2.x longitude:road2.y];
 					//Projection
 					remainingDist=fabs([c_b getDistanceFrom:c_p2]);
@@ -260,15 +257,16 @@
 		}
 		if((groad1==nil || groad2==nil) && previousSegement>=0) {
 			previousSegement=-1;
-			NSLog(@"Second pas!!!!!!!!!!!!!!!!!");
+			//NSLog(@"Second pas!!!!!!!!!!!!!!!!!");
 		} else
 			break;
 	}
 	[c_p2 release];
 	[c_p release];
-	
-	if(groad1==nil || groad2==nil) {
+		if(groad1==nil || groad2==nil) {
 		NSLog(@"Wrong way!!!");
+			//NSLog(@"Done %d pas for road",counterIterRoad);
+
 		[c_b release];
 		return;
 	}
@@ -282,20 +280,40 @@
 	float distNext=-1;
 	
 	for(i=i+1;i<[roadPoints count];i++) {
-		for(Instruction *instr in instructions) {
-			float dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
-			if(dist>=0 && dist<=2){
-				distNext=dist;
-				next=instr;
-				break;
+		for(int k=0;k<2;k++) {
+			//float minDist=-1;
+			//int found=-1;
+			int j;
+			if(previousInstruction>=0)
+				j=previousInstruction;
+			else
+				j=0;
+			for(j;j<[instructions count];j++) {
+				//counterIterInstr++;
+				Instruction *instr=[instructions objectAtIndex:j];
+				float dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
+				if(dist>=0 && dist<=2 && previousInstruction<=j){
+					distNext=dist;
+					next=instr;
+					previousInstruction=j;
+					break;
+				}
 			}
+			if(next==nil && previousInstruction>=0) {
+				previousInstruction=-1;
+			} else
+				break;	
 		}
 		if(next!=nil) break;
 	}
-	[delegate nextDirectionChanged:next];
-	[map setNextInstruction:next updatePos:NO];
-	[c_b release];
+	//NSLog(@"Done %d pas for road and %d for instr",counterIterRoad,counterIterInstr);
 
+	if(next!=nil) {
+		[delegate nextDirectionChanged:next];
+		[map setNextInstruction:next updatePos:NO];
+	}
+	[c_b release];
+	
 }
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;
@@ -415,6 +433,7 @@
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
 	
 	if([instructions count]>0){
+		[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];
 		Instruction *s=[instructions objectAtIndex:instrIndex];
 		[delegate nextDirectionChanged:s];
 		[map setNextInstruction:s updatePos:YES];
@@ -439,8 +458,20 @@
 	parsingPlace=NO;
 	computing=NO;
 	parsingLinestring=NO;
+	
+	
 }
-
+-(void)clearResult {
+	[instructions release];
+	instructions=nil;
+	[roadPoints release];
+	roadPoints=nil;
+	[_from release];
+	[_to release];
+	_from=nil;
+	_to=nil;
+	[map setNextInstruction:nil updatePos:NO];
+}
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Parse error from delegate");
 	//if(req==nil) return;

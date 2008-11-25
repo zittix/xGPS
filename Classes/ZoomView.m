@@ -16,8 +16,8 @@
 		UIImage* btnImageOut = [UIImage imageNamed:@"zoomout.png"];
 		zoomout = [UIButton buttonWithType:UIButtonTypeCustom];
 		zoomin = [UIButton buttonWithType:UIButtonTypeCustom];
-		zoomin.frame=CGRectMake(0.0, 54.0f, 35, 32);
-		zoomout.frame=CGRectMake(0.0, 0.0f, 55, 51);
+		zoomin.frame=CGRectMake(0.0, 45.0f, 38, 38);
+		zoomout.frame=CGRectMake(0.0, 0.0f, 38, 38);
 		zoomin.showsTouchWhenHighlighted=YES;
 		zoomout.showsTouchWhenHighlighted=YES;
 		zoomout.adjustsImageWhenHighlighted=YES;

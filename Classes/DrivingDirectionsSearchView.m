@@ -12,8 +12,8 @@
 @implementation DrivingDirectionsSearchView
 
 
-- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller andMap:(MapView*)_map{
-    if (self = [super initWithFrame:frame]) {
+- (id)initWithFrame:(CGRect)frame andController:(MainViewController*)_controller andMap:(MapView*)_map{
+    if ((self = [super initWithFrame:frame])) {
 		controller=_controller;
         // Initialization code
 		map=_map;
@@ -43,7 +43,10 @@
 	}
     return self;
 }
--(void)setEdit {
+-(void)bookmarkSelected:(NSString*)from to:(NSString*)to instr:(NSArray*)instr roadPoints:(NSArray*)roadPoints {
+	
+}
+-(void)setEditingKeyBoard {
 	[from becomeFirstResponder];	
 }
 - (void)dealloc {
@@ -92,9 +95,11 @@
 		[currentPosition release];
 		currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
 		from.text=NSLocalizedString(@"Current Position",@"");
+	} else {
+			from.text=@"Ch. du Marais 9 1031 Mex";
 	}
-	to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
-	
+	//to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
+	to.text=@"Zermatt, Switzerland";
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	if(g.gps_data.fix.mode>1)

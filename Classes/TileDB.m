@@ -40,9 +40,10 @@
 		NSError *err;
 		[fm removeItemAtPath:path error:&err];
 		}
-		[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
+		
 		
 	}
+	[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
 	
 	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 		//Check if table exist

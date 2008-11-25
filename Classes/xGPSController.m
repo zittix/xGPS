@@ -122,9 +122,6 @@
 - (void)stop {
 	NSLog(@"Stoppig xgps");
 	[checkTimer invalidate];
-	[self sendCommand:"f"];
-	
-	sleep(1);
 	isEnabled=NO;
 	stopGPSSerial=YES;
 	started=NO;

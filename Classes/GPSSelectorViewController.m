@@ -13,7 +13,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+    if ((self = [super initWithStyle:style])) {
 		self.navigationItem.title=NSLocalizedString(@"Pick a GPS",@"Title gps picker");
 		gpsList=[[[xGPSAppDelegate gpsmanager] GetAllGPSNames] retain];
 		waitingForLicense=NO;

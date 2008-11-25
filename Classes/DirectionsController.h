@@ -24,6 +24,7 @@
 @protocol DirectionsControllerDelegate
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
 -(void)nextDirectionChanged:(Instruction*)instr;
+-(void)nextDirectionDistanceChanged:(float)dist;
 @end
 
 @interface DirectionsController: NSObject<DrivingInstructionMovingProtocol> {
@@ -52,4 +53,5 @@
 @property (nonatomic,assign) MapView* map;
 @property (nonatomic,setter=updatePos:,assign) PositionObj* pos;
 -(BOOL)drive:(NSString*)from to:(NSString*)to;
+-(void)clearResult;
 @end

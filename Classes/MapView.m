@@ -24,11 +24,15 @@
 	hasGPSfix=val;
 }
 -(void)setNextInstruction:(Instruction*)i updatePos:(BOOL)b {
+	if(i!=nil) {
 	posDrivingInstruction.x=i.pos.x;
 	posDrivingInstruction.y=i.pos.y;
 	if(b) {
 		pos.x=posDrivingInstruction.x;
 		pos.y=posDrivingInstruction.y;	
+	}
+	} else {
+		posDrivingInstruction.x=posDrivingInstruction.y=0;
 	}
 	[self refreshMap];
 }
@@ -163,8 +167,12 @@
 	[self refreshMap];
 }
 -(void)setPosSearch:(PositionObj*)p {
+	if(p!=nil) {
 	posSearch.x=p.x;
 	posSearch.y=p.y;
+	} else {
+		posSearch.x=posSearch.y=0;
+	}
 	[self refreshMap];
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -681,15 +689,15 @@
 		//NSLog(@"Drawing %d points",[APPDELEGATE.directions.roadPoints count]);
 		int i;
 		CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.64);
-		CGContextSetLineWidth(context,8.0);
+		CGContextSetLineWidth(context,6.0);
 		CGContextSetLineJoin(context,kCGLineJoinRound);
 		CGPoint points[[APPDELEGATE.directions.roadPoints count]];
 		//CGPoint points2[[APPDELEGATE.directions.roadPoints count]];
 		int j=0;
 		//BOOL goodFound=NO;
 		//BOOL badFound=NO;
-		float prevx,prevy;
-		BOOL addedPrev=YES;
+		//float prevx=0,prevy=0;
+		//BOOL addedPrev=YES;
 		int nb=debugRoadStep>0 ? debugRoadStep : [APPDELEGATE.directions.roadPoints count];
 		for(i=0;i<nb;i++) {
 			int xoffstart,yoffstart,xstart,ystart;
@@ -730,13 +738,13 @@
 			//	if(alwaysIN || (posXStart>=-dynTileSize && posXStart<rect.size.width+dynTileSize && posYStart>=-dynTileSize && posYStart<rect.size.height+dynTileSize)) {
 			//Draw the line
 			
-			if(!addedPrev) {
+			/*if(!addedPrev) {
 				if(i>0) {
 					points[j]=CGPointMake(prevx,prevy);
 					j++;
 				}
 				addedPrev=YES;
-			}
+			}*/
 			
 			points[j]=CGPointMake(posXPin,posYPin);
 			j++;
