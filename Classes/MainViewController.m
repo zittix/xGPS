@@ -210,6 +210,12 @@
 	[mapview refreshMap];
 	[UIView beginAnimations:nil context:nil];
 	[navView sizeToFit];
+	if(currentSearchType!=1) {
+		searchPlacesView.frame=CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height);
+	}
+	if(currentSearchType!=2) {
+		drivingSearchView.frame=CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height);
+	}
 	[UIView commitAnimations];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }

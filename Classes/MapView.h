@@ -44,8 +44,13 @@
 	BOOL mapRotationEnabled;
 	ZoomView *assocZoomview;
 	int debugRoadStep;
+	
+	CGPoint pDepForMapSelection;
+	CGPoint pEndForMapSelection;
 }
 @property(retain,nonatomic) PositionObj *pos;
+@property(nonatomic) CGPoint pDepForMapSelection;
+@property(nonatomic) CGPoint pEndForMapSelection;
 @property(nonatomic) BOOL mapRotationEnabled;
 @property(nonatomic,assign) ZoomView *assocZoomview;
 @property(nonatomic) int debugRoadStep;

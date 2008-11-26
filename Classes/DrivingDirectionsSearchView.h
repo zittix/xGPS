@@ -22,7 +22,8 @@
 	UISearchBar *from;
 	UISearchBar *to;
 	UISearchBar *bookmarkClicked;
-		NSString *currentPosition;
+	NSString *currentPosition;
+	UIView *dummyView;
 }
 - (id)initWithFrame:(CGRect)frame andController:(MainViewController*)_controller andMap:(MapView*)map;
 @end

@@ -15,13 +15,7 @@
 @protocol ShowMapProtocol
 -(void) showMap;
 @end
-@interface OverlayView:UIView {
-	CGPoint pDep;
-	CGPoint pEnd;
-}
-@property (nonatomic) CGPoint pDep;
-@property (nonatomic) CGPoint pEnd;
-@end
+
 @interface MapsManagerView : UIViewController<UIAlertViewDelegate> {
 	id delegate;
 	MapView *mapview;
@@ -33,7 +27,6 @@
 	BOOL downloading;
 	ZoomView *zoomview;
 	CGRect viewRect;
-	OverlayView* viewOverlay;
 	UIToolbar *toolbar;
 	UISegmentedControl* maptype;
 }

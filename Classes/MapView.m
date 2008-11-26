@@ -20,6 +20,8 @@
 @synthesize mapRotationEnabled;
 @synthesize assocZoomview;
 @synthesize debugRoadStep;
+@synthesize pEndForMapSelection;
+@synthesize pDepForMapSelection;
 -(void)setHasGPSPos:(BOOL)val {
 	hasGPSfix=val;
 }
@@ -340,8 +342,8 @@
 	//Calculate the x and y offset of the first tile corresponding to the correct lat/lon
 	//The pos.x and pos.y will be the center of the screen
 	CGRect rect=[self frame];
-	float centerTilePosY=rect.size.height/2.0-(yoff/TILE_SIZE);
-	float centerTilePosX=rect.size.width/2.0-(xoff/TILE_SIZE);
+	float centerTilePosY=rect.size.height/2.0-(yoff);
+	float centerTilePosX=rect.size.width/2.0-(xoff);
 	
 	float diffx=(x-centerTilePosX);
 	float diffy=(y-centerTilePosY);
@@ -353,11 +355,11 @@
 	diffx-=nbplusX*TILE_SIZE;
 	diffy-=nbplusY*TILE_SIZE;
 	
-	if(diffx<0) {
+	while(diffx<0) {
 		tx--;
 		diffx=TILE_SIZE+diffx;
 	}
-	if(diffy<0) {
+	while(diffy<0) {
 		ty--;
 		diffy=TILE_SIZE+diffy;
 	}
@@ -907,8 +909,34 @@
 	//NSLog(@"Scale: %f m / pixel",[self getMetersPerPixel: pos.x]);
 	//if(!dragging)
 	//[dirC getNextDirection:pos];
-	if(passDoubleFingersEvent)
-		[[self superview] drawRect:rect];
+	CGContextScaleCTM(context, 1, -1);
+	if(pDepForMapSelection.x==0.0f && pDepForMapSelection.y==0.0f && pEndForMapSelection.x==0.0f && pEndForMapSelection.y==0.0f)
+		return;
+	CGContextSetRGBFillColor(context,1,0,0,0.4);
+	CGContextSetRGBStrokeColor(context,1,0,0,0.8);
+
+	CGSize size;
+	
+	//if(orientation==0 || orientation==180) {
+	org=CGPointMake(pDepForMapSelection.x >= 0 ? pDepForMapSelection.x : 0,pDepForMapSelection.y-48.0f >= 0 ? pDepForMapSelection.y-48.0f : 0);
+	size=CGSizeMake(pEndForMapSelection.x-pDepForMapSelection.x,pEndForMapSelection.y-pDepForMapSelection.y);
+	/*} else if(orientation==90) {
+	 org=CGPointMake(pDep.y >= 0 ? pDep.y : 0,pDep.x-48.0f >= 0 ? rect.size.height-pDep.x : 0);
+	 size=CGSizeMake(pEnd.y-pDep.y,pEnd.x-pDep.x);
+	 } else {
+	 org=CGPointMake(pDep.y >= 0 ? pDep.y : 0,pDep.x-48.0f >= 0 ? rect.size.height-pDep.x : 0);
+	 size=CGSizeMake(pEnd.y-pDep.y,pEnd.x-pDep.x);
+	 }*/
+	
+	//NSLog(@"Origin: %f %f",org.x,org.y);
+	//NSLog(@"Size: %f %f",size.width,size.height);
+	CGContextFillRect(context,CGRectMake(org.x,org.y,size.width,size.height));
+	CGContextStrokeRectWithWidth(context,CGRectMake(org.x,org.y,size.width,size.height),4);
+	
+	
+	
+	//if(passDoubleFingersEvent)
+	//	[[self superview] drawRect:rect];
 	
 }
 #endif

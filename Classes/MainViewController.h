@@ -47,6 +47,7 @@
 	int currentSearchType; //1= search, 2=directions
 }
 - (void)gpsChanged:(ChangedState*)msg;
+-(void)cancelDrivingSearch:(id)sender ;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;
 @property (nonatomic) int currentSearchType;

@@ -8,7 +8,7 @@
 
 #import "DrivingDirectionsSearchView.h"
 #import "xGPSAppDelegate.h"
-
+#import "MainViewController.h"
 @implementation DrivingDirectionsSearchView
 
 
@@ -17,6 +17,8 @@
 		controller=_controller;
         // Initialization code
 		map=_map;
+		dummyView=[[UIView alloc] initWithFrame:CGRectMake(0,80,frame.size.width,frame.size.height-80)];
+		[self addSubview:dummyView];
 		self.backgroundColor=[UIColor clearColor];
 		bigbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,0,frame.size.width,80)];
 		bigbar.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
@@ -39,9 +41,19 @@
 		[bigbar addSubview:to];
 		bookmarkClicked=nil;
 		
+		self.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		self.autoresizesSubviews=YES;
 		[self addSubview:bigbar];
 	}
     return self;
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	NSSet *events=[event touchesForView:dummyView];
+
+	if([events count]>0) {
+		[controller cancelDrivingSearch:self];
+	}
 }
 -(void)bookmarkSelected:(NSString*)from to:(NSString*)to instr:(NSArray*)instr roadPoints:(NSArray*)roadPoints {
 	
@@ -76,7 +88,7 @@
 	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Take position from:",@"Directions") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Address book",@""),NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS"),nil];
 	[action showInView:[self superview]];
 }
-- (void)didMoveToSuperview {
+- (void)willMoveToSuperview:(UIView*)view {
 	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
 	
 	if(g.gps_data.fix.mode>1) {
@@ -96,12 +108,13 @@
 		currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
 		from.text=NSLocalizedString(@"Current Position",@"");
 	} else {
-			from.text=@"Ch. du Marais 9 1031 Mex";
+		from.text=@"Ch. du Marais 9 1031 Mex";
 	}
 	//to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
 	to.text=@"Zermatt, Switzerland";
-	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)didMoveToSuperview {
+	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
 	if(g.gps_data.fix.mode>1)
 		[to becomeFirstResponder];
 	else

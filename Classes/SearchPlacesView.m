@@ -135,13 +135,15 @@
 		tblView.frame=CGRectMake(0,50,self.frame.size.width,self.frame.size.height-50);
 	}
 }
-- (void)didMoveToSuperview {
+- (void)willMoveToSuperview:(UIView*)view  {
 	searchBar.text=@"";
 	if(_result!=nil) {
 		[_result release];
 		_result=nil;
 		[tblView reloadData];
 	}
+}
+- (void)didMoveToSuperview {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	[searchBar becomeFirstResponder];

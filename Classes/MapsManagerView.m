@@ -21,9 +21,9 @@
 
 -(void)loadView {
 	viewRect=[[UIScreen mainScreen] applicationFrame];
-	self.view=[[OverlayView alloc] initWithFrame:viewRect];
+	self.view=[[UIView alloc] initWithFrame:viewRect];
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	viewOverlay=(OverlayView*)self.view;
+
 	progress=[[ProgressView alloc] initWithFrame:CGRectMake(0, 0, viewRect.size.width, viewRect.size.height)];
 	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height-44.0f) withDB:db];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -89,14 +89,15 @@
 	if([events count]!=2) return;
 	NSArray* arr=[events allObjects];
 	
-	CGPoint c1 = [[arr objectAtIndex:0] locationInView:self.view];
-	CGPoint c2 = [[arr objectAtIndex:1] locationInView:self.view];
-	c1.y+=48;
-	c2.y+=48;
+	CGPoint c1 = [[arr objectAtIndex:0] locationInView:mapview];
+	CGPoint c2 = [[arr objectAtIndex:1] locationInView:mapview];
+	
 	pDep = c1;
 	pEnd = c2;
-	viewOverlay.pDep=pDep;
-	viewOverlay.pEnd=pEnd;
+	c1.y+=48;
+	c2.y+=48;
+	mapview.pDepForMapSelection=c1;
+	mapview.pEndForMapSelection=c2;
 	[mapview refreshMap];	
 }
 
@@ -105,8 +106,8 @@
 	
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode])
 	APPDELEGATE.idleTimerDisabled=YES;
-	PositionObj *pos1=[mapview getPositionFromPixel:pDep.x andY:pDep.y-48.0f];
-	PositionObj *pos2=[mapview getPositionFromPixel:pEnd.x andY:pEnd.y-48.0f];
+	PositionObj *pos1=[mapview getPositionFromPixel:pDep.x andY:pDep.y];
+	PositionObj *pos2=[mapview getPositionFromPixel:pEnd.x andY:pEnd.y];
 
 	int x1,y1,x2,y2;
 
@@ -142,8 +143,8 @@
 }
 -(void)clearSelection {
 	pDep.x=pDep.y=pEnd.x=pEnd.y=0.0f;
-	viewOverlay.pDep=pDep;
-	viewOverlay.pEnd=pEnd;
+	mapview.pDepForMapSelection=pDep;
+	mapview.pEndForMapSelection=pEnd;
 	[mapview refreshMap];
 }
 -(void)enableDownload {
@@ -178,7 +179,6 @@
 }
 - (void)startDownloadButton:(id)sender
 {
-	NSLog(@"Start downloading button...");
 			PositionObj *pos1=[mapview getPositionFromPixel:pDep.x andY:pDep.y-48.0f];
 			PositionObj *pos2=[mapview getPositionFromPixel:pEnd.x andY:pEnd.y-48.0f];
 
@@ -215,44 +215,9 @@
 }
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[mapview refreshMap];
-	[viewOverlay setNeedsDisplay];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
 
-@end
-@implementation OverlayView
-@synthesize pDep;
-@synthesize pEnd;
-
-
--(void)drawRect:(CGRect)rect {
-	//NSLog(@"OverLayview draw");
-	if(pDep.x==0.0f && pDep.y==0.0f && pEnd.x==0.0f && pEnd.y==0.0f)
-	return;
-
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetRGBFillColor(context,1,0,0,0.4);
-	CGContextSetRGBStrokeColor(context,1,0,0,0.8);
-
-	CGPoint org;
-	CGSize size;
-
-	//if(orientation==0 || orientation==180) {
-		org=CGPointMake(pDep.x >= 0 ? pDep.x : 0,pDep.y-48.0f >= 0 ? pDep.y-48.0f : 0);
-		size=CGSizeMake(pEnd.x-pDep.x,pEnd.y-pDep.y);
-	/*} else if(orientation==90) {
-		org=CGPointMake(pDep.y >= 0 ? pDep.y : 0,pDep.x-48.0f >= 0 ? rect.size.height-pDep.x : 0);
-		size=CGSizeMake(pEnd.y-pDep.y,pEnd.x-pDep.x);
-	} else {
-		org=CGPointMake(pDep.y >= 0 ? pDep.y : 0,pDep.x-48.0f >= 0 ? rect.size.height-pDep.x : 0);
-		size=CGSizeMake(pEnd.y-pDep.y,pEnd.x-pDep.x);
-	}*/
-
-	//NSLog(@"Origin: %f %f",org.x,org.y);
-	//NSLog(@"Size: %f %f",size.width,size.height);
-	CGContextFillRect(context,CGRectMake(org.x,org.y,size.width,size.height));
-	CGContextStrokeRectWithWidth(context,CGRectMake(org.x,org.y,size.width,size.height),4);
-}
 @end
