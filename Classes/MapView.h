@@ -42,7 +42,7 @@
 	BOOL gpsTracking;
 	BOOL mapRotationEnabled;
 	ZoomView *assocZoomview;
-	int debugRoadStep;
+	//int debugRoadStep;
 	
 	CGPoint pDepForMapSelection;
 	CGPoint pEndForMapSelection;
@@ -52,7 +52,7 @@
 @property(nonatomic) CGPoint pEndForMapSelection;
 @property(nonatomic) BOOL mapRotationEnabled;
 @property(nonatomic,assign) ZoomView *assocZoomview;
-@property(nonatomic) int debugRoadStep;
+//@property(nonatomic) int debugRoadStep;
 -(void)refreshMap;
 -(void)computeCachedRoad;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;

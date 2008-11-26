@@ -112,7 +112,7 @@
 	}
 	//to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
 	//to.text=@"Zermatt, Switzerland";
-	to.text=@"Ch. des Mémises 1031 Mex";
+	to.text=@"Rte de Marteley 1302 Vufflens";
 }
 - (void)didMoveToSuperview {
 	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];

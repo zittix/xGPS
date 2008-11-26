@@ -24,6 +24,8 @@
 		4E2397000E40F95D0062A352 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */; };
 		4E2397010E40F95D0062A352 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FF0E40F95D0062A352 /* QuartzCore.framework */; };
 		4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */; };
+		4E74D8530EDD946800C2FEAC /* WrongWayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E74D8520EDD946800C2FEAC /* WrongWayView.m */; };
+		4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E74D8540EDD99B800C2FEAC /* wrongway.png */; };
 		4E7929630E58EAE100CAF1B2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7929620E58EAE100CAF1B2 /* MainViewController.m */; };
 		4E864FA60E7EBC58005954EE /* GPSSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */; };
 		4E864FB90E7EBC58005954EE /* GPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E864FB80E7EBC58005954EE /* GPSController.m */; };
@@ -122,6 +124,9 @@
 		4E2396FF0E40F95D0062A352 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarksViewController.h; sourceTree = "<group>"; };
 		4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarksViewController.m; sourceTree = "<group>"; };
+		4E74D8510EDD946800C2FEAC /* WrongWayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongWayView.h; sourceTree = "<group>"; };
+		4E74D8520EDD946800C2FEAC /* WrongWayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrongWayView.m; sourceTree = "<group>"; };
+		4E74D8540EDD99B800C2FEAC /* wrongway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrongway.png; sourceTree = "<group>"; };
 		4E7929620E58EAE100CAF1B2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4E864FA40E7EBC58005954EE /* GPSSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSSelectorViewController.h; sourceTree = "<group>"; };
 		4E864FA50E7EBC58005954EE /* GPSSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSSelectorViewController.m; sourceTree = "<group>"; };
@@ -293,6 +298,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E74D8540EDD99B800C2FEAC /* wrongway.png */,
 				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
 				4E8F03310EBB5BD000994EA3 /* settingsIcon.png */,
 				4E8A01980E9D445A00E58774 /* wireless_future.jpg */,
@@ -372,6 +378,8 @@
 				4E8F26510EC5F51600401A4E /* NavigationInstructionView.m */,
 				4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */,
 				4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */,
+				4E74D8510EDD946800C2FEAC /* WrongWayView.h */,
+				4E74D8520EDD946800C2FEAC /* WrongWayView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -481,6 +489,7 @@
 				4EAF79FF0EB3C3750078B697 /* Default.png in Resources */,
 				4E8F03320EBB5BD000994EA3 /* settingsIcon.png in Resources */,
 				4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */,
+				4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +567,7 @@
 				4E8F26520EC5F51600401A4E /* NavigationInstructionView.m in Sources */,
 				4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */,
 				4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */,
+				4E74D8530EDD946800C2FEAC /* WrongWayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

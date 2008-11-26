@@ -25,6 +25,8 @@
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
 -(void)nextDirectionChanged:(Instruction*)instr;
 -(void)nextDirectionDistanceChanged:(double)dist;
+-(void)showWrongWay;
+-(void)hideWrongWay;
 @end
 
 @interface DirectionsController: NSObject<DrivingInstructionMovingProtocol> {
@@ -46,6 +48,7 @@
 	MapView *map;
 	int previousSegement;
 	int previousInstruction;
+	int nbWrongWay;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;

@@ -377,8 +377,8 @@
 								value.text=@"Italiano";
 							else if([lang isEqualToString:@"iw"])
 								value.text=@"עברית";
-							/*else if([lang isEqualToString:@"iw"])
-								value.text=@"繁體中文";*/
+							else if([lang isEqualToString:@"zh-TW"])
+								value.text=@"繁體中文";
 							
 						}
 						
@@ -517,8 +517,8 @@
 								value.text=@"Italiano";
 							else if([lang isEqualToString:@"iw"])
 								value.text=@"עברית";
-							/*else if([lang isEqualToString:@"iw"])
-								value.text=@"繁體中文";*/
+							else if([lang isEqualToString:@"zh-TW"])
+								value.text=@"繁體中文";
 						}
 					} break;
 				}

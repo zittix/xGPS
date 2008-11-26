@@ -64,11 +64,11 @@
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
+	size.width-=20;
 	CGSize lblSize=[lbl sizeThatFits:size];
 	lblSize.width=self.frame.size.width;
 	lblSize.height=MAX(lblSize.height,30);
 	return lblSize;
-	
 }
 -(void)setText:(NSString*)txt {
 	

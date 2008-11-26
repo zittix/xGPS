@@ -87,7 +87,22 @@
 	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
 	navView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	navView.delegate=APPDELEGATE.directions;
+	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(10,100,-1,-1)];
+	
+	//wrongWay.autoresizingMask
 	APPDELEGATE.directions.map=mapview;
+}
+-(void)hideWrongWay {
+	if(wrongWay.superview==nil) return;
+	[wrongWay stopAnimate];
+	
+	[wrongWay removeFromSuperview];
+	
+}
+-(void)showWrongWay {
+	if(wrongWay.superview!=nil) return;
+	[wrongWay startAnimate];
+	[self.view addSubview:wrongWay];
 }
 -(void)showBooksmarksView:(id)sender {
 	if(dirBookmarks==nil) {
@@ -187,17 +202,6 @@
 	if(!directionSearch)
 		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
-	//NSLog(@"Frame org (%f,%f) size (%f,%f)",self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
-	//NSLog(@"CENTER size: %f %f of view",self.view.center.x,self.view.center.y);
-	
-	//[UIView beginAnimations:nil context:nil];	
-	//[UIView setAnimationDidStopSelector:@selector(endRotation:::)];
-	//double sx=self.view.frame.size.width/mapview.frame.size.height;
-	//double sy=(self.view.frame.size.height-44.0)/mapview.frame.size.width;
-	//mapview.transform=CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI/2.0),sy,sx);
-	//mapview.transform=CGAffineTransformMakeRotation(M_PI/2.0);
-	//mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0);
-	//[UIView commitAnimations];
 	
 	[super viewDidAppear:animated];
 }
@@ -328,6 +332,9 @@
 			} else if(currentSearchType==2) {
 				[UIView beginAnimations:nil context:nil];	
 				[navView removeFromSuperview];
+				zoomview.frame=CGRectMake(10,10,38,83);
+				wrongWay.frame=CGRectMake(10,100,wrongWay.frame.size.width,wrongWay.frame.size.height);
+				signalView.frame=CGRectMake(self.view.frame.size.width-52,5,47,40);
 				[UIView commitAnimations];
 				[APPDELEGATE.directions clearResult];
 			}
@@ -337,6 +344,11 @@
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];
+	[UIView beginAnimations:nil context:nil];	
+	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
+	wrongWay.frame=CGRectMake(10,100+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
+	signalView.frame=CGRectMake(self.view.frame.size.width-52,5+navView.frame.size.height,47,40);
+	[UIView commitAnimations];
 }
 -(void)nextDirectionDistanceChanged:(double)dist {
 	
@@ -355,6 +367,9 @@
 			self.navigationItem.rightBarButtonItem=nil;
 			self.navigationItem.leftBarButtonItem=nil;
 			[self.view addSubview:navView];
+			zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
+			wrongWay.frame=CGRectMake(10,100+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
+			signalView.frame=CGRectMake(self.view.frame.size.width-52,5+navView.frame.size.height,47,40);
 			[UIView commitAnimations];
 			directionSearch=NO;
 			[mapview computeCachedRoad];

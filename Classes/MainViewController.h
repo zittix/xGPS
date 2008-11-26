@@ -21,6 +21,7 @@
 #import "DirectionsController.h"
 #import "NavigationInstructionView.h"
 #import "DirectionsBookmarksViewController.h"
+#import "WrongWayView.h"
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;
@@ -45,9 +46,12 @@
 	NavigationInstructionView *navView;
 	DirectionsBookmarksViewController *dirBookmarks;
 	int currentSearchType; //1= search, 2=directions
+	WrongWayView *wrongWay;
 }
 - (void)gpsChanged:(ChangedState*)msg;
 -(void)cancelDrivingSearch:(id)sender ;
+-(void)showWrongWay;
+-(void)hideWrongWay;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;
 @property (nonatomic) int currentSearchType;

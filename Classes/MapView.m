@@ -19,7 +19,7 @@
 @synthesize pos;
 @synthesize mapRotationEnabled;
 @synthesize assocZoomview;
-@synthesize debugRoadStep;
+//@synthesize debugRoadStep;
 @synthesize pEndForMapSelection;
 @synthesize pDepForMapSelection;
 -(void)setHasGPSPos:(BOOL)val {
@@ -137,7 +137,7 @@
 		posSearch=[[PositionObj alloc] init];
 		lastPos=[[PositionObj alloc] init];
 		mapRotation=0;
-		debugRoadStep=-1;
+		//debugRoadStep=-1;
 		[self setMultipleTouchEnabled:YES];
 	}
 	return self;
@@ -698,8 +698,8 @@
 		//BOOL badFound=NO;
 		//double prevx=0,prevy=0;
 		//BOOL addedPrev=YES;
-		int nb=debugRoadStep>0 ? debugRoadStep : [APPDELEGATE.directions.roadPoints count];
-		for(i=0;i<nb;i++) {
+		//int nb=debugRoadStep>0 ? debugRoadStep : [APPDELEGATE.directions.roadPoints count];
+		for(i=0;i<[APPDELEGATE.directions.roadPoints count];i++) {
 			int xoffstart,yoffstart,xstart,ystart;
 			PositionObj *l=[APPDELEGATE.directions.roadPoints objectAtIndex:i];
 			//NSLog(@"Drawing line %f %f",l.x,l.y);

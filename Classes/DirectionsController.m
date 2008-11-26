@@ -145,7 +145,7 @@
 	//NSLog(@"DIr update pos");
 	//Check the next directions
 	
-	if(instructions==nil || [instructions count]==0) return;
+	if(instructions==nil || [instructions count]<1 || [roadPoints count]<2) return;
 	
 	
 	//We work in 4 phases
@@ -263,15 +263,42 @@
 	}
 	[c_p2 release];
 	[c_p release];
-		if(groad1==nil || groad2==nil) {
-		NSLog(@"Wrong way!!!");
-			//NSLog(@"Done %d pas for road",counterIterRoad);
-
+	
+	if(groad1==nil || groad2==nil) {
+			//If we have not found were we are, check if we are near the starting point
+		road1=[roadPoints objectAtIndex:0];
+		
+		double tmp=[self distanceBetween:road1 and:p];
+		if(tmp<=15.0) {
+			i=-1;
+			road2=[roadPoints objectAtIndex:1];
+			groad1=road1;
+			groad2=road2;
+			remainingDist=fabs([self distanceBetween:road1 and:road2]);
+		}
+	}
+	
+	
+	if(groad1==nil || groad2==nil) {
+		
+		if(nbWrongWay>3){
+			if(previousInstruction==[instructions count]-1) {
+				
+				[delegate hideWrongWay];
+			} else {
+				[delegate showWrongWay];
+			}
+		} else {
+			nbWrongWay++;
+		}
 		[c_b release];
 		return;
 	}
-	//i=found;
-	map.debugRoadStep=i+2;
+	
+	nbWrongWay=0;
+	[delegate hideWrongWay];
+	
+	//map.debugRoadStep=i+2;
 	[map refreshMap];
 	previousSegement=i;
 	
@@ -279,10 +306,8 @@
 	Instruction *next=nil;
 	double distNext=-1;
 	
-	for(i=i+1;i<[roadPoints count];i++) {
+	for(i+1;i<[roadPoints count];i++) {
 		for(int k=0;k<2;k++) {
-			//double minDist=-1;
-			//int found=-1;
 			int j;
 			if(previousInstruction>=0)
 				j=previousInstruction;
@@ -292,7 +317,7 @@
 				//counterIterInstr++;
 				Instruction *instr=[instructions objectAtIndex:j];
 				double dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
-				if(dist>=0 && dist<=2 && previousInstruction<=j){
+				if(dist>=0 && dist<=2 && previousInstruction-1<=j){ // Allow to step back from one instruction when we get the false direction
 					distNext=dist;
 					next=instr;
 					previousInstruction=j;
@@ -307,7 +332,7 @@
 		if(next!=nil) break;
 	}
 	//NSLog(@"Done %d pas for road and %d for instr",counterIterRoad,counterIterInstr);
-
+	
 	if(next!=nil) {
 		[delegate nextDirectionChanged:next];
 		[map setNextInstruction:next updatePos:NO];
@@ -431,7 +456,7 @@
 }
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
-	
+	nbWrongWay=0;
 	if([instructions count]>0){
 		[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];
 		Instruction *s=[instructions objectAtIndex:instrIndex];
