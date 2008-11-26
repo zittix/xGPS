@@ -9,6 +9,9 @@
 #import "iPhone3GController.h"
 #define USE_UI
 
+@interface CLLocation (toIgnore2dot1FirmwareError)
+-(double)speed;
+@end
 @implementation iPhone3GController
 
 - (BOOL)EnableGPS {
@@ -67,6 +70,10 @@
 		return self;
 	}
 	isConnected=YES;
+	
+	//Check if speed is supported
+	
+	
 	chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 	return self;
 }
@@ -81,39 +88,42 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-	//NSLog(@"SPeed: %f",[newLocation speed]);
-	if(oldLocation!=nil) {
-		CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
-		NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
-		lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
-		if(dt>0.0f && dx>3.0f) {
-			//NSLog(@"Available speed");
-			
-			double speed=dx/dt;
-							
+	if(![newLocation respondsToSelector:@selector(speed)]) {
+		if(oldLocation!=nil) {
+			CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
+			NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
+			lastTimeStamp=oldLocation.timestamp.timeIntervalSince1970;
+			if(dt>0.0f && dx>3.0f) {
+				//NSLog(@"Available speed");
+				
+				double speed=dx/dt;
+				
 				gps_data.fix.speed=speed;
 				speedHasBeenUpdated=YES;
-
-			
-			if(gps_data.fix.speed>60)
+				
+				
+				if(gps_data.fix.speed>60)
+					gps_data.fix.speed=0.0;
+			}else {
 				gps_data.fix.speed=0.0;
+			}
+			
 		}else {
 			gps_data.fix.speed=0.0;
 		}
-		
-	}else {
-		gps_data.fix.speed=0.0;
+	} else {
+		gps_data.fix.speed=[newLocation speed];
+		if(gps_data.fix.speed<0) gps_data.fix.speed=0;
 	}
-
 	gps_data.fix.latitude=newLocation.coordinate.latitude;
 	gps_data.fix.longitude=newLocation.coordinate.longitude;
 	gps_data.fix.altitude=newLocation.altitude;
 	chMsg.state=POS;
-
+	
 	[delegate gpsChanged:chMsg];
 	chMsg.state=SPEED;
 	[delegate gpsChanged:chMsg];
-
+	
 	
 	//Update signal quality
 	signalQuality=100;
@@ -129,9 +139,9 @@
 	} else if(newLocation.horizontalAccuracy==kCLLocationAccuracyThreeKilometers) {
 		signalQuality-=80;
 	}
-			
+	
 	if(signalQuality<0) signalQuality=0;
-
+	
 	chMsg.state=SIGNAL_QUALITY;
 	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 }

@@ -33,7 +33,6 @@
 	[mapview setZoom: 7];
 	self.view.multipleTouchEnabled=YES;
 	[self.view addSubview: mapview];
-	[mapview setPassDoubleFingersEvent:YES];
 	[progress setBtnSelector:@selector(cancelDownload) withDelegate:db];
 	mapview.mapRotationEnabled=NO;
 	downloading=NO;

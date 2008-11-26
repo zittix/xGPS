@@ -129,7 +129,7 @@
  Then the distance from C to P = |s|*L.
  
  */
--(float)distanceBetween:(PositionObj*)p and:(PositionObj*)p2 {
+-(double)distanceBetween:(PositionObj*)p and:(PositionObj*)p2 {
 	double latitudeArc  = (p.x - p2.x) * DEG_TO_RAD;
 	double longitudeArc = (p.y - p2.y) * DEG_TO_RAD;
     double latitudeH = sin(latitudeArc * 0.5);
@@ -178,14 +178,14 @@
 	[MapView getXYOffsetfrom:p.x andLon:p.y toPositionX:&offxc andY:&offyc withZoom:0];
 	c.x=cx+offxc/256.0;
 	c.y=cy+offyc/256.0;
-	float remainingDist=-1;
+	double remainingDist=-1;
 	PositionObj *groad1=nil;
 	PositionObj *groad2=nil;
 	int i;
 	//int counterIterRoad=0;
 	//int counterIterInstr=0;
 	for(int j=0;j<2;j++) {
-		//float minDist=-1;
+		//double minDist=-1;
 		//int found=-1;
 		
 		if(previousSegement>=0)
@@ -216,12 +216,12 @@
 			double r = r_numerator / (r_denomenator);
 			if(r>0 && r<1) {
 				//
-				float px = a.x + r*(b.x-a.x);
-				float py = a.y + r*(b.y-a.y);
+				double px = a.x + r*(b.x-a.x);
+				double py = a.y + r*(b.y-a.y);
 				
 				
 				//Compute the distance between (px,py)=p2 and p => must be +- 8 meters
-				float p2lat,p2lon;
+				double p2lat,p2lon;
 				int to_x=(int)px;
 				int to_y=(int)py;
 				int to_offx=(int)((px-to_x)*256.0);
@@ -229,7 +229,7 @@
 				[MapView getLatLonfromXY:to_x andY:to_y withXOffset:to_offx andYOffset:to_offy toLat:&p2lat andLon:&p2lon withZoom:0];
 				c_p2=[c_p2 initWithLatitude:p2lat longitude:p2lon];
 				
-				//float dist=[self distanceBetween:p and:p2];
+				//double dist=[self distanceBetween:p and:p2];
 				
 				double dist=fabs([c_p getDistanceFrom:c_p2]);
 				
@@ -277,11 +277,11 @@
 	
 	/*3*/
 	Instruction *next=nil;
-	float distNext=-1;
+	double distNext=-1;
 	
 	for(i=i+1;i<[roadPoints count];i++) {
 		for(int k=0;k<2;k++) {
-			//float minDist=-1;
+			//double minDist=-1;
 			//int found=-1;
 			int j;
 			if(previousInstruction>=0)
@@ -291,7 +291,7 @@
 			for(j;j<[instructions count];j++) {
 				//counterIterInstr++;
 				Instruction *instr=[instructions objectAtIndex:j];
-				float dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
+				double dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
 				if(dist>=0 && dist<=2 && previousInstruction<=j){
 					distNext=dist;
 					next=instr;
@@ -363,8 +363,8 @@
 			NSArray *p_arr=[currentPos componentsSeparatedByString:@","];
 			
 			if([p_arr count]==3) {
-				float lon=[[p_arr objectAtIndex:0] floatValue];
-				float lat=[[p_arr objectAtIndex:1] floatValue];
+				double lon=[[p_arr objectAtIndex:0] doubleValue];
+				double lat=[[p_arr objectAtIndex:1] doubleValue];
 				PositionObj *p=[PositionObj positionWithX:lat y:lon];
 				
 				if(currentDescr!=nil) {
@@ -412,8 +412,8 @@
 		for(NSString* prop in p_arr) {
 			NSArray *p_arr2=[prop componentsSeparatedByString:@","];
 			if([p_arr2 count]==3) {
-				float lon=[[p_arr2 objectAtIndex:0] floatValue];
-				float lat=[[p_arr2 objectAtIndex:1] floatValue];
+				double lon=[[p_arr2 objectAtIndex:0] doubleValue];
+				double lat=[[p_arr2 objectAtIndex:1] doubleValue];
 				PositionObj *p=[PositionObj positionWithX:lat y:lon];
 				//NSLog(@"Point %f %f",lat,lon);
 				[roadPoints addObject:p];

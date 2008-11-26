@@ -17,7 +17,7 @@
 @synthesize tiledb;
 -(id)init {
 	if((self=[super init])) {
-		NSLog(@"MainView controller init...");
+		//NSLog(@"MainView controller init...");
 		tiledb=[xGPSAppDelegate tiledb];
 		gpsPos=[[PositionObj alloc] init];
 		[[xGPSAppDelegate gpsmanager] setDelegate:self];
@@ -132,8 +132,8 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:YES];
 	self.title=NSLocalizedString(@"Map","Map");
-	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
-	[[NSUserDefaults standardUserDefaults] setFloat:[mapview getCurrentPos].y forKey:kSettingsLastPosY];
+	[[NSUserDefaults standardUserDefaults] setDouble:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
+	[[NSUserDefaults standardUserDefaults] setDouble:[mapview getCurrentPos].y forKey:kSettingsLastPosY];
 	
 }
 -(void)viewWillAppear:(BOOL)animated {
@@ -172,7 +172,7 @@
 		}
 		[self presentModalViewController:licenseView animated:YES];
 	}
-	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] floatForKey:kSettingsLastPosY]];
+	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosY]];
 	if(p.x==0.0f && p.y==0.0f) {
 		p.x=46.5833333;
 		p.y=6.55;
@@ -192,8 +192,8 @@
 	
 	//[UIView beginAnimations:nil context:nil];	
 	//[UIView setAnimationDidStopSelector:@selector(endRotation:::)];
-	//float sx=self.view.frame.size.width/mapview.frame.size.height;
-	//float sy=(self.view.frame.size.height-44.0)/mapview.frame.size.width;
+	//double sx=self.view.frame.size.width/mapview.frame.size.height;
+	//double sy=(self.view.frame.size.height-44.0)/mapview.frame.size.width;
 	//mapview.transform=CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI/2.0),sy,sx);
 	//mapview.transform=CGAffineTransformMakeRotation(M_PI/2.0);
 	//mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0);
@@ -338,7 +338,7 @@
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];
 }
--(void)nextDirectionDistanceChanged:(float)dist {
+-(void)nextDirectionDistanceChanged:(double)dist {
 	
 }
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
@@ -402,7 +402,7 @@
 			APPDELEGATE.directions.pos=gpsPos;
 			break;
 		}case SPEED: {
-			float speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;
+			double speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;
 			//TODO: settings based
 			speedms*=3.6f;
 			if(speedms>3)

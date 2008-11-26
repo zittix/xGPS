@@ -56,7 +56,7 @@
 }
 
 
--(void)setSpeed:(float)speed {
+-(void)setSpeed:(double)speed {
 	//1 mph = 1.609 km/h
 	if(miles)
 		speed*=0.62150404f;

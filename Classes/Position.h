@@ -10,20 +10,20 @@
 
 @interface PositionObj : NSObject
 {
-	float x;
-	float y;
+	double x;
+	double y;
 	int tileX;
 	int tileY;
 	int xoff;
 	int yoff;
 }
-@property (nonatomic) float x;
-@property (nonatomic) float y;
+@property (nonatomic) double x;
+@property (nonatomic) double y;
 @property (nonatomic) int yoff;
 @property (nonatomic) int xoff;
 @property (nonatomic) int tileX;
 @property (nonatomic) int tileY;
-+(PositionObj*)positionWithX:(float)x y:(float)y;
++(PositionObj*)positionWithX:(double)x y:(double)y;
 @end
 
 @interface TileCoord : NSObject

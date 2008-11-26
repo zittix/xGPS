@@ -15,7 +15,7 @@
 @synthesize xoff;
 @synthesize tileX;
 @synthesize tileY;
-+(PositionObj*)positionWithX:(float)x y:(float)y {
++(PositionObj*)positionWithX:(double)x y:(double)y {
 	PositionObj *p=[[PositionObj alloc] init];
 	p.x=x;
 	p.y=y;

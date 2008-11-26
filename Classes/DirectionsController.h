@@ -24,7 +24,7 @@
 @protocol DirectionsControllerDelegate
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
 -(void)nextDirectionChanged:(Instruction*)instr;
--(void)nextDirectionDistanceChanged:(float)dist;
+-(void)nextDirectionDistanceChanged:(double)dist;
 @end
 
 @interface DirectionsController: NSObject<DrivingInstructionMovingProtocol> {

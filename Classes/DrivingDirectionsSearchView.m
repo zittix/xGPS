@@ -111,7 +111,8 @@
 		from.text=@"Ch. du Marais 9 1031 Mex";
 	}
 	//to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
-	to.text=@"Zermatt, Switzerland";
+	//to.text=@"Zermatt, Switzerland";
+	to.text=@"Ch. des Mémises 1031 Mex";
 }
 - (void)didMoveToSuperview {
 	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];

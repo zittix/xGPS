@@ -17,5 +17,5 @@
 	BOOL miles;
 }
 -(id) initWithFrame:(CGRect)f;
--(void)setSpeed:(float)speed;
+-(void)setSpeed:(double)speed;
 @end
