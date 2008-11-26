@@ -306,7 +306,7 @@
 	Instruction *next=nil;
 	double distNext=-1;
 	
-	for(i+1;i<[roadPoints count];i++) {
+	for(i=i+1;i<[roadPoints count];i++) {
 		for(int k=0;k<2;k++) {
 			int j;
 			if(previousInstruction>=0)
