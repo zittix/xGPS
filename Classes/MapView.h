@@ -43,7 +43,7 @@
 	BOOL mapRotationEnabled;
 	ZoomView *assocZoomview;
 	//int debugRoadStep;
-	
+	BOOL useGPSBall;
 	CGPoint pDepForMapSelection;
 	CGPoint pEndForMapSelection;
 }

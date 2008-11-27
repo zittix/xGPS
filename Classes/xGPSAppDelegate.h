@@ -26,6 +26,7 @@
 #define kSettingsGPSLog @"gpslog"
 #define kSettingsSpeedUnit @"speedunit"
 #define kSettingsDirBookmarksDBVersion @"dirbookmarkversion"
+#define kSettingsUseGPSBall @"usegpsball"
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;

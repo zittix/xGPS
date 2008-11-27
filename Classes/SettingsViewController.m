@@ -7,7 +7,7 @@
 //
 
 #import "SettingsViewController.h"
-
+#import "TitleValueCell.h"
 #import "xGPSAppDelegate.h"
 #include "GPXLogger.h"
 @implementation SettingsViewController
@@ -140,47 +140,31 @@
 			}break;
 		}
 	}
-	
+	NSLog(id);
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
 	
 	if (cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
 		cell.selectionStyle =UITableViewCellSelectionStyleNone;
+
 		switch(indexPath.section) {
-			case 0: switch(indexPath.row) {
+							case 0: switch(indexPath.row) {
 				case 0:
+					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell.selectionStyle =UITableViewCellSelectionStyleNone;
 					cell.text=NSLocalizedString(@"Manage maps",@"Manage maps row in settings");
 					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					cell.accessoryAction=@selector(showMapsManager:);
 					break;
 				case 1:	
 				{
-					UILabel *label;
-					UILabel *value;
-					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-					cell.accessoryAction=@selector(showMapsTypeSelector:);
-					label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0, 180.0, 25.0)] autorelease];
-					label.tag = 2;
-					label.font = [UIFont boldSystemFontOfSize:16.0];
-					label.textAlignment = UITextAlignmentLeft;
-					label.backgroundColor=[UIColor clearColor];
-					label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-					value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
-					value.tag = 1;
-					
-					value.font = [UIFont systemFontOfSize:16.0];
-					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-					value.backgroundColor=[UIColor clearColor];
-					
-					value.textColor=VALUE_COLOR;
-					value.textAlignment=UITextAlignmentRight;
-					value.text=@"Google Maps";
-					[cell.contentView addSubview:value];
-					label.text=NSLocalizedString(@"Maps type",@"Manage maps row in settings");
-					[cell.contentView addSubview:label];
-					//[label release];
-					//[value release];
+					TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell2.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+					cell2.accessoryAction=@selector(showMapsTypeSelector:);
+					cell2.value=@"Google Maps";
+					cell2.title=NSLocalizedString(@"Maps type",@"Manage maps row in settings");
+					cell=cell2;
 				}
 					break;
 				case 2:	

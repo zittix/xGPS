@@ -27,12 +27,12 @@
 }
 -(void)setNextInstruction:(Instruction*)i updatePos:(BOOL)b {
 	if(i!=nil) {
-	posDrivingInstruction.x=i.pos.x;
-	posDrivingInstruction.y=i.pos.y;
-	if(b) {
-		pos.x=posDrivingInstruction.x;
-		pos.y=posDrivingInstruction.y;	
-	}
+		posDrivingInstruction.x=i.pos.x;
+		posDrivingInstruction.y=i.pos.y;
+		if(b) {
+			pos.x=posDrivingInstruction.x;
+			pos.y=posDrivingInstruction.y;	
+		}
 	} else {
 		posDrivingInstruction.x=posDrivingInstruction.y=0;
 	}
@@ -139,14 +139,17 @@
 		mapRotation=0;
 		//debugRoadStep=-1;
 		[self setMultipleTouchEnabled:YES];
+		useGPSBall=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsUseGPSBall];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gpsBallChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
+		
 	}
 	return self;
 }
-
-- (void)layoutSubviews {
-	//tiledLayer.frame=self.frame;
-	
+-(void)gpsBallChanged:(NSNotification *)notif {
+	useGPSBall=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsUseGPSBall];
+	[self refreshMap];
 }
+
 -(void)refreshMap {
 	[self setNeedsDisplay];
 }
@@ -168,8 +171,8 @@
 }
 -(void)setPosSearch:(PositionObj*)p {
 	if(p!=nil) {
-	posSearch.x=p.x;
-	posSearch.y=p.y;
+		posSearch.x=p.x;
+		posSearch.y=p.y;
 	} else {
 		posSearch.x=posSearch.y=0;
 	}
@@ -739,12 +742,12 @@
 			//Draw the line
 			
 			/*if(!addedPrev) {
-				if(i>0) {
-					points[j]=CGPointMake(prevx,prevy);
-					j++;
-				}
-				addedPrev=YES;
-			}*/
+			 if(i>0) {
+			 points[j]=CGPointMake(prevx,prevy);
+			 j++;
+			 }
+			 addedPrev=YES;
+			 }*/
 			
 			points[j]=CGPointMake(posXPin,posYPin);
 			j++;
@@ -799,66 +802,75 @@
 		
 		double posXPin=drawOrigin.x+(x-centerTileX)*TILE_SIZE-(xoff)+(xoff2);
 		double posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);
-		double posXPin2=cosr*posXPin - posYPin*sinr;
-		double posYPin2=sinr*posXPin + posYPin*cosr;
-		if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
+		
+		if(useGPSBall) {
 			
-			//Project
-			//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
+			[imgPinRef drawAtPoint: CGPointMake(posXPin-10, posYPin+10) withContext:context];
+		} else{
 			
-			//CGContextScaleCTM(context, 1, -1);
-			//CGContextRotateCTM(context, -mapRotation);
-			//CGContextScaleCTM(context, 1, -1);
-			//CGContextRotateCTM(context, -mapRotation);
-			// CGContextScaleCTM(context, 1, -1);
-			// [imgPinRef drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+7.5) withContext:context];
-			// CGContextScaleCTM(context, 1, -1);
-			//	CGContextRotateCTM(context, gpsHeading);
 			
-			CGPoint ind[4];
-			ind[0].x=0;
-			ind[0].y=10;
-			ind[1].x=-20;
-			ind[1].y=20*0.666+10;
-			ind[2].x=0;
-			ind[2].y=-40+10;
-			ind[3].x=20;
-			ind[3].y=20*0.666+10;
-			double alpha=gpsHeading+mapRotation-2*M_PI;
-			double cosa=cos(alpha);
-			double sina=sin(alpha);
-			for(int i=0;i<4;i++) {
-				double posx=ind[i].x;
-				double posy=ind[i].y;
+			
+			double posXPin2=cosr*posXPin - posYPin*sinr;
+			double posYPin2=sinr*posXPin + posYPin*cosr;
+			if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
 				
-				ind[i].x=-cosa*posx -posy*sina;
-				ind[i].y=+sina*posx - posy*cosa;
+				//Project
+				//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 				
-				//Translate to correct plage
-				ind[i].x+=posXPin2;
-				ind[i].y-=posYPin2;
+				//CGContextScaleCTM(context, 1, -1);
+				//CGContextRotateCTM(context, -mapRotation);
+				//CGContextScaleCTM(context, 1, -1);
+				//CGContextRotateCTM(context, -mapRotation);
+				// CGContextScaleCTM(context, 1, -1);
+				// [imgPinRef drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+7.5) withContext:context];
+				// CGContextScaleCTM(context, 1, -1);
+				//	CGContextRotateCTM(context, gpsHeading);
+				
+				CGPoint ind[4];
+				ind[0].x=0;
+				ind[0].y=10;
+				ind[1].x=-20;
+				ind[1].y=20*0.666+10;
+				ind[2].x=0;
+				ind[2].y=-40+10;
+				ind[3].x=20;
+				ind[3].y=20*0.666+10;
+				double alpha=gpsHeading+mapRotation-2*M_PI;
+				double cosa=cos(alpha);
+				double sina=sin(alpha);
+				for(int i=0;i<4;i++) {
+					double posx=ind[i].x;
+					double posy=ind[i].y;
+					
+					ind[i].x=-cosa*posx -posy*sina;
+					ind[i].y=+sina*posx - posy*cosa;
+					
+					//Translate to correct plage
+					ind[i].x+=posXPin2;
+					ind[i].y-=posYPin2;
+				}
+				
+				CGContextBeginPath(context);
+				CGContextAddLines(context,ind,4);
+				CGContextClosePath(context);
+				CGContextSetRGBFillColor(context,0,0,1,0.6);
+				CGContextFillPath(context);
+				CGContextBeginPath(context);
+				CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
+				CGContextClosePath(context);
+				CGContextSetRGBFillColor(context,0,0,1,1);
+				CGContextFillPath(context);
+				
+				//CGContextScaleCTM(context, 1, -1);
+				//CGContextRotateCTM(context, mapRotation);
+				//CGContextScaleCTM(context, 1, -1);
+				
+				//NSLog(@"Pos: %f %f",posXPin,posYPin);
 			}
-			
-			CGContextBeginPath(context);
-			CGContextAddLines(context,ind,4);
-			CGContextClosePath(context);
-			CGContextSetRGBFillColor(context,0,0,1,0.6);
-			CGContextFillPath(context);
-			CGContextBeginPath(context);
-			CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
-			CGContextClosePath(context);
-			CGContextSetRGBFillColor(context,0,0,1,1);
-			CGContextFillPath(context);
-			
-			//CGContextScaleCTM(context, 1, -1);
-			//CGContextRotateCTM(context, mapRotation);
-			//CGContextScaleCTM(context, 1, -1);
-			
-			//NSLog(@"Pos: %f %f",posXPin,posYPin);
 		}
 	}
 	//CGContextScaleCTM(context, 1, -1);
-
+	
 	
 	
 	/*
@@ -889,12 +901,12 @@
 	
 	CGContextRestoreGState(context);
 	
-
+	
 	/*CGContextBeginPath(context);
-	CGContextAddArc(context,rect.size.width-72,rect.size.height-52,4,0,2*M_PI,0);
-	CGContextClosePath(context);
-	CGContextSetRGBFillColor(context, 0, 1, 0, 1);
-	CGContextDrawPath(context,kCGPathFill);*/
+	 CGContextAddArc(context,rect.size.width-72,rect.size.height-52,4,0,2*M_PI,0);
+	 CGContextClosePath(context);
+	 CGContextSetRGBFillColor(context, 0, 1, 0, 1);
+	 CGContextDrawPath(context,kCGPathFill);*/
 	CGContextScaleCTM(context, 1, -1);
 	[imgGoogleLogo drawAtPoint:CGPointMake(rect.size.width-72,rect.size.height-2) withContext:context];
 	//CGContextScaleCTM(context, 1, -1);
@@ -912,7 +924,7 @@
 		return;
 	CGContextSetRGBFillColor(context,1,0,0,0.4);
 	CGContextSetRGBStrokeColor(context,1,0,0,0.8);
-
+	
 	CGSize size;
 	
 	//if(orientation==0 || orientation==180) {

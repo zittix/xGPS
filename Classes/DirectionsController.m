@@ -265,7 +265,7 @@
 	[c_p release];
 	
 	if(groad1==nil || groad2==nil) {
-			//If we have not found were we are, check if we are near the starting point
+		//If we have not found were we are, check if we are near a point defining road
 		road1=[roadPoints objectAtIndex:0];
 		
 		double tmp=[self distanceBetween:road1 and:p];

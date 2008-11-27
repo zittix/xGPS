@@ -16,6 +16,7 @@
 		4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F05000E87C49000D75E7D /* GeoEncoder.m */; };
 		4E0F487B0E8518EC001B6F51 /* license.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F487A0E8518EC001B6F51 /* license.html */; };
 		4E0F48E30E851C3C001B6F51 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E0F48E20E851C3C001B6F51 /* Localizable.strings */; };
+		4E1744300EDE94E10062ED18 /* TitleValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E17442F0EDE94E10062ED18 /* TitleValueCell.m */; };
 		4E23964B0E40EF800062A352 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E2396490E40EF800062A352 /* icon.png */; };
 		4E2396740E40F6AB0062A352 /* MapTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E23966F0E40F6AB0062A352 /* MapTile.m */; };
 		4E2396750E40F6AB0062A352 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2396710E40F6AB0062A352 /* MapView.m */; };
@@ -110,6 +111,8 @@
 		4E109D940EDAEDB0009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pl; path = pl.lproj/about.html; sourceTree = "<group>"; };
 		4E109D950EDAEDE1009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E109D960EDAEDEE009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pl; path = pl.lproj/license.html; sourceTree = "<group>"; };
+		4E17442E0EDE94E10062ED18 /* TitleValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueCell.h; sourceTree = "<group>"; };
+		4E17442F0EDE94E10062ED18 /* TitleValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueCell.m; sourceTree = "<group>"; };
 		4E2396490E40EF800062A352 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		4E23966E0E40F6AB0062A352 /* MapTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTile.h; sourceTree = "<group>"; };
 		4E23966F0E40F6AB0062A352 /* MapTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTile.m; sourceTree = "<group>"; };
@@ -380,6 +383,8 @@
 				4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */,
 				4E74D8510EDD946800C2FEAC /* WrongWayView.h */,
 				4E74D8520EDD946800C2FEAC /* WrongWayView.m */,
+				4E17442E0EDE94E10062ED18 /* TitleValueCell.h */,
+				4E17442F0EDE94E10062ED18 /* TitleValueCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */,
 				4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */,
 				4E74D8530EDD946800C2FEAC /* WrongWayView.m in Sources */,
+				4E1744300EDE94E10062ED18 /* TitleValueCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

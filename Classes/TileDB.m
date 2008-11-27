@@ -168,7 +168,7 @@
 
 - (void)asyncTileGet {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	NSLog(@"Async Tile Get Thread - Started");
+	//NSLog(@"Async Tile Get Thread - Started");
 	//NSMutableArray *arrD=[NSMutableArray arrayWithCapacity:5];
 	while(runAsync) {
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -201,7 +201,7 @@
 			sqlite3_clear_bindings(checkTileStmt);
 			[dbLock unlock];
 			if (r != SQLITE_ROW) {
-				if([self downloadTile:p.x atY:p.y withZoom:p.zoom]) {
+				if([self downloadTile:p.x atY:p.y withZoom:p.zoom silent:NO]) {
 					if(p.delegate!=nil) {
 						[p.delegate performSelectorOnMainThread:@selector(tileDownloaded) withObject:nil waitUntilDone:NO];
 					}
@@ -219,7 +219,7 @@
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	}
 	
-	NSLog(@"Async Tile Get Thread - Stoped");
+	//NSLog(@"Async Tile Get Thread - Stoped");
 	[pool release];
 }
 
@@ -253,7 +253,7 @@
 			NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 			if(cancelDownload) {
 				[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-				NSLog(@"Canceled");
+				//NSLog(@"Canceled");
 				[pool release];
 				return -1;
 			}
@@ -267,7 +267,7 @@
 			sqlite3_clear_bindings(checkTileStmt);
 			[dbLock unlock];
 			if (r != SQLITE_ROW) {
-				if(![self downloadTile:i atY:j withZoom:zoom]) {
+				if(![self downloadTile:i atY:j withZoom:zoom silent:YES]) {
 					ret=0;
 					
 				} else {
@@ -286,14 +286,14 @@
 			//}
 			if(nbDownloaded%300==0 && !cancelDownload) {
 				nbDownloaded=0;
-				NSLog(@"Sleeping...");
+				//NSLog(@"Sleeping...");
 				//[NSThread sleepUntilDate:[[NSDate date] addTimeInterval: 3]]; //Sleep 3s.. Google seems more happy :-)
-				NSLog(@"Go to WORK !");
+				//NSLog(@"Go to WORK !");
 			}
 			
 			if(cancelDownload) {
 				[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
-				NSLog(@"Canceled");
+				//NSLog(@"Canceled");
 				[pool release];
 				return -1;
 			}
@@ -301,7 +301,7 @@
 			[pool release];
 		}
 	}
-	NSLog(@"Tiles downloaded !");
+	//NSLog(@"Tiles downloaded !");
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	
 	return ret;
@@ -363,7 +363,7 @@
 }
 
 
--(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom {
+-(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom silent:(BOOL)silent {
 	if(offline || closed) return NO;
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
 	NSString *lang=langMap;
@@ -416,8 +416,19 @@
 		//NSLog(@"Download error");
 		[dl release];
 		[pool release];
+		
+		if(!silent) {
+			if(!showedError) {
+				showedError=YES;
+				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to download a part of the map. Check your internet connection.",@"Tile DL error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+				[alert show];
+			}
+		}
+		
+		
 		return NO;
 	}
+	showedError=NO;
 	//NSLog(@"Tile got at (%d bytes)!",[imageData length]);
 	[dbLock lock];
 	if(sqlite3_bind_int(insertTileStmt,1,x)!=SQLITE_OK)
