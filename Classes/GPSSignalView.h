@@ -13,6 +13,7 @@
 	UIImage *red;
 	UIImage *orange;
 	UIImage *green;
+	UIImage *grey;
 	int quality;
 	UILabel *gps;
 }

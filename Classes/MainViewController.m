@@ -79,9 +79,9 @@
 	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-52,5,47,40)];
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
-	[signalView setQuality:0];
+	[signalView setQuality:-1];
 	speedview.hidden=YES;
-	
+	signalView.hidden=YES;
 	cancelSearch=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelDrivingSearch:)];
 	savedDirections=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bookmarks",@"Saved direction bookmarks") style:UIBarButtonItemStyleBordered target:self action:@selector(showBooksmarksView:)];
 	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
@@ -115,15 +115,17 @@
 	[self presentModalViewController:navigationController animated:YES];
 	[navigationController release];
 }
--(void)hideSpeed {
+-(void)hideGPSStatus {
 	[UIView beginAnimations:nil context:nil];
 	//[speedview removeFromSuperview];
 	speedview.hidden=YES;
+	signalView.hidden=YES;
 	[UIView commitAnimations];
 }
--(void)showSpeed {
+-(void)showGPSStatus {
 	[UIView beginAnimations:nil context:nil];
 	//[self.view addSubview:speedview];
+	signalView.hidden=NO;
 	speedview.hidden=NO;
 	[UIView commitAnimations];
 }
@@ -166,7 +168,7 @@
 			[mapview setHasGPSPos:YES];
 			[mapview setGPSTracking:YES];
 			[mapview refreshMap];
-			[self showSpeed];
+			[self showGPSStatus];
 		} else{
 			[mapview setHasGPSPos:NO];
 			btnEnableGPS.style=UIBarButtonItemStyleBordered;
@@ -241,7 +243,7 @@
 	}
 	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 		btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
-		[self showSpeed];
+		[self showGPSStatus];
 		
 		[mapview setHasGPSPos:YES];
 		if(wasEnabled) {
@@ -251,8 +253,8 @@
 	} else{
 		[mapview setHasGPSPos:NO];
 		[mapview refreshMap];
-		[self hideSpeed];
-		[signalView setQuality:0];
+		[self hideGPSStatus];
+		[signalView setQuality:-1];
 		btnEnableGPS.style=UIBarButtonItemStyleBordered;
 		btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 	}
@@ -383,7 +385,7 @@
 		}
 	}
 	else {
-		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions ∫from the server: %@",@"Network error message"),[err localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions from the server: %@",@"Network error message"),[err localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[alert show];
 		[drivingSearchView setEditingKeyBoard];
 	}
@@ -402,8 +404,8 @@
 				NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
 				[toolbar setItems:btn animated:YES];	
 				[mapview setHasGPSPos:NO];
-				[signalView setQuality:0];
-				[self hideSpeed];
+				[signalView setQuality:-1];
+				[self hideGPSStatus];
 			}
 			
 			break;
@@ -425,16 +427,16 @@
 		}break;
 		case STATE_CHANGE:
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
-				[self showSpeed];
+				[self showGPSStatus];
 				btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
 				[mapview setGPSTracking:YES];
 				btnEnableGPS.style=UIBarButtonItemStyleDone;
 			} else{
 				[mapview setHasGPSPos:NO];
-				[self hideSpeed];
+				[self hideGPSStatus];
 				btnEnableGPS.style=UIBarButtonItemStyleBordered;
 				btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
-				[signalView setQuality:0];
+				[signalView setQuality:-1];
 				[mapview setGPSTracking:NO];
 			}
 			break;

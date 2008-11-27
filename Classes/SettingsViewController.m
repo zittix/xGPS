@@ -140,16 +140,16 @@
 			}break;
 		}
 	}
-	NSLog(id);
+	//NSLog(id);
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
 	
 	if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-		cell.selectionStyle =UITableViewCellSelectionStyleNone;
-
+		//cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+		//cell.selectionStyle =UITableViewCellSelectionStyleNone;
+		
 		switch(indexPath.section) {
-							case 0: switch(indexPath.row) {
+			case 0: switch(indexPath.row) {
 				case 0:
 					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
 					cell.selectionStyle =UITableViewCellSelectionStyleNone;
@@ -160,54 +160,38 @@
 				case 1:	
 				{
 					TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell=cell2;
 					cell2.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					cell2.accessoryAction=@selector(showMapsTypeSelector:);
 					cell2.value=@"Google Maps";
 					cell2.title=NSLocalizedString(@"Maps type",@"Manage maps row in settings");
-					cell=cell2;
+					
 				}
 					break;
 				case 2:	
 				{
-					UILabel *label;
-					UILabel *value;
-					
-					label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0, 180.0, 25.0)] autorelease];
-					label.tag = 2;
-					label.font = [UIFont boldSystemFontOfSize:16.0];
-					label.textAlignment = UITextAlignmentLeft;
-					label.backgroundColor=[UIColor clearColor];
-					label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-					value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
-					value.tag = 1;
-					
-					value.font = [UIFont systemFontOfSize:16.0];
-					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-					value.backgroundColor=[UIColor clearColor];
-					
-					value.textColor=VALUE_COLOR;
-					value.textAlignment=UITextAlignmentRight;
-					value.text=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
-					
-					[cell.contentView addSubview:value];
-					label.text=NSLocalizedString(@"Downloaded maps size",@"Downloaded maps size of settings view");
-					[cell.contentView addSubview:label];
-					//[label release];
-					//[value release];
+					TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell=cell2;				
+					cell2.value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
+					cell2.title=NSLocalizedString(@"Downloaded maps size",@"Downloaded maps size of settings view");
 				}
 					break;
 				case 3:	
 				{
+					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell.selectionStyle =UITableViewCellSelectionStyleNone;
 					cell.text=NSLocalizedString(@"Delete downloaded maps",@"Delete downloaded maps in settings");
 					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					cell.selectionStyle=UITableViewCellSelectionStyleBlue;
 				}
 					break;
 				case 4: {
+					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell.selectionStyle =UITableViewCellSelectionStyleNone;
 					cell.text=NSLocalizedString(@"Offline mode",@"Offline mode");
 					UISwitch *value;
 					
-					value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+					value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
 					value.tag = 1;
 					[value addTarget:self action:@selector(switchOfflineChanged:) forControlEvents:UIControlEventValueChanged];
 					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -217,10 +201,12 @@
 					
 				}break;
 				case 5: {
+					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell.selectionStyle =UITableViewCellSelectionStyleNone;
 					cell.text=NSLocalizedString(@"Map auto-rotation",@"Map auto-rotation");
 					UISwitch *value;
 					
-					value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+					value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
 					value.tag = 1;
 					[value addTarget:self action:@selector(switchRotationChanged:) forControlEvents:UIControlEventValueChanged];
 					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -230,6 +216,8 @@
 					
 				}break;
 				case 6: {
+					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell.selectionStyle =UITableViewCellSelectionStyleNone;
 					cell.text=NSLocalizedString(@"Receive maps",@"Receive maps");
 					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 				}break;
@@ -237,73 +225,28 @@
 			case 1: {
 				switch(indexPath.row) {
 					case 0: {
-						UILabel *label;
-						UILabel *value;
-						
-						label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0,150.0, 25.0)] autorelease];
-						label.tag = 2;
-						label.font = [UIFont boldSystemFontOfSize:16.0];
-						label.textAlignment = UITextAlignmentLeft;
-						label.backgroundColor=[UIColor clearColor];
-						label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						[cell.contentView addSubview:label];
-						
-						
-						value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
-						value.tag = 1;
-						
-						value.font = [UIFont systemFontOfSize:16.0];
-						value.backgroundColor=[UIColor clearColor];
-						value.textColor=VALUE_COLOR;
-						[cell.contentView addSubview:value];
-						value.textAlignment=UITextAlignmentRight;
-						label.text=NSLocalizedString(@"GPS to use",@"Title in setting for gps to use");	
-						value.text=[[xGPSAppDelegate gpsmanager] GetCurrentGPSName];
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell=cell2;
+						cell2.title=NSLocalizedString(@"GPS to use",@"Title in setting for gps to use");	
+						cell2.value=[[xGPSAppDelegate gpsmanager] GetCurrentGPSName];
 						
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-						//[label release];
-						//[value release];
 					} break;
 					case 1:	{
-						UILabel *label;
-						UILabel *value;
-						
-						label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0, 120.0, 25.0)] autorelease];
-						label.tag = 2;
-						label.font = [UIFont boldSystemFontOfSize:16.0];
-						label.textAlignment = UITextAlignmentLeft;
-						label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						
-						
-						[cell.contentView addSubview:label];
-						
-						value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
-						value.tag = 1;
-						
-						value.font = [UIFont systemFontOfSize:16.0];
-						value.textAlignment = UITextAlignmentLeft;
-						
-						value.textColor=VALUE_COLOR;
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						
-						
-						label.text=NSLocalizedString(@"GPS state",@"Title in setting for gps state");
+						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell=cell2;					
+						cell2.title=NSLocalizedString(@"GPS state",@"Title in setting for gps state");
 						
 						
 						if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							value.text=NSLocalizedString(@"Connected",@"GPS State");	
+							cell2.value=NSLocalizedString(@"Connected",@"GPS State");	
 						else if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							value.text=NSLocalizedString(@"Disconnected",@"GPS State");	
+							cell2.value=NSLocalizedString(@"Disconnected",@"GPS State");	
 						else
-							value.text=NSLocalizedString(@"No License",@"GPS State");	
-						
-						value.textAlignment=UITextAlignmentRight;
-						[cell.contentView addSubview:value];
-						//[label release];
-						//[value release];
+							cell2.value=NSLocalizedString(@"No License",@"GPS State");	
 					} break;
 					case 2:
+						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
 						cell.selectionStyle=UITableViewCellSelectionStyleBlue;
 						
 						cell.text=NSLocalizedString(@"Reset GPS",@"Reset GPS Button");
@@ -312,10 +255,12 @@
 						break;
 						
 					case 3: {
+						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell.selectionStyle =UITableViewCellSelectionStyleNone;
 						cell.text=NSLocalizedString(@"GPX Logging",@"Activate GPX Logging");
 						UISwitch *value;
 						
-						value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
 						value.tag = 1;
 						[value addTarget:self action:@selector(switchGPSLoggingChanged:) forControlEvents:UIControlEventValueChanged];
 						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -329,97 +274,54 @@
 			case 2: {
 				switch(indexPath.row) {
 					case 0: {
-						UILabel *label;
-						UILabel *value;
-						
-						label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0,150.0, 25.0)] autorelease];
-						label.tag = 2;
-						label.font = [UIFont boldSystemFontOfSize:16.0];
-						label.textAlignment = UITextAlignmentLeft;
-						label.backgroundColor=[UIColor clearColor];
-						label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						[cell.contentView addSubview:label];
-						
-						
-						value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
-						value.tag = 1;
-						
-						value.font = [UIFont systemFontOfSize:16.0];
-						value.backgroundColor=[UIColor clearColor];
-						value.textColor=VALUE_COLOR;
-						[cell.contentView addSubview:value];
-						value.textAlignment=UITextAlignmentRight;
-						label.text=NSLocalizedString(@"Language",@"Language to use for driving directions");	
+						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell=cell2;
+						cell2.title=NSLocalizedString(@"Language",@"Language to use for driving directions");	
 						NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
-						value.text=@"English";
+						cell2.value=@"English";
 						if(lang!=nil) {
 							if([lang isEqualToString:@"fr"])
-								value.text=@"Français";
+								cell2.value=@"Français";
 							else if([lang isEqualToString:@"de"])
-								value.text=@"Deutsch";
+								cell2.value=@"Deutsch";
 							else if([lang isEqualToString:@"it"])
-								value.text=@"Italiano";
+								cell2.value=@"Italiano";
 							else if([lang isEqualToString:@"iw"])
-								value.text=@"עברית";
+								cell2.value=@"עברית";
 							else if([lang isEqualToString:@"zh-TW"])
-								value.text=@"繁體中文";
+								cell2.value=@"繁體中文";
 							
 						}
 						
-						
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-						//[label release];
-						//[value release];
+						
 					} break;
 				}
 			}break;
 			case 3: {
 				switch(indexPath.row) {
 					case 0: {
+						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell.selectionStyle =UITableViewCellSelectionStyleNone;
 						cell.text=NSLocalizedString(@"About xGPS",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
 					case 1: {
-						UILabel *label;
-						UILabel *value;
-						
-						label = [[[UILabel alloc] initWithFrame:CGRectMake(10.0, 10.0, 120.0, 25.0)] autorelease];
-						label.tag = 2;
-						label.font = [UIFont boldSystemFontOfSize:16.0];
-						label.textAlignment = UITextAlignmentLeft;
-						label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell=cell2;						
+						cell2.title=NSLocalizedString(@"Version",@"Version string");
 						
 						
-						[cell.contentView addSubview:label];
-						
-						value = [[[UILabel alloc] initWithFrame:CGRectMake(135.0, 10.0, 180.0, 25.0)] autorelease];
-						value.tag = 1;
-						
-						value.font = [UIFont systemFontOfSize:16.0];
-						value.textAlignment = UITextAlignmentLeft;
-						
-						value.textColor=VALUE_COLOR;
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						
-						
-						label.text=NSLocalizedString(@"Version",@"Version string");
-						
-						
-						value.text=@"1.1.0 Test";	
-						
-						value.textAlignment=UITextAlignmentRight;
-						[cell.contentView addSubview:value];
-						//[label release];
-						//[value release];
+						cell2.value=@"1.1.0 Test";	
 						
 					} break;
 					case 2: {
+						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell.selectionStyle =UITableViewCellSelectionStyleNone;
 						cell.text=NSLocalizedString(@"Prevent Sleep Mode",@"Prevent Sleep Mode");
 						UISwitch *value;
 						
-						value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
 						value.tag = 1;
 						[value addTarget:self action:@selector(switchSleepMode:) forControlEvents:UIControlEventValueChanged];
 						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -429,10 +331,12 @@
 						
 					}break;
 					case 3: {
+						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+						cell.selectionStyle =UITableViewCellSelectionStyleNone;
 						cell.text=NSLocalizedString(@"Use Miles unit",@"Use Miles unit");
 						UISwitch *value;
 						
-						value = [[[UISwitch alloc] initWithFrame:CGRectMake(220.0, 8.0, 70.0, 25.0)] autorelease];
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
 						value.tag = 1;
 						[value addTarget:self action:@selector(switchUnit:) forControlEvents:UIControlEventValueChanged];
 						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -455,7 +359,7 @@
 					break;
 				case 2:	
 				{
-					((UILabel*)[cell viewWithTag:1]).text=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
+					((TitleValueCell*)cell).value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
 				}
 					break;
 				case 4:	
@@ -468,20 +372,18 @@
 			case 1: {
 				switch(indexPath.row) {
 					case 0: {
-						UILabel *value=(UILabel*)[cell.contentView viewWithTag:1];
-						value.text=[[xGPSAppDelegate gpsmanager] GetCurrentGPSName];
+						((TitleValueCell*)cell).value=[[xGPSAppDelegate gpsmanager] GetCurrentGPSName];
 					} break;
 					case 1:	{
-						UILabel *value=(UILabel*)[cell.contentView viewWithTag:1];
 						//NSLog(@"Current gps name: %@",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].name);
 						//NSLog(@"Current gps state license: %d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense);
 						//NSLog(@"Current gps state connected: %d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected);
 						if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							value.text=NSLocalizedString(@"Connected",@"GPS State");	
+							((TitleValueCell*)cell).value=NSLocalizedString(@"Connected",@"GPS State");	
 						else if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							value.text=NSLocalizedString(@"Disconnected",@"GPS State");	
+							((TitleValueCell*)cell).value=NSLocalizedString(@"Disconnected",@"GPS State");	
 						else
-							value.text=NSLocalizedString(@"No License",@"GPS State");	
+							((TitleValueCell*)cell).value=NSLocalizedString(@"No License",@"GPS State");	
 						
 					} break;
 				}
@@ -489,20 +391,19 @@
 			case 2: {
 				switch(indexPath.row) {
 					case 0: {
-						UILabel *value=(UILabel*)[cell.contentView viewWithTag:1];	
 						NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
-						value.text=@"English";
+						((TitleValueCell*)cell).value=@"English";
 						if(lang!=nil) {
 							if([lang isEqualToString:@"fr"])
-								value.text=@"Français";
+								((TitleValueCell*)cell).value=@"Français";
 							else if([lang isEqualToString:@"de"])
-								value.text=@"Deutsch";
+								((TitleValueCell*)cell).value=@"Deutsch";
 							else if([lang isEqualToString:@"it"])
-								value.text=@"Italiano";
+								((TitleValueCell*)cell).value=@"Italiano";
 							else if([lang isEqualToString:@"iw"])
-								value.text=@"עברית";
+								((TitleValueCell*)cell).value=@"עברית";
 							else if([lang isEqualToString:@"zh-TW"])
-								value.text=@"繁體中文";
+								((TitleValueCell*)cell).value=@"繁體中文";
 						}
 					} break;
 				}

@@ -127,6 +127,11 @@
 	
 	//Update signal quality
 	signalQuality=100;
+	
+	if(newLocation.horizontalAccuracy>=0) gps_data.fix.mode=2;
+	if(newLocation.verticalAccuracy>=0) gps_data.fix.mode=3;
+
+	
 	if(newLocation.verticalAccuracy<0) signalQuality-=40;
 	if(newLocation.horizontalAccuracy<0) signalQuality-=90;
 	

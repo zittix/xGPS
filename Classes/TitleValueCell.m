@@ -15,7 +15,7 @@
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
         // Initialization code
 		titlelbl=[[UILabel alloc] initWithFrame:CGRectMake(10,5,(self.frame.size.width-25)/2.0,(self.frame.size.height-10))];
-		titlelbl.adjustsFontSizeToFitWidth=YES;
+		//titlelbl.adjustsFontSizeToFitWidth=YES;
 		titlelbl.font = [UIFont boldSystemFontOfSize:16.0];
 		titlelbl.textAlignment = UITextAlignmentLeft;
 		titlelbl.backgroundColor=[UIColor clearColor];
@@ -60,6 +60,10 @@
 }
 -(void)setTitle:(NSString*)t {
 	titlelbl.text=t;
+	CGSize size=[titlelbl sizeThatFits:CGSizeMake(3*(self.frame.size.width-25)/4.0+20,self.frame.size.height-10)];
+	size.height=self.frame.size.height-10;
+	titlelbl.frame=CGRectMake(10, 5, size.width+20, size.height);
+	valuelbl.frame=CGRectMake(10+titlelbl.frame.size.width+5,5,self.frame.size.width-titlelbl.frame.size.width-25,(self.frame.size.height-10));
 }
 -(void)setValue:(NSString*)v {
 	valuelbl.text=v;

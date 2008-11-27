@@ -20,7 +20,7 @@
 		red=[[UIImage imageNamed:@"red.png"] retain];
 		green=[[UIImage imageNamed:@"green.png"] retain];
 		orange=[[UIImage imageNamed:@"orange.png"] retain];
-		
+		grey=[[UIImage imageNamed:@"gps_grey.png"] retain];
 		[self setBackgroundColor:[UIColor clearColor]];
 		gps=[[UILabel alloc] initWithFrame:CGRectMake(0,22,frame.size.width,18)];
 		gps.font=[UIFont fontWithName:@"Helvetica" size:14];
@@ -28,6 +28,7 @@
 		gps.text=@"GPS";
 		gps.backgroundColor=[UIColor clearColor];
 		gps.textColor=[UIColor darkGrayColor];
+		quality=-1;
 		[self addSubview:gps];
     }
     return self;
@@ -38,12 +39,15 @@
     // Drawing code
 	//CGContextRef context=UIGraphicsGetCurrentContext();
 	//CGContextSetShadow(context, CGSizeMake(2,-2), 2);
-	if(quality<33)
-	[red drawAtPoint:CGPointMake(0,0)];
+	
+	if(quality<0)
+		[grey drawAtPoint:CGPointMake(0,0)];	
+	else if(quality<33 && quality>=0)
+		[red drawAtPoint:CGPointMake(0,0)];
 	else if(quality >=33 && quality < 66)
-	[orange drawAtPoint:CGPointMake(0,0)];
+		[orange drawAtPoint:CGPointMake(0,0)];
 	else
-	[green drawAtPoint:CGPointMake(0,0)];
+		[green drawAtPoint:CGPointMake(0,0)];
 	
 	[super drawRect:rect];
 }

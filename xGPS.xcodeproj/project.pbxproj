@@ -55,6 +55,7 @@
 		4E9670FE0EBA5840008E7917 /* GPXLogger.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E9670FD0EBA5840008E7917 /* GPXLogger.c */; };
 		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
 		4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */; };
+		4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA9803C0EDEC95D00AAB014 /* gps_grey.png */; };
 		4EAF78B50EB3AB440078B697 /* iGPS360Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */; };
 		4EAF79FF0EB3C3750078B697 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAF79FE0EB3C3750078B697 /* Default.png */; };
 		4EBAF8F70E58CA84008916E9 /* notile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F20E58CA84008916E9 /* notile.png */; };
@@ -186,6 +187,7 @@
 		4E9A00950E8D51B90076EE44 /* FakeGPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeGPSController.m; sourceTree = "<group>"; };
 		4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDownloader.h; sourceTree = "<group>"; };
 		4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDownloader.m; sourceTree = "<group>"; };
+		4EA9803C0EDEC95D00AAB014 /* gps_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gps_grey.png; sourceTree = "<group>"; };
 		4EAF78B30EB3AB440078B697 /* iGPS360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGPS360Controller.h; sourceTree = "<group>"; };
 		4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGPS360Controller.m; sourceTree = "<group>"; };
 		4EAF79FE0EB3C3750078B697 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4EA9803C0EDEC95D00AAB014 /* gps_grey.png */,
 				4E74D8540EDD99B800C2FEAC /* wrongway.png */,
 				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
 				4E8F03310EBB5BD000994EA3 /* settingsIcon.png */,
@@ -495,6 +498,7 @@
 				4E8F03320EBB5BD000994EA3 /* settingsIcon.png in Resources */,
 				4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */,
 				4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */,
+				4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
