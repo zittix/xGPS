@@ -67,7 +67,7 @@
 	NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
 	[toolbar setItems:btn animated:YES];	
 	//92x100
-	settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped withMap:mapview withDB:tiledb];
+	settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self andMap:mapview];
 	searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	searchPlacesView.autoresizesSubviews=YES;

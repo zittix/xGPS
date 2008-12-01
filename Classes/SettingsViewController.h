@@ -17,16 +17,14 @@
 #import "NetworkReceiverViewController.h"
 #import "SettingsUIController.h"
 #import "SettingsGeneralController.h"
-@interface SettingsViewController : UITableViewController<UIActionSheetDelegate> {
-	MapsManagerView* mapsmanager;
-	MapView *_mapview;
+#import "SettingsMapsController.h"
+@interface SettingsViewController : UITableViewController {
 	GPSSelectorViewController *gpsselector;
-	TileDB *db;
 	DirectionsLanguageViewController *dirLangView;
 	NetworkReceiverViewController *receiverView;
 	SettingsUIController* uisettings;
 	SettingsGeneralController* generalsettings;
-
+	SettingsMapsController* mapssettings;
 }
-- (id)initWithStyle:(UITableViewStyle)style withMap:(MapView*)mapview withDB:(TileDB*)_db;
+- (id)initWithStyle:(UITableViewStyle)style;
 @end

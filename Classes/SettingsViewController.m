@@ -13,12 +13,9 @@
 @implementation SettingsViewController
 #define VALUE_COLOR [UIColor colorWithRed:0.235 green:0.2549 blue:0.49019 alpha:1]
 
-- (id)initWithStyle:(UITableViewStyle)style withMap:(MapView*)mapview withDB:(TileDB*)_db{
+- (id)initWithStyle:(UITableViewStyle)style {
 	if (self = [super initWithStyle:style]) {
-		_mapview=mapview;
-		db=_db;
 		self.title=NSLocalizedString(@"Settings",@"Settings Button");
-		//NSLog(@"View center: %f %f",self.view.center.x,self.view.center.y);
 	}
 	return self;
 }
@@ -26,9 +23,7 @@
 
 - (void)dealloc {
 	[super dealloc];
-	if(mapsmanager!=nil) {
-		[mapsmanager release];
-	}
+
 	if(gpsselector!=nil) {
 		[gpsselector release];
 	}
@@ -56,20 +51,6 @@
 		case 0: return 3;
 		case 1: return 7;
 		default: return 0;
-	}
-}
--(void)showMapsManager:(id)sender {
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) {
-		UIAlertView *msg=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"You cannot download maps while you are in the offline mode.",@"Error download maps offline") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-		[msg show];
-	}else{
-		
-		if(mapsmanager==nil) {
-			mapsmanager=[[MapsManagerView alloc] initWithDB:db];
-		}
-		
-		[self.navigationController pushViewController:mapsmanager animated:YES];
-		[mapsmanager updateCurrentPos:[_mapview getCurrentPos]];
 	}
 }
 -(void)showGPSSelector:(id)sender {
@@ -240,12 +221,7 @@
 	return cell;
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(buttonIndex==0) {
-		[[xGPSAppDelegate tiledb] flushMaps];
-		[self.tableView reloadData];
-	}
-}
+
 -(void)showLangDirSelector:(id)sender {
 #define picker_height 260.0f
 	if(dirLangView==nil) {
@@ -269,6 +245,11 @@
 			uisettings=[[SettingsUIController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:uisettings animated:YES];
 			
+	}else if(indexPath.section==1 && indexPath.row==1) {
+		if(mapssettings==nil)
+			mapssettings=[[SettingsMapsController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:mapssettings animated:YES];
+		
 	}
 }
 
