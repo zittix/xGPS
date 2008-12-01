@@ -354,6 +354,8 @@
 	[UIView commitAnimations];
 	[APPDELEGATE.directions clearResult];
 	currentSearchType=0;
+	[wrongWay stopAnimate];
+	[wrongWay removeFromSuperview];
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];

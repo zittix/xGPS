@@ -23,13 +23,6 @@
 
 - (void)dealloc {
 	[super dealloc];
-
-	if(gpsselector!=nil) {
-		[gpsselector release];
-	}
-	if(dirLangView!=nil) {
-		[dirLangView release];
-	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -222,19 +215,6 @@
 }
 
 
--(void)showLangDirSelector:(id)sender {
-#define picker_height 260.0f
-	if(dirLangView==nil) {
-		dirLangView=[[DirectionsLanguageViewController alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-picker_height,self.view.frame.size.width,picker_height+44.0f) andController:self];
-	}
-	//NSLog(@"Height: %f, y=%f height=%f",self.view.bounds.size.height,self.view.bounds.size.height-picker_height-44.0f,picker_height+44.0f);
-	[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-	//[self.navigationController presentModalViewController:dirLangView animated:YES];
-	[UIView beginAnimations:nil context:nil];
-	
-	[self.view addSubview:dirLangView];
-	[UIView commitAnimations];
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.section==1 && indexPath.row==0) {
 		if(generalsettings==nil)

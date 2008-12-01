@@ -67,7 +67,7 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 
@@ -76,8 +76,9 @@
 	switch(section) {
 		case 0:
 		case 1:
-			return 1;
 		case 2:
+			return 1;
+		case 3:
 			return 2;
 	}
 	return 0;
@@ -102,6 +103,9 @@
 					else
 				return NSLocalizedString(@"Distances and speed will be showed with the meter unit (km/h and meters).",@"");
 				break;
+			case 2:
+				return NSLocalizedString(@"The language setting is used to localize the driving directions, the maps and the place/city search results.",@"");
+				break;
 			default:
 				return nil;
 				break;
@@ -114,7 +118,8 @@
 	switch(indexPath.section) {
 		case 0: CellIdentifier=@"sectGen_Idle"; break;
 		case 1: CellIdentifier=@"sectGen_speedunit"; break;
-		case 2: 
+		case 2: CellIdentifier=@"sectGen_Lang"; break;
+		case 3: 
 			switch(indexPath.row) {
 				case 0:	CellIdentifier=@"sectGen_about"; break;
 				case 1:	CellIdentifier=@"sectGen_ver"; break;
@@ -154,6 +159,13 @@
 				
 			} break;
 			case 2: {
+				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+				cell.selectionStyle=UITableViewCellSelectionStyleNone;
+				
+				cell.text=NSLocalizedString(@"Language",@"");
+				cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+			}break;
+			case 3: {
 				switch(indexPath.row) {
 					case 0: {
 						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
@@ -188,12 +200,15 @@
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row==0 && indexPath.section==2) {
+    if(indexPath.row==0 && indexPath.section==3) {
 		if(aboutView==nil)
 			aboutView=[[AboutViewController alloc] init];
 		[self.navigationController pushViewController:aboutView animated:YES];
+	} else if(indexPath.row==0 && indexPath.section==2) {
+		if(langView==nil)
+			langView=[[LanguageViewController alloc] init];
+		[self.navigationController pushViewController:langView animated:YES];
 	}
 }
 

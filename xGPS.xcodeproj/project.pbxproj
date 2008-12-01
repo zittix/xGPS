@@ -82,7 +82,7 @@
 		4EE0F2DC0E6AAA0100BBA3FD /* ZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */; };
 		4EE1356A0E7E63D800A5E181 /* GoogleBadge.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE135690E7E63D800A5E181 /* GoogleBadge.png */; };
 		4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1D57C0EDB0BA80007AEAE /* track.gpx */; };
-		4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */; };
+		4EF25DCE0E897FA300AB6194 /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -241,8 +241,8 @@
 		4EE135690E7E63D800A5E181 /* GoogleBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleBadge.png; sourceTree = "<group>"; };
 		4EEC564F0EC1FCE00093386D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EF1D57C0EDB0BA80007AEAE /* track.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = track.gpx; sourceTree = "<group>"; };
-		4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsLanguageViewController.h; sourceTree = "<group>"; };
-		4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsLanguageViewController.m; sourceTree = "<group>"; };
+		4EF25DCC0E897FA300AB6194 /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
+		4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -397,8 +397,8 @@
 				4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */,
 				4E8F02B40EBB544F00994EA3 /* DrivingDirectionsSearchView.h */,
 				4E8F02B50EBB544F00994EA3 /* DrivingDirectionsSearchView.m */,
-				4EF25DCC0E897FA300AB6194 /* DirectionsLanguageViewController.h */,
-				4EF25DCD0E897FA300AB6194 /* DirectionsLanguageViewController.m */,
+				4EF25DCC0E897FA300AB6194 /* LanguageViewController.h */,
+				4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */,
 				4E90C0F10E8D3CAE003F6B23 /* GPSSignalView.h */,
 				4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */,
 				4E9077F90E9CE48800B0F6BC /* AboutViewController.h */,
@@ -598,7 +598,7 @@
 				4E90BD630E82E95F007D8F7C /* LicenseViewController.m in Sources */,
 				4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */,
 				4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */,
-				4EF25DCE0E897FA300AB6194 /* DirectionsLanguageViewController.m in Sources */,
+				4EF25DCE0E897FA300AB6194 /* LanguageViewController.m in Sources */,
 				4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */,
 				4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */,
 				4E9077FB0E9CE48800B0F6BC /* AboutViewController.m in Sources */,

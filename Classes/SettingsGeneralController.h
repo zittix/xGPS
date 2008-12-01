@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AboutViewController.h";
-
+#import "AboutViewController.h"
+#import "LanguageViewController.h"
 @interface SettingsGeneralController : UITableViewController {
 	AboutViewController *aboutView;
+	LanguageViewController *langView;
 }
 
 @end

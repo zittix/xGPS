@@ -13,14 +13,12 @@
 #import "MapView.h"
 #import "GPSSelectorViewController.h"
 #import "TileDB.h"
-#import "DirectionsLanguageViewController.h"
 #import "NetworkReceiverViewController.h"
 #import "SettingsUIController.h"
 #import "SettingsGeneralController.h"
 #import "SettingsMapsController.h"
 @interface SettingsViewController : UITableViewController {
 	GPSSelectorViewController *gpsselector;
-	DirectionsLanguageViewController *dirLangView;
 	NetworkReceiverViewController *receiverView;
 	SettingsUIController* uisettings;
 	SettingsGeneralController* generalsettings;
