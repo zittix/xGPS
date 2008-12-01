@@ -83,7 +83,9 @@
 - (BOOL)GetSerial {
 	return YES;
 }
-
+-(int)refreshRate {
+	return 5;
+}
 -(void) threadSerialGPS {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	//Do only if serial port is ok

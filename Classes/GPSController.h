@@ -57,6 +57,7 @@ void writeDebugMessage(const char*msg);
 @property(nonatomic) int version_major;
 @property(nonatomic) int version_minor;
 @property(nonatomic) BOOL isConnected;
+@property(nonatomic,readonly) int refreshRate;
 @property(nonatomic,readonly) BOOL debug;
 @property(nonatomic) BOOL isEnabled;
 @property(nonatomic) struct gps_data_t gps_data;

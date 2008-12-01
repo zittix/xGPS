@@ -16,6 +16,4 @@
 
 }
 -(id)initWithFrame:(CGRect)f andController:(UITableViewController*)cnt;
--(void)enable;
--(void)disable;
 @end

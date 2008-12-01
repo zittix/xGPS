@@ -39,7 +39,8 @@
 +(xGPSAppDelegate*)appdelegate;
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
-@property (nonatomic, retain,readonly,getter=tiledb) TileDB* tiledb;
-@property (nonatomic, retain,readonly,getter=directions) DirectionsController* directions;
-@property (nonatomic, retain,readonly,getter=dirbookmarks) DirectionsBookmarks* dirbookmarks;
+@property (nonatomic, readonly,getter=tiledb) TileDB* tiledb;
+@property (nonatomic, readonly,getter=gpsmanager) GPSManager* gpsmanager;
+@property (nonatomic, readonly,getter=directions) DirectionsController* directions;
+@property (nonatomic, readonly,getter=dirbookmarks) DirectionsBookmarks* dirbookmarks;
 @end

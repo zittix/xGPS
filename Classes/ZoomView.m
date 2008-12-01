@@ -24,7 +24,7 @@
 		[zoomout setImage:btnImage forState:UIControlStateNormal];
 
 
-		[zoomin setAlpha:0.7];
+		[zoomin setAlpha:1];
 		[zoomout setAlpha:0.2];
 		[zoomin setImage:btnImageOut forState:UIControlStateNormal];
 
@@ -43,9 +43,9 @@
 	[delegate zoomout:self];
 }
 -(void)setZoomoutState:(BOOL)s  {
-	[zoomin setAlpha:s ? 0.7 : 0.2];
+	[zoomin setAlpha:s ? 1 : 0.2];
 }
 -(void)setZoominState:(BOOL)s {
-	[zoomout setAlpha:s ? 0.7 : 0.2];
+	[zoomout setAlpha:s ? 1 : 0.2];
 }
 @end

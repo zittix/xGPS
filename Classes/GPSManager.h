@@ -33,5 +33,5 @@
 -(NSString*)GetGPSName:(int)id;
 -(void)setDelegate:(id)del;
 @property(readonly) int idGPS;
-
+@property(readonly,nonatomic,getter=GetCurrentGPS) GPSController* currentGPS;
 @end

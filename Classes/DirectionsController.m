@@ -281,7 +281,7 @@
 	
 	if(groad1==nil || groad2==nil) {
 		
-		if(nbWrongWay>3){
+		if(nbWrongWay>5*APPDELEGATE.gpsmanager.currentGPS.refreshRate){
 			if(previousInstruction==[instructions count]-1) {
 				
 				[delegate hideWrongWay];

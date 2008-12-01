@@ -223,6 +223,9 @@ error:
 -(NSString*)name {
 		return @"Invalid";
 }
+-(int)refreshRate {
+	return 1;
+}
 - (id)initWithDelegate:(id)del {
 	if((self=[super init])) {
 	delegate=del;

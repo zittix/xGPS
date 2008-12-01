@@ -66,7 +66,9 @@ static DirectionsBookmarks* dirbookmarks;
 +(GPSManager*)gpsmanager {
 	return gpsmanager;
 }
-
+-(GPSManager*)gpsmanager {
+	return gpsmanager;
+}
 - (void)dealloc {
 	[navController release];
 	[window release];
