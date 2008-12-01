@@ -26,6 +26,12 @@ static DirectionsBookmarks* dirbookmarks;
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog])
 	startGPXLogEngine();
 	
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<2) {
+		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsVersion];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsShowSpeed];
+	}
+		
+	
 	staticObj=self;
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 	dirbookmarks=[[DirectionsBookmarks alloc] init];

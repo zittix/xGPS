@@ -49,7 +49,6 @@
 
 -(void)dismissView {
 	[self removeFromSuperview];
-	[(SettingsViewController*)_cnt setEnabled:YES];	
 }
 -(void)didMoveToSuperview {
 	int row=0;

@@ -68,6 +68,9 @@
 		4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00E0EE469A80077553B /* rm_reception_na.png */; };
 		4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00F0EE469A80077553B /* rm_reception_none.png */; };
 		4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA0100EE469A80077553B /* rm_reception_poor.png */; };
+		4ECFA0F70EE477E40077553B /* SettingsUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA0F60EE477E40077553B /* SettingsUIController.m */; };
+		4ECFA0FC0EE478760077553B /* Save in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA0FB0EE478760077553B /* Save */; };
+		4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
 		4EE0F1CD0E6A958000BBA3FD /* nmea_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */; };
@@ -208,6 +211,11 @@
 		4ECFA00E0EE469A80077553B /* rm_reception_na.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_na.png; sourceTree = "<group>"; };
 		4ECFA00F0EE469A80077553B /* rm_reception_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_none.png; sourceTree = "<group>"; };
 		4ECFA0100EE469A80077553B /* rm_reception_poor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_poor.png; sourceTree = "<group>"; };
+		4ECFA0F50EE477E40077553B /* SettingsUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsUIController.h; sourceTree = "<group>"; };
+		4ECFA0F60EE477E40077553B /* SettingsUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsUIController.m; sourceTree = "<group>"; };
+		4ECFA0FB0EE478760077553B /* Save */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Save; sourceTree = "<group>"; };
+		4ECFA2310EE47EE20077553B /* SettingsGeneralController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsGeneralController.h; sourceTree = "<group>"; };
+		4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsGeneralController.m; sourceTree = "<group>"; };
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -394,12 +402,17 @@
 				4E9077FA0E9CE48800B0F6BC /* AboutViewController.m */,
 				4E8F26500EC5F51600401A4E /* NavigationInstructionView.h */,
 				4E8F26510EC5F51600401A4E /* NavigationInstructionView.m */,
+				4ECFA2310EE47EE20077553B /* SettingsGeneralController.h */,
+				4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */,
 				4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */,
 				4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */,
 				4E74D8510EDD946800C2FEAC /* WrongWayView.h */,
 				4E74D8520EDD946800C2FEAC /* WrongWayView.m */,
 				4E17442E0EDE94E10062ED18 /* TitleValueCell.h */,
 				4E17442F0EDE94E10062ED18 /* TitleValueCell.m */,
+				4ECFA0F50EE477E40077553B /* SettingsUIController.h */,
+				4ECFA0F60EE477E40077553B /* SettingsUIController.m */,
+				4ECFA0FB0EE478760077553B /* Save */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -515,6 +528,7 @@
 				4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */,
 				4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */,
 				4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */,
+				4ECFA0FC0EE478760077553B /* Save in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +608,8 @@
 				4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */,
 				4E74D8530EDD946800C2FEAC /* WrongWayView.m in Sources */,
 				4E1744300EDE94E10062ED18 /* TitleValueCell.m in Sources */,
+				4ECFA0F70EE477E40077553B /* SettingsUIController.m in Sources */,
+				4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

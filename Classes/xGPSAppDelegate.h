@@ -22,12 +22,15 @@
 #define kSettingsMapsLanguage @"mapslanguage"
 #define kSettingsSleepMode @"preventsleepmode"
 #define kSettingsDBVersion @"dbversion"
+#define kSettingsVersion @"settingsversion"
 #define kSettingsMapRotation @"maprotation"
 #define kSettingsGPSLog @"gpslog"
 #define kSettingsSpeedUnit @"speedunit"
 #define kSettingsDirBookmarksDBVersion @"dirbookmarkversion"
 #define kSettingsUseGPSBall @"usegpsball"
+#define kSettingsShowSpeed @"showspeed"
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
+#define VERSION "1.1.0 Test"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;

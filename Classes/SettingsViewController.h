@@ -14,18 +14,19 @@
 #import "GPSSelectorViewController.h"
 #import "TileDB.h"
 #import "DirectionsLanguageViewController.h"
-#import "AboutViewController.h"
 #import "NetworkReceiverViewController.h"
+#import "SettingsUIController.h"
+#import "SettingsGeneralController.h"
 @interface SettingsViewController : UITableViewController<UIActionSheetDelegate> {
 	MapsManagerView* mapsmanager;
 	MapView *_mapview;
 	GPSSelectorViewController *gpsselector;
 	TileDB *db;
 	DirectionsLanguageViewController *dirLangView;
-	AboutViewController* aboutView;
-	BOOL enabled;
 	NetworkReceiverViewController *receiverView;
+	SettingsUIController* uisettings;
+	SettingsGeneralController* generalsettings;
+
 }
 - (id)initWithStyle:(UITableViewStyle)style withMap:(MapView*)mapview withDB:(TileDB*)_db;
--(void) setEnabled:(BOOL)v;
 @end

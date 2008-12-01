@@ -19,7 +19,6 @@
 		db=_db;
 		self.title=NSLocalizedString(@"Settings",@"Settings Button");
 		//NSLog(@"View center: %f %f",self.view.center.x,self.view.center.y);
-		enabled=YES;
 	}
 	return self;
 }
@@ -39,9 +38,9 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 4;
+	return 2;
 }
-
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch(section) {
 		case 0: return NSLocalizedString(@"Maps",@"Maps title in settings");
@@ -51,13 +50,11 @@
 			
 		default: return @"";
 	}
-}
+}*/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
-		case 0: return 7;
-		case 1: return 4;
-		case 2: return 1;
-		case 3: return 4;
+		case 0: return 3;
+		case 1: return 7;
 		default: return 0;
 	}
 }
@@ -111,83 +108,32 @@
 	NSString *id=@"";
 	switch(indexPath.section) {
 		case 0: switch(indexPath.row) {
-			case 0:	id=@"sectMaps_manage"; break;
-			case 1:	id=@"sectMaps_type"; break;
-			case 2:	id=@"sectMaps_size"; break;
-			case 3:	id=@"sectMaps_delete"; break;
-			case 4:	id=@"sectMaps_offline"; break;
-			case 5:	id=@"sectMaps_receive"; break;
+			case 0:	id=@"sectQuick_offline"; break;
+			case 1:	id=@"sectQuick_autorot"; break;
+			case 2:	id=@"sectQuick_gpx"; break;
 		} break;
 		case 1: {
 			switch(indexPath.row) {
-				case 0:	id=@"sectGPS_gpstype"; break;
-				case 1:	id=@"sectGPS_gpsstate"; break;
-				case 2:	id=@"sectGPS_gpsreset"; break;
-				case 3:	id=@"sectGPS_gpslog"; break;
-			}break;
-		}
-		case 2: {
-			switch(indexPath.row) {
-				case 0:	id=@"sectDrvDir_lang"; break;
-			}break;
-		}
-		case 3: {
-			switch(indexPath.row) {
-				case 0:	id=@"sectGen_about"; break;
-				case 1:	id=@"sectGen_ver"; break;
-				case 2:	id=@"sectGen_Idle"; break;
-				case 3: id=@"sectGen_speedunit"; break;
+				case 0:	id=@"general"; break;
+				case 1:	id=@"maps"; break;
+				case 2:	id=@"gps"; break;
+				case 3:	id=@"locations"; break;
+				case 4:	id=@"driving"; break;
+				case 5:	id=@"gpx"; break;
+				case 6:	id=@"ui"; break;
 			}break;
 		}
 	}
-	//NSLog(id);
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
 	
 	if (cell == nil) {
-		//cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-		//cell.selectionStyle =UITableViewCellSelectionStyleNone;
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+		cell.selectionStyle =UITableViewCellSelectionStyleNone;
 		
 		switch(indexPath.section) {
 			case 0: switch(indexPath.row) {
-				case 0:
-					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell.selectionStyle =UITableViewCellSelectionStyleNone;
-					cell.text=NSLocalizedString(@"Manage maps",@"Manage maps row in settings");
-					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-					cell.accessoryAction=@selector(showMapsManager:);
-					break;
-				case 1:	
-				{
-					TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell=cell2;
-					cell2.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-					cell2.accessoryAction=@selector(showMapsTypeSelector:);
-					cell2.value=@"Google Maps";
-					cell2.title=NSLocalizedString(@"Maps type",@"Manage maps row in settings");
-					
-				}
-					break;
-				case 2:	
-				{
-					TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell=cell2;				
-					cell2.value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
-					cell2.title=NSLocalizedString(@"Downloaded maps size",@"Downloaded maps size of settings view");
-				}
-					break;
-				case 3:	
-				{
-					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell.selectionStyle =UITableViewCellSelectionStyleNone;
-					cell.text=NSLocalizedString(@"Delete downloaded maps",@"Delete downloaded maps in settings");
-					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-					cell.selectionStyle=UITableViewCellSelectionStyleBlue;
-				}
-					break;
-				case 4: {
-					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell.selectionStyle =UITableViewCellSelectionStyleNone;
+				case 0: {
 					cell.text=NSLocalizedString(@"Offline mode",@"Offline mode");
 					UISwitch *value;
 					
@@ -196,13 +142,12 @@
 					[value addTarget:self action:@selector(switchOfflineChanged:) forControlEvents:UIControlEventValueChanged];
 					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
 					[cell.contentView addSubview:value];
-					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
 					//[value release];
-					
-				}break;
-				case 5: {
-					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell.selectionStyle =UITableViewCellSelectionStyleNone;
+					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
+					break;
+				}
+				case 1:	
+				{
 					cell.text=NSLocalizedString(@"Map auto-rotation",@"Map auto-rotation");
 					UISwitch *value;
 					
@@ -213,213 +158,88 @@
 					[cell.contentView addSubview:value];
 					value.on=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
 					//[value release];
+					break;
+				}
 					
-				}break;
-				case 6: {
-					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-					cell.selectionStyle =UITableViewCellSelectionStyleNone;
-					cell.text=NSLocalizedString(@"Receive maps",@"Receive maps");
-					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-				}break;
+				case 2:	
+				{
+					cell.text=NSLocalizedString(@"GPX Logging",@"Activate GPX Logging");
+					UISwitch *value;
+					
+					value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
+					value.tag = 1;
+					[value addTarget:self action:@selector(switchGPSLoggingChanged:) forControlEvents:UIControlEventValueChanged];
+					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+					[cell.contentView addSubview:value];
+					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog];
+					//[value release];
+				}
+				break;
 			} break;
 			case 1: {
 				switch(indexPath.row) {
 					case 0: {
-						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell=cell2;
-						cell2.title=NSLocalizedString(@"GPS to use",@"Title in setting for gps to use");	
-						cell2.value=[[xGPSAppDelegate gpsmanager] GetCurrentGPSName];
-						
+						cell.text=NSLocalizedString(@"General",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
 					case 1:	{
-						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell=cell2;					
-						cell2.title=NSLocalizedString(@"GPS state",@"Title in setting for gps state");
-						
-						
-						if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							cell2.value=NSLocalizedString(@"Connected",@"GPS State");	
-						else if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							cell2.value=NSLocalizedString(@"Disconnected",@"GPS State");	
-						else
-							cell2.value=NSLocalizedString(@"No License",@"GPS State");	
-					} break;
-					case 2:
-						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell.selectionStyle=UITableViewCellSelectionStyleBlue;
-						
-						cell.text=NSLocalizedString(@"Reset GPS",@"Reset GPS Button");
+						cell.text=NSLocalizedString(@"Maps",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-						cell.accessoryAction=@selector(resetGPS:);
+					} break;
+					case 2:	{
+						cell.text=NSLocalizedString(@"GPS",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+					} break;
+					case 3:
+						cell.text=NSLocalizedString(@"Locations",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+
 						break;
+					case 4:
+						cell.text=NSLocalizedString(@"Driving Directions",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
-					case 3: {
-						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell.selectionStyle =UITableViewCellSelectionStyleNone;
-						cell.text=NSLocalizedString(@"GPX Logging",@"Activate GPX Logging");
-						UISwitch *value;
+						break;
+					case 5:
+						cell.text=NSLocalizedString(@"GPX Logging",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
-						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
-						value.tag = 1;
-						[value addTarget:self action:@selector(switchGPSLoggingChanged:) forControlEvents:UIControlEventValueChanged];
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						[cell.contentView addSubview:value];
-						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog];
-						//[value release];
-						
-					}
+						break;
+					case 6:
+						cell.text=NSLocalizedString(@"User Interface",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+						break;
 				}break;
 			} break;
-			case 2: {
-				switch(indexPath.row) {
-					case 0: {
-						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell=cell2;
-						cell2.title=NSLocalizedString(@"Language",@"Language to use for driving directions");	
-						NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
-						cell2.value=@"English";
-						if(lang!=nil) {
-							if([lang isEqualToString:@"fr"])
-								cell2.value=@"Français";
-							else if([lang isEqualToString:@"de"])
-								cell2.value=@"Deutsch";
-							else if([lang isEqualToString:@"it"])
-								cell2.value=@"Italiano";
-							else if([lang isEqualToString:@"iw"])
-								cell2.value=@"עברית";
-							else if([lang isEqualToString:@"zh-TW"])
-								cell2.value=@"繁體中文";
-							
-						}
-						
-						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-						
-					} break;
-				}
-			}break;
-			case 3: {
-				switch(indexPath.row) {
-					case 0: {
-						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell.selectionStyle =UITableViewCellSelectionStyleNone;
-						cell.text=NSLocalizedString(@"About xGPS",@"");
-						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-					} break;
-					case 1: {
-						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell=cell2;						
-						cell2.title=NSLocalizedString(@"Version",@"Version string");
-						
-						
-						cell2.value=@"1.1.0 Test";	
-						
-					} break;
-					case 2: {
-						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell.selectionStyle =UITableViewCellSelectionStyleNone;
-						cell.text=NSLocalizedString(@"Prevent Sleep Mode",@"Prevent Sleep Mode");
-						UISwitch *value;
-						
-						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
-						value.tag = 1;
-						[value addTarget:self action:@selector(switchSleepMode:) forControlEvents:UIControlEventValueChanged];
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						[cell.contentView addSubview:value];
-						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode];
-						//[value release];
-						
-					}break;
-					case 3: {
-						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
-						cell.selectionStyle =UITableViewCellSelectionStyleNone;
-						cell.text=NSLocalizedString(@"Use Miles unit",@"Use Miles unit");
-						UISwitch *value;
-						
-						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
-						value.tag = 1;
-						[value addTarget:self action:@selector(switchUnit:) forControlEvents:UIControlEventValueChanged];
-						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-						[cell.contentView addSubview:value];
-						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
-						//[value release];
-						
-					}break;
-				}
-			}break;
 		}
 		
 	} else {
 		switch(indexPath.section) {
 			case 0: switch(indexPath.row) {
+				case 0:	
+				{
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
+				}
+					break;
 				case 1:	
 				{
-					//TODO: load settings
+					((UISwitch*)[cell viewWithTag:1]).on=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
 				}
 					break;
 				case 2:	
 				{
-					((TitleValueCell*)cell).value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog];
 				}
 					break;
-				case 4:	
-				{
-					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
-					((UISwitch*)[cell viewWithTag:1]).enabled=enabled;
-				}
-					break;
-			} break;
-			case 1: {
-				switch(indexPath.row) {
-					case 0: {
-						((TitleValueCell*)cell).value=[[xGPSAppDelegate gpsmanager] GetCurrentGPSName];
-					} break;
-					case 1:	{
-						//NSLog(@"Current gps name: %@",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].name);
-						//NSLog(@"Current gps state license: %d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense);
-						//NSLog(@"Current gps state connected: %d",[[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected);
-						if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							((TitleValueCell*)cell).value=NSLocalizedString(@"Connected",@"GPS State");	
-						else if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense)
-							((TitleValueCell*)cell).value=NSLocalizedString(@"Disconnected",@"GPS State");	
-						else
-							((TitleValueCell*)cell).value=NSLocalizedString(@"No License",@"GPS State");	
-						
-					} break;
-				}
-			} break;
-			case 2: {
-				switch(indexPath.row) {
-					case 0: {
-						NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
-						((TitleValueCell*)cell).value=@"English";
-						if(lang!=nil) {
-							if([lang isEqualToString:@"fr"])
-								((TitleValueCell*)cell).value=@"Français";
-							else if([lang isEqualToString:@"de"])
-								((TitleValueCell*)cell).value=@"Deutsch";
-							else if([lang isEqualToString:@"it"])
-								((TitleValueCell*)cell).value=@"Italiano";
-							else if([lang isEqualToString:@"iw"])
-								((TitleValueCell*)cell).value=@"עברית";
-							else if([lang isEqualToString:@"zh-TW"])
-								((TitleValueCell*)cell).value=@"繁體中文";
-						}
-					} break;
-				}
 			}
-		}	
+		}
 	}
 	
 	
 	// Configure the cell
 	return cell;
 }
--(void) setEnabled:(BOOL)v {
-	[self.tableView setScrollEnabled:v];
-	enabled=v;
-	[self.tableView reloadData];
-}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if(buttonIndex==0) {
 		[[xGPSAppDelegate tiledb] flushMaps];
@@ -438,35 +258,17 @@
 	
 	[self.view addSubview:dirLangView];
 	[UIView commitAnimations];
-	[self setEnabled:NO];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(!enabled) return;
-	if(indexPath.section==0 && indexPath.row==0) {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-		[self showMapsManager:self];
-	} else if(indexPath.section==1 && indexPath.row==2) {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] resetGPS];
-	}else if(indexPath.section==1 && indexPath.row==0) {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-		[self showGPSSelector:self];
-	} else if(indexPath.section==0 && indexPath.row==1) {
-		[self showMapsTypeSelector:self];	
-	}else if(indexPath.section==0 && indexPath.row==3) {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the downloaded maps ?",@"Delete downloaded maps question") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"Yes",@"Yes") otherButtonTitles:NSLocalizedString(@"No",@"No"),nil];
-		[act showInView:self.view];
-	}else if(indexPath.section==2 && indexPath.row==0) {
-		[self showLangDirSelector:self];	
-	}else if(indexPath.section==3 && indexPath.row==0) {
-		if(aboutView==nil)
-			aboutView=[[AboutViewController alloc] init];
-		[self.navigationController pushViewController:aboutView animated:YES];
-	}else if(indexPath.section==0 && indexPath.row==6) {
-		if(receiverView==nil)
-			receiverView=[[NetworkReceiverViewController alloc] init];
-		[self.navigationController pushViewController:receiverView animated:YES];
+	if(indexPath.section==1 && indexPath.row==0) {
+		if(generalsettings==nil)
+			generalsettings=[[SettingsGeneralController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:generalsettings animated:YES];
+	} else if(indexPath.section==1 && indexPath.row==6) {
+		if(uisettings==nil)
+			uisettings=[[SettingsUIController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:uisettings animated:YES];
+			
 	}
 }
 

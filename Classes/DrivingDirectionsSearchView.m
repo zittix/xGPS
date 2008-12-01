@@ -105,12 +105,6 @@
 	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Take position from:",@"Directions") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Address book",@""),NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS"),nil];
 	[action showInView:[self superview]];
 }
--(void)enable {
-
-}
--(void)disable {
-	
-}
 - (void)willMoveToSuperview:(UIView*)view {
 	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
 	
