@@ -145,7 +145,7 @@
 	//NSLog(@"DIr update pos");
 	//Check the next directions
 	
-	if(instructions==nil || [instructions count]<1 || [roadPoints count]<2) return;
+	if(instructions==nil || [instructions count]<1 || [roadPoints count]<2 || computing) return;
 	
 	
 	//We work in 4 phases
@@ -340,6 +340,9 @@
 	[c_b release];
 	
 }
+-(void)recompute {
+	[self drive:_from to:_to];
+}
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;
 	if([instructions count]>0 && instrIndex<[instructions count]-1) {
@@ -396,7 +399,10 @@
 					NSMutableString *tmp=(NSMutableString*)currentDescr;
 					[tmp replaceOccurrencesOfString:@"<br/>" withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
 				}
-				
+				if(currentPlacename!=nil) {
+					NSMutableString *tmp=(NSMutableString*)currentPlacename;
+					[tmp replaceOccurrencesOfString:@"  " withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
+				}
 				Instruction *r=[Instruction instrWithName:currentPlacename pos:p descr:currentDescr];
 				
 				[instructions addObject:r];
@@ -520,6 +526,12 @@
 	parsingPlace=NO;
 	computing=NO;
 	parsingLinestring=NO;
+}
+-(NSString*) from {
+	return _from;
+}
+-(NSString*) to {
+	return _to;
 }
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error

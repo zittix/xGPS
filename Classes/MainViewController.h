@@ -51,6 +51,7 @@
 -(void)cancelDrivingSearch:(id)sender ;
 -(void)showWrongWay;
 -(void)hideWrongWay;
+-(void)clearDirections;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;
 @property (nonatomic) int currentSearchType;

@@ -25,6 +25,7 @@
 		lbl.font=[UIFont boldSystemFontOfSize:14];
 		lbl.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		lbl.numberOfLines=0;
+		lbl.lineBreakMode=UILineBreakModeWordWrap;
 		lbl.shadowColor=[UIColor blackColor];
 		
     }

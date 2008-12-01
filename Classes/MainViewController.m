@@ -87,7 +87,7 @@
 	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
 	navView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	navView.delegate=APPDELEGATE.directions;
-	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(viewRect.size.width-140,100,-1,-1)];
+	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(viewRect.size.width-140,100,-1,-1) withDelegate:self];
 	navView.autoresizesSubviews=YES;
 	//wrongWay.autoresizingMask
 	APPDELEGATE.directions.map=mapview;
@@ -338,18 +338,22 @@
 			if(currentSearchType==1) {
 				[mapview setPosSearch:nil];
 			} else if(currentSearchType==2) {
-				[UIView beginAnimations:nil context:nil];	
-				[navView removeFromSuperview];
-				mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0f);
-				zoomview.frame=CGRectMake(10,10,38,83);
-				wrongWay.frame=CGRectMake(self.view.frame.size.width-140,100,wrongWay.frame.size.width,wrongWay.frame.size.height);
-				signalView.frame=CGRectMake(self.view.frame.size.width-52,5,47,40);
-				[UIView commitAnimations];
-				[APPDELEGATE.directions clearResult];
+				[self clearDirections];
 			}
 			currentSearchType=0;
 		}
 	}
+}
+-(void)clearDirections {
+	[UIView beginAnimations:nil context:nil];	
+	[navView removeFromSuperview];
+	mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0f);
+	zoomview.frame=CGRectMake(10,10,38,83);
+	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,100,wrongWay.frame.size.width,wrongWay.frame.size.height);
+	signalView.frame=CGRectMake(self.view.frame.size.width-52,5,47,40);
+	[UIView commitAnimations];
+	[APPDELEGATE.directions clearResult];
+	currentSearchType=0;
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];

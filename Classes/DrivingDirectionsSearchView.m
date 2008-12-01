@@ -69,9 +69,26 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 	
 	NSString *fromT;
-	if([from.text  isEqualToString:NSLocalizedString(@"Current Position",@"")])
+	if([from.text  isEqualToString:NSLocalizedString(@"Current Position",@"")]) {
+		GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
+		if(g.gps_data.fix.mode>1) {
+			float lat=g.gps_data.fix.latitude;
+			float lon=g.gps_data.fix.longitude;
+			char latD='N';
+			char lonD='E';
+			if(lat<0) {
+				lat*=-1;
+				latD='S';
+			}
+			if(lon<0) {
+				lon*=-1;
+				lonD='S';
+			}
+			[currentPosition release];
+			currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+		} 
 		fromT=currentPosition;
-	else
+	}else
 		fromT=from.text;
 	
 	if(![APPDELEGATE.directions drive:fromT to:to.text]) {
@@ -114,9 +131,11 @@
 		currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
 		from.text=NSLocalizedString(@"Current Position",@"");
 	} else {
-		from.text=@"Ch. du Marais 9 1031 Mex";
+		//from.text=@"Ch. du Marais 9 1031 Mex";
+		from.text=@"";
 	}
-	to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
+	to.text=@"";
+	//to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
 	//to.text=@"Zermatt, Switzerland";
 //	to.text=@"Rte de Marteley 1302 Vufflens";
 }

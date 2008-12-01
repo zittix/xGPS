@@ -7,16 +7,17 @@
 //
 
 #import "WrongWayView.h"
-
-
+#import "xGPSAppDelegate.h"
+#import "MainViewController.h"
 @implementation WrongWayView
 
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame withDelegate:(MainViewController*)_del{
     if ((self = [super initWithFrame:CGRectMake(frame.origin.x,frame.origin.y,130,82)])) {
 		UIImageView* back=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrongway.png"]];
 		[self addSubview:back];
 		[back release];
+		delegate=_del;
 		wrongWaylbl=[[UILabel alloc] initWithFrame:CGRectMake(13,13,104,56)];
 		wrongWaylbl.backgroundColor=[UIColor clearColor];
 		self.backgroundColor=[UIColor clearColor];
@@ -66,7 +67,38 @@
 -(void)stopAnimate {
 	run=NO;
 }
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if(buttonIndex==1) {
+		[self stopAnimate];
+		[self removeFromSuperview];
+		NSString *to=[APPDELEGATE.directions.to retain];
+		float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
+		float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
+		char latD='N';
+		char lonD='E';
+		if(lat<0) {
+			lat*=-1;
+			latD='S';
+		}
+		if(lon<0) {
+			lon*=-1;
+			lonD='S';
+		}
+		NSString*from=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+		[delegate clearDirections];
+		[APPDELEGATE.directions drive:from to:to];
+		[from release];
+		[to release];
+	}
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	NSSet * set=[event touchesForView:self];
+	if([set count]==1) {
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Driving Directions",@"") message:NSLocalizedString(@"Are you sure you want to recompute the itinerary from the current position ?",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"No",@"No") otherButtonTitles:NSLocalizedString(@"Yes",@"Yes"),nil];
+		[alert show];
+		
+	}
+}
 - (void)dealloc {
     [super dealloc];
 }
