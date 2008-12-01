@@ -13,19 +13,21 @@
 
 
 - (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
+    if ((self = [super initWithFrame:CGRectMake(frame.origin.x,frame.origin.y,39,54)])) {
         // Initialization code
 		
-		//47x20
-		red=[[UIImage imageNamed:@"red.png"] retain];
-		green=[[UIImage imageNamed:@"green.png"] retain];
-		orange=[[UIImage imageNamed:@"orange.png"] retain];
-		grey=[[UIImage imageNamed:@"gps_grey.png"] retain];
+		//39x36
+		red=[[UIImage imageNamed:@"rm_reception_none.png"] retain];
+		green=[[UIImage imageNamed:@"rm_reception_good.png"] retain];
+		orange=[[UIImage imageNamed:@"rm_reception_poor.png"] retain];
+		grey=[[UIImage imageNamed:@"rm_reception_na.png"] retain];
 		[self setBackgroundColor:[UIColor clearColor]];
-		gps=[[UILabel alloc] initWithFrame:CGRectMake(0,22,frame.size.width,18)];
+		gps=[[UILabel alloc] initWithFrame:CGRectMake(0,36,self.frame.size.width,18)];
 		gps.font=[UIFont fontWithName:@"Helvetica" size:14];
 		gps.textAlignment=UITextAlignmentCenter;
-		gps.text=@"GPS";
+		gps.minimumFontSize=10;
+		gps.text=NSLocalizedString(@"N/A",@"Not available");
+		gps.adjustsFontSizeToFitWidth=YES;
 		gps.backgroundColor=[UIColor clearColor];
 		gps.textColor=[UIColor darkGrayColor];
 		quality=-1;
@@ -40,15 +42,19 @@
 	//CGContextRef context=UIGraphicsGetCurrentContext();
 	//CGContextSetShadow(context, CGSizeMake(2,-2), 2);
 	
-	if(quality<0)
-		[grey drawAtPoint:CGPointMake(0,0)];	
-	else if(quality<33 && quality>=0)
+	if(quality<0) {
+		[grey drawAtPoint:CGPointMake(0,0)];
+		gps.text=NSLocalizedString(@"N/A",@"Not available");
+	}else if(quality<33 && quality>=0){
 		[red drawAtPoint:CGPointMake(0,0)];
-	else if(quality >=33 && quality < 66)
+		gps.text=NSLocalizedString(@"None",@"GPS Signal");
+	}else if(quality >=33 && quality < 66){
 		[orange drawAtPoint:CGPointMake(0,0)];
-	else
+		gps.text=NSLocalizedString(@"Poor",@"GPS Signal");
+	}else{
 		[green drawAtPoint:CGPointMake(0,0)];
-	
+		gps.text=NSLocalizedString(@"Good",@"GPS Signal");
+	}
 	[super drawRect:rect];
 }
 

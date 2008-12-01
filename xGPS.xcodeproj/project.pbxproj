@@ -64,6 +64,10 @@
 		4EBAF8FA0E58CA84008916E9 /* zoomin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F50E58CA84008916E9 /* zoomin.png */; };
 		4EBAF8FB0E58CA84008916E9 /* zoomout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F60E58CA84008916E9 /* zoomout.png */; };
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
+		4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00D0EE469A80077553B /* rm_reception_good.png */; };
+		4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00E0EE469A80077553B /* rm_reception_na.png */; };
+		4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00F0EE469A80077553B /* rm_reception_none.png */; };
+		4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA0100EE469A80077553B /* rm_reception_poor.png */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
 		4EE0F1CD0E6A958000BBA3FD /* nmea_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */; };
@@ -200,6 +204,10 @@
 		4EBAF8F60E58CA84008916E9 /* zoomout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomout.png; sourceTree = "<group>"; };
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
+		4ECFA00D0EE469A80077553B /* rm_reception_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_good.png; sourceTree = "<group>"; };
+		4ECFA00E0EE469A80077553B /* rm_reception_na.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_na.png; sourceTree = "<group>"; };
+		4ECFA00F0EE469A80077553B /* rm_reception_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_none.png; sourceTree = "<group>"; };
+		4ECFA0100EE469A80077553B /* rm_reception_poor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_poor.png; sourceTree = "<group>"; };
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -303,6 +311,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4ECFA00D0EE469A80077553B /* rm_reception_good.png */,
+				4ECFA00E0EE469A80077553B /* rm_reception_na.png */,
+				4ECFA00F0EE469A80077553B /* rm_reception_none.png */,
+				4ECFA0100EE469A80077553B /* rm_reception_poor.png */,
 				4EA9803C0EDEC95D00AAB014 /* gps_grey.png */,
 				4E74D8540EDD99B800C2FEAC /* wrongway.png */,
 				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
@@ -499,6 +511,10 @@
 				4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */,
 				4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */,
 				4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */,
+				4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */,
+				4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */,
+				4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */,
+				4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
