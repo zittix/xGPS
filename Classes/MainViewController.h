@@ -29,7 +29,6 @@
 	UIBarButtonItem* btnSearch;
 	SettingsViewController* settingsController;
 	UIToolbar* toolbar;
-	CGRect viewRect;
 	UIBarButtonItem* space1;
 	UIBarButtonItem* space2;
 	TileDB* tiledb;

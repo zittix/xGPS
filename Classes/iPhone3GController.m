@@ -88,7 +88,19 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+	BOOL hasGPSSpeed=NO;
+	
 	if(![newLocation respondsToSelector:@selector(speed)]) {
+		hasGPSSpeed=NO;
+	} else {
+		gps_data.fix.speed=[newLocation speed];
+		if(gps_data.fix.speed<0) {
+			gps_data.fix.speed=0;
+			hasGPSSpeed=NO;
+		}
+	}
+	
+	if(!hasGPSSpeed) {
 		if(oldLocation!=nil) {
 			CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
 			NSTimeInterval dt=[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp];
@@ -110,11 +122,10 @@
 			
 		}else {
 			gps_data.fix.speed=0.0;
-		}
-	} else {
-		gps_data.fix.speed=[newLocation speed];
-		if(gps_data.fix.speed<0) gps_data.fix.speed=0;
+		}	
 	}
+	
+	
 	gps_data.fix.latitude=newLocation.coordinate.latitude;
 	gps_data.fix.longitude=newLocation.coordinate.longitude;
 	gps_data.fix.altitude=newLocation.altitude;

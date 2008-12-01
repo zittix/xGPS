@@ -793,9 +793,10 @@
 		CGContextAddArc(context,posXPin,posYPin,35,0,2*M_PI,0);
 		CGContextFillPath(context);
 	}	
-	CGContextRotateCTM(context, -mapRotation);
-	CGContextScaleCTM(context, 1, -1);
+	
 	if(hasGPSfix) {
+		CGContextRotateCTM(context, -mapRotation);
+		CGContextScaleCTM(context, 1, -1);
 		int xoff2,yoff2;
 		[self getXYfrom:posGPS.x andLon:posGPS.y toPositionX:&x andY:&y withZoom:zoom];
 		[self getXYOffsetfrom:posGPS.x andLon:posGPS.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
@@ -813,18 +814,6 @@
 			double posXPin2=cosr*posXPin - posYPin*sinr;
 			double posYPin2=sinr*posXPin + posYPin*cosr;
 			if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
-				
-				//Project
-				//CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
-				
-				//CGContextScaleCTM(context, 1, -1);
-				//CGContextRotateCTM(context, -mapRotation);
-				//CGContextScaleCTM(context, 1, -1);
-				//CGContextRotateCTM(context, -mapRotation);
-				// CGContextScaleCTM(context, 1, -1);
-				// [imgPinRef drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+7.5) withContext:context];
-				// CGContextScaleCTM(context, 1, -1);
-				//	CGContextRotateCTM(context, gpsHeading);
 				
 				CGPoint ind[4];
 				ind[0].x=0;

@@ -16,7 +16,7 @@
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
 		//132 152 179
-		self.backgroundColor=[UIColor colorWithRed:0.51764705f green:0.5960784314f blue:0.7019607843 alpha:0.8];
+		self.backgroundColor=[UIColor colorWithRed:0.51764705f green:0.5960784314f blue:0.7019607843 alpha:1];
 		lbl=[[UILabel alloc] initWithFrame:CGRectMake(10,0,frame.size.width-20,frame.size.height)];
 		[self addSubview:lbl];
 		lbl.textAlignment=UITextAlignmentCenter;
@@ -71,11 +71,7 @@
 	return lblSize;
 }
 -(void)setText:(NSString*)txt {
-	
-	[UIView beginAnimations:nil context:nil];
 	[lbl setText:txt];
-	[self sizeToFit];
-	[UIView commitAnimations];
 }
 - (void)dealloc {
 	[lbl release];

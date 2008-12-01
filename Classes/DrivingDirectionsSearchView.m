@@ -88,6 +88,12 @@
 	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Take position from:",@"Directions") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Address book",@""),NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS"),nil];
 	[action showInView:[self superview]];
 }
+-(void)enable {
+
+}
+-(void)disable {
+	
+}
 - (void)willMoveToSuperview:(UIView*)view {
 	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
 	
@@ -110,9 +116,9 @@
 	} else {
 		from.text=@"Ch. du Marais 9 1031 Mex";
 	}
-	//to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
+	to.text=@"Grand vigne, Vufflens-la-Ville, Switzerland";
 	//to.text=@"Zermatt, Switzerland";
-	to.text=@"Rte de Marteley 1302 Vufflens";
+//	to.text=@"Rte de Marteley 1302 Vufflens";
 }
 - (void)didMoveToSuperview {
 	GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];

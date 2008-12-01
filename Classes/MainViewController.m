@@ -30,7 +30,7 @@
 	self.title=@"xGPS";
 	
 	//Set the View to a UIView
-	viewRect=[[UIScreen mainScreen] applicationFrame];
+	CGRect viewRect=[[UIScreen mainScreen] applicationFrame];
 	viewRect.size.height=viewRect.size.height-44.0f;
 	
 	self.view=[[UIView alloc] initWithFrame:viewRect];
@@ -87,8 +87,8 @@
 	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
 	navView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	navView.delegate=APPDELEGATE.directions;
-	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(10,100,-1,-1)];
-	
+	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(viewRect.size.width-140,100,-1,-1)];
+	navView.autoresizesSubviews=YES;
 	//wrongWay.autoresizingMask
 	APPDELEGATE.directions.map=mapview;
 }
@@ -213,15 +213,21 @@
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	if(!directionSearch)
 		[self.navigationController setNavigationBarHidden:YES animated:YES];
-	[mapview refreshMap];
+
+	
 	[UIView beginAnimations:nil context:nil];
 	[navView sizeToFit];
+	if(currentSearchType==2) {
+		mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
+	}
 	if(currentSearchType!=1) {
 		searchPlacesView.frame=CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height);
 	}
 	if(currentSearchType!=2) {
 		drivingSearchView.frame=CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height);
+		navView.frame=CGRectMake(0,0,self.view.frame.size.width,50);
 	}
+	[mapview refreshMap];
 	[UIView commitAnimations];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
@@ -334,8 +340,9 @@
 			} else if(currentSearchType==2) {
 				[UIView beginAnimations:nil context:nil];	
 				[navView removeFromSuperview];
+				mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0f);
 				zoomview.frame=CGRectMake(10,10,38,83);
-				wrongWay.frame=CGRectMake(10,100,wrongWay.frame.size.width,wrongWay.frame.size.height);
+				wrongWay.frame=CGRectMake(self.view.frame.size.width-140,100,wrongWay.frame.size.width,wrongWay.frame.size.height);
 				signalView.frame=CGRectMake(self.view.frame.size.width-52,5,47,40);
 				[UIView commitAnimations];
 				[APPDELEGATE.directions clearResult];
@@ -346,9 +353,12 @@
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];
+	
 	[UIView beginAnimations:nil context:nil];	
+	[navView sizeToFit];
+	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
 	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
-	wrongWay.frame=CGRectMake(10,100+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
+	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,100+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 	signalView.frame=CGRectMake(self.view.frame.size.width-52,5+navView.frame.size.height,47,40);
 	[UIView commitAnimations];
 }
@@ -369,8 +379,9 @@
 			self.navigationItem.rightBarButtonItem=nil;
 			self.navigationItem.leftBarButtonItem=nil;
 			[self.view addSubview:navView];
+			mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
 			zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
-			wrongWay.frame=CGRectMake(10,100+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
+			wrongWay.frame=CGRectMake(self.view.frame.size.width-140,100+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 			signalView.frame=CGRectMake(self.view.frame.size.width-52,5+navView.frame.size.height,47,40);
 			[UIView commitAnimations];
 			directionSearch=NO;
@@ -407,7 +418,7 @@
 				[signalView setQuality:-1];
 				[self hideGPSStatus];
 			}
-			
+			[settingsController.tableView reloadData];
 			break;
 		case POS: {
 			if(gpsPos==nil) return;
@@ -420,7 +431,6 @@
 			break;
 		}case SPEED: {
 			double speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;
-			//TODO: settings based
 			speedms*=3.6f;
 			if(speedms>3)
 				[speedview setSpeed:speedms];
