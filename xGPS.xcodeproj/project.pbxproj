@@ -116,7 +116,7 @@
 		4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoEncoder.h; sourceTree = "<group>"; };
 		4E0F05000E87C49000D75E7D /* GeoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoEncoder.m; sourceTree = "<group>"; };
 		4E0F48950E8519E6001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = French.lproj/license.html; sourceTree = "<group>"; };
-		4E0F48E00E851C30001B6F51 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E0F48E00E851C30001B6F51 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E40E851C43001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E50E851C47001B6F51 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E60E851C4B001B6F51 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -215,6 +215,7 @@
 		4EBAF8F40E58CA84008916E9 /* speed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speed.png; sourceTree = "<group>"; };
 		4EBAF8F50E58CA84008916E9 /* zoomin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomin.png; sourceTree = "<group>"; };
 		4EBAF8F60E58CA84008916E9 /* zoomout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomout.png; sourceTree = "<group>"; };
+		4EBCB26A0EE59F940030DF3F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
 		4ECFA00D0EE469A80077553B /* rm_reception_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_good.png; sourceTree = "<group>"; };
@@ -508,6 +509,7 @@
 				Hebrew,
 				zh_TW,
 				pl,
+				ru,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* xGPS */;
 			projectDirPath = "";
@@ -666,6 +668,7 @@
 				4EB3A5340E93B1FA004A643A /* Hebrew */,
 				4E109D950EDAEDE1009617FC /* pl */,
 				4EEC564F0EC1FCE00093386D /* zh_TW */,
+				4EBCB26A0EE59F940030DF3F /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

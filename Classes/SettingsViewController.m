@@ -144,7 +144,7 @@
 
 						break;*/
 					case 3:
-						cell.text=NSLocalizedString(@"Driving Directions",@"");
+						cell.text=NSLocalizedString(@"Driving directions",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
 						break;

@@ -1,0 +1,142 @@
+"%.1f MB" = "%.1f MB";
+
+"About xGPS" = "О xGPS";
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Произошла ошибка при загрузке отдельных картах. Некоторые части карты могут быть не загружена правильно.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Вы уверены, что хотите удалить все загруженные карты?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Вы уверены, что хотите загрузить выбранную карту района (%d файлы ~ %d KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Вы уверены, что хотите загрузить выбранную карту района (%d файлы ~ %d KB) ?";
+
+"Cancel" = "Отмена";
+
+"City name / Address" = "Город / Адрес";
+
+"Connected" = "Связанные";
+
+"Delete downloaded maps" = "Удаление загруженных карт";
+
+"Disable GPS" = "Отключение GPS";
+
+"Disconnected" = "Отключено";
+
+"Dismiss" = "Отклонить";
+
+"Download" = "Скачать ";
+
+"Downloaded maps size" = "Размер загруженные карты";
+
+"Downloading maps..." = "Загрузка карты ...";
+
+"Driving directions" = "Направления движения";
+
+"Enable GPS" = "Разрешать GPS";
+
+"Error" = "Ошибка";
+
+"From / Departure" = "От/ Отъезд";
+
+"General" = "Общий";
+
+"GPS Device" = "Устройство GPS";
+
+"GPS state" = "GPS состояние";
+
+"GPS to use" = "GPS для использования";
+
+"GPX Logging" = "GPX Вход";
+
+"Hybrid" = "Гибрид";
+
+"Language" = "Язык";
+
+"License checking" = "Проверка лицензии";
+
+"License number" = "Номер лицензии";
+
+"License number for %@" = "Номер лицензии для%@";
+
+"License:" = "Лицензия:";
+
+"Manage maps" = "Управление картами";
+
+"Map" = "Карта";
+
+"Map auto-rotation" = "Карта автоматической ротации";
+
+"Maps" = "Карты";
+
+"Maps data" = "Данные карт";
+
+"Maps Download" = "Загрузка Карт";
+
+"Maps downloaded successfully !" = "Карты скачаны успешно!";
+
+"Maps Manager" = "Менеджер Карт";
+
+"Maps type" = "Тип карт";
+
+"No" = "Нет";
+
+"No License" = "Никакая Лицензия";
+
+"No location has been found according to your query." = "Никакое местоположение не было, находят согласно вашему вопросу.";
+
+"Offline mode" = "Автономный способ";
+
+"Pick a GPS" = "Выберите  GPS";
+
+"Places / Cities" = "Места / Города";
+
+"Please select a greater map area by touching the screen with two fingers." = "Пожалуйста выберите большую область карты, касаясь экрана с двумя пальцами.";
+
+"Prevent Sleep Mode" = "Предотвратите Способ Сна";
+
+"Ready to receive..." = "Готовый получать...";
+
+"Receive maps" = "Получите карты";
+
+"Receiving maps" = "Получение карт";
+
+"Reset GPS" = "GPS сброса";
+
+"Satellite" = "Спутник";
+
+"Search for:" = "Поиск:";
+
+"Settings" = "Параметры";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услуги Местоположения не позволяются на вашем устройстве. Используйте заявление Параметров настройки на вашем экране Home, чтобы установить эту проблему.";
+
+"This feature will be implemented in a future version." = "Эта особенность будет осуществлена в будущей версии.";
+
+"To / Destination" = "К / Предназначение";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Неспособный открыть последовательный порт. Удостоверьтесь, что никакое другое программное обеспечение GP не бежит в фоне.";
+
+"Unable to retrieve the required information from the server: %@" = "Неспособный восстановить необходимую информацию от сервера: %@";
+
+"Unknown error" = "Неизвестная ошибка";
+
+"Use Miles unit" = "Подразделение Миль Использования";
+
+"Verifying license number..." = "Подтверждение числа лицензии...";
+
+"Version" = "Версия";
+
+"xGPS Error" = "xGPS Ошибка";
+
+"Yes" = "Да";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Вы не можете сделать запроса поиска, в то время как Вы находитесь в автономном способе. Вы можете выключить автономный способ, крутя диск кнопка Settings.";
+
+"You cannot download maps while you are in the offline mode." = "Вы не можете загрузить карты, в то время как Вы находитесь в автономном способе.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Ваши загруженные карты не совместимы с этой версией xGPS. Они были удалены.";
+
+"Your license number is invalid. Please verify and retry" = "Ваше число лицензии недействительно. Пожалуйста проверите и повторить";
+
+"Your license number is valid. You can now use the selected GPS." = "Ваше число лицензии действительно. Вы можете теперь использовать отобранные GPS.";
+

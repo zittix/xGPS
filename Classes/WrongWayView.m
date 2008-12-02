@@ -23,9 +23,9 @@
 		self.backgroundColor=[UIColor clearColor];
 		wrongWaylbl.numberOfLines=0;
 		wrongWaylbl.textColor=[UIColor whiteColor];
-		wrongWaylbl.font=[UIFont boldSystemFontOfSize:23];
+		wrongWaylbl.font=[UIFont boldSystemFontOfSize:21];
 		wrongWaylbl.textAlignment=UITextAlignmentCenter;
-		wrongWaylbl.minimumFontSize=12;
+		wrongWaylbl.minimumFontSize=10;
 		wrongWaylbl.highlighted=YES;
 		wrongWaylbl.adjustsFontSizeToFitWidth=YES;
 		wrongWaylbl.text=NSLocalizedString(@"Wrong\nWay",@"");
@@ -94,7 +94,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	NSSet * set=[event touchesForView:self];
 	if([set count]==1) {
-		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Driving Directions",@"") message:NSLocalizedString(@"Are you sure you want to recompute the itinerary from the current position ?",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"No",@"No") otherButtonTitles:NSLocalizedString(@"Yes",@"Yes"),nil];
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Driving directions",@"") message:NSLocalizedString(@"Are you sure you want to recompute the itinerary from the current position ?",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"No",@"No") otherButtonTitles:NSLocalizedString(@"Yes",@"Yes"),nil];
 		[alert show];
 		
 	}

@@ -275,6 +275,7 @@
 		[self hideGPSStatus];
 		[signalView setQuality:-1];
 		btnEnableGPS.style=UIBarButtonItemStyleBordered;
+		[self hideWrongWay];
 		btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 	}
 }
@@ -289,11 +290,11 @@
 }
 -(void)searchBtnPressed:(id)sender {
 	//Let the user choose between directions and place search
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) {
+	/*if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) {
 		UIAlertView *msg=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button.",@"Error search offline") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[msg show];
 		return;
-	}
+	}*/
 	
 	UIActionSheet *action=nil;
 	
