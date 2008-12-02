@@ -79,6 +79,8 @@
 			gpsHeading=(brng);
 			//NSLog(@"Heading: %f",brng*180.0/M_PI);
 			if(mapRotationEnabled && gpsTracking) {
+				float toRotate=fabs((2*M_PI-brng)-mapRotation);
+				if(toRotate>0.34f)
 				mapRotation=(2*M_PI-brng);
 			}
 			lastPos.x=p.x;

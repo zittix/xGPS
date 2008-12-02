@@ -97,7 +97,7 @@
 }
 
 -(void)speedChanged:(NSNotification *)notif {
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed] && APPDELEGATE.gpsmanager.currentGPS.isConnected) {
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed] && APPDELEGATE.gpsmanager.currentGPS.isEnabled) {
 		speedview.hidden=NO;
 	} else {
 		speedview.hidden=YES;
@@ -445,6 +445,14 @@
 			break;
 		case POS: {
 			if(gpsPos==nil) return;
+			
+			double speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;
+			speedms*=3.6f;
+			if(speedms>3)
+				[speedview setSpeed:speedms];
+			else
+				[speedview setSpeed:0];
+			
 			gpsPos.x=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude;
 			gpsPos.y=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude;
 			[mapview updateCurrentPos:gpsPos];
@@ -457,6 +465,8 @@
 			speedms*=3.6f;
 			if(speedms>3)
 				[speedview setSpeed:speedms];
+			else
+				[speedview setSpeed:0];
 		}break;
 		case STATE_CHANGE:
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {

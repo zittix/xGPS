@@ -62,6 +62,7 @@
 		speed*=0.62150404f;
 	_speed=speed;
 	lblspeed.text=[NSString stringWithFormat:@"%.0f",speed];
+	[lblspeed setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)r {
