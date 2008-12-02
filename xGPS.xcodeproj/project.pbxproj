@@ -56,6 +56,9 @@
 		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
 		4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */; };
 		4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA9803C0EDEC95D00AAB014 /* gps_grey.png */; };
+		4EAA1BAD0EE53A2B0014DBF0 /* SettingsGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA1BAC0EE53A2B0014DBF0 /* SettingsGPSController.m */; };
+		4EAA1BC30EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA1BC20EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m */; };
+		4EAA1BD70EE5401A0014DBF0 /* SettingsGPXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA1BD60EE5401A0014DBF0 /* SettingsGPXController.m */; };
 		4EAF78B50EB3AB440078B697 /* iGPS360Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */; };
 		4EAF79FF0EB3C3750078B697 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAF79FE0EB3C3750078B697 /* Default.png */; };
 		4EBAF8F70E58CA84008916E9 /* notile.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F20E58CA84008916E9 /* notile.png */; };
@@ -196,6 +199,12 @@
 		4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDownloader.h; sourceTree = "<group>"; };
 		4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDownloader.m; sourceTree = "<group>"; };
 		4EA9803C0EDEC95D00AAB014 /* gps_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gps_grey.png; sourceTree = "<group>"; };
+		4EAA1BAB0EE53A2B0014DBF0 /* SettingsGPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsGPSController.h; sourceTree = "<group>"; };
+		4EAA1BAC0EE53A2B0014DBF0 /* SettingsGPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsGPSController.m; sourceTree = "<group>"; };
+		4EAA1BC10EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDrivingDirectionsController.h; sourceTree = "<group>"; };
+		4EAA1BC20EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsDrivingDirectionsController.m; sourceTree = "<group>"; };
+		4EAA1BD50EE5401A0014DBF0 /* SettingsGPXController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsGPXController.h; sourceTree = "<group>"; };
+		4EAA1BD60EE5401A0014DBF0 /* SettingsGPXController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsGPXController.m; sourceTree = "<group>"; };
 		4EAF78B30EB3AB440078B697 /* iGPS360Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGPS360Controller.h; sourceTree = "<group>"; };
 		4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGPS360Controller.m; sourceTree = "<group>"; };
 		4EAF79FE0EB3C3750078B697 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -409,6 +418,12 @@
 				4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */,
 				4ECFA2A40EE48A750077553B /* SettingsMapsController.h */,
 				4ECFA2A50EE48A750077553B /* SettingsMapsController.m */,
+				4EAA1BC10EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.h */,
+				4EAA1BC20EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m */,
+				4EAA1BAB0EE53A2B0014DBF0 /* SettingsGPSController.h */,
+				4EAA1BAC0EE53A2B0014DBF0 /* SettingsGPSController.m */,
+				4EAA1BD50EE5401A0014DBF0 /* SettingsGPXController.h */,
+				4EAA1BD60EE5401A0014DBF0 /* SettingsGPXController.m */,
 				4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */,
 				4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */,
 				4E74D8510EDD946800C2FEAC /* WrongWayView.h */,
@@ -616,6 +631,9 @@
 				4ECFA0F70EE477E40077553B /* SettingsUIController.m in Sources */,
 				4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */,
 				4ECFA2A60EE48A750077553B /* SettingsMapsController.m in Sources */,
+				4EAA1BAD0EE53A2B0014DBF0 /* SettingsGPSController.m in Sources */,
+				4EAA1BC30EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m in Sources */,
+				4EAA1BD70EE5401A0014DBF0 /* SettingsGPXController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,46 +28,20 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 2;
 }
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	switch(section) {
-		case 0: return NSLocalizedString(@"Maps",@"Maps title in settings");
-		case 1: return NSLocalizedString(@"GPS Device",@"GPS Device title in settings");
-		case 2: return NSLocalizedString(@"Driving directions",@"Driving directions");
-		case 3: return NSLocalizedString(@"General",@"General title in settings");
-			
-		default: return @"";
-	}
-}*/
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
 		case 0: return 3;
-		case 1: return 7;
+		case 1: return 6;
 		default: return 0;
 	}
 }
--(void)showGPSSelector:(id)sender {
-	if(gpsselector==nil) {
-		gpsselector=[[GPSSelectorViewController alloc] initWithStyle:UITableViewStylePlain];
-	}
-	[self.navigationController pushViewController:gpsselector animated:YES];
-}
 
--(void)showMapsTypeSelector:(id)parent {
-	
-}
--(void)switchSleepMode:(UISwitch*)sender {
-	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSleepMode];
-	[UIApplication sharedApplication].idleTimerDisabled=sender.on;
-}
 -(void)switchOfflineChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsMapsOffline];
 }
 -(void)switchRotationChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:!sender.on forKey:kSettingsMapRotation];
-}
--(void)switchUnit:(UISwitch*)sender {
-	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSpeedUnit];
 }
 
 -(void)switchGPSLoggingChanged:(UISwitch*)sender {
@@ -91,10 +65,10 @@
 				case 0:	id=@"general"; break;
 				case 1:	id=@"maps"; break;
 				case 2:	id=@"gps"; break;
-				case 3:	id=@"locations"; break;
-				case 4:	id=@"driving"; break;
-				case 5:	id=@"gpx"; break;
-				case 6:	id=@"ui"; break;
+				//case 3:	id=@"locations"; break;
+				case 3:	id=@"driving"; break;
+				case 4:	id=@"gpx"; break;
+				case 5:	id=@"ui"; break;
 			}break;
 		}
 	}
@@ -164,22 +138,22 @@
 						cell.text=NSLocalizedString(@"GPS",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
-					case 3:
+					/*case 3:
 						cell.text=NSLocalizedString(@"Locations",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 
-						break;
-					case 4:
+						break;*/
+					case 3:
 						cell.text=NSLocalizedString(@"Driving Directions",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
 						break;
-					case 5:
+					case 4:
 						cell.text=NSLocalizedString(@"GPX Logging",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
 						break;
-					case 6:
+					case 5:
 						cell.text=NSLocalizedString(@"User Interface",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						break;
@@ -220,7 +194,7 @@
 		if(generalsettings==nil)
 			generalsettings=[[SettingsGeneralController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:generalsettings animated:YES];
-	} else if(indexPath.section==1 && indexPath.row==6) {
+	} else if(indexPath.section==1 && indexPath.row==5) {
 		if(uisettings==nil)
 			uisettings=[[SettingsUIController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:uisettings animated:YES];
@@ -230,10 +204,30 @@
 			mapssettings=[[SettingsMapsController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:mapssettings animated:YES];
 		
+	}else if(indexPath.section==1 && indexPath.row==2) {
+		if(gpssettings==nil)
+			gpssettings=[[SettingsGPSController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:gpssettings animated:YES];
+		
+	}else if(indexPath.section==1 && indexPath.row==3) {
+		if(dirsettings==nil)
+			dirsettings=[[SettingsDrivingDirectionsController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:dirsettings animated:YES];
+		
+	}else if(indexPath.section==1 && indexPath.row==4) {
+		if(gpxsettings==nil)
+			gpxsettings=[[SettingsGPXController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:gpxsettings animated:YES];
+		
 	}
+	
 }
 
-
+-(void)reload {
+	[self.tableView reloadData];
+	if(gpssettings!=nil)
+	[gpssettings.tableView reloadData];
+}
 - (void)viewDidLoad {
 	[super viewDidLoad];
 }

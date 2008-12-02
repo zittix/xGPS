@@ -8,21 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-
-#import "MapsManagerView.h"
-#import "MapView.h"
-#import "GPSSelectorViewController.h"
-#import "TileDB.h"
-#import "NetworkReceiverViewController.h"
 #import "SettingsUIController.h"
 #import "SettingsGeneralController.h"
 #import "SettingsMapsController.h"
+#import "SettingsGPSController.h"
+#import "SettingsDrivingDirectionsController.h"
+#import "SettingsGPXController.h"
 @interface SettingsViewController : UITableViewController {
-	GPSSelectorViewController *gpsselector;
-	NetworkReceiverViewController *receiverView;
 	SettingsUIController* uisettings;
 	SettingsGeneralController* generalsettings;
 	SettingsMapsController* mapssettings;
+	SettingsGPSController* gpssettings;
+	SettingsDrivingDirectionsController* dirsettings;
+	SettingsGPXController* gpxsettings;
 }
 - (id)initWithStyle:(UITableViewStyle)style;
+-(void)reload;
 @end

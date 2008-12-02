@@ -9,8 +9,12 @@
 #include "GPXLogger.h"
 #include <stdio.h>
 #include <time.h>
+
 #define LOG_FILE "/tmp/xgps_gpxtrack.log"
 static FILE* fp=NULL;
+const char* getGPXFilename() {
+	return LOG_FILE;
+}
 void startGPXLogEngine() {
 	char newFile=0;
 	if(fp!=NULL) return;
@@ -37,6 +41,8 @@ void startGPXLogEngine() {
 		fprintf(fp,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"xGPS - http://xgps.xwaves.net\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/1\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n<trk><trkseg>\n");
 		}
 		fflush(fp);
+	}else {
+		fprintf(stderr,"Error while opening GPX log file");
 	}
 }
 void logGPXPoint(float lat, float lon, float alt, float speed, int fix, int sat, double time) {

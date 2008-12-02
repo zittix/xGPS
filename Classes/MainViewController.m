@@ -80,6 +80,7 @@
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
 	[signalView setQuality:-1];
+	
 	speedview.hidden=YES;
 	signalView.hidden=YES;
 	cancelSearch=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelDrivingSearch:)];
@@ -91,6 +92,17 @@
 	navView.autoresizesSubviews=YES;
 	//wrongWay.autoresizingMask
 	APPDELEGATE.directions.map=mapview;
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(speedChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
+	
+}
+
+-(void)speedChanged:(NSNotification *)notif {
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed] && APPDELEGATE.gpsmanager.currentGPS.isConnected) {
+		speedview.hidden=NO;
+	} else {
+		speedview.hidden=YES;
+		
+	}
 }
 -(void)hideWrongWay {
 	if(wrongWay.superview==nil) return;
@@ -126,6 +138,7 @@
 	[UIView beginAnimations:nil context:nil];
 	//[self.view addSubview:speedview];
 	signalView.hidden=NO;
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed])
 	speedview.hidden=NO;
 	[UIView commitAnimations];
 }
@@ -323,7 +336,8 @@
 			//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 			//[alert show];
 			//return;
-			
+			self.navigationItem.leftBarButtonItem.enabled=YES;
+			self.navigationItem.rightBarButtonItem.enabled=YES;
 			[UIView beginAnimations:nil context:nil];
 			[self.view addSubview:drivingSearchView];
 			self.navigationController.navigationBarHidden=NO;
@@ -372,6 +386,8 @@
 	
 }
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
+	self.navigationItem.leftBarButtonItem.enabled=YES;
+	self.navigationItem.rightBarButtonItem.enabled=YES;
 	if(err==nil) {
 		
 		//Search the first instruction
@@ -424,7 +440,7 @@
 				[signalView setQuality:-1];
 				[self hideGPSStatus];
 			}
-			[settingsController.tableView reloadData];
+			[settingsController reload];
 			break;
 		case POS: {
 			if(gpsPos==nil) return;

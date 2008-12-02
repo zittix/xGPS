@@ -99,6 +99,16 @@
 	}
 	return self;
 }
+-(void)deleteAllBookmarks {
+	char *error;
+	int ret;
+	char *tMap="DELETE FROM dirbookmarks";
+	ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+	tMap="DELETE FROM dirb_roadpoints";
+	ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+	tMap="DELETE FROM dirb_instructions";
+	ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+}
 -(void)deleteBookmark:(long)_id {
 	if(sqlite3_bind_int64(deleteBookmarkStmt,1,_id)!=SQLITE_OK)
 		goto err;

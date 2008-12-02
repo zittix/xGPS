@@ -35,7 +35,9 @@
     }
     return self;
 }
-
+-(void)setFrame:(CGRect)frame {
+	[super setFrame:CGRectMake(frame.origin.x,frame.origin.y,39,54)];
+}
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code

@@ -26,4 +26,5 @@
 -(BOOL)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from to:(NSString*)to;
 -(NSArray*)copyBookmarks;
 -(void)deleteBookmark:(long)_id;
+-(void)deleteAllBookmarks;
 @end

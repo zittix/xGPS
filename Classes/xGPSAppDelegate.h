@@ -29,6 +29,7 @@
 #define kSettingsDirBookmarksDBVersion @"dirbookmarkversion"
 #define kSettingsUseGPSBall @"usegpsball"
 #define kSettingsShowSpeed @"showspeed"
+#define kSettingsSaveDirSearch @"savedirsearch"
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 #define VERSION "1.1.0 Test"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {

@@ -817,13 +817,13 @@
 				
 				CGPoint ind[4];
 				ind[0].x=0;
-				ind[0].y=10;
-				ind[1].x=-20;
-				ind[1].y=20*0.666+10;
+				ind[0].y=5;
+				ind[1].x=-15;
+				ind[1].y=15*0.666+10;
 				ind[2].x=0;
-				ind[2].y=-40+10;
-				ind[3].x=20;
-				ind[3].y=20*0.666+10;
+				ind[2].y=-35+10;
+				ind[3].x=15;
+				ind[3].y=15*0.666+10;
 				double alpha=gpsHeading+mapRotation-2*M_PI;
 				double cosa=cos(alpha);
 				double sina=sin(alpha);

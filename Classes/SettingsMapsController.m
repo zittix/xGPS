@@ -35,7 +35,16 @@
  [super viewWillAppear:animated];
 	 [self.tableView reloadData];
  }
- 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	switch (section) {
+		case 0:
+			return NSLocalizedString(@"The maps size will also grow when you browse a part of a map you have not already downloaded.",@"");
+			break;
+		default:
+			return nil;
+			break;
+	}
+}
 /*
  - (void)viewDidAppear:(BOOL)animated {
  [super viewDidAppear:animated];

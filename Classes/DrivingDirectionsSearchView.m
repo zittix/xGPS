@@ -97,6 +97,8 @@
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 		return;
 	}
+	controller.navigationItem.leftBarButtonItem.enabled=NO;
+	controller.navigationItem.rightBarButtonItem.enabled=NO;
 	[searchBar_ resignFirstResponder];
 }
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {

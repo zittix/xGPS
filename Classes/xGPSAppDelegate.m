@@ -29,6 +29,7 @@ static DirectionsBookmarks* dirbookmarks;
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<2) {
 		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsVersion];
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsShowSpeed];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSaveDirSearch];
 	}
 		
 	

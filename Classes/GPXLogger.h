@@ -8,3 +8,4 @@
 void stopGPXLogEngine();
 void startGPXLogEngine();
 void logGPXPoint(float lat, float lon, float alt, float speed, int fix, int sat, double time);
+const char* getGPXFilename();
