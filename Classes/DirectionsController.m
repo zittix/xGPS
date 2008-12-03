@@ -616,7 +616,7 @@
     [resultData release];
 }
 -(BOOL)drive:(NSString*)from to:(NSString*)to {
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
+	//if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
 	
 	if(computing) return NO;
 	

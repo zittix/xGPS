@@ -244,7 +244,7 @@
     [resultData release];
 }
 -(BOOL)geoencode:(NSString*)toEncode {
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
+	//if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
 	if(req!=nil) return NO;
 	
 
