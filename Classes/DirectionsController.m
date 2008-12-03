@@ -489,9 +489,14 @@
 	parsingPlace=NO;
 	computing=NO;
 	parsingLinestring=NO;
-	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recomputeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
 }
+
+-(void)recomputeChanged:(NSNotification *)notif {
+	recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
+}
+	
 -(void)clearResult {
 	[instructions release];
 	instructions=nil;

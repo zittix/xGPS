@@ -67,7 +67,7 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 
@@ -76,6 +76,7 @@
 	switch(section) {
 		case 0:
 		case 1:
+		case 2:
 			return 1;
 	}
 	return 0;
@@ -85,10 +86,17 @@
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSaveDirSearch];
 	
 }
+-(void)switchDirRecompute:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsRecomputeDriving];
+	
+}
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case 0:
 			return NSLocalizedString(@"When activated, all the searched driving directions are saved in the bookmarks.",@"");
+			break;
+		case 2:
+			return NSLocalizedString(@"When activated, the driving directions are recomputed when you are driving on the wrong way.",@"");
 			break;
 		default:
 			return nil;
@@ -101,7 +109,8 @@
     NSString *CellIdentifier;
 	switch(indexPath.section) {
 		case 0: CellIdentifier=@"savebookmarks"; break;
-			case 1: CellIdentifier=@"delbookmarks"; break;
+		case 1: CellIdentifier=@"delbookmarks"; break;
+		case 2: CellIdentifier=@"recomputedriving"; break;
 	}
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -109,7 +118,7 @@
 			case 0: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.selectionStyle =UITableViewCellSelectionStyleNone;
-				cell.text=NSLocalizedString(@"Save in Bookmarks",@"Prevent Sleep Mode");
+				cell.text=NSLocalizedString(@"Save in Bookmarks",@"");
 				UISwitch *value;
 				
 				value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
@@ -125,14 +134,29 @@
 				cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 				cell.selectionStyle=UITableViewCellSelectionStyleBlue;
 			} break;
+			case 2: {
+				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+				cell.selectionStyle =UITableViewCellSelectionStyleNone;
+				cell.text=NSLocalizedString(@"Recompute itinerary",@"");
+				UISwitch *value;
+				
+				value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
+				value.tag = 1;
+				[value addTarget:self action:@selector(switchDirRecompute:) forControlEvents:UIControlEventValueChanged];
+				value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+				[cell.contentView addSubview:value];
+				value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
+			} break;
 		}
     }
 	else {
 		switch(indexPath.section) {
 			case 0: {
 				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch];
-				break;
-			}
+			}break;
+			case 2: {
+				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
+			}break;
 		}
 	}
     return cell;

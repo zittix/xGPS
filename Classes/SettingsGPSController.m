@@ -153,7 +153,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case 0:
-			return NSLocalizedString(@"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not responding anymore.",@"");
+			return NSLocalizedString(@"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore.",@"");
 			break;
 		default:
 			return nil;

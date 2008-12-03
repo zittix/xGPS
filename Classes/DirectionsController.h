@@ -49,6 +49,7 @@
 	int previousSegement;
 	int previousInstruction;
 	int nbWrongWay;
+	BOOL recomputeRoute;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;

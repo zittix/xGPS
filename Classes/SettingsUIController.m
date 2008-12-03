@@ -108,7 +108,7 @@
 				break;
 			}
 			case 1: {
-				cell.text=NSLocalizedString(@"Blue point for position",@"");
+				cell.text=NSLocalizedString(@"Blue dot for position",@"");
 				UISwitch *value;
 				
 				value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
