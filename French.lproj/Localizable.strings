@@ -18,7 +18,7 @@
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "Êtes-vous sûr de vouloir recalculer l'itinéraire depuis le position courante ?";
 
-"Blue point for position" = "Point bleu pour GPS";
+"Blue dot for position" = "Point bleu pour GPS";
 
 "Bookmarks" = "Signets";
 
@@ -150,6 +150,8 @@
 
 "Receiving maps" = "Réception de cartes";
 
+"Recompute itinerary" = "Recalculer l'itinéraire";
+
 "Reset GPS" = "Redémarrer le GPS";
 
 "Satellite" = "Satellite";
@@ -190,7 +192,7 @@
 
 "Use Miles unit" = "Utiliser les Miles";
 
-"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not responding anymore." = "Utilisez l'option Redémarrer le GPS lorsque le GPS donne une position erronée ou qu'il ne répond plus.";
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Utilisez l'option Redémarrer le GPS lorsque le GPS donne une position erronée ou qu'il ne répond plus.";
 
 "User Interface" = "Interface utilisateur";
 
@@ -202,9 +204,11 @@
 
 "When activated, it disables the sleep mode such that the screen is always on." = "Activée, cette option empêche que le mode veille s'active. L'écran reste ainsi toujours allumé.";
 
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Cette option permet de recalculer l'itinéraire en cours lorsque vous ne suivez plus la bonne direction.";
+
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Quand l'enregistrement GPX est activé, tous vos mouvements seront enregistrés dans un fichier au format GPX. Ce fichier pourra ensuite être utilisé sur un ordinateur pour visualisé le tracé.";
 
-"Wrong\nWay" = "Mauvaise\nDirection";
+"Wrong\nWay" = "MauvaisenDirection";
 
 "xGPS Error" = "Erreur xGPS";
 

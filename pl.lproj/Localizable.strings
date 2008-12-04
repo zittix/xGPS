@@ -18,7 +18,7 @@
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "Czy chcesz przeliczyc droge?";
 
-"Blue point for position" = "Zaznacz punkt dla pozycji";
+"Blue dot for position" = "Zaznacz punkt dla pozycji";
 
 "Bookmarks" = "Zakładki";
 
@@ -190,7 +190,7 @@
 
 "Use Miles unit" = "Prędkość w MPH";
 
-"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not responding anymore." = "Uzyj opcji 'Resetuj GPS' jesli GPS podaje kompletnie złą pozycje lub nie odpowiada.";
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Uzyj opcji 'Resetuj GPS' jesli GPS podaje kompletnie złą pozycje lub nie odpowiada.";
 
 "User Interface" = "Interfejs użytkownika";
 
@@ -204,7 +204,7 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Kiedy włączone jest logowanie GPX wszytskie Twoje ruchy są zapisywane z pliku logu. Plik ten moze byc użyty w komputerze do wizualizacji trasy.";
 
-"Wrong\nWay" = "Zła\ntrasa";
+"Wrong\nWay" = "Złantrasa";
 
 "xGPS Error" = "Błąd xGPS";
 

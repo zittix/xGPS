@@ -18,7 +18,7 @@
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "確定要重新計算目前位置出發之路線？";
 
-"Blue point for position" = "以藍點顯示位置";
+"Blue dot for position" = "以藍點顯示位置";
 
 "Bookmarks" = "書籤";
 
@@ -52,17 +52,15 @@
 
 "Dismiss" = "確定";
 
-"Distances and speed will be showed with the meter unit (km/h and meters)." = "距離與車速將會以公尺顯示（Km/H 及公尺）。";
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "距離與車速將會以公尺顯示（km/h 及公尺）。";
 
-"Distances and speed will be showed with the mile unit (mph and miles)." = "距離與車速將會以英呎顯示（MPH 及英呎）。";
+"Distances and speed will be showed with the mile unit (mph and miles)." = "距離與車速將會以英呎顯示（mph 及英呎）。";
 
 "Download" = "下載";
 
 "Downloaded maps size" = "下載地圖大小";
 
 "Downloading maps..." = "正在下載地圖...";
-
-"Driving Directions" = "規劃路線";
 
 "Driving directions" = "規劃路線";
 
@@ -152,6 +150,8 @@
 
 "Receiving maps" = "正在接收地圖";
 
+"Recompute itinerary" = "重新計算規劃路線";
+
 "Reset GPS" = "重置 GPS";
 
 "Satellite" = "衛星";
@@ -192,7 +192,7 @@
 
 "Use Miles unit" = "使用英哩單位";
 
-"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not responding anymore." = "假如 GPS 回報錯誤位置或者沒有回應時，使用重置 GPS 選項以進行 GPS 重新啟動。";
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "假如 GPS 回報錯誤位置或者沒有回應時，使用重置 GPS 選項以進行 GPS 重新啟動。";
 
 "User Interface" = "使用者介面";
 
@@ -204,9 +204,11 @@
 
 "When activated, it disables the sleep mode such that the screen is always on." = "當啟動時，將會關閉自動鎖定、畫面將會保持開啟。";
 
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "當啟動時，行駛於錯誤路線時、將會重新計算規劃路線。";
+
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "當 GPX 紀錄開啟時，所有的移動都將會以 GPX 格式進行紀錄，可以於電腦上檢視該檔案。";
 
-"Wrong\nWay" = "方向\n錯誤";
+"Wrong\nWay" = "路線n錯誤";
 
 "xGPS Error" = "xGPS 錯誤";
 

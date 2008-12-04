@@ -18,7 +18,7 @@
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "Bent u er zeker van de reisroute te herberekenen vanuit uw huidige positie ?";
 
-"Blue point for position" = "Blauwe punt voor positie";
+"Blue dot for position" = "Blauwe punt ipv pijl";
 
 "Bookmarks" = "Bladwijzers";
 
@@ -26,9 +26,9 @@
 
 "City name / Address" = "Plaatsnaam / Adres";
 
-"Clear Driving directions" = "Correcte route";
+"Clear Driving directions" = "Wis route";
 
-"Clear Search results" = "Correcte zoekopdracht resultaten";
+"Clear Search results" = "Wis zoek resultaten";
 
 "Connected" = "Verbonden";
 
@@ -150,6 +150,8 @@
 
 "Receiving maps" = "Ontvangen maps";
 
+"Recompute itinerary" = "Herberekenen route";
+
 "Reset GPS" = "Reset GPS";
 
 "Satellite" = "Satellite";
@@ -160,7 +162,7 @@
 
 "Settings" = "Instellingen";
 
-"Show Speedometer" = "Vertoon Snelheidsmeter";
+"Show Speedometer" = "Snelheidsmeter";
 
 "Take position from:" = "Bepaal positie vanaf:";
 
@@ -190,7 +192,7 @@
 
 "Use Miles unit" = "Gebruik eenheid Miles";
 
-"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not responding anymore." = "Gebruik de Reset GPS optie om de GPS opnieuw te starten als er een compleet afwijkende positie wordt gegeven of de GPS niet meer reageert.";
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Gebruik de Reset GPS optie om de GPS opnieuw te starten als er een compleet afwijkende positie wordt gegeven of de GPS niet meer reageert.";
 
 "User Interface" = "Gebruiker Interface";
 
@@ -202,9 +204,11 @@
 
 "When activated, it disables the sleep mode such that the screen is always on." = "Wanneer geactiveerd, het verbreekt de Sleep Mode zodat het scherm altijd aan blijft.";
 
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Wanneer aktief, zal de route herberekend worden indien u de verkeerde richting heeft genomen. ";
+
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Wanneer GPX vastlegging is geactiveerd, worden alle bewegingen opgeslagen in een GPX formaat file. Dit file kan op een PC gebruikt worden om de track te visualiseren.";
 
-"Wrong\nWay" = "Verkeerde\nmanier";
+"Wrong\nWay" = "Verkeerde richting";
 
 "xGPS Error" = "xGPS Fout";
 
