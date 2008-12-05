@@ -361,7 +361,10 @@
 	//NSLog(@"file size: %f",[nb unsignedLongLongValue]/1024.0/1024.0);
 	return [nb unsignedLongLongValue]/1024.0/1024.0;	
 }
-
+-(void)showDLError {
+	UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to download a part of the map. Check your internet connection.",@"Tile DL error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+	[alert show];
+}
 
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom silent:(BOOL)silent {
 	if(offline || closed) return NO;
@@ -420,8 +423,7 @@
 		if(!silent) {
 			if(!showedError) {
 				showedError=YES;
-				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to download a part of the map. Check your internet connection.",@"Tile DL error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-				[alert show];
+				[self performSelectorOnMainThread:@selector(showDLError) withObject:nil waitUntilDone:NO];
 			}
 		}
 		
