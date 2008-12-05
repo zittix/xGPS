@@ -94,6 +94,21 @@
 	APPDELEGATE.directions.map=mapview;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(speedChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
+	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosY]];
+	if(p.x==0.0f && p.y==0.0f) {
+		p.x=46.5833333;
+		p.y=6.55;
+	}
+	
+	
+	int zoom=[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastZoom];
+	if(zoom>=0 && zoom<18)
+		[mapview setZoom:zoom];
+	
+	mapview.pos=p;
+	mapview.mapRotationEnabled=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
+	
+	
 }
 
 -(void)speedChanged:(NSNotification *)notif {
@@ -164,7 +179,7 @@
 	self.title=NSLocalizedString(@"Map","Map");
 	[[NSUserDefaults standardUserDefaults] setDouble:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
 	[[NSUserDefaults standardUserDefaults] setDouble:[mapview getCurrentPos].y forKey:kSettingsLastPosY];
-	
+	[[NSUserDefaults standardUserDefaults] setInteger:[mapview zoom] forKey:kSettingsLastZoom];
 }
 -(void)viewWillAppear:(BOOL)animated {
 	if(!directionSearch)
@@ -202,13 +217,6 @@
 		}
 		[self presentModalViewController:licenseView animated:YES];
 	}
-	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosY]];
-	if(p.x==0.0f && p.y==0.0f) {
-		p.x=46.5833333;
-		p.y=6.55;
-	}
-	mapview.pos=p;
-	mapview.mapRotationEnabled=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
 }
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -374,7 +382,6 @@
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];
-	
 	[UIView beginAnimations:nil context:nil];	
 	[navView sizeToFit];
 	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);

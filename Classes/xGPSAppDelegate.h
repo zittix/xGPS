@@ -17,6 +17,7 @@
 #define kSettingsConditionsUse @"conditionofuse"
 #define kSettingsLastPosX @"gpslastposx"
 #define kSettingsLastPosY @"gpslastposy"
+#define kSettingsLastZoom @"gpslastzoom"
 #define vSettingsConditionsUse @"1.0"
 #define kSettingsMapsOffline @"mapsofflinemode"
 #define kSettingsMapsLanguage @"mapslanguage"

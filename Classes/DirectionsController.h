@@ -56,9 +56,10 @@
 @property (nonatomic,readonly) NSMutableArray* instructions;
 @property (nonatomic,assign) MapView* map;
 @property (nonatomic,setter=updatePos:,assign) PositionObj* pos;
-@property (nonatomic,readonly) NSString* from;
-@property (nonatomic,readonly) NSString* to;
+@property (nonatomic,retain) NSString* from;
+@property (nonatomic,retain) NSString* to;
 -(BOOL)drive:(NSString*)from to:(NSString*)to;
 -(void)clearResult;
+-(void)setRoad:(NSMutableArray*)road instructions:(NSMutableArray*)instr;
 -(void)recompute;
 @end

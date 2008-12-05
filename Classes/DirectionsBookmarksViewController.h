@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @protocol DirectionsBookmarksDelegate
--(void)bookmarkSelected:(NSString*)from to:(NSString*)to instr:(NSArray*)instr roadPoints:(NSArray*)roadPoints;
 -(void)setEditingKeyBoard;
 @end
 

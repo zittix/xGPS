@@ -17,6 +17,8 @@
 	sqlite3_stmt* insertInstrStmt;
 	sqlite3_stmt* insertBookmarkStmt;
 	sqlite3_stmt* getBookmarkStmt;
+	sqlite3_stmt* getRoadPointStmt;
+	sqlite3_stmt* getInstrStmt;
 	sqlite3_stmt* deleteRoadPointStmt;
 	sqlite3_stmt* deleteInstrStmt;
 	sqlite3_stmt* deleteBookmarkStmt;
@@ -27,4 +29,6 @@
 -(NSArray*)copyBookmarks;
 -(void)deleteBookmark:(long)_id;
 -(void)deleteAllBookmarks;
+-(NSMutableArray*)copyBookmarkRoadPoints:(int)id;
+-(NSMutableArray*)copyBookmarkInstructions:(int)id;
 @end

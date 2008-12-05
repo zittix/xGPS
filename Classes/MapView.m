@@ -30,8 +30,8 @@
 		posDrivingInstruction.x=i.pos.x;
 		posDrivingInstruction.y=i.pos.y;
 		if(b) {
-			pos.x=posDrivingInstruction.x;
-			pos.y=posDrivingInstruction.y;	
+			self.pos.x=posDrivingInstruction.x;
+			self.pos.y=posDrivingInstruction.y;	
 		}
 	} else {
 		posDrivingInstruction.x=posDrivingInstruction.y=0;
@@ -50,8 +50,8 @@
     return EARTH_RADIUS_IN_METERS * 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));	
 }
 - (void)updateCurrentPos:(PositionObj*) p {
-	//NSLog(@"MapView - updateCurrentPos() - IN");
-	//NSLog(@"MapView - updateCurrentPos() - IN with %f %f",[p x],[p y]);
+	NSLog(@"MapView - updateCurrentPos() - IN");
+	NSLog(@"MapView - updateCurrentPos() - IN with %f %f",[p x],[p y]);
 	posGPS.x=[p x];
 	posGPS.y=[p y];
 	if(!dragging && gpsTracking) {
@@ -92,15 +92,15 @@
 	[self refreshMap];
 	//NSLog(@"MapView - updateCurrentPos() - OUT");
 }
-
+-(int)zoom {
+	return zoom;
+}
 -(void)setZoom:(int)z {
 	zoom=z;
+	[assocZoomview setZoomoutState:zoom!=16];
+	[assocZoomview setZoominState:zoom!=0];
 }
--(void)fakeGPS {
-	pos.x+=0.0001;
-	pos.y+=0.0001;
-	[self refreshMap];
-}
+
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db {
 	if((self=[super initWithFrame:f])) {
 		//NSLog(@"Loading MapView");
@@ -491,7 +491,7 @@
 	//TODO: we currently assume that rect if the full screen !
 	int winWidth=rect.size.width;
 	int winHeight=rect.size.height;
-	
+
 	if(!mapRotationEnabled)
 		mapRotation=0;
 	

@@ -58,6 +58,13 @@
 				ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date FROM dirbookmarks ORDER BY date DESC",-1,&getBookmarkStmt,NULL);
 				NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
 			
+			ret=sqlite3_prepare(database,"SELECT lat,lon FROM dirb_roadpoints WHERE owner=?1 ORDER BY internalId ASC",-1,&getRoadPointStmt,NULL);
+			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+
+			ret=sqlite3_prepare(database,"SELECT lat,lon,name,descr FROM dirb_instructions WHERE owner=?1 ORDER BY internalId ASC",-1,&getInstrStmt,NULL);
+			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+
+			
 			
 			//Migrate the DB if wrong Primary index
 			
@@ -151,6 +158,67 @@ err:
 	sqlite3_reset(deleteInstrStmt);
 	sqlite3_clear_bindings(deleteInstrStmt);
 }
+
+-(NSMutableArray*)copyBookmarkRoadPoints:(int)id{
+	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
+	if(sqlite3_bind_int64(getRoadPointStmt,1,id)!=SQLITE_OK)
+		goto err;
+	
+	int r=sqlite3_step(getRoadPointStmt);
+	while (r == SQLITE_ROW) {
+		double lat =sqlite3_column_double(getRoadPointStmt,0);
+		double lon =sqlite3_column_double(getRoadPointStmt,1);
+		PositionObj *p=[PositionObj positionWithX:lat y:lon];
+		//NSLog(@"Point %f %f",lat,lon);
+		[ret addObject:p];
+		r=sqlite3_step(getRoadPointStmt);
+	}
+	sqlite3_reset(getRoadPointStmt);
+	sqlite3_clear_bindings(getRoadPointStmt);
+	return ret;
+err:
+	sqlite3_reset(getRoadPointStmt);
+	sqlite3_clear_bindings(getRoadPointStmt);
+	return nil;
+}
+-(NSMutableArray*)copyBookmarkInstructions:(int)id{
+	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
+	if(sqlite3_bind_int64(getInstrStmt,1,id)!=SQLITE_OK)
+		goto err;
+	
+	int r=sqlite3_step(getInstrStmt);
+	while (r == SQLITE_ROW) {
+		double lat =sqlite3_column_double(getInstrStmt,0);
+		double lon =sqlite3_column_double(getInstrStmt,1);
+		const char* nameC=(const char*)sqlite3_column_text(getInstrStmt,2);
+		const char* descrC=(const char*)sqlite3_column_text(getInstrStmt,3);
+		if(nameC!=NULL) {
+		NSString *name=[[NSString alloc] initWithCString:nameC];
+			
+		NSString *descr=nil;
+			if(descrC!=NULL)
+				descr=[[NSString alloc] initWithCString:descrC];
+			else
+				descr=@"";
+			
+		PositionObj *p=[PositionObj positionWithX:lat y:lon];
+		Instruction *r2=[Instruction instrWithName:name pos:p descr:descr];
+		[name release];
+		[descr release];
+		[ret addObject:r2];
+		}
+		r=sqlite3_step(getInstrStmt);
+	}
+	sqlite3_reset(getInstrStmt);
+	sqlite3_clear_bindings(getInstrStmt);
+	return ret;
+err:
+	sqlite3_reset(getInstrStmt);
+	sqlite3_clear_bindings(getInstrStmt);	
+	return nil;
+}
+
+
 -(NSArray*)copyBookmarks{
 	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
 	int r=sqlite3_step(getBookmarkStmt);

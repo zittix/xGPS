@@ -288,6 +288,27 @@
 			} else {
 				[delegate showWrongWay];
 			}
+			
+			if(nbWrongWay>10*APPDELEGATE.gpsmanager.currentGPS.refreshRate && recomputeRoute) {
+				float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
+				float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
+				char latD='N';
+				char lonD='E';
+				if(lat<0) {
+					lat*=-1;
+					latD='S';
+				}
+				if(lon<0) {
+					lon*=-1;
+					lonD='S';
+				}
+				NSString*from=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+				[self clearResult];
+				[self drive:from to:_to];
+				
+			} else {
+				nbWrongWay++;
+			}
 		} else {
 			nbWrongWay++;
 		}
@@ -334,6 +355,7 @@
 	//NSLog(@"Done %d pas for road and %d for instr",counterIterRoad,counterIterInstr);
 	
 	if(next!=nil) {
+		instrIndex=previousInstruction;
 		[delegate nextDirectionChanged:next];
 		[map setNextInstruction:next updatePos:NO];
 	}
@@ -463,6 +485,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
 	nbWrongWay=0;
+	[delegate directionsGot:_from to:_to  error:nil];
 	if([instructions count]>0){
 		[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];
 		Instruction *s=[instructions objectAtIndex:instrIndex];
@@ -470,7 +493,7 @@
 		[map setNextInstruction:s updatePos:YES];
 	}
 	//if(req==nil) return;
-	[delegate directionsGot:_from to:_to  error:nil];
+	
 	//instructions=nil;
 	previousSegement=previousInstruction=-1;
 	
@@ -492,7 +515,21 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recomputeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
 }
-
+-(void)setRoad:(NSMutableArray*)road instructions:(NSMutableArray*)instr {
+	[instructions release];
+	instructions=[instr retain];
+	[roadPoints release];
+	roadPoints=[road retain];
+	[map setNextInstruction:nil updatePos:NO];
+	nbWrongWay=0;
+	instrIndex=0;
+	[delegate directionsGot:_from to:_to  error:nil];
+	if([instructions count]>0){
+		Instruction *s=[instructions objectAtIndex:instrIndex];
+		[map setNextInstruction:s updatePos:YES];
+		[delegate nextDirectionChanged:s];
+	}
+}
 -(void)recomputeChanged:(NSNotification *)notif {
 	recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
 }
@@ -679,5 +716,12 @@
 -(PositionObj*)pos {
 	return pos;
 }
+-(void)setFrom:(NSString*)f {
+_from=[f retain];
+}
+-(void)setTo:(NSString*)f {
+	_to=[f retain];
+}
 @synthesize map;
+
 @end

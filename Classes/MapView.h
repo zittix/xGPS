@@ -54,6 +54,7 @@
 @property(nonatomic,assign) ZoomView *assocZoomview;
 //@property(nonatomic) int debugRoadStep;
 -(void)refreshMap;
+-(int)zoom;
 -(void)computeCachedRoad;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)tileDownloaded;
