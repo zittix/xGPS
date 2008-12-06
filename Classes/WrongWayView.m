@@ -86,6 +86,7 @@
 		}
 		NSString*from=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
 		[delegate clearDirections];
+		[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 		[APPDELEGATE.directions drive:from to:to];
 		[from release];
 		[to release];

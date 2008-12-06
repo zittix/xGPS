@@ -50,8 +50,8 @@
     return EARTH_RADIUS_IN_METERS * 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));	
 }
 - (void)updateCurrentPos:(PositionObj*) p {
-	NSLog(@"MapView - updateCurrentPos() - IN");
-	NSLog(@"MapView - updateCurrentPos() - IN with %f %f",[p x],[p y]);
+	//NSLog(@"MapView - updateCurrentPos() - IN");
+	//NSLog(@"MapView - updateCurrentPos() - IN with %f %f",[p x],[p y]);
 	posGPS.x=[p x];
 	posGPS.y=[p y];
 	if(!dragging && gpsTracking) {
@@ -149,6 +149,7 @@
 }
 -(void)gpsBallChanged:(NSNotification *)notif {
 	useGPSBall=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsUseGPSBall];
+	mapRotationEnabled=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
 	[self refreshMap];
 }
 
@@ -495,8 +496,8 @@
 	if(!mapRotationEnabled)
 		mapRotation=0;
 	
-	double cosr=cos(mapRotation);
-	double sinr=sin(mapRotation);
+	float cosr=cos(mapRotation);
+	float sinr=sin(mapRotation);
 	
 	// Drawing code
 	//NSLog(@"Drawing Map with rect size: %f %f and pos %f %f",rect.size.width,rect.size.height,rect.origin.x,rect.origin.y);
@@ -528,8 +529,8 @@
 	//The center tile position will then be at the following position:s
 	//double centerTilePosY=winHeight/2.0-(yoff/TILE_SIZE)*dynTileSize;
 	//double centerTilePosX=winWidth/2.0-(xoff/TILE_SIZE)*dynTileSize;
-	double centerTilePosX=drawOrigin.x-(xoff);
-	double centerTilePosY=drawOrigin.y-(yoff);
+	float centerTilePosX=drawOrigin.x-(xoff);
+	float centerTilePosY=drawOrigin.y-(yoff);
 	
 	//double centerTilePosX2=centerTilePosY*sinr+centerTilePosX*cosr;
 	//double centerTilePosY2=centerTilePosY*cosr-centerTilePosX*sinr;
@@ -552,17 +553,17 @@
 	//	NSLog(@"lat lon: %g;%g and x y: %ld;%ld",pos.x,pos.y,x,y);
 	//CGContextRotateCTM(context,_orientation*M_PI/180.0);
 	
-	double widthDraw=0;
-	double heightDraw=0;
+	float widthDraw=0;
+	float heightDraw=0;
 	
 	
-	double widthDraw2=0;
-	double heightDraw2=0;
+	float widthDraw2=0;
+	float heightDraw2=0;
 	
 	widthDraw2=widthDraw=heightDraw=heightDraw2=sqrt(winWidth*winWidth/4+winHeight*winHeight/4);
 	
-	int nbTileInX=ceil((double)widthDraw2/TILE_SIZE);
-	int nbTileInY=ceil((double)heightDraw2/TILE_SIZE);
+	int nbTileInX=ceil((float)widthDraw2/TILE_SIZE);
+	int nbTileInY=ceil((float)heightDraw2/TILE_SIZE);
 	x=x-nbTileInX;
 	y=y-nbTileInY;
 	org.x=centerTilePosX-nbTileInX*TILE_SIZE;
@@ -581,12 +582,12 @@
 	int nbTiles=pow(2,17-zoom);
 	//NSLog(@"x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
 	//CGContextRotateCTM(context,M_PI/2.0);
-	double marginy=0;
+	float marginy=0;
 	
 	while(org.y<heightDraw) {
 		int orgxTile=x;
-		double orgx=org.x;
-		double marginx=0;
+		float orgx=org.x;
+		float marginx=0;
 		if(y<nbTiles && y>=0) {
 			while(org.x<widthDraw) {
 				if(x<0) {
@@ -659,10 +660,10 @@
 		[self getXYOffsetfrom:posSearch.x andLon:posSearch.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
 		
 		
-		double posXPin=drawOrigin.x+(x-centerTileX)*TILE_SIZE-xoff+(xoff2);
-		double posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);
-		double posXPin2=cosr*posXPin - posYPin*sinr;
-		double posYPin2=sinr*posXPin + posYPin*cosr;
+		float posXPin=drawOrigin.x+(x-centerTileX)*TILE_SIZE-xoff+(xoff2);
+		float posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);
+		float posXPin2=cosr*posXPin - posYPin*sinr;
+		float posYPin2=sinr*posXPin + posYPin*cosr;
 		
 		
 		//NSLog(@"Pos: %f %f",posXPin,posYPin);
@@ -714,8 +715,8 @@
 			yoffstart=l.yoff;
 			xstart=l.tileX;
 			ystart=l.tileY;
-			double posXPin=drawOrigin.x+(xstart-centerTileX)*TILE_SIZE-(xoff)+(xoffstart);
-			double posYPin=drawOrigin.y+(ystart-centerTileY)*TILE_SIZE-(yoff)+(yoffstart);
+			float posXPin=drawOrigin.x+(xstart-centerTileX)*TILE_SIZE-(xoff)+(xoffstart);
+			float posYPin=drawOrigin.y+(ystart-centerTileY)*TILE_SIZE-(yoff)+(yoffstart);
 			
 			//	double posXPin2=cosr*posXPin - posYPin*sinr;
 			//	double posYPin2=sinr*posXPin + posYPin*cosr;
@@ -781,8 +782,8 @@
 		[self getXYOffsetfrom:posDrivingInstruction.x andLon:posDrivingInstruction.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
 		
 		
-		double posXPin=drawOrigin.x+(x-centerTileX)*TILE_SIZE-xoff+(xoff2);
-		double posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);		
+		float posXPin=drawOrigin.x+(x-centerTileX)*TILE_SIZE-xoff+(xoff2);
+		float posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);		
 		//Draw a circle
 		
 		CGContextSetLineWidth(context,3.0);
@@ -796,9 +797,14 @@
 		CGContextFillPath(context);
 	}	
 	
+	//CGContextScaleCTM(context, 1, -1);
+	
+
+	//rot=CGAffineTransformMakeRotation(mapRotation);
+	//CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
+	//CGContextConcatCTM(context, rot);
+	
 	if(hasGPSfix) {
-		CGContextRotateCTM(context, -mapRotation);
-		CGContextScaleCTM(context, 1, -1);
 		int xoff2,yoff2;
 		[self getXYfrom:posGPS.x andLon:posGPS.y toPositionX:&x andY:&y withZoom:zoom];
 		[self getXYOffsetfrom:posGPS.x andLon:posGPS.y toPositionX:&xoff2 andY:&yoff2 withZoom:zoom];
@@ -807,14 +813,14 @@
 		double posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);
 		
 		if(useGPSBall) {
-			
+			CGContextRotateCTM(context, -mapRotation);
+			CGContextScaleCTM(context, 1, -1);
 			[imgPinRef drawAtPoint: CGPointMake(posXPin-10, posYPin+10) withContext:context];
-		} else{
-			
-			
-			
-			double posXPin2=cosr*posXPin - posYPin*sinr;
-			double posYPin2=sinr*posXPin + posYPin*cosr;
+			CGContextScaleCTM(context, 1, -1);
+			CGContextRotateCTM(context, mapRotation);
+		} else{		
+			float posXPin2=cosr*posXPin - posYPin*sinr;
+			float posYPin2=sinr*posXPin + posYPin*cosr;
 			if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
 				
 				CGPoint ind[4];
@@ -826,12 +832,12 @@
 				ind[2].y=-35+10;
 				ind[3].x=15;
 				ind[3].y=15*0.666+10;
-				double alpha=gpsHeading+mapRotation-2*M_PI;
-				double cosa=cos(alpha);
-				double sina=sin(alpha);
+				float alpha=gpsHeading+mapRotation;
+				float cosa=cos(alpha);
+				float sina=sin(alpha);
 				for(int i=0;i<4;i++) {
-					double posx=ind[i].x;
-					double posy=ind[i].y;
+					float posx=ind[i].x;
+					float posy=ind[i].y;
 					
 					ind[i].x=-cosa*posx -posy*sina;
 					ind[i].y=+sina*posx - posy*cosa;
@@ -841,6 +847,10 @@
 					ind[i].y-=posYPin2;
 				}
 				
+
+				CGContextRotateCTM(context, -mapRotation);
+	
+				CGContextScaleCTM(context, 1, -1);
 				CGContextBeginPath(context);
 				CGContextAddLines(context,ind,4);
 				CGContextClosePath(context);
@@ -851,17 +861,15 @@
 				CGContextClosePath(context);
 				CGContextSetRGBFillColor(context,0,0,1,1);
 				CGContextFillPath(context);
-				
-				//CGContextScaleCTM(context, 1, -1);
-				//CGContextRotateCTM(context, mapRotation);
-				//CGContextScaleCTM(context, 1, -1);
+				CGContextScaleCTM(context, 1, -1);
+		
+				CGContextRotateCTM(context, mapRotation);
+
 				
 				//NSLog(@"Pos: %f %f",posXPin,posYPin);
 			}
 		}
-	}
-	//CGContextScaleCTM(context, 1, -1);
-	
+	}	
 	
 	
 	/*

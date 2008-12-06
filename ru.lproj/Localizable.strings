@@ -1,44 +1,82 @@
 "%.1f MB" = "%.1f MB";
 
-"About xGPS" = "О xGPS";
+"About xGPS" = "О программе xGPS";
 
-"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Произошла ошибка при загрузке отдельных картах. Некоторые части карты могут быть не загружена правильно.";
+"Address book" = "Адресная книга";
 
-"Are you sure you want to delete all the downloaded maps ?" = "Вы уверены, что хотите удалить все загруженные карты?";
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Произошла ошибка при загрузке выбранных карт. Некоторые части карты могут быть загружены неправильно.";
 
-"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Вы уверены, что хотите загрузить выбранную карту района (%d файлы ~ %d KB) ?";
+"Are you sure you want to delete all the downloaded maps ?" = "Вы уверены, что хотите удалить все загруженные карты ?";
 
-"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Вы уверены, что хотите загрузить выбранную карту района (%d файлы ~ %d KB) ?";
+"Are you sure you want to delete all the recorded tracks ?" = "Вы уверены что хотите удалить все записанные треки?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Вы уверены что хотите удалить все сохраненные закладки?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Вы уверены, что хотите загрузить выбранную часть карты (%d фрагментов ~ %d КB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Вы уверены, что хотите загрузить выбранную часть карты (%d фрагментов ~ %d МB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Вы уверены что хотите просчитать заново маршрут с текущей позиции?";
+
+"Blue dot for position" = "Голубая точка для позиции";
+
+"Bookmarks" = "Закладки";
 
 "Cancel" = "Отмена";
 
 "City name / Address" = "Город / Адрес";
 
+"Clear Driving directions" = "Очистить указания для вождения";
+
+"Clear Search results" = "Очистить результаты поиска";
+
 "Connected" = "Связанные";
+
+"Current GPS Position" = "Текущая позиция GPS";
+
+"Current Position" = "Текущая позиция";
+
+"Delete all bookmarks" = "Удалить все закладки";
 
 "Delete downloaded maps" = "Удаление загруженных карт";
 
-"Disable GPS" = "Отключение GPS";
+"Delete GPX Log file" = "Удалить GPX Log файл";
 
-"Disconnected" = "Отключено";
+"Directions" = "Указания";
+
+"Directions Bookmarks" = "Закладки указаний";
+
+"Disable GPS" = "Выключение GPS";
+
+"Disconnected" = "Выключен";
 
 "Dismiss" = "Отклонить";
 
-"Download" = "Скачать ";
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Расстояния и скорость будут показаны в километрах (км/час и метры)";
 
-"Downloaded maps size" = "Размер загруженные карты";
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Расстояния и скорость будут показаны в милях (миль/час и мили)";
+
+"Download" = "Загрузить";
+
+"Downloaded maps size" = "Размер загруженной карты";
 
 "Downloading maps..." = "Загрузка карты ...";
 
-"Driving directions" = "Направления движения";
+"Driving directions" = "Указания для движения";
 
-"Enable GPS" = "Разрешать GPS";
+"Enable GPS" = "Включить GPS";
 
 "Error" = "Ошибка";
 
 "From / Departure" = "От/ Отъезд";
 
+"From:" = "Откуда:";
+
 "General" = "Общий";
+
+"Good" = "Хорошый";
+
+"GPS" = "GPS";
 
 "GPS Device" = "Устройство GPS";
 
@@ -46,7 +84,7 @@
 
 "GPS to use" = "GPS для использования";
 
-"GPX Logging" = "GPX Вход";
+"GPX Logging" = "GPX Протоколирование";
 
 "Hybrid" = "Гибрид";
 
@@ -56,15 +94,19 @@
 
 "License number" = "Номер лицензии";
 
-"License number for %@" = "Номер лицензии для%@";
+"License number for %@" = "Номер лицензии для %@";
 
 "License:" = "Лицензия:";
+
+"Locations" = "Местоположения:";
+
+"Log file size" = "Записывать размер файла";
 
 "Manage maps" = "Управление картами";
 
 "Map" = "Карта";
 
-"Map auto-rotation" = "Карта автоматической ротации";
+"Map auto-rotation" = "Авто-поворот карты";
 
 "Maps" = "Карты";
 
@@ -72,71 +114,115 @@
 
 "Maps Download" = "Загрузка Карт";
 
-"Maps downloaded successfully !" = "Карты скачаны успешно!";
+"Maps downloaded successfully !" = "Карты загружены успешно!";
 
 "Maps Manager" = "Менеджер Карт";
 
 "Maps type" = "Тип карт";
 
+"N/A" = "N/A";
+
 "No" = "Нет";
 
-"No License" = "Никакая Лицензия";
+"No driving direction can be computed using your query." = "По этому запросу невозможно вычислить указания для вождения.";
 
-"No location has been found according to your query." = "Никакое местоположение не было, находят согласно вашему вопросу.";
+"No License" = "Номер Лицензии";
 
-"Offline mode" = "Автономный способ";
+"No location has been found according to your query." = "По вашему запросу местоположение не найдено.";
 
-"Pick a GPS" = "Выберите  GPS";
+"None" = "Нет";
+
+"Offline mode" = "Автономный режим";
+
+"Pick a GPS" = "Выберите GPS";
 
 "Places / Cities" = "Места / Города";
 
 "Please select a greater map area by touching the screen with two fingers." = "Пожалуйста выберите большую область карты, касаясь экрана с двумя пальцами.";
 
-"Prevent Sleep Mode" = "Предотвратите Способ Сна";
+"Poor" = "Слабый";
 
-"Ready to receive..." = "Готовый получать...";
+"Prevent Sleep Mode" = "Предотвратить режим сна";
 
-"Receive maps" = "Получите карты";
+"Ready to receive..." = "Готов к загрузке...";
 
-"Receiving maps" = "Получение карт";
+"Receive maps" = "Загрузка карт";
 
-"Reset GPS" = "GPS сброса";
+"Receiving maps" = "Загрузка карт";
+
+"Recompute itinerary" = "Пересчитать маршрут";
+
+"Reset GPS" = "Сброс GPS";
 
 "Satellite" = "Спутник";
 
+"Save in Bookmarks" = "Сохранить в закладках";
+
 "Search for:" = "Поиск:";
 
-"Settings" = "Параметры";
+"Settings" = "Установки";
 
-"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услуги Местоположения не позволяются на вашем устройстве. Используйте заявление Параметров настройки на вашем экране Home, чтобы установить эту проблему.";
+"Show Speedometer" = "Показать спидометр";
 
-"This feature will be implemented in a future version." = "Эта особенность будет осуществлена в будущей версии.";
+"Take position from:" = "Взять позицию от:";
 
-"To / Destination" = "К / Предназначение";
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Установка языка используется для локализации указаний для вождения, карт и результатов поиска места или города.";
 
-"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Неспособный открыть последовательный порт. Удостоверьтесь, что никакое другое программное обеспечение GP не бежит в фоне.";
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услуги поиска местоположения не включены на вашем устройстве. Используйте приложение \"Установки\" для их включения.";
 
-"Unable to retrieve the required information from the server: %@" = "Неспособный восстановить необходимую информацию от сервера: %@";
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Размер карт будет возрастать когда вы просматривайте карту, часть которой не была загружена.";
+
+"This feature will be implemented in a future version." = "Эта функция будет создана в будущей версии.";
+
+"To / Destination" = "К / Пункт назначения";
+
+"To:" = "Куда:";
+
+"Unable to download a part of the map. Check your internet connection." = "Не возможно загрузить часть карты. Проверьте соединение с интернет.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Невозможно определить позицию GPS. Приемник GPS не получает сигнал со спутника.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Не могу открыть последовательный порт. Проверьте, что другая программа GPS его не использует.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Невозможно получить указания для вождения от сервера: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Не могу получить необходимую информацию от сервера: %@";
 
 "Unknown error" = "Неизвестная ошибка";
 
-"Use Miles unit" = "Подразделение Миль Использования";
+"Use Miles unit" = "Используйте мили";
 
-"Verifying license number..." = "Подтверждение числа лицензии...";
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Используйте опцию \"Сброс GPS\" для перезагрузки модуля GPS в случае если он показывает неправильную позицию или не отвечает вообще.";
+
+"User Interface" = "Пользовательский интерфейс";
+
+"Verifying license number..." = "Проверка номера лицензии...";
 
 "Version" = "Версия";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Когда опция включена, все найденные указания для вождения сохраняются в закладках.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Когда опция включена, спящий режим отключается и экран будет все время работать.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Когда опция включена, указания для вождения вычисляются заново, когда вы пропускаете нужный поворот.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Когда опция GPX logging включена, все перемещения записываются в файл в формате GPX. Этот файл может быть открыть на компьютере для отображения перемещений.";
+
+"Wrong\nWay" = "Неправильный\nПуть";
 
 "xGPS Error" = "xGPS Ошибка";
 
 "Yes" = "Да";
 
-"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Вы не можете сделать запроса поиска, в то время как Вы находитесь в автономном способе. Вы можете выключить автономный способ, крутя диск кнопка Settings.";
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Вы не можете искать, когда находитесь находитесь в автономном режиме. Вы можете выключить автономный режим в разделе \"Установки\".";
 
-"You cannot download maps while you are in the offline mode." = "Вы не можете загрузить карты, в то время как Вы находитесь в автономном способе.";
+"You cannot download maps while you are in the offline mode." = "Вы не можете загрузить карты находясь в автономном режиме.";
 
 "Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Ваши загруженные карты не совместимы с этой версией xGPS. Они были удалены.";
 
-"Your license number is invalid. Please verify and retry" = "Ваше число лицензии недействительно. Пожалуйста проверите и повторить";
+"Your license number is invalid. Please verify and retry" = "Ваша лицензия недействительна. Пожалуйста проверьте и повторите.";
 
-"Your license number is valid. You can now use the selected GPS." = "Ваше число лицензии действительно. Вы можете теперь использовать отобранные GPS.";
+"Your license number is valid. You can now use the selected GPS." = "Ваша лицензия правильна. Вы можете теперь использовать выбранный GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Сохраненные указания для вождения не совместимы с этой версией программы GPX. Они были удалены.";
 

@@ -208,7 +208,7 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Wenn die GPX Aufzeichnung aktiviert ist, wird ihr Weg in einer GPX Datei gespeichert. Auf einem Computer kann diese Datei zur Darstellung des Weges benutzt werden.";
 
-"Wrong\nWay" = "Falsche Richtung";
+"Wrong\nWay" = "Falsche\nRichtung";
 
 "xGPS Error" = "xGPS Fehler";
 

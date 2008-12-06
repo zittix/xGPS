@@ -208,7 +208,7 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "當 GPX 紀錄開啟時，所有的移動都將會以 GPX 格式進行紀錄，可以於電腦上檢視該檔案。";
 
-"Wrong\nWay" = "路線n錯誤";
+"Wrong\nWay" = "路線\n錯誤";
 
 "xGPS Error" = "xGPS 錯誤";
 

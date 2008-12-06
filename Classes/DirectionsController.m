@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreLocation/CLLocationManager.h>
 #import "MapView.h"
+#import "MainViewController.h"
 @implementation Instruction
 @synthesize name;
 @synthesize pos;
@@ -55,6 +56,7 @@
 -(id)init {
 	if((self=[super init])) {
 		pos=[[PositionObj alloc] init];
+		recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
 	}
 	return self;
 }
@@ -274,7 +276,7 @@
 			road2=[roadPoints objectAtIndex:1];
 			groad1=road1;
 			groad2=road2;
-			remainingDist=fabs([self distanceBetween:road1 and:road2]);
+			//remainingDist=fabs([self distanceBetween:road1 and:road2]);
 		}
 	}
 	
@@ -289,7 +291,7 @@
 				[delegate showWrongWay];
 			}
 			
-			if(nbWrongWay>10*APPDELEGATE.gpsmanager.currentGPS.refreshRate && recomputeRoute) {
+			if(nbWrongWay>20*APPDELEGATE.gpsmanager.currentGPS.refreshRate && recomputeRoute) {
 				float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
 				float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
 				char latD='N';
@@ -303,9 +305,12 @@
 					lonD='S';
 				}
 				NSString*from=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
-				[self clearResult];
-				[self drive:from to:_to];
-				
+				NSString *to=[_to retain];
+				[delegate clearDirections];
+				[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+				[self drive:from to:to];
+				[from release];
+				[to release];
 			} else {
 				nbWrongWay++;
 			}

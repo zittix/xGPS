@@ -33,7 +33,7 @@
 #define kSettingsSaveDirSearch @"savedirsearch"
 #define kSettingsRecomputeDriving @"recomputedirections"
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
-#define VERSION "1.1.0 Test"
+#define VERSION "1.1.0"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;
