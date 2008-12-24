@@ -386,11 +386,11 @@
 				4EE0F2D90E6AAA0100BBA3FD /* ZoomView.h */,
 				4EE0F2DA0E6AAA0100BBA3FD /* ZoomView.m */,
 				4EE0F2D30E6AA9C500BBA3FD /* MapsManagerView.h */,
-				4EE0F2D00E6AA97600BBA3FD /* MapsManagerView.m */,
 				4E23966E0E40F6AB0062A352 /* MapTile.h */,
 				4E23966F0E40F6AB0062A352 /* MapTile.m */,
 				4E2396700E40F6AB0062A352 /* MapView.h */,
 				4E2396710E40F6AB0062A352 /* MapView.m */,
+				4EE0F2D00E6AA97600BBA3FD /* MapsManagerView.m */,
 				4E7929620E58EAE100CAF1B2 /* MainViewController.m */,
 				28216C950DB411BC00E5133A /* MainViewController.h */,
 				4E941A070E6A92330037F8C1 /* SettingsViewController.h */,
@@ -720,7 +720,7 @@
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = xGPS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5CB2FB-5A40-4FBF-9149-20AF336D1770";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "87079DB5-32DC-4FAE-89D9-74FFE37C6912";
 			};
 			name = Release;
 		};

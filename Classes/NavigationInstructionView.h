@@ -21,4 +21,5 @@
 }
 @property(nonatomic,assign) id delegate;
 -(void)setText:(NSString*)txt;
+-(void)setTextSize:(float)size;
 @end

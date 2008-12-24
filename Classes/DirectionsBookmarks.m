@@ -231,6 +231,8 @@ err:
 		[ret addObject:dict];
 		[to release];
 		[from release];
+		from=nil;
+		to=nil;
 		r=sqlite3_step(getBookmarkStmt);
 	}
 		sqlite3_reset(getBookmarkStmt);

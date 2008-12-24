@@ -22,7 +22,7 @@
 		lbl.textAlignment=UITextAlignmentCenter;
 		lbl.backgroundColor=[UIColor clearColor];
 		lbl.textColor=[UIColor whiteColor];
-		lbl.font=[UIFont boldSystemFontOfSize:14];
+		lbl.font=[UIFont boldSystemFontOfSize:16];
 		lbl.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		lbl.numberOfLines=0;
 		lbl.lineBreakMode=UILineBreakModeWordWrap;
@@ -33,7 +33,9 @@
 }
 #define HORIZ_SWIPE_DRAG_MIN  70
 #define VERT_SWIPE_DRAG_MAX    4
-
+-(void)setTextSize:(float)size {
+	lbl.font=[UIFont boldSystemFontOfSize:size];
+}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];

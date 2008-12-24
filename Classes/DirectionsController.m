@@ -17,6 +17,7 @@
 @synthesize name;
 @synthesize pos;
 @synthesize descr;
+@synthesize dist;
 +(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr {
 	Instruction*r=[[Instruction alloc] init];
 	r.pos=pos;
@@ -180,7 +181,7 @@
 	[MapView getXYOffsetfrom:p.x andLon:p.y toPositionX:&offxc andY:&offyc withZoom:0];
 	c.x=cx+offxc/256.0;
 	c.y=cy+offyc/256.0;
-	double remainingDist=-1;
+	double remainingDist=0;
 	PositionObj *groad1=nil;
 	PositionObj *groad2=nil;
 	int i;
@@ -240,6 +241,7 @@
 					c_b=[c_b initWithLatitude:road2.x longitude:road2.y];
 					//Projection
 					remainingDist=fabs([c_b getDistanceFrom:c_p2]);
+					//NSLog(@"Remaining dist %f",remainingDist);
 					//minDist=dist;
 					//found=i;
 					groad1=road1;
@@ -271,12 +273,12 @@
 		road1=[roadPoints objectAtIndex:0];
 		
 		double tmp=[self distanceBetween:road1 and:p];
-		if(tmp<=15.0) {
+		if(tmp<=20.0) {
 			i=-1;
 			road2=[roadPoints objectAtIndex:1];
 			groad1=road1;
 			groad2=road2;
-			//remainingDist=fabs([self distanceBetween:road1 and:road2]);
+			remainingDist=fabs([self distanceBetween:road1 and:road2]);
 		}
 	}
 	
@@ -343,24 +345,31 @@
 				//counterIterInstr++;
 				Instruction *instr=[instructions objectAtIndex:j];
 				double dist=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:instr.pos]);
-				if(dist>=0 && dist<=2 && previousInstruction-1<=j){ // Allow to step back from one instruction when we get the false direction
+				
+				
+				if(dist>=0 && dist<=2 && previousInstruction-1<=j && previousInstruction+1!=[instructions count]){ // Allow to step back from one instruction when we get the false direction
 					distNext=dist;
 					next=instr;
 					previousInstruction=j;
 					break;
-				}
+				} 
 			}
 			if(next==nil && previousInstruction>=0) {
 				previousInstruction=-1;
 			} else
 				break;	
 		}
+		if(i+1<[roadPoints count])
+			remainingDist+=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:[roadPoints objectAtIndex:i+1]]);	
+		
+		
 		if(next!=nil) break;
 	}
 	//NSLog(@"Done %d pas for road and %d for instr",counterIterRoad,counterIterInstr);
 	
 	if(next!=nil) {
 		instrIndex=previousInstruction;
+		next.dist=remainingDist;
 		[delegate nextDirectionChanged:next];
 		[map setNextInstruction:next updatePos:NO];
 	}

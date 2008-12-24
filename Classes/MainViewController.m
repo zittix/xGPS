@@ -385,7 +385,11 @@
 	[wrongWay removeFromSuperview];
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
-	[navView setText:instr.name];
+	if(instr.dist<500)
+		[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f m",instr.name,instr.dist]];
+	else
+		[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f km",instr.name,instr.dist/1000.0]];
+	
 	[UIView beginAnimations:nil context:nil];	
 	[navView sizeToFit];
 	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);

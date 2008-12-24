@@ -15,10 +15,12 @@
 	NSString *name;
 	NSString *descr;
 	PositionObj* pos;
+	double dist;
 }
 @property (nonatomic,retain) NSString* name;
 @property (nonatomic,retain) NSString* descr;
 @property (nonatomic,retain) PositionObj* pos;
+@property (nonatomic) double dist;
 +(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr;
 @end
 @protocol DirectionsControllerDelegate
