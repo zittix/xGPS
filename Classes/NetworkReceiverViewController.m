@@ -24,7 +24,7 @@
 
 // Implement loadView to create a view hierarchy programmatically.
 - (void)loadView {
-	self.navigationItem.title=NSLocalizedString(@"Receiving maps",@"Receiving title");
+	self.navigationItem.title=NSLocalizedString(@"Transfer",@"Receiving title");
 	CGRect viewRect=[[UIScreen mainScreen] applicationFrame];
 	viewRect.size.height=viewRect.size.height-44.0f;
 	UIView *view=[[UIView alloc] initWithFrame:viewRect];
@@ -37,13 +37,14 @@
 	[self.view addSubview:imgview];
 	lblStatus=[[UILabel alloc] initWithFrame:CGRectMake(0,(self.view.frame.size.height-img.size.height)/2.0+img.size.height,self.view.frame.size.width,50)];
 	[self.view addSubview:lblStatus];
-	lblStatus.text=NSLocalizedString(@"Ready to receive...",@"Status ready");
+	lblStatus.text=NSLocalizedString(@"Ready to transfer...",@"Status ready");
 	lblStatus.textAlignment=UITextAlignmentCenter;
 	lblStatus.font=[UIFont fontWithName:@"Helvetica" size:22];
 	progress=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[progress startAnimating];
 	UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:progress];
 	self.navigationItem.rightBarButtonItem=btn;
+	APPDELEGATE.txcontroller.delegate=self;
 }
 
 
@@ -55,9 +56,11 @@
 */
 -(void)viewWillAppear:(BOOL)animated {
 	[APPDELEGATE.tiledb closeDB];
+	[APPDELEGATE.txcontroller startServer];
 }
 -(void)viewWillDisappear:(BOOL)animated {
 	[APPDELEGATE.tiledb loadDB];
+	[APPDELEGATE.txcontroller stopServer];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations

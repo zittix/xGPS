@@ -14,6 +14,7 @@
 #import "SettingsGPSController.h"
 #import "SettingsDrivingDirectionsController.h"
 #import "SettingsGPXController.h"
+#import "NetworkReceiverViewController.h"
 @interface SettingsViewController : UITableViewController {
 	SettingsUIController* uisettings;
 	SettingsGeneralController* generalsettings;
@@ -21,6 +22,7 @@
 	SettingsGPSController* gpssettings;
 	SettingsDrivingDirectionsController* dirsettings;
 	SettingsGPXController* gpxsettings;
+	NetworkReceiverViewController * networkView;
 }
 - (id)initWithStyle:(UITableViewStyle)style;
 -(void)reload;

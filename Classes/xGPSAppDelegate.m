@@ -15,6 +15,7 @@ static TileDB* tiledb;
 static GPSManager* gpsmanager;
 static DirectionsController* directions;
 static DirectionsBookmarks* dirbookmarks;
+static TransferController* txcontroller;
 @synthesize window;
 @synthesize navController;
 
@@ -32,9 +33,14 @@ static DirectionsBookmarks* dirbookmarks;
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSaveDirSearch];
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsRecomputeDriving];
 	}
-		
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<3) {
+		[[NSUserDefaults standardUserDefaults] setInteger:3 forKey:kSettingsVersion];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsRecomputeDriving];
+	}
+	
 	
 	staticObj=self;
+	txcontroller=[[TransferController alloc] init];
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 	dirbookmarks=[[DirectionsBookmarks alloc] init];
 	tiledb=[[TileDB alloc] init];
@@ -67,6 +73,9 @@ static DirectionsBookmarks* dirbookmarks;
 }
 -(DirectionsController*)directions {
 	return directions;
+}
+-(TransferController*)txcontroller {
+	return txcontroller;
 }
 +(TileDB*)tiledb {
 	return tiledb;

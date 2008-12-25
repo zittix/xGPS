@@ -11,6 +11,7 @@
 #import "DirectionsController.h"
 #import "GPSManager.h"
 #import "DirectionsBookmarks.h"
+#import "TransferController.h"
 #define kSettingsCurrentGPS @"gpsinuse"
 #define kSettingsLicense @"gpslicense_%@"
 #define kSettingsLicenseOK @"gpslicense_%@_status"
@@ -32,8 +33,9 @@
 #define kSettingsShowSpeed @"showspeed"
 #define kSettingsSaveDirSearch @"savedirsearch"
 #define kSettingsRecomputeDriving @"recomputedirections"
+#define WIRELESS_TRANSFER_PORT 7777
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
-#define VERSION "1.1.0"
+#define VERSION "1.2.0 Test"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;
@@ -49,4 +51,5 @@
 @property (nonatomic, readonly,getter=gpsmanager) GPSManager* gpsmanager;
 @property (nonatomic, readonly,getter=directions) DirectionsController* directions;
 @property (nonatomic, readonly,getter=dirbookmarks) DirectionsBookmarks* dirbookmarks;
+@property (nonatomic, readonly,getter=txcontroller) TransferController* txcontroller;
 @end

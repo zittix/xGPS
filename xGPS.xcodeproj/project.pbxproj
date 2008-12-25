@@ -24,6 +24,8 @@
 		4E23967A0E40F7750062A352 /* TileDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2396790E40F7750062A352 /* TileDB.m */; };
 		4E2397000E40F95D0062A352 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */; };
 		4E2397010E40F95D0062A352 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FF0E40F95D0062A352 /* QuartzCore.framework */; };
+		4E487FE40F03C9680004AE7B /* TransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E487FE30F03C9680004AE7B /* TransferController.m */; };
+		4E4880410F03CE5F0004AE7B /* TransferProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4880400F03CE5F0004AE7B /* TransferProtocol.m */; };
 		4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */; };
 		4E74D8530EDD946800C2FEAC /* WrongWayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E74D8520EDD946800C2FEAC /* WrongWayView.m */; };
 		4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E74D8540EDD99B800C2FEAC /* wrongway.png */; };
@@ -136,6 +138,10 @@
 		4E23969B0E40F7DA0062A352 /* LocationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationWrapper.h; sourceTree = "<group>"; };
 		4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4E2396FF0E40F95D0062A352 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E487FE20F03C9680004AE7B /* TransferController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferController.h; sourceTree = "<group>"; };
+		4E487FE30F03C9680004AE7B /* TransferController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferController.m; sourceTree = "<group>"; };
+		4E48803F0F03CE5F0004AE7B /* TransferProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferProtocol.h; sourceTree = "<group>"; };
+		4E4880400F03CE5F0004AE7B /* TransferProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferProtocol.m; sourceTree = "<group>"; };
 		4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarksViewController.h; sourceTree = "<group>"; };
 		4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarksViewController.m; sourceTree = "<group>"; };
 		4E74D8510EDD946800C2FEAC /* WrongWayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrongWayView.h; sourceTree = "<group>"; };
@@ -294,6 +300,10 @@
 				4E9670FD0EBA5840008E7917 /* GPXLogger.c */,
 				4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */,
 				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
+				4E487FE20F03C9680004AE7B /* TransferController.h */,
+				4E487FE30F03C9680004AE7B /* TransferController.m */,
+				4E48803F0F03CE5F0004AE7B /* TransferProtocol.h */,
+				4E4880400F03CE5F0004AE7B /* TransferProtocol.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -632,6 +642,8 @@
 				4EAA1BAD0EE53A2B0014DBF0 /* SettingsGPSController.m in Sources */,
 				4EAA1BC30EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m in Sources */,
 				4EAA1BD70EE5401A0014DBF0 /* SettingsGPXController.m in Sources */,
+				4E487FE40F03C9680004AE7B /* TransferController.m in Sources */,
+				4E4880410F03CE5F0004AE7B /* TransferProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

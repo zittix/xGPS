@@ -32,7 +32,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
 		case 0: return 3;
-		case 1: return 6;
+		case 1: return 7;
 		default: return 0;
 	}
 }
@@ -63,12 +63,13 @@
 		case 1: {
 			switch(indexPath.row) {
 				case 0:	id=@"general"; break;
-				case 1:	id=@"maps"; break;
-				case 2:	id=@"gps"; break;
-				//case 3:	id=@"locations"; break;
-				case 3:	id=@"driving"; break;
-				case 4:	id=@"gpx"; break;
-				case 5:	id=@"ui"; break;
+				case 1:	id=@"transfer"; break;
+				case 2:	id=@"maps"; break;
+				case 3:	id=@"gps"; break;
+				//case 4:	id=@"locations"; break;
+				case 4:	id=@"driving"; break;
+				case 5:	id=@"gpx"; break;
+				case 6:	id=@"ui"; break;
 			}break;
 		}
 	}
@@ -131,29 +132,33 @@
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
 					case 1:	{
-						cell.text=NSLocalizedString(@"Maps",@"");
+						cell.text=NSLocalizedString(@"Wireless Transfer",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
 					case 2:	{
+						cell.text=NSLocalizedString(@"Maps",@"");
+						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+					} break;
+					case 3:	{
 						cell.text=NSLocalizedString(@"GPS",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
-					/*case 3:
+					/*case 4:
 						cell.text=NSLocalizedString(@"Locations",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 
 						break;*/
-					case 3:
+					case 4:
 						cell.text=NSLocalizedString(@"Driving directions",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
 						break;
-					case 4:
+					case 5:
 						cell.text=NSLocalizedString(@"GPX Logging",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						
 						break;
-					case 5:
+					case 6:
 						cell.text=NSLocalizedString(@"User Interface",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						break;
@@ -194,31 +199,35 @@
 		if(generalsettings==nil)
 			generalsettings=[[SettingsGeneralController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:generalsettings animated:YES];
-	} else if(indexPath.section==1 && indexPath.row==5) {
+	} else if(indexPath.section==1 && indexPath.row==6) {
 		if(uisettings==nil)
 			uisettings=[[SettingsUIController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:uisettings animated:YES];
 			
-	}else if(indexPath.section==1 && indexPath.row==1) {
+	}else if(indexPath.section==1 && indexPath.row==2) {
 		if(mapssettings==nil)
 			mapssettings=[[SettingsMapsController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:mapssettings animated:YES];
 		
-	}else if(indexPath.section==1 && indexPath.row==2) {
+	}else if(indexPath.section==1 && indexPath.row==3) {
 		if(gpssettings==nil)
 			gpssettings=[[SettingsGPSController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:gpssettings animated:YES];
 		
-	}else if(indexPath.section==1 && indexPath.row==3) {
+	}else if(indexPath.section==1 && indexPath.row==4) {
 		if(dirsettings==nil)
 			dirsettings=[[SettingsDrivingDirectionsController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:dirsettings animated:YES];
 		
-	}else if(indexPath.section==1 && indexPath.row==4) {
+	}else if(indexPath.section==1 && indexPath.row==5) {
 		if(gpxsettings==nil)
 			gpxsettings=[[SettingsGPXController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:gpxsettings animated:YES];
 		
+	} else if(indexPath.section==1 && indexPath.row==1) {
+		if(networkView==nil)
+			networkView=[[NetworkReceiverViewController alloc] init];
+		[self.navigationController pushViewController:networkView animated:YES];	
 	}
 	
 }
