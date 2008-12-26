@@ -717,7 +717,7 @@
 					"-lsqlite3",
 				);
 				PRODUCT_NAME = xGPS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5CB2FB-5A40-4FBF-9149-20AF336D1770";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "87079DB5-32DC-4FAE-89D9-74FFE37C6912";
 				STRIP_STYLE = "non-global";
 			};
 			name = Debug;

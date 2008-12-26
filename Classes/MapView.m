@@ -11,8 +11,8 @@
 #import "xGPSAppDelegate.h"
 #undef NAN
 #define NAN -10e8
-#define DEG_TO_RAD (M_PI/180.0f)
-#define DEG2RAD(x) (x*M_PI/180.0f)
+#define DEG_TO_RAD (M_PI/180.0)
+#define DEG2RAD(x) (x*M_PI/180.0)
 /// @brief Earth's quatratic mean radius for WGS-84
 #define EARTH_RADIUS_IN_METERS 6372797.560856
 @implementation MapView

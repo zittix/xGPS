@@ -93,6 +93,7 @@ static TransferController* txcontroller;
 	[tiledb release];
 	[dirbookmarks release];
 	[gpsmanager release];
+	[txcontroller release];
 	[super dealloc];
 }
 

@@ -151,6 +151,10 @@ name:[NSString stringWithFormat:NSLocalizedString(@"xGPS on %@",@""),[[NSProcess
 		}
 	}
 }
+-(void)dealloc {
+	[self stopServer];
+	[super dealloc];
+}
 -(void)stopServer {
 	if(!started) return;
 	
@@ -165,7 +169,7 @@ name:[NSString stringWithFormat:NSLocalizedString(@"xGPS on %@",@""),[[NSProcess
 
 	connections=nil;
 	fileHandle=nil;
-    [super dealloc];
+	started=NO;
 	NSLog(@"Server stopped");
 }
 @end

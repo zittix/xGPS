@@ -12,10 +12,13 @@
 -(void)closeConnection:(TransferProtocol*)t;
 -(void)setStatus:(NSString*)s;
 @end
+#define MSG_ACTION_HELLO 1
 
+#define PROTOCOL_VERSION "1.0"
 typedef struct xGPSProtocolMessage {
 	char header[4];
-	unsigned long size;
+	char byteOrder;
+	unsigned int size;
 	unsigned int action;
 	char *value;
 } xGPSProtocolMessage;
@@ -29,4 +32,6 @@ typedef struct xGPSProtocolMessage {
 	int receivedBytes;
 }
 - (id)initWithFileHandle:(NSFileHandle *)fh delegate:(id)dl;
+-(void)sendWelcome;
++(char*)getDataFromStruct:(xGPSProtocolMessage*)msg length:(int*)l;
 @end

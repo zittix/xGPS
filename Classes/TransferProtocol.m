@@ -7,7 +7,7 @@
 //
 
 #import "TransferProtocol.h"
-
+#import "xGPSAppDelegate.h"
 
 @implementation TransferProtocol
 - (id)initWithFileHandle:(NSFileHandle *)fh delegate:(id)dl
@@ -17,7 +17,7 @@
 		delegate = [dl retain];
 		memset(&message,0,sizeof(xGPSProtocolMessage));
 		isMessageComplete = NO;
-		
+		[self sendWelcome];
 		NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self
 			   selector:@selector(dataReceivedNotification:)
@@ -33,11 +33,53 @@
     if( message.value ) free(message.value);
     [delegate release];
     [fileHandle release];
+	NSLog(@"Protocol freed");
     [super dealloc];
 }
 -(void)treatMSG {
 	NSLog(@"Got it !!!!");
 }
+-(void)sendWelcome {
+	//Build welcome message packet
+	xGPSProtocolMessage msg;
+	msg.header[0]='x';
+	msg.header[1]='G';
+	msg.header[2]='P';
+	msg.header[3]='S';
+	msg.action=MSG_ACTION_HELLO;
+	NSString *val=@VERSION":"PROTOCOL_VERSION;
+	
+	//Test byte order
+	unsigned int b=1;
+	unsigned char b2 = b >> (sizeof(unsigned int)-1)*8;
+	msg.byteOrder=b2==1 ? 'b' : 'l';
+	NSLog(@"Edian mode: %c",msg.byteOrder);
+	msg.value=(char*)[val UTF8String];
+	msg.size=[val length]+1;
+	int length=0;
+	char *buf=[TransferProtocol getDataFromStruct:&msg length:&length];
+	
+	@try {
+		[fileHandle writeData:[NSData dataWithBytes:buf length:length]];
+	}
+	@catch (NSException *exception) {
+		NSLog(@"Error while transmitting data for welcome message");
+	}
+	free(buf);
+	[val release];
+}
++(char*)getDataFromStruct:(xGPSProtocolMessage*)msg length:(int*)l {
+	int msgLen=5+sizeof(unsigned int)+sizeof(unsigned int)+msg->size;
+	char *buf=malloc(msgLen);
+	memcpy(buf, msg->header, 4);
+	memcpy(buf+4, &msg->byteOrder, 1);
+	memcpy(buf+5, &msg->size, sizeof(unsigned int));
+	memcpy(buf+5+ sizeof(unsigned int), &msg->action, sizeof(unsigned int));
+	memcpy(buf+5+2* sizeof(unsigned int), msg->value, msg->size);
+	*l=msgLen;
+	return buf;
+}
+
 - (void)dataReceivedNotification:(NSNotification *)notification
 {
 	NSData *data = [[notification userInfo] objectForKey:
@@ -49,7 +91,7 @@
 		[delegate closeConnection:self];
 	} else {
 		[fileHandle readInBackgroundAndNotify];
-		int headerSize=4+sizeof(unsigned long)+sizeof(unsigned int);
+		int headerSize=5+sizeof(unsigned int)+sizeof(unsigned int);
 
 		if(!headerReceived) {
 			int toCopy=[data length]>=headerSize ? headerSize : [data length];
