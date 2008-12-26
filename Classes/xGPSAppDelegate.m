@@ -62,8 +62,9 @@ static TransferController* txcontroller;
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[[gpsmanager GetCurrentGPS] stop];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	
 	stopGPXLogEngine();
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(TileDB*)tiledb {
 	return tiledb;

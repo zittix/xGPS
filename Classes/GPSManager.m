@@ -25,7 +25,7 @@
 			idGPS=1;
 		} else
 			idGPS=id_setting;
-
+		
 		delegate=self;
 		NSLog(@"End Init manager");
 	}

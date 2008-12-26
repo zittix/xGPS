@@ -414,6 +414,9 @@
 	if([elementName isEqualToString:@"description"] && parsingPlace==YES && currentDescr==nil) {
 		currentProp=[[NSMutableString alloc] init];
 	}
+	if([elementName isEqualToString:@"address"] && parsingPlace==YES && (startAddr==nil || stopAddr==nil)) {
+		currentProp=[[NSMutableString alloc] init];
+	}
 	if([elementName isEqualToString:@"coordinates"] && ((parsingPlace==YES && currentPos==nil) || (parsingLinestring==YES))) {
 		currentProp=[[NSMutableString alloc] init];
 	}
@@ -469,6 +472,13 @@
 		currentDescr=currentProp;
 		currentProp=nil;
 	}
+	if([elementName isEqualToString:@"address"] && parsingPlace==YES && startAddr==nil) {
+		startAddr=currentProp;
+		currentProp=nil;
+	} else if([elementName isEqualToString:@"address"] && parsingPlace==YES && stopAddr==nil) {
+		stopAddr=currentProp;
+		currentProp=nil;
+	}
 	if([elementName isEqualToString:@"coordinates"] && !parsingLinestring && parsingPlace==YES && currentPos==nil) {
 		currentPos=currentProp;
 		currentProp=nil;
@@ -499,6 +509,16 @@
 }
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
+	
+	if(startAddr!=nil) {
+		[_from release];
+		_from=startAddr;
+	}
+	if(stopAddr!=nil) {
+		[_to release];
+		_to=stopAddr;
+	}
+	
 	nbWrongWay=0;
 	[delegate directionsGot:_from to:_to  error:nil];
 	if([instructions count]>0){
@@ -523,6 +543,8 @@
 	[currentDescr release];
 	currentDescr=nil;
 	currentPos=nil;
+	startAddr=nil;
+	stopAddr=nil;
 	currentProp=nil;
 	parsingPlace=NO;
 	computing=NO;
@@ -558,6 +580,8 @@
 	[_to release];
 	_from=nil;
 	_to=nil;
+	startAddr=nil;
+	stopAddr=nil;
 	[map setNextInstruction:nil updatePos:NO];
 }
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
@@ -581,6 +605,8 @@
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
+	startAddr=nil;
+	stopAddr=nil;
 	computing=NO;
 	parsingLinestring=NO;
 }
@@ -615,6 +641,8 @@
 	[currentProp release];
 	[currentDescr release];
 	currentDescr=nil;
+	startAddr=nil;
+	stopAddr=nil;
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
@@ -719,6 +747,8 @@
 		currentPlacename=nil;
 		currentPos=nil;
 		currentProp=nil;
+		startAddr=nil;
+		stopAddr=nil;
 		currentDescr=nil;
 		parsingLinestring=NO;
 		return YES;

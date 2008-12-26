@@ -121,14 +121,18 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"%d",indexPath.row];
+	int row=indexPath.row;
+if(row<0 || row>=[bookmarks count]) {
+	return nil;
+}
+	NSDictionary *dict=[bookmarks objectAtIndex:row];
+    NSString *CellIdentifier = [NSString stringWithFormat:@"%d",[[dict valueForKey:@"id"] intValue]];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-		int row=indexPath.row;
-		if(row>=0 && row<[bookmarks count]) {
-			NSDictionary *dict=[bookmarks objectAtIndex:row];
+		
+			
 			UILabel *lbl=[[UILabel alloc] initWithFrame:CGRectMake(5,5,50,20)];
 			lbl.text=NSLocalizedString(@"From:",@"");
 			lbl.textColor=[UIColor blueColor];
@@ -156,7 +160,7 @@
 			lbl.autoresizingMask=UIViewAutoresizingFlexibleWidth;
 			lbl.adjustsFontSizeToFitWidth=YES;
 			[lbl release];
-		}
+		
     }
     
     // Set up the cell...

@@ -40,6 +40,8 @@
 	NSString *currentPlacename;
 	NSString *currentPos;
 	NSString *currentDescr;
+	NSString *startAddr;
+	NSString *stopAddr;
 	BOOL parsingPlace;
 	NSMutableString *currentProp;
 	NSMutableData *resultData;

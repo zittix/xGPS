@@ -59,6 +59,7 @@
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;
 -(void)tileDownloaded;
 -(void)setGPSTracking:(BOOL)val;
+-(BOOL)hasGPSTracking;
 -(void)setNextInstruction:(Instruction*)i updatePos:(BOOL)b;
 -(void)setZoom:(int)z;
 -(void)zoomin:(id)sender;

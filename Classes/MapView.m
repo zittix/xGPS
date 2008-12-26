@@ -949,7 +949,9 @@
 	
 }
 #endif
-
+-(BOOL)hasGPSTracking {
+	return gpsTracking;
+}
 -(void)setDir:(id)d {
 	//dirC=d;
 }
