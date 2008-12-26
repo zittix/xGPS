@@ -428,7 +428,7 @@
 	while (lon> 180) lon -= 360;
 	while (lon<-180) lon += 360;
 	
-	int tmpx = (int)((lon+180.0) * 364.088888888); //131072.0=2^17 / 360 =  * 364.088888888f
+	int tmpx = (int)((lon+180.0) * 364.088888888888888); //131072.0=2^17 / 360 =  * 364.088888888f
 	*x = (tmpx >> zoom2);
 	
 	if (lat> 90) lat = lat - 180;
@@ -437,7 +437,7 @@
 	lat = lat / 180.0 * M_PI;
 	ty=sin(lat);
 	ty=(1.0 + ty) / (1.0 - ty);
-	errno=0;
+	//errno=0;
 	double ty2=logf(ty);
 	
 	ty2 = 0.5 * ty2;
@@ -455,7 +455,7 @@
 	double latici=lat;
 	double pow2zoom=pow(2,zoom2);
 	//double lonici=lon;
-	double tmpx = (((lon+180.0) * 364.088888888f)*(TILE_SIZE))/pow2zoom;
+	double tmpx = (((lon+180.0) * 364.088888888888888)*(TILE_SIZE))/pow2zoom;
 	//NSLog(@"Offset x: tmpx=%f",tmpx);
 	*x=(int)fmod(tmpx,TILE_SIZE);
 	//NSLog(@"Lat 1=%f",lat);
@@ -475,6 +475,7 @@
 	
 	for(PositionObj * p in APPDELEGATE.directions.roadPoints) {
 		int xstart,ystart,xoffstart,yoffstart;
+
 		
 		[self getXYfrom:p.x andLon:p.y toPositionX:&xstart andY:&ystart withZoom:zoom];
 		[self getXYOffsetfrom:p.x andLon:p.y toPositionX:&xoffstart andY:&yoffstart withZoom:zoom];	
@@ -482,7 +483,7 @@
 		p.tileY=ystart;
 		p.xoff=xoffstart;
 		p.yoff=yoffstart;
-		//NSLog(@"Point: %f %f is %d %d %d %d",p.x,p.y,p.tileX,p.tileY,p.xoff,p.yoff);
+		//NSLog(@"Point: %f %f is %d %d %d %d. ID=%d",p.x,p.y,p.tileX,p.tileY,p.xoff,p.yoff,i);
 	}
 	[self refreshMap];
 }
@@ -751,9 +752,10 @@
 			 }
 			 addedPrev=YES;
 			 }*/
+		
+				points[j]=CGPointMake(posXPin,posYPin);
+				j++;
 			
-			points[j]=CGPointMake(posXPin,posYPin);
-			j++;
 			//	alwaysIN=YES;
 			//} else {
 			//	alwaysIN=NO;
