@@ -161,7 +161,7 @@
 			
 			case 1:	
 			{
-				NSLog(@"Reload size");
+				//NSLog(@"Reload size");
 				((TitleValueCell*)cell).value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[xGPSAppDelegate tiledb].mapsize];
 			}
 				break;

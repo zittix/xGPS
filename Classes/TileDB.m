@@ -349,7 +349,6 @@
 	
 }
 -(float)mapsize {
-	if(closed) return -1;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
@@ -365,7 +364,11 @@
 	UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to download a part of the map. Check your internet connection.",@"Tile DL error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 	[alert show];
 }
-
+-(NSString*)getDBFilename {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	return [documentsDirectory stringByAppendingPathComponent:@"xGPS_map.db"];
+}
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom silent:(BOOL)silent {
 	if(offline || closed) return NO;
 	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];

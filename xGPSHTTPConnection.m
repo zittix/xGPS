@@ -6,79 +6,134 @@
 #import "xGPSHTTPConnection.h"
 #import "HTTPServer.h"
 #import "HTTPResponse.h"
-
+#import "xGPSAppDelegate.h"
 
 @implementation xGPSHTTPConnection
 
 /**
  * Returns whether or not the requested resource is browseable.
-**/
+ **/
 - (BOOL)isBrowseable:(NSString *)path
 {
 	// Override me to provide custom configuration...
 	// You can configure it for the entire server, or based on the current request
 	
-	return YES;
+	return NO;
 }
 
 /**
  * This method creates a html browseable page.
  * Customize to fit your needs
-**/
+ **/
 - (NSString *) createBrowseableIndex:(NSString *)path
 {
-    NSArray *array = [[NSFileManager defaultManager] directoryContentsAtPath:path];
+	// NSArray *array = [[NSFileManager defaultManager] directoryContentsAtPath:path];
     
     NSMutableString *outdata = [NSMutableString new];
-	[outdata appendString:@"<html><head>"];
-	[outdata appendFormat:@"<title>Files from %@</title>", server.name];
+	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
+	[outdata appendFormat:@"<title>%@</title>", NSLocalizedString(@"xGPS Web-based Management",@"")];
     [outdata appendString:@"<style>html {background-color:#eeeeee} body { background-color:#FFFFFF; font-family:Tahoma,Arial,Helvetica,sans-serif; font-size:18x; margin-left:15%; margin-right:15%; border:3px groove #006600; padding:15px; } </style>"];
     [outdata appendString:@"</head><body>"];
-	[outdata appendFormat:@"<h1>Files from %@</h1>", server.name];
-    [outdata appendString:@"<bq>The following files are hosted live from the iPhone's Docs folder.</bq>"];
-    [outdata appendString:@"<p>"];
-	[outdata appendFormat:@"<a href=\"..\">..</a><br />\n"];
-    for (NSString *fname in array)
-    {
-        NSDictionary *fileDict = [[NSFileManager defaultManager] fileAttributesAtPath:[path stringByAppendingPathComponent:fname] traverseLink:NO];
-		//NSLog(@"fileDict: %@", fileDict);
-        NSString *modDate = [[fileDict objectForKey:NSFileModificationDate] description];
-		if ([[fileDict objectForKey:NSFileType] isEqualToString: @"NSFileTypeDirectory"]) fname = [fname stringByAppendingString:@"/"];
-		[outdata appendFormat:@"<a href=\"%@\">%@</a>		(%8.1f Kb, %@)<br />\n", fname, fname, [[fileDict objectForKey:NSFileSize] floatValue] / 1024, modDate];
-    }
-    [outdata appendString:@"</p>"];
+	[outdata appendFormat:@"<h1>%@</h1>", NSLocalizedString(@"xGPS Web-based Management",@"")];
+    [outdata appendFormat:@"<bq>%@</bq>",NSLocalizedString(@"Available actions:",@"")];
+	[outdata appendString:@"<ul>"];
+	[outdata appendFormat:@"<li><a href=\"/info\">%@</a></li>\n",NSLocalizedString(@"Show device info",@"")];
+	[outdata appendFormat:@"<li><a href=\"/uploadMapsDB\">%@</a></li>\n",NSLocalizedString(@"Upload a new maps database",@"")];
+	[outdata appendString:@"</ul>"];
 	
-	if ([self supportsPOST:path withSize:0])
-	{
-		[outdata appendString:@"<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" name=\"form1\" id=\"form1\">"];
-		[outdata appendString:@"<label>upload file"];
-		[outdata appendString:@"<input type=\"file\" name=\"file\" id=\"file\" />"];
-		[outdata appendString:@"</label>"];
-		[outdata appendString:@"<label>"];
-		[outdata appendString:@"<input type=\"submit\" name=\"button\" id=\"button\" value=\"Submit\" />"];
-		[outdata appendString:@"</label>"];
-		[outdata appendString:@"</form>"];
-	}
+	/*if ([self supportsPOST:path withSize:0])
+	 {
+	 [outdata appendString:@"<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" name=\"form1\" id=\"form1\">"];
+	 [outdata appendString:@"<label>upload file"];
+	 [outdata appendString:@"<input type=\"file\" name=\"file\" id=\"file\" />"];
+	 [outdata appendString:@"</label>"];
+	 [outdata appendString:@"<label>"];
+	 [outdata appendString:@"<input type=\"submit\" name=\"button\" id=\"button\" value=\"Submit\" />"];
+	 [outdata appendString:@"</label>"];
+	 [outdata appendString:@"</form>"];
+	 }*/
 	
 	[outdata appendString:@"</body></html>"];
     
 	//NSLog(@"outData: %@", outdata);
     return [outdata autorelease];
 }
+-(NSString*)createInfoPage {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
+	[outdata appendFormat:@"<title>%@ - %@</title>", NSLocalizedString(@"xGPS Web-based Management",@""), NSLocalizedString(@"Device Info",@"")];
+    [outdata appendString:@"<style>html {background-color:#eeeeee} body { background-color:#FFFFFF; font-family:Tahoma,Arial,Helvetica,sans-serif; font-size:18x; margin-left:15%; margin-right:15%; border:3px groove #006600; padding:15px; } </style>"];
+    [outdata appendString:@"</head><body>"];
+	[outdata appendFormat:@"<h1>%@</h1>", NSLocalizedString(@"Device Info",@"")];
+	[outdata appendString:@"<ul>"];
+	[outdata appendFormat:@"<li>%@: %@</li>\n",NSLocalizedString(@"xGPS Version",@""),@VERSION];
+	[outdata appendFormat:@"<li>%@: %.1f MB</li>\n",NSLocalizedString(@"Map Database size",@""),[xGPSAppDelegate tiledb].mapsize ];
+	[outdata appendString:@"</ul>"];
+	[outdata appendFormat:@"<p><a href=\"/\">%@</a></p>",NSLocalizedString(@"Return to main page",@"")];
+	
+	[outdata appendString:@"</body></html>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
+-(NSString*)createUploadOKPage {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
+	[outdata appendFormat:@"<title>%@ - %@</title>", NSLocalizedString(@"xGPS Web-based Management",@""), NSLocalizedString(@"Upload new maps database",@"")];
+    [outdata appendString:@"<style>html {background-color:#eeeeee} body { background-color:#FFFFFF; font-family:Tahoma,Arial,Helvetica,sans-serif; font-size:18x; margin-left:15%; margin-right:15%; border:3px groove #006600; padding:15px; } </style>"];
+    [outdata appendString:@"</head><body>"];
+	[outdata appendFormat:@"<h1>%@</h1>", NSLocalizedString(@"Upload new maps database",@"")];
+	
+	[outdata appendFormat:@"<p>%@</p>",NSLocalizedString(@"The maps database has been sucessfully saved.",@"")];
+	[outdata appendFormat:@"<p><a href=\"/\">%@</a></p>",NSLocalizedString(@"Return to main page",@"")];
+	
+	[outdata appendString:@"</body></html>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
 
+-(NSString*)createUploadMapDBPage {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
+	[outdata appendFormat:@"<title>%@ - %@</title>", NSLocalizedString(@"xGPS Web-based Management",@""), NSLocalizedString(@"Upload new maps database",@"")];
+    [outdata appendString:@"<style>html {background-color:#eeeeee} body { background-color:#FFFFFF; font-family:Tahoma,Arial,Helvetica,sans-serif; font-size:18x; margin-left:15%; margin-right:15%; border:3px groove #006600; padding:15px; } </style>"];
+    [outdata appendString:@"</head><body>"];
+	[outdata appendFormat:@"<h1>%@</h1>", NSLocalizedString(@"Upload new maps database",@"")];
+	
+	[outdata appendString:@"<form action=\"/uploadMapsDB\" method=\"post\" enctype=\"multipart/form-data\" name=\"uplaodMapDB\" id=\"uplaodMapDB\">"];
+	[outdata appendFormat:@"<label>%@ ",NSLocalizedString(@"New maps database: ",@"")];
+	[outdata appendString:@"<input type=\"file\" name=\"file\" id=\"file\" />"];
+	[outdata appendString:@"</label>"];
+	[outdata appendString:@"<label>"];
+	[outdata appendString:@"<input type=\"submit\" name=\"button\" id=\"button\" value=\"Upload\" />"];
+	[outdata appendString:@"</label>"];
+	[outdata appendString:@"</form>"];
+	[outdata appendFormat:@"<p><a href=\"/\">%@</a></p>",NSLocalizedString(@"Return to main page",@"")];
+	
+	[outdata appendString:@"</body></html>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
 /**
  * Returns whether or not the server will accept POSTs.
  * That is, whether the server will accept uploaded data for the given URI.
-**/
+ **/
 - (BOOL)supportsPOST:(NSString *)path withSize:(UInt64)contentLength
 {
-//	NSLog(@"POST:%@", path);
-	
-	dataStartIndex = 0;
-	multipartData = [[NSMutableArray alloc] init];
-	postHeaderOK = FALSE;
-	
-	return YES;
+	//NSLog(@"POST:%@", path);
+	if([path isEqualToString:@"/uploadMapsDB"]) {
+		dataStartIndex = 0;
+		multipartData = [[NSMutableArray alloc] init];
+		postHeaderOK = FALSE;
+		
+		return YES;
+	} else
+		return NO;
 }
 
 /**
@@ -87,71 +142,95 @@
  * The HTTPServer comes with two such classes: HTTPFileResponse and HTTPDataResponse.
  * HTTPFileResponse is a wrapper for an NSFileHandle object, and is the preferred way to send a file response.
  * HTTPDataResopnse is a wrapper for an NSData object, and may be used to send a custom response.
-**/
+ **/
 - (NSObject<HTTPResponse> *)httpResponseForURI:(NSString *)path
 {
-//	NSLog(@"httpResponseForURI: %@", path);
+	NSLog(@"httpResponseForURI: %@", path);
 	
-	if (postContentLength > 0)		//process POST data
-	{
-		NSLog(@"processing post data: %i", postContentLength);
+	if([path isEqualToString:@"/info"]) {
+		NSString *page=[self createInfoPage];
+		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		return resp;
+	} else if([path isEqualToString:@"/uploadMapsDB"]) {
 		
-		NSString* postInfo = [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:1] bytes] length:[[multipartData objectAtIndex:1] length] encoding:NSUTF8StringEncoding];
-		NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
-		postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
-		postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
-		NSString* filename = [postInfoComponents lastObject];
-		
-		if (![filename isEqualToString:@""]) //this makes sure we did not submitted upload form without selecting file
+		if (postContentLength > 0)		//process POST data
 		{
-			UInt16 separatorBytes = 0x0A0D;
-			NSMutableData* separatorData = [NSMutableData dataWithBytes:&separatorBytes length:2];
-			[separatorData appendData:[multipartData objectAtIndex:0]];
-			int l = [separatorData length];
-			int count = 2;	//number of times the separator shows up at the end of file data
+			NSLog(@"processing post data: %i", postContentLength);
 			
-			NSFileHandle* dataToTrim = [multipartData lastObject];
-			NSLog(@"data: %@", dataToTrim);
+			NSString* postInfo = [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:1] bytes] length:[[multipartData objectAtIndex:1] length] encoding:NSUTF8StringEncoding];
+			NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
+			postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
+			postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
+			NSString* filename = [postInfoComponents lastObject];
 			
-			for (unsigned long long i = [dataToTrim offsetInFile] - l; i > 0; i--)
+			if (![filename isEqualToString:@""]) //this makes sure we did not submitted upload form without selecting file
 			{
-				[dataToTrim seekToFileOffset:i];
-				if ([[dataToTrim readDataOfLength:l] isEqualToData:separatorData])
+				UInt16 separatorBytes = 0x0A0D;
+				NSMutableData* separatorData = [NSMutableData dataWithBytes:&separatorBytes length:2];
+				[separatorData appendData:[multipartData objectAtIndex:0]];
+				int l = [separatorData length];
+				int count = 2;	//number of times the separator shows up at the end of file data
+				
+				NSFileHandle* dataToTrim = [multipartData lastObject];
+				NSLog(@"data: %@", dataToTrim);
+				
+				for (unsigned long long i = [dataToTrim offsetInFile] - l; i > 0; i--)
 				{
-					[dataToTrim truncateFileAtOffset:i];
-					i -= l;
-					if (--count == 0) break;
+					[dataToTrim seekToFileOffset:i];
+					if ([[dataToTrim readDataOfLength:l] isEqualToData:separatorData])
+					{
+						[dataToTrim truncateFileAtOffset:i];
+						i -= l;
+						if (--count == 0) break;
+					}
 				}
+				
+				NSLog(@"NewFileUploaded");
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"NewFileUploaded" object:nil];
 			}
 			
-			NSLog(@"NewFileUploaded");
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"NewFileUploaded" object:nil];
+			for (int n = 1; n < [multipartData count] - 1; n++)
+				NSLog(@"%@", [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:n] bytes] length:[[multipartData objectAtIndex:n] length] encoding:NSUTF8StringEncoding]);
+			
+			[postInfo release];
+			[multipartData release];
+			postContentLength = 0;
+			
+			NSString *page=[self createUploadOKPage];
+			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+			return resp;
+		}
+		else {
+			NSString *page=[self createUploadMapDBPage];
+			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+			return resp;
 		}
 		
-		for (int n = 1; n < [multipartData count] - 1; n++)
-			NSLog(@"%@", [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:n] bytes] length:[[multipartData objectAtIndex:n] length] encoding:NSUTF8StringEncoding]);
-		
-		[postInfo release];
-		[multipartData release];
-		postContentLength = 0;
-		
-	}
-	
-	NSString *filePath = [self filePathForURI:path];
-	
-	if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-	{
-		return [[[HTTPFileResponse alloc] initWithFilePath:filePath] autorelease];
-	}
-	else
-	{
-		NSString *folder = [path isEqualToString:@"/"] ? [[server documentRoot] path] : [NSString stringWithFormat: @"%@%@", [[server documentRoot] path], path];
-		if ([self isBrowseable:folder])
-		{
-			//NSLog(@"folder: %@", folder);
-			NSData *browseData = [[self createBrowseableIndex:folder] dataUsingEncoding:NSUTF8StringEncoding];
-			return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-		}
+		/*
+		 NSString *filePath = [self filePathForURI:path];
+		 
+		 if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+		 {
+		 return [[[HTTPFileResponse alloc] initWithFilePath:filePath] autorelease];
+		 }
+		 else
+		 {
+		 NSString *folder = [path isEqualToString:@"/"] ? [[server documentRoot] path] : [NSString stringWithFormat: @"%@%@", [[server documentRoot] path], path];
+		 if ([self isBrowseable:folder])
+		 {
+		 //NSLog(@"folder: %@", folder);
+		 NSData *browseData = [[self createBrowseableIndex:folder] dataUsingEncoding:NSUTF8StringEncoding];
+		 return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
+		 }
+		 }*/
+	} else if([path isEqualToString:@"/"]) {
+		NSString *str=[self createBrowseableIndex:@"/"];
+		NSData *data=[str dataUsingEncoding:NSUTF8StringEncoding];
+		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		return resp;	
 	}
 	
 	return nil;
@@ -160,7 +239,7 @@
 /**
  * This method is called to handle data read from a POST.
  * The given data is part of the POST body.
-**/
+ **/
 - (void)processPostDataChunk:(NSData *)postDataChunk
 {
 	// Override me to do something useful with a POST.
@@ -202,7 +281,8 @@
 					NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
 					postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
 					postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
-					NSString* filename = [[[server documentRoot] path] stringByAppendingPathComponent:[postInfoComponents lastObject]];
+					NSString* filename =[APPDELEGATE.tiledb getDBFilename];
+					NSLog(@"Saving to %@",filename);
 					NSRange fileDataRange = {dataStartIndex, [postDataChunk length] - dataStartIndex};
 					
 					[[NSFileManager defaultManager] createFileAtPath:filename contents:[postDataChunk subdataWithRange:fileDataRange] attributes:nil];

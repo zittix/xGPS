@@ -39,6 +39,7 @@
 -(void)cancelDownload;
 -(float)mapsize;
 -(void)flushMaps;
+-(NSString*)getDBFilename;
 -(void)closeDB;
 -(void)loadDB;
 -(void)showDLError;

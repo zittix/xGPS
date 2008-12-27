@@ -15,10 +15,10 @@
 	if((self=[super init])) {
 		httpServer = [HTTPServer new];
 		[httpServer setType:@"_xgps._tcp."];
-		NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];
+		//NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];
 		
 		[httpServer setConnectionClass:[xGPSHTTPConnection class]];
-		[httpServer setDocumentRoot:[NSURL fileURLWithPath:root]];
+		//[httpServer setDocumentRoot:[NSURL fileURLWithPath:root]];
 		[httpServer setPort:WIRELESS_TRANSFER_PORT];
 		httpServer.delegate=self;
 	}
