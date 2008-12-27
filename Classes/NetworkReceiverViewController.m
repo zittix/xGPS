@@ -73,7 +73,9 @@
     // Release anything that's not essential, such as cached data
 }
 
-
+-(void)txstatusChanged:(NSString*)s {
+	lblStatus.text=s;
+}
 - (void)dealloc {
     [super dealloc];
 }

@@ -13,7 +13,8 @@
 -(void)setStatus:(NSString*)s;
 @end
 #define MSG_ACTION_HELLO 1
-
+#define MSG_ACTION_GET_MAPDB_SIZE 2
+#define MSG_ACTION_RETURN_MAPDB_SIZE 3
 #define PROTOCOL_VERSION "1.0"
 typedef struct xGPSProtocolMessage {
 	char header[4];

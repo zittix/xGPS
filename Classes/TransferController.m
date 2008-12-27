@@ -29,6 +29,8 @@
         [connections removeObjectsAtIndexes:connectionIndexSet];
     [self didChange:NSKeyValueChangeRemoval valuesAtIndexes:connectionIndexSet
              forKey:@"connections"];
+	[self setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d connected clients",@""),[connections count]]];
+
 }
 
 -(void)startServer {
@@ -148,6 +150,7 @@ name:[NSString stringWithFormat:NSLocalizedString(@"xGPS on %@",@""),[[NSProcess
 			[self didChange:NSKeyValueChangeInsertion
 			valuesAtIndexes:insertedIndexes forKey:@"connections"];
 			[connection release];
+			[self setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d connected clients",@""),[connections count]]];
 		}
 	}
 }

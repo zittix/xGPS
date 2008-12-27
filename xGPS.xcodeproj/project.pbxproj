@@ -24,6 +24,16 @@
 		4E23967A0E40F7750062A352 /* TileDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E2396790E40F7750062A352 /* TileDB.m */; };
 		4E2397000E40F95D0062A352 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */; };
 		4E2397010E40F95D0062A352 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FF0E40F95D0062A352 /* QuartzCore.framework */; };
+		4E3226FD0F06983C005217CB /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3226F60F06983C005217CB /* HTTPAuthenticationRequest.m */; };
+		4E3226FE0F06983C005217CB /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3226F80F06983C005217CB /* HTTPServer.m */; };
+		4E3226FF0F06983C005217CB /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3226FA0F06983C005217CB /* HTTPConnection.m */; };
+		4E3227000F06983C005217CB /* HTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3226FC0F06983C005217CB /* HTTPResponse.m */; };
+		4E3227060F06984C005217CB /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3227050F06984C005217CB /* AsyncSocket.m */; };
+		4E32270E0F06986A005217CB /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3227090F06986A005217CB /* DDNumber.m */; };
+		4E32270F0F06986A005217CB /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E32270B0F06986A005217CB /* DDRange.m */; };
+		4E3227100F06986A005217CB /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E32270D0F06986A005217CB /* DDData.m */; };
+		4E3227150F0698AC005217CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3227140F0698AC005217CB /* CFNetwork.framework */; };
+		4E3227220F069972005217CB /* xGPSHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3227210F069972005217CB /* xGPSHTTPConnection.m */; };
 		4E487FE40F03C9680004AE7B /* TransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E487FE30F03C9680004AE7B /* TransferController.m */; };
 		4E4880410F03CE5F0004AE7B /* TransferProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E4880400F03CE5F0004AE7B /* TransferProtocol.m */; };
 		4E66FD630EDC93A9002097BE /* DirectionsBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */; };
@@ -138,6 +148,25 @@
 		4E23969B0E40F7DA0062A352 /* LocationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationWrapper.h; sourceTree = "<group>"; };
 		4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4E2396FF0E40F95D0062A352 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E3226F50F06983C005217CB /* HTTPAuthenticationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPAuthenticationRequest.h; sourceTree = "<group>"; };
+		4E3226F60F06983C005217CB /* HTTPAuthenticationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPAuthenticationRequest.m; sourceTree = "<group>"; };
+		4E3226F70F06983C005217CB /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		4E3226F80F06983C005217CB /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		4E3226F90F06983C005217CB /* HTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPConnection.h; sourceTree = "<group>"; };
+		4E3226FA0F06983C005217CB /* HTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPConnection.m; sourceTree = "<group>"; };
+		4E3226FB0F06983C005217CB /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponse.h; sourceTree = "<group>"; };
+		4E3226FC0F06983C005217CB /* HTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponse.m; sourceTree = "<group>"; };
+		4E3227040F06984C005217CB /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		4E3227050F06984C005217CB /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		4E3227080F06986A005217CB /* DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNumber.h; sourceTree = "<group>"; };
+		4E3227090F06986A005217CB /* DDNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNumber.m; sourceTree = "<group>"; };
+		4E32270A0F06986A005217CB /* DDRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDRange.h; sourceTree = "<group>"; };
+		4E32270B0F06986A005217CB /* DDRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDRange.m; sourceTree = "<group>"; };
+		4E32270C0F06986A005217CB /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDData.h; sourceTree = "<group>"; };
+		4E32270D0F06986A005217CB /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
+		4E3227140F0698AC005217CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4E3227200F069972005217CB /* xGPSHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xGPSHTTPConnection.h; sourceTree = "<group>"; };
+		4E3227210F069972005217CB /* xGPSHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xGPSHTTPConnection.m; sourceTree = "<group>"; };
 		4E487FE20F03C9680004AE7B /* TransferController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferController.h; sourceTree = "<group>"; };
 		4E487FE30F03C9680004AE7B /* TransferController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferController.m; sourceTree = "<group>"; };
 		4E48803F0F03CE5F0004AE7B /* TransferProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferProtocol.h; sourceTree = "<group>"; };
@@ -272,6 +301,7 @@
 				4E86516D0E7EC361005954EE /* CoreLocation.framework in Frameworks */,
 				4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */,
 				4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */,
+				4E3227150F0698AC005217CB /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +349,10 @@
 		29B97314FDCFA39411CA2CEA /* xGPS */ = {
 			isa = PBXGroup;
 			children = (
+				4E3227030F06984C005217CB /* TCP */,
+				4E3227070F06986A005217CB /* Categories */,
+				4E32271D0F069960005217CB /* xGPS Server */,
+				4E3226F40F06983C005217CB /* HTTP */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -373,6 +407,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E3227140F0698AC005217CB /* CFNetwork.framework */,
 				4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */,
 				4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */,
 				4E86516C0E7EC361005954EE /* CoreLocation.framework */,
@@ -443,6 +478,52 @@
 				4ECFA0F60EE477E40077553B /* SettingsUIController.m */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		4E3226F40F06983C005217CB /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				4E3226F50F06983C005217CB /* HTTPAuthenticationRequest.h */,
+				4E3226F60F06983C005217CB /* HTTPAuthenticationRequest.m */,
+				4E3226F70F06983C005217CB /* HTTPServer.h */,
+				4E3226F80F06983C005217CB /* HTTPServer.m */,
+				4E3226F90F06983C005217CB /* HTTPConnection.h */,
+				4E3226FA0F06983C005217CB /* HTTPConnection.m */,
+				4E3226FB0F06983C005217CB /* HTTPResponse.h */,
+				4E3226FC0F06983C005217CB /* HTTPResponse.m */,
+			);
+			name = HTTP;
+			sourceTree = "<group>";
+		};
+		4E3227030F06984C005217CB /* TCP */ = {
+			isa = PBXGroup;
+			children = (
+				4E3227040F06984C005217CB /* AsyncSocket.h */,
+				4E3227050F06984C005217CB /* AsyncSocket.m */,
+			);
+			name = TCP;
+			sourceTree = "<group>";
+		};
+		4E3227070F06986A005217CB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4E3227080F06986A005217CB /* DDNumber.h */,
+				4E3227090F06986A005217CB /* DDNumber.m */,
+				4E32270A0F06986A005217CB /* DDRange.h */,
+				4E32270B0F06986A005217CB /* DDRange.m */,
+				4E32270C0F06986A005217CB /* DDData.h */,
+				4E32270D0F06986A005217CB /* DDData.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		4E32271D0F069960005217CB /* xGPS Server */ = {
+			isa = PBXGroup;
+			children = (
+				4E3227200F069972005217CB /* xGPSHTTPConnection.h */,
+				4E3227210F069972005217CB /* xGPSHTTPConnection.m */,
+			);
+			name = "xGPS Server";
 			sourceTree = "<group>";
 		};
 		4E79293E0E58E7F500CAF1B2 /* GPS */ = {
@@ -644,6 +725,15 @@
 				4EAA1BD70EE5401A0014DBF0 /* SettingsGPXController.m in Sources */,
 				4E487FE40F03C9680004AE7B /* TransferController.m in Sources */,
 				4E4880410F03CE5F0004AE7B /* TransferProtocol.m in Sources */,
+				4E3226FD0F06983C005217CB /* HTTPAuthenticationRequest.m in Sources */,
+				4E3226FE0F06983C005217CB /* HTTPServer.m in Sources */,
+				4E3226FF0F06983C005217CB /* HTTPConnection.m in Sources */,
+				4E3227000F06983C005217CB /* HTTPResponse.m in Sources */,
+				4E3227060F06984C005217CB /* AsyncSocket.m in Sources */,
+				4E32270E0F06986A005217CB /* DDNumber.m in Sources */,
+				4E32270F0F06986A005217CB /* DDRange.m in Sources */,
+				4E3227100F06986A005217CB /* DDData.m in Sources */,
+				4E3227220F069972005217CB /* xGPSHTTPConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,7 +803,7 @@
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
-					"-lm",
+					"-lz",
 					"-lsqlite3",
 				);
 				PRODUCT_NAME = xGPS;
@@ -731,6 +821,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lsqlite3",
+				);
 				PRODUCT_NAME = xGPS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "87079DB5-32DC-4FAE-89D9-74FFE37C6912";
 			};
@@ -761,6 +855,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lsqlite3",
+				);
 				PRODUCT_NAME = xGPS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
 			};

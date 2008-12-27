@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TransferController.h"
 
-
-@interface NetworkReceiverViewController : UIViewController {
+@interface NetworkReceiverViewController : UIViewController<TransferControllerDelegate> {
 	UILabel *lblStatus;
 	UIActivityIndicatorView *progress;
 }

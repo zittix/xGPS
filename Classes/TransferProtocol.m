@@ -75,6 +75,7 @@
 	memcpy(buf+4, &msg->byteOrder, 1);
 	memcpy(buf+5, &msg->size, sizeof(unsigned int));
 	memcpy(buf+5+ sizeof(unsigned int), &msg->action, sizeof(unsigned int));
+	if(msg->size>0)
 	memcpy(buf+5+2* sizeof(unsigned int), msg->value, msg->size);
 	*l=msgLen;
 	return buf;
@@ -90,7 +91,7 @@
 		// that the client closed the connection
 		[delegate closeConnection:self];
 	} else {
-		[fileHandle readInBackgroundAndNotify];
+		
 		int headerSize=5+sizeof(unsigned int)+sizeof(unsigned int);
 
 		if(!headerReceived) {
@@ -123,7 +124,7 @@
 			isMessageComplete=YES;
 			[self treatMSG];
 		}
-			
+		[fileHandle readInBackgroundAndNotify];	
 	}
 }
 @end
