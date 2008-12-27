@@ -302,6 +302,7 @@
 	@synchronized(connections)
 	{
 		[connections addObject:newConnection];
+		[delegate nbConnectionChanged:[connections count]];
 	}
 	[newConnection release];
 }
@@ -317,6 +318,7 @@
 	@synchronized(connections)
 	{
 		[connections removeObject:[notification object]];
+		[delegate nbConnectionChanged:[connections count]];
 	}
 }
 

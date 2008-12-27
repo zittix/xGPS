@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "HTTPServer.h"
 @protocol TransferControllerDelegate
 
 -(void)txstatusChanged:(NSString*)status;
@@ -15,9 +15,10 @@
 @end
 
 
-@interface TransferController : NSObject {
+@interface TransferController : NSObject<HTTPServerProtocol> {
 	BOOL started;
 	id delegate;
+	HTTPServer  *httpServer;
 }
 
 -(void)startServer;

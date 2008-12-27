@@ -2,6 +2,9 @@
 
 @class AsyncSocket;
 
+@protocol HTTPServerProtocol
+-(void)nbConnectionChanged:(int)nb;
+@end
 
 @interface HTTPServer : NSObject
 {

@@ -8,26 +8,45 @@
 
 #import "TransferController.h"
 #import "xGPSAppDelegate.h"
-
+#import "xGPSHTTPConnection.h"
 @implementation TransferController
 @synthesize delegate;
--(void)setStatus:(NSString*)s {
-	[delegate txstatusChanged:s];
+-(id)init {
+	if((self=[super init])) {
+		httpServer = [HTTPServer new];
+		[httpServer setType:@"_xgps._tcp."];
+		NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];
+		
+		[httpServer setConnectionClass:[xGPSHTTPConnection class]];
+		[httpServer setDocumentRoot:[NSURL fileURLWithPath:root]];
+		[httpServer setPort:WIRELESS_TRANSFER_PORT];
+		httpServer.delegate=self;
+	}
+	return self;
+}
+-(void)nbConnectionChanged:(int)nb {
+	[delegate txstatusChanged:[NSString stringWithFormat:NSLocalizedString(@"%d connected clients",@""),nb]];
 }
 
 -(void)startServer {
 	if(started) return;
-	//portNumber=WIRELESS_TRANSFER_PORT;
+	NSError *error;
+	if(![httpServer start:&error])
+	{
+		NSLog(@"Error starting HTTP Server: %@", error);
+		return;
+	}
 	started=YES;
 	NSLog(@"Server started.");
 }
 -(void)dealloc {
-	[self stopServer];
+	[httpServer release];
 	[super dealloc];
 }
 -(void)stopServer {
 	if(!started) return;
 	started=NO;
+	[httpServer stop];
 	NSLog(@"Server stopped");
 }
 @end
