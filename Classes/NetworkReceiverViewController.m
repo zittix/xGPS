@@ -40,6 +40,7 @@
 	lblStatus.text=NSLocalizedString(@"Ready to transfer...",@"Status ready");
 	lblStatus.textAlignment=UITextAlignmentCenter;
 	lblStatus.font=[UIFont fontWithName:@"Helvetica" size:22];
+	lblStatus.backgroundColor=[UIColor clearColor];
 	progress=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[progress startAnimating];
 	UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:progress];

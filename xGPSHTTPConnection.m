@@ -40,19 +40,6 @@
 	[outdata appendFormat:@"<li><a href=\"/info\">%@</a></li>\n",NSLocalizedString(@"Show device info",@"")];
 	[outdata appendFormat:@"<li><a href=\"/uploadMapsDB\">%@</a></li>\n",NSLocalizedString(@"Upload a new maps database",@"")];
 	[outdata appendString:@"</ul>"];
-	
-	/*if ([self supportsPOST:path withSize:0])
-	 {
-	 [outdata appendString:@"<form action=\"\" method=\"post\" enctype=\"multipart/form-data\" name=\"form1\" id=\"form1\">"];
-	 [outdata appendString:@"<label>upload file"];
-	 [outdata appendString:@"<input type=\"file\" name=\"file\" id=\"file\" />"];
-	 [outdata appendString:@"</label>"];
-	 [outdata appendString:@"<label>"];
-	 [outdata appendString:@"<input type=\"submit\" name=\"button\" id=\"button\" value=\"Submit\" />"];
-	 [outdata appendString:@"</label>"];
-	 [outdata appendString:@"</form>"];
-	 }*/
-	
 	[outdata appendString:@"</body></html>"];
     
 	//NSLog(@"outData: %@", outdata);

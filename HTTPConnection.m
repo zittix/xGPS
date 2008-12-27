@@ -1088,16 +1088,16 @@ static NSMutableArray *recentNonces;
 	// You can use CFHTTPMessageSetBody() to add an optional HTML body.
 	// If you add a body, don't forget to update the Content-Length.
 	// 
-	// if(CFHTTPMessageGetResponseStatusCode(response) == 404)
-	// {
-	//     NSString *msg = @"<html><body>Error 404 - Not Found</body></html>";
-	//     NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];
-	//     
-	//     CFHTTPMessageSetBody(response, (CFDataRef)msgData);
-	//     
-	//     NSString *contentLengthStr = [NSString stringWithFormat:@"%u", (unsigned)[msgData length]];
-	//     CFHTTPMessageSetHeaderFieldValue(response, CFSTR("Content-Length"), (CFStringRef)contentLengthStr);
-	// }
+	 if(CFHTTPMessageGetResponseStatusCode(response) == 404)
+	 {
+	     NSString *msg = @"<html><body>Error 404 - Not Found</body></html>";
+	     NSData *msgData = [msg dataUsingEncoding:NSUTF8StringEncoding];
+	     
+	     CFHTTPMessageSetBody(response, (CFDataRef)msgData);
+	     
+	     NSString *contentLengthStr = [NSString stringWithFormat:@"%u", (unsigned)[msgData length]];
+	     CFHTTPMessageSetHeaderFieldValue(response, CFSTR("Content-Length"), (CFStringRef)contentLengthStr);
+	 }
 	
 	NSString *now = [self dateAsString:[NSDate date]];
 	CFHTTPMessageSetHeaderFieldValue(response, CFSTR("Date"), (CFStringRef)now);

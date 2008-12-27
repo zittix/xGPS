@@ -308,6 +308,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4E32271D0F069960005217CB /* xGPS Server */,
+				4E3227030F06984C005217CB /* TCP */,
+				4E3227070F06986A005217CB /* Categories */,
+				4E3226F40F06983C005217CB /* HTTP */,
 				4E0F04FE0E87C44600D75E7D /* UI */,
 				4E79293E0E58E7F500CAF1B2 /* GPS */,
 				4E23969B0E40F7DA0062A352 /* LocationWrapper.h */,
@@ -344,10 +348,6 @@
 		29B97314FDCFA39411CA2CEA /* xGPS */ = {
 			isa = PBXGroup;
 			children = (
-				4E3227030F06984C005217CB /* TCP */,
-				4E3227070F06986A005217CB /* Categories */,
-				4E32271D0F069960005217CB /* xGPS Server */,
-				4E3226F40F06983C005217CB /* HTTP */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -488,6 +488,7 @@
 				4E3226FC0F06983C005217CB /* HTTPResponse.m */,
 			);
 			name = HTTP;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4E3227030F06984C005217CB /* TCP */ = {
@@ -497,6 +498,7 @@
 				4E3227050F06984C005217CB /* AsyncSocket.m */,
 			);
 			name = TCP;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4E3227070F06986A005217CB /* Categories */ = {
@@ -510,6 +512,7 @@
 				4E32270D0F06986A005217CB /* DDData.m */,
 			);
 			name = Categories;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4E32271D0F069960005217CB /* xGPS Server */ = {
@@ -519,6 +522,7 @@
 				4E3227210F069972005217CB /* xGPSHTTPConnection.m */,
 			);
 			name = "xGPS Server";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4E79293E0E58E7F500CAF1B2 /* GPS */ = {
