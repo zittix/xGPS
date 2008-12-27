@@ -39,11 +39,12 @@
 				
 		NSError *err;
 		[fm removeItemAtPath:path error:&err];
+		[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
 		}
 		
 		
 	}
-	[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
+	
 	
 	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 		//Check if table exist
@@ -52,19 +53,25 @@
 		//IF NOT EXISTS doesn't exist on 1.1.4
 		int ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 		if(ret!=SQLITE_OK) { //Create Table
-			char *tMap="CREATE TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, PRIMARY KEY(x,y,zoom,type))";
+			char *tMap="CREATE TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, version INTEGER,PRIMARY KEY(x,y,zoom,type))";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 			NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
 			
 			ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
 		}
 		
 		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
 			//Add a column to tiles
-			char *tMap="ALTER TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, PRIMARY KEY(x,y,zoom,type))";
+			char *tMap="ALTER TABLE tiles ADD version INTEGER";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 			NSAssert1(ret==SQLITE_OK, @"Failed to migrate database's tables with message '%s'.",error);
+			tMap="UPDATE tiles SET version = 288";
+			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to migrate database's tables with message '%s'.",error);
+			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
+
 		}
 		
 		
@@ -79,7 +86,7 @@
 		
 		
 		//PRepare the insert query for speedup
-		ret=sqlite3_prepare(database,"INSERT INTO tiles (x,y,zoom,type,img) VALUES(?1,?2,?3,?4,?5)",-1,&insertTileStmt,NULL);
+		ret=sqlite3_prepare(database,"INSERT INTO tiles (x,y,zoom,type,img,version) VALUES(?1,?2,?3,?4,?5,288)",-1,&insertTileStmt,NULL);
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
 		
 		//PRepare the check query for speedup
