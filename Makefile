@@ -2,7 +2,7 @@ CC=arm-apple-darwin9-gcc
 CFLAGS=-Os -Wall -I/iphone/sys/usr/include -std=c99
 LDFLAGS=-L"/iphone/sys/usr/lib" -F"/iphone/sys/System/Library/Frameworks" -F"/iphone/sys/System/Library/PrivateFrameworks" -bind_at_load -lobjc -lm -lsqlite3 -framework CoreFoundation -framework Foundation \
         -framework UIKit -framework CoreGraphics \
-        -framework GraphicsServices -framework MultitouchSupport -framework CoreSurface -framework CoreLocation -framework AddressBook -framework AddressBookUI
+        -framework GraphicsServices -framework CFNetwork -framework MultitouchSupport -framework CoreSurface -framework CoreLocation -framework AddressBook -framework AddressBookUI
 
 SRC_C= $(wildcard Classes/*.c)
 SRC_M= $(wildcard Classes/*.m) main.m

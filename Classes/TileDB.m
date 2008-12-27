@@ -60,6 +60,14 @@
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
 		}
 		
+		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
+			//Add a column to tiles
+			char *tMap="ALTER TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, PRIMARY KEY(x,y,zoom,type))";
+			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to migrate database's tables with message '%s'.",error);
+		}
+		
+		
 		//Migrate the DB if wrong Primary index
 		
 		//tMap="DELETE FROM tiles";
