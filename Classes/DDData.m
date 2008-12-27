@@ -53,7 +53,6 @@ static char encodingTable[64] = {
 #if TARGET_OS_IPHONE
 	
 	NSMutableString *stringBuffer = [NSMutableString stringWithCapacity:([self length] * 2)];
-	
     const unsigned char *dataBuffer = [self bytes];
     int i;
     

@@ -9,6 +9,7 @@
 	
 #if __LP64__
 	// long = 64 bit
+
 	*pNum = strtol([str UTF8String], NULL, 10);
 #else
 	// long = 32 bit

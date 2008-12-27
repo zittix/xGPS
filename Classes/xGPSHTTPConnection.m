@@ -7,6 +7,7 @@
 #import "HTTPServer.h"
 #import "HTTPResponse.h"
 #import "xGPSAppDelegate.h"
+#import <sys/stat.h>
 
 @implementation xGPSHTTPConnection
 
@@ -273,6 +274,7 @@
 					NSRange fileDataRange = {dataStartIndex, [postDataChunk length] - dataStartIndex};
 					
 					[[NSFileManager defaultManager] createFileAtPath:filename contents:[postDataChunk subdataWithRange:fileDataRange] attributes:nil];
+					//chmod([filename UTF8String], S_IRWXO);
 					NSFileHandle *file = [[NSFileHandle fileHandleForUpdatingAtPath:filename] retain];
 					if (file)
 					{

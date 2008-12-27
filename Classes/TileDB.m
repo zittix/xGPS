@@ -45,7 +45,7 @@
 		
 	}
 	
-	
+	[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
 	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 		//Check if table exist
 		char *error;
@@ -59,20 +59,20 @@
 			
 			ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
-			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
+			
 		}
-		
+		/*
 		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
 			//Add a column to tiles
 			char *tMap="ALTER TABLE tiles ADD version INTEGER";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-			NSAssert1(ret==SQLITE_OK, @"Failed to migrate database's tables with message '%s'.",error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to migrate (1) database's tables with message '%s'.",error);
 			tMap="UPDATE tiles SET version = 288";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-			NSAssert1(ret==SQLITE_OK, @"Failed to migrate database's tables with message '%s'.",error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to migrate (2) database's tables with message '%s'.",error);
 			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
 
-		}
+		}*/
 		
 		
 		//Migrate the DB if wrong Primary index
@@ -86,7 +86,9 @@
 		
 		
 		//PRepare the insert query for speedup
-		ret=sqlite3_prepare(database,"INSERT INTO tiles (x,y,zoom,type,img,version) VALUES(?1,?2,?3,?4,?5,288)",-1,&insertTileStmt,NULL);
+		ret=sqlite3_prepare(database,"INSERT INTO tiles (x,y,zoom,type,img) VALUES(?1,?2,?3,?4,?5)",-1,&insertTileStmt,NULL);
+		
+		
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
 		
 		//PRepare the check query for speedup
@@ -96,8 +98,23 @@
 	} else {
 		// Even though the open failed, call close to properly clean up resources.
 		sqlite3_close(database);
-		NSAssert1(0, @"Failed to open database with message '%s'.", sqlite3_errmsg(database));
+		//NSAssert1(0, @"Failed to open database with message '%s'.", sqlite3_errmsg(database));
 		// Additional error handling, as appropriate...
+		if([fm fileExistsAtPath:path]) {
+			UIAlertView * hotSheet = [[UIAlertView alloc]
+									  initWithTitle:NSLocalizedString(@"Maps data",@"Maps data title")
+									  message:NSLocalizedString(@"Your downloaded maps are not compatible with this version of xGPS. They have been deleted.",@"")
+									  delegate:nil
+									  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
+									  otherButtonTitles:nil];
+			
+			[hotSheet show];
+			
+			
+			NSError *err;
+			[fm removeItemAtPath:path error:&err];
+		}
+		[self loadDB];
 	}
 	//[dbLock unlock];
 	closed=NO;
@@ -207,6 +224,10 @@
 		for(int i=[copy count]-1;i>=0;i--) {
 			TileCoord *p=[copy objectAtIndex:i];
 			[dbLock lock];
+			if(closed) {
+				[dbLock unlock];
+				break;
+			}
 			sqlite3_bind_int(checkTileStmt,1,p.x);
 			sqlite3_bind_int(checkTileStmt,2,p.y);
 			sqlite3_bind_int(checkTileStmt,3,p.zoom);
@@ -215,7 +236,7 @@
 			sqlite3_reset(checkTileStmt);
 			sqlite3_clear_bindings(checkTileStmt);
 			[dbLock unlock];
-			if (r != SQLITE_ROW) {
+			if (r != SQLITE_ROW && !closed) {
 				if([self downloadTile:p.x atY:p.y withZoom:p.zoom silent:NO]) {
 					if(p.delegate!=nil) {
 						[p.delegate performSelectorOnMainThread:@selector(tileDownloaded) withObject:nil waitUntilDone:NO];
@@ -448,9 +469,11 @@
 		
 		return NO;
 	}
+	int r=-1;
 	showedError=NO;
 	//NSLog(@"Tile got at (%d bytes)!",[imageData length]);
 	[dbLock lock];
+	if(!closed) {
 	if(sqlite3_bind_int(insertTileStmt,1,x)!=SQLITE_OK)
 		goto err;
 	if(sqlite3_bind_int(insertTileStmt,2,y)!=SQLITE_OK)
@@ -462,9 +485,10 @@
 	if(sqlite3_bind_blob(insertTileStmt, 5, [imageData bytes], [imageData length], SQLITE_STATIC)!=SQLITE_OK)
 		goto err;
 	
-	int r=sqlite3_step(insertTileStmt);
+	r=sqlite3_step(insertTileStmt);
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);
+	}
 	[dl release];
 	[dbLock unlock];
 	if(r!=SQLITE_DONE) {
