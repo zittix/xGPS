@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TransferProtocol.h"
+
 @protocol TransferControllerDelegate
 
 -(void)txstatusChanged:(NSString*)status;
@@ -15,16 +15,11 @@
 @end
 
 
-@interface TransferController : NSObject<TransferProtocolDelegate> {
+@interface TransferController : NSObject {
 	BOOL started;
-	int portNumber;
 	id delegate;
-	int fdPort;
-	NSFileHandle *fileHandle;
-	CFSocketRef socket;
-	NSMutableArray *connections; 
-	NSNetService* service;
 }
+
 -(void)startServer;
 -(void)stopServer;
 @property (nonatomic,assign) id delegate;
