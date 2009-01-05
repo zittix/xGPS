@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "DDData.h"
 
 #if TARGET_OS_IPHONE
@@ -200,3 +201,4 @@ static char encodingTable[64] = {
 }
 
 @end
+#endif

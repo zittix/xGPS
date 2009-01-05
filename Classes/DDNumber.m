@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "DDNumber.h"
 
 
@@ -73,3 +74,4 @@
 }
 
 @end
+#endif

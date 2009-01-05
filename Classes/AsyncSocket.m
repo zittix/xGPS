@@ -7,7 +7,7 @@
 //
 //  http://code.google.com/p/cocoaasyncsocket/
 //
-
+#ifdef HAS_HTTPSERVER
 #import "AsyncSocket.h"
 #import <sys/socket.h>
 #import <netinet/in.h>
@@ -2447,3 +2447,4 @@ static void MyCFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType 
 }
 
 @end
+#endif

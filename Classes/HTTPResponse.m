@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "HTTPResponse.h"
 
 
@@ -102,3 +103,4 @@
 }
 
 @end
+#endif

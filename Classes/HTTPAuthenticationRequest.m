@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "HTTPAuthenticationRequest.h"
 
 @interface HTTPAuthenticationRequest (PrivateAPI)
@@ -204,3 +205,4 @@
 }
 
 @end
+#endif

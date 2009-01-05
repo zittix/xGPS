@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-
+#ifdef HAS_HTTPSERVER
 
 @interface NSNumber (DDNumber)
 
@@ -10,3 +10,4 @@
 + (BOOL)parseString:(NSString *)str intoNSUInteger:(NSUInteger *)pNum;
 
 @end
+#endif

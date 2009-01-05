@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "AsyncSocket.h"
 #import "HTTPServer.h"
 #import "HTTPConnection.h"
@@ -1417,3 +1418,4 @@ static NSMutableArray *recentNonces;
 }
 
 @end
+#endif

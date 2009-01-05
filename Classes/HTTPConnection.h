@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_IPHONE
@@ -64,3 +65,4 @@
 - (void)die;
 
 @end
+#endif

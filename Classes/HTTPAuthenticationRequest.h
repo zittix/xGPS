@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_IPHONE
@@ -41,3 +42,4 @@
 - (NSString *)response;
 
 @end
+#endif

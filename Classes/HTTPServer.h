@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import <Foundation/Foundation.h>
 
 @class AsyncSocket;
@@ -60,3 +61,4 @@
 - (uint)numberOfHTTPConnections;
 
 @end
+#endif

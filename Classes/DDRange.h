@@ -7,7 +7,7 @@
  * 
  * All effort is given such that DDRange functions EXACTLY the same as NSRange.
 **/
-
+#ifdef HAS_HTTPSERVER
 #import <Foundation/NSValue.h>
 #import <Foundation/NSObjCRuntime.h>
 
@@ -50,3 +50,4 @@ FOUNDATION_EXPORT DDRange DDRangeFromString(NSString *aString);
 - (DDRange)ddrangeValue;
 
 @end
+#endif

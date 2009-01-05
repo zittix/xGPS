@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import <Foundation/Foundation.h>
 
 @interface NSData (DDData)
@@ -12,3 +13,4 @@
 - (NSData *)base64Decoded;
 
 @end
+#endif

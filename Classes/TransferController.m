@@ -13,6 +13,7 @@
 @synthesize delegate;
 -(id)init {
 	if((self=[super init])) {
+#ifdef HAS_HTTPSERVER
 		httpServer = [HTTPServer new];
 		[httpServer setType:@"_xgps._tcp."];
 		//NSString *root = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) objectAtIndex:0];
@@ -21,6 +22,7 @@
 		//[httpServer setDocumentRoot:[NSURL fileURLWithPath:root]];
 		[httpServer setPort:WIRELESS_TRANSFER_PORT];
 		httpServer.delegate=self;
+#endif
 	}
 	return self;
 }
@@ -30,23 +32,29 @@
 
 -(void)startServer {
 	if(started) return;
+#ifdef HAS_HTTPSERVER
 	NSError *error;
 	if(![httpServer start:&error])
 	{
 		NSLog(@"Error starting HTTP Server: %@", error);
 		return;
 	}
+#endif
 	started=YES;
 	NSLog(@"Server started.");
 }
 -(void)dealloc {
+#ifdef HAS_HTTPSERVER	
 	[httpServer release];
+#endif
 	[super dealloc];
 }
 -(void)stopServer {
 	if(!started) return;
 	started=NO;
+#ifdef HAS_HTTPSERVER
 	[httpServer stop];
+#endif
 	NSLog(@"Server stopped");
 }
 @end

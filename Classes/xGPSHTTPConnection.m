@@ -2,7 +2,7 @@
 //  This class was created by Nonnus,
 //  who graciously decided to share it with the CocoaHTTPServer community.
 //
-
+#ifdef HAS_HTTPSERVER
 #import "xGPSHTTPConnection.h"
 #import "HTTPServer.h"
 #import "HTTPResponse.h"
@@ -296,3 +296,4 @@
 }
 
 @end
+#endif

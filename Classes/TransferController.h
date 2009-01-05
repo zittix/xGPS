@@ -7,18 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#ifdef HAS_HTTPSERVER
 #import "HTTPServer.h"
+#endif
 @protocol TransferControllerDelegate
 
 -(void)txstatusChanged:(NSString*)status;
 
 @end
 
-
+#ifdef HAS_HTTPSERVER
 @interface TransferController : NSObject<HTTPServerProtocol> {
+#else
+@interface TransferController : NSObject {	
+#endif
 	BOOL started;
 	id delegate;
+#ifdef HAS_HTTPSERVER
 	HTTPServer  *httpServer;
+#endif
 }
 
 -(void)startServer;

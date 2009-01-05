@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "AsyncSocket.h"
 #import "HTTPServer.h"
 #import "HTTPConnection.h"
@@ -350,3 +351,4 @@
 }
 
 @end
+#endif

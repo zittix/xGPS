@@ -7,7 +7,7 @@
 //
 //  http://code.google.com/p/cocoaasyncsocket/
 //
-
+#ifdef HAS_HTTPSERVER
 #import <Foundation/Foundation.h>
 
 @class AsyncSocket;
@@ -287,3 +287,4 @@ typedef enum AsyncSocketError AsyncSocketError;
 + (NSData *)ZeroData;   // 0x00
 
 @end
+#endif

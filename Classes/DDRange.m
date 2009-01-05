@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import "DDRange.h"
 #import "DDNumber.h"
 
@@ -68,3 +69,4 @@ DDRange DDRangeFromString(NSString *aString)
 }
 
 @end
+#endif

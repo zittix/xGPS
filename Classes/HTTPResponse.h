@@ -1,3 +1,4 @@
+#ifdef HAS_HTTPSERVER
 #import <Foundation/Foundation.h>
 
 
@@ -32,3 +33,4 @@
 - (id)initWithData:(NSData *)data;
 
 @end
+#endif
