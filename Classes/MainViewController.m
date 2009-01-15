@@ -505,7 +505,7 @@
 			gpsPos.y=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude;
 			[mapview updateCurrentPos:gpsPos];
 			[mapview setHasGPSPos:YES];
-			logGPXPoint([[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.time);
+			logGPXPoint([[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used);
 			APPDELEGATE.directions.pos=gpsPos;
 			break;
 		}case SPEED: {

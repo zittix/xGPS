@@ -47,10 +47,12 @@ void startGPXLogEngine() {
 		fprintf(stderr,"Error while opening GPX log file: %s",strerror(errno));
 	}
 }
-void logGPXPoint(float lat, float lon, float alt, float speed, int fix, int sat, double time) {
+void logGPXPoint(float lat, float lon, float alt, float speed, int fix, int sat) {
 	if(fp==NULL) return;
-	time_t epch = (long)time;
-	struct tm *tm = gmtime ( &epch );
+
+	time_t rawtime;
+	time(&rawtime);
+	struct tm *tm = gmtime ( &rawtime );
 	
 	/*<trkpt lat="48.693754550" lon="0.786620167">
 	 <ele>215.261000</ele>
