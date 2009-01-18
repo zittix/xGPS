@@ -107,6 +107,20 @@
     return [outdata autorelease];
 	
 }
+
+-(NSString*)createAPI_info {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
+	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
+	[outdata appendString:@"<version>"VERSION"</version>"];
+	[outdata appendFormat:@"<tiledbsize>%.2f</tiledbsize>",[APPDELEGATE.tiledb mapsize]];
+	[outdata appendString:@"</xgpsAPI>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
+
 /**
  * Returns whether or not the server will accept POSTs.
  * That is, whether the server will accept uploaded data for the given URI.
@@ -196,29 +210,17 @@
 			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
 			return resp;
 		}
-		
-		/*
-		 NSString *filePath = [self filePathForURI:path];
-		 
-		 if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-		 {
-		 return [[[HTTPFileResponse alloc] initWithFilePath:filePath] autorelease];
-		 }
-		 else
-		 {
-		 NSString *folder = [path isEqualToString:@"/"] ? [[server documentRoot] path] : [NSString stringWithFormat: @"%@%@", [[server documentRoot] path], path];
-		 if ([self isBrowseable:folder])
-		 {
-		 //NSLog(@"folder: %@", folder);
-		 NSData *browseData = [[self createBrowseableIndex:folder] dataUsingEncoding:NSUTF8StringEncoding];
-		 return [[[HTTPDataResponse alloc] initWithData:browseData] autorelease];
-		 }
-		 }*/
+
 	} else if([path isEqualToString:@"/"]) {
 		NSString *str=[self createBrowseableIndex:@"/"];
 		NSData *data=[str dataUsingEncoding:NSUTF8StringEncoding];
 		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
 		return resp;	
+	} else if([path isEqualToString:@"/api/getDeviceInfo"]) {
+		NSString *page=[self createAPI_info];
+		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		return resp;
 	}
 	
 	return nil;
