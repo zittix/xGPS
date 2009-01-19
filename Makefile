@@ -1,8 +1,6 @@
 CC=arm-apple-darwin9-gcc
-CFLAGS=-Os -Wall -I/iphone/sys/usr/include -std=c99
-LDFLAGS=-L"/iphone/sys/usr/lib" -F"/iphone/sys/System/Library/Frameworks" -F"/iphone/sys/System/Library/PrivateFrameworks" -bind_at_load -lobjc -lm -lsqlite3 -framework CoreFoundation -framework Foundation \
-        -framework UIKit -framework CoreGraphics \
-        -framework GraphicsServices -framework CFNetwork -framework MultitouchSupport -framework CoreSurface -framework CoreLocation -framework AddressBook -framework AddressBookUI
+CFLAGS=-DTARGET_OS_IPHONE -Os -I/iphone/sys/usr/include -std=c99 -DHAS_HTTPSERVER
+LDFLAGS=-bind_at_load -framework CoreFoundation -lz -L"/iphone/sys/usr/lib" -F"/iphone/sys/System/Library/Frameworks" -F"/iphone/sys/System/Library/PrivateFrameworks" -lobjc -lm -lsqlite3 -framework Foundation -framework UIKit -framework CoreGraphics -framework CFNetwork -framework CoreLocation -framework AddressBook -framework AddressBookUI
 
 SRC_C= $(wildcard Classes/*.c)
 SRC_M= $(wildcard Classes/*.m) main.m
@@ -11,7 +9,6 @@ C_FILE+= $(SRC_C:.c=.o)
 
 
 all:	xGPS
-
 xGPS: 	$(CLASSES) $(C_FILE)
 	$(CC) $(LDFLAGS) -o xGPS $^
 	ldid -S xGPS
