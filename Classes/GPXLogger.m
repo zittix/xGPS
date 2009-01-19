@@ -20,7 +20,7 @@
 	
 	int i=0;
 	NSString *file=[path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%d.log",[[[[NSDate date] description] stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByReplacingOccurrencesOfString:@":" withString:@"-"],i]];
-	
+
 	fp = fopen ([file UTF8String],"r");
 	while(fp!=NULL)
 	{
@@ -55,6 +55,7 @@
 -(void)gpsSignalChanged:(BOOL)_hasSignal {
 	if(hasSignal!=_hasSignal) {
 		hasSignal=_hasSignal;
+		if(logging && fp!=NULL)
 		fprintf(fp,"\n</trkseg>\n<trkseg>");
 	}
 }

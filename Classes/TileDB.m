@@ -67,7 +67,7 @@
 			char *tMap="ALTER TABLE tiles ADD version INTEGER";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 			NSAssert1(ret==SQLITE_OK, @"Failed to migrate (1) database's tables with message '%s'.",error);
-			tMap="UPDATE tiles SET version = 288";
+			tMap="UPDATE tiles SET version = 289";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 			NSAssert1(ret==SQLITE_OK, @"Failed to migrate (2) database's tables with message '%s'.",error);
 			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
@@ -411,15 +411,13 @@
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
-	NSString *mapType=@"w2.88"; //Normal
+	NSString *mapType=@"w2.89"; //Normal
 	switch(type){
-		case 0: mapType=@"w2.88"; break;
-		case 1: mapType=@"w2t.88"; break; //Hybrid
-		case 2: mapType=@"w2p.88"; break; //Satellite
+		case 0: mapType=@"w2.89"; break;
+		case 1: mapType=@"w2t.89"; break; //Hybrid
+		case 2: mapType=@"w2p.89"; break; //Satellite
 	}
-	//NSString *mapType=@"w2t.75"; //Hybrid
-	//NSString *mapType=@"w2p.75"; //Sat
-	//int zoom=0;
+
 	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
 
 
