@@ -47,9 +47,9 @@
 -(void)switchGPSLoggingChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsGPSLog];
 	if(sender.on)
-		startGPXLogEngine();
+		[APPDELEGATE.gpxlogger startLogging];
 	else
-		stopGPXLogEngine();
+	[APPDELEGATE.gpxlogger stopLogging];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -225,9 +225,14 @@
 		[self.navigationController pushViewController:gpxsettings animated:YES];
 		
 	} else if(indexPath.section==1 && indexPath.row==1) {
+#ifdef HAS_HTTPSERVER
 		if(networkView==nil)
 			networkView=[[NetworkReceiverViewController alloc] init];
 		[self.navigationController pushViewController:networkView animated:YES];	
+#else
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:@"The Wireless Transfer feature is not enabled in nightly builds because of some bugs in the Open Source toolchain." delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		[alert show];
+#endif
 	}
 	
 }

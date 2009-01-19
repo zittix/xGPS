@@ -63,7 +63,6 @@
 		4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F60E8D3CD0003F6B23 /* orange.png */; };
 		4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F70E8D3CD0003F6B23 /* red.png */; };
 		4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E941A080E6A92330037F8C1 /* SettingsViewController.m */; };
-		4E9670FE0EBA5840008E7917 /* GPXLogger.c in Sources */ = {isa = PBXBuildFile; fileRef = 4E9670FD0EBA5840008E7917 /* GPXLogger.c */; };
 		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
 		4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */; };
 		4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA9803C0EDEC95D00AAB014 /* gps_grey.png */; };
@@ -77,6 +76,7 @@
 		4EBAF8F90E58CA84008916E9 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F40E58CA84008916E9 /* speed.png */; };
 		4EBAF8FA0E58CA84008916E9 /* zoomin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F50E58CA84008916E9 /* zoomin.png */; };
 		4EBAF8FB0E58CA84008916E9 /* zoomout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F60E58CA84008916E9 /* zoomout.png */; };
+		4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC64A9D0F248385006B2408 /* GPXLogger.m */; };
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
 		4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00D0EE469A80077553B /* rm_reception_good.png */; };
 		4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00E0EE469A80077553B /* rm_reception_na.png */; };
@@ -221,8 +221,6 @@
 		4E917E760EC39EE4005ACCA9 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = zh_TW; path = zh_TW.lproj/license.html; sourceTree = "<group>"; };
 		4E941A070E6A92330037F8C1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4E941A080E6A92330037F8C1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		4E9670FC0EBA5840008E7917 /* GPXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLogger.h; sourceTree = "<group>"; };
-		4E9670FD0EBA5840008E7917 /* GPXLogger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GPXLogger.c; sourceTree = "<group>"; };
 		4E9A00900E8D4A530076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Dutch; path = Dutch.lproj/license.html; sourceTree = "<group>"; };
 		4E9A00920E8D4A9D0076EE44 /* Dutch */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Dutch; path = Dutch.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E9A00940E8D51B90076EE44 /* FakeGPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeGPSController.h; sourceTree = "<group>"; };
@@ -247,6 +245,8 @@
 		4EBAF8F50E58CA84008916E9 /* zoomin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomin.png; sourceTree = "<group>"; };
 		4EBAF8F60E58CA84008916E9 /* zoomout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomout.png; sourceTree = "<group>"; };
 		4EBCB26A0EE59F940030DF3F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4EC64A9C0F248385006B2408 /* GPXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLogger.h; sourceTree = "<group>"; };
+		4EC64A9D0F248385006B2408 /* GPXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXLogger.m; sourceTree = "<group>"; };
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
 		4ECFA00D0EE469A80077553B /* rm_reception_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_good.png; sourceTree = "<group>"; };
@@ -327,12 +327,12 @@
 				4E8F033C0EBB5CA100994EA3 /* DirectionsController.m */,
 				4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */,
 				4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */,
-				4E9670FC0EBA5840008E7917 /* GPXLogger.h */,
-				4E9670FD0EBA5840008E7917 /* GPXLogger.c */,
 				4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */,
 				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
 				4E487FE20F03C9680004AE7B /* TransferController.h */,
 				4E487FE30F03C9680004AE7B /* TransferController.m */,
+				4EC64A9C0F248385006B2408 /* GPXLogger.h */,
+				4EC64A9D0F248385006B2408 /* GPXLogger.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -708,7 +708,6 @@
 				4E8A01770E9D441C00E58774 /* NetworkReceiverViewController.m in Sources */,
 				4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */,
 				4EAF78B50EB3AB440078B697 /* iGPS360Controller.m in Sources */,
-				4E9670FE0EBA5840008E7917 /* GPXLogger.c in Sources */,
 				4E8F02B60EBB544F00994EA3 /* DrivingDirectionsSearchView.m in Sources */,
 				4E8F033D0EBB5CA100994EA3 /* DirectionsController.m in Sources */,
 				4E8F26520EC5F51600401A4E /* NavigationInstructionView.m in Sources */,
@@ -732,6 +731,7 @@
 				4E568F380F06C097004AC808 /* HTTPConnection.m in Sources */,
 				4E568F390F06C097004AC808 /* HTTPResponse.m in Sources */,
 				4E568F3A0F06C097004AC808 /* HTTPServer.m in Sources */,
+				4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

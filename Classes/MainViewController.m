@@ -505,7 +505,8 @@
 			gpsPos.y=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude;
 			[mapview updateCurrentPos:gpsPos];
 			[mapview setHasGPSPos:YES];
-			logGPXPoint([[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode, [[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used);
+			
+			[APPDELEGATE.gpxlogger logGPXPoint:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude lon:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude alt:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude speed:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed fix:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode sat:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used];
 			APPDELEGATE.directions.pos=gpsPos;
 			break;
 		}case SPEED: {
@@ -533,6 +534,7 @@
 			break;
 		case SIGNAL_QUALITY:
 			[signalView setQuality:[[xGPSAppDelegate gpsmanager] GetCurrentGPS].signalQuality];
+			[APPDELEGATE.gpxlogger gpsSignalChanged:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode>=2];
 			break;
 		case SERIAL:
 			break;

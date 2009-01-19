@@ -12,6 +12,7 @@
 #import "GPSManager.h"
 #import "DirectionsBookmarks.h"
 #import "TransferController.h"
+#import "GPXLogger.h"
 #define kSettingsCurrentGPS @"gpsinuse"
 #define kSettingsLicense @"gpslicense_%@"
 #define kSettingsLicenseOK @"gpslicense_%@_status"
@@ -51,6 +52,7 @@
 @property (nonatomic, readonly,getter=tiledb) TileDB* tiledb;
 @property (nonatomic, readonly,getter=gpsmanager) GPSManager* gpsmanager;
 @property (nonatomic, readonly,getter=directions) DirectionsController* directions;
+@property (nonatomic, readonly,getter=gpxlogger) GPXLogger* gpxlogger;
 @property (nonatomic, readonly,getter=dirbookmarks) DirectionsBookmarks* dirbookmarks;
 @property (nonatomic, readonly,getter=txcontroller) TransferController* txcontroller;
 @end

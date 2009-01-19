@@ -16,6 +16,7 @@ static GPSManager* gpsmanager;
 static DirectionsController* directions;
 static DirectionsBookmarks* dirbookmarks;
 static TransferController* txcontroller;
+static GPXLogger* gpxlogger;
 @synthesize window;
 @synthesize navController;
 
@@ -24,8 +25,10 @@ static TransferController* txcontroller;
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	
+	gpxlogger=[[GPXLogger alloc] init];
+	
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog])
-	startGPXLogEngine();
+		[gpxlogger startLogging];
 	
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<2) {
 		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsVersion];
@@ -63,7 +66,7 @@ static TransferController* txcontroller;
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[[gpsmanager GetCurrentGPS] stop];
 	
-	stopGPXLogEngine();
+	[gpxlogger stopLogging];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(TileDB*)tiledb {
@@ -86,6 +89,9 @@ static TransferController* txcontroller;
 }
 -(GPSManager*)gpsmanager {
 	return gpsmanager;
+}
+-(GPXLogger*)gpxlogger {
+	return gpxlogger;
 }
 - (void)dealloc {
 	[navController release];

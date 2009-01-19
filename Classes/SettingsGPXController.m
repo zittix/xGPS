@@ -65,14 +65,35 @@
     // Release anything that's not essential, such as cached data
 }
 -(float)getsize {
-	NSString *path = [NSString stringWithCString:getGPXFilename()];
-	//NSLog(@"Getting file size %@",path);
-	NSFileManager * fm = [NSFileManager defaultManager];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xgps_gpx/"];
 	
-	NSDictionary *fattrs = [fm fileAttributesAtPath:path traverseLink:YES];
-	NSNumber *nb=[fattrs objectForKey:NSFileSize];
-	//NSLog(@"file size: %f",[nb unsignedLongLongValue]/1024.0/1024.0);
-	return [nb unsignedLongLongValue]/1024.0/1024.0;		
+	NSFileManager * fm = [NSFileManager defaultManager];
+	float total=0;
+		
+	NSArray *files=[[NSFileManager defaultManager] directoryContentsAtPath:path];
+	
+	for(NSString* f in files) {
+		NSString *file = [path stringByAppendingPathComponent:f];
+		NSDictionary *fattrs = [fm fileAttributesAtPath:file traverseLink:YES];
+		if(fattrs==nil) continue;
+		NSNumber *nb=[fattrs objectForKey:NSFileSize];
+		total+=[nb unsignedLongLongValue]/1024.0/1024.0;
+	}
+	
+	
+	
+	return total;		
+}
+-(int) getnbfile {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xgps_gpx"];
+	
+	NSArray *files=[[NSFileManager defaultManager] directoryContentsAtPath:path];
+	return [files count];
+	
 }
 #pragma mark Table view methods
 
@@ -85,7 +106,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
 		case 0:
-			return 2;
+			return 3;
 	}
 	return 0;
 }
@@ -97,7 +118,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 		switch (section) {
 			case 0:
-				return NSLocalizedString(@"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track.",@"");
+				return NSLocalizedString(@"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode.",@"");
 				break;
 			default:
 				return nil;
@@ -110,7 +131,8 @@
     NSString *CellIdentifier;
 	switch(indexPath.row) {
 		case 0: CellIdentifier=@"filesize"; break;
-		case 1: CellIdentifier=@"deletefile"; break;
+		case 1: CellIdentifier=@"nblogfile"; break;
+		case 2: CellIdentifier=@"deletefile"; break;
 	}
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -118,11 +140,18 @@
 			case 0: {
 				TitleValueCell *cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.selectionStyle =UITableViewCellSelectionStyleNone;
-				cell2.title=NSLocalizedString(@"Log file size",@"");
-				cell2.value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[self getsize]];
+				cell2.title=NSLocalizedString(@"Total log files size",@"");
+				cell2.value=[NSString stringWithFormat:NSLocalizedString(@"%.2f MB",@"Size of the map, MB=MegaBytes"),[self getsize]];
 				cell=cell2;
 			} break;
 			case 1: {
+				TitleValueCell *cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+				cell.selectionStyle =UITableViewCellSelectionStyleNone;
+				cell2.title=NSLocalizedString(@"Number of log files",@"");
+				cell2.value=[NSString stringWithFormat:@"%d",[self getnbfile]];
+				cell=cell2;
+			} break;
+			case 2: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.text=NSLocalizedString(@"Delete GPX Log file",@"");
 				cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -133,7 +162,11 @@
 	else {
 		switch(indexPath.row) {
 			case 0: {
-				((TitleValueCell*) cell).value=[NSString stringWithFormat:NSLocalizedString(@"%.1f MB",@"Size of the map, MB=MegaBytes"),[self getsize]];
+				((TitleValueCell*) cell).value=[NSString stringWithFormat:NSLocalizedString(@"%.2f MB",@"Size of the map, MB=MegaBytes"),[self getsize]];
+				break;
+			}
+			case 1: {
+				((TitleValueCell*) cell).value=[NSString stringWithFormat:@"%d",[self getnbfile]];
 				break;
 			}
 		}
@@ -142,22 +175,32 @@
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	if(buttonIndex==0) {
-		stopGPXLogEngine();
-		NSString *path = [NSString stringWithCString:getGPXFilename()];
+		[APPDELEGATE.gpxlogger stopLogging];
+
+
+		NSError *err;
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *documentsDirectory = [paths objectAtIndex:0];
+		NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xgps_gpx/"];
 		
 		NSFileManager * fm = [NSFileManager defaultManager];
 
-		NSError *err;
-		[fm removeItemAtPath:path error:&err];
+		
+		NSArray *files=[[NSFileManager defaultManager] directoryContentsAtPath:path];
+		
+		for(NSString* f in files) {
+			NSString *file = [path stringByAppendingPathComponent:f];
+			[fm removeItemAtPath:file error:&err];
+		}
 
 		if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog])
-			startGPXLogEngine();
+			[APPDELEGATE.gpxlogger startLogging];
 		[self.tableView reloadData];
 	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row==1) {
+    if(indexPath.row==2) {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the recorded tracks ?",@"Delete tracks") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"Yes",@"Yes") otherButtonTitles:NSLocalizedString(@"No",@"No"),nil];
 		[act showInView:self.view];

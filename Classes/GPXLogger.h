@@ -2,10 +2,22 @@
 //  GPXLogger.h
 //  xGPS
 //
-//  Created by Mathieu on 10/30/08.
-//  Copyright 2008 Xwaves. All rights reserved.
+//  Created by Mathieu on 19.01.09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
-void stopGPXLogEngine();
-void startGPXLogEngine();
-void logGPXPoint(float lat, float lon, float alt, float speed, int fix, int sat);
-const char* getGPXFilename();
+
+#import <Foundation/Foundation.h>
+
+
+@interface GPXLogger : NSObject {
+	BOOL logging;
+	FILE *fp;
+	BOOL hasSignal;
+	NSString *currentFile;
+}
+-(void)startLogging;
+-(void)stopLogging;
+-(void)gpsSignalChanged:(BOOL)_hasSignal;
+-(void)logGPXPoint:(float)lat lon:(float)lon alt:(float)alt speed:(float)speed fix:(int) fix sat:(int)sat;
+-(NSString*)getLogFilename;
+@end
