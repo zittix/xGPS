@@ -1,5 +1,5 @@
 CC=arm-apple-darwin9-gcc
-CFLAGS=-DTARGET_OS_IPHONE -Os -I/iphone/sys/usr/include -std=c99 -DHAS_HTTPSERVER
+CFLAGS=-DTARGET_OS_IPHONE -Os -I/iphone/sys/usr/include -std=c99
 LDFLAGS=-bind_at_load -framework CoreFoundation -lz -L"/iphone/sys/usr/lib" -F"/iphone/sys/System/Library/Frameworks" -F"/iphone/sys/System/Library/PrivateFrameworks" -lobjc -lm -lsqlite3 -framework Foundation -framework UIKit -framework CoreGraphics -framework CFNetwork -framework CoreLocation -framework AddressBook -framework AddressBookUI
 
 SRC_C= $(wildcard Classes/*.c)
