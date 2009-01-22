@@ -40,7 +40,6 @@
 		fprintf(fp,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx version=\"1.1\" creator=\"xGPS - http://xgps.xwaves.net\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/1\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n<trk><trkseg>\n");
 		fflush(fp);
 		logging=YES;
-		currentFile=file;
 	}else {
 		fprintf(stderr,"Error while opening GPX log file: %s",strerror(errno));
 	}
@@ -94,8 +93,5 @@
 	if(fix>=2 && sat>0)
 	fprintf(fp,"<sat>%d</sat>\n",sat);
 	fprintf(fp,"</trkpt>\n");	
-}
--(NSString*)getLogFilename {
-	return logging ? currentFile : nil;
 }
 @end

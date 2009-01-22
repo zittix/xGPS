@@ -74,17 +74,8 @@
 		NSString *to=[APPDELEGATE.directions.to retain];
 		float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
 		float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
-		char latD='N';
-		char lonD='E';
-		if(lat<0) {
-			lat*=-1;
-			latD='S';
-		}
-		if(lon<0) {
-			lon*=-1;
-			lonD='S';
-		}
-		NSString*from=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+		
+		NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 		[delegate clearDirections];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 		[APPDELEGATE.directions drive:from to:to];

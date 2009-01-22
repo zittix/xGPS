@@ -296,17 +296,8 @@
 				if(nbWrongWay>20*APPDELEGATE.gpsmanager.currentGPS.refreshRate && recomputeRoute) {
 					float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
 					float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
-					char latD='N';
-					char lonD='E';
-					if(lat<0) {
-						lat*=-1;
-						latD='S';
-					}
-					if(lon<0) {
-						lon*=-1;
-						lonD='S';
-					}
-					NSString*from=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+					
+					NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 					NSString *to=[_to retain];
 					[delegate clearDirections];
 					[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;

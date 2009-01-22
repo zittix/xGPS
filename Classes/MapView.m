@@ -19,7 +19,7 @@
 @synthesize pos;
 @synthesize mapRotationEnabled;
 @synthesize assocZoomview;
-//@synthesize debugRoadStep;
+@synthesize nightMode;
 @synthesize pEndForMapSelection;
 @synthesize pDepForMapSelection;
 -(void)setHasGPSPos:(BOOL)val {
@@ -505,10 +505,15 @@
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSaveGState(context);
 	
-	CGContextSetRGBFillColor(context, 0.53, 0.53, 0.53, 1);
-	CGContextFillRect(context,rect);
-	
-	
+	if(nightMode) {
+			CGContextSetRGBFillColor(context, 1, 1, 1, 1);
+		CGContextFillRect(context,rect);
+			CGContextSetBlendMode(context,kCGBlendModeExclusion);
+	} else {
+		CGContextSetRGBFillColor(context, 0.53, 0.53, 0.53, 1);
+		CGContextFillRect(context,rect);
+
+	}
 	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 	CGAffineTransform rot=CGAffineTransformMakeRotation(mapRotation);
 	//CGAffineTransform trans=CGAffineTransformMakeTranslation(-rect.size.width/2.0,-rect.size.height/2.0);
@@ -584,7 +589,7 @@
 	//NSLog(@"x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
 	//CGContextRotateCTM(context,M_PI/2.0);
 	float marginy=0;
-	
+	CGContextSetRGBFillColor(context, 1, 1, 1, 1);
 	while(org.y<heightDraw) {
 		int orgxTile=x;
 		float orgx=org.x;
@@ -610,13 +615,15 @@
 						//NSLog(@"Error getting tile from TileDB engine %@",db);
 						t=tileNoMap;
 					}
+				} else if(t==nil && dragging==YES) {
+					t=tileNoMap;
 				}
+				
 				
 				
 				if(t!=nil) {
-					[t drawInRect: CGRectMake(org.x+marginx,org.y+marginy + TILE_SIZE,TILE_SIZE,TILE_SIZE) withContext:context];
-				}
-				marginx-=0.5;
+					[t drawInRect: CGRectMake(org.x+marginx,org.y + TILE_SIZE+marginy,TILE_SIZE,TILE_SIZE) withContext:context];
+				}				marginx-=0.5;
 				
 				/* CGContextScaleCTM(context, 1, -1);
 				 CGContextBeginPath(context);
@@ -645,12 +652,12 @@
 		y++;
 		
 	}
-	
+
 	//Flush memory cache if too big
 	if([tilescache count]>64) {
 		[tilescache removeAllObjects];
 	}
-	
+	CGContextSetBlendMode(context,kCGBlendModeNormal);
 	//NSLog(@"Cache size: %d",[tilescache count]);
 	
 	//Draw gps pos
@@ -672,6 +679,8 @@
 			CGContextScaleCTM(context, 1, -1);
 			CGContextRotateCTM(context, -mapRotation);
 			CGContextScaleCTM(context, 1, -1);
+		
+			
 			[imgPinSearch drawAtPoint: CGPointMake(posXPin2-7.5, posYPin2+5) withContext:context];
 			CGContextScaleCTM(context, 1, -1);
 			CGContextRotateCTM(context, mapRotation);
@@ -695,7 +704,7 @@
 	if([APPDELEGATE.directions.roadPoints count]>1) {
 		//NSLog(@"Drawing %d points",[APPDELEGATE.directions.roadPoints count]);
 		int i;
-		CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.64);
+	
 		CGContextSetLineWidth(context,6.0);
 		CGContextSetLineJoin(context,kCGLineJoinRound);
 		CGPoint points[[APPDELEGATE.directions.roadPoints count]];
@@ -764,6 +773,10 @@
 		if(j>1) {
 			//	NSLog(@"Nb points to draw %d",j);
 			//CGContextRotateCTM(context, -mapRotation);
+			if(nightMode)
+				CGContextSetRGBStrokeColor(context,0.215,0.529,.2,0.64);
+			else
+				CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.64);
 			
 			CGContextBeginPath(context);
 			CGContextAddLines(context,points,j);
@@ -789,8 +802,14 @@
 		//Draw a circle
 		
 		CGContextSetLineWidth(context,3.0);
+		
+		if(nightMode){
+			CGContextSetRGBStrokeColor(context,0.215,0.529,.2,0.8);
+			CGContextSetRGBFillColor(context,0.215,0.529,.2,0.4);
+		} else {		
 		CGContextSetRGBFillColor(context,0.662,0.184,1,0.4);
 		CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.8);
+		}
 		CGContextBeginPath(context);
 		CGContextAddArc(context,posXPin,posYPin,35,0,2*M_PI,0);
 		CGContextStrokePath(context);
@@ -817,6 +836,8 @@
 		if(useGPSBall) {
 			CGContextRotateCTM(context, -mapRotation);
 			CGContextScaleCTM(context, 1, -1);
+	
+				
 			[imgPinRef drawAtPoint: CGPointMake(posXPin-10, posYPin+10) withContext:context];
 			CGContextScaleCTM(context, 1, -1);
 			CGContextRotateCTM(context, mapRotation);
@@ -856,12 +877,26 @@
 				CGContextBeginPath(context);
 				CGContextAddLines(context,ind,4);
 				CGContextClosePath(context);
-				CGContextSetRGBFillColor(context,0,0,1,0.6);
+				
+				if(nightMode)
+					CGContextSetRGBFillColor(context,1,0.945,0.270,0.6);
+				else
+					CGContextSetRGBFillColor(context,0,0,1,0.6);
+				
+				
 				CGContextFillPath(context);
 				CGContextBeginPath(context);
 				CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
+				
+				
 				CGContextClosePath(context);
-				CGContextSetRGBFillColor(context,0,0,1,1);
+				
+				if(nightMode)
+					CGContextSetRGBFillColor(context,1,0.945,0.270,1);
+				else
+					CGContextSetRGBFillColor(context,0,0,1,1);
+				
+
 				CGContextFillPath(context);
 				CGContextScaleCTM(context, 1, -1);
 		

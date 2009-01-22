@@ -71,18 +71,9 @@
 		if(g.gps_data.fix.mode>1) {
 			float lat=g.gps_data.fix.latitude;
 			float lon=g.gps_data.fix.longitude;
-			char latD='N';
-			char lonD='E';
-			if(lat<0) {
-				lat*=-1;
-				latD='S';
-			}
-			if(lon<0) {
-				lon*=-1;
-				lonD='S';
-			}
+			
 			[currentPosition release];
-			currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+			currentPosition=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 		} 
 		fromT=currentPosition;
 	}else
@@ -110,18 +101,9 @@
 	if(g.gps_data.fix.mode>1) {
 		float lat=g.gps_data.fix.latitude;
 		float lon=g.gps_data.fix.longitude;
-		char latD='N';
-		char lonD='E';
-		if(lat<0) {
-			lat*=-1;
-			latD='S';
-		}
-		if(lon<0) {
-			lon*=-1;
-			lonD='S';
-		}
+		
 		[currentPosition release];
-		currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+		currentPosition=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 		from.text=NSLocalizedString(@"Current Position",@"");
 	} else {
 		//from.text=@"Ch. du Marais 9 1031 Mex";
@@ -157,18 +139,9 @@
 			if(g.gps_data.fix.mode>1) {
 				float lat=g.gps_data.fix.latitude;
 				float lon=g.gps_data.fix.longitude;
-				char latD='N';
-				char lonD='E';
-				if(lat<0) {
-					lat*=-1;
-					latD='S';
-				}
-				if(lon<0) {
-					lon*=-1;
-					lonD='S';
-				}
+				
 				[currentPosition release];
-				currentPosition=[[NSString alloc] initWithFormat:@"%f%c,%f%c",lat,latD,lon,lonD];
+				currentPosition=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 				bookmarkClicked.text=NSLocalizedString(@"Current Position",@"");
 			} else {
 				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to get the GPS position. The GPS is not currently giving any position information.",@"GPS Dir Pos error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];

@@ -46,12 +46,14 @@
 	DirectionsBookmarksViewController *dirBookmarks;
 	int currentSearchType; //1= search, 2=directions
 	WrongWayView *wrongWay;
+	NSTimer * tmrNightMode;
 }
 - (void)gpsChanged:(ChangedState*)msg;
 -(void)cancelDrivingSearch:(id)sender ;
 -(void)showWrongWay;
 -(void)hideWrongWay;
 -(void)clearDirections;
+-(void)speedChanged:(NSNotification *)notif;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;
 @property (nonatomic) int currentSearchType;

@@ -36,6 +36,14 @@
 -(void)setTextSize:(float)size {
 	lbl.font=[UIFont boldSystemFontOfSize:size];
 }
+-(void)setNightMode:(BOOL)val {
+	[UIView beginAnimations:nil context:nil];
+	if(val)
+	self.backgroundColor=[UIColor colorWithRed:0.25 green:0.25 blue:0.25 alpha:1];
+	else
+		self.backgroundColor=[UIColor colorWithRed:0.51764705f green:0.5960784314f blue:0.7019607843 alpha:1];
+	[UIView commitAnimations];
+}
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];

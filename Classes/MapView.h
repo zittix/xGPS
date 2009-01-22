@@ -46,12 +46,14 @@
 	BOOL useGPSBall;
 	CGPoint pDepForMapSelection;
 	CGPoint pEndForMapSelection;
+	BOOL nightMode;
 }
 @property(retain,nonatomic) PositionObj *pos;
 @property(nonatomic) CGPoint pDepForMapSelection;
 @property(nonatomic) CGPoint pEndForMapSelection;
 @property(nonatomic) BOOL mapRotationEnabled;
 @property(nonatomic,assign) ZoomView *assocZoomview;
+@property(nonatomic) BOOL nightMode;
 //@property(nonatomic) int debugRoadStep;
 -(void)refreshMap;
 -(int)zoom;

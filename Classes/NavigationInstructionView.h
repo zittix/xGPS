@@ -18,8 +18,10 @@
 	CGPoint startTouchPosition;
 	id delegate;
 	int swipeDir;
+	BOOL nightMode;
 }
 @property(nonatomic,assign) id delegate;
 -(void)setText:(NSString*)txt;
 -(void)setTextSize:(float)size;
+-(void)setNightMode:(BOOL)val;
 @end
