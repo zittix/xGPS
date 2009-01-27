@@ -97,7 +97,7 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-		case 0: return 2;
+		case 0: return 3;
 		case 1: return 1+([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsTimerNightEnabled] && [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled] ? 2 : 0)+([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled] ? 1 : 0);
 	}
 	return 0;
@@ -109,6 +109,10 @@
 -(void)switchBluePointChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsUseGPSBall];
 }
+-(void)switchWrongWayChanged:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsWrongWayHidden];
+}
+
 -(void)switchNightMode:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsNightModeEnabled];
 	NSArray *toInsert;
@@ -158,6 +162,7 @@
 			switch(indexPath.row) {
 				case 0: CellIdentifier=@"showspeed"; break;
 				case 1: CellIdentifier=@"usebluepin"; break;
+				case 2: CellIdentifier=@"wrongwayhidden"; break;
 			} break;
 		case 1: 
 			switch(indexPath.row) {
@@ -196,6 +201,18 @@
 						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
 						[cell.contentView addSubview:value];
 						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsUseGPSBall];
+						break;
+					}
+					case 2: {
+						cell.text=NSLocalizedString(@"Wrong Way hidden",@"");
+						UISwitch *value;
+						
+						value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
+						value.tag = 1;
+						[value addTarget:self action:@selector(switchWrongWayChanged:) forControlEvents:UIControlEventValueChanged];
+						value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+						[cell.contentView addSubview:value];
+						value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsWrongWayHidden];
 						break;
 					}
 				}break;
@@ -260,6 +277,10 @@
 					}
 					case 1: {
 						((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsUseGPSBall];
+						break;
+					}
+					case 2: {
+						((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsWrongWayHidden];
 						break;
 					}
 				} break;

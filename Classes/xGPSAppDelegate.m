@@ -39,6 +39,7 @@ static GPXLogger* gpxlogger;
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<3) {
 		[[NSUserDefaults standardUserDefaults] setInteger:3 forKey:kSettingsVersion];
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsRecomputeDriving];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsWrongWayHidden];
 	}
 	
 	

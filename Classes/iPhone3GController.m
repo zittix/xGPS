@@ -34,19 +34,7 @@
 -(NSString*)name {
 	return @"iPhone 3G GPS";
 }
--(void)checkSpeed {
-	NSLog(@"Checking speed");
-	if(!speedHasBeenUpdated) {
-		NSLog(@"Wrong speed");
-		gps_data.fix.speed=0.0;
-#ifdef USE_UI
-		[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:SPEED andParent:self] waitUntilDone:YES];
-#else
-		[delegate gpsChanged:[ChangedState objWithState:SPEED andParent:self]];
-#endif
-	}
-	speedHasBeenUpdated=NO;
-}
+
 -(void) dealloc {
 	[super dealloc];
 	[locManager release];

@@ -39,6 +39,7 @@
 #define kSettingsTimerNightStop @"nightmodetimerstop"
 #define kSettingsTimerNightEnabled @"nightmodetimerenabled"
 #define kSettingsNightModeEnabled @"nightmodeenabled"
+#define kSettingsWrongWayHidden @"wrongwayviewhidden"
 #define WIRELESS_TRANSFER_PORT 7777
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 #define VERSION "1.2.0 Test"

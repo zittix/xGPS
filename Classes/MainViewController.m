@@ -76,7 +76,7 @@
 	drivingSearchView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	drivingSearchView.autoresizesSubviews=YES;
 	
-	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-52,5,47,40)];
+	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-58,5,47,40)];
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
 	[signalView setQuality:-1];
@@ -177,7 +177,9 @@
 	} else {
 		[self timerNightMode];	
 	}
-	
+	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled]) {
+		[self hideWrongWay];
+	}
 }
 -(void)hideWrongWay {
 	if(wrongWay.superview==nil) return;
@@ -456,7 +458,7 @@
 	mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0f);
 	zoomview.frame=CGRectMake(10,10,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70,wrongWay.frame.size.width,wrongWay.frame.size.height);
-	signalView.frame=CGRectMake(self.view.frame.size.width-52,5,47,40);
+	signalView.frame=CGRectMake(self.view.frame.size.width-58,5,47,40);
 	[UIView commitAnimations];
 	[APPDELEGATE.directions clearResult];
 	currentSearchType=0;
@@ -474,7 +476,7 @@
 	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
 	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
-	signalView.frame=CGRectMake(self.view.frame.size.width-52,5+navView.frame.size.height,47,40);
+	signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
 	[UIView commitAnimations];
 }
 -(void)nextDirectionDistanceChanged:(double)dist {
@@ -499,7 +501,7 @@
 			mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
 			zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 			wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
-			signalView.frame=CGRectMake(self.view.frame.size.width-52,5+navView.frame.size.height,47,40);
+			signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
 			[UIView commitAnimations];
 			directionSearch=NO;
 			[mapview computeCachedRoad];

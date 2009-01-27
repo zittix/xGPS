@@ -289,7 +289,7 @@
 			if(previousInstruction==[instructions count]-1) {
 				
 				[delegate hideWrongWay];
-			} else {
+			} else if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsWrongWayHidden]) {
 				[delegate showWrongWay];
 			}
 			if(previousInstruction!=[instructions count]-1) {

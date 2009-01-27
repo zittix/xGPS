@@ -13,7 +13,7 @@
 
 
 - (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:CGRectMake(frame.origin.x,frame.origin.y,39,54)])) {
+    if ((self = [super initWithFrame:CGRectMake(frame.origin.x,frame.origin.y,45,54)])) {
         // Initialization code
 		
 		//39x36
