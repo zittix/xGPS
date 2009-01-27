@@ -167,7 +167,9 @@
 	NSLog(@"Parse error from delegate");
 	
 }
-
+-(BOOL) needSerial {
+	return NO;
+}
 - (void)gpsUpdate {
 	
 	if(gpxLoaded && currentIndex<[posArray count]) {

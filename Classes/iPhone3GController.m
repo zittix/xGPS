@@ -86,7 +86,9 @@
 		}break;
 	}
 }
-
+-(BOOL) needSerial {
+	return NO;
+}
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	BOOL hasGPSSpeed=NO;
 	

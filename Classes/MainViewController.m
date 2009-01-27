@@ -154,7 +154,6 @@
 	}
 }
 -(void)speedChanged:(NSNotification *)notif {
-	NSLog(@"Settings changed...");
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed] && APPDELEGATE.gpsmanager.currentGPS.isEnabled) {
 		speedview.hidden=NO;
 	} else {

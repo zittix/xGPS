@@ -60,6 +60,7 @@ void writeDebugMessage(const char*msg);
 @property(nonatomic,readonly) int refreshRate;
 @property(nonatomic,readonly) BOOL debug;
 @property(nonatomic) BOOL isEnabled;
+@property(nonatomic,readonly) BOOL needSerial;
 @property(nonatomic) struct gps_data_t gps_data;
 @property(readonly) BOOL validLicense;
 @property(readonly) BOOL started;

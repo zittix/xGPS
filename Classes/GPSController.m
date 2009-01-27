@@ -131,7 +131,7 @@ void writeDebugSerial(const char*msg,int len) {
 		goto error;
 	}
 	// Success
-
+	
 	return fileDescriptor;
 	
 	// Failure "/dev/tty.iap"
@@ -144,6 +144,7 @@ error:
 - (void)changeSerialSpeed:(speed_t)s {
 	struct termios options;
 	struct termios gOriginalTTYAttrs;
+	if(serialHandle<0) return;
 	// Get the current options and save them so we can restore the default settings later.
 	if (tcgetattr(serialHandle, &gOriginalTTYAttrs) == -1) {
 		NSLog(@"Error getting tty attributes %s(%d).\n", strerror(errno), errno);
@@ -188,13 +189,13 @@ error:
 	
 }
 -(BOOL)sendCommand:(const char*)cmd {
-		if(![self checkSerialPort]) {
-			return NO;
-		}
-		if(write(serialHandle,cmd,strlen(cmd))>0)
-			return YES;
-		else
-			return NO;
+	if(![self checkSerialPort]) {
+		return NO;
+	}
+	if(write(serialHandle,cmd,strlen(cmd))>0)
+		return YES;
+	else
+		return NO;
 }	
 
 -(void)startDebug {
@@ -221,41 +222,45 @@ error:
 	return YES;
 }
 -(NSString*)name {
-		return @"Invalid";
+	return @"Invalid";
 }
 -(int)refreshRate {
 	return 1;
 }
 - (id)initWithDelegate:(id)del {
 	if((self=[super init])) {
-	delegate=del;
-	stopGPSSerial=NO;
-	isConnected=NO;
-	isEnabled=NO;
-	validLicense=NO;
-	started=NO;
-
-	serial=[[NSString alloc] init];
-	if(serialHandle<0) {
-		serialHandle=[self _openSerialPort:GPSPORT speed:B19200];
-		if(serialHandle<0) {
-			NSLog(@"Unable to open the serial port");
-			if(![self hasAlreadyShownSerialError]) {
-				
+		delegate=del;
+		stopGPSSerial=NO;
+		isConnected=NO;
+		isEnabled=NO;
+		validLicense=NO;
+		started=NO;
+		
+		serial=[[NSString alloc] init];
+		if(self.needSerial) {
+			if(serialHandle<0) {
+				serialHandle=[self _openSerialPort:GPSPORT speed:B19200];
+				if(serialHandle<0) {
+					NSLog(@"Unable to open the serial port");
+					if(![self hasAlreadyShownSerialError]) {
 #ifdef USE_UI
-				//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to open the serial port. Make sure that no other GPS software is running in background.",@"GPS serial port error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-				//[alert show];
+						UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to open the serial port. Make sure that no other GPS software is running in background.",@"GPS serial port error") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+						[alert show];
 #endif
-				[self setHasAlreadyShownSerialError];
+						[self setHasAlreadyShownSerialError];
+					}
+					return self;
+				}
 			}
-			return self;
 		}
-	}
 	}
 	return self;
 }
 -(BOOL)needLicense {
 	return NO;
+}
+-(BOOL) needSerial {
+	return YES;
 }
 -(NSString*)downloadPage:(NSString*)url {
 	NSURL *imageURL = [NSURL URLWithString:url];
@@ -281,7 +286,7 @@ error:
 	return YES;
 }
 - (BOOL)checkSerialPort {
-	return (serialHandle<0) ? NO : YES;
+	return (serialHandle<0) || !self.needSerial ? NO : YES;
 }
 - (BOOL)GetSerial {
 	return YES;
