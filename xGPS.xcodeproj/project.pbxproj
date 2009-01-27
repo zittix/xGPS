@@ -76,6 +76,7 @@
 		4EBAF8F90E58CA84008916E9 /* speed.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F40E58CA84008916E9 /* speed.png */; };
 		4EBAF8FA0E58CA84008916E9 /* zoomin.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F50E58CA84008916E9 /* zoomin.png */; };
 		4EBAF8FB0E58CA84008916E9 /* zoomout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F60E58CA84008916E9 /* zoomout.png */; };
+		4EC16E2E0F2F1A09003B3176 /* GPSDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */; };
 		4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC64A9D0F248385006B2408 /* GPXLogger.m */; };
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
 		4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00D0EE469A80077553B /* rm_reception_good.png */; };
@@ -245,6 +246,8 @@
 		4EBAF8F50E58CA84008916E9 /* zoomin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomin.png; sourceTree = "<group>"; };
 		4EBAF8F60E58CA84008916E9 /* zoomout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomout.png; sourceTree = "<group>"; };
 		4EBCB26A0EE59F940030DF3F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4EC16E2C0F2F1A09003B3176 /* GPSDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSDetailsViewController.h; sourceTree = "<group>"; };
+		4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSDetailsViewController.m; sourceTree = "<group>"; };
 		4EC64A9C0F248385006B2408 /* GPXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLogger.h; sourceTree = "<group>"; };
 		4EC64A9D0F248385006B2408 /* GPXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXLogger.m; sourceTree = "<group>"; };
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
@@ -471,6 +474,8 @@
 				4E17442F0EDE94E10062ED18 /* TitleValueCell.m */,
 				4ECFA0F50EE477E40077553B /* SettingsUIController.h */,
 				4ECFA0F60EE477E40077553B /* SettingsUIController.m */,
+				4EC16E2C0F2F1A09003B3176 /* GPSDetailsViewController.h */,
+				4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -732,6 +737,7 @@
 				4E568F390F06C097004AC808 /* HTTPResponse.m in Sources */,
 				4E568F3A0F06C097004AC808 /* HTTPServer.m in Sources */,
 				4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */,
+				4EC16E2E0F2F1A09003B3176 /* GPSDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

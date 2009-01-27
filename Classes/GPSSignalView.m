@@ -12,10 +12,10 @@
 @implementation GPSSignalView
 
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame delegate:(id<ShowGPSDetailProtocol>)_delegate {
     if ((self = [super initWithFrame:CGRectMake(frame.origin.x,frame.origin.y,45,54)])) {
         // Initialization code
-		
+		delegate=_delegate;
 		//39x36
 		red=[[UIImage imageNamed:@"rm_reception_none.png"] retain];
 		green=[[UIImage imageNamed:@"rm_reception_good.png"] retain];
@@ -59,7 +59,12 @@
 	}
 	[super drawRect:rect];
 }
-
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	NSSet *t = [event touchesForView:self];
+	if([t count]==1) {
+		[delegate showGPSDetails];
+	}
+}
 -(void)setQuality:(int)q {
 	quality=q;
 	[self setNeedsDisplay];

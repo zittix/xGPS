@@ -76,7 +76,7 @@
 	drivingSearchView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	drivingSearchView.autoresizesSubviews=YES;
 	
-	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-58,5,47,40)];
+	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-58,5,47,40) delegate:self];
 	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self.view addSubview:signalView];
 	[signalView setQuality:-1];
@@ -126,6 +126,13 @@
 	[tmrNightMode retain];
 	[self speedChanged:nil];
 	[self viewWillAppear:YES];
+}
+-(void)showGPSDetails {
+	if(gpsdetails==nil) {
+		gpsdetails=[[GPSDetailsViewController alloc] init];
+		
+	}
+	[self presentModalViewController:gpsdetails animated:YES];
 }
 -(void)timerNightMode {
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsTimerNightEnabled]) {
@@ -556,10 +563,12 @@
 			
 			[APPDELEGATE.gpxlogger logGPXPoint:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude lon:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude alt:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude speed:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed fix:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode sat:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used];
 			APPDELEGATE.directions.pos=gpsPos;
+			[gpsdetails updateData];
 			break;
 		}case SPEED: {
 			double speedms=[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed;
 			speedms*=3.6f;
+			[gpsdetails updateData];
 			if(speedms>3)
 				[speedview setSpeed:speedms];
 			else

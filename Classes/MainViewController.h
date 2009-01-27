@@ -22,7 +22,8 @@
 #import "NavigationInstructionView.h"
 #import "DirectionsBookmarksViewController.h"
 #import "WrongWayView.h"
-@interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate> {
+#import "GPSDetailsViewController.h"
+@interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate,ShowGPSDetailProtocol> {
 	MapView* mapview;
 	UIBarButtonItem* btnEnableGPS;
 	UIBarButtonItem* btnSettings;
@@ -47,6 +48,7 @@
 	int currentSearchType; //1= search, 2=directions
 	WrongWayView *wrongWay;
 	NSTimer * tmrNightMode;
+	GPSDetailsViewController *gpsdetails;
 }
 - (void)gpsChanged:(ChangedState*)msg;
 -(void)cancelDrivingSearch:(id)sender ;

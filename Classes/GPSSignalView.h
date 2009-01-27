@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ShowGPSDetailProtocol
+
+-(void)showGPSDetails;
+
+@end
 
 @interface GPSSignalView : UIView {
 	UIImage *red;
@@ -16,6 +21,8 @@
 	UIImage *grey;
 	int quality;
 	UILabel *gps;
+	id delegate;
 }
 -(void)setQuality:(int)q;
+- (id)initWithFrame:(CGRect)frame delegate:(id<ShowGPSDetailProtocol>)_delegate;
 @end

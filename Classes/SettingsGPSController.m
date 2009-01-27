@@ -31,11 +31,11 @@
  */
 
 
- - (void)viewWillAppear:(BOOL)animated {
- [super viewWillAppear:animated];
-	 [self.tableView reloadData];
- }
- 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[self.tableView reloadData];
+}
+
 /*
  - (void)viewDidAppear:(BOOL)animated {
  [super viewDidAppear:animated];
@@ -73,7 +73,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 3;
+	return 4;
 }
 
 -(void)switchSleepMode:(UISwitch*)sender {
@@ -92,6 +92,7 @@
 		case 0:	id=@"sectGPS_gpstype"; break;
 		case 1:	id=@"sectGPS_gpsstate"; break;
 		case 2:	id=@"sectGPS_gpsreset"; break;
+		case 3:	id=@"sectGPS_gpsdetails"; break;
 	}
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (cell == nil) {
@@ -126,6 +127,14 @@
 					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					cell.accessoryAction=@selector(resetGPS:);
 					break;
+				case 3:
+					cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:id] autorelease];
+					cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+					
+					cell.text=NSLocalizedString(@"GPS Information",@"");
+					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+					break;
+					
 			}break;
 				
 		}
@@ -170,6 +179,10 @@
 			gpsselector=[[GPSSelectorViewController alloc] initWithStyle:UITableViewStylePlain];
 		}
 		[self.navigationController pushViewController:gpsselector animated:YES];
+		
+	}else if(indexPath.section==0 && indexPath.row==3) {
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+		[APPDELEGATE.navControllerMain showGPSDetails];
 		
 	}
 }

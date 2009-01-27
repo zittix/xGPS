@@ -7,7 +7,7 @@
 //
 
 #import "xGPSAppDelegate.h"
-#import "MainViewController.h"
+
 #import "GPXLogger.h"
 static xGPSAppDelegate* staticObj=nil;
 @implementation xGPSAppDelegate
@@ -19,7 +19,7 @@ static TransferController* txcontroller;
 static GPXLogger* gpxlogger;
 @synthesize window;
 @synthesize navController;
-
+@synthesize navControllerMain;
 +(xGPSAppDelegate*)appdelegate {
 	return staticObj;
 }
@@ -50,11 +50,11 @@ static GPXLogger* gpxlogger;
 	tiledb=[[TileDB alloc] init];
 	gpsmanager=[[[GPSManager alloc] init] retain];
 	[[gpsmanager GetCurrentGPS] start];
-	MainViewController *navControllerMain = [[MainViewController alloc] init];
+	navControllerMain = [[MainViewController alloc] init];
 	
 	// create a navigation controller using the new controller
 	navController = [[UINavigationController alloc] initWithRootViewController:navControllerMain];
-	[navControllerMain release];
+	
 	directions=[[DirectionsController alloc] init];
 	directions.delegate=navControllerMain;
 	// Add the tab bar controller's current view as a subview of the window
@@ -101,6 +101,7 @@ static GPXLogger* gpxlogger;
 	[dirbookmarks release];
 	[gpsmanager release];
 	[txcontroller release];
+	[navControllerMain release];
 	[super dealloc];
 }
 

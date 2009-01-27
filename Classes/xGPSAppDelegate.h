@@ -43,9 +43,11 @@
 #define WIRELESS_TRANSFER_PORT 7777
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 #define VERSION "1.2.0 Test"
+#import "MainViewController.h"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;
+	MainViewController *navControllerMain;
 }
 
 +(TileDB*)tiledb;
@@ -54,6 +56,7 @@
 +(xGPSAppDelegate*)appdelegate;
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, retain) MainViewController *navControllerMain;
 @property (nonatomic, readonly,getter=tiledb) TileDB* tiledb;
 @property (nonatomic, readonly,getter=gpsmanager) GPSManager* gpsmanager;
 @property (nonatomic, readonly,getter=directions) DirectionsController* directions;
