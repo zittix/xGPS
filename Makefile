@@ -18,8 +18,9 @@ xGPS: 	$(CLASSES) $(C_FILE)
 	
 package:
 	rm -fr debian/Applications
-	mkdir -p debian/Applications/xGPSBeta.app
+	mkdir -p debian/Applications/xGPSBeta.app/sounds
 	cp xGPS debian/Applications/xGPSBeta.app/
+	cp sounds/* debian/Applications/xGPSBeta.app/sounds
 	cp Info_beta.plist debian/Applications/xGPSBeta.app/Info.plist
 	cp *.png debian/Applications/xGPSBeta.app
 	cp -r *.lproj debian/Applications/xGPSBeta.app/
