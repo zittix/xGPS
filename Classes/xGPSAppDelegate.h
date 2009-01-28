@@ -44,6 +44,7 @@
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 #define VERSION "1.2.0 Test"
 #import "MainViewController.h"
+#import "SoundController.h"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;
@@ -62,5 +63,6 @@
 @property (nonatomic, readonly,getter=directions) DirectionsController* directions;
 @property (nonatomic, readonly,getter=gpxlogger) GPXLogger* gpxlogger;
 @property (nonatomic, readonly,getter=dirbookmarks) DirectionsBookmarks* dirbookmarks;
+@property (nonatomic, readonly,getter=soundcontroller) SoundController* soundcontroller;
 @property (nonatomic, readonly,getter=txcontroller) TransferController* txcontroller;
 @end

@@ -17,6 +17,7 @@ static DirectionsController* directions;
 static DirectionsBookmarks* dirbookmarks;
 static TransferController* txcontroller;
 static GPXLogger* gpxlogger;
+static SoundController * soundcontroller;
 @synthesize window;
 @synthesize navController;
 @synthesize navControllerMain;
@@ -45,6 +46,7 @@ static GPXLogger* gpxlogger;
 	
 	staticObj=self;
 	txcontroller=[[TransferController alloc] init];
+	soundcontroller=[[SoundController alloc] init];
 	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 	dirbookmarks=[[DirectionsBookmarks alloc] init];
 	tiledb=[[TileDB alloc] init];
@@ -82,6 +84,10 @@ static GPXLogger* gpxlogger;
 -(TransferController*)txcontroller {
 	return txcontroller;
 }
+-(SoundController*)soundcontroller {
+	return soundcontroller;
+}
+
 +(TileDB*)tiledb {
 	return tiledb;
 }
