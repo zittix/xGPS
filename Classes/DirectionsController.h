@@ -54,6 +54,11 @@
 	int previousInstruction;
 	int nbWrongWay;
 	BOOL recomputeRoute;
+	BOOL playedSoundFarmeters;
+	BOOL playedSoundBeforemeters;
+	double inBetweenDistance;
+	int farThreshold;
+	int beforeThreshold;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;

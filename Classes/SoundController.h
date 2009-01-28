@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SoundEvent.h"
 
 @interface SoundController : NSObject {
-
+	SoundEvent *chain;
+	BOOL running;
+	NSTimer *tmrSoundCheck;
+	int checkSoundCounter;
 }
-
+-(void)addSound:(SoundEvent*)s;
+-(void)treatQueue;
+-(void)addSound:(SoundEvent*)s after:(SoundEvent*)ePrev;
 @end

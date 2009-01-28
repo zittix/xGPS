@@ -25,6 +25,8 @@
 		4E2397000E40F95D0062A352 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */; };
 		4E2397010E40F95D0062A352 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2396FF0E40F95D0062A352 /* QuartzCore.framework */; };
 		4E3227150F0698AC005217CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3227140F0698AC005217CB /* CFNetwork.framework */; };
+		4E3B63FD0F3080D900130CDF /* SoundEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E3B63FC0F3080D900130CDF /* SoundEvent.m */; };
+		4E3B64540F308D0C00130CDF /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 4E3B64500F308D0C00130CDF /* sounds */; };
 		4E487FE40F03C9680004AE7B /* TransferController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E487FE30F03C9680004AE7B /* TransferController.m */; };
 		4E568F220F06C062004AC808 /* xGPSHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E568F210F06C062004AC808 /* xGPSHTTPConnection.m */; };
 		4E568F250F06C070004AC808 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E568F240F06C070004AC808 /* AsyncSocket.m */; };
@@ -226,6 +228,9 @@
 		4E2396FE0E40F95D0062A352 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4E2396FF0E40F95D0062A352 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4E3227140F0698AC005217CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4E3B63FB0F3080D900130CDF /* SoundEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEvent.h; sourceTree = "<group>"; };
+		4E3B63FC0F3080D900130CDF /* SoundEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEvent.m; sourceTree = "<group>"; };
+		4E3B64500F308D0C00130CDF /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		4E487FE20F03C9680004AE7B /* TransferController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferController.h; sourceTree = "<group>"; };
 		4E487FE30F03C9680004AE7B /* TransferController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferController.m; sourceTree = "<group>"; };
 		4E568F200F06C062004AC808 /* xGPSHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xGPSHTTPConnection.h; path = Classes/xGPSHTTPConnection.h; sourceTree = "<group>"; };
@@ -578,6 +583,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E3B64500F308D0C00130CDF /* sounds */,
 				4ECFA00D0EE469A80077553B /* rm_reception_good.png */,
 				4ECFA00E0EE469A80077553B /* rm_reception_na.png */,
 				4ECFA00F0EE469A80077553B /* rm_reception_none.png */,
@@ -771,6 +777,8 @@
 		4EE2423C0F3073FD00C41ACA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4E3B63FB0F3080D900130CDF /* SoundEvent.h */,
+				4E3B63FC0F3080D900130CDF /* SoundEvent.m */,
 				4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */,
 				4E0F05000E87C49000D75E7D /* GeoEncoder.m */,
 				4E8F033B0EBB5CA100994EA3 /* DirectionsController.h */,
@@ -1123,6 +1131,7 @@
 				4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */,
 				4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */,
 				4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */,
+				4E3B64540F308D0C00130CDF /* sounds in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1294,6 +1303,7 @@
 				4EE2432B0F30744C00C41ACA /* cst_sts.c in Sources */,
 				4EE2432C0F30744C00C41ACA /* cst_units.c in Sources */,
 				4EE243440F30750500C41ACA /* SoundController.m in Sources */,
+				4E3B63FD0F3080D900130CDF /* SoundEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

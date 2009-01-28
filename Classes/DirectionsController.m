@@ -13,6 +13,14 @@
 #import <CoreLocation/CLLocationManager.h>
 #import "MapView.h"
 #import "MainViewController.h"
+
+int roundNearest(double dist) {
+	//We dont want 13 but 10, we dont want 345 but 340
+	double dist2=dist/10;
+	int dist3=dist2;
+	return dist3*10;
+}
+
 @implementation Instruction
 @synthesize name;
 @synthesize pos;
@@ -58,6 +66,8 @@
 	if((self=[super init])) {
 		pos=[[PositionObj alloc] init];
 		recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
+		beforeThreshold=100;
+		farThreshold=500;
 	}
 	return self;
 }
@@ -359,11 +369,32 @@
 	}
 	//NSLog(@"Done %d pas for road and %d for instr",counterIterRoad,counterIterInstr);
 	
-	if(next!=nil) {
-		instrIndex=previousInstruction;
-		next.dist=remainingDist;
-		[delegate nextDirectionChanged:next];
-		[map setNextInstruction:next updatePos:NO];
+	if(next!=nil ) {
+		if(inBetweenDistance<0) inBetweenDistance=remainingDist;
+		if(instrIndex!=previousInstruction) {
+			instrIndex=previousInstruction;
+			next.dist=remainingDist;
+			[delegate nextDirectionChanged:next];
+			[map setNextInstruction:next updatePos:NO];
+			playedSoundFarmeters=NO;
+			playedSoundBeforemeters=NO;
+			inBetweenDistance=remainingDist;
+		}
+		if(!playedSoundBeforemeters && remainingDist<=beforeThreshold && instrIndex>0) {
+			playedSoundFarmeters=YES;
+			playedSoundBeforemeters=YES;
+			SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+			[APPDELEGATE.soundcontroller addSound:s];
+			[s release];
+
+		} else if(!playedSoundFarmeters && remainingDist<=farThreshold && inBetweenDistance>farThreshold && instrIndex>0) {
+			playedSoundFarmeters=YES;
+			SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+			[APPDELEGATE.soundcontroller addSound:s];
+			[s release];
+		}
+		
+		[delegate nextDirectionDistanceChanged:remainingDist];
 	}
 	[c_b release];
 	
@@ -511,6 +542,7 @@
 	}
 	
 	nbWrongWay=0;
+	inBetweenDistance=-1;
 	[delegate directionsGot:_from to:_to  error:nil];
 	if([instructions count]>0){
 		[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];

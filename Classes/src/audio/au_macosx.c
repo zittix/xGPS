@@ -83,6 +83,7 @@ static AQPlayerState aqData;
  CST_AUDIO_MULAW
  } cst_audiofmt;
  */
+
 static void DeriveBufferSize (
 							  AudioStreamBasicDescription *ASBDesc,                            // 1
 							  UInt32                      maxPacketSize,                       // 2
