@@ -57,7 +57,6 @@ extern "C" {
 #include "cst_cart.h"
 #include "cst_phoneset.h"
 #include "cst_voice.h"
-#include "cst_audio.h"
 
 #include "cst_utt_utils.h"
 #include "cst_lexicon.h"
@@ -69,17 +68,6 @@ extern "C" {
 int flite_init();
 
 cst_wave *flite_text_to_wave(const char *text,cst_voice *voice);
-float flite_file_to_speech(const char *filename, 
-			   cst_voice *voice,
-			   const char *outtype);
-float flite_text_to_speech(const char *text, 
-			   cst_voice *voice);
-float flite_phones_to_speech(const char *text, 
-			     cst_voice *voice,
-			     const char *outtype);
-float flite_tokens_to_speech(cst_utterance *u,
-			     cst_voice *voice,
-			     const char *outtype);
 
 cst_utterance *flite_synth_text(const char *text,cst_voice *voice);
 cst_utterance *flite_synth_phones(const char *phones,cst_voice *voice);

@@ -123,8 +123,6 @@
 		4EE242FA0F30744C00C41ACA /* us_postlex.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2429F0F30744C00C41ACA /* us_postlex.c */; };
 		4EE242FB0F30744C00C41ACA /* us_text.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242A00F30744C00C41ACA /* us_text.c */; };
 		4EE242FC0F30744C00C41ACA /* usenglish.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242A20F30744C00C41ACA /* usenglish.c */; };
-		4EE242FD0F30744C00C41ACA /* au_macosx.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242A60F30744C00C41ACA /* au_macosx.c */; };
-		4EE242FE0F30744C00C41ACA /* audio.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242A70F30744C00C41ACA /* audio.c */; };
 		4EE242FF0F30744C00C41ACA /* cst_ffeature.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242AA0F30744C00C41ACA /* cst_ffeature.c */; };
 		4EE243000F30744C00C41ACA /* cst_item.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242AB0F30744C00C41ACA /* cst_item.c */; };
 		4EE243010F30744C00C41ACA /* cst_rel_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE242AC0F30744C00C41ACA /* cst_rel_io.c */; };
@@ -366,7 +364,6 @@
 		4EE135690E7E63D800A5E181 /* GoogleBadge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoogleBadge.png; sourceTree = "<group>"; };
 		4EE242500F30744B00C41ACA /* cst_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cst_alloc.h; sourceTree = "<group>"; };
 		4EE242510F30744B00C41ACA /* cst_args.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cst_args.h; sourceTree = "<group>"; };
-		4EE242520F30744B00C41ACA /* cst_audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cst_audio.h; sourceTree = "<group>"; };
 		4EE242530F30744B00C41ACA /* cst_cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cst_cart.h; sourceTree = "<group>"; };
 		4EE242540F30744B00C41ACA /* cst_clunits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cst_clunits.h; sourceTree = "<group>"; };
 		4EE242550F30744B00C41ACA /* cst_diphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cst_diphone.h; sourceTree = "<group>"; };
@@ -444,9 +441,6 @@
 		4EE242A10F30744C00C41ACA /* us_text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = us_text.h; sourceTree = "<group>"; };
 		4EE242A20F30744C00C41ACA /* usenglish.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = usenglish.c; sourceTree = "<group>"; };
 		4EE242A30F30744C00C41ACA /* usenglish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = usenglish.h; sourceTree = "<group>"; };
-		4EE242A60F30744C00C41ACA /* au_macosx.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = au_macosx.c; sourceTree = "<group>"; };
-		4EE242A70F30744C00C41ACA /* audio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = audio.c; sourceTree = "<group>"; };
-		4EE242A80F30744C00C41ACA /* native_audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = native_audio.h; sourceTree = "<group>"; };
 		4EE242AA0F30744C00C41ACA /* cst_ffeature.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cst_ffeature.c; sourceTree = "<group>"; };
 		4EE242AB0F30744C00C41ACA /* cst_item.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cst_item.c; sourceTree = "<group>"; };
 		4EE242AC0F30744C00C41ACA /* cst_rel_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cst_rel_io.c; sourceTree = "<group>"; };
@@ -808,7 +802,6 @@
 			children = (
 				4EE242500F30744B00C41ACA /* cst_alloc.h */,
 				4EE242510F30744B00C41ACA /* cst_args.h */,
-				4EE242520F30744B00C41ACA /* cst_audio.h */,
 				4EE242530F30744B00C41ACA /* cst_cart.h */,
 				4EE242540F30744B00C41ACA /* cst_clunits.h */,
 				4EE242550F30744B00C41ACA /* cst_diphone.h */,
@@ -940,9 +933,6 @@
 		4EE242A50F30744C00C41ACA /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				4EE242A60F30744C00C41ACA /* au_macosx.c */,
-				4EE242A70F30744C00C41ACA /* audio.c */,
-				4EE242A80F30744C00C41ACA /* native_audio.h */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -1254,8 +1244,6 @@
 				4EE242FA0F30744C00C41ACA /* us_postlex.c in Sources */,
 				4EE242FB0F30744C00C41ACA /* us_text.c in Sources */,
 				4EE242FC0F30744C00C41ACA /* usenglish.c in Sources */,
-				4EE242FD0F30744C00C41ACA /* au_macosx.c in Sources */,
-				4EE242FE0F30744C00C41ACA /* audio.c in Sources */,
 				4EE242FF0F30744C00C41ACA /* cst_ffeature.c in Sources */,
 				4EE243000F30744C00C41ACA /* cst_item.c in Sources */,
 				4EE243010F30744C00C41ACA /* cst_rel_io.c in Sources */,
