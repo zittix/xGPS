@@ -506,13 +506,12 @@
 	CGContextSaveGState(context);
 	
 	if(nightMode) {
-			CGContextSetRGBFillColor(context, 1, 1, 1, 1);
+		CGContextSetRGBFillColor(context, 1, 1, 1, 1);
 		CGContextFillRect(context,rect);
-			CGContextSetBlendMode(context,kCGBlendModeExclusion);
+		CGContextSetBlendMode(context,kCGBlendModeExclusion);
 	} else {
 		CGContextSetRGBFillColor(context, 0.53, 0.53, 0.53, 1);
 		CGContextFillRect(context,rect);
-
 	}
 	CGContextTranslateCTM(context,rect.size.width/2.0,rect.size.height/2.0);
 	CGAffineTransform rot=CGAffineTransformMakeRotation(mapRotation);
@@ -538,21 +537,6 @@
 	float centerTilePosX=drawOrigin.x-(xoff);
 	float centerTilePosY=drawOrigin.y-(yoff);
 	
-	//double centerTilePosX2=centerTilePosY*sinr+centerTilePosX*cosr;
-	//double centerTilePosY2=centerTilePosY*cosr-centerTilePosX*sinr;
-	//centerTilePosX=centerTilePosX2;
-	//centerTilePosY=centerTilePosY2;
-	//Try to search the tile x,y which will be put in the top left corner and where exactly.
-	//int nbTileInX=ceil((double)centerTilePosX/dynTileSize);
-	//int nbTileInY=ceil((double)centerTilePosY/dynTileSize);
-	//NSLog(@"nb x y: %d;%d",nbTileInX,nbTileInY);
-	//x=x-nbTileInX;
-	//y=y-nbTileInY;
-	
-	//Try to search the pos of the left top tile
-	//org.x=centerTilePosX-nbTileInX*dynTileSize;
-	//org.y=centerTilePosY-nbTileInY*dynTileSize;
-	
 	//Move the origin
 	org.x=centerTilePosX;
 	org.y=centerTilePosY;
@@ -574,14 +558,7 @@
 	y=y-nbTileInY;
 	org.x=centerTilePosX-nbTileInX*TILE_SIZE;
 	org.y=centerTilePosY-nbTileInY*TILE_SIZE;
-	
-	//double heightDraw=sqrt(winWidth*winWidth+winHeight*winHeight)/2;
-	
-	//double orgAngleY=cos(M_PI/2-mapRotation)*rect.size.width;
-	//double orgAngleX=cos(M_PI/2-mapRotation)*rect.size.height;
-	//double orgAngleX=
-	//org.y-=orgAngleY;
-	//org.x-=orgAngleX;
+
 	CGContextScaleCTM(context, 1, -1);
 	
 	//NSLog(@"Before x y: %d;%d %f %f Offset: %d %d, zoom=%d",x,y,pos.x,pos.y,xoff,yoff,zoom);
@@ -657,6 +634,7 @@
 	if([tilescache count]>64) {
 		[tilescache removeAllObjects];
 	}
+	if(nightMode)
 	CGContextSetBlendMode(context,kCGBlendModeNormal);
 	//NSLog(@"Cache size: %d",[tilescache count]);
 	
@@ -727,48 +705,10 @@
 			ystart=l.tileY;
 			float posXPin=drawOrigin.x+(xstart-centerTileX)*TILE_SIZE-(xoff)+(xoffstart);
 			float posYPin=drawOrigin.y+(ystart-centerTileY)*TILE_SIZE-(yoff)+(yoffstart);
-			
-			//	double posXPin2=cosr*posXPin - posYPin*sinr;
-			//	double posYPin2=sinr*posXPin + posYPin*cosr;
-			
-			//NSLog(@"Test point %f %f",posXPin2,posYPin2);
-			/*
-			 if(posXPin2<-winWidth/2.0 || posXPin2>=winWidth/2 || posYPin2<-winHeight/2 || posYPin2>=winHeight/2) {	
-			 prevx=posXPin;
-			 prevy=posYPin;
-			 if(goodFound) {
-			 if(badFound)
-			 break;
-			 else {
-			 badFound=YES;
-			 }
-			 } else {
-			 continue;
-			 }
-			 
-			 } else {
-			 goodFound=YES;
-			 }*/
-			
-			//NSLog(@"Drawing point %f %f",posXPin,posYPin);
-			//	if(alwaysIN || (posXStart>=-dynTileSize && posXStart<rect.size.width+dynTileSize && posYStart>=-dynTileSize && posYStart<rect.size.height+dynTileSize)) {
-			//Draw the line
-			
-			/*if(!addedPrev) {
-			 if(i>0) {
-			 points[j]=CGPointMake(prevx,prevy);
-			 j++;
-			 }
-			 addedPrev=YES;
-			 }*/
 		
 				points[j]=CGPointMake(posXPin,posYPin);
 				j++;
-			
-			//	alwaysIN=YES;
-			//} else {
-			//	alwaysIN=NO;
-			//}
+
 		}
 		if(j>1) {
 			//	NSLog(@"Nb points to draw %d",j);

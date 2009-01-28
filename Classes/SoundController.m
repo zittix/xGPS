@@ -169,7 +169,7 @@ static void HandleOutputBuffer (
 	
     AudioFileOpenURL (                                  // 2
 					  audioFileURL,                                   // 3
-					  fsRdPerm,                                       // 4
+					  kAudioFileReadPermission,                                       // 4
 					  0,                                              // 5
 					  &aqData.mAudioFile                              // 6
 					  );
