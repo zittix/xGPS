@@ -193,11 +193,11 @@ err:
 		const char* nameC=(const char*)sqlite3_column_text(getInstrStmt,2);
 		const char* descrC=(const char*)sqlite3_column_text(getInstrStmt,3);
 		if(nameC!=NULL) {
-		NSString *name=[[NSString alloc] initWithCString:nameC];
+			NSString *name=[[NSString alloc] initWithCString:nameC encoding:NSUTF8StringEncoding];
 			
 		NSString *descr=nil;
 			if(descrC!=NULL)
-				descr=[[NSString alloc] initWithCString:descrC];
+				descr=[[NSString alloc] initWithCString:descrC encoding:NSUTF8StringEncoding];
 			else
 				descr=@"";
 			
@@ -225,8 +225,8 @@ err:
 	while (r == SQLITE_ROW) {
 		long id=sqlite3_column_int64(getBookmarkStmt, 0);
 		int date=sqlite3_column_int(getBookmarkStmt, 3);
-		NSString *from=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getBookmarkStmt,1)];
-		NSString *to=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getBookmarkStmt,2)];
+		NSString *from=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getBookmarkStmt,1) encoding:NSUTF8StringEncoding];
+		NSString *to=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getBookmarkStmt,2) encoding:NSUTF8StringEncoding];
 		NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithLong:id],@"id",[NSNumber numberWithInt:date],@"date",from,@"from",to,@"to",nil];
 		[ret addObject:dict];
 		[to release];

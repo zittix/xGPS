@@ -446,7 +446,11 @@ int roundNearest(double dist) {
 		parsingLinestring=YES;
 	}
 }
-
+-(void)htmlToChar:(NSMutableString*)s {
+	for(int i=32;i<=127;i++) {
+		[s replaceOccurrencesOfString:[NSString stringWithFormat:@"&#%d;",i] withString:[NSString stringWithFormat:@"%c",(char)i] options:NSCaseInsensitiveSearch range:NSMakeRange(0, [s length])];
+	}
+}
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	if([elementName isEqualToString:@"Placemark"]) {
 		if( parsingPlace && currentPlacename!=nil && currentPos!=nil && !parsingLinestring) {
@@ -460,11 +464,17 @@ int roundNearest(double dist) {
 				if(currentDescr!=nil) {
 					NSMutableString *tmp=(NSMutableString*)currentDescr;
 					[tmp replaceOccurrencesOfString:@"<br/>" withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
+					[self htmlToChar:tmp];
 				}
 				if(currentPlacename!=nil) {
 					NSMutableString *tmp=(NSMutableString*)currentPlacename;
 					[tmp replaceOccurrencesOfString:@"  " withString:@"\n" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [tmp length])];
+					[self htmlToChar:tmp];
 				}
+				
+				//Filter out html encoded characters
+				
+				
 				Instruction *r=[Instruction instrWithName:currentPlacename pos:p descr:currentDescr];
 				
 				[instructions addObject:r];
