@@ -25,7 +25,7 @@
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 	progress=[[ProgressView alloc] initWithFrame:CGRectMake(0, 0, viewRect.size.width, viewRect.size.height)];
-	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height-44.0f) withDB:db];
+	mapview=[[MapView alloc] initWithFrame: CGRectMake(0, 0, viewRect.size.width, viewRect.size.height) withDB:db];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[mapview setGPSTracking:YES];
 	self.title=NSLocalizedString(@"Maps Manager",@"Maps manager title");
@@ -47,20 +47,7 @@
 	[addButton release];
 	[zoomview setZoominState:YES];
 	[zoomview setZoomoutState:YES];
-	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0,viewRect.size.width,44.0f)];
-	toolbar.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-	[self.view addSubview:toolbar];
-	NSArray *arr=[NSArray arrayWithObjects:NSLocalizedString(@"Map",@"Map"),NSLocalizedString(@"Satellite",@"Satellite"),NSLocalizedString(@"Hybrid",@"Map Hybrid"),nil];
-	maptype=[[UISegmentedControl alloc] initWithItems:arr];
-	maptype.segmentedControlStyle=UISegmentedControlStyleBar;
-	UIBarButtonItem *barmaptype=[[UIBarButtonItem alloc] initWithCustomView:maptype];
-	UIBarButtonItem *space=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-	//UIBarButtonItem *space2=[[UIBarButtonItem alloc] initWithCustomView:maptype];
-	[toolbar setItems:[NSArray arrayWithObjects:space,barmaptype,space,nil]];
-	[maptype setEnabled:NO forSegmentAtIndex:1];
-	[maptype setEnabled:NO forSegmentAtIndex:2];
-	maptype.selectedSegmentIndex=0;
-	
+
 }
 -(void)dealloc {
 	[super dealloc];

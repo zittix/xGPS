@@ -87,7 +87,7 @@
 	}
 	//[theConnection unscheduleFromRunLoop:[NSRunLoop mainRunLoop] forMode:[[NSRunLoop mainRunLoop] currentMode]];
 	[theConnection cancel];
-	[theConnection release];
+	//[theConnection release];
 	
 	if(error) {
 		if(receivedData!=nil) {

@@ -26,6 +26,7 @@ int roundNearest(double dist) {
 @synthesize pos;
 @synthesize descr;
 @synthesize dist;
+
 +(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr {
 	Instruction*r=[[Instruction alloc] init];
 	r.pos=pos;
@@ -47,6 +48,7 @@ int roundNearest(double dist) {
 @synthesize delegate;
 @synthesize roadPoints;
 @synthesize instructions;
+@synthesize currentBookId;
 #define DEG_TO_RAD (M_PI/180.0f)
 /// @brief Earth's quatratic mean radius for WGS-84
 #define EARTH_RADIUS_IN_METERS 6372797.560856
@@ -62,12 +64,18 @@ int roundNearest(double dist) {
 	return [result autorelease];
 	//return url;
 }
+-(void)recomputeChanged:(NSNotification *)notif {
+	recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
+	enableVoice=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+}
 -(id)init {
 	if((self=[super init])) {
 		pos=[[PositionObj alloc] init];
-		recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
+		[self recomputeChanged:nil];
 		beforeThreshold=100;
 		farThreshold=500;
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recomputeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
+		currentBookId=-1;
 	}
 	return self;
 }
@@ -310,6 +318,7 @@ int roundNearest(double dist) {
 					NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 					NSString *to=[_to retain];
 					[delegate clearDirections];
+					recomputing=YES;
 					[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
 					[self drive:from to:to];
 					[from release];
@@ -380,27 +389,38 @@ int roundNearest(double dist) {
 			playedSoundBeforemeters=NO;
 			inBetweenDistance=remainingDist;
 		}
-		if(!playedSoundBeforemeters && remainingDist<=beforeThreshold && instrIndex>0) {
-			playedSoundFarmeters=YES;
-			playedSoundBeforemeters=YES;
-			SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
-			[APPDELEGATE.soundcontroller addSound:s];
-			[s release];
-
-		} else if(!playedSoundFarmeters && remainingDist<=farThreshold && inBetweenDistance>farThreshold && instrIndex>0) {
-			playedSoundFarmeters=YES;
-			SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
-			[APPDELEGATE.soundcontroller addSound:s];
-			[s release];
+		if(enableVoice) {
+			if(!playedSoundBeforemeters && remainingDist<=beforeThreshold && instrIndex>0) {
+				playedSoundFarmeters=YES;
+				playedSoundBeforemeters=YES;
+				SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+				[APPDELEGATE.soundcontroller addSound:s];
+				[s release];
+				
+			} else if(!playedSoundFarmeters && remainingDist<=farThreshold && inBetweenDistance>farThreshold && instrIndex>0) {
+				playedSoundFarmeters=YES;
+				SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+				[APPDELEGATE.soundcontroller addSound:s];
+				[s release];
+			}
 		}
-		
 		[delegate nextDirectionDistanceChanged:remainingDist];
 	}
 	[c_b release];
 	
 }
 -(void)recompute {
-	[self drive:_from to:_to];
+	float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
+	float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
+	
+	NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
+	NSString *to=[_to retain];
+	[delegate clearDirections];
+	recomputing=YES;
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+	[self drive:from to:to];
+	[from release];
+	[to release];
 }
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;
@@ -555,11 +575,18 @@ int roundNearest(double dist) {
 	inBetweenDistance=-1;
 	[delegate directionsGot:_from to:_to  error:nil];
 	if([instructions count]>0){
-		[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];
+		
+		if(!recomputing && [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch])
+		currentBookId=[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];
+		
+		
 		Instruction *s=[instructions objectAtIndex:instrIndex];
 		[delegate nextDirectionChanged:s];
 		[map setNextInstruction:s updatePos:YES];
 	}
+	
+	recomputing=NO;
+	
 	//if(req==nil) return;
 	
 	//instructions=nil;
@@ -582,8 +609,7 @@ int roundNearest(double dist) {
 	parsingPlace=NO;
 	computing=NO;
 	parsingLinestring=NO;
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recomputeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
-	
+		
 }
 -(void)setRoad:(NSMutableArray*)road instructions:(NSMutableArray*)instr {
 	[instructions release];
@@ -600,9 +626,7 @@ int roundNearest(double dist) {
 		[delegate nextDirectionChanged:s];
 	}
 }
--(void)recomputeChanged:(NSNotification *)notif {
-	recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
-}
+
 
 -(void)clearResult {
 	[instructions release];
@@ -613,6 +637,7 @@ int roundNearest(double dist) {
 	[_to release];
 	_from=nil;
 	_to=nil;
+	currentBookId=-1;
 	startAddr=nil;
 	stopAddr=nil;
 	[map setNextInstruction:nil updatePos:NO];
@@ -632,7 +657,7 @@ int roundNearest(double dist) {
 	
 	[currentDescr release];
 	currentDescr=nil;
-	
+	recomputing=NO;
 	[currentProp release];
 	
 	currentPos=nil;
@@ -722,6 +747,7 @@ int roundNearest(double dist) {
 		}
 	} else {
 		computing=NO;
+		recomputing=NO;
 		[delegate directionsGot:_from to:_to  error:nil];
 	}
     // release the connection, and the data object

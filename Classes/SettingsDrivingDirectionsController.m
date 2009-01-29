@@ -67,7 +67,7 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 
@@ -77,6 +77,7 @@
 		case 0:
 		case 1:
 		case 2:
+		case 3:
 			return 1;
 	}
 	return 0;
@@ -90,12 +91,20 @@
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsRecomputeDriving];
 	
 }
+-(void)switchVoiceInstr:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsEnableVoiceInstr];
+	
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case 0:
+			return NSLocalizedString(@"Voice instructions work only when the language in General settings is set to English.",@"");
+			break;
+		case 1:
 			return NSLocalizedString(@"When activated, all the searched driving directions are saved in the bookmarks.",@"");
 			break;
-		case 2:
+		case 3:
 			return NSLocalizedString(@"When activated, the driving directions are recomputed when you are driving on the wrong way.",@"");
 			break;
 		default:
@@ -108,14 +117,28 @@
     
     NSString *CellIdentifier;
 	switch(indexPath.section) {
-		case 0: CellIdentifier=@"savebookmarks"; break;
-		case 1: CellIdentifier=@"delbookmarks"; break;
-		case 2: CellIdentifier=@"recomputedriving"; break;
+		case 0: CellIdentifier=@"voicedir"; break;
+		case 1: CellIdentifier=@"savebookmarks"; break;
+		case 2: CellIdentifier=@"delbookmarks"; break;
+		case 3: CellIdentifier=@"recomputedriving"; break;
 	}
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		switch(indexPath.section) {
 			case 0: {
+				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+				cell.selectionStyle =UITableViewCellSelectionStyleNone;
+				cell.text=NSLocalizedString(@"Voice Instructions",@"");
+				UISwitch *value;
+				
+				value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
+				value.tag = 1;
+				[value addTarget:self action:@selector(switchVoiceInstr:) forControlEvents:UIControlEventValueChanged];
+				value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+				[cell.contentView addSubview:value];
+				value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+			} break;
+			case 1: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.selectionStyle =UITableViewCellSelectionStyleNone;
 				cell.text=NSLocalizedString(@"Save in Bookmarks",@"");
@@ -128,13 +151,13 @@
 				[cell.contentView addSubview:value];
 				value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch];
 			} break;
-			case 1: {
+			case 2: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.text=NSLocalizedString(@"Delete all bookmarks",@"");
 				cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 				cell.selectionStyle=UITableViewCellSelectionStyleBlue;
 			} break;
-			case 2: {
+			case 3: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.selectionStyle =UITableViewCellSelectionStyleNone;
 				cell.text=NSLocalizedString(@"Recompute itinerary",@"");
@@ -152,9 +175,12 @@
 	else {
 		switch(indexPath.section) {
 			case 0: {
+				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+			}break;				
+			case 1: {
 				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch];
 			}break;
-			case 2: {
+			case 3: {
 				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
 			}break;
 		}

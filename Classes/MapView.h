@@ -47,6 +47,7 @@
 	CGPoint pDepForMapSelection;
 	CGPoint pEndForMapSelection;
 	BOOL nightMode;
+	int maxZoom;
 }
 @property(retain,nonatomic) PositionObj *pos;
 @property(nonatomic) CGPoint pDepForMapSelection;
@@ -54,8 +55,10 @@
 @property(nonatomic) BOOL mapRotationEnabled;
 @property(nonatomic,assign) ZoomView *assocZoomview;
 @property(nonatomic) BOOL nightMode;
+@property(nonatomic) int maxZoom;
 //@property(nonatomic) int debugRoadStep;
 -(void)refreshMap;
+-(void)fulllRefreshMap;
 -(int)zoom;
 -(void)computeCachedRoad;
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db;

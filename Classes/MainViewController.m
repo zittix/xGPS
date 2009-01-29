@@ -126,6 +126,15 @@
 	[tmrNightMode retain];
 	[self speedChanged:nil];
 	[self viewWillAppear:YES];
+	
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]>=0) {
+		NSMutableArray *road=[APPDELEGATE.dirbookmarks copyBookmarkRoadPoints:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
+		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
+		[APPDELEGATE.directions setRoad:road instructions:instr];
+		[road release];
+		[instr release];
+	}
+	
 }
 -(void)showGPSDetails {
 	if(gpsdetails==nil) {
@@ -187,6 +196,18 @@
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled]) {
 		[self hideWrongWay];
 	}
+	
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]==0)
+		mapview.maxZoom=17;
+	else
+		mapview.maxZoom=15;
+	
+	if(APPDELEGATE.tiledb.type!=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]) {
+		APPDELEGATE.tiledb.type=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType];
+		[mapview fulllRefreshMap];
+	}
+	
+	
 }
 -(void)hideWrongWay {
 	if(wrongWay.superview==nil) return;
@@ -473,11 +494,11 @@
 	[wrongWay removeFromSuperview];
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
-	if(instr.dist<500)
-		[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f m",instr.name,instr.dist]];
-	else
-		[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f km",instr.name,instr.dist/1000.0]];
-	
+	//if(instr.dist<500)
+	//	[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f m",instr.name,instr.dist]];
+	//else
+	//	[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f km",instr.name,instr.dist/1000.0]];
+	[navView setText:instr.name];
 	[UIView beginAnimations:nil context:nil];	
 	[navView sizeToFit];
 	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
@@ -485,7 +506,7 @@
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 	signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
 	[UIView commitAnimations];
-
+	
 }
 -(void)nextDirectionDistanceChanged:(double)dist {
 	

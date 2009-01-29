@@ -42,7 +42,12 @@ static SoundController * soundcontroller;
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsRecomputeDriving];
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsWrongWayHidden];
 	}
-	
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<4) {
+		[[NSUserDefaults standardUserDefaults] setInteger:4 forKey:kSettingsVersion];
+		[[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:kSettingsLastUsedBookmark];
+		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsMapType];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsEnableVoiceInstr];
+	}
 	
 	staticObj=self;
 	txcontroller=[[TransferController alloc] init];
@@ -65,10 +70,12 @@ static SoundController * soundcontroller;
 	[window makeKeyAndVisible];
 	
 	self.idleTimerDisabled=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode];
+		
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[[gpsmanager GetCurrentGPS] stop];
-	
+	//Save current itinaeray
+	[[NSUserDefaults standardUserDefaults] setInteger:directions.currentBookId forKey:kSettingsLastUsedBookmark];	
 	[gpxlogger stopLogging];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }

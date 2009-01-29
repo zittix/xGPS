@@ -27,8 +27,6 @@
 	BOOL downloading;
 	ZoomView *zoomview;
 	CGRect viewRect;
-	UIToolbar *toolbar;
-	UISegmentedControl* maptype;
 }
 -(void)clearSelection;
 -(void)updateCurrentPos:(PositionObj*)pos;

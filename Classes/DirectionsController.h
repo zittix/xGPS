@@ -56,12 +56,16 @@
 	BOOL recomputeRoute;
 	BOOL playedSoundFarmeters;
 	BOOL playedSoundBeforemeters;
+	BOOL enableVoice;
 	double inBetweenDistance;
 	int farThreshold;
 	int beforeThreshold;
+	BOOL recomputing;
+	int currentBookId;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;
+@property (nonatomic) int currentBookId;
 @property (nonatomic,readonly) NSMutableArray* instructions;
 @property (nonatomic,assign) MapView* map;
 @property (nonatomic,setter=updatePos:,assign) PositionObj* pos;

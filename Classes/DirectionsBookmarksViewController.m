@@ -179,6 +179,7 @@ if(row<0 || row>=[bookmarks count]) {
 		NSMutableArray *road=[APPDELEGATE.dirbookmarks copyBookmarkRoadPoints:id];
 		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:id];
 		[APPDELEGATE.directions setRoad:road instructions:instr];
+		APPDELEGATE.directions.currentBookId=id;
 		[road release];
 		[instr release];
 		[self.navigationController dismissModalViewControllerAnimated:YES];

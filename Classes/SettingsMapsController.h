@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MapsManagerView.h"
-#import "NetworkReceiverViewController.h"
+#import "MapTypeViewController.h";
+
 @interface SettingsMapsController : UITableViewController<UIActionSheetDelegate> {
 	MapsManagerView* mapsmanager;
-	NetworkReceiverViewController *receiverView;
+	MapTypeViewController* maptype;
 }
 
 @end

@@ -71,16 +71,7 @@
 	if(buttonIndex==1) {
 		[self stopAnimate];
 		[self removeFromSuperview];
-		NSString *to=[APPDELEGATE.directions.to retain];
-		float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
-		float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
-		
-		NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
-		[delegate clearDirections];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-		[APPDELEGATE.directions drive:from to:to];
-		[from release];
-		[to release];
+		[APPDELEGATE.directions recompute];
 	}
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -22,6 +22,7 @@
 @synthesize nightMode;
 @synthesize pEndForMapSelection;
 @synthesize pDepForMapSelection;
+@synthesize maxZoom;
 -(void)setHasGPSPos:(BOOL)val {
 	hasGPSfix=val;
 }
@@ -121,21 +122,21 @@
 		//No map texture
 		NSString* imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"notile.png"];
 		NSData *noTileImg = [NSData dataWithContentsOfFile:imageFileName];
-		tileNoMap=[[MapTile alloc] initWithData: noTileImg];
+		tileNoMap=[[MapTile alloc] initWithData: noTileImg type:0];
 		
 		imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gps_ball.png"];
 		NSData *data = [NSData dataWithContentsOfFile:imageFileName];
 		
-		imgPinRef=[[MapTile alloc] initWithData: data];
+		imgPinRef=[[MapTile alloc] initWithData: data type:0];
 		imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"GoogleBadge.png"];
 		data = [NSData dataWithContentsOfFile:imageFileName];
 		
-		imgGoogleLogo=[[MapTile alloc] initWithData: data];
+		imgGoogleLogo=[[MapTile alloc] initWithData: data type:0];
 		mapRotationEnabled=NO;
 		imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pin_pos.png"];
 		data = [NSData dataWithContentsOfFile:imageFileName];
 		
-		imgPinSearch=[[MapTile alloc] initWithData: data];
+		imgPinSearch=[[MapTile alloc] initWithData: data type:0];
 		posSearch=[[PositionObj alloc] init];
 		lastPos=[[PositionObj alloc] init];
 		mapRotation=0;
@@ -486,6 +487,12 @@
 		//NSLog(@"Point: %f %f is %d %d %d %d. ID=%d",p.x,p.y,p.tileX,p.tileY,p.xoff,p.yoff,i);
 	}
 	[self refreshMap];
+}
+-(void)fulllRefreshMap {
+	[tilescache removeAllObjects];
+	[self refreshMap];
+	[assocZoomview setZoomoutState:zoom!=16];
+	[assocZoomview setZoominState:zoom!=0];
 }
 #if 1
 - (void)drawRect:(CGRect)rect{
@@ -933,24 +940,25 @@
 	//dirC=d;
 }
 -(void)zoomin:(id)sender {
-	if(zoom>0) zoom--;
+	if(zoom>17-maxZoom) zoom--;
 	
 	//[UIView beginAnimations:nil context:nil];
 	//self.transform=CGAffineTransformMakeScale(0.5,0.5);
 	//[UIView commitAnimations];
 	
 	[self refreshMap];
-	
-	[sender setZoominState:zoom!=0];
-	[sender setZoomoutState:zoom!=16];
+	[sender setZoomoutState:zoom!=17];
+	[sender setZoominState:zoom!=17-maxZoom];
+
 	[self computeCachedRoad];
 }
 -(void)zoomout:(id)sender {
-	if(zoom<16) zoom++;
+	if(zoom<17) zoom++;
 	[self refreshMap];
-	
-	[sender setZoomoutState:zoom!=16];
-	[sender setZoominState:zoom!=0];
+	//[sender setZoominState:zoom!=17];
+	//[sender setZoomoutState:zoom!=17-maxZoom];
+	[sender setZoomoutState:zoom!=17];
+	[sender setZoominState:zoom!=17-maxZoom];
 	[self computeCachedRoad];
 }
 -(void)addDrawPoint:(PositionObj*)p {

@@ -154,7 +154,21 @@ static void HandleOutputBuffer (
 }
 -(id)init {
 	if((self=[super init])) {
-	flite_init();	
+		flite_init();	
+		AudioSessionInitialize (
+								NULL,                            // 1
+								NULL,                            // 2
+								NULL,    // 3
+								NULL                         // 4
+		);
+		 
+		UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;    // 1
+		
+		AudioSessionSetProperty (
+								 kAudioSessionProperty_AudioCategory,                        // 2
+								 sizeof (sessionCategory),                                   // 3
+								 &sessionCategory                                            // 4
+		);
 	}
 	return self;
 }
@@ -162,7 +176,7 @@ static void HandleOutputBuffer (
 	CFURLRef audioFileURL =
     CFURLCreateFromFileSystemRepresentation (           // 1
 											 NULL,                                           // 2
-											(const UInt8 *) f.UTF8String,                       // 3
+											 (const UInt8 *) f.UTF8String,                       // 3
 											 f.length ,                              // 4
 											 false                                           // 5
 											 );
@@ -182,7 +196,7 @@ static void HandleOutputBuffer (
 						  kAudioFilePropertyDataFormat,                       // 4
 						  &dataFormatSize,                                    // 5
 						  &aqData.mDataFormat                                 // 6
-	);
+						  );
 	AudioQueueNewOutput (                                // 1
 						 &aqData.mDataFormat,                             // 2
 						 HandleOutputBuffer,                              // 3
@@ -191,7 +205,7 @@ static void HandleOutputBuffer (
 						 kCFRunLoopCommonModes,                           // 6
 						 0,                                               // 7
 						 &aqData.mQueue                                   // 8
-	);
+						 );
 	UInt32 maxPacketSize;
 	UInt32 propertySize = sizeof (maxPacketSize);
 	AudioFileGetProperty (                               // 1
@@ -199,7 +213,7 @@ static void HandleOutputBuffer (
 						  kAudioFilePropertyPacketSizeUpperBound,          // 3
 						  &propertySize,                                   // 4
 						  &maxPacketSize                                   // 5
-	);
+						  );
 	
 	DeriveBufferSize (                                   // 6
 					  &aqData.mDataFormat,                              // 7
@@ -207,7 +221,7 @@ static void HandleOutputBuffer (
 					  0.5,                                             // 9
 					  &aqData.bufferByteSize,                          // 10
 					  &aqData.mNumPacketsToRead                        // 11
-	);
+					  );
 	aqData.mCurrentPacket = 0;                                // 1
 	aqData.mIsRunning = true;                          // 1
 	for (int i = 0; i < kNumberBuffers; ++i) {                // 2
@@ -229,7 +243,7 @@ static void HandleOutputBuffer (
 							aqData.mQueue,                                        // 3
 							kAudioQueueParam_Volume,                              // 4
 							gain                                                  // 5
-	);
+							);
 	aqData.mIsRunning = true;                          // 1
 	checkSoundCounter=0;
 	tmrSoundCheck=[NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(checkSound) userInfo:nil repeats:YES];
@@ -237,33 +251,33 @@ static void HandleOutputBuffer (
 	AudioQueueStart (                                  // 2
 					 aqData.mQueue,                                 // 3
 					 NULL                                           // 4
-	);
+					 );
 }
 -(void)checkSound {
 	if(aqData.mIsRunning == false) {
 		if(checkSoundCounter==3) {
-		//Done, continue to process the queue
-		
-		//Remove toPlay
-		SoundEvent *next=chain.next;
-		[next retain];
-		[chain release];
-		chain=next;
-		[tmrSoundCheck invalidate];
-		[tmrSoundCheck release];
-		tmrSoundCheck=nil;
+			//Done, continue to process the queue
 			
-		AudioQueueDispose(aqData.mQueue,false);
-		if(aqData.w!=NULL) {
-			delete_wave(aqData.w);
-			aqData.w=NULL;
+			//Remove toPlay
+			SoundEvent *next=chain.next;
+			[next retain];
+			[chain release];
+			chain=next;
+			[tmrSoundCheck invalidate];
+			[tmrSoundCheck release];
+			tmrSoundCheck=nil;
 			
-		} else if(aqData.mAudioFile!=NULL) {
-			AudioFileClose(aqData.mAudioFile);
-		}
-		running=NO;
-		checkSoundCounter=0;
-		[self treatQueue];
+			AudioQueueDispose(aqData.mQueue,false);
+			if(aqData.w!=NULL) {
+				delete_wave(aqData.w);
+				aqData.w=NULL;
+				
+			} else if(aqData.mAudioFile!=NULL) {
+				AudioFileClose(aqData.mAudioFile);
+			}
+			running=NO;
+			checkSoundCounter=0;
+			[self treatQueue];
 		} else {
 			checkSoundCounter++;
 		}
@@ -281,7 +295,7 @@ static void HandleOutputBuffer (
 	
     v = REGISTER_VOX(NULL);
     feat_copy_into(extra_feats,v->features);
-
+	
 	cst_wave *w=flite_text_to_wave(text.UTF8String,v);
 	
     delete_features(extra_feats);
@@ -296,9 +310,9 @@ static void HandleOutputBuffer (
 	aqData.mDataFormat.mChannelsPerFrame = w->num_channels;
 	aqData.mDataFormat.mFormatFlags=kLinearPCMFormatFlagIsSignedInteger ;
 	aqData.mDataFormat.mFormatID=kAudioFormatLinearPCM;
-
+	
 	aqData.mDataFormat.mBitsPerChannel = 16;
-		
+	
 	aqData.w=w;
 	aqData.mDataFormat.mBytesPerPacket = w->num_channels*(aqData.mDataFormat.mBitsPerChannel/8);
 	aqData.mDataFormat.mBytesPerFrame = aqData.mDataFormat.mBytesPerPacket;
@@ -367,9 +381,10 @@ static void HandleOutputBuffer (
 	if(toPlay==nil) {
 		running=NO;
 		NSLog(@"SoundController: No more sound to play. Exiting");
+		AudioSessionSetActive (false);
 		return;
 	}
-	
+	AudioSessionSetActive (true);
 	if(toPlay.text!=nil) {
 		[self playText:toPlay.text];
 		

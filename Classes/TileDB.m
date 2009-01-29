@@ -13,7 +13,7 @@
 #import "Position.h"
 #import "SyncDownloader.h"
 @implementation TileDB
-
+@synthesize type;
 -(void)loadDB {
 	//[dbLock lock];
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
@@ -360,7 +360,7 @@
 		const void *data=sqlite3_column_blob(getTileStmt, 0);
 		int length=sqlite3_column_bytes(getTileStmt, 0);
 		//NSLog(@"Tile of %d bytes",length);
-		t=[[MapTile alloc] initWithData: [NSData dataWithBytes:data length:length]];
+		t=[[MapTile alloc] initWithData: [NSData dataWithBytes:data length:length] type:type];
 		sqlite3_reset(getTileStmt);
 		sqlite3_clear_bindings(getTileStmt);
 		[dbLock unlock];
@@ -412,16 +412,31 @@
 	if(lang==nil) lang=@"en";
 	
 	NSString *mapType=@"w2.89"; //Normal
+	NSString *url;
 	switch(type){
-		case 0: mapType=@"w2.89"; break;
-		case 1: mapType=@"w2t.89"; break; //Hybrid
-		case 2: mapType=@"w2p.89"; break; //Satellite
+		case 0: 
+			mapType=@"w2.89"; 
+			url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+			break; //maps
+		case 2: 
+			url=[[NSString alloc] initWithFormat:@"http://khm%d.google.com/kh?v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
+			break; //sat
+		case 3: 
+			//Overlay:
+			//mapType=@"w2t.88"; 
+			//url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+			url=[[NSString alloc] initWithFormat:@"http://khm%d.google.com/kh?v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
+			break; //hybride
+		case 1:
+			mapType=@"w2p.89"; 
+			url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+			break; 	//terrain
 	}
 
-	NSString *url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+	
 
 
-	//NSLog(@"Getting tile at %@",url);
+	NSLog(@"Getting tile at %@",url);
 	NSURL *imageURL = [[NSURL alloc] initWithString:url];
 	[url release];
 	NSMutableURLRequest *urlReq=[[NSMutableURLRequest alloc] initWithURL:imageURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30 ];
@@ -453,7 +468,7 @@
 	
 	
 	if(imageData==nil || !res) {
-		//NSLog(@"Download error");
+		NSLog(@"Download error");
 		[dl release];
 		[pool release];
 		

@@ -82,7 +82,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 3;
+	return 4;
 }
 
 -(void)switchSleepMode:(UISwitch*)sender {
@@ -103,7 +103,6 @@
 			case 1:	CellIdentifier=@"sectMaps_size"; break;
 			case 2:	CellIdentifier=@"sectMaps_delete"; break;
 			case 3:	CellIdentifier=@"sectMaps_type"; break;
-			case 4:	CellIdentifier=@"sectMaps_receive"; break;
 		}
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -139,18 +138,20 @@
 						TitleValueCell* cell2 = [[[TitleValueCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 						cell=cell2;
 						cell2.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-						cell2.accessoryAction=@selector(showMapsTypeSelector:);
-						cell2.value=@"Google Maps";
+						switch(APPDELEGATE.tiledb.type) {
+							case 0:
+								cell2.value=NSLocalizedString(@"Google Maps",@"Map"); break;
+							case 2:
+								cell2.value=NSLocalizedString(@"GMaps Satellite",@"Satellite"); break;
+							case 3:
+								cell2.value=NSLocalizedString(@"GMaps Hybrid",@"Map Hybrid"); break;
+							case 1:
+								cell2.value=NSLocalizedString(@"GMaps Terrain",@"Map Terrain"); break;
+						}
 						cell2.title=NSLocalizedString(@"Maps type",@"");
 						
 					}
 						break;
-					case 4: {
-						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-						cell.selectionStyle =UITableViewCellSelectionStyleNone;
-						cell.text=NSLocalizedString(@"Receive maps",@"Receive maps");
-						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-					}break;
 				}
 			}
 		}
@@ -167,7 +168,17 @@
 				break;
 			case 3:	
 			{
-				//TODO: load settings
+				switch(APPDELEGATE.tiledb.type) {
+					case 0:
+						((TitleValueCell*)cell).value=NSLocalizedString(@"Google Maps",@"Map"); break;
+					case 2:
+						((TitleValueCell*)cell).value=NSLocalizedString(@"GMaps Satellite",@"Satellite"); break;
+					case 3:
+						((TitleValueCell*)cell).value=NSLocalizedString(@"GMaps Hybrid",@"Map Hybrid"); break;
+					case 1:
+						((TitleValueCell*)cell).value=NSLocalizedString(@"GMaps Terrain",@"Map Terrain"); break;
+
+				}
 			}
 			break;
 		}
@@ -205,15 +216,13 @@
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		[self showMapsManager:self];
 	} else if(indexPath.section==0 && indexPath.row==3) {
-		//TODO
+		if(maptype==nil)
+			maptype=[[MapTypeViewController alloc] init];
+		[self.navigationController pushViewController:maptype animated:YES];
 	}else if(indexPath.section==0 && indexPath.row==2) {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the downloaded maps ?",@"Delete downloaded maps question") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"Yes",@"Yes") otherButtonTitles:NSLocalizedString(@"No",@"No"),nil];
 		[act showInView:self.view];
-	}else if(indexPath.section==0 && indexPath.row==4) {
-		if(receiverView==nil)
-			receiverView=[[NetworkReceiverViewController alloc] init];
-		[self.navigationController pushViewController:receiverView animated:YES];
 	}
 }
 
@@ -223,6 +232,7 @@
 
 
 - (void)dealloc {
+	[maptype release];
     [super dealloc];
 }
 

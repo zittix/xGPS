@@ -111,10 +111,6 @@
 	return 0;
 }
 
--(void)switchDirSearch:(UISwitch*)sender {
-	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSaveDirSearch];
-	
-}
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 		switch (section) {
 			case 0:

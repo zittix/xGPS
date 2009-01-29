@@ -44,4 +44,5 @@
 -(void)loadDB;
 -(void)showDLError;
 -(int)downloadTiles:(int)fX fromY:(int)fY toX:(int)toX toY:(int)toY withZoom:(int)zoom  withDelegate:(ProgressView*)progress;
+@property(nonatomic) int type;
 @end

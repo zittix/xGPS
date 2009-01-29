@@ -241,7 +241,7 @@ err:
 	
 	return ret;
 }
--(BOOL)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from to:(NSString*)to {
+-(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from to:(NSString*)to {
 	//First insert the bookmark
 	int date=[[NSDate date] timeIntervalSince1970];
 	if(sqlite3_bind_text(insertBookmarkStmt,1,[from UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
@@ -257,7 +257,7 @@ err:
 
 	if(r!=SQLITE_DONE) {
 		NSLog(@"Unable to insert bookmark: %s. Err. code=%d",sqlite3_errmsg(database),r);
-		return NO;
+		return -1;
 	}
 
 	//Get bookmark id
@@ -278,7 +278,7 @@ err:
 		
 		if(r!=SQLITE_DONE) {
 			NSLog(@"Unable to insert roadpoints: %s. Err. code=%d",sqlite3_errmsg(database),r);
-			return NO;
+			return -1;
 		}
 		
 	}
@@ -302,13 +302,12 @@ err:
 		
 		if(r!=SQLITE_DONE) {
 			NSLog(@"Unable to insert instruction: %s. Err. code=%d",sqlite3_errmsg(database),r);
-			return NO;
+			return -1;
 		}
 		
 	}
-	
-	//NSLog(@"Tile downloaded and saved !");
-	return YES;
+
+	return id;
 
 err:
 	sqlite3_reset(insertRoadPointStmt);
@@ -317,6 +316,6 @@ err:
 	sqlite3_clear_bindings(insertInstrStmt);
 	sqlite3_reset(insertBookmarkStmt);
 	sqlite3_clear_bindings(insertBookmarkStmt);
-	return NO;
+	return -1;
 }
 @end

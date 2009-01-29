@@ -25,7 +25,7 @@
 	BOOL closed;
 }
 -(id)init;
--(BOOL)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from to:(NSString*)to;
+-(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from to:(NSString*)to;
 -(NSArray*)copyBookmarks;
 -(void)deleteBookmark:(long)_id;
 -(void)deleteAllBookmarks;

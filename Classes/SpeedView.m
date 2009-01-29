@@ -14,7 +14,7 @@
 		miles=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
 		NSString* imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"speed.png"];
 		NSData *noTileImg = [NSData dataWithContentsOfFile:imageFileName];
-		speedbgd=[[MapTile alloc] initWithData: noTileImg];
+		speedbgd=[[MapTile alloc] initWithData: noTileImg type:0];
 		[self setBackgroundColor:[UIColor clearColor]];
 
 		lblspeed=[[UILabel alloc] initWithFrame:CGRectMake(13,10,f.size.width-25,f.size.height-40)];
