@@ -265,6 +265,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+	hidden=YES;
 	[super viewWillDisappear:YES];
 	self.title=NSLocalizedString(@"Map","Map");
 	[[NSUserDefaults standardUserDefaults] setDouble:[mapview getCurrentPos].x forKey:kSettingsLastPosX];
@@ -272,6 +273,7 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:[mapview zoom] forKey:kSettingsLastZoom];
 }
 -(void)viewWillAppear:(BOOL)animated {
+	hidden=NO;
 	if(!directionSearch)
 		self.title=@"xGPS";
 	else
@@ -441,6 +443,7 @@
 	self.navigationItem.leftBarButtonItem=nil;
 	[UIView commitAnimations];
 	directionSearch=NO;
+	if(!hidden)
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	
 }
@@ -535,6 +538,7 @@
 			directionSearch=NO;
 			[mapview computeCachedRoad];
 			currentSearchType=2;
+			if(!hidden)
 			[self.navigationController setNavigationBarHidden:YES animated:YES];
 			
 		} else {

@@ -49,6 +49,7 @@
 	WrongWayView *wrongWay;
 	NSTimer * tmrNightMode;
 	GPSDetailsViewController *gpsdetails;
+	BOOL hidden;
 }
 - (void)gpsChanged:(ChangedState*)msg;
 -(void)cancelDrivingSearch:(id)sender ;

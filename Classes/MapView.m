@@ -792,7 +792,7 @@
 			float posXPin2=cosr*posXPin - posYPin*sinr;
 			float posYPin2=sinr*posXPin + posYPin*cosr;
 			if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
-				
+#if 1
 				CGPoint ind[4];
 				ind[0].x=0;
 				ind[0].y=5;
@@ -834,8 +834,6 @@
 				CGContextFillPath(context);
 				CGContextBeginPath(context);
 				CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
-				
-				
 				CGContextClosePath(context);
 				
 				if(nightMode)
@@ -848,7 +846,101 @@
 				CGContextScaleCTM(context, 1, -1);
 		
 				CGContextRotateCTM(context, mapRotation);
+#else
+				CGPoint ind[8];
+				ind[0].x=-15;
+				ind[0].y=0;
+				ind[1].x=-10;
+				ind[1].y=0;
+				
+				ind[2].x=15;
+				ind[2].y=0;
+				ind[3].x=10;
+				ind[3].y=0;
+				
+				ind[4].x=0;
+				ind[4].y=15;
+				ind[5].x=0;
+				ind[5].y=10;
+				
+				ind[6].x=0;
+				ind[6].y=-15;
+				ind[7].x=0;
+				ind[7].y=-10;
+				
+				float alpha=gpsHeading+mapRotation;
+				float cosa=cos(alpha);
+				float sina=sin(alpha);
+				for(int i=0;i<8;i++) {
+					float posx=ind[i].x;
+					float posy=ind[i].y;
+					
+					ind[i].x=-cosa*posx -posy*sina;
+					ind[i].y=+sina*posx - posy*cosa;
+					
+					//Translate to correct plage
+					ind[i].x+=posXPin2;
+					ind[i].y-=posYPin2;
+				}
 
+				
+				CGContextRotateCTM(context, -mapRotation);
+				
+				CGContextScaleCTM(context, 1, -1);
+				
+				CGContextBeginPath(context);
+				CGContextAddArc(context,posXPin2,-posYPin2,15,0,2*M_PI,0);
+				
+				CGContextClosePath(context);
+
+				CGContextSetRGBStrokeColor(context,0,0,1,0.6);
+				CGContextSetLineWidth(context,2);
+				
+				CGContextStrokePath(context);
+				
+				CGContextBeginPath(context);
+				CGContextAddLines(context,ind,2);
+				CGContextClosePath(context);
+				CGContextStrokePath(context);
+				
+				ind[0]=ind[2];
+				ind[1]=ind[3];
+				
+				CGContextBeginPath(context);
+				CGContextAddLines(context,ind,2);
+				CGContextClosePath(context);
+				CGContextStrokePath(context);
+				
+				ind[0]=ind[4];
+				ind[1]=ind[5];
+				
+				CGContextBeginPath(context);
+				CGContextAddLines(context,ind,2);
+				CGContextClosePath(context);
+				CGContextStrokePath(context);
+				ind[0]=ind[6];
+				ind[1]=ind[7];
+				
+				CGContextBeginPath(context);
+				CGContextAddLines(context,ind,2);
+				CGContextClosePath(context);
+				CGContextStrokePath(context);
+				CGContextBeginPath(context);
+				CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
+				CGContextClosePath(context);
+				
+				if(nightMode)
+					CGContextSetRGBFillColor(context,1,0.945,0.270,1);
+				else
+					CGContextSetRGBFillColor(context,0,0,1,1);
+				
+				
+				CGContextFillPath(context);
+				
+				
+				CGContextScaleCTM(context, 1, -1);
+				
+#endif
 				
 				//NSLog(@"Pos: %f %f",posXPin,posYPin);
 			}
