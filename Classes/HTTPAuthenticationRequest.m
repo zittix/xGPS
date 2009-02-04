@@ -57,7 +57,9 @@
 			response = [[self quotedSubHeaderFieldValue:@"response" fromHeaderFieldValue:authInfo] retain];
 		}
 		
-		[authInfo release];
+		// Remember, if using garbage collection:
+		// Core foundation objects must be released using CFRelease, as [id release] is a no-op.
+		if(authInfo) CFRelease((CFStringRef)authInfo);
 	}
 	return self;
 }
@@ -135,7 +137,7 @@
  * In the following header field:
  * Authorization: Digest username="Mufasa", qop=auth, response="6629fae4939"
  * The sub header field titled 'username' is quoted, and this method would return the value @"Mufasa".
-**/
+ **/
 - (NSString *)quotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header
 {
 	NSRange startRange = [header rangeOfString:[NSString stringWithFormat:@"%@=\"", param]];
@@ -167,7 +169,7 @@
  * In the following header field:
  * Authorization: Digest username="Mufasa", qop=auth, response="6629fae4939"
  * The sub header field titled 'qop' is nonquoted, and this method would return the value @"auth".
-**/
+ **/
 - (NSString *)nonquotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header
 {
 	NSRange startRange = [header rangeOfString:[NSString stringWithFormat:@"%@=", param]];

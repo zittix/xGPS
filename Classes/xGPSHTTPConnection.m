@@ -8,7 +8,7 @@
 #import "HTTPResponse.h"
 #import "xGPSAppDelegate.h"
 #import <sys/stat.h>
-
+static BOOL uploading=NO;
 @implementation xGPSHTTPConnection
 
 /**
@@ -138,7 +138,18 @@
     return [outdata autorelease];
 	
 }
-
+-(NSString*)createAPI_dbUploadOK {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
+	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
+	[outdata appendString:@"<version>"VERSION"</version>"];
+	[outdata appendFormat:@"<status>ok</status>"];
+	[outdata appendString:@"</xgpsAPI>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
 -(NSString*)createAPI_info {
 	NSMutableString *outdata = [NSMutableString new];
 	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
@@ -158,7 +169,7 @@
 - (BOOL)supportsPOST:(NSString *)path withSize:(UInt64)contentLength
 {
 	//NSLog(@"POST:%@", path);
-	if([path isEqualToString:@"/uploadMapsDB"]) {
+	if([path hasPrefix:@"/uploadMapsDB"] && !uploading) {
 		dataStartIndex = 0;
 		multipartData = [[NSMutableArray alloc] init];
 		postHeaderOK = FALSE;
@@ -185,7 +196,7 @@
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
 		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
 		return resp;
-	} else if([path isEqualToString:@"/uploadMapsDB"]) {
+	} else if([path hasPrefix:@"/uploadMapsDB"]) {
 		
 		if (postContentLength > 0)		//process POST data
 		{
@@ -203,24 +214,27 @@
 				NSMutableData* separatorData = [NSMutableData dataWithBytes:&separatorBytes length:2];
 				[separatorData appendData:[multipartData objectAtIndex:0]];
 				int l = [separatorData length];
-				int count = 2;	//number of times the separator shows up at the end of file data
+				int count = 1;	//number of times the separator shows up at the end of file data
 				
 				NSFileHandle* dataToTrim = [multipartData lastObject];
 				//NSLog(@"data: %@", dataToTrim);
-				
+				uploading=YES;
 				for (unsigned long long i = [dataToTrim offsetInFile] - l; i > 0; i--)
 				{
+					//NSLog(@"Loop %d",i);
 					[dataToTrim seekToFileOffset:i];
 					if ([[dataToTrim readDataOfLength:l] isEqualToData:separatorData])
 					{
+						//NSLog(@"Loop cond true at i=%d",i2);
 						[dataToTrim truncateFileAtOffset:i];
 						i -= l;
 						if (--count == 0) break;
 					}
+					//NSLog(@"End Loop %d",i);
 				}
-				
+				uploading=NO;
 				//NSLog(@"NewFileUploaded");
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"NewFileUploaded" object:nil];
+				//[[NSNotificationCenter defaultCenter] postNotificationName:@"NewFileUploaded" object:nil];
 			}
 			
 			//for (int n = 1; n < [multipartData count] - 1; n++)
@@ -229,11 +243,18 @@
 			[postInfo release];
 			[multipartData release];
 			postContentLength = 0;
-			
+			NSLog(@"Upload done. sending response");
+			if([path isEqualToString:@"/uploadMapsDB?api=1"]) {
+				NSString *page=[self createAPI_dbUploadOK];
+				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				return resp;
+			} else {
 			NSString *page=[self createUploadOKPage];
 			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
 			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
 			return resp;
+			}
 		}
 		else {
 			NSString *page=[self createUploadMapDBPage];
@@ -323,7 +344,7 @@
 					postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
 					postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
 					NSString* filename =[APPDELEGATE.tiledb getDBFilename];
-					NSLog(@"Saving to %@",filename);
+					//NSLog(@"Saving to %@",filename);
 					NSRange fileDataRange = {dataStartIndex, [postDataChunk length] - dataStartIndex};
 					
 					[[NSFileManager defaultManager] createFileAtPath:filename contents:[postDataChunk subdataWithRange:fileDataRange] attributes:nil];
@@ -344,6 +365,7 @@
 	}
 	else
 	{
+		//NSLog(@"header ok, writing");
 		[(NSFileHandle*)[multipartData lastObject] writeData:postDataChunk];
 	}
 }

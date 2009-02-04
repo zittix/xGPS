@@ -7,6 +7,7 @@
 #endif
 
 
+
 @interface HTTPAuthenticationRequest : NSObject
 {
 	BOOL isBasic;
