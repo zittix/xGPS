@@ -98,8 +98,8 @@
 }
 -(void)setZoom:(int)z {
 	zoom=z;
-	[assocZoomview setZoomoutState:zoom!=16];
-	[assocZoomview setZoominState:zoom!=0];
+	[assocZoomview setZoomoutState:zoom!=17];
+	[assocZoomview setZoominState:zoom!=17-maxZoom];
 }
 
 -(id)initWithFrame:(CGRect)f withDB:(TileDB*)_db {
@@ -491,8 +491,6 @@
 -(void)fulllRefreshMap {
 	[tilescache removeAllObjects];
 	[self refreshMap];
-	[assocZoomview setZoomoutState:zoom!=16];
-	[assocZoomview setZoominState:zoom!=0];
 }
 #if 1
 - (void)drawRect:(CGRect)rect{

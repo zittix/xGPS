@@ -101,9 +101,16 @@
 	}
 	
 	
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]==0)
+		mapview.maxZoom=17;
+	else
+		mapview.maxZoom=15;
+	
 	int zoom=[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastZoom];
-	if(zoom>=0 && zoom<18)
+	if(zoom>=17-mapview.maxZoom && zoom<=17)
 		[mapview setZoom:zoom];
+	else
+		[mapview setZoom:17-mapview.maxZoom];
 	
 	mapview.pos=p;
 	mapview.mapRotationEnabled=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
@@ -319,6 +326,11 @@
 			licenseView=[[LicenseViewController alloc] init];
 		}
 		[self presentModalViewController:licenseView animated:YES];
+	}
+	
+	if(mapview.zoom<17-mapview.maxZoom) {
+		mapview.zoom=mapview.maxZoom;
+		[mapview fulllRefreshMap];
 	}
 }
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

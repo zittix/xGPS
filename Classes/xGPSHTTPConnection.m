@@ -250,10 +250,10 @@ static BOOL uploading=NO;
 				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
 				return resp;
 			} else {
-			NSString *page=[self createUploadOKPage];
-			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
-			return resp;
+				NSString *page=[self createUploadOKPage];
+				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				return resp;
 			}
 		}
 		else {
@@ -277,6 +277,9 @@ static BOOL uploading=NO;
 		NSString *page=[self createGPXLogFiles];
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
 		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		return resp;
+	} else if([path isEqualToString:@"/api/getTileDB"]) {
+		HTTPFileResponse *resp=[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.tiledb getDBFilename]];
 		return resp;
 	} else if([path hasPrefix:@"/api/getGPXLogFile/"]) {
 		
