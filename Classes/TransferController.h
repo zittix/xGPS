@@ -31,4 +31,7 @@
 -(void)startServer;
 -(void)stopServer;
 @property (nonatomic,assign) id delegate;
+#ifdef HAS_HTTPSERVER
+@property (nonatomic,readonly) HTTPServer *httpServer;
+#endif
 @end

@@ -155,6 +155,7 @@ static BOOL uploading=NO;
 	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
 	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
 	[outdata appendString:@"<version>"VERSION"</version>"];
+	[outdata appendFormat:@"<name>%@</name>",[APPDELEGATE.txcontroller.httpServer publishedName]];
 	[outdata appendFormat:@"<tiledbsize>%.2f</tiledbsize>",[APPDELEGATE.tiledb mapsize]];
 	[outdata appendString:@"</xgpsAPI>"];
     

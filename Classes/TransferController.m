@@ -11,6 +11,9 @@
 #import "xGPSHTTPConnection.h"
 @implementation TransferController
 @synthesize delegate;
+#ifdef HAS_HTTPSERVER
+@synthesize httpServer;
+#endif
 -(id)init {
 	if((self=[super init])) {
 #ifdef HAS_HTTPSERVER

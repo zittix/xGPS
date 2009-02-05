@@ -237,7 +237,7 @@
 			sqlite3_clear_bindings(checkTileStmt);
 			[dbLock unlock];
 			if (r != SQLITE_ROW && !closed) {
-				if([self downloadTile:p.x atY:p.y withZoom:p.zoom silent:NO]) {
+				if([self downloadTile:p.x atY:p.y withZoom:p.zoom silent:YES]) {
 					if(p.delegate!=nil) {
 						[p.delegate performSelectorOnMainThread:@selector(tileDownloaded) withObject:nil waitUntilDone:NO];
 					}
@@ -436,7 +436,7 @@
 	
 
 
-	NSLog(@"Getting tile at %@",url);
+	//NSLog(@"Getting tile at %@",url);
 	NSURL *imageURL = [[NSURL alloc] initWithString:url];
 	[url release];
 	NSMutableURLRequest *urlReq=[[NSMutableURLRequest alloc] initWithURL:imageURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30 ];
