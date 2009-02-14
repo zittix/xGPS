@@ -17,7 +17,6 @@
     if ((self = [super initWithStyle:style])) {
 		self.navigationItem.title=NSLocalizedString(@"License number",@"License number title");
 		value = [[UITextField alloc] initWithFrame:CGRectMake(115.0, 10.0, 170.0, 25.0)];
-		value.keyboardType=UIKeyboardTypeNamePhonePad;
 		value.returnKeyType=UIReturnKeySend;
 		value.delegate=self;
 		value.autocapitalizationType=UITextAutocapitalizationTypeAllCharacters;
