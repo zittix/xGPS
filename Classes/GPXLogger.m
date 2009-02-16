@@ -85,13 +85,13 @@
 		fix_str="3d";
 	//2008-07-27T15:22:23Z
 	
-	fprintf(fp,"<trkpt lat=\"%f\" lon=\"%f\">\n",lat,lon);
-	fprintf(fp,"<ele>%f</ele>\n",alt);
-	fprintf(fp,"<time>%d-%d-%dT%d:%d:%dZ</time>\n",tm->tm_year+1900,tm->tm_mon+1,tm->tm_mday,tm->tm_hour,tm->tm_min,tm->tm_sec);
-	fprintf(fp,"<speed>%f</speed>\n",speed);
-	fprintf(fp,"<fix>%s</fix>\n",fix_str);
+	fprintf(fp,"<trkpt lat=\"%f\" lon=\"%f\">",lat,lon);
+	fprintf(fp,"<ele>%f</ele>",alt);
+	fprintf(fp,"<time>%d-%d-%dT%d:%d:%dZ</time>",tm->tm_year+1900,tm->tm_mon+1,tm->tm_mday,tm->tm_hour,tm->tm_min,tm->tm_sec);
+	fprintf(fp,"<speed>%f</speed>",speed);
+	fprintf(fp,"<fix>%s</fix>",fix_str);
 	if(fix>=2 && sat>0)
-	fprintf(fp,"<sat>%d</sat>\n",sat);
-	fprintf(fp,"</trkpt>\n");	
+	fprintf(fp,"<sat>%d</sat>",sat);
+	fprintf(fp,"</trkpt>");	
 }
 @end

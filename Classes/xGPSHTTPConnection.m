@@ -163,6 +163,30 @@ static BOOL uploading=NO;
     return [outdata autorelease];
 	
 }
+-(NSString*)createAPI_GPXLogFiles {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
+	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
+	[outdata appendString:@"<version>"VERSION"</version><gpxfiles>"];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xgps_gpx"];
+	
+	NSArray *files=[[NSFileManager defaultManager] directoryContentsAtPath:path];
+	
+	for(NSString * f in files) {
+		[outdata appendFormat:@"<file>%@</file>\n",f];
+		
+	}
+	[outdata appendString:@"</gpxfiles>"];
+	[outdata appendString:@"</xgpsAPI>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
+
+
 /**
  * Returns whether or not the server will accept POSTs.
  * That is, whether the server will accept uploaded data for the given URI.
@@ -271,6 +295,11 @@ static BOOL uploading=NO;
 		return resp;	
 	} else if([path isEqualToString:@"/api/getDeviceInfo"]) {
 		NSString *page=[self createAPI_info];
+		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		return resp;
+	} else if([path isEqualToString:@"/api/getGPXTrack"]) {
+		NSString *page=[self createAPI_GPXLogFiles];
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
 		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
 		return resp;
