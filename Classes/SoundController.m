@@ -283,12 +283,62 @@ static void HandleOutputBuffer (
 		}
 	}
 }
+-(NSString*)replaceAbbrev:(NSDictionary*)dic inString:(NSString*)str {
+	NSString *ret=str;
+	ret=[ret stringByReplacingOccurrencesOfString:@"/" withString:@" "];
+	ret=[ret stringByReplacingOccurrencesOfString:@"\\" withString:@" "];
+	ret=[ret stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+	for (NSString* key in dic)
+	{
+		NSRange r;
+		r.location=0;
+		r.length=ret.length;
+		ret=[ret stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@ ",key] withString:[NSString stringWithFormat:@" %@ ",[dic objectForKey:key]] options:NSCaseInsensitiveSearch range:r];
+		r.location=0;
+		r.length=key.length+1;
+		ret=[ret stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@ ",key] withString:[NSString stringWithFormat:@"%@ ",[dic objectForKey:key]] options:NSCaseInsensitiveSearch range:r];
+		r.location=ret.length-key.length-1;
+		r.length=key.length+1;
+		ret=[ret stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@",key] withString:[NSString stringWithFormat:@" %@",[dic objectForKey:key]] options:NSCaseInsensitiveSearch range:r];
+		
+	}
+	return ret;
+}
+
 -(void)playText:(NSString*)text {
 	cst_voice *v;
 	
     cst_features *extra_feats;
 	
-    
+	NSString *toPlay=text;
+	
+	//Filter out / and \ and abbreviations
+	/* Roger:
+	
+	
+Ave: Avenue
+St: Street
+Rd: Road
+Blvd: Boulevard
+Pkwy: Parkway
+Cir: Circle
+N: North
+E: East
+S: South
+W: West
+	
+	Also typically in the US freeways are indicated as:
+	
+	I-5 N: I Five North
+	I-605 S: I Six-O-Five South
+	
+	Also, make sure to get rid off slashes (/ \) and dashes (-)
+	*/
+ 
+	
+	NSDictionary *abrev=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Avenue",@"Street",@"Road",@"Boulevard",@"Parkway",@"Circle",@"North",@"East",@"South",@"West",@"Highway",nil] forKeys:[NSArray arrayWithObjects:@"Ave",@"St",@"Rd",@"Blvd",@"Pkwy",@"Cir",@"N",@"E",@"S",@"W",@"Hwy",nil]];
+	
+	toPlay=[self replaceAbbrev:abrev inString:toPlay];
     extra_feats = new_features();
 	
     
@@ -296,7 +346,7 @@ static void HandleOutputBuffer (
     v = REGISTER_VOX(NULL);
     feat_copy_into(extra_feats,v->features);
 	
-	cst_wave *w=flite_text_to_wave(text.UTF8String,v);
+	cst_wave *w=flite_text_to_wave(toPlay.UTF8String,v);
 	
     delete_features(extra_feats);
 	
@@ -380,7 +430,7 @@ static void HandleOutputBuffer (
 	SoundEvent *toPlay=chain;
 	if(toPlay==nil) {
 		running=NO;
-		NSLog(@"SoundController: No more sound to play. Exiting");
+		//NSLog(@"SoundController: No more sound to play. Exiting");
 		AudioSessionSetActive (false);
 		return;
 	}

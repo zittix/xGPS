@@ -178,8 +178,13 @@ if(row<0 || row>=[bookmarks count]) {
 		int id=[[dict valueForKey:@"id"] intValue];
 		NSMutableArray *road=[APPDELEGATE.dirbookmarks copyBookmarkRoadPoints:id];
 		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:id];
+		[APPDELEGATE.directions clearResult];
+		[APPDELEGATE.directions setFrom:[dict valueForKey:@"from"]];
+		[APPDELEGATE.directions setTo:[dict valueForKey:@"to"]];
+		[APPDELEGATE.directions setRoad:road instructions:instr];
 		[APPDELEGATE.directions setRoad:road instructions:instr];
 		APPDELEGATE.directions.currentBookId=id;
+		
 		[road release];
 		[instr release];
 		[self.navigationController dismissModalViewControllerAnimated:YES];

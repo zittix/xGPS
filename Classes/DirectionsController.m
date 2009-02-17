@@ -312,17 +312,7 @@ int roundNearest(double dist) {
 			}
 			if(previousInstruction!=[instructions count]-1) {
 				if(nbWrongWay>20*APPDELEGATE.gpsmanager.currentGPS.refreshRate && recomputeRoute) {
-					float lat=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude;
-					float lon=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude;
-					
-					NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
-					NSString *to=[_to retain];
-					[delegate clearDirections];
-					recomputing=YES;
-					[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-					[self drive:from to:to];
-					[from release];
-					[to release];
+					[self recompute];
 				} else {
 					nbWrongWay++;
 				}
@@ -390,14 +380,25 @@ int roundNearest(double dist) {
 			inBetweenDistance=remainingDist;
 		}
 		if(enableVoice) {
-			if(!playedSoundBeforemeters && remainingDist<=beforeThreshold && instrIndex>0) {
+			float beforeThresholdCalc=beforeThreshold;
+			float farThresholdCalc=farThreshold;
+			double speed=APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.speed*3.6;
+			if(speed<30) speed=30;
+			if(speed>120) speed=120;
+			
+			beforeThresholdCalc=speed*(beforeThreshold/30.0)+speed*1.944444f; //The + is for the playing time of the audio mean=6s (7/3.6=1.94444)
+			farThresholdCalc=speed*(farThreshold/30.0);
+			
+			//NSLog(@"Threshold before: %f, far: %f",beforeThresholdCalc,farThresholdCalc);
+			
+			if(!playedSoundBeforemeters && remainingDist<=beforeThresholdCalc && instrIndex>0) {
 				playedSoundFarmeters=YES;
 				playedSoundBeforemeters=YES;
 				SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
 				[APPDELEGATE.soundcontroller addSound:s];
 				[s release];
 				
-			} else if(!playedSoundFarmeters && remainingDist<=farThreshold && inBetweenDistance>farThreshold && instrIndex>0) {
+			} else if(!playedSoundFarmeters && remainingDist<=farThresholdCalc && inBetweenDistance>farThresholdCalc && instrIndex>0) {
 				playedSoundFarmeters=YES;
 				SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
 				[APPDELEGATE.soundcontroller addSound:s];
@@ -821,9 +822,11 @@ int roundNearest(double dist) {
 	return pos;
 }
 -(void)setFrom:(NSString*)f {
+	[_from release];
 	_from=[f retain];
 }
 -(void)setTo:(NSString*)f {
+	[_to release];
 	_to=[f retain];
 }
 @synthesize map;

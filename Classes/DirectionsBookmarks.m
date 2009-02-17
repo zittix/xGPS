@@ -181,7 +181,7 @@ err:
 	sqlite3_clear_bindings(getRoadPointStmt);
 	return nil;
 }
--(NSMutableArray*)copyBookmarkInstructions:(int)id{
+-(NSMutableArray*)copyBookmarkInstructions:(int)id {
 	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
 	if(sqlite3_bind_int64(getInstrStmt,1,id)!=SQLITE_OK)
 		goto err;
