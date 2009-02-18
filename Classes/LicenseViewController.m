@@ -18,7 +18,8 @@
 	CGRect viewRect=[[UIScreen mainScreen] applicationFrame];
 	self.view=[[UIWebView alloc] initWithFrame:viewRect];
 
-	NSString *license=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"license" ofType:@"html" inDirectory:@"." forLocalization:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0]]];
+	NSError *err;
+	NSString *license=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"license" ofType:@"html" inDirectory:@"." forLocalization:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0]] encoding:NSUTF8StringEncoding error:&err];
 	[(UIWebView*)self.view loadHTMLString:license baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
 	((UIWebView*)self.view).delegate=self;
 }
