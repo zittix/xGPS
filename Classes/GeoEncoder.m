@@ -252,7 +252,15 @@
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
 	//NSLog(@"Using %@ language",lang);
-	NSString* encURL=[GeoEncoder urlencode:toEncode encoding:@"utf8"];
+	
+	NSString *search=toEncode;
+	
+	//Add location if available
+	if(APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1) {
+		search=[NSString stringWithFormat:@"%@ loc:%f,%f",search,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude];
+	}
+	
+	NSString* encURL=[GeoEncoder urlencode:search encoding:@"utf8"];
 	
 	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&q=%@&hl=%@",encURL,lang];
 	//NSLog(@"Getting geoencode at %@",urlT);

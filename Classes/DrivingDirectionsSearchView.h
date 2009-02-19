@@ -11,9 +11,9 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "MapView.h"
-#import "DirectionsBookmarksViewController.h"
+#import "RoutesManagerViewController.h"
 @class MainViewController;
-@interface DrivingDirectionsSearchView : UIView<ABPeoplePickerNavigationControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate,DirectionsBookmarksDelegate> {
+@interface DrivingDirectionsSearchView : UIView<ABPeoplePickerNavigationControllerDelegate,UISearchBarDelegate,UIActionSheetDelegate,RoutesManagerDelegate> {
 	MainViewController* controller;
 	MapView *map;
 	float keyboardHeight;

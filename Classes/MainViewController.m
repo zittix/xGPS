@@ -10,6 +10,7 @@
 #import "Position.h"
 #import "xGPSAppDelegate.h"
 #import "GPXLogger.h"
+#import "RoutesManagerViewController.h"
 @implementation MainViewController
 
 @synthesize mapview;
@@ -68,7 +69,7 @@
 	[toolbar setItems:btn animated:YES];	
 	//92x100
 	settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self andMap:mapview];
+	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController delegate:self];
 	searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	searchPlacesView.autoresizesSubviews=YES;
 	
@@ -84,7 +85,7 @@
 	speedview.hidden=YES;
 	signalView.hidden=YES;
 	cancelSearch=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelDrivingSearch:)];
-	savedDirections=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bookmarks",@"Saved direction bookmarks") style:UIBarButtonItemStyleBordered target:self action:@selector(showBooksmarksView:)];
+	routesManager=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Manager",@"") style:UIBarButtonItemStyleBordered target:self action:@selector(showManager:)];
 	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
 	navView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	navView.delegate=APPDELEGATE.directions;
@@ -141,6 +142,9 @@
 		[road release];
 		[instr release];
 	}
+	
+}
+-(void) searchPlaceWillHide {
 	
 }
 -(void)showGPSDetails {
@@ -228,17 +232,15 @@
 	[wrongWay startAnimate];
 	[self.view addSubview:wrongWay];
 }
--(void)showBooksmarksView:(id)sender {
-	if(dirBookmarks==nil) {
-		dirBookmarks=[[DirectionsBookmarksViewController alloc] initWithStyle:UITableViewStylePlain delegate:drivingSearchView];
-		
-	}
-	
+-(void)showManager:(id)sender {
+	UIViewController *manager=[[RoutesManagerViewController alloc] initWithStyle:UITableViewStylePlain delegate:drivingSearchView];
 	UINavigationController *navigationController = [[UINavigationController 
-													 alloc] initWithRootViewController:dirBookmarks]; 
+													 alloc] initWithRootViewController:manager]; 
 	[self presentModalViewController:navigationController animated:YES];
 	[navigationController release];
+	[manager release];
 }
+
 -(void)hideGPSStatus {
 	[UIView beginAnimations:nil context:nil];
 	//[speedview removeFromSuperview];
@@ -434,11 +436,11 @@
 	UIActionSheet *action=nil;
 	
 	if(currentSearchType==0)
-		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Search for:",@"Search actionsheet title") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),nil];
+		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),nil];
 	else if(currentSearchType==1)
-		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Search for:",@"Search actionsheet title") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Clear Search results",@""),nil];
+		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Search results",@""),nil];
 	else
-		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Search for:",@"Search actionsheet title") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Clear Driving directions",@""),nil];
+		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Driving directions",@""),nil];
 	[action showFromToolbar:toolbar];
 }
 -(void)cancelSearchPressed:(id)sender {
@@ -469,10 +471,6 @@
 		}break;
 		case 1: {
 			directionSearch=YES;
-			
-			//UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"This feature will be implemented in a future version.",@"Not yet implemented message.") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-			//[alert show];
-			//return;
 			self.navigationItem.leftBarButtonItem.enabled=YES;
 			self.navigationItem.rightBarButtonItem.enabled=YES;
 			[UIView beginAnimations:nil context:nil];
@@ -480,12 +478,15 @@
 			self.navigationController.navigationBarHidden=NO;
 			self.navigationItem.title=NSLocalizedString(@"Directions",@"");
 			self.navigationItem.rightBarButtonItem=cancelSearch;
-			self.navigationItem.leftBarButtonItem=savedDirections;
+			self.navigationItem.leftBarButtonItem=routesManager;
 			[mapview refreshMap];
 			[UIView commitAnimations];
 			
 		}break;
 		case 2: {
+			[self showManager:nil];
+		}
+		case 3: {
 			if(currentSearchType==1) {
 				[mapview setPosSearch:nil];
 			} else if(currentSearchType==2) {
@@ -525,6 +526,10 @@
 }
 -(void)nextDirectionDistanceChanged:(double)dist {
 	
+}
+-(void)gotResultForSearch:(GeoEncoderResult*)res {
+	[mapview setPosSearch:res.pos];
+	currentSearchType=1;
 }
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
 	self.navigationItem.leftBarButtonItem.enabled=YES;

@@ -578,7 +578,7 @@ int roundNearest(double dist) {
 	if([instructions count]>0){
 		
 		if(!recomputing && [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch])
-		currentBookId=[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to];
+			currentBookId=[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to name:@""];
 		
 		
 		Instruction *s=[instructions objectAtIndex:instrIndex];
@@ -775,6 +775,12 @@ int roundNearest(double dist) {
 		unit=@"ptm";
 	else
 		unit=@"ptk";
+	
+	//NSString *loc=@"";
+	
+	/*if(APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1) {
+		loc=[NSString stringWithFormat:@"&q=loc:%f,%f",APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude];
+	}*/
 	
 	
 	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&hl=%@&saddr=%@&daddr=%@&doflg=%@",lang,fromE,toE,unit];

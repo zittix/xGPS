@@ -12,11 +12,11 @@
 @implementation SearchPlacesView
 
 
-- (id)initWithFrame:(CGRect)frame andController:(MainViewController*)_controller andMap:(MapView*)_map{
+- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller delegate:(id<SearchPlacesViewDelegate>)_delegate {
     if ((self = [super initWithFrame:frame])) {
-		controller=_controller.navigationController;
+		viewController;
         // Initialization code
-		
+		delegate=_delegate;
 		searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(0,0,frame.size.width,50)];
 		searchBar.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		searchBar.showsCancelButton=YES;
@@ -28,9 +28,7 @@
 		searchBar.placeholder=NSLocalizedString(@"City name / Address",@"Placeholder for search bar of cities");
 
 		[self addSubview:searchBar];
-		
-
-		map=_map;
+	
 		self.backgroundColor=[UIColor clearColor];
 		geocoder=[[GeoEncoder alloc] init];
 		geocoder.delegate=self;
@@ -112,10 +110,11 @@
 	NSString *key=[NSString stringWithFormat:@"%d",indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	GeoEncoderResult* r=[_result objectForKey:key];
-	
+	/*
 	map.pos=r.pos;
 	[map setPosSearch:r.pos];
-	((MainViewController*)viewController).currentSearchType=1;
+	((MainViewController*)viewController).currentSearchType=1;*/
+	[delegate gotResultForSearch:r];
 	[self searchBarCancelButtonClicked:searchBar];
 }
 - (void)keyboardWillShow:(NSNotification *)notif{
@@ -157,9 +156,7 @@
 			id key = [enumerator nextObject];
 			GeoEncoderResult* r=[result objectForKey:key];
 			
-			map.pos=r.pos;
-			((MainViewController*)viewController).currentSearchType=1;
-			[map setPosSearch:r.pos];
+			[delegate gotResultForSearch:r];
 			[self searchBarCancelButtonClicked:searchBar];
 		} else {
 			_result=[result retain];
@@ -195,6 +192,7 @@
 	[searchBar_ resignFirstResponder];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+	[delegate searchPlaceWillHide];
 	[UIView beginAnimations:nil context:nil];
 	[self removeFromSuperview];
 	
@@ -202,13 +200,14 @@
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil]; 
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil]; 
+	
 }
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {
 	ABPeoplePickerNavigationController *picker =
 	[[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
 	picker.displayedProperties=[NSArray arrayWithObject:[NSNumber numberWithInt: kABPersonAddressProperty]];
-    [controller presentModalViewController:picker animated:YES];
+    [viewController presentModalViewController:picker animated:YES];
     [picker release];
 }
 
@@ -239,13 +238,13 @@
 	CFRelease(dic);
 	CFRelease(multi);
 	
-	[controller dismissModalViewControllerAnimated:YES];
+	[viewController dismissModalViewControllerAnimated:YES];
 	//[searchBar becomeFirstResponder];
 	[self searchBarSearchButtonClicked:searchBar];
     return NO;
 }
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
-    [controller dismissModalViewControllerAnimated:YES];
+    [viewController dismissModalViewControllerAnimated:YES];
 	[searchBar becomeFirstResponder];
 }
 - (BOOL)peoplePickerNavigationController:

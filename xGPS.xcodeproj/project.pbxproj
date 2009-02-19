@@ -11,6 +11,15 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		4E0827ED0F4DE9F300B1C9AF /* RoutesManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */; };
+		4E0828690F4DF11D00B1C9AF /* RouteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0828680F4DF11D00B1C9AF /* RouteCell.m */; };
+		4E0829050F4DF83300B1C9AF /* addicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E0829040F4DF83300B1C9AF /* addicon.png */; };
+		4E0829530F4DFB2800B1C9AF /* RouteAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0829520F4DFB2800B1C9AF /* RouteAddViewController.m */; };
+		4E0829790F4DFCF000B1C9AF /* NavigationPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0829780F4DFCF000B1C9AF /* NavigationPoint.m */; };
+		4E0829910F4E017500B1C9AF /* startway.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E08298F0F4E017500B1C9AF /* startway.png */; };
+		4E0829920F4E017500B1C9AF /* endway.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E0829900F4E017500B1C9AF /* endway.png */; };
+		4E0829BA0F4E027F00B1C9AF /* middleway.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E0829B90F4E027F00B1C9AF /* middleway.png */; };
+		4E082A600F4E0A4300B1C9AF /* ModalSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E082A5F0F4E0A4300B1C9AF /* ModalSearchViewController.m */; };
 		4E0B8CF90E812A74009A2F86 /* iGPSDController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0B8CF80E812A74009A2F86 /* iGPSDController.m */; };
 		4E0B8D440E812DDD009A2F86 /* GPSLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0B8D430E812DDD009A2F86 /* GPSLicenseViewController.m */; };
 		4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F05000E87C49000D75E7D /* GeoEncoder.m */; };
@@ -198,6 +207,20 @@
 		28216C950DB411BC00E5133A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		28A0AB4B0D9B1048005BE974 /* xGPS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xGPS_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4E0827EB0F4DE9F300B1C9AF /* RoutesManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutesManagerViewController.h; sourceTree = "<group>"; };
+		4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesManagerViewController.m; sourceTree = "<group>"; };
+		4E0828670F4DF11D00B1C9AF /* RouteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCell.h; sourceTree = "<group>"; };
+		4E0828680F4DF11D00B1C9AF /* RouteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCell.m; sourceTree = "<group>"; };
+		4E0829040F4DF83300B1C9AF /* addicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addicon.png; sourceTree = "<group>"; };
+		4E0829510F4DFB2800B1C9AF /* RouteAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteAddViewController.h; sourceTree = "<group>"; };
+		4E0829520F4DFB2800B1C9AF /* RouteAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteAddViewController.m; sourceTree = "<group>"; };
+		4E0829770F4DFCF000B1C9AF /* NavigationPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationPoint.h; sourceTree = "<group>"; };
+		4E0829780F4DFCF000B1C9AF /* NavigationPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationPoint.m; sourceTree = "<group>"; };
+		4E08298F0F4E017500B1C9AF /* startway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startway.png; sourceTree = "<group>"; };
+		4E0829900F4E017500B1C9AF /* endway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = endway.png; sourceTree = "<group>"; };
+		4E0829B90F4E027F00B1C9AF /* middleway.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = middleway.png; sourceTree = "<group>"; };
+		4E082A5E0F4E0A4300B1C9AF /* ModalSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalSearchViewController.h; sourceTree = "<group>"; };
+		4E082A5F0F4E0A4300B1C9AF /* ModalSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalSearchViewController.m; sourceTree = "<group>"; };
 		4E0B8CF70E812A74009A2F86 /* iGPSDController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iGPSDController.h; sourceTree = "<group>"; };
 		4E0B8CF80E812A74009A2F86 /* iGPSDController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iGPSDController.m; sourceTree = "<group>"; };
 		4E0B8D420E812DDD009A2F86 /* GPSLicenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSLicenseViewController.h; sourceTree = "<group>"; };
@@ -580,6 +603,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E08298F0F4E017500B1C9AF /* startway.png */,
+				4E0829900F4E017500B1C9AF /* endway.png */,
 				4E3B64500F308D0C00130CDF /* sounds */,
 				4ECFA00D0EE469A80077553B /* rm_reception_good.png */,
 				4ECFA00E0EE469A80077553B /* rm_reception_na.png */,
@@ -588,7 +613,9 @@
 				4EA9803C0EDEC95D00AAB014 /* gps_grey.png */,
 				4E74D8540EDD99B800C2FEAC /* wrongway.png */,
 				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
+				4E0829B90F4E027F00B1C9AF /* middleway.png */,
 				4E8F03310EBB5BD000994EA3 /* settingsIcon.png */,
+				4E0829040F4DF83300B1C9AF /* addicon.png */,
 				4E8A01980E9D445A00E58774 /* wireless_future.jpg */,
 				4E9078190E9CE69900B0F6BC /* about.html */,
 				4E90C0F50E8D3CD0003F6B23 /* green.png */,
@@ -631,6 +658,8 @@
 		4E0F04FE0E87C44600D75E7D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4E0829770F4DFCF000B1C9AF /* NavigationPoint.h */,
+				4E0829780F4DFCF000B1C9AF /* NavigationPoint.m */,
 				4E96C6310F320DF10058C714 /* MapTypeViewController.h */,
 				4E96C6320F320DF10058C714 /* MapTypeViewController.m */,
 				4E8A01750E9D441C00E58774 /* NetworkReceiverViewController.h */,
@@ -681,6 +710,8 @@
 				4EAA1BD60EE5401A0014DBF0 /* SettingsGPXController.m */,
 				4E66FD610EDC93A9002097BE /* DirectionsBookmarksViewController.h */,
 				4E66FD620EDC93A9002097BE /* DirectionsBookmarksViewController.m */,
+				4E0828670F4DF11D00B1C9AF /* RouteCell.h */,
+				4E0828680F4DF11D00B1C9AF /* RouteCell.m */,
 				4E74D8510EDD946800C2FEAC /* WrongWayView.h */,
 				4E74D8520EDD946800C2FEAC /* WrongWayView.m */,
 				4E17442E0EDE94E10062ED18 /* TitleValueCell.h */,
@@ -689,6 +720,12 @@
 				4ECFA0F60EE477E40077553B /* SettingsUIController.m */,
 				4EC16E2C0F2F1A09003B3176 /* GPSDetailsViewController.h */,
 				4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */,
+				4E0827EB0F4DE9F300B1C9AF /* RoutesManagerViewController.h */,
+				4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */,
+				4E0829510F4DFB2800B1C9AF /* RouteAddViewController.h */,
+				4E0829520F4DFB2800B1C9AF /* RouteAddViewController.m */,
+				4E082A5E0F4E0A4300B1C9AF /* ModalSearchViewController.h */,
+				4E082A5F0F4E0A4300B1C9AF /* ModalSearchViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1127,6 +1164,10 @@
 				4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */,
 				4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */,
 				4E3B64540F308D0C00130CDF /* sounds in Resources */,
+				4E0829050F4DF83300B1C9AF /* addicon.png in Resources */,
+				4E0829910F4E017500B1C9AF /* startway.png in Resources */,
+				4E0829920F4E017500B1C9AF /* endway.png in Resources */,
+				4E0829BA0F4E027F00B1C9AF /* middleway.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1298,6 +1339,11 @@
 				4EE243440F30750500C41ACA /* SoundController.m in Sources */,
 				4E3B63FD0F3080D900130CDF /* SoundEvent.m in Sources */,
 				4E96C6330F320DF10058C714 /* MapTypeViewController.m in Sources */,
+				4E0827ED0F4DE9F300B1C9AF /* RoutesManagerViewController.m in Sources */,
+				4E0828690F4DF11D00B1C9AF /* RouteCell.m in Sources */,
+				4E0829530F4DFB2800B1C9AF /* RouteAddViewController.m in Sources */,
+				4E0829790F4DFCF000B1C9AF /* NavigationPoint.m in Sources */,
+				4E082A600F4E0A4300B1C9AF /* ModalSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

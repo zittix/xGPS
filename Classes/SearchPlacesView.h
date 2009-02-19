@@ -10,17 +10,22 @@
 #import "GeoEncoder.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-#import "MapView.h"
-@class MainViewController;
+
+@protocol SearchPlacesViewDelegate
+
+-(void)gotResultForSearch:(GeoEncoderResult*)result;
+-(void)searchPlaceWillHide;
+@end
+
+
 @interface SearchPlacesView : UIView<UISearchBarDelegate,ABPeoplePickerNavigationControllerDelegate,GeoEncoderDelegate,UITableViewDelegate,UITableViewDataSource> {
 	UISearchBar *searchBar;
-	UIViewController* controller;
+	UIViewController* viewController;
 	GeoEncoder *geocoder;
-	MapView *map;
 	UITableView *tblView;
 	float keyboardHeight;
 	NSDictionary *_result;
-	id viewController;
+	id delegate;
 }
-- (id)initWithFrame:(CGRect)frame andController:(MainViewController*)_controller andMap:(MapView*)map;
+- (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller delegate:(id<SearchPlacesViewDelegate>)_delegate;
 @end
