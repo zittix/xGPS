@@ -24,7 +24,7 @@
 	[self.view release];
 	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.title=NSLocalizedString(@"Search",@"");
-	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) andController:self.navigationController delegate:self];
+	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) andController:self delegate:self];
 	searchPlacesView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	searchPlacesView.autoresizesSubviews=YES;
 	[self.view addSubview:searchPlacesView];
@@ -32,10 +32,9 @@
 
 -(void)gotResultForSearch:(GeoEncoderResult*)r {
 	[delegate gotResultForSearch:r];
-	[self dismissModalViewControllerAnimated:YES];
 }
 -(void) searchPlaceWillHide {
-	[self dismissModalViewControllerAnimated:YES];
+	[delegate searchPlaceWillHide];
 }
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -43,6 +42,12 @@
     return YES;
 }
 
+-(void)setLocation:(BOOL)val {
+	searchPlacesView.location=val;
+}
+-(BOOL)location {
+	return searchPlacesView.location;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview

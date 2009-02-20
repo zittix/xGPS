@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Position.h"
 #import "NavigationInstructionView.h"
+
+typedef enum RoutingType {
+	ROUTING_NORMAL, ROUTING_AVOID_HIGHWAY, ROUTING_BY_FOOT
+} RoutingType;
+
 @class MapView;
 @interface Instruction : NSObject
 {
@@ -34,6 +39,7 @@
 @interface DirectionsController: NSObject<DrivingInstructionMovingProtocol> {
 	NSString *_from;
 	NSString *_to;
+	NSArray *_via;
 	id delegate;
 	NSMutableArray* instructions;
 	NSMutableArray* roadPoints;
@@ -62,17 +68,23 @@
 	int beforeThreshold;
 	BOOL recomputing;
 	int currentBookId;
+	RoutingType routingType;
+	id tmpDelegate;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;
 @property (nonatomic) int currentBookId;
+@property (nonatomic) RoutingType routingType;
+@property (nonatomic) BOOL recomputing;
 @property (nonatomic,readonly) NSMutableArray* instructions;
 @property (nonatomic,assign) MapView* map;
 @property (nonatomic,setter=updatePos:,assign) PositionObj* pos;
 @property (nonatomic,retain) NSString* from;
 @property (nonatomic,retain) NSString* to;
--(BOOL)drive:(NSString*)from to:(NSString*)to;
+@property (nonatomic,retain) NSArray* via;
+-(BOOL)drive:(NSString*)from to:(NSString*)to via:(NSArray*)via delegate:(id<DirectionsControllerDelegate>)_tmpDelegate;
 -(void)clearResult;
 -(void)setRoad:(NSMutableArray*)road instructions:(NSMutableArray*)instr;
 -(void)recompute;
+-(void)saveCurrent:(NSString*)name;
 @end

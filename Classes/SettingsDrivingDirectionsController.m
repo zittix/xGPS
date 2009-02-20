@@ -194,7 +194,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section==1) {
+    if(indexPath.section==2) {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the saved bookmarks ?",@"Delete bookmarks") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"Yes",@"Yes") otherButtonTitles:NSLocalizedString(@"No",@"No"),nil];
 		[act showInView:self.view];

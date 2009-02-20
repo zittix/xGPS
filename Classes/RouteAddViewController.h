@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "SearchPlacesView.h"
-@interface RouteAddViewController : UITableViewController<SearchPlacesViewDelegate> {
+#import "ProgressViewController.h"
+#import "DirectionsController.h"
+@interface RouteAddViewController : UIViewController<SearchPlacesViewDelegate,DirectionsControllerDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate> {
 	NSMutableArray *points;
 	int editingRow;
-
+	UISegmentedControl *routeType;
+	ProgressViewController *pController;
+	UITableView *tableView;
+	UITextField *txtName;
 }
 -(void)clearAll;
+@property (nonatomic,readonly) UITableView *tableView;
 @end

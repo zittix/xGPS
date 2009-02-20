@@ -10,6 +10,7 @@
 #import "xGPSAppDelegate.h"
 #import "Position.h"
 #import "DirectionsController.h"
+#import "NavigationPoint.h"
 @implementation DirectionsBookmarks
 
 -(id)init {
@@ -23,7 +24,7 @@
 		NSLog(@"Loading Direction Bookmarks DB %@...",path);
 		
 		//Check DB version
-		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]<2 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]>0) {
+		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]>0) {
 			if([fm fileExistsAtPath:path]) {
 				UIAlertView * hotSheet = [[UIAlertView alloc]
 										  initWithTitle:NSLocalizedString(@"Directions Bookmarks",@"")
@@ -41,12 +42,12 @@
 			
 			
 		}
-		[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDirBookmarksDBVersion];
+		[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDirBookmarksDBVersion];
 		
 		if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 			char *error;
 			int ret;
-				char *tMap="CREATE TABLE IF NOT EXISTS dirbookmarks (id INTEGER PRIMARY KEY AUTOINCREMENT, fromPos TEXT,toPos TEXT,date INTEGER,length INTEGER,duration INTEGER, name TEXT)";
+				char *tMap="CREATE TABLE IF NOT EXISTS dirbookmarks (id INTEGER PRIMARY KEY AUTOINCREMENT, fromPos TEXT,toPos TEXT,date INTEGER,length INTEGER,duration INTEGER, name TEXT, via TEXT)";
 				ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 				NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
 				tMap="CREATE TABLE IF NOT EXISTS dirb_roadpoints (lat REAL,lon REAL,owner INTEGER,internalId INTEGER)";
@@ -55,7 +56,7 @@
 				tMap="CREATE TABLE IF NOT EXISTS dirb_instructions (lat REAL,lon REAL,owner INTEGER,internalId INTEGER,name TEXT,descr TEXT)";
 				ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 				NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
-				ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date,name FROM dirbookmarks ORDER BY date DESC",-1,&getBookmarkStmt,NULL);
+				ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date,name,via FROM dirbookmarks ORDER BY date DESC",-1,&getBookmarkStmt,NULL);
 				NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
 			
 			ret=sqlite3_prepare(database,"SELECT lat,lon FROM dirb_roadpoints WHERE owner=?1 ORDER BY internalId ASC",-1,&getRoadPointStmt,NULL);
@@ -81,7 +82,7 @@
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
 			ret=sqlite3_prepare(database,"INSERT INTO dirb_instructions (lat,lon,owner,internalId,name,descr) VALUES(?1,?2,?3,?4,?5,?6)",-1,&insertInstrStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-			ret=sqlite3_prepare(database,"INSERT INTO dirbookmarks (fromPos,toPos,date,name) VALUES(?1,?2,?3,?4)",-1,&insertBookmarkStmt,NULL);
+			ret=sqlite3_prepare(database,"INSERT INTO dirbookmarks (fromPos,toPos,date,name,via) VALUES(?1,?2,?3,?4,?5)",-1,&insertBookmarkStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
 			ret=sqlite3_prepare(database,"DELETE FROM dirbookmarks WHERE id=?1",-1,&deleteBookmarkStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
@@ -244,7 +245,7 @@ err:
 	
 	return ret;
 }
--(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from to:(NSString*)to name:(NSString*)name {
+-(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from via:(NSArray*)via to:(NSString*)to name:(NSString*)name {
 	//First insert the bookmark
 	int date=[[NSDate date] timeIntervalSince1970];
 	if(sqlite3_bind_text(insertBookmarkStmt,1,[from UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
@@ -256,6 +257,19 @@ err:
 	if(sqlite3_bind_text(insertBookmarkStmt,4,[name UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
 		goto err;
 	
+	NSString *viaText=@"";
+	if(via!=nil) {
+		for(NavigationPoint *p in via) {
+			viaText=[NSString stringWithFormat:@"%@|%f,%f;",p.name,p.pos.x,p.pos.y];
+		}
+		if([viaText hasSuffix:@";"]) {
+			viaText=[viaText substringToIndex:viaText.length -1];
+		}
+		NSLog(@"Via text: %@",viaText);
+	}
+	if(sqlite3_bind_text(insertBookmarkStmt,5,[viaText UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
+		goto err;
+
 	int r=sqlite3_step(insertBookmarkStmt);
 	sqlite3_reset(insertBookmarkStmt);
 	sqlite3_clear_bindings(insertBookmarkStmt);

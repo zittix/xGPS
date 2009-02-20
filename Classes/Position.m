@@ -21,6 +21,9 @@
 	p.y=y;
 	return [p autorelease];
 }
+-(NSString*)description {
+	return [NSString stringWithFormat:@"%f,%f",x,y];
+}
 @end
 @implementation TileCoord
 @synthesize x;

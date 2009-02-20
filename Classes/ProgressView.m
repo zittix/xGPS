@@ -3,6 +3,7 @@
 #import "ProgressView.h"
 
 @implementation ProgressView
+@synthesize ltext;
 - (id)initWithFrame:(struct CGRect)frame {
 	rect=frame;
 
@@ -13,7 +14,7 @@
 
 	float translucentBlack[4] = {0, 0, 0, .8};
 	self.autoresizesSubviews=YES;
-
+	self.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self setBackgroundColor: [UIColor colorWithCGColor:CGColorCreate(CGColorSpaceCreateDeviceRGB(), translucentBlack)]];
 
 	ltext = [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 220.0f, rect.size.width, 30.0f)];
@@ -46,6 +47,7 @@
 	[button setTitle:NSLocalizedString(@"Cancel",@"Cancel") forState:UIControlStateNormal];
 	button.frame=CGRectMake((frame.size.width-100)/2,300,100,50);
 	[self addSubview: button];
+	[button retain];
 	currentDelegate=nil;
 	return self;
 }
@@ -75,6 +77,7 @@
 }
 - (void) fadeInFrom: (UIView*) view {
 	[self setAlpha: 0.0f];
+	if(view!=nil)
 	[view addSubview: self];
 	[UIView beginAnimations: nil context:nil];
 	[UIView setAnimationDuration: 0.5f];

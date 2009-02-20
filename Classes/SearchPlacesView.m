@@ -148,6 +148,7 @@
 	[searchBar becomeFirstResponder];
 }
 -(void)geoEncodeGot:(NSDictionary*)result forRequest:(NSString*)req error:(NSError*)err {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	if(err==nil) {
 	if([result count]>0) {
 		NSEnumerator *enumerator = [result keyEnumerator];
@@ -158,6 +159,7 @@
 			
 			[delegate gotResultForSearch:r];
 			[self searchBarCancelButtonClicked:searchBar];
+			return;
 		} else {
 			_result=[result retain];
 			[tblView reloadData];
@@ -172,8 +174,14 @@
 		[alert show];
 
 	}
-	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+	
 	[searchBar becomeFirstResponder];
+}
+-(void)setLocation:(BOOL)val {
+	geocoder.location=val;
+}
+-(BOOL)location {
+	return geocoder.location;
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar_ {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;

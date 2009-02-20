@@ -98,6 +98,7 @@
 		4ECFA0F70EE477E40077553B /* SettingsUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA0F60EE477E40077553B /* SettingsUIController.m */; };
 		4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */; };
 		4ECFA2A60EE48A750077553B /* SettingsMapsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2A50EE48A750077553B /* SettingsMapsController.m */; };
+		4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
 		4EE0F1CD0E6A958000BBA3FD /* nmea_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */; };
@@ -368,6 +369,8 @@
 		4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsGeneralController.m; sourceTree = "<group>"; };
 		4ECFA2A40EE48A750077553B /* SettingsMapsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsMapsController.h; sourceTree = "<group>"; };
 		4ECFA2A50EE48A750077553B /* SettingsMapsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsMapsController.m; sourceTree = "<group>"; };
+		4ED2BD750F4EE1BE00DDC062 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
+		4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -724,6 +727,8 @@
 				4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */,
 				4E0829510F4DFB2800B1C9AF /* RouteAddViewController.h */,
 				4E0829520F4DFB2800B1C9AF /* RouteAddViewController.m */,
+				4ED2BD750F4EE1BE00DDC062 /* ProgressViewController.h */,
+				4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */,
 				4E082A5E0F4E0A4300B1C9AF /* ModalSearchViewController.h */,
 				4E082A5F0F4E0A4300B1C9AF /* ModalSearchViewController.m */,
 			);
@@ -1344,6 +1349,7 @@
 				4E0829530F4DFB2800B1C9AF /* RouteAddViewController.m in Sources */,
 				4E0829790F4DFCF000B1C9AF /* NavigationPoint.m in Sources */,
 				4E082A600F4E0A4300B1C9AF /* ModalSearchViewController.m in Sources */,
+				4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

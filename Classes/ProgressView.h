@@ -20,4 +20,5 @@
 - (void)hide;
 -(void)hideCancelButton;
 -(void)hideProgressText;
+@property (nonatomic,readonly) UILabel *ltext;
 @end

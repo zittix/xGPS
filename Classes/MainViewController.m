@@ -534,6 +534,7 @@
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
 	self.navigationItem.leftBarButtonItem.enabled=YES;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
+	[self dismissModalViewControllerAnimated:YES];
 	if(err==nil) {
 		
 		//Search the first instruction

@@ -28,4 +28,5 @@
 	id delegate;
 }
 - (id)initWithFrame:(CGRect)frame andController:(UIViewController*)_controller delegate:(id<SearchPlacesViewDelegate>)_delegate;
+@property (nonatomic) BOOL location;
 @end

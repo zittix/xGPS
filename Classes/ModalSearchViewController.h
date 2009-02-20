@@ -14,4 +14,5 @@
 	id delegate;
 }
 -(id)initWithDelegate:(id<SearchPlacesViewDelegate>)del;
+@property (nonatomic) BOOL location;
 @end

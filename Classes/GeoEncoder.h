@@ -35,7 +35,10 @@
 	BOOL parsingPlace;
 	NSMutableString *currentProp;
 	NSMutableData *resultData;
+	BOOL retryingWithoutLoc;
+	BOOL location;
 }
 @property (nonatomic,assign) id delegate;
+@property (nonatomic) BOOL location;
 -(BOOL)geoencode:(NSString*)toEncode;
 @end

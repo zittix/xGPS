@@ -13,7 +13,7 @@
 #import <CoreLocation/CLLocationManager.h>
 #import "MapView.h"
 #import "MainViewController.h"
-
+#import "NavigationPoint.h"
 int roundNearest(double dist) {
 	//We dont want 13 but 10, we dont want 345 but 340
 	double dist2=dist/10;
@@ -416,12 +416,14 @@ int roundNearest(double dist) {
 	
 	NSString*from=[[NSString alloc] initWithFormat:@"%f,%f",lat,lon];
 	NSString *to=[_to retain];
+	NSString *via=[_via retain];
 	[delegate clearDirections];
 	recomputing=YES;
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-	[self drive:from to:to];
+	[self drive:from to:to via:_via delegate:nil];
 	[from release];
 	[to release];
+	[via release];
 }
 -(void)nextDrivingInstructions {
 	if(instructions==nil) return;
@@ -560,6 +562,9 @@ int roundNearest(double dist) {
 		[currentProp appendString:string];
     }
 }
+-(void)saveCurrent:(NSString*)name {
+	currentBookId=[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from via:_via to:_to name:name];
+}
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End directions ok with %d instructions and %d road points",[instructions count],[roadPoints count]);
 	
@@ -574,11 +579,16 @@ int roundNearest(double dist) {
 	
 	nbWrongWay=0;
 	inBetweenDistance=-1;
-	[delegate directionsGot:_from to:_to  error:nil];
+	
+	if(tmpDelegate!=nil) {
+		[tmpDelegate directionsGot:_from to:_to  error:nil];
+		tmpDelegate=nil;
+	} else
+		[delegate directionsGot:_from to:_to  error:nil];
 	if([instructions count]>0){
 		
 		if(!recomputing && [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch])
-			currentBookId=[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from to:_to name:@""];
+			currentBookId=[APPDELEGATE.dirbookmarks insertBookmark:roadPoints withInstructions:instructions from:_from via:_via to:_to name:@""];
 		
 		
 		Instruction *s=[instructions objectAtIndex:instrIndex];
@@ -620,7 +630,12 @@ int roundNearest(double dist) {
 	[map setNextInstruction:nil updatePos:NO];
 	nbWrongWay=0;
 	instrIndex=0;
-	[delegate directionsGot:_from to:_to  error:nil];
+	if(tmpDelegate!=nil) {
+		[tmpDelegate directionsGot:_from to:_to  error:nil];
+		tmpDelegate=nil;
+	} else
+		[delegate directionsGot:_from to:_to  error:nil];
+	
 	if([instructions count]>0){
 		Instruction *s=[instructions objectAtIndex:instrIndex];
 		[map setNextInstruction:s updatePos:YES];
@@ -636,6 +651,8 @@ int roundNearest(double dist) {
 	roadPoints=nil;
 	[_from release];
 	[_to release];
+	[_via release];
+	_via=nil;
 	_from=nil;
 	_to=nil;
 	currentBookId=-1;
@@ -646,8 +663,12 @@ int roundNearest(double dist) {
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Parse error from delegate");
 	//if(req==nil) return;
+	if(tmpDelegate!=nil) {
+		[tmpDelegate directionsGot:_from to:_to  error:parseError];
+		tmpDelegate=nil;
+	} else
+		[delegate directionsGot:_from to:_to  error:parseError];
 	
-	[delegate directionsGot:_from to:_to  error:parseError];
 	//instructions=nil;
 	
 	
@@ -690,7 +711,12 @@ int roundNearest(double dist) {
 	
 	//if(req==nil) return;
 	
-	[delegate directionsGot:_from to:_to  error:error];
+	if(tmpDelegate!=nil) {
+		[tmpDelegate directionsGot:_from to:_to  error:error];
+		tmpDelegate=nil;
+	} else
+		[delegate directionsGot:_from to:_to  error:error];
+	
 	
 	instructions=nil;
 	
@@ -749,17 +775,24 @@ int roundNearest(double dist) {
 	} else {
 		computing=NO;
 		recomputing=NO;
-		[delegate directionsGot:_from to:_to  error:nil];
+		if(tmpDelegate!=nil) {
+			[tmpDelegate directionsGot:_from to:_to  error:nil];
+			tmpDelegate=nil;
+		} else
+			[delegate directionsGot:_from to:_to  error:nil];
+		
 	}
     // release the connection, and the data object
     [connection release];
     [resultData release];
 }
--(BOOL)drive:(NSString*)from to:(NSString*)to {
+-(BOOL)drive:(NSString*)from to:(NSString*)to via:(NSArray*)via delegate:(id<DirectionsControllerDelegate>)_tmpDelegate{
 	//if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
-	
+	tmpDelegate=_tmpDelegate;
 	if(computing) return NO;
 	
+	
+	_via=[via retain];
 	_from=[from retain];
 	_to=[to retain];
 	instrIndex=0;
@@ -768,7 +801,19 @@ int roundNearest(double dist) {
 	//NSLog(@"Using %@ language",lang);
 	
 	NSString* fromE=[DirectionsController urlencode:from encoding:@"utf8"];
-	NSString* toE=[DirectionsController urlencode:to encoding:@"utf8"];
+	
+	NSString *advTo=to;
+	if(via!=nil) {
+		advTo=@"";
+		for(NavigationPoint *p in via) {
+			if(advTo.length==0) 
+				advTo=[advTo stringByAppendingFormat:@"%f,%f",p.pos.x,p.pos.y];
+			else
+				advTo=[advTo stringByAppendingFormat:@"+to:%f,%f",p.pos.x,p.pos.y];
+		}
+		advTo=[advTo stringByAppendingFormat:@"+to:%@",to];
+	}
+	NSString* toE=[DirectionsController urlencode:advTo encoding:@"utf8"];
 	
 	NSString *unit;
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit])
@@ -776,6 +821,17 @@ int roundNearest(double dist) {
 	else
 		unit=@"ptk";
 	
+	NSString *routeType=@"";
+	switch(routingType) {
+		case ROUTING_NORMAL:
+			break;
+		case ROUTING_AVOID_HIGHWAY:
+			routeType=@"&dirflg=h";
+			break;
+		case ROUTING_BY_FOOT:
+			routeType=@"&dirflg=w";
+			break;
+	}
 	//NSString *loc=@"";
 	
 	/*if(APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1) {
@@ -783,7 +839,7 @@ int roundNearest(double dist) {
 	}*/
 	
 	
-	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&hl=%@&saddr=%@&daddr=%@&doflg=%@",lang,fromE,toE,unit];
+	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&hl=%@&saddr=%@&daddr=%@&doflg=%@%@",lang,fromE,toE,unit,routeType];
 	
 	NSLog(@"Getting directions at %@",urlT);
 	
@@ -835,6 +891,14 @@ int roundNearest(double dist) {
 	[_to release];
 	_to=[f retain];
 }
+-(void)setVia:(NSArray*)f {
+	[_via release];
+	_via=[f retain];
+}
+-(NSArray*) via {
+	return _via;
+}
 @synthesize map;
-
+@synthesize routingType;
+@synthesize recomputing;
 @end

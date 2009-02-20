@@ -9,6 +9,7 @@
 #import "DrivingDirectionsSearchView.h"
 #import "xGPSAppDelegate.h"
 #import "MainViewController.h"
+#import "ProgressViewController.h"
 @implementation DrivingDirectionsSearchView
 
 
@@ -79,7 +80,7 @@
 	}else
 		fromT=from.text;
 	
-	if(![APPDELEGATE.directions drive:fromT to:to.text]) {
+	if(![APPDELEGATE.directions drive:fromT to:to.text via:nil delegate:nil]) {
 		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the required information from the server: %@",@"Network error message"),NSLocalizedString(@"Unknown error",@"Unknown error")] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[alert show];
 		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
@@ -88,6 +89,17 @@
 	controller.navigationItem.leftBarButtonItem.enabled=NO;
 	controller.navigationItem.rightBarButtonItem.enabled=NO;
 	[searchBar_ resignFirstResponder];
+	
+	ProgressViewController *pController=[[ProgressViewController alloc] init];
+	
+	[pController.progress hideCancelButton];
+	pController.progress.ltext.text=NSLocalizedString(@"Computing your route...",@"");
+	[pController.progress setProgress:0.2];
+	APPDELEGATE.directions.routingType=ROUTING_NORMAL;
+		
+	[controller presentModalViewController:pController animated:NO];
+	
+	
 }
 - (void)searchBarBookmarkButtonClicked:(UISearchBar *)searchBar {
 	

@@ -24,4 +24,7 @@
 -(PositionObj*)pos {
 	return pos;
 }
+-(NSString*)description {
+	return [NSString stringWithFormat:@"%@ @ %f,%f",name,pos.x,pos.y];
+}
 @end

@@ -41,6 +41,7 @@
     [super viewWillAppear:animated];
 	[bookmarks release];
 	bookmarks=[APPDELEGATE.dirbookmarks copyBookmarks];
+	[self.tableView reloadData];
 }
 
 /*
@@ -171,7 +172,7 @@
 		[instr release];
 		[self.navigationController dismissModalViewControllerAnimated:YES];
 	} else if (row==0) {
-		UINavigationController *nav=[[RouteAddViewController alloc] initWithStyle:UITableViewStylePlain];
+		UINavigationController *nav=[[RouteAddViewController alloc] init];
 		[self.navigationController pushViewController:nav animated:YES];
 		[nav release];
 	}

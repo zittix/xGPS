@@ -15,6 +15,7 @@
 @synthesize name;
 @synthesize pos;
 @synthesize addr;
+
 +(GeoEncoderResult*)resultWithName:(NSString*)name pos:(PositionObj*)pos addr:(NSString*)addr{
 	GeoEncoderResult*r=[[GeoEncoderResult alloc] init];
 	r.pos=pos;
@@ -28,6 +29,14 @@
 
 @implementation GeoEncoder
 @synthesize delegate;
+@synthesize location;
+
+-(id) init {
+	if((self=[super init])) {
+		location=YES;
+	}
+	return self;
+}
 
 + (NSString *) urlencode: (NSString *) url encoding:(NSString*)enc
 {
@@ -104,12 +113,12 @@
 		currentProp=nil;
 	}
 	if([elementName isEqualToString:@"address"] && parsingPlace==YES && currentAddr==nil) {
-		NSLog(@"Found Address");
+		//NSLog(@"Found Address");
 		currentAddr=currentProp;
 		currentProp=nil;
 	}
 	if([elementName isEqualToString:@"Snippet"] && parsingPlace==YES && currentAddr==nil) {
-		NSLog(@"Found Snippet");
+		//NSLog(@"Found Snippet");
 		currentAddr=currentProp;
 		currentProp=nil;
 	}
@@ -143,13 +152,14 @@
 	currentPos=nil;
 	currentProp=nil;
 	parsingPlace=NO;
+	retryingWithoutLoc=NO;
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	NSLog(@"Parse error from delegate");
 	if(req==nil) return;
-	
-	[delegate geoEncodeGot:result forRequest:req  error:nil];
+	retryingWithoutLoc=NO;
+	[delegate geoEncodeGot:result forRequest:[req autorelease]  error:nil];
 	result=nil;
 	req=nil;
 	if(currentPlacename!=nil)
@@ -182,7 +192,7 @@
           [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);
 	
 	if(req==nil) return;
-	
+	retryingWithoutLoc=NO;
 	[delegate geoEncodeGot:result forRequest:req  error:error];
 	result=nil;
 	req=nil;
@@ -221,33 +231,47 @@
 {
     // do something with the data
     // receivedData is declared as a method instance elsewhere
-    NSLog(@"Succeeded! Received %d bytes of data",[resultData length]);
-
-	NSXMLParser *xmlParser=[[NSXMLParser alloc] initWithData:resultData];
-	[xmlParser setShouldProcessNamespaces:NO];
-	[xmlParser setShouldReportNamespacePrefixes:NO];
-	[xmlParser setShouldResolveExternalEntities:NO];
-		
-	if(xmlParser==nil) {
-		NSLog(@"Parsing error");
-	} else {
-		xmlParser.delegate=self;
-		if(![xmlParser parse]) {
-			NSLog(@"Parsing error 2");
+    NSLog(@"Succeeded! Received %d bytes of data with redone=%d",[resultData length],retryingWithoutLoc);
+	
+	if([resultData length]==0) {
+		[connection release];
+		[resultData release];
+		if(!retryingWithoutLoc && APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1) {
+			retryingWithoutLoc=YES;
+			[self geoencode:req];
+			[req release];
+			return;
 		}
-		//[dataR release];
-		[xmlParser release];
+		retryingWithoutLoc=NO;
+	} else {
+		
+		NSXMLParser *xmlParser=[[NSXMLParser alloc] initWithData:resultData];
+		[xmlParser setShouldProcessNamespaces:NO];
+		[xmlParser setShouldReportNamespacePrefixes:NO];
+		[xmlParser setShouldResolveExternalEntities:NO];
+		
+		if(xmlParser==nil) {
+			NSLog(@"Parsing error");
+		} else {
+			xmlParser.delegate=self;
+			if(![xmlParser parse]) {
+				NSLog(@"Parsing error 2");
+			}
+			//[dataR release];
+			[xmlParser release];
+		}
+		[connection release];
+		[resultData release];
+		retryingWithoutLoc=NO;
 	}
-
     // release the connection, and the data object
-    [connection release];
-    [resultData release];
+	
 }
 -(BOOL)geoencode:(NSString*)toEncode {
 	//if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline]) return NO;
-	if(req!=nil) return NO;
+	if(req!=nil && !retryingWithoutLoc) return NO;
 	
-
+	
 	
 	NSString *lang=[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsMapsLanguage];
 	if(lang==nil) lang=@"en";
@@ -256,7 +280,7 @@
 	NSString *search=toEncode;
 	
 	//Add location if available
-	if(APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1) {
+	if(APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1 && !retryingWithoutLoc && location) {
 		search=[NSString stringWithFormat:@"%@ loc:%f,%f",search,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude];
 	}
 	
@@ -268,7 +292,7 @@
 	NSURL *url = [NSURL URLWithString:urlT];
 	
 	//NSMutableURLRequest *urlReq=[NSMutableURLRequest requestWithURL:url];
-
+	
 	
 	//[urlReq setValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" forHTTPHeaderField:@"User-Agent"];
 	//[urlReq setValue:@"image/png,image/*;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
@@ -276,8 +300,8 @@
 	
 	// create the request
 	NSURLRequest *theRequest=[NSMutableURLRequest requestWithURL:url
-											  cachePolicy:NSURLRequestUseProtocolCachePolicy
-										  timeoutInterval:30.0];
+													 cachePolicy:NSURLRequestUseProtocolCachePolicy
+												 timeoutInterval:30.0];
 	// create the connection with the request
 	// and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
