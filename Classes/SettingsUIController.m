@@ -12,15 +12,59 @@
 @implementation SettingsUIController
 
 
-- (id)initWithStyle:(UITableViewStyle)style {
+- (id)init {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
+    if (self = [super init]) {
 		self.navigationItem.title=NSLocalizedString(@"User Interface",@"");
+		
+		self.view=[[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+		[self.view release];
+		self.view.autoresizesSubviews=YES;
+		
+		self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		tableView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		toolbarPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height,self.view.frame.size.width,44)];
+		toolbarPicker.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+		
+		UIBarButtonItem *space=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+		UIBarButtonItem *btnDone=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setTime)];
+		[toolbarPicker setItems:[NSArray arrayWithObjects:space,btnDone,nil] animated:NO];
+		[space release];
+		[btnDone release];
+		pickerTime=[[UIDatePicker alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height+44,self.view.frame.size.width,210)];
+		pickerTime.datePickerMode=UIDatePickerModeTime;
+		pickerTime.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+		
+		dummyView=[[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-254)];
+		dummyView.backgroundColor=[UIColor blackColor];
+		dummyView.alpha=0;
+		dummyView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		pickerTime.minuteInterval=15;
+		tableView=[[UITableView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) style:UITableViewStyleGrouped];
+		tableView.dataSource=self;
+		tableView.delegate=self;
+		
+		[self.view addSubview:tableView];
+		
     }
     return self;
 }
 
+-(void) setTime {
+	//editingTime
 
+	[UIView beginAnimations:nil context:nil];
+	dummyView.alpha=0;
+	
+	tableView.scrollEnabled=YES;
+	toolbarPicker.frame=CGRectMake(0,self.view.frame.size.height,self.view.frame.size.width,44);
+	pickerTime.frame=CGRectMake(0,self.view.frame.size.height,self.view.frame.size.width,210);
+	tableView.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
+	[toolbarPicker removeFromSuperview];
+	[pickerTime removeFromSuperview];
+	[dummyView removeFromSuperview];
+	[UIView commitAnimations];
+}
 /*
  - (void)viewDidLoad {
  [super viewDidLoad];
@@ -154,7 +198,7 @@
 	}
 }
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *CellIdentifier;
 	switch (indexPath.section) {
@@ -172,7 +216,7 @@
 				case 3: CellIdentifier=@"endtime"; break;
 			} break;
 	}
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		switch (indexPath.section) {
 			case 0:  {
@@ -310,11 +354,23 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	// AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-	// [self.navigationController pushViewController:anotherViewController];
-	// [anotherViewController release];
+- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section==1) {
+		if(indexPath.row==2 || indexPath.row==3) {
+			editingTime=indexPath.row-2;
+			dummyView.alpha=0;
+			[self.view addSubview:pickerTime];
+			[self.view addSubview:toolbarPicker];
+			[self.view addSubview:dummyView];
+			[UIView beginAnimations:nil context:nil];
+			dummyView.alpha=0.7;
+			tableView.scrollEnabled=NO;
+			toolbarPicker.frame=CGRectMake(0,self.view.frame.size.height-254,self.view.frame.size.width,44);
+			pickerTime.frame=CGRectMake(0,self.view.frame.size.height-210,self.view.frame.size.width,210);
+			dummyView.frame=tableView.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-254);
+			[UIView commitAnimations];
+		}
+	}
 }
 
 
@@ -323,9 +379,11 @@
 
 
 - (void)dealloc {
+	[tableView release];
+	[pickerTime release];
     [super dealloc];
 }
 
-
+@synthesize tableView;
 @end
 

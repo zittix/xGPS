@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SettingsUIController : UITableViewController {
-
+@interface SettingsUIController : UIViewController<UITableViewDataSource,UITableViewDelegate> {
+	UITableView *tableView;
+	UIDatePicker *pickerTime;
+	UIView *dummyView;
+	UIToolbar *toolbarPicker;
+	int editingTime;
 }
-
+@property (nonatomic,readonly) UITableView *tableView;
 @end

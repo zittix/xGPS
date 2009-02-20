@@ -10,6 +10,14 @@
 #import "TitleValueCell.h"
 #import "xGPSAppDelegate.h"
 #include "GPXLogger.h"
+
+#import "SettingsUIController.h"
+#import "SettingsGeneralController.h"
+#import "SettingsMapsController.h"
+#import "SettingsGPSController.h"
+#import "SettingsDrivingDirectionsController.h"
+#import "SettingsGPXController.h"
+#import "NetworkReceiverViewController.h"
 @implementation SettingsViewController
 #define VALUE_COLOR [UIColor colorWithRed:0.235 green:0.2549 blue:0.49019 alpha:1]
 
@@ -49,7 +57,7 @@
 	if(sender.on)
 		[APPDELEGATE.gpxlogger startLogging];
 	else
-	[APPDELEGATE.gpxlogger stopLogging];
+		[APPDELEGATE.gpxlogger stopLogging];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -66,7 +74,7 @@
 				case 1:	id=@"transfer"; break;
 				case 2:	id=@"maps"; break;
 				case 3:	id=@"gps"; break;
-				//case 4:	id=@"locations"; break;
+					//case 4:	id=@"locations"; break;
 				case 4:	id=@"driving"; break;
 				case 5:	id=@"gpx"; break;
 				case 6:	id=@"ui"; break;
@@ -123,7 +131,7 @@
 					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog];
 					//[value release];
 				}
-				break;
+					break;
 			} break;
 			case 1: {
 				switch(indexPath.row) {
@@ -143,11 +151,11 @@
 						cell.text=NSLocalizedString(@"GPS",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 					} break;
-					/*case 4:
-						cell.text=NSLocalizedString(@"Locations",@"");
-						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-
-						break;*/
+						/*case 4:
+						 cell.text=NSLocalizedString(@"Locations",@"");
+						 cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+						 
+						 break;*/
 					case 4:
 						cell.text=NSLocalizedString(@"Driving directions",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -196,39 +204,40 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.section==1 && indexPath.row==0) {
-		if(generalsettings==nil)
-			generalsettings=[[SettingsGeneralController alloc] initWithStyle:UITableViewStyleGrouped];
+		SettingsGeneralController *generalsettings=[[SettingsGeneralController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:generalsettings animated:YES];
+		[generalsettings release];
 	} else if(indexPath.section==1 && indexPath.row==6) {
-		if(uisettings==nil)
-			uisettings=[[SettingsUIController alloc] initWithStyle:UITableViewStyleGrouped];
+		
+		SettingsUIController * uisettings=[[SettingsUIController alloc] init];
 		[self.navigationController pushViewController:uisettings animated:YES];
-			
+		[uisettings release];
 	}else if(indexPath.section==1 && indexPath.row==2) {
-		if(mapssettings==nil)
-			mapssettings=[[SettingsMapsController alloc] initWithStyle:UITableViewStyleGrouped];
+		
+		SettingsMapsController *mapssettings=[[SettingsMapsController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:mapssettings animated:YES];
-		
+		[mapssettings release];
 	}else if(indexPath.section==1 && indexPath.row==3) {
-		if(gpssettings==nil)
-			gpssettings=[[SettingsGPSController alloc] initWithStyle:UITableViewStyleGrouped];
+		
+		SettingsGPSController *gpssettings=[[SettingsGPSController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:gpssettings animated:YES];
-		
+		[gpssettings release];
 	}else if(indexPath.section==1 && indexPath.row==4) {
-		if(dirsettings==nil)
-			dirsettings=[[SettingsDrivingDirectionsController alloc] initWithStyle:UITableViewStyleGrouped];
+		
+		SettingsDrivingDirectionsController *dirsettings=[[SettingsDrivingDirectionsController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:dirsettings animated:YES];
-		
+		[dirsettings release];
 	}else if(indexPath.section==1 && indexPath.row==5) {
-		if(gpxsettings==nil)
-			gpxsettings=[[SettingsGPXController alloc] initWithStyle:UITableViewStyleGrouped];
-		[self.navigationController pushViewController:gpxsettings animated:YES];
 		
+		SettingsGPXController * gpxsettings=[[SettingsGPXController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:gpxsettings animated:YES];
+		[gpxsettings release];
 	} else if(indexPath.section==1 && indexPath.row==1) {
 #ifdef HAS_HTTPSERVER
-		if(networkView==nil)
-			networkView=[[NetworkReceiverViewController alloc] init];
+		
+		NetworkReceiverViewController * networkView=[[NetworkReceiverViewController alloc] init];
 		[self.navigationController pushViewController:networkView animated:YES];	
+		[networkView release];
 #else
 		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:@"The Wireless Transfer feature is not enabled in nightly builds because of some bugs in the Open Source toolchain." delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
 		[alert show];
@@ -239,8 +248,6 @@
 
 -(void)reload {
 	[self.tableView reloadData];
-	if(gpssettings!=nil)
-	[gpssettings.tableView reloadData];
 }
 - (void)viewDidLoad {
 	[super viewDidLoad];
