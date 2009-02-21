@@ -15,99 +15,131 @@
 
 -(id)init {
 	if((self=[super init])) {
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-		NSString *documentsDirectory = [paths objectAtIndex:0];
-		NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_directions.db"];
-		NSFileManager * fm = [NSFileManager defaultManager];
-		NSLog(@"Using Sqlite Version %s",sqlite3_libversion());
-		//NSLog(@"Sqlite library thread-safe option: %@",(sqlite3_threadsafe() ? @"Yes" : @"No"));
-		NSLog(@"Loading Direction Bookmarks DB %@...",path);
-		
-		//Check DB version
-		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]>0) {
-			if([fm fileExistsAtPath:path]) {
-				UIAlertView * hotSheet = [[UIAlertView alloc]
-										  initWithTitle:NSLocalizedString(@"Directions Bookmarks",@"")
-										  message:NSLocalizedString(@"Your saved driving directions are not compatible with this version of xGPS. They have been deleted.",@"")
-										  delegate:nil
-										  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
-										  otherButtonTitles:nil];
-				
-				[hotSheet show];
-				
-				
-				NSError *err;
-				[fm removeItemAtPath:path error:&err];
-			}
-			
-			
-		}
-		[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDirBookmarksDBVersion];
-		
-		if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
-			char *error;
-			int ret;
-				char *tMap="CREATE TABLE IF NOT EXISTS dirbookmarks (id INTEGER PRIMARY KEY AUTOINCREMENT, fromPos TEXT,toPos TEXT,date INTEGER,length INTEGER,duration INTEGER, name TEXT, via TEXT)";
-				ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-				NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
-				tMap="CREATE TABLE IF NOT EXISTS dirb_roadpoints (lat REAL,lon REAL,owner INTEGER,internalId INTEGER)";
-				ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-				NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
-				tMap="CREATE TABLE IF NOT EXISTS dirb_instructions (lat REAL,lon REAL,owner INTEGER,internalId INTEGER,name TEXT,descr TEXT)";
-				ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-				NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
-				ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date,name,via FROM dirbookmarks ORDER BY date DESC",-1,&getBookmarkStmt,NULL);
-				NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
-			
-			ret=sqlite3_prepare(database,"SELECT lat,lon FROM dirb_roadpoints WHERE owner=?1 ORDER BY internalId ASC",-1,&getRoadPointStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
-
-			ret=sqlite3_prepare(database,"SELECT lat,lon,name,descr FROM dirb_instructions WHERE owner=?1 ORDER BY internalId ASC",-1,&getInstrStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
-
-			
-			
-			//Migrate the DB if wrong Primary index
-			
-			//tMap="DELETE FROM tiles";
-			//ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-			//NSAssert1(ret==SQLITE_OK, @"Failed to empty database's tables with message '%s'.",error);
-			
-			
-			//PRepare the get query for speedup
-			
-			
-			//PRepare the insert query for speedup
-			ret=sqlite3_prepare(database,"INSERT INTO dirb_roadpoints (lat,lon,owner,internalId) VALUES(?1,?2,?3,?4)",-1,&insertRoadPointStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-			ret=sqlite3_prepare(database,"INSERT INTO dirb_instructions (lat,lon,owner,internalId,name,descr) VALUES(?1,?2,?3,?4,?5,?6)",-1,&insertInstrStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-			ret=sqlite3_prepare(database,"INSERT INTO dirbookmarks (fromPos,toPos,date,name,via) VALUES(?1,?2,?3,?4,?5)",-1,&insertBookmarkStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-			ret=sqlite3_prepare(database,"DELETE FROM dirbookmarks WHERE id=?1",-1,&deleteBookmarkStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-			ret=sqlite3_prepare(database,"DELETE FROM dirb_roadpoints WHERE owner=?1",-1,&deleteRoadPointStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-			ret=sqlite3_prepare(database,"DELETE FROM dirb_instructions WHERE owner=?1",-1,&deleteInstrStmt,NULL);
-			NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
-
-			//PRepare the check query for speedup
-			//ret=sqlite3_prepare(database,"SELECT x FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&checkTileStmt,NULL);
-			//NSAssert1(ret==SQLITE_OK, @"Failed to prepare check query with message '%s'.",sqlite3_errmsg(database));
-			
-		} else {
-			// Even though the open failed, call close to properly clean up resources.
-			sqlite3_close(database);
-			NSAssert1(0, @"Failed to open database with message '%s'.", sqlite3_errmsg(database));
-			// Additional error handling, as appropriate...
-			[self release];
-			return nil;
-		}
-		closed=NO;
+		closed=YES;
+		[self load];
 	}
 	return self;
 }
+-(void) load {
+	if(!closed) return;
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_directions.db"];
+	NSFileManager * fm = [NSFileManager defaultManager];
+	NSLog(@"Using Sqlite Version %s",sqlite3_libversion());
+	//NSLog(@"Sqlite library thread-safe option: %@",(sqlite3_threadsafe() ? @"Yes" : @"No"));
+	NSLog(@"Loading Direction Bookmarks DB %@...",path);
+	
+	//Check DB version
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]>0) {
+		if([fm fileExistsAtPath:path]) {
+			UIAlertView * hotSheet = [[UIAlertView alloc]
+									  initWithTitle:NSLocalizedString(@"Directions Bookmarks",@"")
+									  message:NSLocalizedString(@"Your saved driving directions are not compatible with this version of xGPS. They have been deleted.",@"")
+									  delegate:nil
+									  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
+									  otherButtonTitles:nil];
+			
+			[hotSheet show];
+			
+			
+			NSError *err;
+			[fm removeItemAtPath:path error:&err];
+		}
+		
+		
+	}
+	[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDirBookmarksDBVersion];
+	
+	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
+		char *error;
+		int ret;
+		char *tMap="CREATE TABLE IF NOT EXISTS dirbookmarks (id INTEGER PRIMARY KEY AUTOINCREMENT, fromPos TEXT,toPos TEXT,date INTEGER,length INTEGER,duration INTEGER, name TEXT, via TEXT)";
+		ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+		NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
+		tMap="CREATE TABLE IF NOT EXISTS dirb_roadpoints (lat REAL,lon REAL,owner INTEGER,internalId INTEGER)";
+		ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+		NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
+		tMap="CREATE TABLE IF NOT EXISTS dirb_instructions (lat REAL,lon REAL,owner INTEGER,internalId INTEGER,name TEXT,descr TEXT)";
+		ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+		NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
+		ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date,name,via FROM dirbookmarks ORDER BY date DESC",-1,&getBookmarkStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+		
+		ret=sqlite3_prepare(database,"SELECT lat,lon FROM dirb_roadpoints WHERE owner=?1 ORDER BY internalId ASC",-1,&getRoadPointStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+		
+		ret=sqlite3_prepare(database,"SELECT lat,lon,name,descr FROM dirb_instructions WHERE owner=?1 ORDER BY internalId ASC",-1,&getInstrStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+		
+		
+		
+		//Migrate the DB if wrong Primary index
+		
+		//tMap="DELETE FROM tiles";
+		//ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+		//NSAssert1(ret==SQLITE_OK, @"Failed to empty database's tables with message '%s'.",error);
+		
+		
+		//PRepare the get query for speedup
+		
+		
+		//PRepare the insert query for speedup
+		ret=sqlite3_prepare(database,"INSERT INTO dirb_roadpoints (lat,lon,owner,internalId) VALUES(?1,?2,?3,?4)",-1,&insertRoadPointStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		ret=sqlite3_prepare(database,"INSERT INTO dirb_instructions (lat,lon,owner,internalId,name,descr) VALUES(?1,?2,?3,?4,?5,?6)",-1,&insertInstrStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		ret=sqlite3_prepare(database,"INSERT INTO dirbookmarks (fromPos,toPos,date,name,via) VALUES(?1,?2,?3,?4,?5)",-1,&insertBookmarkStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		ret=sqlite3_prepare(database,"DELETE FROM dirbookmarks WHERE id=?1",-1,&deleteBookmarkStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		ret=sqlite3_prepare(database,"DELETE FROM dirb_roadpoints WHERE owner=?1",-1,&deleteRoadPointStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		ret=sqlite3_prepare(database,"DELETE FROM dirb_instructions WHERE owner=?1",-1,&deleteInstrStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		
+		//PRepare the check query for speedup
+		//ret=sqlite3_prepare(database,"SELECT x FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&checkTileStmt,NULL);
+		//NSAssert1(ret==SQLITE_OK, @"Failed to prepare check query with message '%s'.",sqlite3_errmsg(database));
+		
+	} else {
+		// Even though the open failed, call close to properly clean up resources.
+		sqlite3_close(database);
+		NSAssert1(0, @"Failed to open database with message '%s'.", sqlite3_errmsg(database));
+		// Additional error handling, as appropriate...
+		[self release];
+		return;
+	}
+	closed=NO;
+	
+
+}
+-(NSString*)getDBFilename {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"xGPS_directions.db"];
+	return path;
+}
+-(void)close {
+	if(closed) return;
+
+	
+	sqlite3_finalize(insertRoadPointStmt);
+	sqlite3_finalize(insertInstrStmt);
+	sqlite3_finalize(insertBookmarkStmt);
+	sqlite3_finalize(getBookmarkStmt);
+	sqlite3_finalize(getRoadPointStmt);
+	sqlite3_finalize(getInstrStmt);
+	sqlite3_finalize(deleteRoadPointStmt);
+	sqlite3_finalize(deleteInstrStmt);
+	sqlite3_finalize(deleteBookmarkStmt);
+	
+	sqlite3_close(database);
+	closed=YES;
+	
+}
 -(void)deleteAllBookmarks {
+	if(closed) return;
 	char *error;
 	int ret;
 	char *tMap="DELETE FROM dirbookmarks";
@@ -118,6 +150,7 @@
 	ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 }
 -(void)deleteBookmark:(long)_id {
+	if(closed) return;
 	if(sqlite3_bind_int64(deleteBookmarkStmt,1,_id)!=SQLITE_OK)
 		goto err;
 	
@@ -161,6 +194,7 @@ err:
 }
 
 -(NSMutableArray*)copyBookmarkRoadPoints:(int)id{
+	if(closed) return nil;
 	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
 	if(sqlite3_bind_int64(getRoadPointStmt,1,id)!=SQLITE_OK)
 		goto err;
@@ -183,6 +217,7 @@ err:
 	return nil;
 }
 -(NSMutableArray*)copyBookmarkInstructions:(int)id {
+	if(closed) return nil;
 	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
 	if(sqlite3_bind_int64(getInstrStmt,1,id)!=SQLITE_OK)
 		goto err;
@@ -221,6 +256,7 @@ err:
 
 
 -(NSArray*)copyBookmarks{
+	if(closed) return nil;
 	NSMutableArray *ret=[[NSMutableArray alloc] initWithCapacity:5];
 	int r=sqlite3_step(getBookmarkStmt);
 	while (r == SQLITE_ROW) {
@@ -246,6 +282,7 @@ err:
 	return ret;
 }
 -(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from via:(NSArray*)via to:(NSString*)to name:(NSString*)name {
+	if(closed) return -1;
 	//First insert the bookmark
 	int date=[[NSDate date] timeIntervalSince1970];
 	if(sqlite3_bind_text(insertBookmarkStmt,1,[from UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)

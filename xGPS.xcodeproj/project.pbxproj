@@ -568,8 +568,6 @@
 				1D3623250D0F684500981E51 /* xGPSAppDelegate.m */,
 				4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */,
 				4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */,
-				4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */,
-				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -830,6 +828,8 @@
 				4EC64A9D0F248385006B2408 /* GPXLogger.m */,
 				4EE243420F30750500C41ACA /* SoundController.h */,
 				4EE243430F30750500C41ACA /* SoundController.m */,
+				4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */,
+				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

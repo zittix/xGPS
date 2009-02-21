@@ -11,8 +11,6 @@
 
 @interface DirectionsBookmarks : NSObject {
 	sqlite3 *database;
-	//sqlite3_stmt* getTileStmt;
-	//sqlite3_stmt* checkTileStmt;
 	sqlite3_stmt* insertRoadPointStmt;
 	sqlite3_stmt* insertInstrStmt;
 	sqlite3_stmt* insertBookmarkStmt;
@@ -25,6 +23,9 @@
 	BOOL closed;
 }
 -(id)init;
+-(void)close;
+-(void)load;
+-(NSString*)getDBFilename;
 -(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from via:(NSArray*)via to:(NSString*)to name:(NSString*)name;
 -(NSArray*)copyBookmarks;
 -(void)deleteBookmark:(long)_id;

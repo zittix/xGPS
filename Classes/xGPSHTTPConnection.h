@@ -12,6 +12,7 @@
 	int dataStartIndex;
 	NSMutableArray* multipartData;
 	BOOL postHeaderOK;
+	NSString *fileSaving;
 }
 
 - (BOOL)isBrowseable:(NSString *)path;

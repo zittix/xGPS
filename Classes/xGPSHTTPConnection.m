@@ -41,6 +41,7 @@ static BOOL uploading=NO;
 	[outdata appendFormat:@"<li><a href=\"/info\">%@</a></li>\n",NSLocalizedString(@"Show device info",@"")];
 	[outdata appendFormat:@"<li><a href=\"/gpxlogger\">%@</a></li>\n",NSLocalizedString(@"GPX Log Files",@"")];
 	[outdata appendFormat:@"<li><a href=\"/uploadMapsDB\">%@</a></li>\n",NSLocalizedString(@"Upload a new maps database",@"")];
+	[outdata appendFormat:@"<li><a href=\"/uploadDirectionsDB\">%@</a></li>\n",NSLocalizedString(@"Upload a new directions database",@"")];
 	[outdata appendString:@"</ul>"];
 	[outdata appendString:@"</body></html>"];
     
@@ -114,6 +115,23 @@ static BOOL uploading=NO;
 	
 }
 
+-(NSString*)createUploadDirectionsOKPage {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
+	[outdata appendFormat:@"<title>%@ - %@</title>", NSLocalizedString(@"xGPS Web-based Management",@""), NSLocalizedString(@"Upload new directions database",@"")];
+    [outdata appendString:@"<style>html {background-color:#eeeeee} body { background-color:#FFFFFF; font-family:Tahoma,Arial,Helvetica,sans-serif; font-size:18x; margin-left:15%; margin-right:15%; border:3px groove #006600; padding:15px; } </style>"];
+    [outdata appendString:@"</head><body>"];
+	[outdata appendFormat:@"<h1>%@</h1>", NSLocalizedString(@"Upload new directions database",@"")];
+	
+	[outdata appendFormat:@"<p>%@</p>",NSLocalizedString(@"The directions database has been sucessfully saved.",@"")];
+	[outdata appendFormat:@"<p><a href=\"/\">%@</a></p>",NSLocalizedString(@"Return to main page",@"")];
+	
+	[outdata appendString:@"</body></html>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
 -(NSString*)createUploadMapDBPage {
 	NSMutableString *outdata = [NSMutableString new];
 	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
@@ -124,6 +142,30 @@ static BOOL uploading=NO;
 	
 	[outdata appendString:@"<form action=\"/uploadMapsDB\" method=\"post\" enctype=\"multipart/form-data\" name=\"uplaodMapDB\" id=\"uplaodMapDB\">"];
 	[outdata appendFormat:@"<label>%@ ",NSLocalizedString(@"New maps database: ",@"")];
+	[outdata appendString:@"<input type=\"file\" name=\"file\" id=\"file\" />"];
+	[outdata appendString:@"</label>"];
+	[outdata appendString:@"<label>"];
+	[outdata appendString:@"<input type=\"submit\" name=\"button\" id=\"button\" value=\"Upload\" />"];
+	[outdata appendString:@"</label>"];
+	[outdata appendString:@"</form>"];
+	[outdata appendFormat:@"<p><a href=\"/\">%@</a></p>",NSLocalizedString(@"Return to main page",@"")];
+	
+	[outdata appendString:@"</body></html>"];
+    
+	//NSLog(@"outData: %@", outdata);
+    return [outdata autorelease];
+	
+}
+-(NSString*)createUploadDirectionsDBPage {
+	NSMutableString *outdata = [NSMutableString new];
+	[outdata appendString:@"<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"];
+	[outdata appendFormat:@"<title>%@ - %@</title>", NSLocalizedString(@"xGPS Web-based Management",@""), NSLocalizedString(@"Upload new directions database",@"")];
+    [outdata appendString:@"<style>html {background-color:#eeeeee} body { background-color:#FFFFFF; font-family:Tahoma,Arial,Helvetica,sans-serif; font-size:18x; margin-left:15%; margin-right:15%; border:3px groove #006600; padding:15px; } </style>"];
+    [outdata appendString:@"</head><body>"];
+	[outdata appendFormat:@"<h1>%@</h1>", NSLocalizedString(@"Upload new directions database",@"")];
+	
+	[outdata appendString:@"<form action=\"/uploadDirectionsDB\" method=\"post\" enctype=\"multipart/form-data\" name=\"uploadDirectionsDB\" id=\"uploadDirectionsDB\">"];
+	[outdata appendFormat:@"<label>%@ ",NSLocalizedString(@"New directions database: ",@"")];
 	[outdata appendString:@"<input type=\"file\" name=\"file\" id=\"file\" />"];
 	[outdata appendString:@"</label>"];
 	[outdata appendString:@"<label>"];
@@ -150,6 +192,7 @@ static BOOL uploading=NO;
     return [outdata autorelease];
 	
 }
+
 -(NSString*)createAPI_info {
 	NSMutableString *outdata = [NSMutableString new];
 	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
@@ -194,11 +237,17 @@ static BOOL uploading=NO;
 - (BOOL)supportsPOST:(NSString *)path withSize:(UInt64)contentLength
 {
 	//NSLog(@"POST:%@", path);
-	if([path hasPrefix:@"/uploadMapsDB"] && !uploading) {
+	if(([path hasPrefix:@"/uploadMapsDB"] || [path hasPrefix:@"/uploadDirectionsDB"]) && !uploading) {
 		dataStartIndex = 0;
 		multipartData = [[NSMutableArray alloc] init];
 		postHeaderOK = FALSE;
+		if([path hasPrefix:@"/uploadMapsDB"])
+			fileSaving=[[APPDELEGATE.tiledb getDBFilename] retain];
+		else
+			fileSaving=[[APPDELEGATE.dirbookmarks getDBFilename] retain];
 		
+		
+		//NSLog(@"POST:%@", fileSaving);
 		return YES;
 	} else
 		return NO;
@@ -288,6 +337,73 @@ static BOOL uploading=NO;
 			return resp;
 		}
 		
+	} else if([path hasPrefix:@"/uploadDirectionsDB"]) {
+		
+		if (postContentLength > 0)		//process POST data
+		{
+			//NSLog(@"processing post data: %i", postContentLength);
+			
+			NSString* postInfo = [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:1] bytes] length:[[multipartData objectAtIndex:1] length] encoding:NSUTF8StringEncoding];
+			NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
+			postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
+			postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
+			NSString* filename = [postInfoComponents lastObject];
+			
+			if (![filename isEqualToString:@""]) //this makes sure we did not submitted upload form without selecting file
+			{
+				UInt16 separatorBytes = 0x0A0D;
+				NSMutableData* separatorData = [NSMutableData dataWithBytes:&separatorBytes length:2];
+				[separatorData appendData:[multipartData objectAtIndex:0]];
+				int l = [separatorData length];
+				int count = 1;	//number of times the separator shows up at the end of file data
+				
+				NSFileHandle* dataToTrim = [multipartData lastObject];
+				//NSLog(@"data: %@", dataToTrim);
+				uploading=YES;
+				for (unsigned long long i = [dataToTrim offsetInFile] - l; i > 0; i--)
+				{
+					//NSLog(@"Loop %d",i);
+					[dataToTrim seekToFileOffset:i];
+					if ([[dataToTrim readDataOfLength:l] isEqualToData:separatorData])
+					{
+						//NSLog(@"Loop cond true at i=%d",i2);
+						[dataToTrim truncateFileAtOffset:i];
+						i -= l;
+						if (--count == 0) break;
+					}
+					//NSLog(@"End Loop %d",i);
+				}
+				uploading=NO;
+				//NSLog(@"NewFileUploaded");
+				//[[NSNotificationCenter defaultCenter] postNotificationName:@"NewFileUploaded" object:nil];
+			}
+			
+			//for (int n = 1; n < [multipartData count] - 1; n++)
+			//	NSLog(@"%@", [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:n] bytes] length:[[multipartData objectAtIndex:n] length] encoding:NSUTF8StringEncoding]);
+			
+			[postInfo release];
+			[multipartData release];
+			postContentLength = 0;
+			NSLog(@"Upload done. sending response");
+			if([path isEqualToString:@"/uploadDirectionsDB?api=1"]) {
+				NSString *page=[self createAPI_dbUploadOK];
+				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				return resp;
+			} else {
+				NSString *page=[self createUploadDirectionsOKPage];
+				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				return resp;
+			}
+		}
+		else {
+			NSString *page=[self createUploadDirectionsDBPage];
+			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
+			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+			return resp;
+		}
+		
 	} else if([path isEqualToString:@"/"]) {
 		NSString *str=[self createBrowseableIndex:@"/"];
 		NSData *data=[str dataUsingEncoding:NSUTF8StringEncoding];
@@ -310,6 +426,9 @@ static BOOL uploading=NO;
 		return resp;
 	} else if([path isEqualToString:@"/api/getTileDB"]) {
 		HTTPFileResponse *resp=[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.tiledb getDBFilename]];
+		return resp;
+	} else if([path isEqualToString:@"/api/getDirectionsDB"]) {
+		HTTPFileResponse *resp=[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.dirbookmarks getDBFilename]];
 		return resp;
 	} else if([path hasPrefix:@"/api/getGPXLogFile/"]) {
 		
@@ -376,13 +495,15 @@ static BOOL uploading=NO;
 					NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
 					postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
 					postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
-					NSString* filename =[APPDELEGATE.tiledb getDBFilename];
-					//NSLog(@"Saving to %@",filename);
+					NSString* filename =fileSaving;
+					
+					NSLog(@"Saving to %@",filename);
 					NSRange fileDataRange = {dataStartIndex, [postDataChunk length] - dataStartIndex};
 					
 					[[NSFileManager defaultManager] createFileAtPath:filename contents:[postDataChunk subdataWithRange:fileDataRange] attributes:nil];
 					//chmod([filename UTF8String], S_IRWXO);
 					NSFileHandle *file = [[NSFileHandle fileHandleForUpdatingAtPath:filename] retain];
+					
 					if (file)
 					{
 						[file seekToEndOfFile];
@@ -390,7 +511,8 @@ static BOOL uploading=NO;
 					}
 					
 					[postInfo release];
-					
+					[fileSaving release];
+					fileSaving=nil;
 					break;
 				}
 			}

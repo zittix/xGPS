@@ -57,11 +57,13 @@
 */
 -(void)viewWillAppear:(BOOL)animated {
 	[APPDELEGATE.tiledb closeDB];
+	[APPDELEGATE.dirbookmarks close];
 	[APPDELEGATE.txcontroller startServer];
 	lblStatus.text=NSLocalizedString(@"Ready to transfer...",@"Status ready");
 }
 -(void)viewWillDisappear:(BOOL)animated {
 	[APPDELEGATE.tiledb loadDB];
+	[APPDELEGATE.dirbookmarks load];
 	[APPDELEGATE.txcontroller stopServer];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
