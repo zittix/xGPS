@@ -39,7 +39,7 @@
 		dummyView.backgroundColor=[UIColor blackColor];
 		dummyView.alpha=0;
 		dummyView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		pickerTime.minuteInterval=15;
+		//pickerTime.minuteInterval=15;
 		tableView=[[UITableView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) style:UITableViewStyleGrouped];
 		tableView.dataSource=self;
 		tableView.delegate=self;
@@ -52,7 +52,22 @@
 
 -(void) setTime {
 	//editingTime
-
+	
+	
+	[NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
+	
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateStyle:NSDateFormatterNoStyle];
+	[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+	[dateFormatter setDateFormat:@"HH:mm"];
+	NSString *date=[dateFormatter stringFromDate:pickerTime.date];
+	[dateFormatter release];
+	if(editingTime==0)
+		[[NSUserDefaults standardUserDefaults] setObject:date forKey:kSettingsTimerNightStart];
+	else
+		[[NSUserDefaults standardUserDefaults] setObject:date forKey:kSettingsTimerNightStop];
+	[self.tableView reloadData];
+	
 	[UIView beginAnimations:nil context:nil];
 	dummyView.alpha=0;
 	
@@ -295,7 +310,13 @@
 						cell=cell2;
 						cell2.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						cell2.title=NSLocalizedString(@"Start time",@"");
-						cell2.value=@"20:00";
+						//cell2.value=@"20:00";
+						NSString * timeInt=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStart];
+						if(timeInt==nil) 
+							timeInt=@"20:00";
+						
+						cell2.value=timeInt;
+						
 						break;
 					}	
 					case 3: {
@@ -303,7 +324,10 @@
 						cell=cell2;
 						cell2.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						cell2.title=NSLocalizedString(@"Stop time",@"");
-						cell2.value=@"7:00";
+						NSString * timeInt=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStop];
+						if(timeInt==nil) 
+							timeInt=@"7:00";
+						cell2.value=timeInt;
 						break;
 					}	
 				}
@@ -340,10 +364,18 @@
 					}
 					case 2: {
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+						NSString * timeInt=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStart];
+						if(timeInt==nil) 
+							timeInt=@"20:00";
+						((TitleValueCell*)cell).value=timeInt;
 						break;
 					}
 					case 3: {
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+						NSString * timeInt=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStop];
+						if(timeInt==nil) 
+							timeInt=@"7:00";
+						((TitleValueCell*)cell).value=timeInt;
 						break;
 					}
 				} break;
@@ -362,6 +394,34 @@
 			[self.view addSubview:pickerTime];
 			[self.view addSubview:toolbarPicker];
 			[self.view addSubview:dummyView];
+			
+			[NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
+			
+			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+			[dateFormatter setDateStyle:NSDateFormatterNoStyle];
+			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+			[dateFormatter setDateFormat:@"HH:mm"];
+			
+			NSString * timeInt=nil;
+			
+			if(editingTime==0)
+				timeInt=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStart];
+			else
+				timeInt=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStop];
+			
+			if(timeInt==nil && editingTime==0) 
+				timeInt=@"20:00";
+			else if(timeInt==nil && editingTime==1) 
+				timeInt=@"7:00";
+			
+			NSDate *date=[dateFormatter dateFromString:timeInt];
+			
+			
+			[dateFormatter release];
+			
+			pickerTime.date=date;
+			
+			
 			[UIView beginAnimations:nil context:nil];
 			dummyView.alpha=0.7;
 			tableView.scrollEnabled=NO;

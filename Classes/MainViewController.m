@@ -159,9 +159,32 @@
 		NSCalendar *currentCalendar = [NSCalendar currentCalendar];
 		NSDate *now=[NSDate date];
 		NSDateComponents *comp=[currentCalendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:now];
-		//int actMinute=[comp minute];
+		int actMinute=[comp minute];
 		int actHour=[comp hour];
-		if(actHour>=20 || actHour<7) {
+
+		[NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateStyle:NSDateFormatterNoStyle];
+		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		[dateFormatter setDateFormat:@"HH:mm"];
+		
+		
+		NSString *start=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStart];
+		if(start==nil) start=@"20:00";
+		NSString *stop=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsTimerNightStop];
+		if(stop==nil) stop=@"7:00";
+		
+		NSDate *startDate=[dateFormatter dateFromString:start];
+		NSDate *stopDate=[dateFormatter dateFromString:stop];
+		
+		if([stopDate compare:startDate]==NSOrderedAscending)
+			stopDate=[stopDate addTimeInterval:24*60*60];
+		NSDate *curDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%d:%d",actHour,actMinute]];
+		NSComparisonResult resStart=[curDate compare:startDate];
+		NSComparisonResult resStop=[curDate compare:stopDate];
+		[dateFormatter release];
+		if((resStart==NSOrderedSame || resStart==NSOrderedDescending) && resStop==NSOrderedAscending) {
 			if(mapview.nightMode!=YES) {
 				[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];	
 				[navView setNightMode:YES];

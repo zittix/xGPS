@@ -48,6 +48,11 @@ static SoundController * soundcontroller;
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsMapType];
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsEnableVoiceInstr];
 	}
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<5) {
+		[[NSUserDefaults standardUserDefaults] setInteger:5 forKey:kSettingsVersion];
+		[[NSUserDefaults standardUserDefaults] setObject:@"20:00" forKey:kSettingsTimerNightStart];
+		[[NSUserDefaults standardUserDefaults] setObject:@"7:00" forKey:kSettingsTimerNightStop];
+	}
 	
 	staticObj=self;
 	txcontroller=[[TransferController alloc] init];
