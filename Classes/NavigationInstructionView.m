@@ -7,7 +7,7 @@
 //
 
 #import "NavigationInstructionView.h"
-
+#import "xGPSAppDelegate.h"
 
 @implementation NavigationInstructionView
 @synthesize delegate;
@@ -27,7 +27,7 @@
 		lbl.numberOfLines=0;
 		lbl.lineBreakMode=UILineBreakModeWordWrap;
 		lbl.shadowColor=[UIColor blackColor];
-		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontChanged) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     return self;
 }
@@ -35,6 +35,14 @@
 #define VERT_SWIPE_DRAG_MAX    4
 -(void)setTextSize:(float)size {
 	lbl.font=[UIFont boldSystemFontOfSize:size];
+}
+-(void)fontChanged {
+	BOOL stat=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLargeFont];
+	if(stat)
+		lbl.font=[UIFont boldSystemFontOfSize:22];
+	else
+		lbl.font=[UIFont boldSystemFontOfSize:16];
+	[self sizeToFit];
 }
 -(void)setNightMode:(BOOL)val {
 	[UIView beginAnimations:nil context:nil];

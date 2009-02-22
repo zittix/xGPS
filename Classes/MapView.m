@@ -19,13 +19,18 @@
 @synthesize pos;
 @synthesize mapRotationEnabled;
 @synthesize assocZoomview;
-@synthesize nightMode;
+
 @synthesize pEndForMapSelection;
 @synthesize pDepForMapSelection;
 @synthesize maxZoom;
 -(void)setHasGPSPos:(BOOL)val {
 	hasGPSfix=val;
 }
+-(void)setNightMode:(BOOL)val {
+	nightMode=val;
+	[tilescache removeAllObjects];
+}
+@synthesize nightMode;
 -(void)setNextInstruction:(Instruction*)i updatePos:(BOOL)b {
 	if(i!=nil) {
 		posDrivingInstruction.x=i.pos.x;
@@ -122,21 +127,21 @@
 		//No map texture
 		NSString* imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"notile.png"];
 		NSData *noTileImg = [NSData dataWithContentsOfFile:imageFileName];
-		tileNoMap=[[MapTile alloc] initWithData: noTileImg type:0];
+		tileNoMap=[[MapTile alloc] initWithData: noTileImg type:0 invert:NO];
 		
 		imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"gps_ball.png"];
 		NSData *data = [NSData dataWithContentsOfFile:imageFileName];
 		
-		imgPinRef=[[MapTile alloc] initWithData: data type:0];
+		imgPinRef=[[MapTile alloc] initWithData: data type:0 invert:NO];
 		imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"GoogleBadge.png"];
 		data = [NSData dataWithContentsOfFile:imageFileName];
 		
-		imgGoogleLogo=[[MapTile alloc] initWithData: data type:0];
+		imgGoogleLogo=[[MapTile alloc] initWithData: data type:0 invert:NO];
 		mapRotationEnabled=NO;
 		imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"pin_pos.png"];
 		data = [NSData dataWithContentsOfFile:imageFileName];
 		
-		imgPinSearch=[[MapTile alloc] initWithData: data type:0];
+		imgPinSearch=[[MapTile alloc] initWithData: data type:0 invert:NO];
 		posSearch=[[PositionObj alloc] init];
 		lastPos=[[PositionObj alloc] init];
 		mapRotation=0;
@@ -175,8 +180,9 @@
 }
 -(void)setPosSearch:(PositionObj*)p {
 	if(p!=nil) {
-		posSearch.x=p.x;
-		posSearch.y=p.y;
+		pos.x=posSearch.x=p.x;
+		pos.y=posSearch.y=p.y;
+		
 	} else {
 		posSearch.x=posSearch.y=0;
 	}
@@ -511,9 +517,8 @@
 	CGContextSaveGState(context);
 	
 	if(nightMode) {
-		CGContextSetRGBFillColor(context, 1, 1, 1, 1);
+		CGContextSetRGBFillColor(context, 0, 0,0, 1);
 		CGContextFillRect(context,rect);
-		CGContextSetBlendMode(context,kCGBlendModeExclusion);
 	} else {
 		CGContextSetRGBFillColor(context, 0.53, 0.53, 0.53, 1);
 		CGContextFillRect(context,rect);
@@ -587,7 +592,7 @@
 				MapTile* t=[tilescache objectForKey:key];
 				//NSLog(@"Getting x y: %d;%d",x,y);
 				if(t==nil && dragging==NO) {
-					t=[db getTile:x atY:y withZoom:zoom withDelegate:self];
+					t=[db getTile:x atY:y withZoom:zoom withDelegate:self inverted:nightMode];
 					
 					if(t!=nil) {
 						//Add to the cache
@@ -639,8 +644,7 @@
 	if([tilescache count]>64) {
 		[tilescache removeAllObjects];
 	}
-	if(nightMode)
-	CGContextSetBlendMode(context,kCGBlendModeNormal);
+
 	//NSLog(@"Cache size: %d",[tilescache count]);
 	
 	//Draw gps pos
@@ -719,7 +723,7 @@
 			//	NSLog(@"Nb points to draw %d",j);
 			//CGContextRotateCTM(context, -mapRotation);
 			if(nightMode)
-				CGContextSetRGBStrokeColor(context,0.215,0.529,.2,0.64);
+				CGContextSetRGBStrokeColor(context,0.8353,0,0,0.64);
 			else
 				CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.64);
 			
@@ -749,11 +753,11 @@
 		CGContextSetLineWidth(context,3.0);
 		
 		if(nightMode){
-			CGContextSetRGBStrokeColor(context,0.215,0.529,.2,0.8);
-			CGContextSetRGBFillColor(context,0.215,0.529,.2,0.4);
+			CGContextSetRGBStrokeColor(context,0.8353,0,0,0.8);
+			CGContextSetRGBFillColor(context,0.8353,0,0,0.4);
 		} else {		
-		CGContextSetRGBFillColor(context,0.662,0.184,1,0.4);
-		CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.8);
+			CGContextSetRGBFillColor(context,0.662,0.184,1,0.4);
+			CGContextSetRGBStrokeColor(context,0.662,0.184,1,0.8);
 		}
 		CGContextBeginPath(context);
 		CGContextAddArc(context,posXPin,posYPin,35,0,2*M_PI,0);
@@ -790,7 +794,7 @@
 			float posXPin2=cosr*posXPin - posYPin*sinr;
 			float posYPin2=sinr*posXPin + posYPin*cosr;
 			if(posXPin2>=-winWidth/2.0 && posXPin2<winWidth/2 && posYPin2>=-winHeight/2 && posYPin2<winHeight/2) {
-#if 1
+
 				CGPoint ind[4];
 				ind[0].x=0;
 				ind[0].y=5;
@@ -844,101 +848,7 @@
 				CGContextScaleCTM(context, 1, -1);
 		
 				CGContextRotateCTM(context, mapRotation);
-#else
-				CGPoint ind[8];
-				ind[0].x=-15;
-				ind[0].y=0;
-				ind[1].x=-10;
-				ind[1].y=0;
-				
-				ind[2].x=15;
-				ind[2].y=0;
-				ind[3].x=10;
-				ind[3].y=0;
-				
-				ind[4].x=0;
-				ind[4].y=15;
-				ind[5].x=0;
-				ind[5].y=10;
-				
-				ind[6].x=0;
-				ind[6].y=-15;
-				ind[7].x=0;
-				ind[7].y=-10;
-				
-				float alpha=gpsHeading+mapRotation;
-				float cosa=cos(alpha);
-				float sina=sin(alpha);
-				for(int i=0;i<8;i++) {
-					float posx=ind[i].x;
-					float posy=ind[i].y;
-					
-					ind[i].x=-cosa*posx -posy*sina;
-					ind[i].y=+sina*posx - posy*cosa;
-					
-					//Translate to correct plage
-					ind[i].x+=posXPin2;
-					ind[i].y-=posYPin2;
-				}
 
-				
-				CGContextRotateCTM(context, -mapRotation);
-				
-				CGContextScaleCTM(context, 1, -1);
-				
-				CGContextBeginPath(context);
-				CGContextAddArc(context,posXPin2,-posYPin2,15,0,2*M_PI,0);
-				
-				CGContextClosePath(context);
-
-				CGContextSetRGBStrokeColor(context,0,0,1,0.6);
-				CGContextSetLineWidth(context,2);
-				
-				CGContextStrokePath(context);
-				
-				CGContextBeginPath(context);
-				CGContextAddLines(context,ind,2);
-				CGContextClosePath(context);
-				CGContextStrokePath(context);
-				
-				ind[0]=ind[2];
-				ind[1]=ind[3];
-				
-				CGContextBeginPath(context);
-				CGContextAddLines(context,ind,2);
-				CGContextClosePath(context);
-				CGContextStrokePath(context);
-				
-				ind[0]=ind[4];
-				ind[1]=ind[5];
-				
-				CGContextBeginPath(context);
-				CGContextAddLines(context,ind,2);
-				CGContextClosePath(context);
-				CGContextStrokePath(context);
-				ind[0]=ind[6];
-				ind[1]=ind[7];
-				
-				CGContextBeginPath(context);
-				CGContextAddLines(context,ind,2);
-				CGContextClosePath(context);
-				CGContextStrokePath(context);
-				CGContextBeginPath(context);
-				CGContextAddArc(context,posXPin2,-posYPin2,6,0,2*M_PI,0);
-				CGContextClosePath(context);
-				
-				if(nightMode)
-					CGContextSetRGBFillColor(context,1,0.945,0.270,1);
-				else
-					CGContextSetRGBFillColor(context,0,0,1,1);
-				
-				
-				CGContextFillPath(context);
-				
-				
-				CGContextScaleCTM(context, 1, -1);
-				
-#endif
 				
 				//NSLog(@"Pos: %f %f",posXPin,posYPin);
 			}

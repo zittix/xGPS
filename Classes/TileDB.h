@@ -34,7 +34,7 @@
 	int type;
 	BOOL showedError;
 }
--(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom withDelegate:(id)delegate;
+-(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom withDelegate:(id)delegate inverted:(BOOL)invert;
 -(BOOL)downloadTile:(int)x atY:(int)y withZoom:(int)zoom silent:(BOOL)silent;
 -(void)cancelDownload;
 -(float)mapsize;

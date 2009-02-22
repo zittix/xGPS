@@ -342,7 +342,7 @@
 	
 	return ret;
 }
--(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom  withDelegate:(id)delegate{
+-(MapTile*)getTile:(int)x atY:(int)y withZoom:(int)zoom withDelegate:(id)delegate inverted:(BOOL)invert{
 	if(closed) return nil;
 	//NSLog(@"TileDB- getTile()- IN");
 	if(x<0 || y<0) return nil;
@@ -360,7 +360,7 @@
 		const void *data=sqlite3_column_blob(getTileStmt, 0);
 		int length=sqlite3_column_bytes(getTileStmt, 0);
 		//NSLog(@"Tile of %d bytes",length);
-		t=[[MapTile alloc] initWithData: [NSData dataWithBytes:data length:length] type:type];
+		t=[[MapTile alloc] initWithData: [NSData dataWithBytes:data length:length] type:type invert:invert];
 		sqlite3_reset(getTileStmt);
 		sqlite3_clear_bindings(getTileStmt);
 		[dbLock unlock];

@@ -15,7 +15,7 @@
 	CGSize size;
 	CGRect rect;
 }
-- (id)initWithData:(NSData *)d type:(int)type;
+- (id)initWithData:(NSData *)d type:(int)type invert:(BOOL)invert;
 - (void)drawAtPoint:(CGPoint)p withContext:(CGContextRef) c;
 - (void)drawInRect:(CGRect)r withContext:(CGContextRef) c;
 @end

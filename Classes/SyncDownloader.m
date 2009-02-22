@@ -91,7 +91,7 @@
 	
 	if(error) {
 		if(receivedData!=nil) {
-			[receivedData release];
+			//[receivedData release];
 			receivedData=nil;
 		}
 	} else {
