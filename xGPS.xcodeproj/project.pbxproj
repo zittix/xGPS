@@ -101,6 +101,9 @@
 		4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
+		4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE70F51E8BA00C77686 /* settings_button.png */; };
+		4EDDACEA0F51E8BA00C77686 /* search_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE80F51E8BA00C77686 /* search_button.png */; };
+		4EDDAE020F51FD0D00C77686 /* RemainingDistanceTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDDAE010F51FD0D00C77686 /* RemainingDistanceTimeView.m */; };
 		4EE0F1CD0E6A958000BBA3FD /* nmea_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */; };
 		4EE0F1CE0E6A958000BBA3FD /* packet_reader.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1C70E6A958000BBA3FD /* packet_reader.c */; };
 		4EE0F1CF0E6A958000BBA3FD /* xGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE0F1CC0E6A958000BBA3FD /* xGPSController.m */; };
@@ -375,6 +378,10 @@
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4EDABC700E89115A009AF7C2 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = German; path = German.lproj/license.html; sourceTree = "<group>"; };
+		4EDDACE70F51E8BA00C77686 /* settings_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_button.png; sourceTree = "<group>"; };
+		4EDDACE80F51E8BA00C77686 /* search_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_button.png; sourceTree = "<group>"; };
+		4EDDAE000F51FD0D00C77686 /* RemainingDistanceTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemainingDistanceTimeView.h; sourceTree = "<group>"; };
+		4EDDAE010F51FD0D00C77686 /* RemainingDistanceTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemainingDistanceTimeView.m; sourceTree = "<group>"; };
 		4EE0F1C40E6A958000BBA3FD /* gps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gps.h; sourceTree = "<group>"; };
 		4EE0F1C50E6A958000BBA3FD /* nmea_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nmea_parse.c; sourceTree = "<group>"; };
 		4EE0F1C60E6A958000BBA3FD /* packet_names.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = packet_names.h; sourceTree = "<group>"; };
@@ -621,6 +628,8 @@
 				4E9078190E9CE69900B0F6BC /* about.html */,
 				4E90C0F50E8D3CD0003F6B23 /* green.png */,
 				4E90C0F60E8D3CD0003F6B23 /* orange.png */,
+				4EDDACE70F51E8BA00C77686 /* settings_button.png */,
+				4EDDACE80F51E8BA00C77686 /* search_button.png */,
 				4E90C0F70E8D3CD0003F6B23 /* red.png */,
 				4E8BBC280E89786800BADF0C /* gps_ball.png */,
 				4E0F48E20E851C3C001B6F51 /* Localizable.strings */,
@@ -659,6 +668,8 @@
 		4E0F04FE0E87C44600D75E7D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4EDDAE000F51FD0D00C77686 /* RemainingDistanceTimeView.h */,
+				4EDDAE010F51FD0D00C77686 /* RemainingDistanceTimeView.m */,
 				4E0829770F4DFCF000B1C9AF /* NavigationPoint.h */,
 				4E0829780F4DFCF000B1C9AF /* NavigationPoint.m */,
 				4E96C6310F320DF10058C714 /* MapTypeViewController.h */,
@@ -1173,6 +1184,8 @@
 				4E0829910F4E017500B1C9AF /* startway.png in Resources */,
 				4E0829920F4E017500B1C9AF /* endway.png in Resources */,
 				4E0829BA0F4E027F00B1C9AF /* middleway.png in Resources */,
+				4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */,
+				4EDDACEA0F51E8BA00C77686 /* search_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1350,6 +1363,7 @@
 				4E0829790F4DFCF000B1C9AF /* NavigationPoint.m in Sources */,
 				4E082A600F4E0A4300B1C9AF /* ModalSearchViewController.m in Sources */,
 				4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */,
+				4EDDAE020F51FD0D00C77686 /* RemainingDistanceTimeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

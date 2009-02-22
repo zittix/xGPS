@@ -15,7 +15,7 @@
 @implementation iPhone3GController
 
 - (BOOL)EnableGPS {
-	
+	if(isEnabled) return NO;
 	if(locManager.locationServicesEnabled){
 		speedHasBeenUpdated=NO;
 		[locManager startUpdatingLocation];
@@ -24,6 +24,7 @@
 	return YES;
 }
 - (BOOL)DisableGPS {
+	if(!isEnabled) return NO;
 	memset(&gps_data,0,sizeof(struct gps_data_t));
 	if(locManager.locationServicesEnabled){
 		[locManager stopUpdatingLocation];
@@ -60,7 +61,7 @@
 	isConnected=YES;
 	
 	//Check if speed is supported
-	
+	isEnabled=NO;
 	
 	chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 	return self;
@@ -90,6 +91,8 @@
 		}
 	}
 	
+	
+	
 	if(!hasGPSSpeed) {
 		if(oldLocation!=nil) {
 			CLLocationDistance dx=[newLocation getDistanceFrom:oldLocation];
@@ -116,22 +119,13 @@
 	}
 	
 	
-	gps_data.fix.latitude=newLocation.coordinate.latitude;
-	gps_data.fix.longitude=newLocation.coordinate.longitude;
-	gps_data.fix.altitude=newLocation.altitude;
-	chMsg.state=POS;
-	
-	[delegate gpsChanged:chMsg];
-	chMsg.state=SPEED;
-	[delegate gpsChanged:chMsg];
-	
 	
 	//Update signal quality
 	signalQuality=100;
 	
 	if(newLocation.horizontalAccuracy>=0) gps_data.fix.mode=2;
 	if(newLocation.verticalAccuracy>=0) gps_data.fix.mode=3;
-
+	
 	
 	if(newLocation.verticalAccuracy<0) signalQuality-=40;
 	if(newLocation.horizontalAccuracy<0) signalQuality-=90;
@@ -148,7 +142,16 @@
 	
 	if(signalQuality<0) signalQuality=0;
 	
-	chMsg.state=SIGNAL_QUALITY;
+	
+	gps_data.fix.latitude=newLocation.coordinate.latitude;
+	gps_data.fix.longitude=newLocation.coordinate.longitude;
+	gps_data.fix.altitude=newLocation.altitude;
+	chMsg.state=POS;
+	
+	[delegate gpsChanged:chMsg];
+	chMsg.state=SPEED;
+	[delegate gpsChanged:chMsg];
+		chMsg.state=SIGNAL_QUALITY;
 	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 }
 @end

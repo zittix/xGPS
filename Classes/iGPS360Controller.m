@@ -30,15 +30,15 @@
 	return @"iGPS360";
 }
 
-//Seems not possbile to enable or disable the iGPS360, not implemented so.
+
 - (BOOL)EnableGPS {
-	//Not possible
+	isEnabled=YES;
 	return YES;
 }
 
-//Seems not possbile to enable or disable the iGPS360, not implemented so.
+
 - (BOOL)DisableGPS {
-	//Not possible
+	isEnabled=NO;
 	return YES;
 }
 
@@ -47,7 +47,6 @@
 	[super changeSerialSpeed:B115200];
 	stopGPSSerial=NO;
 	started=YES;
-	isEnabled=YES;
 	[NSThread detachNewThreadSelector:@selector(threadSerialGPS) toTarget:self withObject:nil];
 }
 - (id)initWithDelegate:(id)del {
@@ -57,6 +56,7 @@
 		serial=@"N/A";
 		version_major=1;
 		version_minor=0;
+		isEnabled=NO;
 	}
 	return self;
 }
@@ -141,6 +141,7 @@
 						[delegate gpsChanged:chMsg];
 #endif
 					}*/
+			
 					if((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET){
 						chMsg.state=POS;
 
@@ -159,7 +160,7 @@
 					signalQuality=80;
 				chMsg.state=SIGNAL_QUALITY;
 				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
-				}
+					}
 				
 				//Parse the next packet
 				packet.type = BAD_PACKET;

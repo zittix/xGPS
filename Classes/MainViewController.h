@@ -24,13 +24,9 @@
 #import "GPSDetailsViewController.h"
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate,ShowGPSDetailProtocol,SearchPlacesViewDelegate> {
 	MapView* mapview;
-	UIBarButtonItem* btnEnableGPS;
-	UIBarButtonItem* btnSettings;
-	UIBarButtonItem* btnSearch;
+	UIButton* btnSettings;
+	UIButton* btnSearch;
 	SettingsViewController* settingsController;
-	UIToolbar* toolbar;
-	UIBarButtonItem* space1;
-	UIBarButtonItem* space2;
 	TileDB* tiledb;
 	UIBarButtonItem* cancelSearch;
 	UIBarButtonItem* routesManager;
@@ -48,7 +44,9 @@
 	NSTimer * tmrNightMode;
 	GPSDetailsViewController *gpsdetails;
 	BOOL hidden;
+
 }
+-(void)setGPSMode:(int)mode;
 - (void)gpsChanged:(ChangedState*)msg;
 -(void)cancelDrivingSearch:(id)sender ;
 -(void)showWrongWay;

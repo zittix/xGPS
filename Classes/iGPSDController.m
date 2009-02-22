@@ -40,7 +40,7 @@
 	return YES;
 }
 - (BOOL)DisableGPS {
-	isEnabled=YES;
+	isEnabled=NO;
 	return YES;
 }
 -(BOOL)needLicense {
@@ -93,7 +93,7 @@
 	
 	isConnected=YES;
 	validLicense=NO;
-	isEnabled=YES;
+	isEnabled=NO;
 	
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLicenseOK]) {
 		validLicense=YES;
@@ -159,7 +159,7 @@
 	
 			//NSLog(@"Packet type: %d",packet.type);
 
-			if(packet.type==1) {
+			if(packet.type==1 && isEnabled) {
 				//NMEA
 				 writeDebugMessage([[NSString stringWithFormat:@"Received data: '%s'",packet.outbuffer] UTF8String]);
 				unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);

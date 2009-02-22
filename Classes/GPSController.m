@@ -17,6 +17,7 @@
 #include <math.h>
 #include "packet_reader.h"
 #define GPSPORT "/dev/tty.iap"
+//#define GPSPORT "/dev/tty.gpsholux"
 #define USE_UI
 static FILE* fserial;
 static FILE* fmsg;

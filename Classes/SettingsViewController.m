@@ -39,7 +39,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
-		case 0: return 3;
+		case 0: return 5;
 		case 1: return 7;
 		default: return 0;
 	}
@@ -51,7 +51,22 @@
 -(void)switchRotationChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:!sender.on forKey:kSettingsMapRotation];
 }
-
+-(void)switchGPSEnabled:(UISwitch*)sender {
+	if(sender.on)
+		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsGPSState];
+	else {
+		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsGPSState];
+		
+	}
+	[self.tableView reloadData];
+}
+-(void)switchGPSTracking:(UISwitch*)sender {
+	if(sender.on)
+		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsGPSState];
+	else {
+		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kSettingsGPSState];
+	}
+}
 -(void)switchGPSLoggingChanged:(UISwitch*)sender {
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsGPSLog];
 	if(sender.on)
@@ -64,9 +79,11 @@
 	NSString *id=@"";
 	switch(indexPath.section) {
 		case 0: switch(indexPath.row) {
-			case 0:	id=@"sectQuick_offline"; break;
-			case 1:	id=@"sectQuick_autorot"; break;
-			case 2:	id=@"sectQuick_gpx"; break;
+			case 0:	id=@"sectQuick_gpsenable"; break;
+			case 1:	id=@"sectQuick_gpstrack"; break;
+			case 2:	id=@"sectQuick_offline"; break;
+			case 3:	id=@"sectQuick_autorot"; break;
+			case 4:	id=@"sectQuick_gpx"; break;
 		} break;
 		case 1: {
 			switch(indexPath.row) {
@@ -91,6 +108,36 @@
 		switch(indexPath.section) {
 			case 0: switch(indexPath.row) {
 				case 0: {
+					cell.text=NSLocalizedString(@"GPS Enabled",@"");
+					UISwitch *value;
+					
+					value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
+					value.tag = 1;
+					[value addTarget:self action:@selector(switchGPSEnabled:) forControlEvents:UIControlEventValueChanged];
+					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+					[cell.contentView addSubview:value];
+					
+					
+					value.on=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]>0;
+					//[value release];
+					break;
+				}
+				case 1: {
+					cell.text=NSLocalizedString(@"GPS Tracking",@"");
+					UISwitch *value;
+					
+					value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
+					value.tag = 1;
+					[value addTarget:self action:@selector(switchGPSTracking:) forControlEvents:UIControlEventValueChanged];
+					value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+					[cell.contentView addSubview:value];
+					
+					value.on=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]==2;
+					value.enabled=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]>0;
+					//[value release];
+					break;
+				}					
+				case 2: {
 					cell.text=NSLocalizedString(@"Offline mode",@"Offline mode");
 					UISwitch *value;
 					
@@ -103,7 +150,7 @@
 					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
 					break;
 				}
-				case 1:	
+				case 3:	
 				{
 					cell.text=NSLocalizedString(@"Map auto-rotation",@"Map auto-rotation");
 					UISwitch *value;
@@ -118,7 +165,7 @@
 					break;
 				}
 					
-				case 2:	
+				case 4:	
 				{
 					cell.text=NSLocalizedString(@"GPX Logging",@"Activate GPX Logging");
 					UISwitch *value;
@@ -177,20 +224,31 @@
 	} else {
 		switch(indexPath.section) {
 			case 0: switch(indexPath.row) {
+					
 				case 0:	
-				{
-					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
-				}
+					
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]>0;
 					break;
+					
 				case 1:	
-				{
-					((UISwitch*)[cell viewWithTag:1]).on=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
-				}
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]==2;
+					((UISwitch*)[cell viewWithTag:1]).enabled=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]>0;
 					break;
+					
 				case 2:	
-				{
+					
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapsOffline];
+					
+					break;
+				case 3:	
+					
+					((UISwitch*)[cell viewWithTag:1]).on=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
+					
+					break;
+				case 4:	
+					
 					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsGPSLog];
-				}
+					
 					break;
 			}
 		}

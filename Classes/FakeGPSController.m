@@ -12,6 +12,7 @@
 @implementation FakeGPSController
 
 - (BOOL)EnableGPS {
+	if(isEnabled) return NO;
 	if(tmrGPS==nil)
 	tmrGPS=[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(gpsUpdate) userInfo:nil repeats:YES];
 	
@@ -20,6 +21,7 @@
 	return YES;
 }
 - (BOOL)DisableGPS {
+	if(!isEnabled) return NO;
 	if(tmrGPS!=nil) {
 		[tmrGPS invalidate];
 		tmrGPS=nil;
@@ -45,6 +47,7 @@
 	version_major=1;
 	validLicense=YES;
 	isConnected=YES;
+	isEnabled=NO;
 	chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 	posArray=[[NSMutableArray alloc] initWithCapacity:5];
 	[self loadGPX];

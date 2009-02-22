@@ -11,6 +11,7 @@
 #import "xGPSAppDelegate.h"
 #import "GPXLogger.h"
 #import "RoutesManagerViewController.h"
+#import "iPhone3GController.h"
 @implementation MainViewController
 
 @synthesize mapview;
@@ -44,7 +45,7 @@
 	//Inside the view:
 	
 	//self.view.backgroundColor=[UIColor blueColor];
-	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height-44.0f) withDB:tiledb];
+	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height) withDB:tiledb];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	[self.view addSubview:mapview];
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,38,83) withDelegate:mapview];
@@ -54,19 +55,29 @@
 	
 	//[self.view addSubview:speedview];
 	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
-	toolbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,viewRect.size.height-44.0f,viewRect.size.width,44.0f)];
-	[self.view addSubview:toolbar];
+
+
 	[self.view addSubview:speedview];
-	btnEnableGPS=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Enable GPS",@"Enable GPS Button") style:UIBarButtonItemStyleBordered target:self action:@selector(gpsEnableBtnPressed:)];
-	toolbar.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+
 	//btnSettings=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",@"Settings Button") style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
-	btnSettings=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settingsIcon.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
-	btnSearch=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnPressed:)];
-	btnSearch.style=UIBarButtonItemStyleBordered;
-	space1=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-	space2=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-	NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
-	[toolbar setItems:btn animated:YES];	
+	//btnSettings=[[UIButton alloc] initWithImage:[UIImage imageNamed:@"settingsIcon.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
+	//btnSearch=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnPressed:)];
+	btnSettings=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
+	btnSearch=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
+	[btnSettings setImage:[UIImage imageNamed:@"settings_button.png"] forState:UIControlStateNormal];
+	[btnSearch setImage:[UIImage imageNamed:@"search_button.png"] forState:UIControlStateNormal];
+	
+	btnSettings.frame=CGRectMake(20.0,self.view.frame.size.height-45.0f,40.0f,40.0f);
+	btnSettings.autoresizingMask=UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+	[btnSettings addTarget:self action:@selector(settingsBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:btnSettings];
+	
+	btnSearch.frame=CGRectMake((self.view.frame.size.width-40)/2.0,self.view.frame.size.height-45.0f,40.0f,40.0f);
+	btnSearch.autoresizingMask=UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+	[btnSearch addTarget:self action:@selector(searchBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:btnSearch];
+	
+	
 	//92x100
 	settingsController=[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	searchPlacesView=[[SearchPlacesView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height) andController:self.navigationController delegate:self];
@@ -115,21 +126,7 @@
 	
 	mapview.pos=p;
 	mapview.mapRotationEnabled=![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsMapRotation];
-	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense) {
-		int gpsState=[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState];
-		
-		if(gpsState==1) {
-			btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
-			btnEnableGPS.style=UIBarButtonItemStyleBordered;	
-			[mapview setGPSTracking:NO];
-			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
-		}else if(gpsState==2) {
-			btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
-			btnEnableGPS.style=UIBarButtonItemStyleDone;	
-			[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
-			[mapview setGPSTracking:YES];
-		}
-	}
+	[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
 	tmrNightMode=[NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(timerNightMode) userInfo:nil repeats:YES];
 	[tmrNightMode retain];
 	[self speedChanged:nil];
@@ -155,7 +152,7 @@
 	[self presentModalViewController:gpsdetails animated:YES];
 }
 -(void)timerNightMode {
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsTimerNightEnabled]) {
+	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsTimerNightEnabled] && [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled]) {
 		NSCalendar *currentCalendar = [NSCalendar currentCalendar];
 		NSDate *now=[NSDate date];
 		NSDateComponents *comp=[currentCalendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:now];
@@ -189,7 +186,6 @@
 				[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];	
 				[navView setNightMode:YES];
 				mapview.nightMode=YES;
-				toolbar.barStyle=UIBarStyleBlackOpaque;
 				[mapview refreshMap];
 			}
 		} else {
@@ -197,7 +193,6 @@
 				[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 				mapview.nightMode=NO;
 				[navView setNightMode:NO];
-				toolbar.barStyle=UIBarStyleDefault;
 				[mapview refreshMap];
 			}
 		}
@@ -210,18 +205,18 @@
 		speedview.hidden=YES;
 		
 	}
-	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsTimerNightEnabled] || ![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled]) {
+	[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
+	
+	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsTimerNightEnabled]) {
 		if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled]) {
 			[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];	
 			[navView setNightMode:YES];
 			mapview.nightMode=YES;
-			toolbar.barStyle=UIBarStyleBlackOpaque;
 			[mapview refreshMap];
 		} else {
 			[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 			mapview.nightMode=NO;
 			[navView setNightMode:NO];
-			toolbar.barStyle=UIBarStyleDefault;
 			[mapview refreshMap];
 		}
 	} else {
@@ -284,12 +279,8 @@
 	[mapview release];
 	[zoomview release];
 	[speedview release];
-	[toolbar release];
-	[btnEnableGPS release];
 	[btnSettings release];
 	[btnSearch release];
-	[space1 release];
-	[space2 release];
 	[settingsController release];
 	[signalView release];
 	[searchPlacesView release];
@@ -311,39 +302,8 @@
 	else
 		self.title=NSLocalizedString(@"Directions",@"");
 	
-	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense) {
-		NSArray *btn=[NSArray arrayWithObjects:btnEnableGPS,space1,btnSearch,space2,btnSettings,nil];
-		[toolbar setItems:btn animated:YES];	
-		if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
-			
-			
-			[mapview setHasGPSPos:YES];
-			
-			if([btnEnableGPS.title isEqualToString:NSLocalizedString(@"Enable GPS",@"Enable GPS Button")])
-				[mapview setGPSTracking:YES];
-			
-			btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
-			if([mapview hasGPSTracking]) {
-				btnEnableGPS.style=UIBarButtonItemStyleDone;
-			}else {
-				btnEnableGPS.style=UIBarButtonItemStyleBordered;	
-				
-			}
-			[mapview refreshMap];
-			[self showGPSStatus];
-		} else{
-			[mapview setHasGPSPos:NO];
-			[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsGPSState];
-			btnEnableGPS.style=UIBarButtonItemStyleBordered;
-			btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
-		}
-	}else {
-		NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
-		[toolbar setItems:btn animated:YES];	
-		[mapview setHasGPSPos:NO];
-		[mapview refreshMap];
-	}	
-	
+	[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
+		
 	if(![[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsConditionsUse] isEqualToString:vSettingsConditionsUse]) {
 		[[NSUserDefaults standardUserDefaults] setObject:vSettingsConditionsUse forKey:kSettingsConditionsUse];
 		
@@ -377,7 +337,7 @@
 	
 	
 	[UIView beginAnimations:nil context:nil];
-	[navView sizeToFit];
+	
 	if(currentSearchType==2) {
 		mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 	}
@@ -391,53 +351,33 @@
 	} else {
 		wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 	}
-	
+	[navView sizeToFit];
 	[mapview refreshMap];
 	[UIView commitAnimations];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
--(void)gpsEnableBtnPressed:(id)sender {
-	BOOL wasEnabled=NO;
-	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled && btnEnableGPS.style!=UIBarButtonItemStyleDone) {
+-(void)setGPSMode:(int)mode {
+	//NSLog(@"Setting mode: %d",mode);
+	if(mode==0) {
 		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] DisableGPS];
-		btnEnableGPS.style=UIBarButtonItemStyleBordered;
 		[mapview setGPSTracking:NO];
-		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsGPSState];
-		wasEnabled=YES;
-	}
-	else if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled && btnEnableGPS.style==UIBarButtonItemStyleDone){
-		btnEnableGPS.style=UIBarButtonItemStyleBordered;
-		[mapview setGPSTracking:NO];
-		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kSettingsGPSState];
-	} else {
-		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
-		btnEnableGPS.style=UIBarButtonItemStyleDone;
-		[mapview setGPSTracking:YES];
-		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsGPSState];
-	}
-	if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
-		btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
-		[self showGPSStatus];
-		
-		[mapview setHasGPSPos:YES];
-		if(wasEnabled) {
-			btnEnableGPS.style=UIBarButtonItemStyleDone;
-			[mapview setGPSTracking:YES];
-			
-		}
-		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsGPSState];
-		
-		
-	} else{
 		[mapview setHasGPSPos:NO];
 		[mapview refreshMap];
 		[self hideGPSStatus];
-		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsGPSState];
 		[signalView setQuality:-1];
-		btnEnableGPS.style=UIBarButtonItemStyleBordered;
 		[self hideWrongWay];
-		btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
 	}
+	else if(mode==1 && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense){
+		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
+		[self showGPSStatus];
+		[mapview setHasGPSPos:NO];
+		[mapview setGPSTracking:NO];
+	} else if(mode==2 && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense){
+		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
+		[self showGPSStatus];
+		[mapview setHasGPSPos:NO];
+		[mapview setGPSTracking:YES];
+	} 		
 }
 -(void)settingsBtnPressed:(id)sender {
 	[UIView beginAnimations:nil context:nil];	
@@ -464,7 +404,7 @@
 		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Search results",@""),nil];
 	else
 		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Driving directions",@""),nil];
-	[action showFromToolbar:toolbar];
+	[action showInView:self.view];
 }
 -(void)cancelSearchPressed:(id)sender {
 	[UIView beginAnimations:nil context:nil];	
@@ -522,7 +462,7 @@
 -(void)clearDirections {
 	[UIView beginAnimations:nil context:nil];	
 	[navView removeFromSuperview];
-	mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-44.0f);
+	mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
 	zoomview.frame=CGRectMake(10,10,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70,wrongWay.frame.size.width,wrongWay.frame.size.height);
 	signalView.frame=CGRectMake(self.view.frame.size.width-58,5,47,40);
@@ -540,7 +480,7 @@
 	[navView setText:instr.name];
 	[UIView beginAnimations:nil context:nil];	
 	[navView sizeToFit];
-	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
+	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 	signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
@@ -571,7 +511,7 @@
 			self.navigationItem.rightBarButtonItem=nil;
 			self.navigationItem.leftBarButtonItem=nil;
 			[self.view addSubview:navView];
-			mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height-44.0f);
+			mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 			zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 			wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 			signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
@@ -601,15 +541,10 @@
 		case VERSION_CHANGE:
 			break;
 		case CONNECTION_CHANGE:
-			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[toolbar items] count]!=5) {
-				NSArray *btn=[NSArray arrayWithObjects:btnEnableGPS,space1,btnSearch,space2,btnSettings,nil];
-				[toolbar setItems:btn animated:YES];		
-			}else if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[toolbar items] count]!=3) {
-				NSArray *btn=[NSArray arrayWithObjects:btnSearch,space2,btnSettings,nil];
-				[toolbar setItems:btn animated:YES];	
-				[mapview setHasGPSPos:NO];
-				[signalView setQuality:-1];
-				[self hideGPSStatus];
+			if(![[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected) {
+				[self setGPSMode:0];
+			} else {
+				[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
 			}
 			[settingsController reload];
 			break;
@@ -628,7 +563,12 @@
 			[mapview updateCurrentPos:gpsPos];
 			[mapview setHasGPSPos:YES];
 			
-			[APPDELEGATE.gpxlogger logGPXPoint:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude lon:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude alt:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude speed:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed fix:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode sat:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used];
+			
+			
+			if(([[[xGPSAppDelegate gpsmanager] GetCurrentGPS] isKindOfClass:[iPhone3GController class]] && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].signalQuality>66) || ![[[xGPSAppDelegate gpsmanager] GetCurrentGPS] isKindOfClass:[iPhone3GController class]])
+				[APPDELEGATE.gpxlogger logGPXPoint:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.latitude lon:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.longitude alt:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.altitude speed:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.speed fix:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode sat:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].satellites_used];
+			
+			
 			APPDELEGATE.directions.pos=gpsPos;
 			[gpsdetails updateData];
 			break;
@@ -643,17 +583,9 @@
 		}break;
 		case STATE_CHANGE:
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
-				[self showGPSStatus];
-				btnEnableGPS.title=NSLocalizedString(@"Disable GPS",@"Disable GPS Button");
-				[mapview setGPSTracking:YES];
-				btnEnableGPS.style=UIBarButtonItemStyleDone;
+				[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
 			} else{
-				[mapview setHasGPSPos:NO];
-				[self hideGPSStatus];
-				btnEnableGPS.style=UIBarButtonItemStyleBordered;
-				btnEnableGPS.title=NSLocalizedString(@"Enable GPS",@"Enable GPS Button");
-				[signalView setQuality:-1];
-				[mapview setGPSTracking:NO];
+				[self setGPSMode:0];
 			}
 			break;
 		case SIGNAL_QUALITY:
