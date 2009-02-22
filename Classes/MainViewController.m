@@ -370,12 +370,12 @@
 	else if(mode==1 && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense){
 		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
 		[self showGPSStatus];
-		[mapview setHasGPSPos:NO];
+		//[mapview setHasGPSPos:NO];
 		[mapview setGPSTracking:NO];
 	} else if(mode==2 && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense){
 		[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] EnableGPS];
 		[self showGPSStatus];
-		[mapview setHasGPSPos:NO];
+		//[mapview setHasGPSPos:NO];
 		[mapview setGPSTracking:YES];
 	} 		
 }
@@ -545,6 +545,7 @@
 				[self setGPSMode:0];
 			} else {
 				[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
+				[mapview setHasGPSPos:NO];
 			}
 			[settingsController reload];
 			break;
@@ -584,6 +585,7 @@
 		case STATE_CHANGE:
 			if([[xGPSAppDelegate gpsmanager] GetCurrentGPS].isEnabled) {
 				[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
+				[mapview setHasGPSPos:NO];
 			} else{
 				[self setGPSMode:0];
 			}
