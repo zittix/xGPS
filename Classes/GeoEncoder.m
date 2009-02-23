@@ -23,6 +23,12 @@
 	r.addr=addr;
 	return [r autorelease];
 }
+-(void)dealloc {
+	[super dealloc];
+	[pos release];
+	[name release];
+	[addr release];
+}
 @end
 
 
@@ -47,11 +53,10 @@
 	
 	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)url, NULL, CFSTR("?=&+"), cEnc);
 	return [result autorelease];
-	//return url;
 }
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	result=[[NSMutableDictionary alloc] initWithCapacity:5];
-	NSLog(@"Parser start...");
+	//NSLog(@"Parser start...");
 }
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
 	//NSLog(@"Found start element %@",elementName);
@@ -132,22 +137,27 @@
 		[currentProp appendString:string];
     }
 }
+-(void)dealloc {
+	[super dealloc];
+	[currentPos release];
+	[currentProp release];
+	[currentAddr release];
+	[currentPlacename release];
+	[req release];
+	[result release];
+	[resultData release];
+}
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End geocode ok with %d results",[result count]);
 	if(req==nil) return;
 	[delegate geoEncodeGot:[result autorelease] forRequest:[req autorelease] error:nil];
 	result=nil;
 	req=nil;
-	if(currentPlacename!=nil)
-		[currentPlacename release];
+	[currentPlacename release];
 	currentPlacename=nil;
-	if(currentPos!=nil)
-		[currentPos release];
-	
-	if(currentProp!=nil)
-		[currentProp release];
-	if(currentAddr!=nil)
-		[currentAddr release];
+	[currentPos release];
+	[currentProp release];
+	[currentAddr release];
 	currentAddr=nil;
 	currentPos=nil;
 	currentProp=nil;
@@ -236,6 +246,7 @@
 	if([resultData length]==0) {
 		[connection release];
 		[resultData release];
+		resultData=nil;
 		if(!retryingWithoutLoc && APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.mode>1) {
 			retryingWithoutLoc=YES;
 			[self geoencode:req];
@@ -262,6 +273,7 @@
 		}
 		[connection release];
 		[resultData release];
+		resultData=nil;
 		retryingWithoutLoc=NO;
 	}
     // release the connection, and the data object

@@ -9,17 +9,16 @@
 #import "NetworkReceiverViewController.h"
 
 #import "xGPSAppDelegate.h"
-@implementation NetworkReceiverViewController
 
-/*
-// Override initWithNibName:bundle: to load the view using a nib file then perform additional customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+#define USE_SIMULATOR
+
+#ifndef USE_SIMULATOR
+@interface NSHost
+-(NSString*)address;
++(NSHost*)currentHost;
+@end
+#endif
+@implementation NetworkReceiverViewController
 
 
 // Implement loadView to create a view hierarchy programmatically.
@@ -29,25 +28,59 @@
 	viewRect.size.height=viewRect.size.height-44.0f;
 	UIView *view=[[UIView alloc] initWithFrame:viewRect];
 	self.view=view;
+	[view release];
+	self.view.autoresizesSubviews=YES;
+	self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.view.backgroundColor=[UIColor whiteColor];
 	UIImage *img=[UIImage imageNamed:@"wireless_future.jpg"];
 	UIImageView* imgview=[[UIImageView alloc] initWithImage:img];
 	CGRect size=CGRectMake((self.view.frame.size.width-img.size.width)/2.0,(self.view.frame.size.height-img.size.height)/2.0,img.size.width,img.size.height);
+	
+	imgview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+	
 	imgview.frame=size;
 	[self.view addSubview:imgview];
-	lblStatus=[[UILabel alloc] initWithFrame:CGRectMake(0,(self.view.frame.size.height-img.size.height)/2.0+img.size.height,self.view.frame.size.width,50)];
-	[self.view addSubview:lblStatus];
+	[imgview release];
+	lblStatus=[[UILabel alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-50,self.view.frame.size.width,50)];
+	lblAddress=[[UILabel alloc] initWithFrame:CGRectMake(0,5,self.view.frame.size.width,20)];
+	lblAddress.text=[NSString stringWithFormat:NSLocalizedString(@"Device address: %@",@""),[self getIPAddress]];
+	lblAddress.adjustsFontSizeToFitWidth=YES;
+	lblAddress.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+	lblAddress.textAlignment=UITextAlignmentCenter;
+	lblAddress.font=[UIFont systemFontOfSize:16];
+	lblAddress.backgroundColor=[UIColor clearColor];
+	
 	lblStatus.text=NSLocalizedString(@"Ready to transfer...",@"Status ready");
+	lblStatus.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 	lblStatus.textAlignment=UITextAlignmentCenter;
-	lblStatus.font=[UIFont fontWithName:@"Helvetica" size:22];
+	lblStatus.font=[UIFont systemFontOfSize:22];
 	lblStatus.backgroundColor=[UIColor clearColor];
-	progress=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	lblStatus.textColor=[UIColor darkGrayColor];
+	
+	
+	[self.view addSubview:lblAddress];
+	
+	[self.view addSubview:lblStatus];
+	
+	UIActivityIndicatorView *progress=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[progress startAnimating];
 	UIBarButtonItem *btn=[[UIBarButtonItem alloc] initWithCustomView:progress];
 	self.navigationItem.rightBarButtonItem=btn;
+	[btn release];
+	[progress release];
+	
+	
+	
 	APPDELEGATE.txcontroller.delegate=self;
 }
-
+-(NSString*)getIPAddress {
+	NSHost* myhost =[NSHost currentHost];
+	if (myhost)
+		return [myhost address];
+	else
+		return NSLocalizedString(@"Unknown",@"");
+		
+}
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view.
@@ -67,8 +100,7 @@
 	[APPDELEGATE.txcontroller stopServer];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 
@@ -82,6 +114,8 @@
 }
 - (void)dealloc {
     [super dealloc];
+	[lblStatus release];
+	[lblAddress release];
 }
 
 

@@ -112,7 +112,7 @@
 					case 0:
 						cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 						cell.selectionStyle =UITableViewCellSelectionStyleNone;
-						cell.text=NSLocalizedString(@"Manage maps",@"Manage maps row in settings");
+						cell.text=NSLocalizedString(@"Download maps",@"");
 						cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 						cell.accessoryAction=@selector(showMapsManager:);
 						break;
@@ -233,6 +233,7 @@
 
 - (void)dealloc {
 	[maptype release];
+	[mapsmanager release];
     [super dealloc];
 }
 

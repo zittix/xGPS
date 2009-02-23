@@ -18,8 +18,7 @@
 }
 -(void)dealloc {
 	[finished release];
-	if(receivedData!=nil)
-		[receivedData release];
+	[receivedData release];
 	[super dealloc];
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

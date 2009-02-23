@@ -25,27 +25,27 @@
 	NSLog(@"Loading DB %@...",path);
 	
 	//Check DB version
-	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<2 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
 		if([fm fileExistsAtPath:path]) {
-		UIAlertView * hotSheet = [[UIAlertView alloc]
-								  initWithTitle:NSLocalizedString(@"Maps data",@"Maps data title")
-								  message:NSLocalizedString(@"Your downloaded maps are not compatible with this version of xGPS. They have been deleted.",@"")
-								  delegate:nil
-								  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
-								  otherButtonTitles:nil];
-		
-		[hotSheet show];
-		
-				
-		NSError *err;
-		[fm removeItemAtPath:path error:&err];
-		[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
+			UIAlertView * hotSheet = [[UIAlertView alloc]
+									  initWithTitle:NSLocalizedString(@"Maps data",@"Maps data title")
+									  message:NSLocalizedString(@"Your downloaded maps are not compatible with this version of xGPS. They have been deleted.",@"")
+									  delegate:nil
+									  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
+									  otherButtonTitles:nil];
+			
+			[hotSheet show];
+			
+			
+			NSError *err;
+			[fm removeItemAtPath:path error:&err];
+			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
 		}
 		
 		
 	}
 	
-	[[NSUserDefaults standardUserDefaults]  setInteger:2 forKey:kSettingsDBVersion];
+	[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
 	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 		//Check if table exist
 		char *error;
@@ -53,34 +53,23 @@
 		//IF NOT EXISTS doesn't exist on 1.1.4
 		int ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 		if(ret!=SQLITE_OK) { //Create Table
-			char *tMap="CREATE TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB, version INTEGER,PRIMARY KEY(x,y,zoom,type))";
+			char *tMap="CREATE TABLE tiles (x INTEGER, y INTEGER,zoom INTEGER,type INTEGER, img BLOB,PRIMARY KEY(x,y,zoom,type))";
 			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
 			NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
 			
+			tMap="CREATE TABLE maps (id INTEGER, name TEXT, zoom TEXT, type INTEGER, PRIMARY KEY(id))";
+			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables 2 with message '%s'.",error);
+			tMap="CREATE TABLE map_regions (regionsid INTEGER, mapid INTEGER, PRIMARY KEY(regionsid))";
+			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables 2 with message '%s'.",error);
+			tMap="CREATE TABLE regions_points (regionsid INTEGER, lat REAL,lon REAL, pos INTEGER, PRIMARY KEY(regionsid,lat,lon))";
+			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
+			NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables 2 with message '%s'.",error);
 			ret=sqlite3_prepare(database,"SELECT img FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&getTileStmt,NULL);
 			NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
 			
 		}
-		/*
-		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]>0) {
-			//Add a column to tiles
-			char *tMap="ALTER TABLE tiles ADD version INTEGER";
-			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-			NSAssert1(ret==SQLITE_OK, @"Failed to migrate (1) database's tables with message '%s'.",error);
-			tMap="UPDATE tiles SET version = 289";
-			ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-			NSAssert1(ret==SQLITE_OK, @"Failed to migrate (2) database's tables with message '%s'.",error);
-			[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];
-
-		}*/
-		
-		
-		//Migrate the DB if wrong Primary index
-		
-		//tMap="DELETE FROM tiles";
-		//ret= sqlite3_exec(database,tMap,NULL,NULL,&error);
-		//NSAssert1(ret==SQLITE_OK, @"Failed to empty database's tables with message '%s'.",error);
-		
 		
 		//PRepare the get query for speedup
 		
@@ -94,6 +83,18 @@
 		//PRepare the check query for speedup
 		ret=sqlite3_prepare(database,"SELECT x FROM tiles WHERE x=?1 AND y=?2 AND zoom=?3 AND type=?4",-1,&checkTileStmt,NULL);
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare check query with message '%s'.",sqlite3_errmsg(database));
+		
+		
+		ret=sqlite3_prepare(database,"INSERT INTO map_regions (mapid) VALUES(?1)",-1,&insertRegionStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		
+		ret=sqlite3_prepare(database,"INSERT INTO regions_points (regionsid,lat,lon,pos) VALUES(?1,?2,?3,?4)",-1,&insertPointStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		
+		ret=sqlite3_prepare(database,"INSERT INTO maps (name,zoom,type) VALUES(?1,?2,?3)",-1,&insertMapStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare insert query with message '%s'.",sqlite3_errmsg(database));
+		
+		
 		
 	} else {
 		// Even though the open failed, call close to properly clean up resources.
@@ -119,7 +120,84 @@
 	//[dbLock unlock];
 	closed=NO;
 }
+-(void)saveMap:(NSString*)name points:(NSArray*)points zoom:(NSString*)zoom {
+	if(name==nil || points==nil || points.count<3) return;
+	if(closed) return;
 
+	[dbLock lock];
+	
+	if(sqlite3_bind_text(insertMapStmt,1,[name UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
+		goto err;
+	if(sqlite3_bind_text(insertMapStmt,2,[zoom UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
+		goto err;
+	
+	NSString *typeS=[NSString stringWithFormat:@"%d",type];
+
+	if(sqlite3_bind_text(insertMapStmt,3,[typeS UTF8String],-1, SQLITE_STATIC)!=SQLITE_OK)
+		goto err;
+	
+	
+	
+	int r=sqlite3_step(insertMapStmt);
+	sqlite3_reset(insertMapStmt);
+	sqlite3_clear_bindings(insertMapStmt);
+	
+	if(r!=SQLITE_DONE) {
+		[dbLock unlock];
+		NSLog(@"Unable to insert map: %s. Err. code=%d",sqlite3_errmsg(database),r);
+		return;
+	}
+	
+	//Get map id
+	long mapId=sqlite3_last_insert_rowid(database);
+	
+	if(sqlite3_bind_int(insertRegionStmt,1,mapId)!=SQLITE_OK)
+		goto err;
+	r=sqlite3_step(insertRegionStmt);
+	sqlite3_reset(insertRegionStmt);
+	sqlite3_clear_bindings(insertRegionStmt);
+	if(r!=SQLITE_DONE) {
+		[dbLock unlock];
+		NSLog(@"Unable to insert region: %s. Err. code=%d",sqlite3_errmsg(database),r);
+		return;
+	}
+	long regionId=sqlite3_last_insert_rowid(database);
+	int i=0;
+	
+	for(PositionObj *p in points) {
+		if(sqlite3_bind_int(insertPointStmt,1,regionId)!=SQLITE_OK)
+			goto err;
+		
+		if(sqlite3_bind_double(insertPointStmt,2,p.x)!=SQLITE_OK)
+			goto err;
+		if(sqlite3_bind_double(insertPointStmt,3,p.y)!=SQLITE_OK)
+			goto err;
+		if(sqlite3_bind_int(insertPointStmt,4,i)!=SQLITE_OK)
+			goto err;
+		i++;
+		r=sqlite3_step(insertPointStmt);
+		sqlite3_reset(insertPointStmt);
+		sqlite3_clear_bindings(insertPointStmt);
+		if(r!=SQLITE_DONE) {
+			[dbLock unlock];
+			NSLog(@"Unable to insert region: %s. Err. code=%d",sqlite3_errmsg(database),r);
+			return;
+		}
+	}
+
+	[dbLock unlock];
+	return;
+err:
+	sqlite3_reset(insertMapStmt);
+	sqlite3_clear_bindings(insertMapStmt);
+	sqlite3_reset(insertRegionStmt);
+	sqlite3_clear_bindings(insertRegionStmt);
+	sqlite3_reset(insertPointStmt);
+	sqlite3_clear_bindings(insertPointStmt);
+	[dbLock unlock];
+	return;
+	
+}
 -(id)init {
 	closed=YES;
 	tileHeap=[[NSMutableArray arrayWithCapacity:10] retain];
@@ -139,7 +217,7 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(offlineModeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	[NSThread detachNewThreadSelector:@selector(asyncTileGet) toTarget:self withObject:nil];
-
+	
 	
 	return self;
 }
@@ -149,6 +227,10 @@
 	sqlite3_finalize(getTileStmt);
 	sqlite3_finalize(insertTileStmt);
 	sqlite3_finalize(checkTileStmt);
+	sqlite3_finalize(insertMapStmt);
+	sqlite3_finalize(insertPointStmt);
+	sqlite3_finalize(insertPointStmt);
+	
 	sqlite3_close(database);
 	[dbLock unlock];
 	closed=YES;
@@ -168,10 +250,15 @@
 		[langMap release];	
 	}
 	[hasTileToDLlock unlock];
-	sqlite3_finalize(getTileStmt);
-	sqlite3_finalize(insertTileStmt);
-	sqlite3_finalize(checkTileStmt);
-	sqlite3_close(database);
+	if(!closed) {
+		sqlite3_finalize(getTileStmt);
+		sqlite3_finalize(insertTileStmt);
+		sqlite3_finalize(checkTileStmt);
+		sqlite3_finalize(insertMapStmt);
+		sqlite3_finalize(insertPointStmt);
+		sqlite3_finalize(insertPointStmt);
+		sqlite3_close(database);
+	}
 	[super dealloc];
 }
 -(void)cancelDownload {
@@ -197,7 +284,14 @@
 	[self loadDB];
 	[dbLock unlock];
 }
-
+-(void)showIndicator {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+	
+}
+-(void)hideIndicator {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+	
+}
 - (void)asyncTileGet {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	//NSLog(@"Async Tile Get Thread - Started");
@@ -219,8 +313,7 @@
 		NSArray *copy=[tileHeap copy];
 		[tileHeap removeAllObjects];
 		[tileHeapLock unlock];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
-		
+		[self performSelectorOnMainThread:@selector(showIndicator) withObject:nil waitUntilDone:YES];
 		for(int i=[copy count]-1;i>=0;i--) {
 			TileCoord *p=[copy objectAtIndex:i];
 			[dbLock lock];
@@ -248,11 +341,10 @@
 				}	
 			}
 		}
-		
+		[self performSelectorOnMainThread:@selector(hideIndicator) withObject:nil waitUntilDone:YES];
 		[copy release];
 		//[arrD removeAllObjects];
 		[pool release];
-		[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	}
 	
 	//NSLog(@"Async Tile Get Thread - Stoped");
@@ -411,11 +503,11 @@
 	NSString *lang=langMap;
 	if(lang==nil) lang=@"en";
 	
-	NSString *mapType=@"w2.89"; //Normal
+	NSString *mapType=@"w2.92"; //Normal
 	NSString *url;
 	switch(type){
 		case 0: 
-			mapType=@"w2.89"; 
+			mapType=@"w2.92"; 
 			url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
 			break; //maps
 		case 2: 
@@ -428,14 +520,14 @@
 			url=[[NSString alloc] initWithFormat:@"http://khm%d.google.com/kh?v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
 			break; //hybride
 		case 1:
-			mapType=@"w2p.89"; 
+			mapType=@"w2p.87"; 
 			url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
 			break; 	//terrain
 	}
-
 	
-
-
+	
+	
+	
 	//NSLog(@"Getting tile at %@",url);
 	NSURL *imageURL = [[NSURL alloc] initWithString:url];
 	[url release];
@@ -458,7 +550,7 @@
 	[urlReq setValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" forHTTPHeaderField:@"User-Agent"];
 	[urlReq setValue:@"image/png,image/*;q=0.8,*/*;q=0.5" forHTTPHeaderField:@"Accept"];
 	[urlReq setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
-
+	
 	NSData *imageData=nil;
 	
 	SyncDownloader *dl=[[SyncDownloader alloc] init];
@@ -469,7 +561,7 @@
 	
 	if(imageData==nil || !res) {
 		NSLog(@"Download error");
-		[dl release];
+		//[dl release];
 		[pool release];
 		
 		if(!silent) {
@@ -487,20 +579,20 @@
 	//NSLog(@"Tile got at (%d bytes)!",[imageData length]);
 	[dbLock lock];
 	if(!closed) {
-	if(sqlite3_bind_int(insertTileStmt,1,x)!=SQLITE_OK)
-		goto err;
-	if(sqlite3_bind_int(insertTileStmt,2,y)!=SQLITE_OK)
-		goto err;
-	if(sqlite3_bind_int(insertTileStmt,3,zoom)!=SQLITE_OK)
-		goto err;
-	if(sqlite3_bind_int(insertTileStmt,4,type)!=SQLITE_OK)
-		goto err;
-	if(sqlite3_bind_blob(insertTileStmt, 5, [imageData bytes], [imageData length], SQLITE_STATIC)!=SQLITE_OK)
-		goto err;
-	
-	r=sqlite3_step(insertTileStmt);
-	sqlite3_reset(insertTileStmt);
-	sqlite3_clear_bindings(insertTileStmt);
+		if(sqlite3_bind_int(insertTileStmt,1,x)!=SQLITE_OK)
+			goto err;
+		if(sqlite3_bind_int(insertTileStmt,2,y)!=SQLITE_OK)
+			goto err;
+		if(sqlite3_bind_int(insertTileStmt,3,zoom)!=SQLITE_OK)
+			goto err;
+		if(sqlite3_bind_int(insertTileStmt,4,type)!=SQLITE_OK)
+			goto err;
+		if(sqlite3_bind_blob(insertTileStmt, 5, [imageData bytes], [imageData length], SQLITE_STATIC)!=SQLITE_OK)
+			goto err;
+		
+		r=sqlite3_step(insertTileStmt);
+		sqlite3_reset(insertTileStmt);
+		sqlite3_clear_bindings(insertTileStmt);
 	}
 	[dl release];
 	[dbLock unlock];
@@ -519,7 +611,7 @@ err:
 	NSLog(@"Error while getting tile.");
 	sqlite3_reset(insertTileStmt);
 	sqlite3_clear_bindings(insertTileStmt);
-
+	
 	return NO;
 }
 @end

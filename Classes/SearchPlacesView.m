@@ -47,6 +47,8 @@
     [super dealloc];
 	[searchBar release];
 	[geocoder release];
+	[tblView release];
+	[_result release];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	if(_result!=nil) {
@@ -110,10 +112,6 @@
 	NSString *key=[NSString stringWithFormat:@"%d",indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	GeoEncoderResult* r=[_result objectForKey:key];
-	/*
-	map.pos=r.pos;
-	[map setPosSearch:r.pos];
-	((MainViewController*)viewController).currentSearchType=1;*/
 	[delegate gotResultForSearch:r];
 	[self searchBarCancelButtonClicked:searchBar];
 }

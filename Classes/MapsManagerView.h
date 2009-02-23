@@ -11,12 +11,12 @@
 #import "TileDB.h"
 #import "ProgressView.h"
 #import "ZoomView.h"
-
+#import "MapsDownloadDetailsViewController.h"
 @protocol ShowMapProtocol
 -(void) showMap;
 @end
 
-@interface MapsManagerView : UIViewController<UIAlertViewDelegate> {
+@interface MapsManagerView : UIViewController<UIAlertViewDelegate,MapsDownloadDetailsDelegate> {
 	id delegate;
 	MapView *mapview;
 	TileDB *db;
@@ -27,6 +27,9 @@
 	BOOL downloading;
 	ZoomView *zoomview;
 	CGRect viewRect;
+	NSString *savedName;
+	int savedZoom;
+	BOOL detailView;
 }
 -(void)clearSelection;
 -(void)updateCurrentPos:(PositionObj*)pos;

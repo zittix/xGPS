@@ -21,8 +21,6 @@
 		dummyView=[[UIView alloc] initWithFrame:CGRectMake(0,80,frame.size.width,frame.size.height-80)];
 		[self addSubview:dummyView];
 		self.backgroundColor=[UIColor clearColor];
-		bigbar=[[UIToolbar alloc] initWithFrame:CGRectMake(0,0,frame.size.width,80)];
-		bigbar.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		from=[[UISearchBar alloc] initWithFrame:CGRectMake(0,0,frame.size.width,40)];
 		from.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 		from.showsCancelButton=NO;
@@ -38,13 +36,12 @@
 		to.placeholder=NSLocalizedString(@"To / Destination",@"Driving to ");
 		from.placeholder=NSLocalizedString(@"From / Departure",@"Driving from ");
 		[from becomeFirstResponder];
-		[bigbar addSubview:from];
-		[bigbar addSubview:to];
+		[self addSubview:from];
+		[self addSubview:to];
 		bookmarkClicked=nil;
 		
 		self.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.autoresizesSubviews=YES;
-		[self addSubview:bigbar];
 	}
     return self;
 }
@@ -61,6 +58,9 @@
 }
 - (void)dealloc {
 	[currentPosition release];
+	[from release];
+	[dummyView release];
+	[to release];
     [super dealloc];
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar_ {

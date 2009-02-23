@@ -18,6 +18,7 @@
 	[self setBackgroundColor: [UIColor colorWithCGColor:CGColorCreate(CGColorSpaceCreateDeviceRGB(), translucentBlack)]];
 
 	ltext = [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 220.0f, rect.size.width, 30.0f)];
+	ltext.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	prctext = [[UILabel alloc] initWithFrame: CGRectMake(0.0f, 250.0f, rect.size.width, 30.0f)];
 	ltext.textAlignment=UITextAlignmentCenter;
 	ltext.backgroundColor=[UIColor colorWithWhite:0 alpha:0];
@@ -25,7 +26,7 @@
 	prctext.text=[NSString stringWithFormat:@"0.0 %%"];
 	prctext.textAlignment=UITextAlignmentCenter;
 	prctext.backgroundColor=[UIColor colorWithWhite:0 alpha:0];
-
+	prctext.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[ltext setTextColor:[UIColor whiteColor]];
 	ltext.font=[UIFont systemFontOfSize:16];
 	[ltext setOpaque: YES];
@@ -40,12 +41,14 @@
 	struct CGRect irect = CGRectMake((frame.size.width-200)/2, 200.0f, 200.0f, 25.0f);
 	progressBar = [[UIProgressView alloc] initWithFrame: irect];
 	progressBar.progress=0;
-
+	progressBar.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[self addSubview: progressBar];
 
 	button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 	[button setTitle:NSLocalizedString(@"Cancel",@"Cancel") forState:UIControlStateNormal];
-	button.frame=CGRectMake((frame.size.width-100)/2,300,100,50);
+	button.frame=CGRectMake((frame.size.width-100)/2,frame.size.height-60,100,50);
+	button.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+	
 	[self addSubview: button];
 	[button retain];
 	currentDelegate=nil;

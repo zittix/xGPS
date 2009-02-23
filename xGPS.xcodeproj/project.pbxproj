@@ -99,6 +99,7 @@
 		4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */; };
 		4ECFA2A60EE48A750077553B /* SettingsMapsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2A50EE48A750077553B /* SettingsMapsController.m */; };
 		4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */; };
+		4ED973340F52EBF6006E2312 /* MapsDownloadDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
 		4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE70F51E8BA00C77686 /* settings_button.png */; };
@@ -374,6 +375,8 @@
 		4ECFA2A50EE48A750077553B /* SettingsMapsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsMapsController.m; sourceTree = "<group>"; };
 		4ED2BD750F4EE1BE00DDC062 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
 		4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
+		4ED973320F52EBF6006E2312 /* MapsDownloadDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsDownloadDetailsViewController.h; sourceTree = "<group>"; };
+		4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsDownloadDetailsViewController.m; sourceTree = "<group>"; };
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -567,8 +570,6 @@
 				4E0F04FE0E87C44600D75E7D /* UI */,
 				4E79293E0E58E7F500CAF1B2 /* GPS */,
 				4E23969B0E40F7DA0062A352 /* LocationWrapper.h */,
-				4E2396780E40F7750062A352 /* TileDB.h */,
-				4E2396790E40F7750062A352 /* TileDB.m */,
 				4E2396720E40F6AB0062A352 /* Position.h */,
 				4E2396730E40F6AB0062A352 /* Position.m */,
 				1D3623240D0F684500981E51 /* xGPSAppDelegate.h */,
@@ -674,6 +675,8 @@
 				4E0829780F4DFCF000B1C9AF /* NavigationPoint.m */,
 				4E96C6310F320DF10058C714 /* MapTypeViewController.h */,
 				4E96C6320F320DF10058C714 /* MapTypeViewController.m */,
+				4ED973320F52EBF6006E2312 /* MapsDownloadDetailsViewController.h */,
+				4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */,
 				4E8A01750E9D441C00E58774 /* NetworkReceiverViewController.h */,
 				4E8A01760E9D441C00E58774 /* NetworkReceiverViewController.m */,
 				4E8C97350E6CBEF7001F5317 /* SpeedView.h */,
@@ -841,6 +844,8 @@
 				4EE243430F30750500C41ACA /* SoundController.m */,
 				4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */,
 				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
+				4E2396780E40F7750062A352 /* TileDB.h */,
+				4E2396790E40F7750062A352 /* TileDB.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1364,6 +1369,7 @@
 				4E082A600F4E0A4300B1C9AF /* ModalSearchViewController.m in Sources */,
 				4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */,
 				4EDDAE020F51FD0D00C77686 /* RemainingDistanceTimeView.m in Sources */,
+				4ED973340F52EBF6006E2312 /* MapsDownloadDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -56,6 +56,7 @@
 
 
 - (void)dealloc {
+	[searchPlacesView release];
     [super dealloc];
 }
 

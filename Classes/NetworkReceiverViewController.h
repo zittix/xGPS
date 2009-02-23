@@ -11,7 +11,7 @@
 
 @interface NetworkReceiverViewController : UIViewController<TransferControllerDelegate> {
 	UILabel *lblStatus;
-	UIActivityIndicatorView *progress;
+	UILabel *lblAddress;
 }
-
+-(NSString*)getIPAddress;
 @end

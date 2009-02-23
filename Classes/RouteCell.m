@@ -54,6 +54,9 @@
 }
 
 - (void)dealloc {
+	[lblFrom release];
+	[lblTo release];
+	[lblName release];
     [super dealloc];
 }
 

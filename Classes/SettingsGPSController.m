@@ -193,6 +193,7 @@
 
 
 - (void)dealloc {
+	[gpsselector release];
     [super dealloc];
 }
 

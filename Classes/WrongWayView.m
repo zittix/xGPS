@@ -83,6 +83,7 @@
 	}
 }
 - (void)dealloc {
+	[wrongWaylbl release];
     [super dealloc];
 }
 

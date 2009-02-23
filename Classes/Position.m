@@ -55,9 +55,7 @@
 	end=[val retain];
 }
 -(void)dealloc {
-	if(start!=nil)
 	[start release];
-	if(end!=nil)
 	[end release];
 	[super dealloc];
 }

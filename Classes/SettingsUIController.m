@@ -464,6 +464,8 @@
 - (void)dealloc {
 	[tableView release];
 	[pickerTime release];
+	[dummyView release];
+	[toolbarPicker release];
     [super dealloc];
 }
 

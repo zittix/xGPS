@@ -403,6 +403,10 @@
 
 - (void)dealloc {
 	[points release];
+	[txtName release];
+	[routeType release];
+	[pController release];
+	[tableView release];
     [super dealloc];
 }
 

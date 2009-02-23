@@ -17,6 +17,11 @@
 	}
 	return self;
 }
+-(void)dealloc {
+	[super dealloc];
+	[pos release];
+	[name release];
+}
 -(void)setPos:(PositionObj*)p {
 	pos.x=p.x;
 	pos.y=p.y;

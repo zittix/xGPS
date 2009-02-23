@@ -25,6 +25,6 @@ typedef enum {
 }
 +(ChangedState*)objWithState:(MSG_TYPE)t andParent:(GPSController*)p;
 @property (nonatomic) MSG_TYPE state;
-@property (retain,nonatomic) GPSController* parent;
+@property (assign,nonatomic) GPSController* parent;
 +(NSString*)stringForState:(MSG_TYPE)s;
 @end

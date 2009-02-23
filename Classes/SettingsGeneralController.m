@@ -9,6 +9,8 @@
 #import "SettingsGeneralController.h"
 #import "xGPSAppDelegate.h"
 #import "TitleValueCell.h"
+#import "AboutViewController.h"
+#import "LanguageViewController.h"
 @implementation SettingsGeneralController
 
 
@@ -202,13 +204,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row==0 && indexPath.section==3) {
-		if(aboutView==nil)
-			aboutView=[[AboutViewController alloc] init];
+		AboutViewController *aboutView=[[AboutViewController alloc] init];
 		[self.navigationController pushViewController:aboutView animated:YES];
+		[aboutView release];
 	} else if(indexPath.row==0 && indexPath.section==2) {
-		if(langView==nil)
-			langView=[[LanguageViewController alloc] init];
+		LanguageViewController*	langView=[[LanguageViewController alloc] init];
 		[self.navigationController pushViewController:langView animated:YES];
+		[langView release];
 	}
 }
 

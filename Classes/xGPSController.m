@@ -88,10 +88,12 @@
 	//Reset the timer to a longer interval if connected
 	if(isConnected && checkTimer.timeInterval!=12) {
 		[checkTimer invalidate];
-		checkTimer=[NSTimer scheduledTimerWithTimeInterval:12 target:self selector:@selector(checkConnection) userInfo:nil repeats:YES];
+		[checkTimer release];
+		checkTimer=[[NSTimer scheduledTimerWithTimeInterval:12 target:self selector:@selector(checkConnection) userInfo:nil repeats:YES] retain];
 	} else if(!isConnected && checkTimer.timeInterval!=2) {
 		[checkTimer invalidate];
-		checkTimer=[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(checkConnection) userInfo:nil repeats:YES];
+		[checkTimer release];
+		checkTimer=[[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(checkConnection) userInfo:nil repeats:YES] retain];
 	}
 }
 -(void)start {
@@ -101,7 +103,8 @@
 	stopGPSSerial=NO;
 	started=YES;
 	[NSThread detachNewThreadSelector:@selector(threadSerialGPS) toTarget:self withObject:nil];
-	checkTimer=[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(checkConnection) userInfo:nil repeats:YES];
+	
+	checkTimer=[[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(checkConnection) userInfo:nil repeats:YES] retain];
 	
 	//Check if online or not
 	
@@ -122,6 +125,8 @@
 - (void)stop {
 	NSLog(@"Stoppig xgps");
 	[checkTimer invalidate];
+	[checkTimer release];
+	checkTimer=nil;
 	isEnabled=NO;
 	stopGPSSerial=YES;
 	started=NO;
@@ -129,6 +134,7 @@
 -(void)dealloc {
 	NSLog(@"Deallocate xgps");
 	[lockReceivedOk release];
+	[checkTimer release];
 	[super dealloc];
 }
 -(void)resetGPS {

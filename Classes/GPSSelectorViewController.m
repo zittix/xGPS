@@ -155,7 +155,6 @@
 - (void)dealloc {
     [super dealloc];
 	[gpsList release];
-	if(licenseView!=nil)
 	[licenseView release];
 }
 

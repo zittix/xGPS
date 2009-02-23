@@ -22,6 +22,11 @@
 	sqlite3_stmt* getTileStmt;
 	sqlite3_stmt* checkTileStmt;
 	sqlite3_stmt* insertTileStmt;
+	
+	sqlite3_stmt* insertMapStmt;
+	sqlite3_stmt* insertRegionStmt;
+	sqlite3_stmt* insertPointStmt;
+	
 	BOOL cancelDownload;
 	NSMutableArray* tileHeap;
 	NSLock *tileHeapLock;
@@ -39,6 +44,7 @@
 -(void)cancelDownload;
 -(float)mapsize;
 -(void)flushMaps;
+-(void)saveMap:(NSString*)name points:(NSArray*)points zoom:(NSString*)zoom;
 -(NSString*)getDBFilename;
 -(void)closeDB;
 -(void)loadDB;

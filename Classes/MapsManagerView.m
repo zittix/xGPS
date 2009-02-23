@@ -9,6 +9,7 @@
 #import "MapsManagerView.h"
 #import "Position.h"
 #import "xGPSAppDelegate.h"
+
 @implementation MapsManagerView
 -(id) initWithDB:(TileDB*)_db {
 	self=[super init];
@@ -57,6 +58,7 @@
 	[progress release];
 	[mapview release];
 	[zoomview release];
+	[savedName release];
 	
 }
 -(void)updateCurrentPos:(PositionObj*)pos {
@@ -96,16 +98,19 @@
 	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSleepMode])
 		APPDELEGATE.idleTimerDisabled=YES;
 	PositionObj *pos1=[mapview getPositionFromPixel:pDep.x andY:pDep.y];
-	PositionObj *pos2=[mapview getPositionFromPixel:pEnd.x andY:pEnd.y];
+	PositionObj *pos4=[mapview getPositionFromPixel:pEnd.x andY:pEnd.y];
+	
+	PositionObj *pos2=[mapview getPositionFromPixel:pEnd.x andY:pDep.y];
+	PositionObj *pos3=[mapview getPositionFromPixel:pDep.x andY:pEnd.y];
+	
 	
 	int x1,y1,x2,y2;
 	
-	//TODO: Let the user choosing the zoom
-	[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
-	[mapview getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
+	[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:savedZoom];
+	[mapview getXYfrom:pos4.x andLon:pos4.y toPositionX:&x2 andY:&y2 withZoom:savedZoom];
 	
 	
-	int res=[db downloadTiles:x1 fromY:y1 toX:x2 toY:y2 withZoom:0 withDelegate:progress];
+	int res=[db downloadTiles:x1 fromY:y1 toX:x2 toY:y2 withZoom:savedZoom withDelegate:progress];
 	
 	//NSLog(@"End of download thread");
 	[progress performSelectorOnMainThread:@selector(hide) withObject:nil waitUntilDone:NO];
@@ -114,9 +119,13 @@
 	if(res==0) {
 		msg=NSLocalizedString(@"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly.",@"Error message download maps");
 	} else if(res==1) {
+		NSArray *points=[NSArray arrayWithObjects:pos1,pos2,pos3,pos4,nil];
+		
+		[db saveMap:savedName points:points zoom:[NSString stringWithFormat:@"%d",savedZoom]];
 		msg=NSLocalizedString(@"Maps downloaded successfully !",@"Download maps ok");
 	}
-	
+	[savedName release];
+	savedName=nil;
 	[self performSelectorOnMainThread:@selector(enableDownload) withObject:nil waitUntilDone:NO];
 	
 	if(msg!=nil) {
@@ -152,25 +161,32 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	[alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+	
+	
 	if(buttonIndex==1) {
-		downloading=YES;
-		[progress setProgress:0];
-		[progress showFrom:self.view];
-		self.navigationItem.rightBarButtonItem.enabled=NO;
-		[NSThread detachNewThreadSelector:@selector(downloadTiles) toTarget:self withObject:nil];
+		savedName=nil;
+		detailView=YES;
+		MapsDownloadDetailsViewController *controller=[[MapsDownloadDetailsViewController alloc] initWithStyle:UITableViewStyleGrouped delegate:self];
+		[self.navigationController pushViewController:controller animated:YES];
 	}
 }
 - (void)viewWillDisappear:(BOOL)animated {
 	[db cancelDownload];
 	[progress hide];
 	self.navigationItem.rightBarButtonItem.enabled=YES;
+	if(!detailView)
 	[self clearSelection];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
+	if(!detailView) {
+	
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]==0)
 		mapview.maxZoom=17;
 	else
 		mapview.maxZoom=15;
+	
+	savedZoom=17-mapview.maxZoom;
 	
 	if(mapview.zoom<17-mapview.maxZoom)
 		[mapview setZoom:17-mapview.maxZoom];
@@ -178,6 +194,26 @@
 		[mapview setZoom:mapview.zoom];
 	[mapview fulllRefreshMap];
 	mapview.mapRotationEnabled=NO;
+	}
+
+}
+-(void)viewDidAppear:(BOOL)animated {
+	if(detailView && savedName!=nil) {
+
+	downloading=YES;
+	[progress setProgress:0];
+	progress.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+	[progress showFrom:self.view];
+	self.navigationItem.rightBarButtonItem.enabled=NO;
+	[NSThread detachNewThreadSelector:@selector(downloadTiles) toTarget:self withObject:nil];	
+	
+	}
+	mapview.mapRotationEnabled=NO;
+	detailView=NO;
+}
+-(void)gotName:(NSString*)name andZoomLevel:(int)z {
+	savedName=[name retain];
+	savedZoom=z;
 }
 - (void)startDownloadButton:(id)sender
 {
@@ -187,19 +223,19 @@
 	int x1,y1,x2,y2;
 	
 	//TODO: Let the user choosing the zoom
-	[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:0];
-	[mapview getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:0];
+	[mapview getXYfrom:pos1.x andLon:pos1.y toPositionX:&x1 andY:&y1 withZoom:savedZoom];
+	[mapview getXYfrom:pos2.x andLon:pos2.y toPositionX:&x2 andY:&y2 withZoom:savedZoom];
 	
 	if(abs(x2-x1)>0 && abs(y2-y1)>0 ) {
 		
 		int nb=abs(x2-x1)*abs(y2-y1);
-		int kb=abs(x2-x1)*abs(y2-y1)*6;
+		double kb=abs(x2-x1)*abs(y2-y1)*3.6;
 		NSString *msg;
 		if(kb>1000) {
-			kb/=1024;
-			msg=[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?",@"Make sure to let the %d etc..."),nb,kb];
+			kb/=1024.0;
+			msg=[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?",@"Make sure to let the %d etc..."),nb,kb];
 		} else {
-			msg=[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?",@"in kilo bytes"),nb,kb];
+			msg=[NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?",@"in kilo bytes"),nb,kb];
 		}
 		
 		UIAlertView * hotSheet = [[UIAlertView alloc]

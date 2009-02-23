@@ -17,8 +17,6 @@
 	MainViewController* controller;
 	MapView *map;
 	float keyboardHeight;
-	NSDictionary *_result;
-	UIToolbar *bigbar;
 	UISearchBar *from;
 	UISearchBar *to;
 	UISearchBar *bookmarkClicked;

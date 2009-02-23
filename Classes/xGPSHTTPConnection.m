@@ -268,7 +268,7 @@ static BOOL uploading=NO;
 	if([path isEqualToString:@"/info"]) {
 		NSString *page=[self createInfoPage];
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 		return resp;
 	} else if([path hasPrefix:@"/uploadMapsDB"]) {
 		
@@ -321,19 +321,19 @@ static BOOL uploading=NO;
 			if([path isEqualToString:@"/uploadMapsDB?api=1"]) {
 				NSString *page=[self createAPI_dbUploadOK];
 				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 				return resp;
 			} else {
 				NSString *page=[self createUploadOKPage];
 				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 				return resp;
 			}
 		}
 		else {
 			NSString *page=[self createUploadMapDBPage];
 			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+			HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data]  autorelease];
 			return resp;
 		}
 		
@@ -388,47 +388,47 @@ static BOOL uploading=NO;
 			if([path isEqualToString:@"/uploadDirectionsDB?api=1"]) {
 				NSString *page=[self createAPI_dbUploadOK];
 				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 				return resp;
 			} else {
 				NSString *page=[self createUploadDirectionsOKPage];
 				NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-				HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+				HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 				return resp;
 			}
 		}
 		else {
 			NSString *page=[self createUploadDirectionsDBPage];
 			NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-			HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+			HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 			return resp;
 		}
 		
 	} else if([path isEqualToString:@"/"]) {
 		NSString *str=[self createBrowseableIndex:@"/"];
 		NSData *data=[str dataUsingEncoding:NSUTF8StringEncoding];
-		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 		return resp;	
 	} else if([path isEqualToString:@"/api/getDeviceInfo"]) {
 		NSString *page=[self createAPI_info];
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 		return resp;
 	} else if([path isEqualToString:@"/api/getGPXTrack"]) {
 		NSString *page=[self createAPI_GPXLogFiles];
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 		return resp;
 	} else if([path isEqualToString:@"/gpxlogger"]) {
 		NSString *page=[self createGPXLogFiles];
 		NSData *data=[page dataUsingEncoding:NSUTF8StringEncoding];
-		HTTPDataResponse *resp=[[HTTPDataResponse alloc] initWithData:data];
+		HTTPDataResponse *resp=[[[HTTPDataResponse alloc] initWithData:data] autorelease];
 		return resp;
 	} else if([path isEqualToString:@"/api/getTileDB"]) {
-		HTTPFileResponse *resp=[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.tiledb getDBFilename]];
+		HTTPFileResponse *resp=[[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.tiledb getDBFilename]] autorelease];
 		return resp;
 	} else if([path isEqualToString:@"/api/getDirectionsDB"]) {
-		HTTPFileResponse *resp=[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.dirbookmarks getDBFilename]];
+		HTTPFileResponse *resp=[[[HTTPFileResponse alloc] initWithFilePath:[APPDELEGATE.dirbookmarks getDBFilename]] autorelease];
 		return resp;
 	} else if([path hasPrefix:@"/api/getGPXLogFile/"]) {
 		
@@ -440,7 +440,7 @@ static BOOL uploading=NO;
 		NSString *file = [path stringByAppendingPathComponent:filename];
 		HTTPFileResponse *resp=nil;
 		if([[NSFileManager defaultManager] fileExistsAtPath:file])
-			resp=[[HTTPFileResponse alloc] initWithFilePath:file];
+			resp=[[[HTTPFileResponse alloc] initWithFilePath:file] autorelease];
 		else
 			resp=nil;
 		return resp;
@@ -492,9 +492,9 @@ static BOOL uploading=NO;
 					postHeaderOK = TRUE;
 					
 					NSString* postInfo = [[NSString alloc] initWithBytes:[[multipartData objectAtIndex:1] bytes] length:[[multipartData objectAtIndex:1] length] encoding:NSUTF8StringEncoding];
-					NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
-					postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
-					postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
+					//NSArray* postInfoComponents = [postInfo componentsSeparatedByString:@"; filename="];
+					//postInfoComponents = [[postInfoComponents lastObject] componentsSeparatedByString:@"\""];
+					//postInfoComponents = [[postInfoComponents objectAtIndex:1] componentsSeparatedByString:@"\\"];
 					NSString* filename =fileSaving;
 					
 					NSLog(@"Saving to %@",filename);
@@ -508,6 +508,7 @@ static BOOL uploading=NO;
 					{
 						[file seekToEndOfFile];
 						[multipartData addObject:file];
+						[ file release];
 					}
 					
 					[postInfo release];
