@@ -9,6 +9,7 @@
 #import "SettingsDrivingDirectionsController.h"
 #import "xGPSAppDelegate.h"
 #import "TitleValueCell.h"
+#import "HomeAddressViewController.h";
 @implementation SettingsDrivingDirectionsController
 
 
@@ -67,7 +68,7 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 
@@ -75,9 +76,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
 		case 0:
+			return 2;
 		case 1:
 		case 2:
 		case 3:
+		case 4:
 			return 1;
 	}
 	return 0;
@@ -95,7 +98,10 @@
 	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsEnableVoiceInstr];
 	
 }
-
+-(void)switchVoiceBip:(UISwitch*)sender {
+	[[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsDisableVoiceBip];
+	
+}
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case 0:
@@ -104,7 +110,10 @@
 		case 1:
 			return NSLocalizedString(@"When activated, all the searched driving directions are saved in the bookmarks.",@"");
 			break;
-		case 3:
+		case 2:
+			return NSLocalizedString(@"Your home address will be used to get driving directions to your home when the Home button is pressed.",@"");
+			break;
+		case 4:
 			return NSLocalizedString(@"When activated, the driving directions are recomputed when you are driving on the wrong way.",@"");
 			break;
 		default:
@@ -117,10 +126,12 @@
     
     NSString *CellIdentifier;
 	switch(indexPath.section) {
-		case 0: CellIdentifier=@"voicedir"; break;
+		case 0: if(indexPath.row==0) CellIdentifier=@"voicedir"; else CellIdentifier=@"voicebip"; break;
 		case 1: CellIdentifier=@"savebookmarks"; break;
-		case 2: CellIdentifier=@"delbookmarks"; break;
-		case 3: CellIdentifier=@"recomputedriving"; break;
+		case 2: CellIdentifier=@"homeaddress"; break;
+		case 3: CellIdentifier=@"delbookmarks"; break;
+		case 4: CellIdentifier=@"recomputedriving"; break;
+			
 	}
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -128,15 +139,25 @@
 			case 0: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.selectionStyle =UITableViewCellSelectionStyleNone;
-				cell.text=NSLocalizedString(@"Voice Instructions",@"");
+				
 				UISwitch *value;
 				
 				value = [[[UISwitch alloc] initWithFrame:CGRectMake(215.0, 8.0, 70.0, 25.0)] autorelease];
 				value.tag = 1;
-				[value addTarget:self action:@selector(switchVoiceInstr:) forControlEvents:UIControlEventValueChanged];
+				
 				value.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+				
+				
+				if(indexPath.row==0) {
+					cell.text=NSLocalizedString(@"Voice Instructions",@"");
+					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+					[value addTarget:self action:@selector(switchVoiceInstr:) forControlEvents:UIControlEventValueChanged];
+				} else {
+					cell.text=NSLocalizedString(@"Disable Beep",@"");
+					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip];
+					[value addTarget:self action:@selector(switchVoiceBip:) forControlEvents:UIControlEventValueChanged];
+				}
 				[cell.contentView addSubview:value];
-				value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
 			} break;
 			case 1: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
@@ -153,11 +174,17 @@
 			} break;
 			case 2: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-				cell.text=NSLocalizedString(@"Delete all bookmarks",@"");
+				cell.text=NSLocalizedString(@"Home Address",@"");
 				cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 				cell.selectionStyle=UITableViewCellSelectionStyleBlue;
 			} break;
 			case 3: {
+				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+				cell.text=NSLocalizedString(@"Delete all bookmarks",@"");
+				cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+				cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+			} break;
+			case 4: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 				cell.selectionStyle =UITableViewCellSelectionStyleNone;
 				cell.text=NSLocalizedString(@"Recompute itinerary",@"");
@@ -175,12 +202,17 @@
 	else {
 		switch(indexPath.section) {
 			case 0: {
-				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+				if(indexPath.row==0) {
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+				} else {
+					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip];
+				}
+				
 			}break;				
 			case 1: {
 				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSaveDirSearch];
 			}break;
-			case 3: {
+			case 4: {
 				((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
 			}break;
 		}
@@ -194,10 +226,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section==2) {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.section==3) {
 		UIActionSheet *act=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure you want to delete all the saved bookmarks ?",@"Delete bookmarks") delegate:self cancelButtonTitle:nil destructiveButtonTitle:NSLocalizedString(@"Yes",@"Yes") otherButtonTitles:NSLocalizedString(@"No",@"No"),nil];
 		[act showInView:self.view];
+	} else if(indexPath.section==2) {
+		HomeAddressViewController *c=[[HomeAddressViewController alloc] initWithStyle:UITableViewStyleGrouped];
+		[self.navigationController pushViewController:c animated:YES];
+		[c release];
 	}
 }
 

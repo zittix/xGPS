@@ -407,13 +407,23 @@ int roundNearest(double dist) {
 			if(!playedSoundBeforemeters && remainingDist<=beforeThresholdCalc && instrIndex>0) {
 				playedSoundFarmeters=YES;
 				playedSoundBeforemeters=YES;
-				SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+				
+				SoundEvent *s=nil;
+				if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip])
+					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name]];
+				else
+					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
 				[APPDELEGATE.soundcontroller addSound:s];
 				[s release];
 				
 			} else if(!playedSoundFarmeters && remainingDist<=farThresholdCalc && inBetweenDistance>farThresholdCalc && instrIndex>0) {
 				playedSoundFarmeters=YES;
-				SoundEvent *s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+				SoundEvent *s=nil;
+				
+				if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip])
+					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name]];
+				else
+					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
 				[APPDELEGATE.soundcontroller addSound:s];
 				[s release];
 			}

@@ -44,6 +44,8 @@
 #define kSettingsMapType @"maptype"
 #define kSettingsLastUsedBookmark @"lastusedbookmarkdirinstr"
 #define kSettingsLargeFont @"largefontsizedriving"
+#define kSettingsHomeAddress @"homeaddress"
+#define kSettingsDisableVoiceBip @"disablevoicebip"
 #define WIRELESS_TRANSFER_PORT 7777
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
 #define VERSION "1.2.0 Test"
