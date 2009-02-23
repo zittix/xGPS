@@ -20,9 +20,14 @@
 		self.view=[[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
 		[self.view release];
 		self.view.autoresizesSubviews=YES;
+		tableView=[[UITableView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) style:UITableViewStyleGrouped];
+		tableView.dataSource=self;
+		tableView.delegate=self;
 		
 		self.view.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		
 		tableView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		
 		toolbarPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height,self.view.frame.size.width,44)];
 		toolbarPicker.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 		
@@ -34,16 +39,13 @@
 		pickerTime=[[UIDatePicker alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height+44,self.view.frame.size.width,210)];
 		pickerTime.datePickerMode=UIDatePickerModeTime;
 		pickerTime.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-		
+		pickerTime.autoresizesSubviews=YES;
 		dummyView=[[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-254)];
 		dummyView.backgroundColor=[UIColor blackColor];
 		dummyView.alpha=0;
 		dummyView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		//pickerTime.minuteInterval=15;
-		tableView=[[UITableView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height) style:UITableViewStyleGrouped];
-		tableView.dataSource=self;
-		tableView.delegate=self;
-		
+		pickerTime.minuteInterval=5;
+				
 		[self.view addSubview:tableView];
 		
     }
