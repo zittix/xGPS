@@ -101,6 +101,14 @@
 		4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */; };
 		4ED973340F52EBF6006E2312 /* MapsDownloadDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */; };
 		4ED974CE0F530FBF006E2312 /* HomeAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED974CD0F530FBF006E2312 /* HomeAddressViewController.m */; };
+		4ED9752C0F531675006E2312 /* ViewSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED9752B0F531675006E2312 /* ViewSearch.m */; };
+		4ED975340F5316C3006E2312 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED9752E0F5316C3006E2312 /* home.png */; };
+		4ED975350F5316C3006E2312 /* routes.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED9752F0F5316C3006E2312 /* routes.png */; };
+		4ED975360F5316C3006E2312 /* route_manager.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED975300F5316C3006E2312 /* route_manager.png */; };
+		4ED975370F5316C3006E2312 /* search_places.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED975310F5316C3006E2312 /* search_places.png */; };
+		4ED975380F5316C3006E2312 /* bg_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED975320F5316C3006E2312 /* bg_search.png */; };
+		4ED9756B0F53196C006E2312 /* bg_search_landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED9756A0F53196C006E2312 /* bg_search_landscape.png */; };
+		4ED975D00F531FD2006E2312 /* clear_results.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED975CF0F531FD2006E2312 /* clear_results.png */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
 		4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE70F51E8BA00C77686 /* settings_button.png */; };
@@ -380,6 +388,15 @@
 		4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsDownloadDetailsViewController.m; sourceTree = "<group>"; };
 		4ED974CC0F530FBF006E2312 /* HomeAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeAddressViewController.h; sourceTree = "<group>"; };
 		4ED974CD0F530FBF006E2312 /* HomeAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeAddressViewController.m; sourceTree = "<group>"; };
+		4ED9752A0F531675006E2312 /* ViewSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSearch.h; sourceTree = "<group>"; };
+		4ED9752B0F531675006E2312 /* ViewSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSearch.m; sourceTree = "<group>"; };
+		4ED9752E0F5316C3006E2312 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		4ED9752F0F5316C3006E2312 /* routes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = routes.png; sourceTree = "<group>"; };
+		4ED975300F5316C3006E2312 /* route_manager.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route_manager.png; sourceTree = "<group>"; };
+		4ED975310F5316C3006E2312 /* search_places.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_places.png; sourceTree = "<group>"; };
+		4ED975320F5316C3006E2312 /* bg_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_search.png; sourceTree = "<group>"; };
+		4ED9756A0F53196C006E2312 /* bg_search_landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_search_landscape.png; sourceTree = "<group>"; };
+		4ED975CF0F531FD2006E2312 /* clear_results.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear_results.png; sourceTree = "<group>"; };
 		4EDA9EB60E8791710020E8AF /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Italian; path = Italian.lproj/license.html; sourceTree = "<group>"; };
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -615,7 +632,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4ED975CF0F531FD2006E2312 /* clear_results.png */,
+				4ED9756A0F53196C006E2312 /* bg_search_landscape.png */,
 				4E08298F0F4E017500B1C9AF /* startway.png */,
+				4ED9752E0F5316C3006E2312 /* home.png */,
+				4ED9752F0F5316C3006E2312 /* routes.png */,
+				4ED975300F5316C3006E2312 /* route_manager.png */,
+				4ED975310F5316C3006E2312 /* search_places.png */,
+				4ED975320F5316C3006E2312 /* bg_search.png */,
 				4E0829900F4E017500B1C9AF /* endway.png */,
 				4E3B64500F308D0C00130CDF /* sounds */,
 				4ECFA00D0EE469A80077553B /* rm_reception_good.png */,
@@ -748,6 +772,8 @@
 				4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */,
 				4E082A5E0F4E0A4300B1C9AF /* ModalSearchViewController.h */,
 				4E082A5F0F4E0A4300B1C9AF /* ModalSearchViewController.m */,
+				4ED9752A0F531675006E2312 /* ViewSearch.h */,
+				4ED9752B0F531675006E2312 /* ViewSearch.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1196,6 +1222,13 @@
 				4E0829BA0F4E027F00B1C9AF /* middleway.png in Resources */,
 				4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */,
 				4EDDACEA0F51E8BA00C77686 /* search_button.png in Resources */,
+				4ED975340F5316C3006E2312 /* home.png in Resources */,
+				4ED975350F5316C3006E2312 /* routes.png in Resources */,
+				4ED975360F5316C3006E2312 /* route_manager.png in Resources */,
+				4ED975370F5316C3006E2312 /* search_places.png in Resources */,
+				4ED975380F5316C3006E2312 /* bg_search.png in Resources */,
+				4ED9756B0F53196C006E2312 /* bg_search_landscape.png in Resources */,
+				4ED975D00F531FD2006E2312 /* clear_results.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1376,6 +1409,7 @@
 				4EDDAE020F51FD0D00C77686 /* RemainingDistanceTimeView.m in Sources */,
 				4ED973340F52EBF6006E2312 /* MapsDownloadDetailsViewController.m in Sources */,
 				4ED974CE0F530FBF006E2312 /* HomeAddressViewController.m in Sources */,
+				4ED9752C0F531675006E2312 /* ViewSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

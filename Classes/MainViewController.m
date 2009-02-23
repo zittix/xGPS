@@ -47,6 +47,8 @@
 	//self.view.backgroundColor=[UIColor blueColor];
 	mapview=[[MapView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height) withDB:tiledb];
 	mapview.autoresizingMask=UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	viewSearch=[[ViewSearch alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,viewRect.size.height) delegate:self];
+	viewSearch.frame=CGRectMake(viewRect.size.width/2.0,viewRect.size.height/2.0,1,1);
 	[self.view addSubview:mapview];
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,38,83) withDelegate:mapview];
 	[self.view addSubview:zoomview];
@@ -140,6 +142,57 @@
 		[instr release];
 	}
 	
+}
+-(void)showManager:(id)sender {
+	UIViewController *manager=[[RoutesManagerViewController alloc] initWithStyle:UITableViewStylePlain delegate:drivingSearchView];
+	UINavigationController *navigationController = [[UINavigationController 
+													 alloc] initWithRootViewController:manager]; 
+	[self presentModalViewController:navigationController animated:YES];
+	[navigationController release];
+	[manager release];
+}
+
+-(void)btnSearchPlacePressed {
+	[UIView beginAnimations:nil context:nil];
+	[self.view addSubview:searchPlacesView];
+	[UIView commitAnimations];
+	[self hideViewSearch];
+}
+-(void)btnSearchRoutePressed {
+	directionSearch=YES;
+	self.navigationItem.leftBarButtonItem.enabled=YES;
+	self.navigationItem.rightBarButtonItem.enabled=YES;
+	[UIView beginAnimations:nil context:nil];
+	[self.view addSubview:drivingSearchView];
+	self.navigationController.navigationBarHidden=NO;
+	self.navigationItem.title=NSLocalizedString(@"Directions",@"");
+	self.navigationItem.rightBarButtonItem=cancelSearch;
+	self.navigationItem.leftBarButtonItem=routesManager;
+	[mapview refreshMap];
+	[UIView commitAnimations];
+	[self hideViewSearch];
+}
+-(void)btnRoutesManagerPressed {
+	[self hideViewSearch];
+	[self showManager:nil];
+}
+-(void)btnHomePressed {
+	[self hideViewSearch];
+}
+-(void)hideViewSearch {
+	[UIView beginAnimations:nil context:nil];
+	viewSearch.frame=CGRectMake(self.view.frame.size.width/2.0,self.view.frame.size.height/2.0,0,0);
+	[viewSearch removeFromSuperview];
+	[UIView commitAnimations];
+}
+-(void)btnClearPressed {
+	if(currentSearchType==1) {
+		[mapview setPosSearch:nil];
+	} else if(currentSearchType==2) {
+		[self clearDirections];
+	}
+	currentSearchType=0;
+	[self hideViewSearch];
 }
 -(void) searchPlaceWillHide {
 	
@@ -250,14 +303,6 @@
 	[wrongWay startAnimate];
 	[self.view addSubview:wrongWay];
 }
--(void)showManager:(id)sender {
-	UIViewController *manager=[[RoutesManagerViewController alloc] initWithStyle:UITableViewStylePlain delegate:drivingSearchView];
-	UINavigationController *navigationController = [[UINavigationController 
-													 alloc] initWithRootViewController:manager]; 
-	[self presentModalViewController:navigationController animated:YES];
-	[navigationController release];
-	[manager release];
-}
 
 -(void)hideGPSStatus {
 	[UIView beginAnimations:nil context:nil];
@@ -278,6 +323,7 @@
 	[super dealloc];
 	[mapview release];
 	[zoomview release];
+	[viewSearch release];
 	[speedview release];
 	[btnSettings release];
 	[btnSearch release];
@@ -318,14 +364,15 @@
 		[mapview fulllRefreshMap];
 	}
 }
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[self.navigationController setNavigationBarHidden:NO animated:NO];
+	[viewSearch changeOrientation:toInterfaceOrientation];
 }
 - (void)viewDidAppear:(BOOL)animated {
 	if(!directionSearch)
 		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
-	
 	[super viewDidAppear:animated];
 }
 -(void) endRotation:(NSString*)animationID finished:(BOOL)finished context:(NSString*)context {
@@ -395,7 +442,7 @@
 	 [msg show];
 	 return;
 	 }*/
-	
+	/*
 	UIActionSheet *action=nil;
 	
 	if(currentSearchType==0)
@@ -404,7 +451,11 @@
 		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Search results",@""),nil];
 	else
 		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Driving directions",@""),nil];
-	[action showInView:self.view];
+	[action showInView:self.view];*/
+	[self.view addSubview:viewSearch];
+	[UIView beginAnimations:nil context:nil];
+	viewSearch.frame=mapview.frame;
+	[UIView commitAnimations];
 }
 -(void)cancelSearchPressed:(id)sender {
 	[UIView beginAnimations:nil context:nil];	
@@ -425,39 +476,7 @@
 	
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-	//0 cities,1 directions,2 cancel
-	switch(buttonIndex) {
-		case 0: {
-			[UIView beginAnimations:nil context:nil];
-			[self.view addSubview:searchPlacesView];
-			[UIView commitAnimations];
-		}break;
-		case 1: {
-			directionSearch=YES;
-			self.navigationItem.leftBarButtonItem.enabled=YES;
-			self.navigationItem.rightBarButtonItem.enabled=YES;
-			[UIView beginAnimations:nil context:nil];
-			[self.view addSubview:drivingSearchView];
-			self.navigationController.navigationBarHidden=NO;
-			self.navigationItem.title=NSLocalizedString(@"Directions",@"");
-			self.navigationItem.rightBarButtonItem=cancelSearch;
-			self.navigationItem.leftBarButtonItem=routesManager;
-			[mapview refreshMap];
-			[UIView commitAnimations];
-			
-		}break;
-		case 2: {
-			[self showManager:nil];
-		}
-		case 3: {
-			if(currentSearchType==1) {
-				[mapview setPosSearch:nil];
-			} else if(currentSearchType==2) {
-				[self clearDirections];
-			}
-			currentSearchType=0;
-		}
-	}
+
 }
 -(void)clearDirections {
 	[UIView beginAnimations:nil context:nil];	
