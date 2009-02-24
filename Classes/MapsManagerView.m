@@ -75,8 +75,7 @@
 	
 	NSSet *events=[event allTouches];
 	
-	///UITouch* value;
-	//NSLog(@"Nb finger: %d",[events count]);
+	
 	if([events count]!=2) return;
 	NSArray* arr=[events allObjects];
 	
@@ -175,38 +174,38 @@
 	[progress hide];
 	self.navigationItem.rightBarButtonItem.enabled=YES;
 	if(!detailView)
-	[self clearSelection];
+		[self clearSelection];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	if(!detailView) {
-	
-	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]==0)
-		mapview.maxZoom=17;
-	else
-		mapview.maxZoom=15;
-	
-	savedZoom=17-mapview.maxZoom;
-	
-	if(mapview.zoom<17-mapview.maxZoom)
-		[mapview setZoom:17-mapview.maxZoom];
-	else
-		[mapview setZoom:mapview.zoom];
-	[mapview fulllRefreshMap];
-	mapview.mapRotationEnabled=NO;
+		
+		if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]==0)
+			mapview.maxZoom=17;
+		else
+			mapview.maxZoom=15;
+		
+		savedZoom=17-mapview.maxZoom;
+		
+		if(mapview.zoom<17-mapview.maxZoom)
+			[mapview setZoom:17-mapview.maxZoom];
+		else
+			[mapview setZoom:mapview.zoom];
+		[mapview fulllRefreshMap];
+		
 	}
-
+	mapview.mapRotationEnabled=NO;
 }
 -(void)viewDidAppear:(BOOL)animated {
 	if(detailView && savedName!=nil) {
-
-	downloading=YES;
-	[progress setProgress:0];
-	progress.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-	[progress showFrom:self.view];
-	self.navigationItem.rightBarButtonItem.enabled=NO;
-	[NSThread detachNewThreadSelector:@selector(downloadTiles) toTarget:self withObject:nil];	
-	
+		
+		downloading=YES;
+		[progress setProgress:0];
+		progress.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+		[progress showFrom:self.view];
+		self.navigationItem.rightBarButtonItem.enabled=NO;
+		[NSThread detachNewThreadSelector:@selector(downloadTiles) toTarget:self withObject:nil];	
+		
 	}
 	mapview.mapRotationEnabled=NO;
 	detailView=NO;

@@ -25,8 +25,11 @@
 	UIButton *routesManager;
 	UIButton *home;
 	UIButton *clear;
+	UIButton *close;
 }
 
 -(id)initWithFrame:(CGRect)frame delegate:(id<ViewSearchProtocol>)_delegate;
 -(void)changeOrientation:(UIInterfaceOrientation)interfaceOrientation;
+-(void)showInView:(UIView*)view;
+-(void)hide;
 @end

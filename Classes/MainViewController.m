@@ -12,6 +12,7 @@
 #import "GPXLogger.h"
 #import "RoutesManagerViewController.h"
 #import "iPhone3GController.h"
+#import "ProgressViewController.h"
 @implementation MainViewController
 
 @synthesize mapview;
@@ -57,10 +58,10 @@
 	
 	//[self.view addSubview:speedview];
 	speedview.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
-
-
+	
+	
 	[self.view addSubview:speedview];
-
+	
 	//btnSettings=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",@"Settings Button") style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
 	//btnSettings=[[UIButton alloc] initWithImage:[UIImage imageNamed:@"settingsIcon.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
 	//btnSearch=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnPressed:)];
@@ -156,7 +157,7 @@
 	[UIView beginAnimations:nil context:nil];
 	[self.view addSubview:searchPlacesView];
 	[UIView commitAnimations];
-	[self hideViewSearch];
+	[viewSearch hide];
 }
 -(void)btnSearchRoutePressed {
 	directionSearch=YES;
@@ -170,20 +171,53 @@
 	self.navigationItem.leftBarButtonItem=routesManager;
 	[mapview refreshMap];
 	[UIView commitAnimations];
-	[self hideViewSearch];
+	[viewSearch hide];
 }
 -(void)btnRoutesManagerPressed {
-	[self hideViewSearch];
+	[viewSearch hide];
 	[self showManager:nil];
 }
 -(void)btnHomePressed {
-	[self hideViewSearch];
-}
--(void)hideViewSearch {
-	[UIView beginAnimations:nil context:nil];
-	viewSearch.frame=CGRectMake(self.view.frame.size.width/2.0,self.view.frame.size.height/2.0,0,0);
-	[viewSearch removeFromSuperview];
-	[UIView commitAnimations];
+	[viewSearch hide];
+	
+	NSString *homeAddress=[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsHomeAddress];
+	if(homeAddress==nil || homeAddress.length==0) {
+		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature.",@"") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+		[alert show];
+	} else {
+		
+			NSString *currentPosition;
+			GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
+			if(g.gps_data.fix.mode>1) {
+				float lat=g.gps_data.fix.latitude;
+				float lon=g.gps_data.fix.longitude;
+
+				currentPosition=[NSString stringWithFormat:@"%f,%f",lat,lon];
+			} else {
+				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to get the GPS position. The GPS is not currently giving any position information.",@"GPS Dir Pos error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+				[alert show];	
+				return;
+			}
+
+
+		
+		if(![APPDELEGATE.directions drive:currentPosition to:homeAddress via:nil delegate:nil]) {
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the required information from the server: %@",@"Network error message"),NSLocalizedString(@"Unknown error",@"Unknown error")] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+			[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+			return;
+		}
+				
+		ProgressViewController *pController=[[ProgressViewController alloc] init];
+		
+		[pController.progress hideCancelButton];
+		pController.progress.ltext.text=NSLocalizedString(@"Computing your route...",@"");
+		[pController.progress setProgress:0.2];
+		APPDELEGATE.directions.routingType=ROUTING_NORMAL;
+		
+		[self presentModalViewController:pController animated:NO];
+		
+	}
 }
 -(void)btnClearPressed {
 	if(currentSearchType==1) {
@@ -192,7 +226,7 @@
 		[self clearDirections];
 	}
 	currentSearchType=0;
-	[self hideViewSearch];
+	[viewSearch hide];
 }
 -(void) searchPlaceWillHide {
 	
@@ -211,7 +245,7 @@
 		NSDateComponents *comp=[currentCalendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:now];
 		int actMinute=[comp minute];
 		int actHour=[comp hour];
-
+		
 		[NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehaviorDefault];
 		
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -349,7 +383,7 @@
 		self.title=NSLocalizedString(@"Directions",@"");
 	
 	[self setGPSMode:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsGPSState]];
-		
+	
 	if(![[[NSUserDefaults standardUserDefaults] stringForKey:kSettingsConditionsUse] isEqualToString:vSettingsConditionsUse]) {
 		[[NSUserDefaults standardUserDefaults] setObject:vSettingsConditionsUse forKey:kSettingsConditionsUse];
 		
@@ -443,19 +477,16 @@
 	 return;
 	 }*/
 	/*
-	UIActionSheet *action=nil;
-	
-	if(currentSearchType==0)
-		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),nil];
-	else if(currentSearchType==1)
-		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Search results",@""),nil];
-	else
-		action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Driving directions",@""),nil];
-	[action showInView:self.view];*/
-	[self.view addSubview:viewSearch];
-	[UIView beginAnimations:nil context:nil];
-	viewSearch.frame=mapview.frame;
-	[UIView commitAnimations];
+	 UIActionSheet *action=nil;
+	 
+	 if(currentSearchType==0)
+	 action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),nil];
+	 else if(currentSearchType==1)
+	 action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Search results",@""),nil];
+	 else
+	 action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Actions",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Places / Cities",@"Search for places"),NSLocalizedString(@"Driving directions",@"Driving directions"),NSLocalizedString(@"Routes Manager",@""),NSLocalizedString(@"Clear Driving directions",@""),nil];
+	 [action showInView:self.view];*/
+	[viewSearch showInView:self.view];
 }
 -(void)cancelSearchPressed:(id)sender {
 	[UIView beginAnimations:nil context:nil];	
@@ -472,11 +503,11 @@
 	[UIView commitAnimations];
 	directionSearch=NO;
 	if(!hidden)
-	[self.navigationController setNavigationBarHidden:YES animated:YES];
+		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-
+	
 }
 -(void)clearDirections {
 	[UIView beginAnimations:nil context:nil];	
@@ -539,7 +570,7 @@
 			[mapview computeCachedRoad];
 			currentSearchType=2;
 			if(!hidden)
-			[self.navigationController setNavigationBarHidden:YES animated:YES];
+				[self.navigationController setNavigationBarHidden:YES animated:YES];
 			
 		} else {
 			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"No driving direction can be computed using your query.",@"No driving dir. found error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
