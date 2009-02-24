@@ -56,7 +56,7 @@
 	txtName.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
 	txtName.delegate=self;
 	[viewButton addSubview:txtName];
-	//NSLocalizedString(@"No Higway",@"")
+	//NSLocalizedString(@"No Highway",@"")
 	NSArray *items=[NSArray arrayWithObjects:NSLocalizedString(@"By Car",@""),NSLocalizedString(@"Walking",@""),nil];
 	routeType=[[UISegmentedControl alloc] initWithItems:items];
 	routeType.frame=CGRectMake(5,45,self.view.frame.size.width-10,40);
@@ -96,7 +96,7 @@
 	if((p_start.pos.x==0 && p_start.pos.y==0) || (p_end.pos.x==0 && p_end.pos.y==0)) {
 		UIAlertView * hotSheet = [[UIAlertView alloc]
 								  initWithTitle:NSLocalizedString(@"Route computation",@"")
-								  message:NSLocalizedString(@"You have to add at lest one starting and one ending point in your route.",@"")
+								  message:NSLocalizedString(@"You have to add at least one starting and one ending point in your route.",@"")
 								  delegate:nil
 								  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
 								  otherButtonTitles:nil];
@@ -201,7 +201,7 @@
 -(void)nextDirectionChanged:(Instruction*)instr {
 	
 }
--(void)nextDirectionDistanceChanged:(double)dist {
+-(void)nextDirectionDistanceChanged:(double)dist total:(double)totalDist {
 	
 }
 -(void)showWrongWay {

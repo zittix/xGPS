@@ -8,9 +8,9 @@
 
 #import "LanguageViewController.h"
 #import "xGPSAppDelegate.h"
-#define NBNAME 8
-static NSString* langName[NBNAME]={@"English", @"Français",@"Deutsch",@"Italiano",@"עברית",@"繁體中文",@"Polski",@"Русский"};
-static NSString* langIdent[NBNAME]={@"en",@"fr",@"de",@"it",@"iw",@"zh-TW",@"pl",@"ru"};
+#define NBNAME 14
+static NSString* langName[NBNAME]={@"English", @"Français",@"Deutsch",@"Italiano",@"עברית",@"繁體中文",@"Polski",@"Русский",@"日本語",@"Dansk",@"Svenska",@"Español",@"Português",@"Português (Portugal)"};
+static NSString* langIdent[NBNAME]={@"en",@"fr",@"de",@"it",@"iw",@"zh-TW",@"pl",@"ru",@"ja",@"da",@"sv",@"es",@"pt-br",@"pt-pt"};
 @implementation LanguageViewController
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

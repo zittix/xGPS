@@ -116,7 +116,7 @@
 	
 	NSString *msg=nil;
 	if(res==0) {
-		msg=NSLocalizedString(@"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly.",@"Error message download maps");
+		msg=NSLocalizedString(@"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly.",@"Error message download maps");
 	} else if(res==1) {
 		NSArray *points=[NSArray arrayWithObjects:pos1,pos2,pos3,pos4,nil];
 		

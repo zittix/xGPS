@@ -147,7 +147,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case 1:
-			return NSLocalizedString(@"The night mode allows you to concentrate yourself on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum.",@"");
+			return NSLocalizedString(@"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum.",@"");
 			break;
 		default:
 			return nil;
