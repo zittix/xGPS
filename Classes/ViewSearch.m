@@ -17,9 +17,10 @@
 		bg=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg_search.png"]];
 		[self addSubview:bg];
 		self.autoresizesSubviews=YES;
+		self.backgroundColor=[UIColor clearColor];
 		self.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		bg.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		
+
 		searchPlace=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		searchPlace.showsTouchWhenHighlighted=YES;
 		[searchPlace setBackgroundImage:[UIImage imageNamed:@"search_places.png"] forState:UIControlStateNormal];

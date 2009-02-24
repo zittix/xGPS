@@ -154,6 +154,7 @@
 }
 
 -(void)btnSearchPlacePressed {
+	searchPlacesView.frame=CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height);
 	[UIView beginAnimations:nil context:nil];
 	[self.view addSubview:searchPlacesView];
 	[UIView commitAnimations];
@@ -163,6 +164,7 @@
 	directionSearch=YES;
 	self.navigationItem.leftBarButtonItem.enabled=YES;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
+	drivingSearchView.frame=CGRectMake(0,0,self.view.frame.size.width,[[UIScreen mainScreen] applicationFrame].size.height);
 	[UIView beginAnimations:nil context:nil];
 	[self.view addSubview:drivingSearchView];
 	self.navigationController.navigationBarHidden=NO;
@@ -407,6 +409,17 @@
 	if(!directionSearch)
 		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
+	navView.frame=CGRectMake(0,0,self.view.frame.size.width,50);
+	
+	if(currentSearchType==2) {
+	[UIView beginAnimations:nil context:nil];	
+	[navView sizeToFit];
+	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
+	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
+	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
+	signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
+	[UIView commitAnimations];
+	}
 	[super viewDidAppear:animated];
 }
 -(void) endRotation:(NSString*)animationID finished:(BOOL)finished context:(NSString*)context {
@@ -541,6 +554,8 @@
 	
 }
 -(void)gotResultForSearch:(GeoEncoderResult*)res {
+	if(currentSearchType!=1) [self btnClearPressed];
+	
 	[mapview setPosSearch:res.pos];
 	currentSearchType=1;
 }
@@ -552,7 +567,7 @@
 		
 		//Search the first instruction
 		if([APPDELEGATE.directions.instructions count]>0) {
-			
+			if(currentSearchType!=2) [self btnClearPressed];
 			
 			[UIView beginAnimations:nil context:nil];	
 			[drivingSearchView removeFromSuperview];
