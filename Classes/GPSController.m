@@ -236,7 +236,7 @@ error:
 		isEnabled=NO;
 		validLicense=NO;
 		started=NO;
-		
+		//[self startDebug];
 		serial=[[NSString alloc] init];
 		if(self.needSerial) {
 			if(serialHandle<0) {
@@ -279,8 +279,8 @@ error:
 	sleep(1);
 }
 -(void)dealloc {
+	//[self stopDebug];
 	[serial release];
-	if(serial!=nil) [serial release];
 	[super dealloc];
 }
 -(BOOL)GetVersion {

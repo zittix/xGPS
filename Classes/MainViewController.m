@@ -421,7 +421,7 @@
 		[self.navigationController setNavigationBarHidden:YES animated:YES];
 	[mapview refreshMap];
 	navView.frame=CGRectMake(0,0,self.view.frame.size.width,50);
-	
+	remainingView.frame=CGRectMake(self.view.frame.size.width-100,self.view.frame.size.height-60,100,70);
 	if(currentSearchType==2) {
 	[UIView beginAnimations:nil context:nil];	
 	[navView sizeToFit];
@@ -442,7 +442,7 @@
 	
 	
 	[UIView beginAnimations:nil context:nil];
-	
+	[navView sizeToFit];
 	if(currentSearchType==2) {
 		mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 	}
@@ -456,7 +456,7 @@
 	} else {
 		wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
 	}
-	[navView sizeToFit];
+	
 	[mapview refreshMap];
 	[UIView commitAnimations];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];

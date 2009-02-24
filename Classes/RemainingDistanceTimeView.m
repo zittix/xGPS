@@ -27,7 +27,7 @@
 		lblDist.textAlignment=UITextAlignmentCenter;
 		lblDist.backgroundColor=[UIColor clearColor];
 		lblDist.textColor=[UIColor whiteColor];
-		lblDist.font=[UIFont boldSystemFontOfSize:16];
+		lblDist.font=[UIFont boldSystemFontOfSize:20];
 		lblDist.adjustsFontSizeToFitWidth=YES;
 		lblDist.text=@"N/A";
 		
@@ -36,12 +36,12 @@
 		[self addSubview:line];
 		[line release];
 		
-		UILabel *lblTotal=[[UILabel alloc] initWithFrame:CGRectMake(0,32,frame.size.width,10)];
+		UILabel *lblTotal=[[UILabel alloc] initWithFrame:CGRectMake(0,31,frame.size.width,10)];
 		[self addSubview:lblTotal];
 		lblTotal.textAlignment=UITextAlignmentCenter;
 		lblTotal.backgroundColor=[UIColor clearColor];
 		lblTotal.textColor=[UIColor whiteColor];
-		lblTotal.font=[UIFont boldSystemFontOfSize:12];
+		lblTotal.font=[UIFont boldSystemFontOfSize:14];
 		lblTotal.text=NSLocalizedString(@"Total",@"");
 		[lblTotal release];
 		

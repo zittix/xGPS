@@ -92,6 +92,7 @@
 		4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC64A9D0F248385006B2408 /* GPXLogger.m */; };
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
 		4ECAC69A0F54537C002D5571 /* arrow_direction.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC6990F54537C002D5571 /* arrow_direction.png */; };
+		4ECAC7A90F546A0B002D5571 /* track.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC7A80F546A0B002D5571 /* track.gpx */; };
 		4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00D0EE469A80077553B /* rm_reception_good.png */; };
 		4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00E0EE469A80077553B /* rm_reception_na.png */; };
 		4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00F0EE469A80077553B /* rm_reception_none.png */; };
@@ -197,7 +198,7 @@
 		4EE2433B0F3074E800C41ACA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE243390F3074E800C41ACA /* AudioToolbox.framework */; };
 		4EE2433C0F3074E800C41ACA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE2433A0F3074E800C41ACA /* CoreAudio.framework */; };
 		4EE243440F30750500C41ACA /* SoundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE243430F30750500C41ACA /* SoundController.m */; };
-		4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1D57C0EDB0BA80007AEAE /* track.gpx */; };
+		4EF1D57D0EDB0BA80007AEAE /* oldtrack.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1D57C0EDB0BA80007AEAE /* oldtrack.gpx */; };
 		4EF25DCE0E897FA300AB6194 /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -374,6 +375,7 @@
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
 		4ECAC6990F54537C002D5571 /* arrow_direction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_direction.png; sourceTree = "<group>"; };
+		4ECAC7A80F546A0B002D5571 /* track.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = track.gpx; sourceTree = "<group>"; };
 		4ECFA00D0EE469A80077553B /* rm_reception_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_good.png; sourceTree = "<group>"; };
 		4ECFA00E0EE469A80077553B /* rm_reception_na.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_na.png; sourceTree = "<group>"; };
 		4ECFA00F0EE469A80077553B /* rm_reception_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_none.png; sourceTree = "<group>"; };
@@ -553,7 +555,7 @@
 		4EE243420F30750500C41ACA /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundController.h; sourceTree = "<group>"; };
 		4EE243430F30750500C41ACA /* SoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundController.m; sourceTree = "<group>"; };
 		4EEC564F0EC1FCE00093386D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4EF1D57C0EDB0BA80007AEAE /* track.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = track.gpx; sourceTree = "<group>"; };
+		4EF1D57C0EDB0BA80007AEAE /* oldtrack.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = oldtrack.gpx; sourceTree = "<group>"; };
 		4EF25DCC0E897FA300AB6194 /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
 		4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -651,7 +653,8 @@
 				4ECFA0100EE469A80077553B /* rm_reception_poor.png */,
 				4EA9803C0EDEC95D00AAB014 /* gps_grey.png */,
 				4E74D8540EDD99B800C2FEAC /* wrongway.png */,
-				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
+				4EF1D57C0EDB0BA80007AEAE /* oldtrack.gpx */,
+				4ECAC7A80F546A0B002D5571 /* track.gpx */,
 				4E0829B90F4E027F00B1C9AF /* middleway.png */,
 				4E8F03310EBB5BD000994EA3 /* settingsIcon.png */,
 				4E0829040F4DF83300B1C9AF /* addicon.png */,
@@ -1211,7 +1214,7 @@
 				4E8A01990E9D445A00E58774 /* wireless_future.jpg in Resources */,
 				4EAF79FF0EB3C3750078B697 /* Default.png in Resources */,
 				4E8F03320EBB5BD000994EA3 /* settingsIcon.png in Resources */,
-				4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */,
+				4EF1D57D0EDB0BA80007AEAE /* oldtrack.gpx in Resources */,
 				4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */,
 				4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */,
 				4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */,
@@ -1233,6 +1236,7 @@
 				4ED9756B0F53196C006E2312 /* bg_search_landscape.png in Resources */,
 				4ED975D00F531FD2006E2312 /* clear_results.png in Resources */,
 				4ECAC69A0F54537C002D5571 /* arrow_direction.png in Resources */,
+				4ECAC7A90F546A0B002D5571 /* track.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

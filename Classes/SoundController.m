@@ -339,6 +339,7 @@ W: West
 	NSDictionary *abrev=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Avenue",@"Street",@"Road",@"Boulevard",@"Parkway",@"Circle",@"North",@"East",@"South",@"West",@"Highway",nil] forKeys:[NSArray arrayWithObjects:@"Ave",@"St",@"Rd",@"Blvd",@"Pkwy",@"Cir",@"N",@"E",@"S",@"W",@"Hwy",nil]];
 	
 	toPlay=[self replaceAbbrev:abrev inString:toPlay];
+	//NSLog(@"Saying :%@",toPlay);
     extra_feats = new_features();
 	
     
