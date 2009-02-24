@@ -890,11 +890,15 @@
 	 CGContextClosePath(context);
 	 CGContextSetRGBFillColor(context, 0, 1, 0, 1);
 	 CGContextDrawPath(context,kCGPathFill);*/
+	
+	CGContextSaveGState(context);
+	CGContextTranslateCTM(context,rect.size.width,(rect.size.height)/2.0+20);
+	CGContextRotateCTM(context,-M_PI/2.0);
 	CGContextScaleCTM(context, 1, -1);
-	[imgGoogleLogo drawAtPoint:CGPointMake(rect.size.width-72,rect.size.height-2) withContext:context];
+	[imgGoogleLogo drawAtPoint:CGPointMake(0,0) withContext:context];
 	//CGContextScaleCTM(context, 1, -1);
 	
-	
+		CGContextRestoreGState(context);
 	
 	//CGContextSetRGBFillColor(context, 1, 0, 0, 1);
 	//CGContextFillRect(context,CGRectMake(-30,30,10,10));
@@ -902,7 +906,7 @@
 	//NSLog(@"Scale: %f m / pixel",[self getMetersPerPixel: pos.x]);
 	//if(!dragging)
 	//[dirC getNextDirection:pos];
-	CGContextScaleCTM(context, 1, -1);
+	//CGContextScaleCTM(context, 1, -1);
 	if(pDepForMapSelection.x==0.0f && pDepForMapSelection.y==0.0f && pEndForMapSelection.x==0.0f && pEndForMapSelection.y==0.0f)
 		return;
 	CGContextSetRGBFillColor(context,1,0,0,0.4);

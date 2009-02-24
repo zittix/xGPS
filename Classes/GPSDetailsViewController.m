@@ -98,6 +98,7 @@
 -(void)sendEmail {
 	NSString *urls=[NSString stringWithFormat:@"mailto:?subject=%@&body=%@",[self urlencode:NSLocalizedString(@"My GPS Position",@"") encoding:@"utf8"],[self urlencode:[self getGPSString] encoding:@"utf8"]];
 	NSURL *url=[NSURL URLWithString:urls];
+	//NSLog(@"%@",urls);
 	[APPDELEGATE openURL:url];
 	
 }

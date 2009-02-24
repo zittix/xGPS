@@ -322,6 +322,7 @@ int roundNearest(double dist) {
 				[delegate hideWrongWay];
 			} else if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsWrongWayHidden]) {
 				[delegate showWrongWay];
+				[delegate nextDirectionDistanceChanged:-1 total:-1];
 			}
 			if(previousInstruction!=[instructions count]-1) {
 				if(nbWrongWay>20*APPDELEGATE.gpsmanager.currentGPS.refreshRate && recomputeRoute) {
@@ -373,12 +374,21 @@ int roundNearest(double dist) {
 			} else
 				break;	
 		}
+		
 		if(i+1<[roadPoints count])
 			remainingDist+=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:[roadPoints objectAtIndex:i+1]]);	
 		
 		
 		if(next!=nil) break;
 	}
+	
+	double totalRemainingDist=remainingDist;
+	
+	for(i=i+1;i<[roadPoints count];i++) {
+		if(i+1<[roadPoints count])
+			totalRemainingDist+=fabs([self distanceBetween:[roadPoints objectAtIndex:i] and:[roadPoints objectAtIndex:i+1]]);	
+	}
+	
 	//NSLog(@"Done %d pas for road and %d for instr",counterIterRoad,counterIterInstr);
 	
 	if(next!=nil ) {
@@ -428,7 +438,7 @@ int roundNearest(double dist) {
 				[s release];
 			}
 		}
-		[delegate nextDirectionDistanceChanged:remainingDist];
+		[delegate nextDirectionDistanceChanged:remainingDist total:totalRemainingDist];
 	}
 	[c_b release];
 	

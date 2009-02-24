@@ -13,9 +13,12 @@
 	UILabel *lblTotalDist;
 	UIView *coutourDist;
 	BOOL nightMode;
+	BOOL miles;
+	double totalDist;
+	double dist;
 }
--(void)setDistance:(float)d;
--(void)setTotalDistance:(float)d;
+-(void)setDistance:(double)d;
+-(void)setTotalDistance:(double)d;
 -(void)setTime:(int)sec;
 -(void)setNightMode:(BOOL)val;
 @end

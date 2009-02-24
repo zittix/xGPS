@@ -31,7 +31,7 @@ typedef enum RoutingType {
 @protocol DirectionsControllerDelegate
 -(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
 -(void)nextDirectionChanged:(Instruction*)instr;
--(void)nextDirectionDistanceChanged:(double)dist;
+-(void)nextDirectionDistanceChanged:(double)dist total:(double)totalDist;
 -(void)showWrongWay;
 -(void)hideWrongWay;
 @end

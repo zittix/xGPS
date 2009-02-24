@@ -91,6 +91,7 @@
 		4EC16E2E0F2F1A09003B3176 /* GPSDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */; };
 		4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC64A9D0F248385006B2408 /* GPXLogger.m */; };
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
+		4ECAC69A0F54537C002D5571 /* arrow_direction.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC6990F54537C002D5571 /* arrow_direction.png */; };
 		4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00D0EE469A80077553B /* rm_reception_good.png */; };
 		4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00E0EE469A80077553B /* rm_reception_na.png */; };
 		4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00F0EE469A80077553B /* rm_reception_none.png */; };
@@ -372,6 +373,7 @@
 		4EC64A9D0F248385006B2408 /* GPXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXLogger.m; sourceTree = "<group>"; };
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
+		4ECAC6990F54537C002D5571 /* arrow_direction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_direction.png; sourceTree = "<group>"; };
 		4ECFA00D0EE469A80077553B /* rm_reception_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_good.png; sourceTree = "<group>"; };
 		4ECFA00E0EE469A80077553B /* rm_reception_na.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_na.png; sourceTree = "<group>"; };
 		4ECFA00F0EE469A80077553B /* rm_reception_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_none.png; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4ECAC6990F54537C002D5571 /* arrow_direction.png */,
 				4ED975CF0F531FD2006E2312 /* clear_results.png */,
 				4ED9756A0F53196C006E2312 /* bg_search_landscape.png */,
 				4E08298F0F4E017500B1C9AF /* startway.png */,
@@ -1229,6 +1232,7 @@
 				4ED975380F5316C3006E2312 /* bg_search.png in Resources */,
 				4ED9756B0F53196C006E2312 /* bg_search_landscape.png in Resources */,
 				4ED975D00F531FD2006E2312 /* clear_results.png in Resources */,
+				4ECAC69A0F54537C002D5571 /* arrow_direction.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

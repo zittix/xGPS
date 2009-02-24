@@ -23,6 +23,7 @@
 #import "WrongWayView.h"
 #import "GPSDetailsViewController.h"
 #import "ViewSearch.h"
+#import "RemainingDistanceTimeView.h"
 @interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate,ShowGPSDetailProtocol,SearchPlacesViewDelegate,ViewSearchProtocol> {
 	MapView* mapview;
 	UIButton* btnSettings;
@@ -44,6 +45,7 @@
 	WrongWayView *wrongWay;
 	NSTimer * tmrNightMode;
 	GPSDetailsViewController *gpsdetails;
+	RemainingDistanceTimeView *remainingView;
 	ViewSearch *viewSearch;
 	BOOL hidden;
 

@@ -288,6 +288,7 @@ static void HandleOutputBuffer (
 	ret=[ret stringByReplacingOccurrencesOfString:@"/" withString:@" "];
 	ret=[ret stringByReplacingOccurrencesOfString:@"\\" withString:@" "];
 	ret=[ret stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+	ret=[ret stringByReplacingOccurrencesOfString:@"\n" withString:@". "];
 	for (NSString* key in dic)
 	{
 		NSRange r;
@@ -307,7 +308,6 @@ static void HandleOutputBuffer (
 
 -(void)playText:(NSString*)text {
 	cst_voice *v;
-	
     cst_features *extra_feats;
 	
 	NSString *toPlay=text;

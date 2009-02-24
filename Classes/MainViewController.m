@@ -106,6 +106,12 @@
 	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(viewRect.size.width-140,70,-1,-1) withDelegate:self];
 	navView.autoresizesSubviews=YES;
 	wrongWay.autoresizingMask=UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
+	
+	
+	remainingView=[[RemainingDistanceTimeView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-100,self.view.frame.size.height-60,100,70)];
+	remainingView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+	
+	remainingView.autoresizesSubviews=YES;
 	APPDELEGATE.directions.map=mapview;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(speedChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	
@@ -274,6 +280,7 @@
 			if(mapview.nightMode!=YES) {
 				[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];	
 				[navView setNightMode:YES];
+				[remainingView setNightMode:YES];
 				mapview.nightMode=YES;
 				[mapview refreshMap];
 			}
@@ -282,6 +289,7 @@
 				[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 				mapview.nightMode=NO;
 				[navView setNightMode:NO];
+				[remainingView setNightMode:NO];
 				[mapview refreshMap];
 			}
 		}
@@ -301,11 +309,13 @@
 			[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];	
 			[navView setNightMode:YES];
 			mapview.nightMode=YES;
+			[remainingView setNightMode:YES];
 			[mapview refreshMap];
 		} else {
 			[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 			mapview.nightMode=NO;
 			[navView setNightMode:NO];
+			[remainingView setNightMode:NO];
 			[mapview refreshMap];
 		}
 	} else {
@@ -360,6 +370,7 @@
 	[zoomview release];
 	[viewSearch release];
 	[speedview release];
+	[remainingView release];
 	[btnSettings release];
 	[btnSearch release];
 	[settingsController release];
@@ -525,6 +536,7 @@
 -(void)clearDirections {
 	[UIView beginAnimations:nil context:nil];	
 	[navView removeFromSuperview];
+	[remainingView removeFromSuperview];
 	mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
 	zoomview.frame=CGRectMake(10,10,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70,wrongWay.frame.size.width,wrongWay.frame.size.height);
@@ -536,10 +548,6 @@
 	[wrongWay removeFromSuperview];
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
-	//if(instr.dist<500)
-	//	[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f m",instr.name,instr.dist]];
-	//else
-	//	[navView setText:[NSString stringWithFormat:@"%@\nIn %.1f km",instr.name,instr.dist/1000.0]];
 	[navView setText:instr.name];
 	[UIView beginAnimations:nil context:nil];	
 	[navView sizeToFit];
@@ -550,8 +558,9 @@
 	[UIView commitAnimations];
 	
 }
--(void)nextDirectionDistanceChanged:(double)dist {
-	
+-(void)nextDirectionDistanceChanged:(double)dist total:(double)totalDist{
+	[remainingView setDistance:dist];
+	[remainingView setTotalDistance:totalDist];
 }
 -(void)gotResultForSearch:(GeoEncoderResult*)res {
 	if(currentSearchType!=1) [self btnClearPressed];
@@ -576,6 +585,7 @@
 			self.navigationItem.rightBarButtonItem=nil;
 			self.navigationItem.leftBarButtonItem=nil;
 			[self.view addSubview:navView];
+			[self.view addSubview:remainingView];
 			mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 			zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 			wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
