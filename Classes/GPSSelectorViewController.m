@@ -153,9 +153,9 @@
 */
 
 - (void)dealloc {
-    [super dealloc];
 	[gpsList release];
 	[licenseView release];
+	[super dealloc];
 }
 
 

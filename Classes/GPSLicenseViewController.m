@@ -33,9 +33,9 @@
 
 
 - (void)dealloc {
-    [super dealloc];
 	[value release];
 	[progress release];
+	[super dealloc];
 }
 -(void)setLicenseValue:(NSString*)val {
 	value.text=val;	

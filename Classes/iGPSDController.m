@@ -103,10 +103,10 @@
 	return self;
 }
 -(void)dealloc {
-	[super dealloc];
 	if(license!=nil) {
 		[license release];	
 	}
+	[super dealloc];
 }
 
 

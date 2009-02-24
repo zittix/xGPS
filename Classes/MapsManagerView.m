@@ -54,11 +54,11 @@
 	
 }
 -(void)dealloc {
-	[super dealloc];
 	[progress release];
 	[mapview release];
 	[zoomview release];
 	[savedName release];
+	[super dealloc];
 	
 }
 -(void)updateCurrentPos:(PositionObj*)pos {

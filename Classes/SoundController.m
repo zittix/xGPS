@@ -148,9 +148,9 @@ static void HandleOutputBuffer (
 @implementation SoundController
 
 -(void)dealloc {
-	[super dealloc];
 	[tmrSoundCheck release];
 	[chain dealloc];
+	[super dealloc];
 }
 -(id)init {
 	if((self=[super init])) {

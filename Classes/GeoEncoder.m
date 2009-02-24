@@ -24,10 +24,10 @@
 	return [r autorelease];
 }
 -(void)dealloc {
-	[super dealloc];
 	[pos release];
 	[name release];
 	[addr release];
+	[super dealloc];
 }
 @end
 
@@ -138,7 +138,6 @@
     }
 }
 -(void)dealloc {
-	[super dealloc];
 	[currentPos release];
 	[currentProp release];
 	[currentAddr release];
@@ -146,6 +145,7 @@
 	[req release];
 	[result release];
 	[resultData release];
+	[super dealloc];
 }
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	NSLog(@"End geocode ok with %d results",[result count]);

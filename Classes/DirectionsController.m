@@ -80,7 +80,6 @@ int roundNearest(double dist) {
 	return self;
 }
 -(void)dealloc {
-	[super dealloc];
 	[pos release];
 	
 	[_from release];
@@ -95,6 +94,7 @@ int roundNearest(double dist) {
 	[stopAddr release];
 	[currentProp release];
 	[resultData release];
+	[super dealloc];
 }
 /*
  

@@ -37,7 +37,6 @@
 	[self GetGPSWithId:idGPS].delegate=delegate;
 }
 -(void)dealloc {
-	NSLog(@"Deallocate gpsmanager");
 	[[self GetCurrentGPS] stop];
 	[gpsControllers1 release];
 	[gpsControllers2 release];

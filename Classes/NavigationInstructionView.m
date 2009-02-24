@@ -93,8 +93,8 @@
 	[lbl setText:txt];
 }
 - (void)dealloc {
+	[super dealloc];
 	[lbl release];
-    [super dealloc];
 }
 
 

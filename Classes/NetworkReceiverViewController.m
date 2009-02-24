@@ -113,9 +113,9 @@
 	lblStatus.text=s;
 }
 - (void)dealloc {
-    [super dealloc];
 	[lblStatus release];
 	[lblAddress release];
+	 [super dealloc];
 }
 
 

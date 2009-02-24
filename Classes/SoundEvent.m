@@ -41,8 +41,8 @@
 	return self;
 }
 -(void)dealloc {
-	[super dealloc];
 	[next release];
 	[text release];
+	[super dealloc];
 }
 @end

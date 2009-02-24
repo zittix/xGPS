@@ -54,9 +54,9 @@
 
 
 - (void)dealloc {
-    [super dealloc];
 	[titlelbl release];
 	[valuelbl release];
+	[super dealloc];
 }
 -(void)setTitle:(NSString*)t {
 	titlelbl.text=t;

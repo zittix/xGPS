@@ -10,7 +10,6 @@
 	UIButton *button;
 	id currentDelegate;
 }
-- (void)dealloc;
 -(void)setBtnSelector:(SEL)sel withDelegate:(id)del;
 - (id)initWithFrame:(CGRect)frame;
 - (void)setProgress:(float) progress;

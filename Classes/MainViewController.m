@@ -320,7 +320,6 @@
 	[UIView commitAnimations];
 }
 - (void)dealloc {
-	[super dealloc];
 	[mapview release];
 	[zoomview release];
 	[viewSearch release];
@@ -331,6 +330,7 @@
 	[signalView release];
 	[searchPlacesView release];
 	[gpsPos release];
+	[super dealloc];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

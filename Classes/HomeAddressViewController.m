@@ -95,8 +95,8 @@
 
 
 - (void)dealloc {
-    [super dealloc];
 	[txtHome release];
+	[super dealloc];
 }
 
 

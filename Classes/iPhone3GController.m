@@ -37,9 +37,9 @@
 }
 
 -(void) dealloc {
-	[super dealloc];
 	[locManager release];
 	[chMsg release];
+	[super dealloc];
 }
 - (id)initWithDelegate:(id)del {
 	self=[super initWithDelegate:del];

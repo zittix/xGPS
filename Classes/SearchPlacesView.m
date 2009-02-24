@@ -44,11 +44,11 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
 	[searchBar release];
 	[geocoder release];
 	[tblView release];
 	[_result release];
+	 [super dealloc];
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	if(_result!=nil) {
