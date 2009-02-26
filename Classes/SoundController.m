@@ -353,6 +353,22 @@ W: West
 	
     UNREGISTER_VOX(v);
 	
+	//Volume max
+	
+	//unsigned short max = 0;
+	//for (long l=0;l<w->num_samples;l++)
+	//	if(max<w->samples[l])
+	//		max=w->samples[l];
+	
+	//float ratio=65536.0 / (float)max;
+	//ratio=1.5;
+	//if(ratio>1) {
+	//	NSLog(@"Augmenting volume by %f",ratio);
+	//	for (long i = 0; i < w->num_samples; i++) {
+	//		w->samples[i] = (w->samples[i] * ratio);
+	//	}
+		
+	//}
 	aqData.mDataFormat.mSampleRate=w->sample_rate;
 	
 	

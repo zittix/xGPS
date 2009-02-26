@@ -84,12 +84,12 @@ void cst_wave_resize(cst_wave *w,int samples, int num_channels)
 
 }
 
-void cst_wave_rescale(cst_wave *w, int factor)
+void cst_wave_rescale(cst_wave *w, float factor)
 {
 	int i;
 
 	for (i = 0; i < w->num_samples; ++i)
-		w->samples[i] = ((int)w->samples[i] * factor) / 65536;
+		w->samples[i] = (w->samples[i] * factor) / 65536.0;
 }
 
 cst_wave *copy_wave(const cst_wave *w)

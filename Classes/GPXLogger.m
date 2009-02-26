@@ -19,7 +19,7 @@
 	[[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil];
 	
 	int i=0;
-	NSString *file=[path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-%d.log",[[[[NSDate date] description] stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByReplacingOccurrencesOfString:@":" withString:@"-"],i]];
+	NSString *file=[path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d.log",[[[[NSDate date] description] stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringByReplacingOccurrencesOfString:@":" withString:@"-"],i]];
 
 	fp = fopen ([file UTF8String],"r");
 	while(fp!=NULL)

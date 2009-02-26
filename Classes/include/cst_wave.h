@@ -98,7 +98,7 @@ int cst_wave_load_raw_fd (cst_wave *w, cst_file fd,
 
 void cst_wave_resize(cst_wave *w,int samples, int num_channels);
 void cst_wave_resample(cst_wave *w, int sample_rate);
-void cst_wave_rescale(cst_wave *w, int factor);
+void cst_wave_rescale(cst_wave *w, float factor);
 
 /* Resampling code */
 typedef struct cst_rateconv_struct {
