@@ -27,6 +27,7 @@
 		lbl.numberOfLines=0;
 		lbl.lineBreakMode=UILineBreakModeWordWrap;
 		lbl.shadowColor=[UIColor blackColor];
+		[self fontChanged];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontChanged) name:NSUserDefaultsDidChangeNotification object:nil];
     }
     return self;

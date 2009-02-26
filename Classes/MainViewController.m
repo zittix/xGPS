@@ -105,6 +105,7 @@
 	navView.delegate=APPDELEGATE.directions;
 	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(viewRect.size.width-140,70,-1,-1) withDelegate:self];
 	navView.autoresizesSubviews=YES;
+
 	wrongWay.autoresizingMask=UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
 	
 	

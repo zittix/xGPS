@@ -24,4 +24,5 @@
 -(void)setText:(NSString*)txt;
 -(void)setTextSize:(float)size;
 -(void)setNightMode:(BOOL)val;
+-(void)fontChanged;
 @end
