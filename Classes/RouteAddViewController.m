@@ -66,7 +66,7 @@
 	[viewButton addSubview:btnCompute];
 	[viewButton addSubview:routeType];
 	viewButton.autoresizesSubviews=YES;
-
+	
 	viewButton.autoresizingMask=UIViewAutoresizingFlexibleWidth;
 	
 	//self.tableView.tableHeaderView=viewButton;
@@ -104,7 +104,7 @@
 		[hotSheet show];	
 		return;
 	}
-	if(points.count>10) {
+	if(points.count>2) {
 		UIAlertView * hotSheet = [[UIAlertView alloc]
 								  initWithTitle:NSLocalizedString(@"Route computation",@"")
 								  message:[NSString stringWithFormat:NSLocalizedString(@"You cannot have more than %d points in your route.",@""),10]
@@ -131,11 +131,15 @@
 	NSString *from=p_start.pos.description;
 	NSString *to=p_end.pos.description;
 	NSMutableArray * arr=nil;
-	if(points.count - 2>0)
-	arr=[NSMutableArray arrayWithCapacity:points.count -2];
-	
+	if(points.count - 2>0){
+		arr=[NSMutableArray arrayWithCapacity:points.count -2];
+		
+		for(int i=1;i<points.count-1;i++) {
+			[arr addObject:[points objectAtIndex:i]];
+		}
+	}
 	pController=[[ProgressViewController alloc] init];
-
+	
 	[pController.progress hideCancelButton];
 	pController.progress.ltext.text=NSLocalizedString(@"Computing your route...",@"");
 	[pController.progress setBtnSelector:@selector(cancelRoute) withDelegate:self];
@@ -161,7 +165,7 @@
 		return;
 	};
 	
-
+	
 	[self presentModalViewController:pController animated:NO];
 	
 }
@@ -196,7 +200,7 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	APPDELEGATE.directions.routingType=ROUTING_NORMAL;
 	APPDELEGATE.directions.recomputing=NO;
-
+	
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	
@@ -235,9 +239,9 @@
 	[txtName resignFirstResponder];
 	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Add / Modify:",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Location / Place",@""),NSLocalizedString(@"Address",@""),nil];
 	[action showInView:self.view];
-
 	
-	}
+	
+}
 -(void) searchPlaceWillHide {
 	editingRow=-1;
 	[self dismissModalViewControllerAnimated:YES];
@@ -321,7 +325,7 @@
 	} else {
 		cell.image=[UIImage imageNamed:@"middleway.png"];
 	}
-
+	
 	cell.text=point.name;
 	
     return cell;

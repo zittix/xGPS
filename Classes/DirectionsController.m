@@ -834,8 +834,11 @@ int roundNearest(double dist) {
 	//NSLog(@"Using %@ language",lang);
 	
 	NSString* fromE=[DirectionsController urlencode:from encoding:@"utf8"];
+	NSString* toE=[DirectionsController urlencode:to encoding:@"utf8"];
+	NSString *advTo=toE;
 	
-	NSString *advTo=to;
+	
+	
 	if(via!=nil) {
 		advTo=@"";
 		for(NavigationPoint *p in via) {
@@ -844,9 +847,12 @@ int roundNearest(double dist) {
 			else
 				advTo=[advTo stringByAppendingFormat:@"+to:%f,%f",p.pos.x,p.pos.y];
 		}
-		advTo=[advTo stringByAppendingFormat:@"+to:%@",to];
+		
+		
+		
+		advTo=[advTo stringByAppendingFormat:@"+to:%@",toE];
 	}
-	NSString* toE=[DirectionsController urlencode:advTo encoding:@"utf8"];
+	
 	
 	NSString *unit;
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit])
@@ -872,7 +878,7 @@ int roundNearest(double dist) {
 	}*/
 	
 	
-	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&hl=%@&saddr=%@&daddr=%@&doflg=%@%@",lang,fromE,toE,unit,routeType];
+	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&hl=%@&saddr=%@&daddr=%@&doflg=%@%@",lang,fromE,advTo,unit,routeType];
 	
 	NSLog(@"Getting directions at %@",urlT);
 	
