@@ -107,7 +107,7 @@
 	if(points.count>2) {
 		UIAlertView * hotSheet = [[UIAlertView alloc]
 								  initWithTitle:NSLocalizedString(@"Route computation",@"")
-								  message:[NSString stringWithFormat:NSLocalizedString(@"You cannot have more than %d points in your route.",@""),10]
+								  message:[NSString stringWithFormat:NSLocalizedString(@"You cannot have more than %d points in your route.",@""),2]
 								  delegate:nil
 								  cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss")
 								  otherButtonTitles:nil];
