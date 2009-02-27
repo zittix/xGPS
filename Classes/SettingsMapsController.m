@@ -9,6 +9,7 @@
 #import "SettingsMapsController.h"
 #import "xGPSAppDelegate.h"
 #import "TitleValueCell.h"
+#import "MapsManagerView.h"
 @implementation SettingsMapsController
 
 
@@ -199,15 +200,17 @@
 		[msg show];
 	}else{
 		
-		if(mapsmanager==nil) {
-			mapsmanager=[[MapsManagerView alloc] initWithDB:APPDELEGATE.tiledb];
-		}
+
+			MapsManagerView *mapsmanager=[[MapsManagerView alloc] initWithDB:APPDELEGATE.tiledb];
 		
+	
 		[self.navigationController pushViewController:mapsmanager animated:YES];
+		
 		PositionObj *p=[[PositionObj alloc] init];
 		p.x=[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosX];
 		p.y=[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosY];
 		[mapsmanager updateCurrentPos:p];
+		[mapsmanager release];
 		[p release];
 	}
 }
@@ -233,7 +236,6 @@
 
 - (void)dealloc {
 	[maptype release];
-	[mapsmanager release];
     [super dealloc];
 }
 

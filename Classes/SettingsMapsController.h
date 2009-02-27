@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MapsManagerView.h"
+
 #import "MapTypeViewController.h";
 
 @interface SettingsMapsController : UITableViewController<UIActionSheetDelegate> {
-	MapsManagerView* mapsmanager;
 	MapTypeViewController* maptype;
 }
 
