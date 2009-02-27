@@ -215,29 +215,62 @@
 	
 }
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if(buttonIndex==2) return;
+	if(buttonIndex==3) return;
 	
-	ModalSearchViewController *manager=[[ModalSearchViewController alloc] initWithDelegate:self];
-	
-	
-	[self presentModalViewController:manager animated:YES];
 	
 	switch(buttonIndex) {
 		case 1:
-			manager.location=NO;
+		case 0:	
+		{
+			ModalSearchViewController *manager=[[ModalSearchViewController alloc] initWithDelegate:self];
+			
+			[self presentModalViewController:manager animated:YES];
+			manager.location= buttonIndex==0;
+			[manager release];
+		}
+		break;
+		case 2: {		
+			GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
+			
+			if(g.gps_data.fix.mode>1) {
+				float lat=g.gps_data.fix.latitude;
+				float lon=g.gps_data.fix.longitude;
+				
+				NavigationPoint *p=[[NavigationPoint alloc] init];
+				p.name=NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS");
+				p.pos.x=lat;
+				p.pos.y=lon;
+				if(editingRow<0) {
+					NavigationPoint *p_start=[points objectAtIndex:0];
+					NavigationPoint *p_end=[points objectAtIndex:points.count-1];
+					if(p_start.pos.x==0 && p_start.pos.y==0) {
+						[points removeObjectAtIndex:0];
+						[points insertObject:p atIndex:0];
+					} else if(p_end.pos.x==0 && p_end.pos.y==0) {
+						[points removeObjectAtIndex:points.count-1];
+						[points addObject:p];
+					} else
+						[points addObject:p];
+				} else {
+					[points replaceObjectAtIndex:editingRow withObject:p];
+				}
+				editingRow=-1;
+				[p release];
+				[self.tableView reloadData];
+			} else {
+				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to get the GPS position. The GPS is not currently giving any position information.",@"GPS Dir Pos error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+				[alert show];
+			}
 			break;
-		case 0:
-			manager.location=YES;
-			break;
+		}
 	}
 	
 	
-	[manager release];
 	
 }
 -(void)add {
 	[txtName resignFirstResponder];
-	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Add / Modify:",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Location / Place",@""),NSLocalizedString(@"Address",@""),nil];
+	UIActionSheet *action=[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Add / Modify:",@"") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Location / Place",@""),NSLocalizedString(@"Address",@""),NSLocalizedString(@"Current GPS Position",@"Driving directions current GPS POS"),nil];
 	[action showInView:self.view];
 	
 	

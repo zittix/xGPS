@@ -299,7 +299,7 @@
 	NSString* encURL=[GeoEncoder urlencode:search encoding:@"utf8"];
 	
 	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&q=%@&hl=%@",encURL,lang];
-	//NSLog(@"Getting geoencode at %@",urlT);
+	NSLog(@"Getting geoencode at %@",urlT);
 	//
 	NSURL *url = [NSURL URLWithString:urlT];
 	
