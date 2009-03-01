@@ -36,7 +36,7 @@
 		searchRoute=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		searchRoute.showsTouchWhenHighlighted=YES;
 		[searchRoute setBackgroundImage:[UIImage imageNamed:@"routes.png"] forState:UIControlStateNormal];
-		[searchRoute setTitle:NSLocalizedString(@"Driving Directions",@"") forState:UIControlStateNormal];
+		[searchRoute setTitle:NSLocalizedString(@"Driving directions",@"") forState:UIControlStateNormal];
 		searchRoute.frame=CGRectMake(2*horSpace+BUTTON_SIZE, 30, BUTTON_SIZE, BUTTON_SIZE);
 		searchRoute.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin;
 		searchRoute.font=[UIFont systemFontOfSize:10];

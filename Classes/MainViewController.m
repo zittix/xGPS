@@ -271,13 +271,30 @@
 		NSDate *startDate=[dateFormatter dateFromString:start];
 		NSDate *stopDate=[dateFormatter dateFromString:stop];
 		
-		if([stopDate compare:startDate]==NSOrderedAscending)
-			stopDate=[stopDate addTimeInterval:24*60*60];
-		NSDate *curDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%d:%d",actHour,actMinute]];
-		NSComparisonResult resStart=[curDate compare:startDate];
-		NSComparisonResult resStop=[curDate compare:stopDate];
+		//if([stopDate compare:startDate]==NSOrderedAscending)
+		//	stopDate=[stopDate addTimeInterval:24*60*60];
+		
+		//NSDate *curDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%d:%d",actHour,actMinute]];
+		//NSComparisonResult resStart=[curDate compare:startDate];
+		//NSComparisonResult resStop=[curDate compare:stopDate];
+		
+		
+		comp=[currentCalendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:startDate];
+		int startMinute=[comp minute];
+		int startHour=[comp hour];
+		
+		comp=[currentCalendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:stopDate];
+		int stopMinute=[comp minute];
+		int stopHour=[comp hour];
+		
+		
 		[dateFormatter release];
-		if((resStart==NSOrderedSame || resStart==NSOrderedDescending) && resStop==NSOrderedAscending) {
+		
+		BOOL nightModeDateNotAfter=actHour>startHour || actHour<stopHour || (actHour==startHour && actMinute>=startMinute) || (actHour==stopHour && actMinute<stopMinute);
+		BOOL nightModeDateAfter=(actHour>startHour && actHour<stopHour) || (actHour==startHour && actMinute>=startMinute && actMinute<stopMinute) || (actHour==stopHour && actMinute<stopMinute && actMinute>=startMinute);
+		
+		
+		if((nightModeDateNotAfter && (startHour>stopHour || (startHour==stopHour && startMinute>stopMinute))) || (nightModeDateAfter && (startHour<stopHour || (startHour==stopHour && startMinute<stopMinute)))) {
 			if(mapview.nightMode!=YES) {
 				[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:YES];	
 				[navView setNightMode:YES];
