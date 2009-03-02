@@ -43,6 +43,9 @@
 		}
 		
 		
+	} else if ([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDBVersion]==0 && [fm fileExistsAtPath:path]) {
+		NSError *err;
+		[fm removeItemAtPath:path error:&err];
 	}
 	
 	[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDBVersion];

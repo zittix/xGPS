@@ -31,7 +31,7 @@
 	NSLog(@"Loading Direction Bookmarks DB %@...",path);
 	
 	//Check DB version
-	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]<3 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]>0) {
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]<4 && [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]>0) {
 		if([fm fileExistsAtPath:path]) {
 			UIAlertView * hotSheet = [[UIAlertView alloc]
 									  initWithTitle:NSLocalizedString(@"Directions Bookmarks",@"")
@@ -48,8 +48,12 @@
 		}
 		
 		
+	} else if ([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsDirBookmarksDBVersion]==0 && [fm fileExistsAtPath:path]) {
+		NSError *err;
+		[fm removeItemAtPath:path error:&err];
 	}
-	[[NSUserDefaults standardUserDefaults]  setInteger:3 forKey:kSettingsDirBookmarksDBVersion];
+	
+	[[NSUserDefaults standardUserDefaults]  setInteger:4 forKey:kSettingsDirBookmarksDBVersion];
 	
 	if (sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
 		char *error;
