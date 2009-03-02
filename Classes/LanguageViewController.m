@@ -8,9 +8,12 @@
 
 #import "LanguageViewController.h"
 #import "xGPSAppDelegate.h"
-#define NBNAME 14
-static NSString* langName[NBNAME]={@"English", @"Français",@"Deutsch",@"Italiano",@"עברית",@"繁體中文",@"Polski",@"Русский",@"日本語",@"Dansk",@"Svenska",@"Español",@"Português",@"Português (Portugal)"};
-static NSString* langIdent[NBNAME]={@"en",@"fr",@"de",@"it",@"iw",@"zh-TW",@"pl",@"ru",@"ja",@"da",@"sv",@"es",@"pt-br",@"pt-pt"};
+#define NBNAME 24
+
+static NSString* langName[NBNAME]={@"English", @"Français",@"Deutsch",@"Italiano",@"עברית",@"繁體中文",@"Polski",@"Русский",@"日本語",@"Dansk",@"Svenska",@"Español",@"Português",@"Português (Portugal)",
+@"čeština",@"الْعَرَبيّة",@"ภาษาไทย", @"ελληνικά",@"slovenščina", @"Gjuha shqipe",  @"slovenčina", @"lietuvių kalba",@"български език",@"suomi"};
+
+static NSString* langIdent[NBNAME]={@"en",@"fr",@"de",@"it",@"iw",@"zh-TW",@"pl",@"ru",@"ja",@"da",@"sv",@"es",@"pt-br",@"pt-pt",@"cs", @"ar", @"th", @"el", @"sl", @"sq", @"sk", @"lt",@"bg",@"fi"  };
 @implementation LanguageViewController
 - (id)initWithStyle:(UITableViewStyle)style {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -56,8 +59,8 @@ static NSString* langIdent[NBNAME]={@"en",@"fr",@"de",@"it",@"iw",@"zh-TW",@"pl"
 	CellIdentifier=langIdent[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-
+		cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+		
 		if([lang isEqualToString:langIdent[indexPath.row]])
 			cell.accessoryType=UITableViewCellAccessoryCheckmark;
 		else
@@ -74,7 +77,7 @@ static NSString* langIdent[NBNAME]={@"en",@"fr",@"de",@"it",@"iw",@"zh-TW",@"pl"
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   [[NSUserDefaults standardUserDefaults] setObject:langIdent[indexPath.row] forKey:kSettingsMapsLanguage];
+	[[NSUserDefaults standardUserDefaults] setObject:langIdent[indexPath.row] forKey:kSettingsMapsLanguage];
 	
 	for(int i=0;i<[tableView numberOfRowsInSection:0];i++) {
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i	inSection:0]];

@@ -1,0 +1,400 @@
+"%.1f MB" = "%.1f MB";
+
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d متصل بالخدمات";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
+"About xGPS" = "حول xGPS";
+
+"Actions" = "الإجراءات";
+
+"Add / Modify:" = "إضافة / تعديل :";
+
+"Address" = "العنوان";
+
+"Address book" = "دفتر العناوين";
+
+"Altitude" = "الإرتفاع";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "حدث خطأ أثناء تنزيل الخرائط المختارة. بعض أجزاء من الخرائط لا يمكن تحميلها بشكل صحيح.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "هل أنت متأكد من حذف جميع تحميل الخرائط؟";
+
+"Are you sure you want to delete all the recorded tracks ?" = "هل أنت متأكد من حذف جميع المسارات المسجلة؟";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "هل أنت متأكد من حذف جميع العناوين المحفوظة؟";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "هل أنت متأكد من الأختيار لتحميل خريطة المنطقة (%1$d tiles ~ %2$d KB) ؟";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Are you sure you want to download the selected map area (%1$d tiles ~ %2$.1f MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "هل أنت متأكد من الأختيار لتحميل خريطة المنطقة (%1$d tiles ~ %2$d MB) ؟";
+
+"Available actions:" = "الإجراءات المتاحة:";
+
+"Back" = "إرجع";
+
+"Blue dot for position" = "النقطة الزرقاء موقعك";
+
+"Bookmarks" = "العناوين";
+
+"By Car" = "بالسيارة";
+
+"Cancel" = "إلغاء";
+
+"City name / Address" = "اسم مدينة / العنوان";
+
+"Clear All" = "مسح الكل";
+
+"Clear Driving directions" = "مسح اتجاهات القيادة";
+
+"Clear Results" = "مسح النتائج";
+
+"Clear Search results" = "مسح نتائج البحث";
+
+"Close" = "إغلاق";
+
+"Compute" = "إحسب";
+
+"Computing your route..." = "إحتساب طريقك...";
+
+"Connected" = "متصل";
+
+"Create a new route" = "إنشاء طريق جديد";
+
+"Current GPS Position" = "موقع GPS الحالي";
+
+"Current Position" = "الموقع الحالي";
+
+"Delete all bookmarks" = "حذف كل العناوين";
+
+"Delete downloaded maps" = "حذف الخرائط المحملة";
+
+"Delete GPX Log file" = "حذف ملف الدخول GPX";
+
+"Device address: %@" = "عنوان الجهاز: %@";
+
+"Device Info" = "معلومات الجهاز";
+
+"Directions" = "اتجاهات";
+
+"Directions Bookmarks" = "اتجاهات العناوين";
+
+"Disable Beep" = "تعطيل الصفارة";
+
+"Disconnected" = "غير متصل";
+
+"Dismiss" = "فصل";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "المسافات وسرعة سوف تظهر مع وحدة الميتر (km/h and meters).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "المسافات وسرعة سوف تظهر مع وحدة الميل (mph and miles).";
+
+"Download" = "تنزيل";
+
+"Download maps" = "تنزيل خرائط";
+
+"Downloaded maps size" = "حجم تحميل الخرائط";
+
+"Downloading maps..." = "تنزيل الخرائط...";
+
+"Driving Directions" = "اتجاهات القياد";
+
+"Enable night mode" = "تمكين الوضع اليلي";
+
+"Enable timer" = "تمكين الوقت";
+
+"Error" = "خطأ";
+
+"From / Departure" = "من / المغادرة";
+
+"From:" = "من:";
+
+"General" = "عام";
+
+"GMaps Hybrid" = "GMaps Hybrid";
+
+"GMaps Satellite" = "GMaps Satellite";
+
+"GMaps Terrain" = "GMaps Terrain";
+
+"Go Home" = "العودة للمنزل";
+
+"Good" = "جيد";
+
+"Google Maps" = "خرائط جوجل";
+
+"Google Maps Hybrid" = "خرائط جوجل Hybrid";
+
+"Google Maps Satellite" = "خرائط جوجل Satellite";
+
+"Google Maps Terrain" = "خرائط جوجل Terrain";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "تفعيل GPS";
+
+"GPS Information" = "معلومات الGPS";
+
+"GPS state" = "حالة GPS";
+
+"GPS to use" = "لاستخدام GPS";
+
+"GPS Tracking" = "تتبع GPS";
+
+"GPX Log Files" = "GPX ملفات الدخول";
+
+"GPX Logging" = "دخول GPX";
+
+"Home Address" = "عنوان المنزل";
+
+"Language" = "لغة";
+
+"Large font size" = "حجم الخط كبير";
+
+"Latitude" = "خط العرض";
+
+"License checking" = "التحقق من الترخيص";
+
+"License number" = "رقم الرخصة";
+
+"License number for %@" = "الترخيص لعدد ٪ @";
+
+"License:" = "الترخيص :";
+
+"Location / Place" = "الموقع / المكان";
+
+"Locations" = "الموقع";
+
+"Longitude" = "خط الطول";
+
+"Manager" = "مدير المهام";
+
+"Map" = "الخريطة";
+
+"Map auto-rotation" = "الدوران الالي للخريطة";
+
+"Map Database size" = "حجم قاعدت البيانات للخريطة";
+
+"Map details" = "تفاصيل الخريطة";
+
+"Map name" = "إسم الخريطة";
+
+"Map Type" = "نوع الخريطة";
+
+"Maps" = "الخرائط";
+
+"Maps data" = "بيانات الخرائط";
+
+"Maps Download" = "تنزيل الخرائط";
+
+"Maps downloaded successfully !" = "تم تحميل الخرائط بنجاح !";
+
+"Maps Manager" = "مدير الخرائط";
+
+"Maps type" = "نوع الخرائط";
+
+"My GPS Position" = "موقعي الحاليي للGPS";
+
+"My GPS position is:" = "موقعي الحالي للGPS هو:";
+
+"N/A" = "غير متوفر";
+
+"Name:" = "الإسم:";
+
+"New directions database: " = "الاتجاهات الجديدة قاعدة بيانات : ";
+
+"New maps database: " = "قاعدة بيانات خرائط جديدة : ";
+
+"New Route" = "طريق جديدة";
+
+"Night Mode" = "الوضع اليلي";
+
+"No" = "كلا";
+
+"No driving direction can be computed using your query." = "لا يمكن أن تكون القيادة والتوجيه باستخدام استفسارك.";
+
+"No Highway" = "لايوجد طريق سريع";
+
+"No License" = "لا رخصة";
+
+"No location has been found according to your query." = "لم يتم العثور على الموقع وفقا لاستفسارك.";
+
+"No name" = "لا إسم";
+
+"None" = "لا شيئ";
+
+"Number of log files" = "سجل عدد من الملفات";
+
+"Offline mode" = "الوضع الغير متصل";
+
+"Pick a GPS" = "إختيار الGPS";
+
+"Places / Cities" = "الأماكن / المدن";
+
+"Please enter a name for your map." = "الرجاء إدخال اسم للخريطة.";
+
+"Please enter a name for your route." = "الرجاء إدخال اسم لمسارك.";
+
+"Please select a greater map area by touching the screen with two fingers." = "الرجاء اختيار منطقة أكبر من الخريطة من خلال لمس الشاشة بالأصبعين.";
+
+"Poor" = "ضعيف";
+
+"Prevent Sleep Mode" = "إمنع وضع النوم";
+
+"Ready to transfer..." = "مستعدة لنقل...";
+
+"Recompute itinerary" = "إعادة تحسب المسار";
+
+"Reset GPS" = "Reset GPS";
+
+"Return to main page" = "العودة إلى الصفحة الرئيسية";
+
+"Route computation" = "تحسب المسار";
+
+"Routes Manager" = "مدير الطرق";
+
+"Save in Bookmarks" = "الحفظ في العناوين";
+
+"Search" = "بحث";
+
+"Search Places" = "البحث عن الأماكن";
+
+"Send by Email" = "إرسال عن طريق البريد الـرلكتروني";
+
+"Send by SMS" = "إرسال عن طريق الرسائل";
+
+"Settings" = "إعدادات";
+
+"Show device info" = "إظهر معلومات الجهاز";
+
+"Show Speedometer" = "إظهر عداد السرعة";
+
+"Speed" = "السرعة";
+
+"Start time" = "بداية الزمن";
+
+"Stop time" = "توقف الزمن";
+
+"Take position from:" = "اتخاذ موقع من :";
+
+"Tap to edit" = "إضغط للتحرير";
+
+"The directions database has been sucessfully saved." = "تم حفظ قاعدة بيانات الإتجاهات بنجاح.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "اللغة التي تستخدم لتحديد موضع اتجاهات القيادة ، وخرائط والمكان / مدينة نتائج البحث.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "فإن الموقع الخدمات ليست فعالة في جهازك. استخدام تطبيق الإعدادات في شاشة الصفحة الرئيسية الخاصة بك لإصلاح هذه المشكلة.";
+
+"The maps database has been sucessfully saved." = "تم حفظ قاعدة بيانات الخرائط بنجاح.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "حجم الخرائط سوف يزداد عند تصفح جزء من الخريطه لم يتم تنزيلها";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "يمكنك الوضع اليلي على التركيز على الطريق بعدم الإنزعاج من سطوح شاشة الآيفون. وهذه الألوان أغمق وسيتم تحديد الحد الأدنى لسطوع الشاشة";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "مستوى التكبير %d إلى مستوى أكثر تفصيلا الزوم";
+
+"To / Destination" = "إلى/ الوجهة";
+
+"To:" = "إلى:";
+
+"Total" = "المجموع";
+
+"Total log files size" = "سجل اجمالي حجم الملفات";
+
+"Transfer" = "نقل";
+
+"Unable to download a part of the map. Check your internet connection." = "غير قادر على تحميل جزء من الخريطة. تحقق من اتصالك بالإنترنت.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "غير قادر على الحصول على موقع GPS. لا توجد معلومات في الوقت الحالي لتوفر الشبكة";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "غير قادر على فتح المسلسل الميناء. تأكد من عدم وجود برامج أخرى لتحديد المواقع يعمل في الخلفية.";
+
+"Unable to retrieve the driving directions from the server: %@" = "غير قادر على استعادة اتجاهات القيادة من الخادم : ٪ @";
+
+"Unable to retrieve the required information from the server: %@" = "غير قادرة على استرجاع المعلومات المطلوبة من الخادم : ٪ @";
+
+"Unknown" = "غير معروف";
+
+"Unknown error" = "خطأ غير معروف";
+
+"Upload a new directions database" = "تحميل قاعدة بيانات الاتجاهات الجديدة";
+
+"Upload a new maps database" = "تحميل قاعدة بيانات خرائط جديدة";
+
+"Upload new directions database" = "تحميل قاعدة بيانات الاتجاهات الجديدة";
+
+"Upload new maps database" = "تحميل قاعدة بيانات خرائط جديدة";
+
+"Use Miles unit" = "استخدام وحدة مايلز";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "استخدام خيار إعادة GPS لتحديد المواقع لاستئناف عندما يعطي موقع خاطئ كليا أو إذا لم يعد يستجيب.";
+
+"User Interface" = "واجهة المستخدم";
+
+"Verifying license number..." = "الترخيص والتحقق من عدد...";
+
+"Version" = "النسخة";
+
+"Voice Instructions" = "التعليمات الصوتية";
+
+"Voice instructions work only when the language in General settings is set to English." = "تعليمات الصوت تعمل فقط عند وضع إعدادات اللغة إلى الإنجليزية";
+
+"Walking" = "المشي";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "عند تفعيله ، كل البحوث واتجاهات القيادة تحفظ في العناوين.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "عند تفعيله ، فإنه يعطل وضع النوم والشاشة في وضع شغال.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "عند تفعيله ، سوف تعاد تحسب اتجاهات القيادة عندما تسير على الطريق الخطأ.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "عندما يتم تنشيط الدخول للGPX ، كل التحركات تكون مسجلة في ملف GPX . الملف يمكن استخدامها بعد ذلك على جهاز كمبيوتر لتصور مسارها.";
+
+"Wireless Transfer" = "نقل لاسلكية";
+
+"Wrong Way hidden" = "وجهة الطريق خاطئة";
+
+"Wrong\nWay" = "خطألا وجهة";
+
+"xGPS Error" = "خطأ xGPS";
+
+"xGPS Version" = "الإصدار xGPS";
+
+"xGPS Web-based Management" = "الإدارة على شبكة الإنترنت xGPS";
+
+"Yes" = "نعم";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "أنت لا تستطيع أن تفعل طلب بحث وأنت في الوضع دون اتصال. يمكنك إيقاف الوضع دون اتصال عن طريق الضغط على زر الاعدادات.";
+
+"You cannot download maps while you are in the offline mode." = "لا يمكن تحميل الخرائط وأنت في الوضع دون اتصال.";
+
+"You cannot have more than %d points in your route." = "لا يمكن ان تكون اكثر من نقطة %d في مسارك.";
+
+"You have to add at least one starting and one ending point in your route." = "يجب عليك ان تضيف على الأقل بادئة و نهاية نقطة لمسارك.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "يجب عليك وضع عنوانك في الإعدادات --> اتجاهات القيادة --> عنوان المنزل ، قبل استخدام هذه الميزة.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "تحميل الخرائط الخاصة بك لا تتفق مع هذا الإصدار من xGPS. وقد تم حذفها.";
+
+"Your home address" = "عنوانك";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "عنوانك سيستخدم للحصول على اتجاهات القيادة إلى منزلك عند الضغط على زر الصفحة الرئيسية.";
+
+"Your license number is invalid. Please verify and retry" = "ترخيصك غير صالح. يرجى التحقق من وإعادة المحاولة";
+
+"Your license number is valid. You can now use the selected GPS." = "ترخيصك صالح. يمكنك الآن استخدام GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "اتجاهات القيادة المحفوظة الخاصة بك لا تتفق مع هذا الإصدار من xGPS. وقد تم حذفها.";
+
+"Zoom level to download" = "مستوى التكبير لتحميل";
+
+"Zoom level: %d" = "مستوى التكبير : %d";
+

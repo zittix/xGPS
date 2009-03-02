@@ -1,0 +1,252 @@
+"%.1f MB" = "%.1f MB";
+
+"%d connected clients" = "%d συνδεδεμένοι πελάτες";
+
+"About xGPS" = "Πληροφορίες για το xGPS";
+
+"Address book" = "Βιβλίο διευθύνσεων ";
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Προέκυψε ένα λάθος κατά το κατέβασμα των επιλεγμένων χαρτών. Ορισμένα τμήματα του χάρτη μπορεί να μην έχουν κατέβει σωστά.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Είστε σίγουροι ότι θέλετε να διαγράψετε όλους τους κατεβασμένους χάρτε�";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Είστε σίγουροι ότι θέλετε να διαγράψετε όλες τις καταγεγραμένες διαδρομές ";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Είστε σίγουροι ότι θέλετε να διαγράψετε όλους τους αποθηκευμένους σελιδοδείκτε�";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = " Είστε σίγουροι ότι θέλετε να κατεβάσετε την επιλεγμένη περιοχή χάρτη (%1$d τμήματα ~ %2$d KB";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = " Είστε σίγουροι ότι θέλετε να κατεβάσετε την επιλεγμένη περιοχή χάρτη (%1$d τμήματα ~ %2$d MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = " Είστε σίγουροι ότι θέλετε τον επανυπολογισμό της παρούσας περιήγηση�";
+
+"Available actions:" = "Διαθέσιμες ενέργειες:";
+
+"Blue dot for position" = "Μπλε κουκίδα για θέση";
+
+"Bookmarks" = "Σελιδοδείκτες";
+
+"Cancel" = "Ακύρωση";
+
+"City name / Address" = "Όνομα πόλης / Διεύθυνση";
+
+"Clear Driving directions" = "Καθάρισε τις οδηγίες κατεύθυνσης";
+
+"Clear Search results" = "Καθάρισε τα αποτελέσματα Αναζήτησης";
+
+"Connected" = "Συνδεδεμένο";
+
+"Current GPS Position" = "Παρούσα Θέση GPS";
+
+"Current Position" = "Παρούσα Θέση ";
+
+"Delete all bookmarks" = "Διέγραψε όλες τους σελιδοδείκτες";
+
+"Delete downloaded maps" = "Διέγραψε τους κατεβασμένους χάρτες";
+
+"Delete GPX Log file" = "Διέγραψε το αρχείο ημερολογίου GPX ";
+
+"Device Info" = "Πληροφορίες συσκευής";
+
+"Directions" = "Οδηγίες";
+
+"Directions Bookmarks" = "Οδηγίες Σελιδοδεικτών";
+
+"Disable GPS" = "Απενεργοποίηση GPS";
+
+"Disconnected" = "Αποσυνδεμένο";
+
+"Dismiss" = "Παράλειψη";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Αποστάσεις και ταχύτητα θα απεικονίζονται με μονάδα μέτρησης μέτρων (χ.α.ω. και μέτρα).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = " Αποστάσεις και ταχύτητα θα απεικονίζονται με μονάδα μέτρησης μιλίου (μ.α.ω. και μίλια).";
+
+"Download" = "Κατέβασε";
+
+"Downloaded maps size" = "Μέγεθος κατεβασμένων χαρτών ";
+
+"Downloading maps..." = "Κατεβάζοντας χάρτες...";
+
+"Driving directions" = "Οδηγίες οδήγησης";
+
+"Enable GPS" = "Ενεργοποίηση GPS";
+
+"Error" = "Λάθος";
+
+"From / Departure" = "Από / Αναχώρηση";
+
+"From:" = "Από:";
+
+"General" = "Γενικά";
+
+"Good" = "Καλό";
+
+"GPS" = "GPS";
+
+"GPS state" = "Κατάσταση GPS";
+
+"GPS to use" = "GPS προς χρήση";
+
+"GPX Logging" = "Καταγραφή GPX ";
+
+"Hybrid" = "Υβριδικά";
+
+"Language" = "Γλώσσα";
+
+"License checking" = "Έλεγχος αδείας";
+
+"License number" = "Αριθμός αδείας";
+
+"License number for %@" = "Αριθμός αδείας για %@";
+
+"License:" = "Άδεια:";
+
+"Locations" = "Τοποθεσίες";
+
+"Log file size" = "Μέγεθος αρχείου καταγραφής";
+
+"Manage maps" = "Διαχείρηση χαρτών";
+
+"Map" = "Χάρτης";
+
+"Map auto-rotation" = "Αυτόματη περιστροφή χάρτη";
+
+"Map Database size" = "Μέγεθος βάσης χάρτη";
+
+"Maps" = "Χάρτες";
+
+"Maps data" = "Δεδομένα χαρτών";
+
+"Maps Download" = "Κατέβασμα χαρτών";
+
+"Maps downloaded successfully !" = "Επιτυχές κατέβασμα χαρτών!";
+
+"Maps Manager" = "Διαχειριστής χαρτών";
+
+"Maps type" = "Τύπος χαρτών";
+
+"N/A" = "N/A";
+
+"New maps database: " = "Νέα βάση χαρτών: ";
+
+"No" = "Όχι";
+
+"No driving direction can be computed using your query." = "Δεν είναι δυνατός ο υπολογισμός οδηγιών κατεύθυνσης χρησιμοποιώντας το ερώτημά σας.";
+
+"No License" = "Ανυπαρξία άδειας";
+
+"No location has been found according to your query." = "Δεν ήταν δυνατή η εύρεση τοποθεσίας με βάση το ερώτημά σας.";
+
+"None" = "Καθόλου";
+
+"Offline mode" = "Διαμόρφωση εκτός σύνδεσης";
+
+"Pick a GPS" = "Επέλεξε ένα GPS";
+
+"Places / Cities" = "Περιοχές / Πόλεις";
+
+"Please select a greater map area by touching the screen with two fingers." = "Παρακαλώ επιλέξτε μία μεγαλύτερη περιοχή χάρτη αγγίζοντας την οθόνη με τα δύο δάκτυλα.";
+
+"Poor" = "Φτωχό";
+
+"Prevent Sleep Mode" = "Απέτρεψε Διαμόρφωση Κλειδώματος ";
+
+"Ready to transfer..." = "Έτοιμο για μεταφορά...";
+
+"Receive maps" = "Παραλαβή χαρτών";
+
+"Recompute itinerary" = "Επανυπολογισμός περιήγησης";
+
+"Reset GPS" = "Επανεκκίνηση GPS";
+
+"Return to main page" = "Επιστροφή στην κεντρική σελίδα";
+
+"Satellite" = "Δορυφόρος";
+
+"Save in Bookmarks" = "Αποθήκευση στους σελιδοδείκτες";
+
+"Search for:" = "Αναζήτηση για:";
+
+"Settings" = "Ρυθμίσεις";
+
+"Show device info" = "Εμφάνιση πληροφορίες συσκευής";
+
+"Show Speedometer" = "Εμφάνιση Ταχύμετρου";
+
+"Take position from:" = "Λήψη θέσης από:";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Οι ρυθμίσεις γλώσσας χρησιμοποιούνται για την τοπολόγηση των οδηγιών κατεύθυνσης, των χαρτών και τα αποτελέσματα της έρευνας περιοχής/πόλης.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Οι Υπηρεσίες Τοποθεσίας δεν είναι ενεργοποιημένες στη συσκευή σας.Χρησιμοποιήστε την εφαρμογή Ρυθμίσεις στην κύρια οθόνη για να διορθώσετε αυτό το πρόβλημα.";
+
+"The maps database has been sucessfully saved." = "Η βάση χαρτών έχει αποθηκευτεί με επιτυχία.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "To μέγεθος των χαρτών επίσης θα μεγαλώσει καθώς περιηγήστε ένα τμήμα ενός χάρτη που δεν έχετε ήδη κατεβάσει.";
+
+"This feature will be implemented in a future version." = "Αυτό το χαρακτηριστικό θα ισχύει σε μελλοντική έκδοση.";
+
+"To / Destination" = "Προς / Προορισμός";
+
+"To:" = "Προς:";
+
+"Transfer" = "Μεταφορά";
+
+"Unable to download a part of the map. Check your internet connection." = "Μη ικανό το κατέβασμα ενός τμήματος του χάρτη.Ελέγξτε την σύνδεσή σας στο διαδίκτυο.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Μη ικανή η ανάκτηση θέσης GPS. Η μονάδα GPS δεν παρέχει προς το παρόν πληροφορίες θέσης.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Μη ικανή η ενεργοποίηση της σειριακής θύρας. Βεβαιωθείτε ότι δεν εκτελείται στο παρασκήνιο άλλο λογισμικό GPS.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Μη ικανή η ανάκτηση πληροφοριών θέσης από το διακομιστή: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Μη ικανή η ανάκτηση των απαραιτήτων πληροφοριών από το διακομιστή: %@";
+
+"Unknown error" = "Άγνωστο σφάλμα";
+
+"Upload a new maps database" = "Ανέβασμα μιας νέας βάσης χαρτών";
+
+"Upload new maps database" = "Ανέβασμα νέας βάσης χαρτών";
+
+"Use Miles unit" = "Χρησιμοποίηση μονάδων μιλίου";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Χρησιμοποιήστε την  επιλογή επανεκκίνησης GPS option για να επανεκκινήσετε τη μονάδα GPS όταν εμφανίζει μια τελείως λανθασμένη θέση ή δεν ανταποκρίνεται πλέον.";
+
+"User Interface" = "Διεπαφή Χρήστη ";
+
+"Verifying license number..." = "Επαληθεύοντας τον αριθμό αδείας...";
+
+"Version" = "Έκδοση";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Όταν ενεργοποιηθεί, όλες οι εκτελεσμένες αναζητήσεις οδηγιών κατεύθυνσης αποθηκεύονται στους σελιδοδείκτες.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Όταν ενεργοποιηθεί, απενεργοποιεί τη διαμόρφωση αδρανοποίησης ώστε η οθόνη να είναι πάντοτε ανοιχτή.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Όταν ενεργοποιηθεί, οι οδηγίες κατεύθυνσης επανυπολογίζονται όταν οδηγείτε σε λάθος δρόμο.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Όταν η καταγραφή GPX είναι ενεργοποιημένη, όλες οι κινήσεις σας καταγράφονται σε ένα αρχείο διαμόρφωσης GPX.Το αρχείο μπορεί να χρησιμοποιηθεί σε έναν υπολογιστή για να απεικονίσει τη διαδρομή.";
+
+"Wireless Transfer" = "Ασύρματη μεταφορά";
+
+"Wrong\nWay" = "ΛάθοςnΚατεύθυνση";
+
+"xGPS Error" = " Σφάλμα xGPS ";
+
+"xGPS Version" = " Έκδοση xGPS ";
+
+"xGPS Web-based Management" = " Δικτυακή Διαχείρηση xGPS ";
+
+"Yes" = "Ναι";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Δεν μπορείτε να εκτελέσετε ένα αίτημα όταν βρίσκεστε στη διαμόρφωση εκτός δικτύου.Μπορείτε να απενεργοποιήσετε τη διαμόρφωση εκτός δικτύου επιλέγοντας το κουμπί Ρυθμίσεις.";
+
+"You cannot download maps while you are in the offline mode." = "Δεν μπορείτε να κατεβάσετε χάρτες ενώ βρισκόσαστε στη διαμόρφωση εκτός δικτύου.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Οι κατεβασμένοι χάρτες δεν είναι συμβατοί με αυτή την έκδοση του xGPS. Έχουν διαγραφεί.";
+
+"Your license number is invalid. Please verify and retry" = "Ο αριθμός αδείας σας δεν είναι έγκυρος. Παρακαλώ επιβεβαιώστε και ξαναδοκιμάστε";
+
+"Your license number is valid. You can now use the selected GPS." = " Ο αριθμός αδείας σας είναι έγκυρος. Μπορείτε να χρησιμοποιήσετε την επιλεγμένη μονάδα GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Οι αποθηκευμένες οδηγίες κατεύθυνσης δεν είναι συμβατές με αυτή την έκδοση του xGPS. Έχουν διαγραφεί.";
+

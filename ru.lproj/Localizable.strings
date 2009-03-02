@@ -1,10 +1,30 @@
 "%.1f MB" = "%.1f MB";
 
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d подключенных клиентов";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f км/ч";
+
+"%f m" = "%f м";
+
+"%f mph" = "%f миль/ч";
+
 "About xGPS" = "О программе xGPS";
+
+"Actions" = "Действия";
+
+"Add / Modify:" = "Добавить / Изменить:";
+
+"Address" = "Адрес";
 
 "Address book" = "Адресная книга";
 
-"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Произошла ошибка при загрузке выбранных карт. Некоторые части карты могут быть загружены неправильно.";
+"Altitude" = "Высота";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Произошла ошибка при загрузке выбранных карт. Некоторые части карты могут быть загружены неправильно.";
 
 "Are you sure you want to delete all the downloaded maps ?" = "Вы уверены, что хотите удалить все загруженные карты ?";
 
@@ -12,25 +32,47 @@
 
 "Are you sure you want to delete all the saved bookmarks ?" = "Вы уверены что хотите удалить все сохраненные закладки?";
 
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Вы уверены что хотите загрузить выбранную часть карты (%d tiles ~ %.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Вы уверены что хотите загрузить выбранную часть карты (%d tiles ~ %.1f MB) ?";
+
 "Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Вы уверены, что хотите загрузить выбранную часть карты (%d фрагментов ~ %d КB) ?";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Вы уверены, что хотите загрузить выбранную часть карты (%d фрагментов ~ %d МB) ?";
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "Вы уверены что хотите просчитать заново маршрут с текущей позиции?";
 
+"Available actions:" = "Доступные действия:";
+
+"Back" = "Назад";
+
 "Blue dot for position" = "Голубая точка для позиции";
 
 "Bookmarks" = "Закладки";
+
+"By Car" = "By Car";
 
 "Cancel" = "Отмена";
 
 "City name / Address" = "Город / Адрес";
 
+"Clear All" = "Очистить все";
+
 "Clear Driving directions" = "Очистить указания для вождения";
+
+"Clear Results" = "Очистить результаты";
 
 "Clear Search results" = "Очистить результаты поиска";
 
+"Close" = "Закрыть";
+
+"Compute" = "Рассчитать";
+
+"Computing your route..." = "Рассчитываю маршрут...";
+
 "Connected" = "Связанные";
+
+"Create a new route" = "Создать новый маршрут";
 
 "Current GPS Position" = "Текущая позиция GPS";
 
@@ -38,57 +80,99 @@
 
 "Delete all bookmarks" = "Удалить все закладки";
 
-"Delete downloaded maps" = "Удаление загруженных карт";
+"Delete downloaded maps" = "Удалить загруженные карты";
 
 "Delete GPX Log file" = "Удалить GPX Log файл";
+
+"Device address: %@" = "Адрес устройства: %@";
+
+"Device Info" = "Информация об устройстве";
 
 "Directions" = "Указания";
 
 "Directions Bookmarks" = "Закладки указаний";
 
+"Disable Beep" = "Запретить звук";
+
 "Disable GPS" = "Выключение GPS";
 
-"Disconnected" = "Выключен";
+"Disconnected" = "Отключен";
 
-"Dismiss" = "Отклонить";
+"Dismiss" = "Закрыть";
 
-"Distances and speed will be showed with the meter unit (km/h and meters)." = "Расстояния и скорость будут показаны в километрах (км/час и метры)";
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Расстояния и скорость будут показаны в метрах (км/час и метры)";
 
 "Distances and speed will be showed with the mile unit (mph and miles)." = "Расстояния и скорость будут показаны в милях (миль/час и мили)";
 
 "Download" = "Загрузить";
 
+"Download maps" = "Загрузить карты";
+
 "Downloaded maps size" = "Размер загруженной карты";
 
 "Downloading maps..." = "Загрузка карты ...";
 
-"Driving directions" = "Указания для движения";
+"Driving directions" = "Указания для вождения";
 
 "Enable GPS" = "Включить GPS";
 
+"Enable night mode" = "Включить ночной режим";
+
+"Enable timer" = "Включить таймер";
+
 "Error" = "Ошибка";
 
-"From / Departure" = "От/ Отъезд";
+"From / Departure" = "Откуда/ Выезд";
 
 "From:" = "Откуда:";
 
 "General" = "Общий";
 
+"GMaps Hybrid" = "GMaps Гибрид";
+
+"GMaps Satellite" = "GMaps Спутник";
+
+"GMaps Terrain" = "GMaps Ландшафт";
+
+"Go Home" = "Домой";
+
 "Good" = "Хорошый";
+
+"Google Maps" = "Карта Google";
+
+"Google Maps Hybrid" = "Гибридная Карта Google";
+
+"Google Maps Satellite" = "Спутниковая Карта Google";
+
+"Google Maps Terrain" = "Ландшафтная Карта Google";
 
 "GPS" = "GPS";
 
 "GPS Device" = "Устройство GPS";
 
-"GPS state" = "GPS состояние";
+"GPS Enabled" = "GPS Включен";
 
-"GPS to use" = "GPS для использования";
+"GPS Information" = "Информация GPS";
+
+"GPS state" = "Состояние GPS";
+
+"GPS to use" = "Использовать GPS";
+
+"GPS Tracking" = "GPS Трекинг";
+
+"GPX Log Files" = "GPX Файлы протоколирования";
 
 "GPX Logging" = "GPX Протоколирование";
+
+"Home Address" = "Домашний Адрес";
 
 "Hybrid" = "Гибрид";
 
 "Language" = "Язык";
+
+"Large font size" = "Большой размер шрифта";
+
+"Latitude" = "Широта";
 
 "License checking" = "Проверка лицензии";
 
@@ -98,15 +182,29 @@
 
 "License:" = "Лицензия:";
 
+"Location / Place" = "Местоположение";
+
 "Locations" = "Местоположения:";
 
 "Log file size" = "Записывать размер файла";
 
+"Longitude" = "Долгота";
+
 "Manage maps" = "Управление картами";
+
+"Manager" = "Менеджер";
 
 "Map" = "Карта";
 
 "Map auto-rotation" = "Авто-поворот карты";
+
+"Map Database size" = "Размер базы карты";
+
+"Map details" = "Детали карты";
+
+"Map name" = "Имя карты";
+
+"Map Type" = "Тип карты";
 
 "Maps" = "Карты";
 
@@ -120,23 +218,47 @@
 
 "Maps type" = "Тип карт";
 
+"My GPS Position" = "Моя позиция по GPS";
+
+"My GPS position is:" = "Моя позиция по GPS:";
+
 "N/A" = "N/A";
+
+"Name:" = "Имя:";
+
+"New directions database: " = "Новая база указаний:";
+
+"New maps database: " = "Новая база карт:";
+
+"New Route" = "Новый маршрут";
+
+"Night Mode" = "Ночной режим";
 
 "No" = "Нет";
 
 "No driving direction can be computed using your query." = "По этому запросу невозможно вычислить указания для вождения.";
 
-"No License" = "Номер Лицензии";
+"No Highway" = "Нет автострады";
+
+"No License" = "Нет Лицензии";
 
 "No location has been found according to your query." = "По вашему запросу местоположение не найдено.";
 
+"No name" = "Нет имени";
+
 "None" = "Нет";
+
+"Number of log files" = "Количество файлов протоколирования";
 
 "Offline mode" = "Автономный режим";
 
 "Pick a GPS" = "Выберите GPS";
 
 "Places / Cities" = "Места / Города";
+
+"Please enter a name for your map." = "Введите имя для вашей карты";
+
+"Please enter a name for your route." = "Введите имя для вашего маршрута";
 
 "Please select a greater map area by touching the screen with two fingers." = "Пожалуйста выберите большую область карты, касаясь экрана с двумя пальцами.";
 
@@ -146,6 +268,8 @@
 
 "Ready to receive..." = "Готов к загрузке...";
 
+"Ready to transfer..." = "Готов к передаче...";
+
 "Receive maps" = "Загрузка карт";
 
 "Receiving maps" = "Загрузка карт";
@@ -154,29 +278,67 @@
 
 "Reset GPS" = "Сброс GPS";
 
+"Return to main page" = "Возврат к главной странице";
+
+"Route computation" = "Расчет маршрута";
+
+"Routes Manager" = "Менеджер маршрутов";
+
 "Satellite" = "Спутник";
 
 "Save in Bookmarks" = "Сохранить в закладках";
 
+"Search" = "Поиск";
+
 "Search for:" = "Поиск:";
+
+"Search Places" = "Искать Адреса";
+
+"Send by Email" = "Выслать по Email";
+
+"Send by SMS" = "Выслать по SMS";
 
 "Settings" = "Установки";
 
+"Show device info" = "Показать инфо по устройству";
+
 "Show Speedometer" = "Показать спидометр";
+
+"Speed" = "Скорость";
+
+"Start time" = "Время начала";
+
+"Stop time" = "Время конца";
 
 "Take position from:" = "Взять позицию от:";
 
-"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Установка языка используется для локализации указаний для вождения, карт и результатов поиска места или города.";
+"Tap to edit" = "Коснитесь для редактирования";
 
-"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услуги поиска местоположения не включены на вашем устройстве. Используйте приложение \"Установки\" для их включения.";
+"The directions database has been sucessfully saved." = "База маршрутов была успешно сохранена.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Установка языка используется для локализации указаний для вождения, карт и результатов поиска места.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услуги поиска местоположения не включены на вашем устройстве. Используйте иконку \"Установки\" для их включения.";
+
+"The maps database has been sucessfully saved." = "База карт была успешно сохранена.";
 
 "The maps size will also grow when you browse a part of a map you have not already downloaded." = "Размер карт будет возрастать когда вы просматривайте карту, часть которой не была загружена.";
 
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Ночной режим позволяет сконцентрироваться на дороге. Яркость экрана будет минимальной, чтобы не отвлекать.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Уровень увеличения %d соответствует максимальному";
+
 "This feature will be implemented in a future version." = "Эта функция будет создана в будущей версии.";
 
-"To / Destination" = "К / Пункт назначения";
+"To / Destination" = "Куда / Пункт назначения";
 
 "To:" = "Куда:";
+
+"Total" = "Всего";
+
+"Total log files size" = "Полный размер файла протоколирования";
+
+"Transfer" = "Передача";
 
 "Unable to download a part of the map. Check your internet connection." = "Не возможно загрузить часть карты. Проверьте соединение с интернет.";
 
@@ -188,17 +350,33 @@
 
 "Unable to retrieve the required information from the server: %@" = "Не могу получить необходимую информацию от сервера: %@";
 
+"Unknown" = "Неизвестный";
+
 "Unknown error" = "Неизвестная ошибка";
 
-"Use Miles unit" = "Используйте мили";
+"Upload a new directions database" = "Загрузить новую базу указаний";
 
-"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Используйте опцию \"Сброс GPS\" для перезагрузки модуля GPS в случае если он показывает неправильную позицию или не отвечает вообще.";
+"Upload a new maps database" = "Загрузить новую базу карт";
+
+"Upload new directions database" = "Загрузить новую базу указаний";
+
+"Upload new maps database" = "Загрузить новую базу карт";
+
+"Use Miles unit" = "Использовать мили";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Используйте опцию Сброс GPS для перезагрузки модуля если он дает сильно неверную позицию или не отвечает вовсе.";
 
 "User Interface" = "Пользовательский интерфейс";
 
 "Verifying license number..." = "Проверка номера лицензии...";
 
 "Version" = "Версия";
+
+"Voice Instructions" = "Голосовые инструкции";
+
+"Voice instructions work only when the language in General settings is set to English." = "Голосовые инструкции работают только при установке языка Английский.";
+
+"Walking" = "Ходьба";
 
 "When activated, all the searched driving directions are saved in the bookmarks." = "Когда опция включена, все найденные указания для вождения сохраняются в закладках.";
 
@@ -208,9 +386,19 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Когда опция GPX logging включена, все перемещения записываются в файл в формате GPX. Этот файл может быть открыть на компьютере для отображения перемещений.";
 
-"Wrong\nWay" = "Неправильный\nПуть";
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Если включена опция ";
+
+"Wireless Transfer" = "Передача через Wi-Fi интерфейс";
+
+"Wrong Way hidden" = "Неправильный Путь скрыт";
+
+"Wrong\nWay" = "Неправильный Путь";
 
 "xGPS Error" = "xGPS Ошибка";
+
+"xGPS Version" = "Версия xGPS";
+
+"xGPS Web-based Management" = "Управление xGPS через Web";
 
 "Yes" = "Да";
 
@@ -218,11 +406,25 @@
 
 "You cannot download maps while you are in the offline mode." = "Вы не можете загрузить карты находясь в автономном режиме.";
 
+"You cannot have more than %d points in your route." = "Нельзя иметь больше чем %d точек на маршруте.";
+
+"You have to add at least one starting and one ending point in your route." = "На маршруте должна быть хотя бы одна точка начала маршрута и одна точка его конца.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Вам нужно указать домашний адрес в разделе \"Установки\" -> \"Домашний Адрес\" для продолжения.";
+
 "Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Ваши загруженные карты не совместимы с этой версией xGPS. Они были удалены.";
+
+"Your home address" = "Домашний Адрес";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Домашний адрес используется для расчета указаний для вождения когда вы нажимаете кнопку \"Домашний Адрес\"";
 
 "Your license number is invalid. Please verify and retry" = "Ваша лицензия недействительна. Пожалуйста проверьте и повторите.";
 
 "Your license number is valid. You can now use the selected GPS." = "Ваша лицензия правильна. Вы можете теперь использовать выбранный GPS.";
 
 "Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Сохраненные указания для вождения не совместимы с этой версией программы GPX. Они были удалены.";
+
+"Zoom level to download" = "Уровень увеличения для загрузки";
+
+"Zoom level: %d" = "Уровень увеличения: %d";
 

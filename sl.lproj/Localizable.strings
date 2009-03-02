@@ -1,0 +1,252 @@
+"%.1f MB" = "%.1f MB";
+
+"%d connected clients" = "%d povezanih klientov";
+
+"About xGPS" = "Več o xGPS";
+
+"Address book" = "Imenik";
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Prišlo je do napake med nalaganjem zemljevidov. Nekateri deli so lahko okrnjeni.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Želite izbrisati vse prenesene zemljevide?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Želite izbrisati vse loge?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Želite izbrisati vse shranjene zaznamke?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Želite prenesti izbrano območje (%1$d delov ~ %2$d KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Želite prenesti izbrano območje (%1$d delov ~ %2$d MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Ali želite ponovno izračunati pot od trenutne lokacije?";
+
+"Available actions:" = "Možna dejanja:";
+
+"Blue dot for position" = "Modra pika za pozicijo";
+
+"Bookmarks" = "Zaznamki";
+
+"Cancel" = "Prekliči";
+
+"City name / Address" = "Mesto / Naslov";
+
+"Clear Driving directions" = "Počisti vodenje";
+
+"Clear Search results" = "Počisti iskalne nize";
+
+"Connected" = "Povezan";
+
+"Current GPS Position" = "Trenutna pozicija GPS";
+
+"Current Position" = "Trenutna pozicija";
+
+"Delete all bookmarks" = "Izbriši vse zaznamke";
+
+"Delete downloaded maps" = "Izbriši prenesene zemljevide";
+
+"Delete GPX Log file" = "Izbriši GPX loge";
+
+"Device Info" = "Več o napravi";
+
+"Directions" = "Poti";
+
+"Directions Bookmarks" = "Zaznamki poti";
+
+"Disable GPS" = "Onemogoči GPS";
+
+"Disconnected" = "Nepovezan";
+
+"Dismiss" = "Zapri";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Prikaz razdalje in hitrosti v km/h in metrih.";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Prikaz razdalje in hitrosti v mph in milijah.";
+
+"Download" = "Prenesi";
+
+"Downloaded maps size" = "Velikost prenesenih kart";
+
+"Downloading maps..." = "Prenašam zemljevide...";
+
+"Driving directions" = "Vodenje";
+
+"Enable GPS" = "Omogoči GPS";
+
+"Error" = "Napaka";
+
+"From / Departure" = "Od / Odhod";
+
+"From:" = "Od:";
+
+"General" = "Splošno";
+
+"Good" = "Dober";
+
+"GPS" = "GPS";
+
+"GPS state" = "Stanje GPS";
+
+"GPS to use" = "Uporabi GPS";
+
+"GPX Logging" = "GPX Logiranje";
+
+"Hybrid" = "Hibrid";
+
+"Language" = "Jezik";
+
+"License checking" = "Preverjam licenco";
+
+"License number" = "Številka licence";
+
+"License number for %@" = "Licenčna številka za %@";
+
+"License:" = "Licenca:";
+
+"Locations" = "Lokacije";
+
+"Log file size" = "Velikost logov";
+
+"Manage maps" = "Uredi zemljevide";
+
+"Map" = "Zemljevid";
+
+"Map auto-rotation" = "Samodejna rotacija";
+
+"Map Database size" = "Velikost zbirke kart";
+
+"Maps" = "Zemljevidi";
+
+"Maps data" = "Zbirka kart";
+
+"Maps Download" = "Prenos kart";
+
+"Maps downloaded successfully !" = "Zemljevidi uspešno prenešeni!";
+
+"Maps Manager" = "Upravitelj kart";
+
+"Maps type" = "Tip karte";
+
+"N/A" = "N/A";
+
+"New maps database: " = "Nova baza kart: ";
+
+"No" = "Ne";
+
+"No driving direction can be computed using your query." = "Ne morem izračunati poti za vaš vnos.";
+
+"No License" = "Ni licence";
+
+"No location has been found according to your query." = "Nisem našel iskane lokacije.";
+
+"None" = "Brez";
+
+"Offline mode" = "Brez povezave";
+
+"Pick a GPS" = "Izberi GPS";
+
+"Places / Cities" = "Kraji / Mesta";
+
+"Please select a greater map area by touching the screen with two fingers." = "Prosim izberite večje območje z dvoprstnim dotikom.";
+
+"Poor" = "Slab";
+
+"Prevent Sleep Mode" = "Vedno osvetljen";
+
+"Ready to transfer..." = "Pripravljen na prenos...";
+
+"Receive maps" = "Sprejem zemljevidov";
+
+"Recompute itinerary" = "Preračunaj pot";
+
+"Reset GPS" = "Resetiraj GPS";
+
+"Return to main page" = "Vrni se na osnovno stran";
+
+"Satellite" = "Satelit";
+
+"Save in Bookmarks" = "Shrani kot zaznamek";
+
+"Search for:" = "Išči:";
+
+"Settings" = "Nastavitve";
+
+"Show device info" = "Prikaži več o napravi";
+
+"Show Speedometer" = "Prikaži hitrost";
+
+"Take position from:" = "Poberi lokacijo iz:";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Jezikovne nastavitve poslovenijo vodenje, zemljevide ter iskalne rezultate.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Podatki o lokaciji so onemogočeni v nastavitvah vaše naprave. Prosimo, spremenite v nastavitvah.";
+
+"The maps database has been sucessfully saved." = "Baza zemljevidov je bila uspešno shranjena.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Velikost zemljevidov se lahko poveča, če preglejujete dele, ki niso na pomnilniku.";
+
+"This feature will be implemented in a future version." = "Ta funkcija bo implementirana v prihodnjih verzijah.";
+
+"To / Destination" = "Do / Prihod";
+
+"To:" = "Do:";
+
+"Transfer" = "Prenos";
+
+"Unable to download a part of the map. Check your internet connection." = "Ni mogoče prenesti dela zemljevidov. Preverite povezavo.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Ni mogoče določiti trenutne lokacije. Trenutno GPS ne posreduje koordinat.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Ni mogoče odpreti serijskega porta. Preverite, da noben drug program ne uporablja GPS.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Ni mogoče prejeti navodil za vodenje s strežnika: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Ni mogoče dobiti potrebnih informacij s strežnika: %@";
+
+"Unknown error" = "Neznana napaka";
+
+"Upload a new maps database" = "Naloži novo bazo kart";
+
+"Upload new maps database" = "Naloži novo bazo kart";
+
+"Use Miles unit" = "Uporabi milije";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Uporabi možnost resetiranja GPS, kadar daje napačno pozicijo ali pa se ne odziva.";
+
+"User Interface" = "Uporabniški vmesnik";
+
+"Verifying license number..." = "Preverjam številko licence...";
+
+"Version" = "Verzija";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Kadar izbrano, vse poti shranjene med zaznamke.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Kadar izbrano, onemogoči stanje pripravljenosti naprave, zaslon vedno osvetljen.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Kadar izbrano, se pot preračuna, če ste zapeljali v napačno smer.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Kadar GPX logiranje izbrano, se vsi položaji shranjujejo v datoteko GPX, pot se lahko kasneje rekonstruira na računalniku.";
+
+"Wireless Transfer" = "Brezžičen prenos";
+
+"Wrong\nWay" = "Napačnansmer";
+
+"xGPS Error" = "xGPS Napaka";
+
+"xGPS Version" = "xGPS Verzija";
+
+"xGPS Web-based Management" = "xGPS Spletno urejanje";
+
+"Yes" = "Da";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Iskanje ni mogoče v načinu brez povezave. Povezavo lahko vključite v nastavitvah.";
+
+"You cannot download maps while you are in the offline mode." = "V načinu brez povezave ni mogoče prenašanje zemljevidov.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Prenesene karte niso združljive s trenutno verzijo xGPS, zato bodo izbrisane.";
+
+"Your license number is invalid. Please verify and retry" = "Vaša licenca ni veljavna. Prosim poskusite ponovno";
+
+"Your license number is valid. You can now use the selected GPS." = "Vaša licenca je veljavna. Lahko uporabljate izbrani GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Vaše shranjene poti niso združljive s trenutno verzijo xGPS, zato bodo izbrisane.";
+

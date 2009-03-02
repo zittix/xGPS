@@ -1,0 +1,400 @@
+"%.1f MB" = "%.1f MB";
+
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d připojených klientů";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
+"About xGPS" = "O programu xGPS";
+
+"Actions" = "Akce";
+
+"Add / Modify:" = "Přidat / Upravit:";
+
+"Address" = "Adresa";
+
+"Address book" = "Adresář";
+
+"Altitude" = "Nadmořská výška";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Nastala chyba při stahování vybraných map. Některé části map můžou být staženy špatně.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Chcete smazat všechny stažené mapy ?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Chcete smazat všechny nahrané trasy ?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Chcete smazat všechny uložené záložky ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Chcete stáhnout označenou část mapy (%1$d pokrytí ~ %2$.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Chcete stáhnout označenou část mapy (%1$d pokrytí ~ %2$.1f MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Chcete přepočítat trasu od současné pozice ?";
+
+"Available actions:" = "Možné akce:";
+
+"Back" = "Zpět";
+
+"Blue dot for position" = "Modrý bod na pozici";
+
+"Bookmarks" = "Záložky";
+
+"By Car" = "Autem";
+
+"Cancel" = "Zrušit";
+
+"City name / Address" = "Název města / Adresa";
+
+"Clear All" = "Smazat vše";
+
+"Clear Driving directions" = "Smazat pokyny pro navigování";
+
+"Clear Results" = "Smazat výsledky";
+
+"Clear Search results" = "Smazat pokyny pro navigaci";
+
+"Close" = "Zavřít";
+
+"Compute" = "Vypočítat";
+
+"Computing your route..." = "Počítání trasy...";
+
+"Connected" = "Připojeno";
+
+"Create a new route" = "Vytvořit novou trasu";
+
+"Current GPS Position" = "Současná GPS Pozice";
+
+"Current Position" = "Současná pozice";
+
+"Delete all bookmarks" = "Smazat všechny záložky";
+
+"Delete downloaded maps" = "Smazat stažené mapy";
+
+"Delete GPX Log file" = "Smazat GPX Log";
+
+"Device address: %@" = "Adresa zařízení: %@";
+
+"Device Info" = "Informace o zařízení";
+
+"Directions" = "Pokyny";
+
+"Directions Bookmarks" = "Záložky pokynů";
+
+"Disable Beep" = "Vypnout zvukové znamení";
+
+"Disconnected" = "Odpojeno";
+
+"Dismiss" = "Odejít";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Vzdálenosti a rychlost budou zobrazeny v metrických jednotkách (km/h a metry).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Vzdálenosti a rychlost budou zobrazeny v mílích (mph a míle).";
+
+"Download" = "Stáhnout";
+
+"Download maps" = "Stáhnout mapy";
+
+"Downloaded maps size" = "Velikost stažených map";
+
+"Downloading maps..." = "Stahování map...";
+
+"Driving Directions" = "Pokyny pro navigování";
+
+"Enable night mode" = "Zapnout noční režim";
+
+"Enable timer" = "Zapnout čas";
+
+"Error" = "Chyba";
+
+"From / Departure" = "Z / Start";
+
+"From:" = "Z:";
+
+"General" = "Všeobecné";
+
+"GMaps Hybrid" = "GMapy Hybrid";
+
+"GMaps Satellite" = "GMapy Satelitní";
+
+"GMaps Terrain" = "GMapy Terén";
+
+"Go Home" = "Domů";
+
+"Good" = "Dobrý";
+
+"Google Maps" = "Google Maps";
+
+"Google Maps Hybrid" = "Google Mapy Hybrid";
+
+"Google Maps Satellite" = "Google Mapy Satelitní";
+
+"Google Maps Terrain" = "Google Mapy Terén";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "Zapnout GPS";
+
+"GPS Information" = "GPS Informace";
+
+"GPS state" = "GPS stav";
+
+"GPS to use" = "Použít GPS";
+
+"GPS Tracking" = "GPS Sledování";
+
+"GPX Log Files" = "GPX Log Soubory";
+
+"GPX Logging" = "GPX Logování";
+
+"Home Address" = "Domácí Adresa";
+
+"Language" = "Jazyk";
+
+"Large font size" = "Velké písmo";
+
+"Latitude" = "Zeměpisná šířka";
+
+"License checking" = "Kontrola Licence";
+
+"License number" = "Licenční číslo";
+
+"License number for %@" = "Licenční číslo pro %@";
+
+"License:" = "Licence:";
+
+"Location / Place" = "Umístění / Místo";
+
+"Locations" = "Lokality";
+
+"Longitude" = "Zeměpisná délka";
+
+"Manager" = "Manažer";
+
+"Map" = "Mapy";
+
+"Map auto-rotation" = "Mapy auto-rotace";
+
+"Map Database size" = "Velikost databáze map";
+
+"Map details" = "Detaily map";
+
+"Map name" = "Název mapy";
+
+"Map Type" = "Typ mapy";
+
+"Maps" = "Mapy";
+
+"Maps data" = "Data mapy";
+
+"Maps Download" = "Stažení map";
+
+"Maps downloaded successfully !" = "Stažení map v pořádku !";
+
+"Maps Manager" = "Mapový manažer";
+
+"Maps type" = "Typy map";
+
+"My GPS Position" = "Moje GPS Pozice";
+
+"My GPS position is:" = "Moje GPS pozice je:";
+
+"N/A" = "Nedostupné";
+
+"Name:" = "Jméno:";
+
+"New directions database: " = "Nová databáze pokynů: ";
+
+"New maps database: " = "Nová mapová databáze: ";
+
+"New Route" = "Nová trasa";
+
+"Night Mode" = "Noční mód";
+
+"No" = "Ne";
+
+"No driving direction can be computed using your query." = "Nelze vypočítat žádné trasy podle Vašeho dotazu.";
+
+"No Highway" = "Bez dálnic";
+
+"No License" = "Bez licence";
+
+"No location has been found according to your query." = "Žádné umístění neodpovídá Vašemu dotazu.";
+
+"No name" = "Bez jména";
+
+"None" = "Žádný";
+
+"Number of log files" = "Množství log souborů";
+
+"Offline mode" = "Offline mód";
+
+"Pick a GPS" = "Vyberte GPS";
+
+"Places / Cities" = "Místa / Města";
+
+"Please enter a name for your map." = "Pojmenujte mapu.";
+
+"Please enter a name for your route." = "Pojmenujte trasu.";
+
+"Please select a greater map area by touching the screen with two fingers." = "Prosím vyberte větší část mapy na displeji výběrem pomocí dvou prstů.";
+
+"Poor" = "Slabý";
+
+"Prevent Sleep Mode" = "Zabránit Uspání";
+
+"Ready to transfer..." = "Připravený k přenosu...";
+
+"Recompute itinerary" = "Přepočítat trasu";
+
+"Reset GPS" = "Reset GPS";
+
+"Return to main page" = "Návrat na hlavní stránku";
+
+"Route computation" = "Výpočet trasy";
+
+"Routes Manager" = "Manažer tras";
+
+"Save in Bookmarks" = "Uložit do záložek";
+
+"Search" = "Najít";
+
+"Search Places" = "Najít místo";
+
+"Send by Email" = "Odeslat Emailem";
+
+"Send by SMS" = "Odeslat v SMS";
+
+"Settings" = "Nastavení";
+
+"Show device info" = "Zobrazit informace o zařízení";
+
+"Show Speedometer" = "Zapnout Tachometr";
+
+"Speed" = "Rychlost";
+
+"Start time" = "Čas startu";
+
+"Stop time" = "Konečný čas";
+
+"Take position from:" = "Vezměte pozici z:";
+
+"Tap to edit" = "Klepněte pro editaci";
+
+"The directions database has been sucessfully saved." = "Databáze byla úspěšně uložena.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Není použito žádné nastavení jazyka pro lokalizaci instrukcí pro navigování, mapy a výsledky vyhledávání místa/města.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Lokalizační služby nejsou povoleny na Vašem zařízení. Použijte nastavení aplikace na Vaší Home obrazovce pro vyřešení tohoto problému.";
+
+"The maps database has been sucessfully saved." = "Mapová databáze byla úspěšně uložena.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Velikost map bude narůstat i s prohlížením části mapy která ješte nebyla stažena.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Noční režim vám umožní soustředit se na cestu, nebudete rušeni silným podsvícením, jas a kontrast barev bude snížen na minimum.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Úroveň zvětšení %d odpovídá nejvíce detailnímu zvětšení";
+
+"To / Destination" = "Kam / Cíl";
+
+"To:" = "Kam:";
+
+"Total" = "Celkem";
+
+"Total log files size" = "Celková velikost log souborů";
+
+"Transfer" = "Přenos";
+
+"Unable to download a part of the map. Check your internet connection." = "Nejde stáhnout část map, zkontrolujte připojení k internetu.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Není možné zobrazit GPS pozici, GPS nepřijímá žádná data";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Není možné otevřít seriový port. Zkontrolujte ostatní GPS programy jestli nepracují na pozadí.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Není možné přijmout informace o dalším směru jízdy ze serveru: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Není možno přijmout znovu požadované informace ze serveru: %@";
+
+"Unknown" = "Neznámý";
+
+"Unknown error" = "Neznámá chyba";
+
+"Upload a new directions database" = "Odeslání nové naigační databáze";
+
+"Upload a new maps database" = "Odeslání nové mapové databáze";
+
+"Upload new directions database" = "Odeslání nové navigační databáze";
+
+"Upload new maps database" = "Odeslání nové mapové databáze";
+
+"Use Miles unit" = "Použít míle";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Použijte Reset GPS pozice pro restartování GPS když dává chybné informace nebo přestane komunikovat.";
+
+"User Interface" = "Uživatelské rozhraní";
+
+"Verifying license number..." = "Kontrola licenčního čísla...";
+
+"Version" = "Verze";
+
+"Voice Instructions" = "Hlasové instrukce";
+
+"Voice instructions work only when the language in General settings is set to English." = "Hlasové instrukce jdou pouze při nastavení jazyka na English.";
+
+"Walking" = "Chůze";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Když je zapnuto, všechny vyhledané pokyny pro navigování jsou ukládány do Záložek.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Když je zapnuto, zabraňuje režimu spánku, takže je obrazovka stále zapnuta.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Když je zapnuto, instrukce pro navigování jsou přepočítány při sjetí z trasy.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Když je GPX logování zapnuté, všechny Vaše pohyby jsou nahrávány do souboru v GPX formátu. Soubor potom může být použit na počítačí pro vizualizaci trasy. Log soubor může být stažený přes webové rozhraní pomocí bezdrátového přenosu Wi-Fi.";
+
+"Wireless Transfer" = "Bezdrátový přenos";
+
+"Wrong Way hidden" = "Špatná cesta skrytá";
+
+"Wrong\nWay" = "ŠpatnánCesta";
+
+"xGPS Error" = "xGPS Chyba";
+
+"xGPS Version" = "xGPS Verze";
+
+"xGPS Web-based Management" = "xGPS Internetový Management";
+
+"Yes" = "Ano";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Nemůžete vyhledávat pokud jste v offline módu. Offline mód můžete vypnout v Nastavení.";
+
+"You cannot download maps while you are in the offline mode." = "Nemůžete stahovat mapy pokud jste v offline módu.";
+
+"You cannot have more than %d points in your route." = "Nemůžete mít víc než %d bodů na Vaší trase.";
+
+"You have to add at least one starting and one ending point in your route." = "Musíte přidat alespoň jeden počáteční a jeden konečný bod Vaší trasy.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Musíte nastavit Vaši domácí adresu -> Pokyny pro navigování -> Domácí adresa, před použitím této položky .";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Vami stáhnuté mapy nejsou kompatibilní s touto verzí xGPS a byli smazány.";
+
+"Your home address" = "Vaše domácí adresa";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Vaše domácí adresa bude použita vždy, když stisknete tlačítko domů.";
+
+"Your license number is invalid. Please verify and retry" = "Vaše licenční číslo je špatné. Prosím zkontrolujte ho a zkuste znovu";
+
+"Your license number is valid. You can now use the selected GPS." = "Vaše licenční číslo je správné. Teď můžete používat zvolenou GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Vámi uložené pokyny pro navigování nejsou kompatibilní s touto verzí xGPS a byli smazány.";
+
+"Zoom level to download" = "Stáhnout úroveň zvětšení";
+
+"Zoom level: %d" = "Úroveň zvětšení: %d";
+

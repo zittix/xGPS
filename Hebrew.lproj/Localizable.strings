@@ -1,10 +1,30 @@
 "%.1f MB" = "%.1f MB";
 
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d מחוברים";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f קמ''ש";
+
+"%f m" = "%f מ'";
+
+"%f mph" = "%f מייל לשעה";
+
 "About xGPS" = "אודות xGPS";
+
+"Actions" = "פעולות";
+
+"Add / Modify:" = "הוסף / שנה:";
+
+"Address" = "כתובות";
 
 "Address book" = "אנשי קשר";
 
-"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "ארעה שגיאה בזמן הורדת המפות המבוקשות. עשוי להיות כי חלקים של המפות לא הורדו בצורה תקינה.";
+"Altitude" = "גובה";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "ארעה שגיאה בזמן הורדת המפות המבוקשות. עשוי להיות כי חלקים של המפות לא הורדו בצורה תקינה.";
 
 "Are you sure you want to delete all the downloaded maps ?" = "האם אתה בטוח שברצונך למחוק את המפות שהורדו?";
 
@@ -12,25 +32,47 @@
 
 "Are you sure you want to delete all the saved bookmarks ?" = "האם אתה בטוח שברצונך למחוק את כל המועדפים השמורים?";
 
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "האם אתה בטוחשברצונך להוריד את שטח המפה שנבחר (%d קבצים ~ %.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "האם אתה בטוחשברצונך להוריד את שטח המפה שנבחר (%d קבצים ~ %.1f KB) ?";
+
 "Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "האם אתה בטוח שברצונך להוריד את אזור המפה הנבחר (%d קבצים ~ %d KB) ?";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "האם אתה בטוח שברצונך להוריד את אזור המפה הנבחר (%d קבצים ~ %d MB) ?";
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "האם אתה בטוח שברצונך לחשב מחדש את המסלול מהמיקום הנוכחי?";
 
+"Available actions:" = "פעולות אפשריות:";
+
+"Back" = "אחורה";
+
 "Blue dot for position" = "נקודה כחולה עבור המיקום";
 
 "Bookmarks" = "מועדפים";
+
+"By Car" = "ברכב";
 
 "Cancel" = "ביטול";
 
 "City name / Address" = "שם עיר / כתובת";
 
+"Clear All" = "נקה הכל";
+
 "Clear Driving directions" = "נקה הכוונת נהיגה";
+
+"Clear Results" = "נקה תוצאות";
 
 "Clear Search results" = "נקה תוצאות חיפוש";
 
+"Close" = "סגור";
+
+"Compute" = "חשב";
+
+"Computing your route..." = "מחשב את המסלול שלך...";
+
 "Connected" = "מחובר";
+
+"Create a new route" = "צור מסלול חדש";
 
 "Current GPS Position" = "מיקום GPS נוכחי";
 
@@ -42,9 +84,15 @@
 
 "Delete GPX Log file" = "בטל קובץ תיעוד של GPX";
 
+"Device address: %@" = "כתובות המכשיר: %@";
+
+"Device Info" = "מידע מכשיר";
+
 "Directions" = "הכוונה";
 
 "Directions Bookmarks" = "מועדפי הכוונת נהיגה";
+
+"Disable Beep" = "נטרל ביפ";
 
 "Disable GPS" = "נטרול GPS";
 
@@ -58,6 +106,8 @@
 
 "Download" = "הורדה";
 
+"Download maps" = "הורד מפות";
+
 "Downloaded maps size" = "נפח מפות שהורדו";
 
 "Downloading maps..." = "מוריד מפות...";
@@ -65,6 +115,10 @@
 "Driving directions" = "הכוונת נהיגה";
 
 "Enable GPS" = "הפעל GPS";
+
+"Enable night mode" = "הפעל מצב לילה";
+
+"Enable timer" = "אפשר טיימר";
 
 "Error" = "שגיאה";
 
@@ -74,21 +128,51 @@
 
 "General" = "כללי";
 
+"GMaps Hybrid" = "משולב GMaps";
+
+"GMaps Satellite" = "לווין GMaps";
+
+"GMaps Terrain" = "שטח GMaps";
+
+"Go Home" = "הביתה";
+
 "Good" = "תקין";
+
+"Google Maps" = "מפות גוגל";
+
+"Google Maps Hybrid" = "מפות גוגל משולב";
+
+"Google Maps Satellite" = "מפות גוגל לווין";
+
+"Google Maps Terrain" = "מפות גוגל שטח";
 
 "GPS" = "GPS";
 
 "GPS Device" = "התקן GPS";
 
+"GPS Enabled" = "GPS מופעל";
+
+"GPS Information" = "GPS מידע";
+
 "GPS state" = "מצב GPS";
 
 "GPS to use" = "GPS בשימוש";
 
+"GPS Tracking" = "GPS מעקב";
+
+"GPX Log Files" = "GPX קבצי לוג";
+
 "GPX Logging" = "תיעוד GPX";
+
+"Home Address" = "כתובת בית";
 
 "Hybrid" = "משולב";
 
 "Language" = "שפה";
+
+"Large font size" = "פונט גדול";
+
+"Latitude" = "קו-רוחב";
 
 "License checking" = "בדיקת רישיון";
 
@@ -98,15 +182,29 @@
 
 "License:" = "רישיון:";
 
+"Location / Place" = "מיקום / מקום";
+
 "Locations" = "מיקומים";
 
 "Log file size" = "גודל קובץ תיעוד";
 
+"Longitude" = "קו-אורך";
+
 "Manage maps" = "נהל מפות";
+
+"Manager" = "מנהל";
 
 "Map" = "מפה";
 
 "Map auto-rotation" = "סיבוב מפה אוטומטי";
+
+"Map Database size" = "גודל מסד נתוני מפה";
+
+"Map details" = "פרטי מפה";
+
+"Map name" = "שם מפה";
+
+"Map Type" = "סוג מפה";
 
 "Maps" = "מפות";
 
@@ -120,23 +218,47 @@
 
 "Maps type" = "סוג מפות";
 
+"My GPS Position" = "מיקום ה GPS שלי";
+
+"My GPS position is:" = "מיקום ה GPS שלי:";
+
 "N/A" = "לא זמין";
+
+"Name:" = "שם:";
+
+"New directions database: " = "מסד נתוני הכוונה: ";
+
+"New maps database: " = "מסד נתוני מפות: ";
+
+"New Route" = "מסלול חדש";
+
+"Night Mode" = "מצב לילה";
 
 "No" = "לא";
 
 "No driving direction can be computed using your query." = "לא ניתן לחשב הכוונת נהיגה לפי החיפוש שלך.";
 
+"No Highway" = "ללא כביש ראשי";
+
 "No License" = "אין רישיון";
 
 "No location has been found according to your query." = "לא נמצא מיקום התואם את המידע שהוקלד.";
 
+"No name" = "ללא שם";
+
 "None" = "אין";
+
+"Number of log files" = "מספר של קבצי לוג";
 
 "Offline mode" = "מצב לא מחובר";
 
 "Pick a GPS" = "בחר GPS";
 
 "Places / Cities" = "מקומות / ערים";
+
+"Please enter a name for your map." = "אנא הזן שם מפה.";
+
+"Please enter a name for your route." = "אנא הזן את שם המסלול.";
 
 "Please select a greater map area by touching the screen with two fingers." = "אנא בחר אזור מפה גדול יותר בעזרת מגע של שתי אצבעות במסך.";
 
@@ -146,6 +268,8 @@
 
 "Ready to receive..." = "מוכן לקבל...";
 
+"Ready to transfer..." = "מוכן להעברה...";
+
 "Receive maps" = "קבל מפות";
 
 "Receiving maps" = "מקבל מפות";
@@ -154,29 +278,67 @@
 
 "Reset GPS" = "איפוס GPS";
 
+"Return to main page" = "חזור לעמוד הראשי";
+
+"Route computation" = "חישוב מסלול";
+
+"Routes Manager" = "מנהל מסלולים";
+
 "Satellite" = "לווין";
 
 "Save in Bookmarks" = "שמור במועדפים";
 
+"Search" = "חיפוש";
+
 "Search for:" = "חיפוש:";
+
+"Search Places" = "חפש מקום";
+
+"Send by Email" = "שלח באמצעות דוא''ל";
+
+"Send by SMS" = "שלח באמצעות SMS";
 
 "Settings" = "הגדרות";
 
+"Show device info" = "הצג נתוני מכשיר";
+
 "Show Speedometer" = "הראה מד מהירות";
 
+"Speed" = "מהירות";
+
+"Start time" = "זמן התחלה";
+
+"Stop time" = "זמן סיום";
+
 "Take position from:" = "קח מיקום החל:";
+
+"Tap to edit" = "הקש לעריכה";
+
+"The directions database has been sucessfully saved." = "מסד נתוני ההכוונה נשמר בהצלחה.";
 
 "The language setting is used to localize the driving directions, the maps and the place/city search results." = "הגדרות השפה משמשות להתאמה מקומית של הכוונת הנהיגה, המפה ומיקוםעיר של תוצאות החיפוש.";
 
 "The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "שרותי המיקום אינם פעילים במכשיר שלך. אנא השתמש בהגדרות אשר נמצאות במסך הראשי על מנת לשנות מצב זה.";
 
+"The maps database has been sucessfully saved." = "מסד נתוני מפות נשמר בהצלחה.";
+
 "The maps size will also grow when you browse a part of a map you have not already downloaded." = "נפח המפה יגדל כאשר תגלוש לחלק במפה שלא הורדת.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "מצב לילה מאפשר לך להתרכז בכביש ולא להיות מוטרד מבהירות המסך של האייפון. הצבעים יהיו כהים ובהירות המסך תוגדר למינימום.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "רמת זום %d הינה רמת הזום המפורטת ביותר";
 
 "This feature will be implemented in a future version." = "אפשרות זו תיושם בגרסה עתידית.";
 
 "To / Destination" = "סיום  יעד";
 
 "To:" = "סיום:";
+
+"Total" = "סה''כ";
+
+"Total log files size" = "סה''כ גודל קבצי לוג";
+
+"Transfer" = "העבר";
 
 "Unable to download a part of the map. Check your internet connection." = "לא ניתן להוריד חלק מהפה. אנא בדוק את החיבור לרשת.";
 
@@ -188,7 +350,17 @@
 
 "Unable to retrieve the required information from the server: %@" = "לא ניתן לאחזר את המידע הנדרש מהשרת: %@";
 
+"Unknown" = "לא ידוע";
+
 "Unknown error" = "שגיאה לא ידועה";
+
+"Upload a new directions database" = "העלה בסיס נתוני הכוונה חדש";
+
+"Upload a new maps database" = "העלה בסיס נתוני מפות חדש";
+
+"Upload new directions database" = "העלה בסיס נתוני הכוונה חדש";
+
+"Upload new maps database" = "העלה בסיס נתוני מפות חדש";
 
 "Use Miles unit" = "השתמש במיילים";
 
@@ -200,6 +372,12 @@
 
 "Version" = "גרסה";
 
+"Voice Instructions" = "הכוונה קולית";
+
+"Voice instructions work only when the language in General settings is set to English." = "הכוונת נהיגה קולית תעבוד אך ורק כאשר בהגדרות הכלליות השפה מוגדרת לאנגלית.";
+
+"Walking" = "הליכה";
+
 "When activated, all the searched driving directions are saved in the bookmarks." = "כאשר מופעל, כל הכוונת הנהיגה שנמצאות נשמרות במועדפים.";
 
 "When activated, it disables the sleep mode such that the screen is always on." = "כאשר מופעל, ינוטרל מצב שינה כך שהמסך יהיה פעיל תמיד.";
@@ -208,9 +386,19 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "כאשר תיעוד GPX מופעל, כל התנועות שלך נשמרות לקובץ הפורמט GPX. הקובץ יכול לשמש להצגה ויזואלית של המסלול.";
 
-"Wrong\nWay" = "שגויאין\nדרך";
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode.";
+
+"Wireless Transfer" = "העברה אלחוטית";
+
+"Wrong Way hidden" = "כיוון שגוי";
+
+"Wrong\nWay" = "שגויאיןnדרך";
 
 "xGPS Error" = "שגיאת xGPS";
+
+"xGPS Version" = "xGPS גרסת";
+
+"xGPS Web-based Management" = "xGPS ניהול מבוסס רשת";
 
 "Yes" = "כן";
 
@@ -218,11 +406,25 @@
 
 "You cannot download maps while you are in the offline mode." = "לא ניתן להוריד מפות בזמן שאתה במצב מנותק.";
 
+"You cannot have more than %d points in your route." = "You cannot have more than %d points in your route.";
+
+"You have to add at least one starting and one ending point in your route." = "You have to add at least one starting and one ending point in your route.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature.";
+
 "Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "המפות שהורדת בעבר אינן תואמות לגרסת xGPS זו. המפות הללו בוטלו.";
+
+"Your home address" = "Your home address";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Your home address will be used to get driving directions to your home when the Home button is pressed.";
 
 "Your license number is invalid. Please verify and retry" = "מספר הרישיון אינו תקין. אנא וודא ונסה שנית.";
 
 "Your license number is valid. You can now use the selected GPS." = "מספר הרשיון שלך תקין. אתה יכול כעת להשתמש ב GPS הנבחר.";
 
 "Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "הכוונות הנהיגה השמורות שלך אינן תואמות עם גרסה זו של xGPS. הן נמחקו.";
+
+"Zoom level to download" = "Zoom level to download";
+
+"Zoom level: %d" = "Zoom level: %d";
 

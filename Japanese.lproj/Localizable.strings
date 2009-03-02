@@ -1,0 +1,424 @@
+"%.1f MB" = "%.1f MB";
+
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "クライアント接続数:%d";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
+"About xGPS" = "xGPSについて";
+
+"Actions" = "アクション";
+
+"Add / Modify:" = "追加 / 編集:";
+
+"Address" = "住所";
+
+"Address book" = "連絡先";
+
+"Altitude" = "高度";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "マップをダウンロード中にエラーが起きました。いくつかのマップは正しくダウンロードできていないかも知れません。";
+
+"Are you sure you want to delete all the downloaded maps ?" = "ダウンロードしたマップをすべて削除してもよろしいですか?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "記録したトラックをすべて削除してもよろしいですか?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "保存したブックマークをすべて削除してもよろしいですか?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "選択したエリアのマップをダウンロードしますか (%1$d 面で %2$.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "選択したエリアのマップをダウンロードしますか(%1$d 面で %2$.1f MB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "選択した領域内の地図をダウンロードしますか？ (%1$d 面で %2$d KB)";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "選択した領域内の地図をダウンロードしますか？ (%1$d 面で %2$d MB)";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "現在位置からルートを再検索しますか?";
+
+"Available actions:" = "可能なアクション:";
+
+"Back" = "戻る";
+
+"Blue dot for position" = "青いマークで位置表示";
+
+"Bookmarks" = "ブックマーク";
+
+"By Car" = "車を利�";
+
+"Cancel" = "キャンセル";
+
+"City name / Address" = "市名 / 住所";
+
+"Clear All" = "すべて消去";
+
+"Clear Driving directions" = "ナビゲーションを消去";
+
+"Clear Results" = "結果を消去";
+
+"Clear Search results" = "検索結果を消去";
+
+"Close" = "閉じる";
+
+"Compute" = "検索";
+
+"Computing your route..." = "ルート検索中...";
+
+"Connected" = "接続";
+
+"Create a new route" = "新規ルートを作成";
+
+"Current GPS Position" = "GPSの現在位置";
+
+"Current Position" = "現在位置";
+
+"Delete all bookmarks" = "すべてのブックマークを消去";
+
+"Delete downloaded maps" = "ダウンロードしたマップを消去";
+
+"Delete GPX Log file" = "GPXログを消去";
+
+"Device address: %@" = "デバイスアドレス: %@";
+
+"Device Info" = "デバイス情報";
+
+"Directions" = "ルート";
+
+"Directions Bookmarks" = "ルートブックマーク";
+
+"Disable Beep" = "ビープ音消去";
+
+"Disable GPS" = "GPS 無効";
+
+"Disconnected" = "切断";
+
+"Dismiss" = "了解";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "距離・速度をメートルで表示します (km/h, メートル) 。";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "距離・速度をマイルで表示します (mph, マイル) 。";
+
+"Download" = "ダウンロード";
+
+"Download maps" = "ダウンロードしたマップ";
+
+"Downloaded maps size" = "ダウンロードしたマップサイズ";
+
+"Downloading maps..." = "マップをダウンロード中...";
+
+"Driving directions" = "ナビゲーション";
+
+"Enable GPS" = "GPS 有効化";
+
+"Enable night mode" = "夜間モードを有効";
+
+"Enable timer" = "タイマーを有効";
+
+"Error" = "エラー";
+
+"From / Departure" = "出発地";
+
+"From:" = "出発:";
+
+"General" = "一般";
+
+"GMaps Hybrid" = "衛星写真+地図";
+
+"GMaps Satellite" = "衛星写真";
+
+"GMaps Terrain" = "地形";
+
+"Go Home" = "ホームへ";
+
+"Good" = "良好";
+
+"Google Maps" = "Googleマップ";
+
+"Google Maps Hybrid" = "Googleマップ衛星写真+地図";
+
+"Google Maps Satellite" = "Googleマップ衛星写真";
+
+"Google Maps Terrain" = "Googleマップ地形";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "GPS有効";
+
+"GPS Information" = "GPS情報";
+
+"GPS state" = "GPS状態";
+
+"GPS to use" = "GPS選択";
+
+"GPS Tracking" = "GPS追跡";
+
+"GPX Log Files" = "GPXログファイル";
+
+"GPX Logging" = "GPXロギング";
+
+"Home Address" = "ホームの住所";
+
+"Hybrid" = "航空写真+地図";
+
+"Language" = "言語設定";
+
+"Large font size" = "ラージフォントサイズ";
+
+"Latitude" = "緯度";
+
+"License checking" = "ライセンスを確認";
+
+"License number" = "ライセンスナンバー";
+
+"License number for %@" = " %@ のライセンスナンバー";
+
+"License:" = "ライセンス:";
+
+"Location / Place" = "場所";
+
+"Locations" = "場所";
+
+"Log file size" = "ログファイルサイズ";
+
+"Longitude" = "経度";
+
+"Manage maps" = "地図の管理";
+
+"Manager" = "マネージャー";
+
+"Map" = "マップ";
+
+"Map auto-rotation" = "マップの自動回転";
+
+"Map Database size" = "マップデータベースサイズ";
+
+"Map details" = "マップの詳細";
+
+"Map name" = "マップの名前";
+
+"Map Type" = "マップの種類";
+
+"Maps" = "マップ";
+
+"Maps data" = "マップデータ";
+
+"Maps Download" = "マップをダウンロード";
+
+"Maps downloaded successfully !" = "マップのダウンロード成功 !";
+
+"Maps Manager" = "ダウンロードするマップの範囲を選択";
+
+"Maps type" = "マップの種類";
+
+"My GPS Position" = "GPSの位置";
+
+"My GPS position is:" = "GPSの位置:";
+
+"N/A" = "使えません";
+
+"Name:" = "名前:";
+
+"New directions database: " = "新規ルートデータベース: ";
+
+"New maps database: " = "新規マップデータベース: ";
+
+"New Route" = "新規ルート";
+
+"Night Mode" = "夜間モード";
+
+"No" = "なし";
+
+"No driving direction can be computed using your query." = "ナビゲーション結果が見つかりません。";
+
+"No Highway" = "高速道路を使わない";
+
+"No License" = "ライセンスなし";
+
+"No location has been found according to your query." = "場所が見つかりません。";
+
+"No name" = "名前なし";
+
+"None" = "なし";
+
+"Number of log files" = "ログファイル数";
+
+"Offline mode" = "オフラインモード";
+
+"Pick a GPS" = "GPSを選択";
+
+"Places / Cities" = "場所 / 都市";
+
+"Please enter a name for your map." = "マップ名を入力してください。";
+
+"Please enter a name for your route." = "ルート名を入力してください。";
+
+"Please select a greater map area by touching the screen with two fingers." = "Please select a greater map area by touching the screen with two fingers.";
+
+"Poor" = "微弱";
+
+"Prevent Sleep Mode" = "スリープモード無効化";
+
+"Ready to transfer..." = "転送準備完了...";
+
+"Receive maps" = "地図を受信";
+
+"Recompute itinerary" = "ナビゲーションの再取得";
+
+"Reset GPS" = "GPSリセット";
+
+"Return to main page" = "メインページへ戻る";
+
+"Route computation" = "ルート検索";
+
+"Routes Manager" = "ルートマネージャー";
+
+"Satellite" = "航空写真";
+
+"Save in Bookmarks" = "ブックマークに保存";
+
+"Search" = "検索";
+
+"Search for:" = "検索:";
+
+"Search Places" = "場所を検索";
+
+"Send by Email" = "メールで送信";
+
+"Send by SMS" = "SMSで送信";
+
+"Settings" = "設定";
+
+"Show device info" = "デバイス情報";
+
+"Show Speedometer" = "スピードメーターを表示";
+
+"Speed" = "速度";
+
+"Start time" = "開始時間";
+
+"Stop time" = "停止時間";
+
+"Take position from:" = "Take position from:";
+
+"Tap to edit" = "タップして修正";
+
+"The directions database has been sucessfully saved." = "ルートデータベースは保存されました。";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "言語設定はナビゲーション、地図、地名検索の結果に用いられます。.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "位置情報サービスがオフになっています。ホーム画面の[設定]->[一般]->位置情報サービスをオンにしてください。";
+
+"The maps database has been sucessfully saved." = "マップデータベースは保存されました";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "未保存の地図範囲を閲覧すると地図の保存サイズが増加します。";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "夜間モードは、運転に集中出来るように、色はより暗く、明るさは最小限に設定されます。";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "拡大レベル %d は最も詳細なレベルです。";
+
+"This feature will be implemented in a future version." = "この機能は将来のバージョンで提供されます。";
+
+"To / Destination" = "目的地";
+
+"To:" = "目的地:";
+
+"Total" = "合計";
+
+"Total log files size" = "ログファイルの合計サイズ";
+
+"Transfer" = "転送";
+
+"Unable to download a part of the map. Check your internet connection." = "地図をダウンロードできません。インターネット接続を確認してください。";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "GPS を捕捉できません。 GPS からの位置情報はありません。";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "シリアルポートを開けません。他の GPS ソフトが動作していないか確認してください。";
+
+"Unable to retrieve the driving directions from the server: %@" = "ナビゲーション結果をサーバから取得できません: %@";
+
+"Unable to retrieve the required information from the server: %@" = "必要な情報をサーバから取得できません: %@";
+
+"Unknown" = "不明";
+
+"Unknown error" = "不明なエラー";
+
+"Upload a new directions database" = "新規ルートデータベースをアップロード";
+
+"Upload a new maps database" = "新規マップデータベースをアップロード";
+
+"Upload new directions database" = "新規ルートデータベースをアップロード";
+
+"Upload new maps database" = "新規マップデータベースをアップロード";
+
+"Use Miles unit" = "マイル表示を使用";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "GPS が反応しないか位置を誤っている場合は、 GPS リセットを押してください";
+
+"User Interface" = "ユーザーインターフェース";
+
+"Verifying license number..." = "ライセンス番号を確認中...";
+
+"Version" = "バージョン";
+
+"Voice Instructions" = "音声案内";
+
+"Voice instructions work only when the language in General settings is set to English." = "音声案内は言語設定が英語の場合のみ有効です。.";
+
+"Walking" = "徒歩";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "ON にするとすべてのナビゲーション結果がブックマークに保存されます。";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "ON にするとスリープモードを無効にして常に表示状態にします。";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "ON にすると間違った道へ進んでもナビゲーションを再取得します。";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "GPX ログ有効化を ON にすると GPX フォーマットでトラックファイルを記録します。トラックファイルは PC 上でを使用できます。";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "GPX ログ有効化を ON にすると GPX フォーマットでトラックファイルを記録します。トラックファイルは PC 上でを使用できます。ログは無線通信で転送出来ます。";
+
+"Wireless Transfer" = "無線転送";
+
+"Wrong Way hidden" = "Wrong Way hidden";
+
+"Wrong\nWay" = "ルートがn間違っています";
+
+"xGPS Error" = "xGPSエラー";
+
+"xGPS Version" = "xGPSバージョン";
+
+"xGPS Web-based Management" = "xGPSウェブ管理";
+
+"Yes" = "はい";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "オフラインモードでは検索できません。設定ボタンをタップするとオフラインモードが解除されます。";
+
+"You cannot download maps while you are in the offline mode." = "オフラインモードでは地図をダウンロードできません。";
+
+"You cannot have more than %d points in your route." = "You cannot have more than %d points in your route.";
+
+"You have to add at least one starting and one ending point in your route." = "出発地点と終了地点を入力してください。";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "この機能を使うには [設定] -> [ナビゲーション] -> [ホームアドレス] を設定してください。";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "ダウンロードしたマップはこのバージョンの xGPS と互換性がありませんので削除しました。";
+
+"Your home address" = "ホームアドレス";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "ホームアドレスはホームボタンが押された時に設定した住所までのナビゲーションに利用されます。";
+
+"Your license number is invalid. Please verify and retry" = "ライセンス番号が無効です。再入力してください。";
+
+"Your license number is valid. You can now use the selected GPS." = "ライセンス番号が有効です。選択した GPS が使えます。";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "保存したナビゲーションはこのバージョンの xGPS と互換性がありませんので削除しました。";
+
+"Zoom level to download" = "ダウンロードするズームレベル";
+
+"Zoom level: %d" = "ズームレベル: %d";
+

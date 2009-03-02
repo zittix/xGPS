@@ -1,0 +1,422 @@
+"%.1f MB" = "%.1f MB";
+
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d anslutna klienter";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
+"About xGPS" = "Om xGPS";
+
+"Actions" = "Val";
+
+"Add / Modify:" = "Lägg till / Modifiera:";
+
+"Address" = "Adress";
+
+"Address book" = "Adressbok";
+
+"Altitude" = "Höjd";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Ett fel har uppstått under nedladdningen av de valda kartorna. Vissa kartdelar har kanske inte blivit korrekt nedladdade.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Är du säker på att du vill ta bort alla nedladdade kartor ?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Är du säker på att du vill ta bort alla sparade rutter ?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Är du säker på att du vill ta bort alla sparade bokmärken ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Är du säker på att du vill ladda ner det valda kartområdet (%1$d rutor ~ %2$.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Är du säker på att du vill ladda ner det valda kartområdet (%1$d rutor ~ %2$d KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Är du säker på att du vill ladda ner det valda kartområdet (%1$d rutor ~ %2$d MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Är du säker på att du vill räkna om rutt från nuvarande position ?";
+
+"Available actions:" = "Möjliga val:";
+
+"Back" = "Bakåt";
+
+"Blue dot for position" = "Blå punkt som position";
+
+"Bookmarks" = "Bokmärken";
+
+"By Car" = "Med bil";
+
+"Cancel" = "Avbryt";
+
+"City name / Address" = "Stad / Adress";
+
+"Clear All" = "Rensa allt";
+
+"Clear Driving directions" = "Rensa köranvisningar";
+
+"Clear Results" = "Rensa resultat";
+
+"Clear Search results" = "Rensa sökresultat";
+
+"Close" = "Stäng";
+
+"Compute" = "Beräkna";
+
+"Computing your route..." = "Beräknar rutt";
+
+"Connected" = "Ansluten";
+
+"Create a new route" = "Skapa ny rutt";
+
+"Current GPS Position" = "Nuvarande GPS-position";
+
+"Current Position" = "Nuvarande position";
+
+"Delete all bookmarks" = "Radera alla bokmärken";
+
+"Delete downloaded maps" = "Radera nedladdade kartor";
+
+"Delete GPX Log file" = "Radera GPX-loggfil";
+
+"Device address: %@" = "Enhetsadress: %@";
+
+"Device Info" = "Enhetsinfo";
+
+"Directions" = "Köranvisningar";
+
+"Directions Bookmarks" = "Bokmärken köranvisningar";
+
+"Disable Beep" = "Stäng av ton";
+
+"Disable GPS" = "Inaktivera GPS";
+
+"Disconnected" = "Frånkopplad";
+
+"Dismiss" = "Avslå";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Avstånd och hastighet visas metriskt (km/h och meter).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Avstånd och hastighet visas med amerikanska enheter (mph och miles).";
+
+"Download" = "Ladda ner";
+
+"Download maps" = "Ladda ner kartor";
+
+"Downloaded maps size" = "Storlek på nedladdade kartor";
+
+"Downloading maps..." = "Laddar ner kartor...";
+
+"Driving directions" = "Köranvisningar";
+
+"Enable GPS" = "Aktivera GPS";
+
+"Enable night mode" = "Aktivera nattläge";
+
+"Enable timer" = "Aktivera timer";
+
+"Error" = "Fel";
+
+"From / Departure" = "Från / Start";
+
+"From:" = "Från:";
+
+"General" = "Allmänt";
+
+"GMaps Hybrid" = "GMaps Hybrid";
+
+"GMaps Satellite" = "GMaps Satellit";
+
+"GMaps Terrain" = "GMaps Terräng";
+
+"Go Home" = "Kör hem";
+
+"Good" = "Bra";
+
+"Google Maps" = "Google Maps";
+
+"Google Maps Hybrid" = "Google Maps Hybrid";
+
+"Google Maps Satellite" = "Google Maps Satellit";
+
+"Google Maps Terrain" = "Google Maps Terräng";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "GPS används";
+
+"GPS Information" = "GPS information";
+
+"GPS state" = "GPS tillstånd";
+
+"GPS to use" = "Använd GPS";
+
+"GPS Tracking" = "GPS-spårning";
+
+"GPX Log Files" = "GPX-loggfiler";
+
+"GPX Logging" = "GPX-loggning";
+
+"Home Address" = "Hemadress";
+
+"Hybrid" = "Hybrid";
+
+"Language" = "Språk";
+
+"Large font size" = "Stort teckensnitt";
+
+"Latitude" = "Latitud";
+
+"License checking" = "Licenskontroll";
+
+"License number" = "Licensnummer";
+
+"License number for %@" = "Licensnummer för %@";
+
+"License:" = "Licens:";
+
+"Location / Place" = "Plats / Position";
+
+"Locations" = "Platser";
+
+"Log file size" = "Loggfilsstorlek";
+
+"Longitude" = "Longitud";
+
+"Manage maps" = "Hantera kartor";
+
+"Manager" = "Hanterare";
+
+"Map" = "Karta";
+
+"Map auto-rotation" = "Automatisk kartrotation";
+
+"Map Database size" = "Kartdatabasens storlek";
+
+"Map details" = "Kartdetaljer";
+
+"Map name" = "Kartnamn";
+
+"Map Type" = "Karttyp";
+
+"Maps" = "Kartor";
+
+"Maps data" = "Kartinformation";
+
+"Maps Download" = "Kartnedladdning";
+
+"Maps downloaded successfully !" = "Kartor nedladdade !";
+
+"Maps Manager" = "Karthanterare";
+
+"Maps type" = "Karttyper";
+
+"My GPS Position" = "Min GPS-position";
+
+"My GPS position is:" = "Min GPS-position är:";
+
+"N/A" = "Ej tillgänglig";
+
+"Name:" = "Namn:";
+
+"New directions database: " = "Ny köranvisningsdatabas: ";
+
+"New maps database: " = "Ny kartdatabas: ";
+
+"New Route" = "Ny rutt";
+
+"Night Mode" = "Nattläge";
+
+"No" = "Nej";
+
+"No driving direction can be computed using your query." = "Sökningen gav ingen köranvisning. Felaktig sökning ?";
+
+"No Highway" = "Ej motorväg";
+
+"No License" = "Ingen licens";
+
+"No location has been found according to your query." = "Sökningen gav ingen plats. Felaktig sökning ?";
+
+"No name" = "Ej namngiven";
+
+"None" = "Ingen";
+
+"Number of log files" = "Antal loggfiler";
+
+"Offline mode" = "Offline-läge";
+
+"Pick a GPS" = "Välj GPS";
+
+"Places / Cities" = "Platser / Städer";
+
+"Please enter a name for your map." = "Namnge din karta.";
+
+"Please enter a name for your route." = "Namnge din rutt.";
+
+"Please select a greater map area by touching the screen with two fingers." = "Var vänlig välj ett större kartområde genom att använda två fingrar på skärmen.";
+
+"Poor" = "Dålig";
+
+"Prevent Sleep Mode" = "Motverka sovläge";
+
+"Ready to transfer..." = "Redo att skicka...";
+
+"Receive maps" = "Tag emot kartor";
+
+"Recompute itinerary" = "Räkna om rutt";
+
+"Reset GPS" = "Återställ GPS";
+
+"Return to main page" = "Åter till huvudsidan";
+
+"Route computation" = "Ruttberäkning";
+
+"Routes Manager" = "Rutthanterare";
+
+"Satellite" = "Satellit";
+
+"Save in Bookmarks" = "Spara till bokmärken";
+
+"Search" = "Sök";
+
+"Search for:" = "Sök efter:";
+
+"Search Places" = "Sök platser";
+
+"Send by Email" = "Skicka via e-post";
+
+"Send by SMS" = "Skicka via SMS";
+
+"Settings" = "Inställningar";
+
+"Show device info" = "Visa enhetsinfo";
+
+"Show Speedometer" = "Visa hastighetsmätare";
+
+"Speed" = "Hastighet";
+
+"Start time" = "Starttid";
+
+"Stop time" = "Sluttid";
+
+"Take position from:" = "Tag position från:";
+
+"Tap to edit" = "Tryck för att ändra";
+
+"The directions database has been sucessfully saved." = "Ruttdatabasen har sparats.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Språkinställningen används för att regionalisera köranvisningar, kartor och sökresultat för plats/stad.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "GPS-delen är ej påslagen. Använd programmet Inställningar på din huvudskärm för att starta den.";
+
+"The maps database has been sucessfully saved." = "Kartdatabasen har sparats.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Kartornas storlek ökar också när du ser på delar av kartan du inte redan laddat ner.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Nattläget minskar ljusstyrkan på skärmen för att göra det lättare att koncentrera sig på vägen. Färgerna är mörkare och ljusstyrkan är minimerad.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Zoomläget %d motsvarar det högsta detaljläget.";
+
+"This feature will be implemented in a future version." = "Denna funktion kommer att implementeras i en framtida version av programmet.";
+
+"To / Destination" = "Till / Destination";
+
+"To:" = "Till:";
+
+"Total" = "Total";
+
+"Total log files size" = "Loggfilernas totala storlek";
+
+"Transfer" = "Överför";
+
+"Unable to download a part of the map. Check your internet connection." = "Det gick inte att ladda ner en del av kartan. Kontrollera din Internetuppkoppling.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Det gick inte att hämta GPS-position. GPS-enheten ger för tillfället ingen positionsinformation.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Det gick inte att öppna serieporten. Se till att ingen annan mjukvara använder GPS-enheten.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Det gick inte att hämta köranvisningar från servern: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Det gick inte att hämta den nödvändiga informationen från servern: %@";
+
+"Unknown" = "Okänt";
+
+"Unknown error" = "Okänt fel";
+
+"Upload a new directions database" = "Ladda upp en ny ruttdatabas";
+
+"Upload a new maps database" = "Ladda upp en ny kartdatabas";
+
+"Upload new directions database" = "Ladda upp ny ruttdatabas";
+
+"Upload new maps database" = "Ladda upp ny kartdatabas";
+
+"Use Miles unit" = "Använd Miles-enhet";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Använd Återställ GPS funktionen för att starta om GPS-enheten när den ger felaktig positionering eller slutat svara.";
+
+"User Interface" = "Användargränsnitt";
+
+"Verifying license number..." = "Verifierar licensnummer...";
+
+"Version" = "Version";
+
+"Voice Instructions" = "Röstinstruktioner";
+
+"Voice instructions work only when the language in General settings is set to English." = "Röstinstruktioner fungerar endast när språk är inställt på Engelska i Allmänna inställningar.";
+
+"Walking" = "Till fots";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Om aktiverad så sparas alla uppsökta köranvisningar som bokmärken.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Om aktiverad så stängs sovläget av så att skärmen alltid är på.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Om aktiverad så räknas rutten om när du kör åt fel håll.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "När GPX-loggning är aktiverat så sparas din förflyttning till en fil i GPX-format. Filen kan sedan användas på en dator för att visualisera rutten.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "När GPX-loggning är aktiverat så sparas din förflyttning till en fil i GPX-format. Filen kan sedan användas på en dator för att visualisera rutten. Loggfilen laddas ner genom webbgränssnittet i Trådlöst överföringsläge";
+
+"Wireless Transfer" = "Trådlös överföring";
+
+"Wrong Way hidden" = "Fel väg gömd";
+
+"Wrong\nWay" = "Felnväg";
+
+"xGPS Error" = "xGPS fel";
+
+"xGPS Version" = "xGPS Version";
+
+"xGPS Web-based Management" = "xGPS Webbaserad hantering";
+
+"Yes" = "Ja";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Det går inte att söka i offline-läge. Tryck på Inställningar för att ändra offline-inställningar.";
+
+"You cannot download maps while you are in the offline mode." = "Det går inte att ladda ner kartor i offline-läge.";
+
+"You cannot have more than %d points in your route." = "Du kan inte ha fler än %d platser i din rutt.";
+
+"You have to add at least one starting and one ending point in your route." = "Du måste ange minst en start- och en slutpunkt i din rutt.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Du måste ställa in din hemadress i Inställningar -> Köranvisningar -> Hemadress, innan du kan använda denna funktion.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Dina nedladdade kartor är inte kompatibla med den här versionen av xGPS. De har tagits bort.";
+
+"Your home address" = "Din hemadress";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Din hemadress används för att ge köranvisningar till ditt hem när du trycker på Hem-knappen.";
+
+"Your license number is invalid. Please verify and retry" = "Ditt licensnummer är felaktigt. Kontrollera det och försök igen.";
+
+"Your license number is valid. You can now use the selected GPS." = "Ditt licensnummer är korrekt. Du kan nu använda vald GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Dina sparade köranvisningar är inte kompatibla med den här versionen av xGPS. De har tagits bort.";
+
+"Zoom level to download" = "Zoom-nivå att ladda ner";
+
+"Zoom level: %d" = "Zoom-nivå: %d";
+

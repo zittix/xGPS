@@ -1,0 +1,400 @@
+"%.1f MB" = "%.1f Mb";
+
+"%.2f MB" = "%.2f Mb";
+
+"%d connected clients" = "%d yhteyttä";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
+"About xGPS" = "Tietoja xGPS:stä";
+
+"Actions" = "Toiminnot";
+
+"Add / Modify:" = "Lisää / Muokkaa:";
+
+"Address" = "Osoite";
+
+"Address book" = "Osoitekirja";
+
+"Altitude" = "Korkeus";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Karttoja ladatessa tapahtui virhe, karttoja ei ole välttämättä ladattu oikein.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Haluatko varmasti poistaa kaikki ladatut kartat?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Haluatko varmasti poistaa kaikki tallennetut reitit?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Haluatko varmasti poistaa kaikki tallennetut kirjanmerkit?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Haluatko varmasti ladata valitun alueen kartan? (%1$d ruutua ~ %2$.1f Kb)";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Haluatko varmasti ladata valitun alueen kartan? (%1$d ruutua ~ %2$.1f Mb) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Haluatko varmasti laskea reitin uudelleen nykyisestä sijainnista lähtien?";
+
+"Available actions:" = "Mahdolliset toiminnot:";
+
+"Back" = "Takaisin";
+
+"Blue dot for position" = "Sininen piste sijainnin merkiksi";
+
+"Bookmarks" = "Kirjanmerkit";
+
+"By Car" = "Autolla";
+
+"Cancel" = "Peruuta";
+
+"City name / Address" = "Kaupungin nimi / Osoite";
+
+"Clear All" = "Tyhjennä kaikki";
+
+"Clear Driving directions" = "Tyhjennä ajo-ohjeet";
+
+"Clear Results" = "Tyhjennä tulokset";
+
+"Clear Search results" = "Tyhjennä hakutulokset";
+
+"Close" = "Sulje";
+
+"Compute" = "Määritä";
+
+"Computing your route..." = "Määritetään reittiä...";
+
+"Connected" = "Yhdistetty";
+
+"Create a new route" = "Luo uusi reitti";
+
+"Current GPS Position" = "Nykyinen sijainti";
+
+"Current Position" = "Nykyinen sijainti";
+
+"Delete all bookmarks" = "Poista kaikki kirjanmerkit";
+
+"Delete downloaded maps" = "Poista ladatut kartat";
+
+"Delete GPX Log file" = "Poista GPX:n Lokitiedosto";
+
+"Device address: %@" = "Laitteen osoite: %@";
+
+"Device Info" = "Laitteen tiedot";
+
+"Directions" = "Reittiohjeet";
+
+"Directions Bookmarks" = "Reittiohjeiden kirjanmerkit";
+
+"Disable Beep" = "Poista äänet käytöstä";
+
+"Disconnected" = "Ei yhdistetty";
+
+"Dismiss" = "Hylkää";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Matkat ja nopeudet näytetään metreissä (Km/h ja metrit)";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Matkat ja nopeudet näytetän maileissa (mph ja mailit)";
+
+"Download" = "Lataa";
+
+"Download maps" = "Lataa karttoja";
+
+"Downloaded maps size" = "Ladattujen kartojen koko";
+
+"Downloading maps..." = "Ladataan karttaa...";
+
+"Driving Directions" = "Ajo-ohjeet";
+
+"Enable night mode" = "Ota yömoodi käyttöön";
+
+"Enable timer" = "Ota ajastin käyttöön";
+
+"Error" = "Virhe";
+
+"From / Departure" = "Lähtöpaikka:";
+
+"From:" = "Lähtöpaikka:";
+
+"General" = "Yleiset";
+
+"GMaps Hybrid" = "GMaps Hybridi";
+
+"GMaps Satellite" = "GMaps Satelliitti";
+
+"GMaps Terrain" = "GMaps Maasto";
+
+"Go Home" = "Mene kotiin";
+
+"Good" = "Hyvä";
+
+"Google Maps" = "Google Maps";
+
+"Google Maps Hybrid" = "Google Maps Hybridi";
+
+"Google Maps Satellite" = "Google Maps Satelliitti";
+
+"Google Maps Terrain" = "Google Maps Maasto";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "GPS Käytössä";
+
+"GPS Information" = "GPS:n tiedot";
+
+"GPS state" = "GPS:n tila";
+
+"GPS to use" = "Käytettävä GPS";
+
+"GPS Tracking" = "GPS jäljitys";
+
+"GPX Log Files" = "GPX:n Lokitiedostot";
+
+"GPX Logging" = "GPX Loki";
+
+"Home Address" = "Kotiosoite";
+
+"Language" = "Kieli";
+
+"Large font size" = "Iso fonttikoko";
+
+"Latitude" = "Leveysaste";
+
+"License checking" = "Lisenssitarkistus";
+
+"License number" = "Lisenssinumero";
+
+"License number for %@" = "%@:n lisenssinumero";
+
+"License:" = "Lisenssi";
+
+"Location / Place" = "Location / Place";
+
+"Locations" = "Sijainnit";
+
+"Longitude" = "Pituusaste";
+
+"Manager" = "Hallinta";
+
+"Map" = "Kartta";
+
+"Map auto-rotation" = "Kartan automaattikääntö";
+
+"Map Database size" = "Karttatietokannan koko";
+
+"Map details" = "Kartan yksityiskohdat";
+
+"Map name" = "Kartan nimi";
+
+"Map Type" = "Kartan tyyppi";
+
+"Maps" = "Kartat";
+
+"Maps data" = "Karttadata";
+
+"Maps Download" = "Karttojen lataus";
+
+"Maps downloaded successfully !" = "Kartta ladattu onnistuneesti!";
+
+"Maps Manager" = "Karttojen hallinta";
+
+"Maps type" = "Kartan tyyppi";
+
+"My GPS Position" = "Sijaintini";
+
+"My GPS position is:" = "Sijaintini on:";
+
+"N/A" = "Ei saatavilla";
+
+"Name:" = "Nimi:";
+
+"New directions database: " = "Uusi reittitietokanta: ";
+
+"New maps database: " = "Uusi karttatietokanta: ";
+
+"New Route" = "Uusi reitti";
+
+"Night Mode" = "Yömoodi";
+
+"No" = "Ei";
+
+"No driving direction can be computed using your query." = "Haustasi ei pystytä muodostamaan ajo-ohjetta.";
+
+"No Highway" = "Ei moottoriteitä";
+
+"No License" = "Ei lisenssiä";
+
+"No location has been found according to your query." = "Hakusi ei löytänyt sijainteja.";
+
+"No name" = "Nimetön";
+
+"None" = "Ei signaalia";
+
+"Number of log files" = "Lokitiedostojen määrä";
+
+"Offline mode" = "Offline-moodi";
+
+"Pick a GPS" = "Valitse GPS";
+
+"Places / Cities" = "Paikat / Kaupungit";
+
+"Please enter a name for your map." = "Anna kartallesi nimi.";
+
+"Please enter a name for your route." = "Anna reitillesi nimi";
+
+"Please select a greater map area by touching the screen with two fingers." = "Valitse suurempi alue kahdella sormella koskettamalla.";
+
+"Poor" = "Heikko";
+
+"Prevent Sleep Mode" = "Estä valmiustila";
+
+"Ready to transfer..." = "Valmiina siirtoon...";
+
+"Recompute itinerary" = "Lasketaan reittiä";
+
+"Reset GPS" = "Nollaa GPS";
+
+"Return to main page" = "Siirry etusivulle";
+
+"Route computation" = "Reitin laskenta";
+
+"Routes Manager" = "Reittien hallinta";
+
+"Save in Bookmarks" = "Tallenna kirjanmerkkeihin";
+
+"Search" = "Hae";
+
+"Search Places" = "Hae paikkoja";
+
+"Send by Email" = "Lähetä sähköpostilla";
+
+"Send by SMS" = "lähetä tekstiviestillä";
+
+"Settings" = "Asetukset";
+
+"Show device info" = "Näytä laitetiedot";
+
+"Show Speedometer" = "Näytä nopeusmittari";
+
+"Speed" = "Nopeus";
+
+"Start time" = "Aloita ajanotto";
+
+"Stop time" = "Lopeta ajanotto";
+
+"Take position from:" = "Ota sijainti:";
+
+"Tap to edit" = "Kosketa muokataksesi";
+
+"The directions database has been sucessfully saved." = "Reittitietokanta onnistuneesti tallennettu.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Kieliasetusta käytetään lokalisoimaan ajo-ohjeet, kartat, ja paikkojen/kaupunkien hakutulokset.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Sijaintipalveluja ei ole aktivoitu, käynnistä ne laittesi asetuksista.";
+
+"The maps database has been sucessfully saved." = "Karttatietokanta onnistuneesti tallennettu.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Karttojen koko kasvaa myös silloin, kun selaat sellaista paikkaa kartalla, jota et ole aiemmin ladannut.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Yömoodi antaa sinun keskittyä tiehen ilman että iPhonen näytön kirkkaus häiritsee sinua. Siinä värit ovat tummemmat ja näytön kirkkaus on asetettu minimiin";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Suurennoskerroin %d vastaa yksityiskohtaisinta suurennoskerrointa";
+
+"To / Destination" = "Kohde";
+
+"To:" = "Kohde:";
+
+"Total" = "Yhteensä";
+
+"Total log files size" = "lokitiedostojen yhteiskoko";
+
+"Transfer" = "Siirretään";
+
+"Unable to download a part of the map. Check your internet connection." = "Osaa kartasta ei saatu ladattua. Tarkista internetyhteytesi.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Sijaintia ei saada selvitettyä. GPS ei anna tällä hetkellä mitään sijaintitietoja.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Sarjaportin avaus epäonnistui. Varmista ettei mikään muu GPS-ohjelma ole taustalla käynnissä.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Ajo-ohjeiden haku serveritltä %@ epäonnistui.";
+
+"Unable to retrieve the required information from the server: %@" = "Vaadittujen tietojen haku serveriltä %@ epäonnistui.";
+
+"Unknown" = "Tuntematon";
+
+"Unknown error" = "Tuntematon virhe";
+
+"Upload a new directions database" = "Lähetä uusi reittitietokanta.";
+
+"Upload a new maps database" = "Lähetä uusi karttatietokanta";
+
+"Upload new directions database" = "Lähetä uusi reittitietokanta.";
+
+"Upload new maps database" = "Lähetä uusi karttatietokanta.";
+
+"Use Miles unit" = "Käytä maileja";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Nollaa GPS jos se antaa täysin väärän sijainnin tai ei vastaa ollenkaan.";
+
+"User Interface" = "Käyttöliittymä";
+
+"Verifying license number..." = "Tarkistetaan lisenssinumeroa...";
+
+"Version" = "Versio";
+
+"Voice Instructions" = "Ääniopastus";
+
+"Voice instructions work only when the language in General settings is set to English." = "Ääniopastus toimii ainoastaan yleisasetusten kieliasetuksen ollessa englanti.";
+
+"Walking" = "Kävellen";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Kun aktivoitu, kaikki haetut reittiohjeet tallennetaan kirjanmerkkeihin.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Kun aktivoitu, valmiustila otetaan pois käytöstä jolloin näyttö on aina päällä.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Kun aktivoitu, ajo-ohjeet lasketaan uudestaan ajaessasi väärään suuntaan.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Kun GPX-lokitus aktivoidaan, kaikki liikkeesi tallennetaan tiedostoon GPX-formaatissa. Tiedoston avulla kuljettu reitti voidaan helposti visualisoida tietokoneella. Lokitiedosto voidaan ladata web-käyttöliittymällä langattomassa tiedonsiirtotilassa.";
+
+"Wireless Transfer" = "Langaton tiedonsiirto";
+
+"Wrong Way hidden" = "Väärä suunta piilotettu.";
+
+"Wrong\nWay" = "Vääränsuunta!";
+
+"xGPS Error" = "xGPS:n virhe!";
+
+"xGPS Version" = "xGPS:n versio";
+
+"xGPS Web-based Management" = "xGPS:n webbihallinnointi";
+
+"Yes" = "Kyllä";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Et voi tehdä hakua offline-tilassa. Poistu offline-tilasta koskettamalla asetukset-painiketta.";
+
+"You cannot download maps while you are in the offline mode." = "Et voi ladata karttoja offline-moodissa.";
+
+"You cannot have more than %d points in your route." = "Sinulla ei voi olle enempää kuin %d pistettä reitilläsi ";
+
+"You have to add at least one starting and one ending point in your route." = "Sinun täytyy asettaa vähintään yksi aloitus- ja päätepiste reitillesi.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Sinun täytyy asettaa kotiosoiteesi kohdassa Asetukset -> Ajo-ohjeet -> Kotiosoite ennen kuin voit käyttää tätä ominaisuutta.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Lataamasi kartat eivät ole yhteensopivia tämän xGPS-version kanssa. Ne on nyt poistettu.";
+
+"Your home address" = "Kotiosoitteesi";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Kotiosoitettasi käytetään luoman ajo-ohjeet kotiisi kun Koti-painiketta on painettu.";
+
+"Your license number is invalid. Please verify and retry" = "Lisenssinumerosi ei kelpaa, tarkista sen oikeellisuus.";
+
+"Your license number is valid. You can now use the selected GPS." = "Lisenssinumerosi on kelvollinen. Voit nyt käyttää valittua GPS:ää.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Tallennetut ajo-ohjeesi eivät ole yhteensopivia tämän xGPS-version kanssa. Ne on nyt poistettu.";
+
+"Zoom level to download" = "Ladattava suurennustaso.";
+
+"Zoom level: %d" = "Suurennustaso: %d";
+

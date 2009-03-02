@@ -1,0 +1,422 @@
+"%.1f MB" = "%.1f MB";
+
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d forbundne enheder";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/t";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
+"About xGPS" = "Om xGPS";
+
+"Actions" = "Handlinger";
+
+"Add / Modify:" = "Tilføj / Ændre:";
+
+"Address" = "Adresse";
+
+"Address book" = "En kontakt";
+
+"Altitude" = "Altitude";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "En fejl er opstået under download af valgt kort. Visse dele af kortet er muligvis ikke downloadet korrekt.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Er du sikker på du ønsker at slette alle downloadede kort?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Er du sikker på du ønsker at slette alle optagede logfiler?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Er du sikker på du ønsker at slette alle gemte bogmærker?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Er du sikker på du ønsker at downloade det valgte kortområde (%1$d dele ~ %2$d KB)?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Er du sikker på du ønsker at downloade det valgte kortområde (%1$d dele ~ %2$d MB)?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Er du sikker på du ønsker at downloade det valgte kortområde (%1$d dele ~ %2$d KB)?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Er du sikker på du ønsker at downloade det valgte kortområde (%1$d dele ~ %2$d MB)?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Er du sikker på du ønsker at genberegne ruten fra den aktuelle position?";
+
+"Available actions:" = "Tilgængelige handlinger:";
+
+"Back" = "Tilbage";
+
+"Blue dot for position" = "Vis blå/rund markør";
+
+"Bookmarks" = "Bogmærker";
+
+"By Car" = "Med bil";
+
+"Cancel" = "Annuller";
+
+"City name / Address" = "Bynavn / Adresse";
+
+"Clear All" = "Ryd alt";
+
+"Clear Driving directions" = "Slet kørselsvejledning";
+
+"Clear Results" = "Slet søgeresultat";
+
+"Clear Search results" = "Slet søgeresultat";
+
+"Close" = "Luk";
+
+"Compute" = "Beregn";
+
+"Computing your route..." = "Beregner din rute...";
+
+"Connected" = "Forbundet";
+
+"Create a new route" = "Lav en ny rute";
+
+"Current GPS Position" = "Aktuel GPS position";
+
+"Current Position" = "Aktuel position";
+
+"Delete all bookmarks" = "Slet alle bogmærker";
+
+"Delete downloaded maps" = "Slet downloadede kort";
+
+"Delete GPX Log file" = "Slet GPX log filen";
+
+"Device address: %@" = "Enheds adresse: %@";
+
+"Device Info" = "Enheds info";
+
+"Directions" = "Ruteplan";
+
+"Directions Bookmarks" = "Ruteplans bogmærker";
+
+"Disable Beep" = "Deaktiver beep";
+
+"Disable GPS" = "Deaktiver GPS";
+
+"Disconnected" = "Slukket";
+
+"Dismiss" = "Afvis";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Hastighed og afstande vil blive vist metrisk (km/t og meter).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Hastighed og afstande vil blive vist i miles (mph og miles).";
+
+"Download" = "Download";
+
+"Download maps" = "Download kort";
+
+"Downloaded maps size" = "Downloaded kort størrelse";
+
+"Downloading maps..." = "Downloader kort...";
+
+"Driving directions" = "Kørselsvejledning";
+
+"Enable GPS" = "Aktiver GPS";
+
+"Enable night mode" = "Aktiver nat tilstand";
+
+"Enable timer" = "Aktiver timer";
+
+"Error" = "Fejl";
+
+"From / Departure" = "Fra / Afgang";
+
+"From:" = "Fra:";
+
+"General" = "Generelt";
+
+"GMaps Hybrid" = "GKort Hybrid";
+
+"GMaps Satellite" = "GKort Satellit";
+
+"GMaps Terrain" = "GKort Terræn";
+
+"Go Home" = "Kør hjem";
+
+"Good" = "Godt";
+
+"Google Maps" = "Google Kort";
+
+"Google Maps Hybrid" = "Google Kort Hybrid";
+
+"Google Maps Satellite" = "Google Kort Satellit";
+
+"Google Maps Terrain" = "Google Kort Terræn";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "GPS aktiveret";
+
+"GPS Information" = "GPS Information";
+
+"GPS state" = "GPS status";
+
+"GPS to use" = "GPS valg";
+
+"GPS Tracking" = "GPS Tracking";
+
+"GPX Log Files" = "GPX Log Filer";
+
+"GPX Logging" = "GPX Logging";
+
+"Home Address" = "Hjem adresse";
+
+"Hybrid" = "Hybrid";
+
+"Language" = "Sprog";
+
+"Large font size" = "Stor font";
+
+"Latitude" = "Breddegrad";
+
+"License checking" = "Licens check";
+
+"License number" = "Licens nummer";
+
+"License number for %@" = "Licens nummer for %@";
+
+"License:" = "Licens:";
+
+"Location / Place" = "Placering / Sted";
+
+"Locations" = "Placeringer";
+
+"Log file size" = "Log fil størrelse";
+
+"Longitude" = "Længdegrad";
+
+"Manage maps" = "Kort Manager";
+
+"Manager" = "Manager";
+
+"Map" = "Kort";
+
+"Map auto-rotation" = "Kort auto-rotation";
+
+"Map Database size" = "Kort databasestørrelse";
+
+"Map details" = "Kortdetaljer";
+
+"Map name" = "Kort navn";
+
+"Map Type" = "Kort type";
+
+"Maps" = "Kort";
+
+"Maps data" = "Kort data";
+
+"Maps Download" = "Kort download";
+
+"Maps downloaded successfully !" = "Kort downloadet korrekt!";
+
+"Maps Manager" = "Kort manager";
+
+"Maps type" = "Kort type";
+
+"My GPS Position" = "Min GPS position";
+
+"My GPS position is:" = "Min GPS position er:";
+
+"N/A" = "Ikke tilgængelig";
+
+"Name:" = "Navn:";
+
+"New directions database: " = "Ny ruteplans database: ";
+
+"New maps database: " = "Ny kort database: ";
+
+"New Route" = "Ny rute";
+
+"Night Mode" = "Nat tilstand";
+
+"No" = "Nej";
+
+"No driving direction can be computed using your query." = "Ingen ruteplaner kan blive beregnet ud fra din forespørgsel.";
+
+"No Highway" = "Ingen motorvej";
+
+"No License" = "Ingen licens";
+
+"No location has been found according to your query." = "Intet sted kan blive fundet ud fra din forespørgsel.";
+
+"No name" = "Intet navn";
+
+"None" = "Ingen";
+
+"Number of log files" = "Antal log filer";
+
+"Offline mode" = "Offline tilstand";
+
+"Pick a GPS" = "Vælg GPS enhed";
+
+"Places / Cities" = "Steder / Byer";
+
+"Please enter a name for your map." = "Indtast et navn til dit kort.";
+
+"Please enter a name for your route." = "Indtast et navn til din ruteplan.";
+
+"Please select a greater map area by touching the screen with two fingers." = "Vælg et større kort ved at røre skærmen med to fingre.";
+
+"Poor" = "Dårlig";
+
+"Prevent Sleep Mode" = "Undgå automatisk lås";
+
+"Ready to transfer..." = "Klar til at sende...";
+
+"Receive maps" = "Modtag kort";
+
+"Recompute itinerary" = "Genberegn rute";
+
+"Reset GPS" = "Nulstil GPS";
+
+"Return to main page" = "Tilbage til kortsiden";
+
+"Route computation" = "Ruteplan";
+
+"Routes Manager" = "Rute manager";
+
+"Satellite" = "Satellit";
+
+"Save in Bookmarks" = "Gem i bogmærker";
+
+"Search" = "Søg";
+
+"Search for:" = "Søg efter:";
+
+"Search Places" = "Søg steder";
+
+"Send by Email" = "Send med email";
+
+"Send by SMS" = "Send med SMS";
+
+"Settings" = "Indstillinger";
+
+"Show device info" = "Vis enhedsinfo";
+
+"Show Speedometer" = "Vis speedometer";
+
+"Speed" = "Hastighed";
+
+"Start time" = "Start tidspunkt";
+
+"Stop time" = "Stop tid";
+
+"Take position from:" = "Sæt position fra:";
+
+"Tap to edit" = "Tap for at rette";
+
+"The directions database has been sucessfully saved." = "Rueplans databasen er blevet gemt.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Sprogindstillingerne bruges til at oversætte kørselsvejledning, kortet og sted/by søgeresultaterne.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Lokalitetstjenester er ikke aktiveret på din enhed. Brug Indstillinger på din Home Screen til at løse dette problem.";
+
+"The maps database has been sucessfully saved." = "Kort databasen er blevet gemt.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Kortstørrelsen vil også vokse når du gennemser en del af kortet du ikke allerede har downloadet.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Nat tilstand gør dig i stand til at koncentere dig om vejen og ikke blive blændet af skærmen. Farverne er mørkere og skærmlyset sænkes til et minimum.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Zoom niveauet %d svarer til den mest detaljerede zoom niveau";
+
+"This feature will be implemented in a future version." = "Denne funktion vil blive implementeret i en senere version.";
+
+"To / Destination" = "Til / Destination";
+
+"To:" = "Til:";
+
+"Total" = "Samlet";
+
+"Total log files size" = "Samlet log filstørelse";
+
+"Transfer" = "Overfør";
+
+"Unable to download a part of the map. Check your internet connection." = "Kan ikke overføre dele af kortet. Check din internet forbindelse.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Kan ikke få GPS position. GPS'en afgiver for øjeblikket ingen positionsinformation.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Kan ikke åbne den serielle port. Sørg for at andet GPS software ikke kører i baggrunden.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Kan ikke hente kørselsvejledning fra serveren: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Kan ikke hente den ønskede information fra serveren: %@";
+
+"Unknown" = "Ukendt";
+
+"Unknown error" = "Ukendt fejl";
+
+"Upload a new directions database" = "Upload en ny ruteplans database";
+
+"Upload a new maps database" = "Upload en ny kort database";
+
+"Upload new directions database" = "Upload en ny ruteplans database";
+
+"Upload new maps database" = "Upload en ny kort database";
+
+"Use Miles unit" = "Anvend miles enheder";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Anvend Nulstil GPS for at genstarte GPS'en når den angiver en helt forkert position eller ikke svarer længere.";
+
+"User Interface" = "Brugerflade";
+
+"Verifying license number..." = "Undersøger licensnummer...";
+
+"Version" = "Version";
+
+"Voice Instructions" = "Stemme instruktioner";
+
+"Voice instructions work only when the language in General settings is set to English." = "Stemme instruktioner virker kun når sprog i Generelle indstillinger er sat til Engelsk.";
+
+"Walking" = "Gå";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Når aktiveret, vil alle de søgte kørselsvejledning vil blive gemt i bogmærker.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Når aktiveret, deaktiveres enhedens automatiske lås, sådan at skærmen altid er tændt.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Når aktiveret, genberegnes kørselsvejledningen automatisk, hvis du kører en forkert vej.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Når GPX logging er aktiveret, vil alle dine bevægelser blive optaget i en fil i GPX formatet. Filen kan derefter bruges på en pc til visuelt at følge din rute.";
+
+"Wireless Transfer" = "Trådløs overførsel";
+
+"Wrong Way hidden" = "Forkert vej slået fra";
+
+"Wrong\nWay" = "Forkertnvej";
+
+"xGPS Error" = "xGPS fejl";
+
+"xGPS Version" = "xGPS Version";
+
+"xGPS Web-based Management" = "xGPS Web-baseret Management";
+
+"Yes" = "Ja";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Du kan ikke foretage en søgning mens du er i Flytilstand. Du kan koble Flytilstand fra ved at trykke på Indstillinger knappen.";
+
+"You cannot download maps while you are in the offline mode." = "Du kan ikke downloade kort mens du er i Flytilstand.";
+
+"You cannot have more than %d points in your route." = "Du kan ikke have flere end %d vejpunkter i din ruteplan.";
+
+"You have to add at least one starting and one ending point in your route." = "Du skal minimum have et start og endepunkt i din ruteplan.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Du skal indstille din hjemadresse i Indstillinger -> Kørselsvejledning -> Hjem adresse, før du kan brugge denne funktion.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Dine downloadede kort er ikke kompatible med denne version af xGPS. De er blevet slettet";
+
+"Your home address" = "Din hjem adresse";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Din hjem adresse vil blive brugt for at danne en kørselsvejledning til dit hjem når Hjem knappen bliver trykket.";
+
+"Your license number is invalid. Please verify and retry" = "Dit licensnummer er ugyldigt. Check venligst og prøv igen";
+
+"Your license number is valid. You can now use the selected GPS." = "Dit licensnummer er gyldigt. Du kan nu bruge den valgte GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Dine downloadede kørselsvejledninger er ikke kompatible med denne version af xGPS. De er blevet slettet.";
+
+"Zoom level to download" = "Vælg Zoom niveau for download";
+
+"Zoom level: %d" = "Zoom niveau: %d";
+

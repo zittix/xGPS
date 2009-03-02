@@ -1,0 +1,252 @@
+"%.1f MB" = "%.1f MB";
+
+"%d connected clients" = "%d klient të lidhur";
+
+"About xGPS" = "Për xGPS";
+
+"Address book" = "Adresari";
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Një error u shfaq duke e shkarkuar hartën. Disa pjesë të hartës mund të mos jenë shkarkuar mirë.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "A jeni i/e sigurt që dëshironi ti fshini të gjitha hartat e shkarkuara ?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "A jeni i/e sigurt se dëshironi ti fshini të gjitha zërat e inqizuara ?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "A jeni i/e sigurt se dëshironi ti fshini të gjitha faqeshënimet e ruajtura ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "A jeni i/e sigurt se dëshironi ta shkarkoni zonën e zgjedhur të hartës (%1$d pllakë/a ~ %2$d KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "A jeni i/e sigurt se dëshironi ta shkarkoni zonën e zgjedhur të hartës (%1$d pllakë/a ~ %2$d MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "A jeni i/e sigurt se dëshironi ta rikalkuloni itinerarin nga pozita që gjendeni ?";
+
+"Available actions:" = "Veprimet e mundshme:";
+
+"Blue dot for position" = "Pika e kaltër për poziten";
+
+"Bookmarks" = "Faqeshënimet";
+
+"Cancel" = "Anulo";
+
+"City name / Address" = "Emri i qytetit / Adresa";
+
+"Clear Driving directions" = "Fshij drejtimin e vozitjes";
+
+"Clear Search results" = "Fshij rezultatet e kërkimit";
+
+"Connected" = "I/E lidhur";
+
+"Current GPS Position" = "Pozita GPS e tanishme";
+
+"Current Position" = "Pozita e tanishme";
+
+"Delete all bookmarks" = "Fshij të gjitha faqeshënimet";
+
+"Delete downloaded maps" = "Fshij hartat e shkarkuara";
+
+"Delete GPX Log file" = "Fshij GPX file-in e shënimeve";
+
+"Device Info" = "Informata për mjetin";
+
+"Directions" = "Drejtimet";
+
+"Directions Bookmarks" = "Faqeshënimet për drejtimet";
+
+"Disable GPS" = "Ç'aktivizo GPS";
+
+"Disconnected" = "Shkëputur";
+
+"Dismiss" = "Mos prano";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Largësia dhe shpejtësia do të tregohet me njësinë e metrit (km/h dhe metra).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Largësia dhe shpejtësia do të tregohet me njësinë e miljës (mph and milje).";
+
+"Download" = "Shkarko";
+
+"Downloaded maps size" = "Madhësia e hartës e shkarkuar";
+
+"Downloading maps..." = "Duke shkarkuar hartat...";
+
+"Driving directions" = "Drejtimet e vozitjes";
+
+"Enable GPS" = "Lësho GPS";
+
+"Error" = "Error";
+
+"From / Departure" = "Nga / Nisja";
+
+"From:" = "Nga:";
+
+"General" = "I/E përgjithshme";
+
+"Good" = "Mirë";
+
+"GPS" = "GPS";
+
+"GPS state" = "Gjendja e GPS";
+
+"GPS to use" = "GPS për të përdorur";
+
+"GPX Logging" = "GPX shënim";
+
+"Hybrid" = "Hibrid";
+
+"Language" = "Gjuha";
+
+"License checking" = "Kontrollimi i lejes";
+
+"License number" = "Numri i lejes";
+
+"License number for %@" = "Numri i lejes për %@";
+
+"License:" = "Leja:";
+
+"Locations" = "Vendet";
+
+"Log file size" = "Madhësia e file-it të shënimeve";
+
+"Manage maps" = "Përkujdesu për hartat";
+
+"Map" = "Harta";
+
+"Map auto-rotation" = "Vetërrotullim i hartës";
+
+"Map Database size" = "Madhësia e bazës së të dhënave të hartës";
+
+"Maps" = "Hartat";
+
+"Maps data" = "Të dhënat e hartës";
+
+"Maps Download" = "Shkarkimi i hartave";
+
+"Maps downloaded successfully !" = "Hartat u shkarkuan me sukses !";
+
+"Maps Manager" = "Përkujdesi i hartave";
+
+"Maps type" = "Tipi i hartave";
+
+"N/A" = "N/A";
+
+"New maps database: " = "Baza e re e të dhënave e hartave: ";
+
+"No" = "Jo";
+
+"No driving direction can be computed using your query." = "Nuk mund të kalkulohen drejtimet e vozitjes sipas kërkimit e tuaj.";
+
+"No License" = "Pa Leje";
+
+"No location has been found according to your query." = "Nuk u gjend vendi sipas kërkimit tuaj.";
+
+"None" = "Asnjë";
+
+"Offline mode" = "Mënyra e shkëputur";
+
+"Pick a GPS" = "Zgjedhe një GPS";
+
+"Places / Cities" = "Vendet / Qytetet";
+
+"Please select a greater map area by touching the screen with two fingers." = "Ju lutemi zgjedheni një hapësirë më të madhe të hartës duke prekur ekranin me dy gishta.";
+
+"Poor" = "Dobët";
+
+"Prevent Sleep Mode" = "Parandalo mënyrën e gjumit";
+
+"Ready to transfer..." = "Gati për transfer...";
+
+"Receive maps" = "Prano hartat";
+
+"Recompute itinerary" = "Rikalkulo itinerarin";
+
+"Reset GPS" = "Rivendos GPS";
+
+"Return to main page" = "Kthehu në faqen kryesore";
+
+"Satellite" = "Sateliti";
+
+"Save in Bookmarks" = "Ruaj në faqeshënues";
+
+"Search for:" = "Kërko për:";
+
+"Settings" = "Mjedis";
+
+"Show device info" = "Trego informata për paisjen";
+
+"Show Speedometer" = "Trego matësin e shpejtësisë";
+
+"Take position from:" = "Merr pozitën nga:";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Mjedisi i gjuhës është shfrytëzuar për të lokalizuar drejtimet e vozitjes, hartat dhe vendin/qytetin e rezultatetve të kërkimit.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Shërbimet e Vendndodhjes nuk janë të lëshuar në paisjen tuaj. Përdor programin e Mjedisit në dritaren e Shtëpisë për të rregulluar këtë problem.";
+
+"The maps database has been sucessfully saved." = "Baza e të dhënave e hartave është ruajtur me sukses.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Madhësia e hartave gjithashtu do të rritet kur të shikoni një pjesë të hartës që nuk është e shkarkuar më herët.";
+
+"This feature will be implemented in a future version." = "Kjo veti do të zbatohet në versionin e ardhshëm.";
+
+"To / Destination" = "Te / Destinacion";
+
+"To:" = "Te:";
+
+"Transfer" = "Transfer";
+
+"Unable to download a part of the map. Check your internet connection." = "Nuk mund të shkarkohet një pjesë e hartës. Kontrollo lidhjen e internetit.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Nuk mund të gjendet pozita e GPS. GPS-i momentalisht nuk është duke jap asnjë informatë për pozitën.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Nuk mund të hapet port-i serial. Sigurohuni që asnjë GPS program tjetër nuk është i lëshuar në prapavi.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Nuk mund të merren drejtimet e vozitjes nga serveri: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Nuk mund te merret informata e kërkuar nga serveri: %@";
+
+"Unknown error" = "Error i panjohur";
+
+"Upload a new maps database" = "Ngarko një bazë të re të të dhënave të hartave";
+
+"Upload new maps database" = "Ngarko bazë të re të të dhënave të hartave";
+
+"Use Miles unit" = "Përdor njësinë e matjes Milje";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Përdore rivendos GPS mundësinë ta rifilloni GPS-in kur të tregoj pozitën e gabuar ose nëse nuk përgjigjet më.";
+
+"User Interface" = "Paraqitja e shfrytëzuesit";
+
+"Verifying license number..." = "Duke kontrolluar numrin e lejes...";
+
+"Version" = "Versioni";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Kur është e aktivizuar, tërë drejtimet e vozitjes janë të ruajtura në faqeshënimet.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Kur është e aktivizuar, ç'aktivizon mënyrën e fjetjes që ekrani të jetë gjithmonë i lëshuar.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Kur është e aktivizuar, drejtimet e vozitjes janë të rikalkuluara kur jeni duke shkuar në rrugë të gabuar.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Kur GPX shenimi është i aktivizuar, të gjitha lëvizjet e juaja janë të ruajtura në një file me GPX formatim. File-i pastaj mund të përdoret në një kompjuter që ta shikoni rrugën.";
+
+"Wireless Transfer" = "Transfer pa tela";
+
+"Wrong\nWay" = "Drejtim inGabuar";
+
+"xGPS Error" = "Error i xGPS";
+
+"xGPS Version" = "Versioni i xGPS";
+
+"xGPS Web-based Management" = "xGPS Web-based Management";
+
+"Yes" = "Po";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Nuk mund të bëni kërkesë për kërkim derisa jeni në mënyrë të shkëputur. Mund ta ndalni mënyrën e shkëputur duke prekur pullën e mjedisit.";
+
+"You cannot download maps while you are in the offline mode." = "Nuk mund të shkarkoni hartat derisa jeni në mënyrën e shkëputur.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Hartat e juaja të shkarkuara nuk janë të përshtatshme me këtë version të xGPS. Ato janë fshirë.";
+
+"Your license number is invalid. Please verify and retry" = "Numri i juaj i lejes nuk është i vlefshëm. Ju lutemi kontrolloni dhe provoni prap";
+
+"Your license number is valid. You can now use the selected GPS." = "Numri i juaj i lejes është i vlefshëm. Tani mund ta përdorni GPS-in e zgjedhur.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Drejtimet e vozitjes qe i keni ruajtur nuk janë të përshtatshme me këtë version të xGPS. Ato janë fshirë.";
+

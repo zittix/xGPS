@@ -1,10 +1,30 @@
 "%.1f MB" = "%.1f Mo";
 
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d clients connectés";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
 "About xGPS" = "A propos de xGPS";
+
+"Actions" = "Actions";
+
+"Add / Modify:" = "Ajouter / Modifier:";
+
+"Address" = "Addresse";
 
 "Address book" = "Carnet d'adresses";
 
-"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Une erreur est survenue lors du téléchargement. Certaines parties de la carte n'ont peut-être pas été téléchargées correctement.";
+"Altitude" = "Altitude";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Une erreur est survenue lors du téléchargement. Certaines parties de la carte n'ont peut-être pas été téléchargées correctement.";
 
 "Are you sure you want to delete all the downloaded maps ?" = "Êtes-vous sûr de vouloir supprimer toutes les cartes ?";
 
@@ -12,25 +32,47 @@
 
 "Are you sure you want to delete all the saved bookmarks ?" = "Êtes-vous sûr de vouloir supprimer tous les signets ?";
 
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Êtes-vous sûr de vouloir télécharger la carte sélectionnée (%d tiles ~ %.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Êtes-vous sûr de vouloir télécharger la carte sélectionnée (%d tiles ~ %.1f MB) ?";
+
 "Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Êtes-vous sûr de vouloir télécharger la partie sélectionnée de la carte (%d parties ~ %d KB) ?";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Êtes-vous sûr de vouloir télécharger la partie sélectionnée de la carte (%d parties ~ %d MB) ?";
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "Êtes-vous sûr de vouloir recalculer l'itinéraire depuis le position courante ?";
 
+"Available actions:" = "Actions disponibles:";
+
+"Back" = "Back";
+
 "Blue dot for position" = "Point bleu pour GPS";
 
 "Bookmarks" = "Signets";
+
+"By Car" = "Voiture";
 
 "Cancel" = "Annuler";
 
 "City name / Address" = "Ville / Addresse";
 
+"Clear All" = "Tout effacer";
+
 "Clear Driving directions" = "Effacer les instructions routières";
+
+"Clear Results" = "Effacer Résultats";
 
 "Clear Search results" = "Effacer le résultat de la recherche";
 
+"Close" = "Fermer";
+
+"Compute" = "Calculer";
+
+"Computing your route..." = "Calcule de votre itinéraire...";
+
 "Connected" = "Connecté";
+
+"Create a new route" = "Créer un itinéraire";
 
 "Current GPS Position" = "Position GPS actuelle";
 
@@ -42,9 +84,15 @@
 
 "Delete GPX Log file" = "Effacer les enregistrements GPX";
 
+"Device address: %@" = "Adresse de l'appareil: %@";
+
+"Device Info" = "Information de l'appareil";
+
 "Directions" = "Directions";
 
 "Directions Bookmarks" = "Itinéraires - Signets";
+
+"Disable Beep" = "Désactiver le bip";
 
 "Disable GPS" = "Désactiver le GPS";
 
@@ -58,6 +106,8 @@
 
 "Download" = "Télécharger";
 
+"Download maps" = "Télécharger une carte";
+
 "Downloaded maps size" = "Taille des cartes";
 
 "Downloading maps..." = "Téléchargement des cartes...";
@@ -65,6 +115,10 @@
 "Driving directions" = "Itinéraire";
 
 "Enable GPS" = "Activer le GPS";
+
+"Enable night mode" = "Activer mode nuit";
+
+"Enable timer" = "Activation horaire";
 
 "Error" = "Erreur";
 
@@ -74,21 +128,51 @@
 
 "General" = "Général";
 
+"GMaps Hybrid" = "GMaps Hybride";
+
+"GMaps Satellite" = "GMaps Satellite";
+
+"GMaps Terrain" = "GMaps Relief";
+
+"Go Home" = "Maison";
+
 "Good" = "Bon";
+
+"Google Maps" = "Google Maps";
+
+"Google Maps Hybrid" = "Google Maps Hybride";
+
+"Google Maps Satellite" = "Google Maps Satellite";
+
+"Google Maps Terrain" = "Google Maps Relief";
 
 "GPS" = "GPS";
 
 "GPS Device" = "GPS";
 
+"GPS Enabled" = "GPS Activé";
+
+"GPS Information" = "Information GPS";
+
 "GPS state" = "Etat GPS";
 
 "GPS to use" = "GPS à utiliser";
 
+"GPS Tracking" = "Suivi GPS";
+
+"GPX Log Files" = "Fichiers GPX";
+
 "GPX Logging" = "Traçage GPX";
+
+"Home Address" = "Adresse domicile";
 
 "Hybrid" = "Hybride";
 
 "Language" = "Langue";
+
+"Large font size" = "Grande police";
+
+"Latitude" = "Latitude";
 
 "License checking" = "Vérification license";
 
@@ -98,15 +182,29 @@
 
 "License:" = "License:";
 
+"Location / Place" = "Endroit / Place";
+
 "Locations" = "Endroits";
 
 "Log file size" = "Taille du fichier";
 
+"Longitude" = "Longitude";
+
 "Manage maps" = "Gestion des cartes";
+
+"Manager" = "Manager";
 
 "Map" = "Carte";
 
 "Map auto-rotation" = "Auto-rotation carte";
+
+"Map Database size" = "Taille cartes";
+
+"Map details" = "Détails de la carte";
+
+"Map name" = "Nom de la carte";
+
+"Map Type" = "Type de carte";
 
 "Maps" = "Cartes";
 
@@ -120,23 +218,47 @@
 
 "Maps type" = "Type de carte";
 
-"N/A" = "N/A";
+"My GPS Position" = "Ma position GPS";
+
+"My GPS position is:" = "Ma position GPS est:";
+
+"N/A" = "N/D";
+
+"Name:" = "Name:";
+
+"New directions database: " = "Nouvelle base de données d'itinéraires: ";
+
+"New maps database: " = "Nouvelle base de données de cartes: ";
+
+"New Route" = "Nouvel itinéraire";
+
+"Night Mode" = "Mode Nuit";
 
 "No" = "Non";
 
 "No driving direction can be computed using your query." = "Aucun itinéraire n'a pu être calculé pour la requête.";
 
+"No Highway" = "Pas d'autoroute";
+
 "No License" = "Aucune license";
 
 "No location has been found according to your query." = "Votre recherche n'a donné aucun résultat.";
 
+"No name" = "Aucun nom";
+
 "None" = "Aucun";
+
+"Number of log files" = "Nombre de fichiers GPX";
 
 "Offline mode" = "Mode hors-ligne";
 
 "Pick a GPS" = "Choisissez un GPS";
 
 "Places / Cities" = "Endroits / Villes";
+
+"Please enter a name for your map." = "Merci d'entrer un nom pour votre carte.";
+
+"Please enter a name for your route." = "Merci d'entrer un nom pour votre itinéraire.";
 
 "Please select a greater map area by touching the screen with two fingers." = "Veuillez sélectionner une partie de la carte en touchant l'écran avec deux doigts.";
 
@@ -146,6 +268,8 @@
 
 "Ready to receive..." = "Prêt pour recevoir...";
 
+"Ready to transfer..." = "Prêt à transférer";
+
 "Receive maps" = "Réception de cartes";
 
 "Receiving maps" = "Réception de cartes";
@@ -154,29 +278,67 @@
 
 "Reset GPS" = "Redémarrer le GPS";
 
+"Return to main page" = "Retourner à la page d'accueil";
+
+"Route computation" = "Calcul d'itinéraire";
+
+"Routes Manager" = "Manager Itinéraires";
+
 "Satellite" = "Satellite";
 
 "Save in Bookmarks" = "Sauver en signets";
 
+"Search" = "Recherche";
+
 "Search for:" = "Rechercher:";
+
+"Search Places" = "Recherche Endroits";
+
+"Send by Email" = "Envoyer par e-mail";
+
+"Send by SMS" = "Envoyer par SMS";
 
 "Settings" = "Paramètres";
 
+"Show device info" = "Voir les informations de l'appareil";
+
 "Show Speedometer" = "Afficher la vitesse";
 
+"Speed" = "Vitesse";
+
+"Start time" = "Début";
+
+"Stop time" = "Fin";
+
 "Take position from:" = "Utiliser:";
+
+"Tap to edit" = "Toucher pour éditer";
+
+"The directions database has been sucessfully saved." = "La base de donnée d'itinéraires a été sauvée avec succès.";
 
 "The language setting is used to localize the driving directions, the maps and the place/city search results." = "Le paramètre langage est utilisé pour traduire les instructions routières, les cartes ainsi que les résultats de recherche de villes ou places.";
 
 "The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Les Services de Localisation ne sont pas activer sur votre appareil. Utilisez l'application Réglages pour corriger ce problème.";
 
+"The maps database has been sucessfully saved." = "La base de donnée de cartes a été sauvée avec succès.";
+
 "The maps size will also grow when you browse a part of a map you have not already downloaded." = "La taille des cartes va s'élargir au fur et à mesure que vous parcourez une partie de la carte que vous n'avez pas préalablement téléchargée.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Le mode nuit vous permet de vous concentrer sur la route sans être perturbé par l'écran de votre iPhone. Les couleurs seront plus sombres et la luminosité sera réduite.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Le zoom %d correspond au zoom le plus détaillé";
 
 "This feature will be implemented in a future version." = "Cette fonctionnalité sera disponible dans une future version.";
 
 "To / Destination" = "A / Destination";
 
 "To:" = "À:";
+
+"Total" = "Total";
+
+"Total log files size" = "Taille totale des fichiers";
+
+"Transfer" = "Transfert";
 
 "Unable to download a part of the map. Check your internet connection." = "Impossible de télécharger une partie de la carte. Vérifiez votre connexion Internet.";
 
@@ -188,7 +350,17 @@
 
 "Unable to retrieve the required information from the server: %@" = "Impossible d'obtenir les informations requises: %@";
 
+"Unknown" = "Inconnu";
+
 "Unknown error" = "Erreur inconnue";
+
+"Upload a new directions database" = "Envoyer une nouvelle base de données d'itinéraires";
+
+"Upload a new maps database" = "Envoyer une nouvelle base de données de cartes";
+
+"Upload new directions database" = "Envoyer une nouvelle base de données d'itinéraires";
+
+"Upload new maps database" = "Envoyer une nouvelle base de données de cartes";
 
 "Use Miles unit" = "Utiliser les Miles";
 
@@ -200,6 +372,12 @@
 
 "Version" = "Version";
 
+"Voice Instructions" = "Instructions vocales";
+
+"Voice instructions work only when the language in General settings is set to English." = "Les instructions vocales ne fonctionnent uniquement lorsque le langage est réglé sur English dans les paramètres généraux.";
+
+"Walking" = "A pieds";
+
 "When activated, all the searched driving directions are saved in the bookmarks." = "Lorsque cette option est activée, tous les itinéraires seront sauvés dans les signets.";
 
 "When activated, it disables the sleep mode such that the screen is always on." = "Activée, cette option empêche que le mode veille s'active. L'écran reste ainsi toujours allumé.";
@@ -208,9 +386,19 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Quand l'enregistrement GPX est activé, tous vos mouvements seront enregistrés dans un fichier au format GPX. Ce fichier pourra ensuite être utilisé sur un ordinateur pour visualisé le tracé.";
 
-"Wrong\nWay" = "Mauvaise\nDirection";
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Lorsque cette fonction est activée, tous vos mouvements seront enregistrés dans un fichier appelé GPX. Ce fichier peut être utilisé sur un ordinateur pour visualiser votre trajet. Le fichier peut être télécharger par l'intermédiaire du mode de transfert sans-fil.";
+
+"Wireless Transfer" = "Transfert Sans-fil";
+
+"Wrong Way hidden" = "Mauvaise directions caché";
+
+"Wrong\nWay" = "MauvaisenDirection";
 
 "xGPS Error" = "Erreur xGPS";
+
+"xGPS Version" = "Version xGPS";
+
+"xGPS Web-based Management" = "Management Web de xGPS";
 
 "Yes" = "Oui";
 
@@ -218,11 +406,25 @@
 
 "You cannot download maps while you are in the offline mode." = "Vous ne pouvez pas télécharger de cartes lorsque vous êtes dans le mode hors-ligne.";
 
+"You cannot have more than %d points in your route." = "Vous ne pouvez pas avoir plus que %d destinations dans votre itinéraire.";
+
+"You have to add at least one starting and one ending point in your route." = "Vous devez au moins avoir un point de départ et d'arrivée pour votre itinéraire.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Vous devez régler votre adresse de domicile dans Paramètres -> Instructions Routières -> Adresse domicile, avant d'utiliser cette fonction.";
+
 "Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Vos cartes ne sont pas compatibles avec cette version de xGPS. Elles ont été supprimées.";
+
+"Your home address" = "Votre adresse de domicile";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Votre adresse de domicile sera utilisée pour vous reconduire chez vous lorsque le bouton Maison sera appuyé.";
 
 "Your license number is invalid. Please verify and retry" = "Votre numéro de license est invalide. Veuillez vérifier.";
 
 "Your license number is valid. You can now use the selected GPS." = "Votre numéro de license est valide. Vous pouvez dès lors utiliser le GPS sélectionné.";
 
 "Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Vos signets pour les itinéraires ne sont pas compatible avec cette version de xGPS. Ils ont été supprimés.";
+
+"Zoom level to download" = "Niveau de zoom à télécharger";
+
+"Zoom level: %d" = "Niveau de zoom: %d";
 

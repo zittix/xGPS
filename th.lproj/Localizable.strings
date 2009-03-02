@@ -1,0 +1,603 @@
+/* Size of the map, MB=MegaBytes */
+"%.1f MB" = "%.1f MB";
+
+/* Size of the map, MB=MegaBytes */
+"%.2f MB" = "%.2f MB";
+
+/* No comment provided by engineer. */
+"%d connected clients" = "%d свързани клиента";
+
+/* No comment provided by engineer. */
+"%f km/h" = "%f км/ч";
+
+/* No comment provided by engineer. */
+"%f m" = "%f м";
+
+/* No comment provided by engineer. */
+"%f mph" = "%f мили/ч";
+
+/* No comment provided by engineer. */
+"%f °" = "%f °";
+
+/* About xGPS Title */
+"About xGPS" = "За xGPS";
+
+/* No comment provided by engineer. */
+"Actions" = "Действия";
+
+/* No comment provided by engineer. */
+"Add / Modify:" = "Добави / Промени:";
+
+/* No comment provided by engineer. */
+"Address" = "Адрес";
+
+/* No comment provided by engineer. */
+"Address book" = "Адрена книга";
+
+/* No comment provided by engineer. */
+"Altitude" = "Височина";
+
+/* Error message download maps */
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Възникна грешка по време на зареждането на избраните карти. Някои части от картите може да не са заредени коректно.";
+
+/* Delete downloaded maps question */
+"Are you sure you want to delete all the downloaded maps ?" = "Сигурни ли сте, че искате да изтриете заредените карти ?";
+
+/* Delete tracks */
+"Are you sure you want to delete all the recorded tracks ?" = "Сигурни ли сте, че искате да изтриете всички записани марширути ?";
+
+/* Delete bookmarks */
+"Are you sure you want to delete all the saved bookmarks ?" = "Сигурни ли сте, че искате да изтриете всички запазени отметки ?";
+
+/* in kilo bytes */
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Сигурни ли сте, че искате да заредите избраната област от картата (%1$d сектора ~ %2$.1f KB) ?";
+
+/* Make sure to let the %d etc... */
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Сигурни ли сте, че искате да заредите избраната област от картата (%1$d сектора ~ %2$.1f MB) ?";
+
+/* No comment provided by engineer. */
+"Are you sure you want to recompute the itinerary from the current position ?" = "Сигурни ли сте, че искате да преизчислите марширута от сегашната позиция ?";
+
+/* No comment provided by engineer. */
+"Available actions:" = "Възможни действия:";
+
+/* No comment provided by engineer. */
+"Back" = "Назад";
+
+/* No comment provided by engineer. */
+"Blue dot for position" = "Синя точка";
+
+/* No comment provided by engineer. */
+"Bookmarks" = "Отметки";
+
+/* No comment provided by engineer. */
+"By Car" = "С кола";
+
+/* Cancel */
+"Cancel" = "Отмени";
+
+/* Placeholder for search bar of cities */
+"City name / Address" = "Град / Адрес";
+
+/* No comment provided by engineer. */
+"Clear All" = "Изчисти всичко";
+
+/* No comment provided by engineer. */
+"Clear Driving directions" = "Изчисти навигацията";
+
+/* No comment provided by engineer. */
+"Clear Results" = "Изчисти резултатите";
+
+/* No comment provided by engineer. */
+"Clear Search results" = "Изчисти търсенето";
+
+/* No comment provided by engineer. */
+"Close" = "Затвори";
+
+/* No comment provided by engineer. */
+"Compute" = "Изчисли";
+
+/* No comment provided by engineer. */
+"Computing your route..." = "Изчисляване на марширута...";
+
+/* GPS State */
+"Connected" = "Свързан";
+
+/* No comment provided by engineer. */
+"Create a new route" = "Създай нов марширут";
+
+/* Driving directions current GPS POS */
+"Current GPS Position" = "Сегашна GPS позиция";
+
+/* No comment provided by engineer. */
+"Current Position" = "Сегашна позиция";
+
+/* No comment provided by engineer. */
+"Delete all bookmarks" = "Изтрий всички отметки";
+
+/* Delete downloaded maps in settings */
+"Delete downloaded maps" = "Изтрий заредените карти";
+
+/* No comment provided by engineer. */
+"Delete GPX Log file" = "Изтрий GPX лог файла";
+
+/* No comment provided by engineer. */
+"Device address: %@" = "Адрес на устройството: %@";
+
+/* No comment provided by engineer. */
+"Device Info" = "Информация за устройството";
+
+/* No comment provided by engineer. */
+"Directions" = "Напътствия";
+
+/* No comment provided by engineer. */
+"Directions Bookmarks" = "Отметки за напътствия";
+
+/* No comment provided by engineer. */
+"Disable Beep" = "Изкл. звука";
+
+/* GPS State */
+"Disconnected" = "Няма връзка";
+
+/* Dismiss */
+"Dismiss" = "Отхвърли";
+
+/* No comment provided by engineer. */
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Разстоянията и скоростта ще бъдат показвани в метричната система (км/ч и метри).";
+
+/* No comment provided by engineer. */
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Разстоянията и скоростта ще бъдат показвани в мили (мили/ч и мили).";
+
+/* Download button */
+"Download" = "Зареди";
+
+/* No comment provided by engineer. */
+"Download maps" = "Зареди карти";
+
+/* Downloaded maps size of settings view */
+"Downloaded maps size" = "Размер на заредени карти";
+
+/* Downloading maps title view */
+"Downloading maps..." = "Зареждане на карти...";
+
+/* No comment provided by engineer. */
+"Driving Directions" = "Напътствия за шофиране";
+
+/* Driving directions */
+"Driving directions" = "Напътствия за шофиране";
+
+/* No comment provided by engineer. */
+"Enable night mode" = "Вкл. нощен режим";
+
+/* No comment provided by engineer. */
+"Enable timer" = "Вкл. таймера";
+
+/* Error title */
+"Error" = "Грешка";
+
+/* Driving from  */
+"From / Departure" = "От / Тръгване";
+
+/* No comment provided by engineer. */
+"From:" = "От:";
+
+/* No comment provided by engineer. */
+"General" = "Общи";
+
+/* Map Hybrid */
+"GMaps Hybrid" = "GMaps Хибрид";
+
+/* Satellite */
+"GMaps Satellite" = "GMaps Сателит";
+
+/* Map Terrain */
+"GMaps Terrain" = "GMaps Терен";
+
+/* No comment provided by engineer. */
+"Go Home" = "Към вкъщи";
+
+/* GPS Signal */
+"Good" = "Добра";
+
+/* Map */
+"Google Maps" = "Google Maps";
+
+/* Map Hybrid */
+"Google Maps Hybrid" = "Google Maps Хибрид";
+
+/* Satellite */
+"Google Maps Satellite" = "Google Maps Сателит";
+
+/* Map Terrain */
+"Google Maps Terrain" = "Google Maps Терен";
+
+/* No comment provided by engineer. */
+"GPS" = "GPS";
+
+/* No comment provided by engineer. */
+"GPS Enabled" = "GPS включен";
+
+/* No comment provided by engineer. */
+"GPS Information" = "GPS информация";
+
+/* Title in setting for gps state */
+"GPS state" = "GPS състояние";
+
+/* Title in setting for gps to use */
+"GPS to use" = GPS за използване";
+
+/* No comment provided by engineer. */
+"GPS Tracking" = "GPS следене";
+
+/* No comment provided by engineer. */
+"GPX Log Files" = "GPX лог файлове";
+
+/* Activate GPX Logging */
+"GPX Logging" = "GPX следене";
+
+/* No comment provided by engineer. */
+"Home Address" = "Домашен адрес";
+
+/* No comment provided by engineer. */
+"Language" = "Език";
+
+/* No comment provided by engineer. */
+"Large font size" = "Голям шрифт";
+
+/* No comment provided by engineer. */
+"Latitude" = "Ширина";
+
+/* Title of the message box of the result of the checking.. */
+"License checking" = "Проверка на лиценза";
+
+/* License number title */
+"License number" = "Лицензен номер";
+
+/* Title section in license view */
+"License number for %@" = "Лицензен номер за %@";
+
+/* License number title for cell */
+"License:" = "Лиценз:";
+
+/* No comment provided by engineer. */
+"Location / Place" = "Местоположение / Място";
+
+/* No comment provided by engineer. */
+"Locations" = "Местоположения";
+
+/* No comment provided by engineer. */
+"Longitude" = "Дължина";
+
+/* No comment provided by engineer. */
+"Manager" = "Мениджър";
+
+/* Map */
+"Map" = "Карта";
+
+/* Map auto-rotation */
+"Map auto-rotation" = "Авто-завъртане";
+
+/* No comment provided by engineer. */
+"Map Database size" = "Размер на карти";
+
+/* No comment provided by engineer. */
+"Map details" = "Детайли за карта";
+
+/* No comment provided by engineer. */
+"Map name" = "Име на карта";
+
+/* No comment provided by engineer. */
+"Map Type" = "Тип на карта";
+
+/* No comment provided by engineer. */
+"Maps" = "Карти";
+
+/* Maps data title */
+"Maps data" = "Данни за карти";
+
+/* Maps Download title message box */
+"Maps Download" = "Зареждане на карти";
+
+/* Download maps ok */
+"Maps downloaded successfully !" = "Картите са заредени успешно !";
+
+/* Maps manager title */
+"Maps Manager" = "Мениджър на карти";
+
+/* No comment provided by engineer. */
+"Maps type" = "Вид на картите";
+
+/* No comment provided by engineer. */
+"My GPS Position" = "Моята GPS позиция";
+
+/* No comment provided by engineer. */
+"My GPS position is:" = "Моята GPS позиция е:";
+
+/* Not available */
+"N/A" = "N/A";
+
+/* No comment provided by engineer. */
+"Name:" = "Име:";
+
+/* No comment provided by engineer. */
+"New directions database: " = "Нова база данни за напътствия: ";
+
+/* No comment provided by engineer. */
+"New maps database: " = "Нова база данни за карти: ";
+
+/* No comment provided by engineer. */
+"New Route" = "Нов марширут";
+
+/* No comment provided by engineer. */
+"Night Mode" = "Нощен режим";
+
+/* No */
+"No" = "Не";
+
+/* No driving dir. found error message */
+"No driving direction can be computed using your query." = "Не могат да се изчислят напъствия за шофиране по вашата заявка.";
+
+/* No comment provided by engineer. */
+"No Highway" = "Няма магистрала";
+
+/* GPS State */
+"No License" = "Няма лиценз";
+
+/* No location found error message */
+"No location has been found according to your query." = "Не е намерено място по вашата заявка.";
+
+/* No comment provided by engineer. */
+"No name" = "Няма име";
+
+/* GPS Signal */
+"None" = "Липсва";
+
+/* No comment provided by engineer. */
+"Number of log files" = "Брой лог файлове";
+
+/* Offline mode */
+"Offline mode" = "Offline режим";
+
+/* Title gps picker */
+"Pick a GPS" = "Избери GPS";
+
+/* Search for places */
+"Places / Cities" = "Места / Градове";
+
+/* No comment provided by engineer. */
+"Please enter a name for your map." = "Моля, въведете име за картата.";
+
+/* No comment provided by engineer. */
+"Please enter a name for your route." = "Моля, въведете име за марширута";
+
+/* Error map select message */
+"Please select a greater map area by touching the screen with two fingers." = "Моля, изберете по-голяма област като докоснете екрана с два пръста.";
+
+/* GPS Signal */
+"Poor" = "Слаба";
+
+/* Prevent Sleep Mode */
+"Prevent Sleep Mode" = "Изключи заспиване";
+
+/* Status ready */
+"Ready to transfer..." = "Готовност за транфер...";
+
+/* No comment provided by engineer. */
+"Recompute itinerary" = "Преизчисли марширута";
+
+/* Reset GPS Button */
+"Reset GPS" = "Нулирай GPS";
+
+/* No comment provided by engineer. */
+"Return to main page" = "Към началната стр.";
+
+/* No comment provided by engineer. */
+"Route computation" = "Изчисляване на марширута";
+
+/* No comment provided by engineer. */
+"Routes Manager" = "Менджър на марширути";
+
+/* No comment provided by engineer. */
+"Save in Bookmarks" = "Запази в Отметки";
+
+/* No comment provided by engineer. */
+"Search" = "Търси";
+
+/* No comment provided by engineer. */
+"Search Places" = "Търси места";
+
+/* No comment provided by engineer. */
+"Send by Email" = "Изпрати по мейл";
+
+/* No comment provided by engineer. */
+"Send by SMS" = "Изпрати по СМС";
+
+/* Settings Button */
+"Settings" = "Настройки";
+
+/* No comment provided by engineer. */
+"Show device info" = "Покажи инфо за устр.";
+
+/* No comment provided by engineer. */
+"Show Speedometer" = "Покажи километраж";
+
+/* No comment provided by engineer. */
+"Speed" = "Скорост";
+
+/* No comment provided by engineer. */
+"Start time" = "Тръгване";
+
+/* No comment provided by engineer. */
+"Stop time" = "Пристигане";
+
+/* Directions */
+"Take position from:" = "Вземи позиция от:";
+
+/* No comment provided by engineer. */
+"Tap to edit" = "Натисни за редакция";
+
+/* No comment provided by engineer. */
+"The directions database has been sucessfully saved." = "Базата данни за напътствия е успешно запазена.";
+
+/* No comment provided by engineer. */
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Езиковите настройки се използват за локализиране на напътствията за шофиране, картите и резултатите от търсенето.";
+
+/* GPS iphone 3G error */
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услугите за локализация на вашето устройство не са пуснати. Използвайте приложението Настройки на началния екран да оправите проблема.";
+
+/* No comment provided by engineer. */
+"The maps database has been sucessfully saved." = "Базата данни за картите е успешно запазена.";
+
+/* No comment provided by engineer. */
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Размерът на картите ще расте и когато разглеждате част от карта, която не сте заредили.";
+
+/* No comment provided by engineer. */
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Нощният режим ви позволява да се концентрирате върху пътя без да се разсейвате от яркостта на екрана ви. Цветовете са по-тъмни и яркостта на екрана ще бъде намалена до минимум.";
+
+/* No comment provided by engineer. */
+"The zoom level %d corresponds to the most detailed zoom level" = "Нивото на увеличение %d отговаря на най-детайлното ниво на увеличение";
+
+/* Driving to  */
+"To / Destination" = "Към / Посока";
+
+/* No comment provided by engineer. */
+"To:" = "Към:";
+
+/* No comment provided by engineer. */
+"Total" = "Общо";
+
+/* No comment provided by engineer. */
+"Total log files size" = "Общ размер на логовете";
+
+/* Receiving title */
+"Transfer" = "Прехвърли";
+
+/* Tile DL error */
+"Unable to download a part of the map. Check your internet connection." = "Не е възможно зареждането на част от картата. Проверете връзката си с Интернет.";
+
+/* GPS Dir Pos error message */
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Не е възможно определянет на GPS позицията. GPS-ът в момента не дава никаква информация за позицията.";
+
+/* GPS serial port error */
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Не е възможна връзката със серийния порт. Проверете да не би да има пуснат друг GPS софтуер.";
+
+/* Network error message */
+"Unable to retrieve the driving directions from the server: %@" = "Не е възможно зареждането на напътствия за шофиране от сървъра: %@";
+
+/* Network error message */
+"Unable to retrieve the required information from the server: %@" = "Не е възможно зареждането на необходимата информация от сървъра: %@";
+
+/* No comment provided by engineer. */
+"Unknown" = "Неизвестен";
+
+/* Unknown error */
+"Unknown error" = "Неизвестна грешка";
+
+/* No comment provided by engineer. */
+"Upload a new directions database" = "Качи нова база данни за напътствия";
+
+/* No comment provided by engineer. */
+"Upload a new maps database" = "Качи нова база данни за карти";
+
+/* No comment provided by engineer. */
+"Upload new directions database" = "Качи нова база данни за напътствия";
+
+/* No comment provided by engineer. */
+"Upload new maps database" = "Качи нова база данни за карти";
+
+/* Use Miles unit */
+"Use Miles unit" = "Използвай мили";
+
+/* No comment provided by engineer. */
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Използвайте опцията Нулирай GPS да рестартирате GPS-а когато ви дава грешна посока или е забил.";
+
+/* No comment provided by engineer. */
+"User Interface" = "Потребителски интерфейс";
+
+/* Verify license text */
+"Verifying license number..." = "Проверяване на лицензен номер...";
+
+/* Version string */
+"Version" = "Версия";
+
+/* No comment provided by engineer. */
+"Voice Instructions" = "Гласови напътствия";
+
+/* No comment provided by engineer. */
+"Voice instructions work only when the language in General settings is set to English." = "Гласовите напътсвия работят само когато езикът избран в Общи е Английски.";
+
+/* No comment provided by engineer. */
+"Walking" = "Вървене";
+
+/* No comment provided by engineer. */
+"When activated, all the searched driving directions are saved in the bookmarks." = "Когато е активирано, всички търсени напътствия за шофиране се запазват в Отметки.";
+
+/* No comment provided by engineer. */
+"When activated, it disables the sleep mode such that the screen is always on." = "Когато е активирано, телефонът не може да заспи и екрана остава включен.";
+
+/* No comment provided by engineer. */
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Когато е активирано, напътствията за шофиране се преизчисляват, когато карате в грешната посока.";
+
+/* No comment provided by engineer. */
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Когато GPX следенето е активирано, всички ваши движения се записват във файл в GPX формат. След това файла може да се използва на компютър да се визуализира пътя. Лог файла може да се смъкне чрез web-базирания интерфейс използвайки режима Безжичен трансфер.";
+
+/* No comment provided by engineer. */
+"Wireless Transfer" = "Безжичен трансфер";
+
+/* No comment provided by engineer. */
+"Wrong Way hidden" = "Скрий грешна посока";
+
+/* No comment provided by engineer. */
+"Wrong\nWay" = "Грешна\nпосока";
+
+/* Error title */
+"xGPS Error" = "xGPS грешка";
+
+/* No comment provided by engineer. */
+"xGPS Version" = "xGPS версия";
+
+/* No comment provided by engineer. */
+"xGPS Web-based Management" = "xGPS Web-базирано управление";
+
+/* Yes */
+"Yes" = "Да";
+
+/* Error search offline */
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Не можете да търсите, докато сте в offline режим. Можете да изключите offline режима в Настройки. You can switch off the offline mode by tapping the Settings button.";
+
+/* Error download maps offline */
+"You cannot download maps while you are in the offline mode." = "Не можете да зареждате карти, докато сте в offline режим.";
+
+/* No comment provided by engineer. */
+"You cannot have more than %d points in your route." = "Не можете да имате повече от %d точки във вашия марширут.";
+
+/* No comment provided by engineer. */
+"You have to add at least one starting and one ending point in your route." = "Трябва да добавите поне една начална и една крайна точка на вашия марширут.";
+
+/* No comment provided by engineer. */
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Трябва да въведете домашния си адрес в Настройки -> Напътствия за шофиране -> Домашен адрес преди да можете да използвате тази функция.";
+
+/* No comment provided by engineer. */
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Запазените ви карти не са съвместими с тази версия на xGPS и бяха изтрити.";
+
+/* No comment provided by engineer. */
+"Your home address" = "Вашият домашен адрес";
+
+/* No comment provided by engineer. */
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Вашият домашен адрес ще се използва да получите напътствия за шофиране към вас когато натиснете бутона Към вкъщи.";
+
+/* Confirm invalid license */
+"Your license number is invalid. Please verify and retry" = "Вашият лицензен номер е невалиден. Моля, проверете го и опитайте пак";
+
+/* Confirm valid license */
+"Your license number is valid. You can now use the selected GPS." = "Вашият лицензен номер е валиден. Вече можете да ползвате избрания GPS.";
+
+/* No comment provided by engineer. */
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Запазените ви напътствия за шофиране не са съвместими с тази версия на xGPS и бяха изтрити.";
+
+/* No comment provided by engineer. */
+"Zoom level to download" = "Ниво на увеличение за зареждане";
+
+/* No comment provided by engineer. */
+"Zoom level: %d" = "Ниво на увеличение: %d";
+

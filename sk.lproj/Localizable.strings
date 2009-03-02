@@ -1,0 +1,252 @@
+"%.1f MB" = "%.1f MB";
+
+"%d connected clients" = "%d pripojených klientov";
+
+"About xGPS" = "O programe xGPS";
+
+"Address book" = "Adresár";
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Nastala chyba pri sťahovaní vybraných máp. Niektoré časti máp môžu byť nestihnuté správne.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Naozaj chcete zmazať všetky stiahnuté mapy ?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Naozaj chcete zmazať všetky nahrané trasy ?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Naozaj chcete zmazať všetky uložené záložky ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Naozaj chcete stiahnuť označenú časť mapy (%1$d pokrytie ~ %2$d KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Naozaj chcete stiahnuť označenú časť mapy (%1$d pokrytie ~ %2$d MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Naozaj chcete prepočítať cestu od súčasnej pozície ?";
+
+"Available actions:" = "Možné Akcie:";
+
+"Blue dot for position" = "Modrý Bod pre pozíciu";
+
+"Bookmarks" = "Záložky";
+
+"Cancel" = "Zrušiť";
+
+"City name / Address" = "Názob mesta / Adresa";
+
+"Clear Driving directions" = "Clear Driving directions";
+
+"Clear Search results" = "Zmazať pokyny pre riadene";
+
+"Connected" = "Pripojené";
+
+"Current GPS Position" = "Súčasná GPS Pozícia";
+
+"Current Position" = "Súčasná Pozícia";
+
+"Delete all bookmarks" = "Zmazať všstky záložky";
+
+"Delete downloaded maps" = "Zmazať stiahnuté mapy";
+
+"Delete GPX Log file" = "Zmazať GPX Log súbor";
+
+"Device Info" = "Informácie o Zariadení";
+
+"Directions" = "Pokyny";
+
+"Directions Bookmarks" = "Záložky Pokynov";
+
+"Disable GPS" = "Zakázať GPS";
+
+"Disconnected" = "Odpojené";
+
+"Dismiss" = "Odmietnuť";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Vzdialenosti a rýchlosť budú zobrazené v metrických jednotkách (km/h a metre).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Vzdialenosti a rýchlosť budú zobrazené v míľových jednotkách (mph a míle).";
+
+"Download" = "Stiahnuť";
+
+"Downloaded maps size" = "Veľkosť stiahnutých máp";
+
+"Downloading maps..." = "Sťahovanie máp...";
+
+"Driving directions" = "Pokyny pre šoférovanie";
+
+"Enable GPS" = "Povoliť GPS";
+
+"Error" = "Chyba";
+
+"From / Departure" = "Z / Príchod";
+
+"From:" = "Z:";
+
+"General" = "Všeobecné";
+
+"Good" = "Dobrý";
+
+"GPS" = "GPS";
+
+"GPS state" = "Stav GPS";
+
+"GPS to use" = "Použiť GPS";
+
+"GPX Logging" = "GPX Logovanie";
+
+"Hybrid" = "Hybrid";
+
+"Language" = "Jazyk";
+
+"License checking" = "Kontrola Licenie";
+
+"License number" = "Číslo Licencie";
+
+"License number for %@" = "Číslo Licencie pre %@";
+
+"License:" = "Licencia:";
+
+"Locations" = "Lokácie";
+
+"Log file size" = "Veľkosť Log súboru";
+
+"Manage maps" = "Spravovať mapy";
+
+"Map" = "Mapa";
+
+"Map auto-rotation" = "Automatické natáčanie mapy";
+
+"Map Database size" = "Veľkosť datázy mapy";
+
+"Maps" = "Mapy";
+
+"Maps data" = "Dáta máp";
+
+"Maps Download" = "Stiahnutie Máp";
+
+"Maps downloaded successfully !" = "Sťahovanie Máp úspešné !";
+
+"Maps Manager" = "Správca Máp";
+
+"Maps type" = "Typ Máp";
+
+"N/A" = "Nedostupné";
+
+"New maps database: " = "Nová databáza máp: ";
+
+"No" = "Nie";
+
+"No driving direction can be computed using your query." = "Pokyny pre riadenie nemôžu byť vypočítané žiadné podľa Vami zadanej požiadavky.";
+
+"No License" = "Žiadna Licencia";
+
+"No location has been found according to your query." = "Žiadna lokalita nebola nájdená podľa Vami zadanej požiadavky.";
+
+"None" = "Žiadny";
+
+"Offline mode" = "Offline mód";
+
+"Pick a GPS" = "Vyberte GPS";
+
+"Places / Cities" = "Miesta / Mestá";
+
+"Please select a greater map area by touching the screen with two fingers." = "Prosím vyberte väčšiu časť mapy dotykom dvoch prstov na obrazovku.";
+
+"Poor" = "Slabý";
+
+"Prevent Sleep Mode" = "Zabrániť Uspaniu";
+
+"Ready to transfer..." = "Pripravený na prenos...";
+
+"Receive maps" = "Prijať mapy";
+
+"Recompute itinerary" = "Prepočítať trasu";
+
+"Reset GPS" = "Resetnúť GPS";
+
+"Return to main page" = "Návrat na hlavnú obrazovku";
+
+"Satellite" = "Satelit";
+
+"Save in Bookmarks" = "Uložiť do Záložiek";
+
+"Search for:" = "Hľadať:";
+
+"Settings" = "Nastavenia";
+
+"Show device info" = "Zobraziť info o zariadení";
+
+"Show Speedometer" = "Zobraziť Show Tachometer";
+
+"Take position from:" = "Použiť pozíciu z :";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Nie je použité žiadne nastavenie jazyku pre lokalizovanie inštrukcií pre šoférovanie, mapy a výsledky vyhľadávania miesta/mesta.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Lokalizačné služby nie sú povolené na Vašom zariadení. Použite Nasvenia aplikácie na Vašej Home obrazovke pre vyriešenie tohto problému.";
+
+"The maps database has been sucessfully saved." = "Databáza máp bola úspešne uložená.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Veľkosť máp bude narastať aj s prezeraním časti mapy ktorá ešte nebola stiahnutá.";
+
+"This feature will be implemented in a future version." = "Táto funkcia bude implementovaná v budúcej verzii.";
+
+"To / Destination" = "Kam / Cieľ";
+
+"To:" = "Kam:";
+
+"Transfer" = "Prenos";
+
+"Unable to download a part of the map. Check your internet connection." = "Nie je možné stiahnuť časť mapy. Skontrolujte Vaše Internetové pripojenie.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Nie je možné získať GPS pozíciu. GPS práve teraz nedáva žiadne informácie o polohe.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Nie je možné otvoriť sérivý port. Uistite sa, že nie je spustená žiadna iná GPS aplikácia na pozadí.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Nie je možné získať pokyny pre riadenie zo servera: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Nie je možné získať požadované informácie zo servera: %@";
+
+"Unknown error" = "Neznáma chyba";
+
+"Upload a new maps database" = "Uploadnúť novú databázu máp";
+
+"Upload new maps database" = "Uploadnúť novú databázu máp";
+
+"Use Miles unit" = "Použiť Míľové jednotky";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Použite Reset GPS pozície pre reštartovanie GPS keď dáva chybné informácie alebo prestane komunikovať.";
+
+"User Interface" = "Užívateľské Rozranie";
+
+"Verifying license number..." = "Kontrolovanie licenčného čísla...";
+
+"Version" = "Verzia";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Keď je aktivované, všetky vyhľadané pokyny pre riadenie sú ukladané do Záložiek.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Keď je aktivované, zabraňuje režimu spánku, takže je obrazovka stále zapnutá.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Keď je aktivované, inštrukcie pre riadenie sú prepočítavané keď idete zlou cestou.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Keď je GPX logovanie aktivované, všetky Vaše pohyby sú nahrávanédo súboru v GPX formáte. Súbor potom môže byť použitý na počítačí pre vizualizáciu cesty.";
+
+"Wireless Transfer" = "Bezdrôtový Prenos";
+
+"Wrong\nWay" = "ZlánCesta";
+
+"xGPS Error" = "xGPS Chyba";
+
+"xGPS Version" = "xGPS Verszia";
+
+"xGPS Web-based Management" = "xGPS Web Správca";
+
+"Yes" = "Áno";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Nemôžete vyhľadávať pokiaľ ste v offline móde. Offline mód môžete vypnúť stlačením tlačidla Nastavenia.";
+
+"You cannot download maps while you are in the offline mode." = "Nemôžete sťahovať mapy pokiaľ ste v offline móde.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Vami stiahnuté mapy nie sú kompatibilné s touto verziou xGPS a boli zmazané.";
+
+"Your license number is invalid. Please verify and retry" = "Vaše licenčné číslo je nesprávna. Prosím skontrolujte ho a skúste znovu";
+
+"Your license number is valid. You can now use the selected GPS." = "Vaše licenčné číslo je správne. Teraz môžete používať zvolenú GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Vami uložené pokyny pre riadenie nie sú kompatibilné s touto verziou xGPS a boli zmazané.";
+

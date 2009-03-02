@@ -1,0 +1,400 @@
+"%.1f MB" = "%.1f MB";
+
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d свързани клиента";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f км/ч";
+
+"%f m" = "%f м";
+
+"%f mph" = "%f мили/ч";
+
+"About xGPS" = "За xGPS";
+
+"Actions" = "Действия";
+
+"Add / Modify:" = "Добави / Промени:";
+
+"Address" = "Адрес";
+
+"Address book" = "Адрена книга";
+
+"Altitude" = "Височина";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Възникна грешка по време на зареждането на избраните карти. Някои части от картите може да не са заредени коректно.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Сигурни ли сте, че искате да изтриете заредените карти ?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Сигурни ли сте, че искате да изтриете всички записани марширути ?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Сигурни ли сте, че искате да изтриете всички запазени отметки ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Сигурни ли сте, че искате да заредите избраната област от картата (%1$d сектора ~ %2$.1f KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Сигурни ли сте, че искате да заредите избраната област от картата (%1$d сектора ~ %2$.1f MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Сигурни ли сте, че искате да преизчислите марширута от сегашната позиция ?";
+
+"Available actions:" = "Възможни действия:";
+
+"Back" = "Назад";
+
+"Blue dot for position" = "Синя точка";
+
+"Bookmarks" = "Отметки";
+
+"By Car" = "С кола";
+
+"Cancel" = "Отмени";
+
+"City name / Address" = "Град / Адрес";
+
+"Clear All" = "Изчисти всичко";
+
+"Clear Driving directions" = "Изчисти навигацията";
+
+"Clear Results" = "Изчисти резултатите";
+
+"Clear Search results" = "Изчисти търсенето";
+
+"Close" = "Затвори";
+
+"Compute" = "Изчисли";
+
+"Computing your route..." = "Изчисляване на марширута...";
+
+"Connected" = "Свързан";
+
+"Create a new route" = "Създай нов марширут";
+
+"Current GPS Position" = "Сегашна GPS позиция";
+
+"Current Position" = "Сегашна позиция";
+
+"Delete all bookmarks" = "Изтрий всички отметки";
+
+"Delete downloaded maps" = "Изтрий заредените карти";
+
+"Delete GPX Log file" = "Изтрий GPX лог файла";
+
+"Device address: %@" = "Адрес на устройството: %@";
+
+"Device Info" = "Информация за устройството";
+
+"Directions" = "Напътствия";
+
+"Directions Bookmarks" = "Отметки за напътствия";
+
+"Disable Beep" = "Изкл. звука";
+
+"Disconnected" = "Няма връзка";
+
+"Dismiss" = "Отхвърли";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Разстоянията и скоростта ще бъдат показвани в метричната система (км/ч и метри).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Разстоянията и скоростта ще бъдат показвани в мили (мили/ч и мили).";
+
+"Download" = "Зареди";
+
+"Download maps" = "Зареди карти";
+
+"Downloaded maps size" = "Размер на заредени карти";
+
+"Downloading maps..." = "Зареждане на карти...";
+
+"Driving Directions" = "Напътствия за шофиране";
+
+"Enable night mode" = "Вкл. нощен режим";
+
+"Enable timer" = "Вкл. таймера";
+
+"Error" = "Грешка";
+
+"From / Departure" = "От / Тръгване";
+
+"From:" = "От:";
+
+"General" = "Общи";
+
+"GMaps Hybrid" = "GMaps Хибрид";
+
+"GMaps Satellite" = "GMaps Сателит";
+
+"GMaps Terrain" = "GMaps Терен";
+
+"Go Home" = "Към вкъщи";
+
+"Good" = "Добра";
+
+"Google Maps" = "Google Maps";
+
+"Google Maps Hybrid" = "Google Maps Хибрид";
+
+"Google Maps Satellite" = "Google Maps Сателит";
+
+"Google Maps Terrain" = "Google Maps Терен";
+
+"GPS" = "GPS";
+
+"GPS Enabled" = "GPS включен";
+
+"GPS Information" = "GPS информация";
+
+"GPS state" = "GPS състояние";
+
+"GPS to use" = "";
+
+"GPS Tracking" = "GPS следене";
+
+"GPX Log Files" = "GPX лог файлове";
+
+"GPX Logging" = "GPX следене";
+
+"Home Address" = "Домашен адрес";
+
+"Language" = "Език";
+
+"Large font size" = "Голям шрифт";
+
+"Latitude" = "Ширина";
+
+"License checking" = "Проверка на лиценза";
+
+"License number" = "Лицензен номер";
+
+"License number for %@" = "Лицензен номер за %@";
+
+"License:" = "Лиценз:";
+
+"Location / Place" = "Местоположение / Място";
+
+"Locations" = "Местоположения";
+
+"Longitude" = "Дължина";
+
+"Manager" = "Мениджър";
+
+"Map" = "Карта";
+
+"Map auto-rotation" = "Авто-завъртане";
+
+"Map Database size" = "Размер на карти";
+
+"Map details" = "Детайли за карта";
+
+"Map name" = "Име на карта";
+
+"Map Type" = "Тип на карта";
+
+"Maps" = "Карти";
+
+"Maps data" = "Данни за карти";
+
+"Maps Download" = "Зареждане на карти";
+
+"Maps downloaded successfully !" = "Картите са заредени успешно !";
+
+"Maps Manager" = "Мениджър на карти";
+
+"Maps type" = "Вид на картите";
+
+"My GPS Position" = "Моята GPS позиция";
+
+"My GPS position is:" = "Моята GPS позиция е:";
+
+"N/A" = "N/A";
+
+"Name:" = "Име:";
+
+"New directions database: " = "Нова база данни за напътствия: ";
+
+"New maps database: " = "Нова база данни за карти: ";
+
+"New Route" = "Нов марширут";
+
+"Night Mode" = "Нощен режим";
+
+"No" = "Не";
+
+"No driving direction can be computed using your query." = "Не могат да се изчислят напъствия за шофиране по вашата заявка.";
+
+"No Highway" = "Няма магистрала";
+
+"No License" = "Няма лиценз";
+
+"No location has been found according to your query." = "Не е намерено място по вашата заявка.";
+
+"No name" = "Няма име";
+
+"None" = "Липсва";
+
+"Number of log files" = "Брой лог файлове";
+
+"Offline mode" = "Offline режим";
+
+"Pick a GPS" = "Избери GPS";
+
+"Places / Cities" = "Места / Градове";
+
+"Please enter a name for your map." = "Моля, въведете име за картата.";
+
+"Please enter a name for your route." = "Моля, въведете име за марширута";
+
+"Please select a greater map area by touching the screen with two fingers." = "Моля, изберете по-голяма област като докоснете екрана с два пръста.";
+
+"Poor" = "Слаба";
+
+"Prevent Sleep Mode" = "Изключи заспиване";
+
+"Ready to transfer..." = "Готовност за транфер...";
+
+"Recompute itinerary" = "Преизчисли марширута";
+
+"Reset GPS" = "Нулирай GPS";
+
+"Return to main page" = "Към началната стр.";
+
+"Route computation" = "Изчисляване на марширута";
+
+"Routes Manager" = "Менджър на марширути";
+
+"Save in Bookmarks" = "Запази в Отметки";
+
+"Search" = "Търси";
+
+"Search Places" = "Търси места";
+
+"Send by Email" = "Изпрати по мейл";
+
+"Send by SMS" = "Изпрати по СМС";
+
+"Settings" = "Настройки";
+
+"Show device info" = "Покажи инфо за устр.";
+
+"Show Speedometer" = "Покажи километраж";
+
+"Speed" = "Скорост";
+
+"Start time" = "Тръгване";
+
+"Stop time" = "Пристигане";
+
+"Take position from:" = "Вземи позиция от:";
+
+"Tap to edit" = "Натисни за редакция";
+
+"The directions database has been sucessfully saved." = "Базата данни за напътствия е успешно запазена.";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Езиковите настройки се използват за локализиране на напътствията за шофиране, картите и резултатите от търсенето.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Услугите за локализация на вашето устройство не са пуснати. Използвайте приложението Настройки на началния екран да оправите проблема.";
+
+"The maps database has been sucessfully saved." = "Базата данни за картите е успешно запазена.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Размерът на картите ще расте и когато разглеждате част от карта, която не сте заредили.";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Нощният режим ви позволява да се концентрирате върху пътя без да се разсейвате от яркостта на екрана ви. Цветовете са по-тъмни и яркостта на екрана ще бъде намалена до минимум.";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "Нивото на увеличение %d отговаря на най-детайлното ниво на увеличение";
+
+"To / Destination" = "Към / Посока";
+
+"To:" = "Към:";
+
+"Total" = "Общо";
+
+"Total log files size" = "Общ размер на логовете";
+
+"Transfer" = "Прехвърли";
+
+"Unable to download a part of the map. Check your internet connection." = "Не е възможно зареждането на част от картата. Проверете връзката си с Интернет.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Не е възможно определянет на GPS позицията. GPS-ът в момента не дава никаква информация за позицията.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Не е възможна връзката със серийния порт. Проверете да не би да има пуснат друг GPS софтуер.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Не е възможно зареждането на напътствия за шофиране от сървъра: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Не е възможно зареждането на необходимата информация от сървъра: %@";
+
+"Unknown" = "Неизвестен";
+
+"Unknown error" = "Неизвестна грешка";
+
+"Upload a new directions database" = "Качи нова база данни за напътствия";
+
+"Upload a new maps database" = "Качи нова база данни за карти";
+
+"Upload new directions database" = "Качи нова база данни за напътствия";
+
+"Upload new maps database" = "Качи нова база данни за карти";
+
+"Use Miles unit" = "Използвай мили";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Използвайте опцията Нулирай GPS да рестартирате GPS-а когато ви дава грешна посока или е забил.";
+
+"User Interface" = "Потребителски интерфейс";
+
+"Verifying license number..." = "Проверяване на лицензен номер...";
+
+"Version" = "Версия";
+
+"Voice Instructions" = "Гласови напътствия";
+
+"Voice instructions work only when the language in General settings is set to English." = "Гласовите напътсвия работят само когато езикът избран в Общи е Английски.";
+
+"Walking" = "Вървене";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Когато е активирано, всички търсени напътствия за шофиране се запазват в Отметки.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Когато е активирано, телефонът не може да заспи и екрана остава включен.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Когато е активирано, напътствията за шофиране се преизчисляват, когато карате в грешната посока.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Когато GPX следенето е активирано, всички ваши движения се записват във файл в GPX формат. След това файла може да се използва на компютър да се визуализира пътя. Лог файла може да се смъкне чрез web-базирания интерфейс използвайки режима Безжичен трансфер.";
+
+"Wireless Transfer" = "Безжичен трансфер";
+
+"Wrong Way hidden" = "Скрий грешна посока";
+
+"Wrong\nWay" = "Грешнаnпосока";
+
+"xGPS Error" = "xGPS грешка";
+
+"xGPS Version" = "xGPS версия";
+
+"xGPS Web-based Management" = "xGPS Web-базирано управление";
+
+"Yes" = "Да";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Не можете да търсите, докато сте в offline режим. Можете да изключите offline режима в Настройки. You can switch off the offline mode by tapping the Settings button.";
+
+"You cannot download maps while you are in the offline mode." = "Не можете да зареждате карти, докато сте в offline режим.";
+
+"You cannot have more than %d points in your route." = "Не можете да имате повече от %d точки във вашия марширут.";
+
+"You have to add at least one starting and one ending point in your route." = "Трябва да добавите поне една начална и една крайна точка на вашия марширут.";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "Трябва да въведете домашния си адрес в Настройки -> Напътствия за шофиране -> Домашен адрес преди да можете да използвате тази функция.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Запазените ви карти не са съвместими с тази версия на xGPS и бяха изтрити.";
+
+"Your home address" = "Вашият домашен адрес";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Вашият домашен адрес ще се използва да получите напътствия за шофиране към вас когато натиснете бутона Към вкъщи.";
+
+"Your license number is invalid. Please verify and retry" = "Вашият лицензен номер е невалиден. Моля, проверете го и опитайте пак";
+
+"Your license number is valid. You can now use the selected GPS." = "Вашият лицензен номер е валиден. Вече можете да ползвате избрания GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Запазените ви напътствия за шофиране не са съвместими с тази версия на xGPS и бяха изтрити.";
+
+"Zoom level to download" = "Ниво на увеличение за зареждане";
+
+"Zoom level: %d" = "Ниво на увеличение: %d";
+

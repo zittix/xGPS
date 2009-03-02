@@ -1,0 +1,252 @@
+"%.1f MB" = "%.1f MB";
+
+"%d connected clients" = "%d prisijungę klientai";
+
+"About xGPS" = "Apie xGPS";
+
+"Address book" = "Adresų knygelė";
+
+"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Siunčiant žemėlapius įvyko klaida. Kai kurios žemėlapių dalys neparsiūstos.";
+
+"Are you sure you want to delete all the downloaded maps ?" = "Ar tikrai norite ištrinti visus parsiųstus žemėlapius?";
+
+"Are you sure you want to delete all the recorded tracks ?" = "Ar tikrai norite ištrinti visus kelius?";
+
+"Are you sure you want to delete all the saved bookmarks ?" = "Ar tikrai norite ištrinti visas žymes?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Ar tikrai norite parsisiųsti pažymėtą teritoriją (%1$d dalys ~ %2$d KB) ?";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Ar tikrai norite parsisiųsti pažymėtą teritoriją (%1$d dalys ~ %2$d MB) ?";
+
+"Are you sure you want to recompute the itinerary from the current position ?" = "Ar tikrai norite perskaičiuoti maršrutą nuo esamos vietos?";
+
+"Available actions:" = "Galimi veiksmai:";
+
+"Blue dot for position" = "Melynas pozicijos taškas";
+
+"Bookmarks" = "Žymės";
+
+"Cancel" = "Atšaukti";
+
+"City name / Address" = "Miestas / Adresas";
+
+"Clear Driving directions" = "Ištrinti važiavimo kryptį";
+
+"Clear Search results" = "Išvalyti paieškos rezultatus";
+
+"Connected" = "Prijungtas";
+
+"Current GPS Position" = "Dabartinė GPS pozicija";
+
+"Current Position" = "Dabartinė pozicija";
+
+"Delete all bookmarks" = "Ištrinti visas žymes";
+
+"Delete downloaded maps" = "Ištrinti parsiųstus žemėlapius";
+
+"Delete GPX Log file" = "Ištrinti GPX žurnalo failą";
+
+"Device Info" = "Prietaiso informacija";
+
+"Directions" = "Kryptys";
+
+"Directions Bookmarks" = "Krypčių žymės";
+
+"Disable GPS" = "Išjungti GPS";
+
+"Disconnected" = "Išjungtas";
+
+"Dismiss" = "Nutraukti";
+
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Atstumas ir greitis bus rodomas metrais (km/h ir metrai).";
+
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Atstumas ir greitis bus rodomas myliomis (mph ir mylios).";
+
+"Download" = "Parsiųsti";
+
+"Downloaded maps size" = "Parsiųstų žemėlapių dydis";
+
+"Downloading maps..." = "Siunčiami žemėlapiai...";
+
+"Driving directions" = "Vairavimo kryptys";
+
+"Enable GPS" = "Įjungti GPS";
+
+"Error" = "Klaida";
+
+"From / Departure" = "Iš / Išvykimas";
+
+"From:" = "Iš:";
+
+"General" = "Bendrai";
+
+"Good" = "Geras";
+
+"GPS" = "GPS";
+
+"GPS state" = "GPS būsena";
+
+"GPS to use" = "naudojamas GPS";
+
+"GPX Logging" = "GPX žurnalas";
+
+"Hybrid" = "Maišytas";
+
+"Language" = "Kalba";
+
+"License checking" = "Tikrinama licenzija";
+
+"License number" = "Licenzijos numeris";
+
+"License number for %@" = "Licenzija skirta %@";
+
+"License:" = "Licenzija:";
+
+"Locations" = "Vietos";
+
+"Log file size" = "Žurnalo bylos dydis";
+
+"Manage maps" = "Tvarkyti žemėlapius";
+
+"Map" = "Žemėlapis";
+
+"Map auto-rotation" = "Žemėlapio automatinis pasukimas";
+
+"Map Database size" = "Žemėlapių DB dydis";
+
+"Maps" = "Žemėlapiai";
+
+"Maps data" = "Žemėlapių duomenys";
+
+"Maps Download" = "Parsisiųsti žemėlapius";
+
+"Maps downloaded successfully !" = "Žemėlapiai parsiųsti sėkmingai!";
+
+"Maps Manager" = "Žemėlapių tvarkyklė";
+
+"Maps type" = "Žemėlapių tipas";
+
+"N/A" = "Nėra";
+
+"New maps database: " = "Nauja žemėlapių DB: ";
+
+"No" = "Ne";
+
+"No driving direction can be computed using your query." = "Pagal Jūsų užklausą negalima suskaičiuoti važiavimo krypties.";
+
+"No License" = "Nėra licenzijos";
+
+"No location has been found according to your query." = "Pagal Jūsų užklausą negalima rasti vietovės.";
+
+"None" = "Nėra";
+
+"Offline mode" = "Atjungtas";
+
+"Pick a GPS" = "Pasirinkite GPS";
+
+"Places / Cities" = "Vietos / Miestai";
+
+"Please select a greater map area by touching the screen with two fingers." = "Pasirinkite didesnį žemėlapio plotą liesdami ekraną dviem pirštais.";
+
+"Poor" = "Prastas";
+
+"Prevent Sleep Mode" = "Išvengti miegojimo rėžimo";
+
+"Ready to transfer..." = "Paruoštas persiųsti...";
+
+"Receive maps" = "Gauti žemėlapius";
+
+"Recompute itinerary" = "Perskaičiuoti maršrutą";
+
+"Reset GPS" = "Perkrauti GPS";
+
+"Return to main page" = "Grįžti į pagrindinį puslapį";
+
+"Satellite" = "Palydovas";
+
+"Save in Bookmarks" = "Išsaugoti žymėse";
+
+"Search for:" = "Ieškoti:";
+
+"Settings" = "Nuostatos";
+
+"Show device info" = "Rodyti įrenginio informaciją";
+
+"Show Speedometer" = "Rodyti spidometrą";
+
+"Take position from:" = "Iš:";
+
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Važiavimo krypties, žemėlapių ir vietų/miestų paieškos kalba.";
+
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Vietos nustatymo paslauga Jūsų įrenginiui negalima. Nueikite į telefono nustatymus ir įjunkite vietos nustatymo paslaugas.";
+
+"The maps database has been sucessfully saved." = "Žemėlapių DB išsaugota sėkmingai.";
+
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "Žemėlapių DB augs, kai žiūrinėsite žemėlapius, kurių dar nesate parsiuntęs.";
+
+"This feature will be implemented in a future version." = "Ši įpatybė bus įdiegta ateityje.";
+
+"To / Destination" = "Į / Paskirties taškas";
+
+"To:" = "Į:";
+
+"Transfer" = "Persiūsti";
+
+"Unable to download a part of the map. Check your internet connection." = "Negalima parsiųsti žemėlapio dalies. Patikrinkite interneto prieigą.";
+
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Negalima gauti GPS pozicijos. GPS įrenginys neduoda jokios pozicijos informacijos.";
+
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Negalima atidaryti nuoseklaus prievado. Įsitikinkite ar neveikia jokia kita GPS programinė įranga.";
+
+"Unable to retrieve the driving directions from the server: %@" = "Negalima parsiųsti važiavimo krypties iš serverio: %@";
+
+"Unable to retrieve the required information from the server: %@" = "Negalima parsiųsti informacijos iš serverio: %@";
+
+"Unknown error" = "Nežinoma klaida";
+
+"Upload a new maps database" = "Nusiųsti naują žemėlapių DB";
+
+"Upload new maps database" = "Nusiųsti naujų žemėlapių DB";
+
+"Use Miles unit" = "Naudoti Mylias";
+
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Naudokite Perkrauti GPS opciją, jei įrenginys rodo visiškai klaidingą poziciją arba nebereaguoja visai.";
+
+"User Interface" = "Vartotojo sąsaja";
+
+"Verifying license number..." = "Tikrinamas licenzijos numeris...";
+
+"Version" = "Versija";
+
+"When activated, all the searched driving directions are saved in the bookmarks." = "Kai įjungta, visos ieškotos važiavimo kryptys bus išsaugotos žymėse.";
+
+"When activated, it disables the sleep mode such that the screen is always on." = "Kai įjungta, miegojimo režimas bus blokuotas ir ekranas bus visada įjungtas.";
+
+"When activated, the driving directions are recomputed when you are driving on the wrong way." = "Kai įjungta, važiavimo kryptis bus perskaičiuojama automatiškai, jei pasirinsite neteisingą kelią.";
+
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Kai įjungtas GPX žurnalas, visas Jūsų judėjimas bus įrašytas GPX formatu. Byla bus galima naudotis kompiuteriu, vizualizuojant Jūsų judėjimą.";
+
+"Wireless Transfer" = "Bevielis persiuntimas";
+
+"Wrong\nWay" = "Neteisingasnkelias";
+
+"xGPS Error" = "xGPS klaida";
+
+"xGPS Version" = "xGPS versija";
+
+"xGPS Web-based Management" = "xGPS internetinis valdymas";
+
+"Yes" = "Taip";
+
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "Jūs negalite naudotis paieška, nes naudojatės režimu Atjungtas.";
+
+"You cannot download maps while you are in the offline mode." = "Jūs negalite parsisiūsti žemėlapių, nes naudojatės režimu Atjungtas.";
+
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Jūsų parsiūsti žemėlapiai nesuderinami su šia xGPS versija ir bus ištrinti.";
+
+"Your license number is invalid. Please verify and retry" = "Jūsų licenzijos numeris neteisingas. Patikrinkite ir pabandykite dar kartą";
+
+"Your license number is valid. You can now use the selected GPS." = "Jūsų licenzijos numeris teisingas. Galite naudotis pasirinktu GPS.";
+
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Jūsų išsaugotos važiavimo kryptys nesuderinamos su šia xGPS versija ir bus ištrintos.";
+

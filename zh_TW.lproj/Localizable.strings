@@ -1,10 +1,30 @@
 "%.1f MB" = "%.1f MB";
 
+"%.2f MB" = "%.2f MB";
+
+"%d connected clients" = "%d 個已連線客戶端";
+
+"%f °" = "%f °";
+
+"%f km/h" = "%f km/h";
+
+"%f m" = "%f m";
+
+"%f mph" = "%f mph";
+
 "About xGPS" = "關於 xGPS";
+
+"Actions" = "執行";
+
+"Add / Modify:" = "新增 / 修改：";
+
+"Address" = "地址";
 
 "Address book" = "通訊錄";
 
-"An error has occured while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "於下載所選地圖時發生錯誤，部份地圖可能沒有正確的完成下載。";
+"Altitude" = "高度";
+
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "於下載所選地圖時發生錯誤，部份地圖可能沒有正確的完成下載。";
 
 "Are you sure you want to delete all the downloaded maps ?" = "確定要刪除所有下載地圖？";
 
@@ -12,25 +32,47 @@
 
 "Are you sure you want to delete all the saved bookmarks ?" = "確定要刪除所有已儲存書籤？";
 
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "確定要下載所選擇地圖區域（%d 區塊 ~ %.1f KB）？";
+
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "確定要下載所選擇地圖區域（%d 區塊 ~ %.1f MB）？";
+
 "Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "確定要下載所選擇之地圖區域（%d 個區塊 ~ %d KB）？";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "確定要下載所選擇之地圖區域（%d 個區塊 ~ %d MB）？";
 
 "Are you sure you want to recompute the itinerary from the current position ?" = "確定要重新計算目前位置出發之路線？";
 
+"Available actions:" = "可執行動作：";
+
+"Back" = "上一頁";
+
 "Blue dot for position" = "以藍點顯示位置";
 
 "Bookmarks" = "書籤";
+
+"By Car" = "開車";
 
 "Cancel" = "取消";
 
 "City name / Address" = "城市名稱 / 地址";
 
+"Clear All" = "全部清除";
+
 "Clear Driving directions" = "清除規劃路線";
+
+"Clear Results" = "清除結果";
 
 "Clear Search results" = "清除搜尋結果";
 
+"Close" = "關閉";
+
+"Compute" = "計算";
+
+"Computing your route..." = "計算路線中...";
+
 "Connected" = "已連線";
+
+"Create a new route" = "新增路線";
 
 "Current GPS Position" = "目前 GPS 位置";
 
@@ -42,9 +84,15 @@
 
 "Delete GPX Log file" = "刪除 GPX 紀錄檔";
 
+"Device address: %@" = "裝置位址：%@";
+
+"Device Info" = "裝置資訊";
+
 "Directions" = "規劃路線";
 
 "Directions Bookmarks" = "規劃路線書籤";
+
+"Disable Beep" = "關閉聲響";
 
 "Disable GPS" = "關閉 GPS";
 
@@ -58,6 +106,8 @@
 
 "Download" = "下載";
 
+"Download maps" = "下載地圖";
+
 "Downloaded maps size" = "下載地圖大小";
 
 "Downloading maps..." = "正在下載地圖...";
@@ -66,29 +116,63 @@
 
 "Enable GPS" = "開啟 GPS";
 
+"Enable night mode" = "開啟夜間模式";
+
+"Enable timer" = "開啟計時器";
+
 "Error" = "錯誤";
 
 "From / Departure" = "起點 / 出發點";
 
-"From:" = "出發點﹕";
+"From:" = "起點：";
 
 "General" = "一般設定";
 
+"GMaps Hybrid" = "GMaps 混合";
+
+"GMaps Satellite" = "GMaps 衛星";
+
+"GMaps Terrain" = "GMaps 地形";
+
+"Go Home" = "回自家點";
+
 "Good" = "良好";
+
+"Google Maps" = "Google 地圖";
+
+"Google Maps Hybrid" = "Google 混合地圖";
+
+"Google Maps Satellite" = "Google 衛星地圖";
+
+"Google Maps Terrain" = "Google 地形地圖";
 
 "GPS" = "GPS";
 
 "GPS Device" = "GPS 裝置";
 
+"GPS Enabled" = "GPS 已開啟";
+
+"GPS Information" = "GPS 資訊";
+
 "GPS state" = "GPS 狀態";
 
 "GPS to use" = "使用之 GPS";
 
+"GPS Tracking" = "GPS 軌跡";
+
+"GPX Log Files" = "GPX 記錄檔案";
+
 "GPX Logging" = "GPX 紀錄";
+
+"Home Address" = "自家點地址";
 
 "Hybrid" = "混合地圖";
 
 "Language" = "語言";
+
+"Large font size" = "大型字體";
+
+"Latitude" = "緯度";
 
 "License checking" = "正在檢查授權";
 
@@ -98,15 +182,29 @@
 
 "License:" = "授權：";
 
+"Location / Place" = "位置 / 地點";
+
 "Locations" = "位置";
 
 "Log file size" = "紀錄檔案大小";
 
+"Longitude" = "經度";
+
 "Manage maps" = "管理地圖";
+
+"Manager" = "管理員";
 
 "Map" = "地圖";
 
 "Map auto-rotation" = "地圖自動轉向";
+
+"Map Database size" = "地圖資料庫大小";
+
+"Map details" = "地圖精細度";
+
+"Map name" = "地圖名稱";
+
+"Map Type" = "地圖類型";
 
 "Maps" = "地圖";
 
@@ -120,23 +218,47 @@
 
 "Maps type" = "地圖類型";
 
+"My GPS Position" = "我的 GPS 位置";
+
+"My GPS position is:" = "我的 GPS 位置為：";
+
 "N/A" = "無";
+
+"Name:" = "名稱：";
+
+"New directions database: " = "新規劃路線資料庫：";
+
+"New maps database: " = "新地圖資料庫：";
+
+"New Route" = "新路線";
+
+"Night Mode" = "夜間模式";
 
 "No" = "取消";
 
 "No driving direction can be computed using your query." = "無法計算所查詢的規劃路線。";
 
+"No Highway" = "迴避高速公路";
+
 "No License" = "未授權";
 
 "No location has been found according to your query." = "找不到符合所查詢的位置。";
 
+"No name" = "沒有名稱";
+
 "None" = "無";
+
+"Number of log files" = "記錄檔案數";
 
 "Offline mode" = "離線模式";
 
 "Pick a GPS" = "選擇 GPS";
 
 "Places / Cities" = "地方 / 城市";
+
+"Please enter a name for your map." = "請輸入地圖名稱。";
+
+"Please enter a name for your route." = "請輸入路線名稱。";
 
 "Please select a greater map area by touching the screen with two fingers." = "請藉由使用兩個手指碰觸螢幕以選擇一塊大區域的地圖。";
 
@@ -146,6 +268,8 @@
 
 "Ready to receive..." = "準備接收...";
 
+"Ready to transfer..." = "準備傳送...";
+
 "Receive maps" = "接收地圖";
 
 "Receiving maps" = "正在接收地圖";
@@ -154,29 +278,67 @@
 
 "Reset GPS" = "重置 GPS";
 
+"Return to main page" = "回到主頁";
+
+"Route computation" = "路線計算";
+
+"Routes Manager" = "路線管理員";
+
 "Satellite" = "衛星";
 
 "Save in Bookmarks" = "儲存於書籤";
 
+"Search" = "搜尋";
+
 "Search for:" = "搜尋：";
+
+"Search Places" = "搜尋地點";
+
+"Send by Email" = "以郵件傳送";
+
+"Send by SMS" = "以簡訊傳送";
 
 "Settings" = "設定";
 
+"Show device info" = "顯示裝置資訊";
+
 "Show Speedometer" = "顯示車速";
 
+"Speed" = "速度";
+
+"Start time" = "開始時間";
+
+"Stop time" = "停止時間";
+
 "Take position from:" = "出發點﹕";
+
+"Tap to edit" = "點選以編輯";
+
+"The directions database has been sucessfully saved." = "規劃路線資料庫已成功儲存。";
 
 "The language setting is used to localize the driving directions, the maps and the place/city search results." = "語言設定為用於規劃路線、地圖及搜尋結果顯示文字之用。";
 
 "The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "無法開啟裝置上的定位服務，使用主畫面中之設定功能以修正此問題。";
 
+"The maps database has been sucessfully saved." = "地圖資料庫已成功儲存。";
+
 "The maps size will also grow when you browse a part of a map you have not already downloaded." = "地圖檔案大小同時也將會隨著瀏覽尚未下載的地圖區域而變大。";
+
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "夜間模式可讓使用者專心於路況，而不受 iPhone 畫面亮度干擾，此模式之顏色較暗、螢幕亮度也將調整至最低模式。";
+
+"The zoom level %d corresponds to the most detailed zoom level" = "縮放等級 %d 表示最精細之縮放等級";
 
 "This feature will be implemented in a future version." = "此功能將會在未來版本中進行改善。";
 
 "To / Destination" = "終點 / 目的地";
 
 "To:" = "終點﹕";
+
+"Total" = "總";
+
+"Total log files size" = "總登錄檔大小";
+
+"Transfer" = "傳送";
 
 "Unable to download a part of the map. Check your internet connection." = "無法下載某部份的地圖，請檢查網際網路連線狀況。";
 
@@ -188,7 +350,17 @@
 
 "Unable to retrieve the required information from the server: %@" = "無法自伺服器上接受所要求之資訊：%@";
 
+"Unknown" = "未知";
+
 "Unknown error" = "未知錯誤";
+
+"Upload a new directions database" = "上傳新規劃路線資料庫";
+
+"Upload a new maps database" = "上傳新地圖資料庫";
+
+"Upload new directions database" = "上傳新規劃路線資料庫";
+
+"Upload new maps database" = "上傳新地圖資料庫";
 
 "Use Miles unit" = "使用英哩單位";
 
@@ -200,6 +372,12 @@
 
 "Version" = "版本";
 
+"Voice Instructions" = "語音導引";
+
+"Voice instructions work only when the language in General settings is set to English." = "語音導引僅適用於將一般設定中的語言設為英文時。";
+
+"Walking" = "行走";
+
 "When activated, all the searched driving directions are saved in the bookmarks." = "當啟動時，所有規劃路線搜尋將會儲存於書籤內。";
 
 "When activated, it disables the sleep mode such that the screen is always on." = "當啟動時，將會關閉自動鎖定、畫面將會保持開啟。";
@@ -208,9 +386,19 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "當 GPX 紀錄開啟時，所有的移動都將會以 GPX 格式進行紀錄，可以於電腦上檢視該檔案。";
 
-"Wrong\nWay" = "路線\n錯誤";
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "當 GPX 記錄開啟時，所有移動都將以 GPX 格式進行檔案記錄，檔案可於電腦上進行檢視。記錄檔案可藉由網頁界面進行無線傳送模式進行下載。";
+
+"Wireless Transfer" = "無線傳送";
+
+"Wrong Way hidden" = "隱藏路線錯誤";
+
+"Wrong\nWay" = "路線n錯誤";
 
 "xGPS Error" = "xGPS 錯誤";
+
+"xGPS Version" = "xGPS 版本";
+
+"xGPS Web-based Management" = "xGPS 網頁管理";
 
 "Yes" = "確定";
 
@@ -218,11 +406,25 @@
 
 "You cannot download maps while you are in the offline mode." = "當於離線模式時，無法進行地圖下載。";
 
+"You cannot have more than %d points in your route." = "無法於路線中包含超過 %d 個路徑點。";
+
+"You have to add at least one starting and one ending point in your route." = "路線中必須包含至少一個起點跟終點。";
+
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "於使用本功能前，您必須於設定 -> 規劃路線 -> 自家點地址中進行設定自家點。";
+
 "Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "所下載的地圖不相容於此版本之 xGPS，已經進行刪除。";
+
+"Your home address" = "自家點地址";
+
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "自家點地址將用於按下 Home 按鈕時導航回自家點之用。";
 
 "Your license number is invalid. Please verify and retry" = "輸入的授權碼無效，請確認後重新輸入";
 
 "Your license number is valid. You can now use the selected GPS." = "所輸入的授權碼有效，現在可以開始使用所選擇之 GPS。";
 
 "Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "所儲存的規劃路線不相容於此版本之 xGPS，已經刪除。";
+
+"Zoom level to download" = "縮放等級以下載";
+
+"Zoom level: %d" = "縮放等級：%d";
 
