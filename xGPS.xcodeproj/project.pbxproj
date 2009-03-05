@@ -198,6 +198,7 @@
 		4EE2433B0F3074E800C41ACA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE243390F3074E800C41ACA /* AudioToolbox.framework */; };
 		4EE2433C0F3074E800C41ACA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE2433A0F3074E800C41ACA /* CoreAudio.framework */; };
 		4EE243440F30750500C41ACA /* SoundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE243430F30750500C41ACA /* SoundController.m */; };
+		4EE410600F603C9B00510F8A /* GFiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE4105F0F603C9B00510F8A /* GFiController.m */; };
 		4EF1D57D0EDB0BA80007AEAE /* oldtrack.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1D57C0EDB0BA80007AEAE /* oldtrack.gpx */; };
 		4EF25DCE0E897FA300AB6194 /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */; };
 /* End PBXBuildFile section */
@@ -563,6 +564,8 @@
 		4EE2433A0F3074E800C41ACA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		4EE243420F30750500C41ACA /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundController.h; sourceTree = "<group>"; };
 		4EE243430F30750500C41ACA /* SoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundController.m; sourceTree = "<group>"; };
+		4EE4105E0F603C9B00510F8A /* GFiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFiController.h; sourceTree = "<group>"; };
+		4EE4105F0F603C9B00510F8A /* GFiController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFiController.m; sourceTree = "<group>"; };
 		4EEC564F0EC1FCE00093386D /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4EF1D57C0EDB0BA80007AEAE /* oldtrack.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = oldtrack.gpx; sourceTree = "<group>"; };
 		4EF25DCC0E897FA300AB6194 /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
@@ -846,6 +849,8 @@
 		4E79293E0E58E7F500CAF1B2 /* GPS */ = {
 			isa = PBXGroup;
 			children = (
+				4EE4105E0F603C9B00510F8A /* GFiController.h */,
+				4EE4105F0F603C9B00510F8A /* GFiController.m */,
 				4EAF78B30EB3AB440078B697 /* iGPS360Controller.h */,
 				4EAF78B40EB3AB440078B697 /* iGPS360Controller.m */,
 				4E0B8CF70E812A74009A2F86 /* iGPSDController.h */,
@@ -1442,6 +1447,7 @@
 				4ED973340F52EBF6006E2312 /* MapsDownloadDetailsViewController.m in Sources */,
 				4ED974CE0F530FBF006E2312 /* HomeAddressViewController.m in Sources */,
 				4ED9752C0F531675006E2312 /* ViewSearch.m in Sources */,
+				4EE410600F603C9B00510F8A /* GFiController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 @interface CLLocation (toIgnore2dot1FirmwareError)
 -(double)speed;
 @end
+
 @implementation iPhone3GController
 
 - (BOOL)EnableGPS {
