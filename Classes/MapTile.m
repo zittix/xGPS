@@ -17,7 +17,7 @@ CGContextRef MyCreateBitmapContext (int pixelsWide,
 	
     CGContextRef    context = NULL;
     CGColorSpaceRef colorSpace;
-    void *          bitmapData;
+   // void *          bitmapData;
     int             bitmapByteCount;
     int             bitmapBytesPerRow;
 	
@@ -27,7 +27,7 @@ CGContextRef MyCreateBitmapContext (int pixelsWide,
 
     colorSpace = CGColorSpaceCreateDeviceRGB();
 	
-    bitmapData = malloc( bitmapByteCount );// 3
+   /* bitmapData = malloc( bitmapByteCount );// 3
 	
     if (bitmapData == NULL)
 		
@@ -37,9 +37,9 @@ CGContextRef MyCreateBitmapContext (int pixelsWide,
 		
         return NULL;
 		
-    }
+    }*/
 	
-    context = CGBitmapContextCreate (bitmapData,// 4
+    context = CGBitmapContextCreate (NULL,// 4
 									 
 									 pixelsWide,
 									 
@@ -57,7 +57,7 @@ CGContextRef MyCreateBitmapContext (int pixelsWide,
 		
     {
 		
-        free (bitmapData);// 5
+       // free (bitmapData);// 5
 		
         fprintf (stderr, "Context not created!");
 		
@@ -99,6 +99,8 @@ CGContextRef MyCreateBitmapContext (int pixelsWide,
 			[data release];
 			data=nil;
 			image=CGBitmapContextCreateImage(context);
+			CGContextRelease(context);
+			
 		}
 		
 		
