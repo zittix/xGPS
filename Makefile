@@ -19,10 +19,17 @@ xGPS: 	$(CLASSES) $(C_FILE)
 package:
 	rm -fr debian/Applications
 	mkdir -p debian/Applications/xGPSBeta.app/sounds
+	mkdir -p debian/System/Library/CoreServices/SpringBoard.app
 	cp xGPS debian/Applications/xGPSBeta.app/
 	cp sounds/* debian/Applications/xGPSBeta.app/sounds
 	cp Info_beta.plist debian/Applications/xGPSBeta.app/Info.plist
 	cp *.png debian/Applications/xGPSBeta.app
+	cp icon_satbar_red.png debian/System/Library/CoreServices/SpringBoard.app/Default_xGPS_sat_0.png
+	cp icon_satbar_red.png debian/System/Library/CoreServices/SpringBoard.app/FSO_xGPS_sat_0.png
+	cp icon_satbar_yellow.png debian/System/Library/CoreServices/SpringBoard.app/Default_xGPS_sat_1.png
+	cp icon_satbar_yellow.png debian/System/Library/CoreServices/SpringBoard.app/FSO_xGPS_sat_1.png
+	cp icon_satbar_green.png debian/System/Library/CoreServices/SpringBoard.app/Default_xGPS_sat_2.png
+	cp icon_satbar_green.png debian/System/Library/CoreServices/SpringBoard.app/FSO_xGPS_sat_2.png
 	cp -r *.lproj debian/Applications/xGPSBeta.app/
 	chmod a+r debian/Applications/xGPSBeta.app/*
 	chmod a+x debian/Applications/xGPSBeta.app/xGPS

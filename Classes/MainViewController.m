@@ -141,7 +141,7 @@
 	[tmrNightMode retain];
 	[self speedChanged:nil];
 	[self viewWillAppear:YES];
-	
+	[self setStatusIconVisible:YES state:2];
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]>=0) {
 		NSMutableArray *road=[APPDELEGATE.dirbookmarks copyBookmarkRoadPoints:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
 		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
@@ -312,6 +312,33 @@
 			}
 		}
 	}
+}
+- (void)setStatusIconVisible:(BOOL)visible state:(int)state {
+	
+	if (visible) {
+		
+		NSString *name = [NSString
+						  
+						  stringWithFormat:@"xGPS_sat_%d", state];
+		
+		if ([[UIApplication sharedApplication]
+			 
+			 respondsToSelector:@selector(addStatusBarImageNamed:removeOnExit:)])
+			
+			[[UIApplication sharedApplication] addStatusBarImageNamed:name removeOnExit:YES];
+		
+		else
+			
+			[[UIApplication sharedApplication] addStatusBarImageNamed:name removeOnAbnormalExit:YES];
+		
+	} else {
+		
+		[[UIApplication sharedApplication] removeStatusBarImageNamed:
+		 
+		 [NSString stringWithFormat:@"xGPS_sat_%d", state]];
+		
+	}
+	
 }
 -(void)speedChanged:(NSNotification *)notif {
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed] && APPDELEGATE.gpsmanager.currentGPS.isEnabled) {

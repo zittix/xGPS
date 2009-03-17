@@ -56,6 +56,7 @@
 -(void)showWrongWay;
 -(void)hideWrongWay;
 -(void)clearDirections;
+- (void)setStatusIconVisible:(BOOL)visible state:(int)state;
 -(void)speedChanged:(NSNotification *)notif;
 @property (nonatomic,retain,readonly) MapView* mapview;
 @property (nonatomic,retain) TileDB* tiledb;
