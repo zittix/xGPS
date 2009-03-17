@@ -184,6 +184,7 @@
 	if([dic objectForKey:(NSString*)kABPersonAddressCountryKey]!=nil)
 		out=[NSString stringWithFormat:@"%@%@",out,[dic objectForKey:(NSString*)kABPersonAddressCountryKey]];
 	
+	[controller dismissModalViewControllerAnimated:YES];
 	
 	bookmarkClicked.text=out;
 	
@@ -197,7 +198,6 @@
 	CFRelease(dic);
 	CFRelease(multi);
 	
-	[controller dismissModalViewControllerAnimated:YES];
 	
 	
     return NO;
