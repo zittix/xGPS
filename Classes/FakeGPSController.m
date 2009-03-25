@@ -185,6 +185,11 @@
 		currentIndex++;
 	}
 	
+	
+	
+	
+	
+	
 	chMsg.state=POS;
 #ifdef USE_UI
 	[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];

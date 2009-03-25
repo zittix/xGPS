@@ -21,6 +21,7 @@
 		speedHasBeenUpdated=NO;
 		[locManager startUpdatingLocation];
 		isEnabled=YES;
+		filterI=0;
 	}
 	return YES;
 }
@@ -119,8 +120,43 @@
 		}	
 	}
 	
+	//Filter out speed
 	
+	//1. add the speed to the stack
+	if(filterI<SPEED_FILTER_LENGTH) {
+		speedFilter[filterI]=gps_data.fix.speed;
+		
+		filterI++;
+	} else {
+		for(int i=1;i<SPEED_FILTER_LENGTH;i++) {
+			speedFilter[i-1]=speedFilter[i];
+		}
+		for(int i=1;i<SPEED_FILTER_LENGTH;i++) {
+			speedFilterWeight[i-1]=speedFilterWeight[i];
+		}
+		speedFilter[filterI-1]=gps_data.fix.speed;
+	}
 	
+	//2. Compute the weight of the added speed
+	//The more diff there is between the last speed, the less is the weight
+	if(filterI>1) {
+		
+		float diff=fabs(speedFilter[filterI-2]-speedFilter[filterI-1]);
+		if(diff<1.0f) diff=1.0f;
+#define MAX_DIFF 4.0
+		speedFilterWeight[filterI-1]=1.0/(MAX_DIFF+1.0)*diff+MAX_DIFF/(MAX_DIFF+1.0);
+	}else {
+		speedFilterWeight[filterI-1]=1;	
+	}
+	
+	//3. compute the resulting speed
+	gps_data.fix.speed=0.0;
+	float weightSum=0.0;
+	for(int i=0;i<filterI;i++) {
+		gps_data.fix.speed+=speedFilter[i];
+		weightSum+=speedFilterWeight[filterI-1];
+	}
+	gps_data.fix.speed/=weightSum;	
 	//Update signal quality
 	signalQuality=100;
 	

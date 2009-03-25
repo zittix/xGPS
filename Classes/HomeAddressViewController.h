@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-
-@interface HomeAddressViewController : UITableViewController<UITextFieldDelegate> {
+@interface HomeAddressViewController : UITableViewController<UITextFieldDelegate,ABPeoplePickerNavigationControllerDelegate> {
 	UITextField *txtHome;
 }
 

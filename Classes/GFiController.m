@@ -77,7 +77,8 @@ static unsigned int from_len;        /* source addr length */
 		currentGfiLocation = [self parseNMEAData:strNMEA];	
 		if(currentGfiLocation != nil) {
 			
-			gps_data.fix.speed=currentSpeed;
+			gps_data.fix.speed=currentSpeed*KNOTS_TO_MPS;
+				
 			//Update signal quality
 			signalQuality=100;
 
@@ -426,7 +427,7 @@ static unsigned int from_len;        /* source addr length */
 	memset(&from_addr, 0, from_len);
 	errno=0;
 	if ((recv_len = recvfrom(sock, recv_str, MAX_LEN, 0, (struct sockaddr*)&from_addr, &from_len)) < 0) {
-		printf("recvfrom() failed: %s\n",strerror(errno));
+		//printf("recvfrom() failed: %s\n",strerror(errno));
 		return nil;
 	}
 	

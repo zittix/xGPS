@@ -783,13 +783,13 @@
 		double posYPin=drawOrigin.y+(y-centerTileY)*TILE_SIZE-(yoff)+(yoff2);
 		
 		if(useGPSBall) {
-			CGContextRotateCTM(context, -mapRotation);
+			//CGContextRotateCTM(context, -mapRotation);
 			CGContextScaleCTM(context, 1, -1);
 	
 				
 			[imgPinRef drawAtPoint: CGPointMake(posXPin-10, posYPin+10) withContext:context];
 			CGContextScaleCTM(context, 1, -1);
-			CGContextRotateCTM(context, mapRotation);
+			//CGContextRotateCTM(context, mapRotation);
 		} else{		
 			float posXPin2=cosr*posXPin - posYPin*sinr;
 			float posYPin2=sinr*posXPin + posYPin*cosr;
