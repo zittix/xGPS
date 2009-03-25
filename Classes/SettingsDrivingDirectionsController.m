@@ -10,6 +10,7 @@
 #import "xGPSAppDelegate.h"
 #import "TitleValueCell.h"
 #import "HomeAddressViewController.h";
+#import <MediaPlayer/MediaPlayer.h>
 @implementation SettingsDrivingDirectionsController
 
 
@@ -76,7 +77,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	switch(section) {
 		case 0:
-			return 2;
+			return 4;
 		case 1:
 		case 2:
 		case 3:
@@ -126,7 +127,7 @@
     
     NSString *CellIdentifier;
 	switch(indexPath.section) {
-		case 0: if(indexPath.row==0) CellIdentifier=@"voicedir"; else CellIdentifier=@"voicebip"; break;
+		case 0: if(indexPath.row==0) CellIdentifier=@"voicedir"; else if(indexPath.row==1) CellIdentifier=@"voicebip"; else  if(indexPath.row==2) CellIdentifier=@"volume"; else  if(indexPath.row==3) CellIdentifier=@"volumec"; break;
 		case 1: CellIdentifier=@"savebookmarks"; break;
 		case 2: CellIdentifier=@"homeaddress"; break;
 		case 3: CellIdentifier=@"delbookmarks"; break;
@@ -152,12 +153,23 @@
 					cell.text=NSLocalizedString(@"Voice Instructions",@"");
 					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
 					[value addTarget:self action:@selector(switchVoiceInstr:) forControlEvents:UIControlEventValueChanged];
-				} else {
+					[cell.contentView addSubview:value];
+				} else if(indexPath.row==1) {
 					cell.text=NSLocalizedString(@"Disable Beep",@"");
 					value.on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip];
 					[value addTarget:self action:@selector(switchVoiceBip:) forControlEvents:UIControlEventValueChanged];
+					[cell.contentView addSubview:value];
+				} else if(indexPath.row==2) {
+					cell.text=NSLocalizedString(@"Volume",@"");
+					MPVolumeView *volume=[[MPVolumeView alloc] initWithFrame:CGRectMake(100,(cell.frame.size.height-25)/2.0,cell.frame.size.width-110,25)];
+					volume.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin;
+					[volume sizeToFit];
+					[cell.contentView addSubview:volume];
+				}else if(indexPath.row==3) {
+					cell.text=NSLocalizedString(@"Test Voice volume",@"");
+					cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 				}
-				[cell.contentView addSubview:value];
+				
 			} break;
 			case 1: {
 				cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
@@ -204,7 +216,7 @@
 			case 0: {
 				if(indexPath.row==0) {
 					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
-				} else {
+				} else 	if(indexPath.row==1) {
 					((UISwitch*)[cell viewWithTag:1]).on=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip];
 				}
 				
@@ -234,6 +246,14 @@
 		HomeAddressViewController *c=[[HomeAddressViewController alloc] initWithStyle:UITableViewStyleGrouped];
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];
+	} else if(indexPath.section==0 && indexPath.row==3) {
+		SoundEvent *s;
+		if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip])
+			s=[[SoundEvent alloc] initWithText:@"In 200 meters, please turn left."];
+		else
+			s=[[SoundEvent alloc] initWithText:@"In 200 meters, please turn left." andSound:Sound_Announce];
+		[APPDELEGATE.soundcontroller addSound:s];	
+		[s release];
 	}
 }
 

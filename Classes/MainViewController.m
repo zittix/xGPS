@@ -150,6 +150,9 @@
 		[instr release];
 	}
 	
+	SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
+	//[APPDELEGATE.soundcontroller addSound:s];	
+	[s release];
 }
 -(void)showManager:(id)sender {
 	UIViewController *manager=[[RoutesManagerViewController alloc] initWithStyle:UITableViewStylePlain delegate:drivingSearchView];

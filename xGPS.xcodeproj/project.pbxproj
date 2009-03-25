@@ -11,6 +11,7 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		4E026AD10F7AC60600BB5675 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E026AD00F7AC60600BB5675 /* MediaPlayer.framework */; };
 		4E0827ED0F4DE9F300B1C9AF /* RoutesManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */; };
 		4E0828690F4DF11D00B1C9AF /* RouteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0828680F4DF11D00B1C9AF /* RouteCell.m */; };
 		4E0829050F4DF83300B1C9AF /* addicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E0829040F4DF83300B1C9AF /* addicon.png */; };
@@ -240,6 +241,7 @@
 		4E00D5C60F5C31820082A147 /* sq */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sq; path = sq.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5C70F5C31EF0082A147 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5C80F5C31F70082A147 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E026AD00F7AC60600BB5675 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		4E0827EB0F4DE9F300B1C9AF /* RoutesManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutesManagerViewController.h; sourceTree = "<group>"; };
 		4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesManagerViewController.m; sourceTree = "<group>"; };
 		4E0828670F4DF11D00B1C9AF /* RouteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCell.h; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				4E3227150F0698AC005217CB /* CFNetwork.framework in Frameworks */,
 				4EE2433B0F3074E800C41ACA /* AudioToolbox.framework in Frameworks */,
 				4EE2433C0F3074E800C41ACA /* CoreAudio.framework in Frameworks */,
+				4E026AD10F7AC60600BB5675 /* MediaPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +700,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E026AD00F7AC60600BB5675 /* MediaPlayer.framework */,
 				4EE243390F3074E800C41ACA /* AudioToolbox.framework */,
 				4EE2433A0F3074E800C41ACA /* CoreAudio.framework */,
 				4E3227140F0698AC005217CB /* CFNetwork.framework */,

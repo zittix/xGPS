@@ -863,12 +863,20 @@ int roundNearest(double dist) {
 	NSString *routeType=@"";
 	switch(routingType) {
 		case ROUTING_NORMAL:
+			if([lang isEqualToString:@"jp"])
+				routeType=@"&dirflg=d";
 			break;
 		case ROUTING_AVOID_HIGHWAY:
-			routeType=@"&dirflg=h";
+			if([lang isEqualToString:@"jp"])
+				routeType=@"&dirflg=dh";
+			else
+				routeType=@"&dirflg=h";
 			break;
 		case ROUTING_BY_FOOT:
-			routeType=@"&dirflg=w";
+			if([lang isEqualToString:@"jp"])
+				routeType=@"&dirflg=dt";
+			else
+				routeType=@"&dirflg=w";
 			break;
 	}
 	//NSString *loc=@"";

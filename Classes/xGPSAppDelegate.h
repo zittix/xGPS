@@ -48,7 +48,7 @@
 #define kSettingsDisableVoiceBip @"disablevoicebip"
 #define WIRELESS_TRANSFER_PORT 7777
 #define APPDELEGATE ((xGPSAppDelegate*)[UIApplication sharedApplication])
-#define VERSION "1.2.0"
+#define VERSION "1.2.5"
 #import "MainViewController.h"
 #import "SoundController.h"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
