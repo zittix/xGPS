@@ -119,7 +119,7 @@
 			gps_data.fix.speed=0.0;
 		}	
 	}
-	
+	/*
 	//Filter out speed
 	
 	//1. add the speed to the stack
@@ -157,6 +157,7 @@
 		weightSum+=speedFilterWeight[filterI-1];
 	}
 	gps_data.fix.speed/=weightSum;	
+	 */
 	//Update signal quality
 	signalQuality=100;
 	

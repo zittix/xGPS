@@ -9,7 +9,7 @@
 #import "SpeedView.h"
 #import "xGPSAppDelegate.h"
 @implementation SpeedView
--(id) initWithFrame:(CGRect)f {
+-(id) initWithFrame:(CGRect)f delegate:(id<ShowGPSDetailProtocol>)_delegate {
 	if((self = [super initWithFrame:f])) {
 		miles=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
 		NSString* imageFileName = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"speed.png"];
@@ -32,12 +32,19 @@
 		lblunit.text=@"mph";
 			else
 		lblunit.text=@"km/h";
-
+		delegate=_delegate;
 		[self addSubview:lblspeed];
 		[self addSubview:lblunit];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unitChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 	}
 	return self;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	NSSet *t = [event touchesForView:self];
+	if([t count]==1) {
+		[delegate showGPSDetails];
+	}
 }
 -(void)unitChanged:(NSNotification *)notif {
 	miles=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];

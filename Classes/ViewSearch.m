@@ -63,13 +63,13 @@
 		clear=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[clear setTitle:NSLocalizedString(@"Clear Results",@"") forState:UIControlStateNormal];
 		[clear setBackgroundImage:[UIImage imageNamed:@"clear_results.png"] forState:UIControlStateNormal];
-		clear.frame=CGRectMake((self.frame.size.width-130)/2.0, 50+2*BUTTON_SIZE, 136, 55);
+		clear.frame=CGRectMake((self.frame.size.width-180)/2.0, 50+2*BUTTON_SIZE, 180, 55);
 		clear.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 
 		close=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
 		[close setTitle:NSLocalizedString(@"Close",@"") forState:UIControlStateNormal];
 		[close setBackgroundImage:[UIImage imageNamed:@"clear_results.png"] forState:UIControlStateNormal];
-		close.frame=CGRectMake((self.frame.size.width-130)/2.0, 50+2*BUTTON_SIZE+70, 136, 55);
+		close.frame=CGRectMake((self.frame.size.width-180)/2.0, 50+2*BUTTON_SIZE+70, 180, 55);
 		close.autoresizingMask=UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 
 		

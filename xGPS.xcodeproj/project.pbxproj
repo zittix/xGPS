@@ -63,22 +63,16 @@
 		4E8C97370E6CBEF7001F5317 /* SpeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8C97360E6CBEF7001F5317 /* SpeedView.m */; };
 		4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */; };
 		4E8F02B60EBB544F00994EA3 /* DrivingDirectionsSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8F02B50EBB544F00994EA3 /* DrivingDirectionsSearchView.m */; };
-		4E8F03320EBB5BD000994EA3 /* settingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E8F03310EBB5BD000994EA3 /* settingsIcon.png */; };
 		4E8F033D0EBB5CA100994EA3 /* DirectionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8F033C0EBB5CA100994EA3 /* DirectionsController.m */; };
 		4E8F26520EC5F51600401A4E /* NavigationInstructionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8F26510EC5F51600401A4E /* NavigationInstructionView.m */; };
 		4E9077FB0E9CE48800B0F6BC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9077FA0E9CE48800B0F6BC /* AboutViewController.m */; };
 		4E90781B0E9CE69900B0F6BC /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 4E9078190E9CE69900B0F6BC /* about.html */; };
 		4E90BD630E82E95F007D8F7C /* LicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E90BD620E82E95F007D8F7C /* LicenseViewController.m */; };
 		4E90BD7C0E82E95F007D8F7C /* whiteButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90BD7B0E82E95F007D8F7C /* whiteButton.png */; };
-		4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */; };
-		4E90C0F80E8D3CD0003F6B23 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F50E8D3CD0003F6B23 /* green.png */; };
-		4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F60E8D3CD0003F6B23 /* orange.png */; };
-		4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E90C0F70E8D3CD0003F6B23 /* red.png */; };
 		4E941A090E6A92330037F8C1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E941A080E6A92330037F8C1 /* SettingsViewController.m */; };
 		4E96C6330F320DF10058C714 /* MapTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E96C6320F320DF10058C714 /* MapTypeViewController.m */; };
 		4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9A00950E8D51B90076EE44 /* FakeGPSController.m */; };
 		4EA54F1F0EB231860077F5F4 /* SyncDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */; };
-		4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EA9803C0EDEC95D00AAB014 /* gps_grey.png */; };
 		4EAA1BAD0EE53A2B0014DBF0 /* SettingsGPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA1BAC0EE53A2B0014DBF0 /* SettingsGPSController.m */; };
 		4EAA1BC30EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA1BC20EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.m */; };
 		4EAA1BD70EE5401A0014DBF0 /* SettingsGPXController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EAA1BD60EE5401A0014DBF0 /* SettingsGPXController.m */; };
@@ -94,10 +88,6 @@
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
 		4ECAC69A0F54537C002D5571 /* arrow_direction.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC6990F54537C002D5571 /* arrow_direction.png */; };
 		4ECAC7A90F546A0B002D5571 /* track_demo.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC7A80F546A0B002D5571 /* track_demo.gpx */; };
-		4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00D0EE469A80077553B /* rm_reception_good.png */; };
-		4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00E0EE469A80077553B /* rm_reception_na.png */; };
-		4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA00F0EE469A80077553B /* rm_reception_none.png */; };
-		4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECFA0100EE469A80077553B /* rm_reception_poor.png */; };
 		4ECFA0F70EE477E40077553B /* SettingsUIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA0F60EE477E40077553B /* SettingsUIController.m */; };
 		4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */; };
 		4ECFA2A60EE48A750077553B /* SettingsMapsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2A50EE48A750077553B /* SettingsMapsController.m */; };
@@ -334,7 +324,6 @@
 		4E8DAF2D0E85737C0025D8ED /* SearchPlacesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPlacesView.m; sourceTree = "<group>"; };
 		4E8F02B40EBB544F00994EA3 /* DrivingDirectionsSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrivingDirectionsSearchView.h; sourceTree = "<group>"; };
 		4E8F02B50EBB544F00994EA3 /* DrivingDirectionsSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrivingDirectionsSearchView.m; sourceTree = "<group>"; };
-		4E8F03310EBB5BD000994EA3 /* settingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsIcon.png; sourceTree = "<group>"; };
 		4E8F033B0EBB5CA100994EA3 /* DirectionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsController.h; sourceTree = "<group>"; };
 		4E8F033C0EBB5CA100994EA3 /* DirectionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsController.m; sourceTree = "<group>"; };
 		4E8F26500EC5F51600401A4E /* NavigationInstructionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationInstructionView.h; sourceTree = "<group>"; };
@@ -346,11 +335,6 @@
 		4E90BD620E82E95F007D8F7C /* LicenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseViewController.m; sourceTree = "<group>"; };
 		4E90BD640E82E95F007D8F7C /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = English; path = English.lproj/license.html; sourceTree = "<group>"; };
 		4E90BD7B0E82E95F007D8F7C /* whiteButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteButton.png; sourceTree = "<group>"; };
-		4E90C0F10E8D3CAE003F6B23 /* GPSSignalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSSignalView.h; sourceTree = "<group>"; };
-		4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSSignalView.m; sourceTree = "<group>"; };
-		4E90C0F50E8D3CD0003F6B23 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
-		4E90C0F60E8D3CD0003F6B23 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
-		4E90C0F70E8D3CD0003F6B23 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		4E917E760EC39EE4005ACCA9 /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = zh_TW; path = zh_TW.lproj/license.html; sourceTree = "<group>"; };
 		4E941A070E6A92330037F8C1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4E941A080E6A92330037F8C1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -362,7 +346,6 @@
 		4E9A00950E8D51B90076EE44 /* FakeGPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeGPSController.m; sourceTree = "<group>"; };
 		4EA54F1D0EB231860077F5F4 /* SyncDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncDownloader.h; sourceTree = "<group>"; };
 		4EA54F1E0EB231860077F5F4 /* SyncDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncDownloader.m; sourceTree = "<group>"; };
-		4EA9803C0EDEC95D00AAB014 /* gps_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gps_grey.png; sourceTree = "<group>"; };
 		4EAA1BAB0EE53A2B0014DBF0 /* SettingsGPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsGPSController.h; sourceTree = "<group>"; };
 		4EAA1BAC0EE53A2B0014DBF0 /* SettingsGPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsGPSController.m; sourceTree = "<group>"; };
 		4EAA1BC10EE53E0F0014DBF0 /* SettingsDrivingDirectionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDrivingDirectionsController.h; sourceTree = "<group>"; };
@@ -388,10 +371,6 @@
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
 		4ECAC6990F54537C002D5571 /* arrow_direction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_direction.png; sourceTree = "<group>"; };
 		4ECAC7A80F546A0B002D5571 /* track_demo.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = track_demo.gpx; sourceTree = "<group>"; };
-		4ECFA00D0EE469A80077553B /* rm_reception_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_good.png; sourceTree = "<group>"; };
-		4ECFA00E0EE469A80077553B /* rm_reception_na.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_na.png; sourceTree = "<group>"; };
-		4ECFA00F0EE469A80077553B /* rm_reception_none.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_none.png; sourceTree = "<group>"; };
-		4ECFA0100EE469A80077553B /* rm_reception_poor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rm_reception_poor.png; sourceTree = "<group>"; };
 		4ECFA0F50EE477E40077553B /* SettingsUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsUIController.h; sourceTree = "<group>"; };
 		4ECFA0F60EE477E40077553B /* SettingsUIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsUIController.m; sourceTree = "<group>"; };
 		4ECFA2310EE47EE20077553B /* SettingsGeneralController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsGeneralController.h; sourceTree = "<group>"; };
@@ -662,24 +641,15 @@
 				4ED975320F5316C3006E2312 /* bg_search.png */,
 				4E0829900F4E017500B1C9AF /* endway.png */,
 				4E3B64500F308D0C00130CDF /* sounds */,
-				4ECFA00D0EE469A80077553B /* rm_reception_good.png */,
-				4ECFA00E0EE469A80077553B /* rm_reception_na.png */,
-				4ECFA00F0EE469A80077553B /* rm_reception_none.png */,
-				4ECFA0100EE469A80077553B /* rm_reception_poor.png */,
-				4EA9803C0EDEC95D00AAB014 /* gps_grey.png */,
 				4E74D8540EDD99B800C2FEAC /* wrongway.png */,
 				4EF1D57C0EDB0BA80007AEAE /* track.gpx */,
 				4ECAC7A80F546A0B002D5571 /* track_demo.gpx */,
 				4E0829B90F4E027F00B1C9AF /* middleway.png */,
-				4E8F03310EBB5BD000994EA3 /* settingsIcon.png */,
 				4E0829040F4DF83300B1C9AF /* addicon.png */,
 				4E8A01980E9D445A00E58774 /* wireless_future.jpg */,
 				4E9078190E9CE69900B0F6BC /* about.html */,
-				4E90C0F50E8D3CD0003F6B23 /* green.png */,
-				4E90C0F60E8D3CD0003F6B23 /* orange.png */,
 				4EDDACE70F51E8BA00C77686 /* settings_button.png */,
 				4EDDACE80F51E8BA00C77686 /* search_button.png */,
-				4E90C0F70E8D3CD0003F6B23 /* red.png */,
 				4E8BBC280E89786800BADF0C /* gps_ball.png */,
 				4E0F48E20E851C3C001B6F51 /* Localizable.strings */,
 				4E90BD7B0E82E95F007D8F7C /* whiteButton.png */,
@@ -758,8 +728,6 @@
 				4E8F02B50EBB544F00994EA3 /* DrivingDirectionsSearchView.m */,
 				4EF25DCC0E897FA300AB6194 /* LanguageViewController.h */,
 				4EF25DCD0E897FA300AB6194 /* LanguageViewController.m */,
-				4E90C0F10E8D3CAE003F6B23 /* GPSSignalView.h */,
-				4E90C0F20E8D3CAE003F6B23 /* GPSSignalView.m */,
 				4E9077F90E9CE48800B0F6BC /* AboutViewController.h */,
 				4E9077FA0E9CE48800B0F6BC /* AboutViewController.m */,
 				4E8F26500EC5F51600401A4E /* NavigationInstructionView.h */,
@@ -1240,20 +1208,11 @@
 				4E90BD7C0E82E95F007D8F7C /* whiteButton.png in Resources */,
 				4E0F48E30E851C3C001B6F51 /* Localizable.strings in Resources */,
 				4E8BBC290E89786800BADF0C /* gps_ball.png in Resources */,
-				4E90C0F80E8D3CD0003F6B23 /* green.png in Resources */,
-				4E90C0F90E8D3CD0003F6B23 /* orange.png in Resources */,
-				4E90C0FA0E8D3CD0003F6B23 /* red.png in Resources */,
 				4E90781B0E9CE69900B0F6BC /* about.html in Resources */,
 				4E8A01990E9D445A00E58774 /* wireless_future.jpg in Resources */,
 				4EAF79FF0EB3C3750078B697 /* Default.png in Resources */,
-				4E8F03320EBB5BD000994EA3 /* settingsIcon.png in Resources */,
 				4EF1D57D0EDB0BA80007AEAE /* track.gpx in Resources */,
 				4E74D8550EDD99B800C2FEAC /* wrongway.png in Resources */,
-				4EA9803D0EDEC95D00AAB014 /* gps_grey.png in Resources */,
-				4ECFA0110EE469A80077553B /* rm_reception_good.png in Resources */,
-				4ECFA0120EE469A80077553B /* rm_reception_na.png in Resources */,
-				4ECFA0130EE469A80077553B /* rm_reception_none.png in Resources */,
-				4ECFA0140EE469A80077553B /* rm_reception_poor.png in Resources */,
 				4E3B64540F308D0C00130CDF /* sounds in Resources */,
 				4E0829050F4DF83300B1C9AF /* addicon.png in Resources */,
 				4E0829910F4E017500B1C9AF /* startway.png in Resources */,
@@ -1335,7 +1294,6 @@
 				4E8DAF2E0E85737C0025D8ED /* SearchPlacesView.m in Sources */,
 				4E0F05010E87C49000D75E7D /* GeoEncoder.m in Sources */,
 				4EF25DCE0E897FA300AB6194 /* LanguageViewController.m in Sources */,
-				4E90C0F30E8D3CAE003F6B23 /* GPSSignalView.m in Sources */,
 				4E9A00960E8D51B90076EE44 /* FakeGPSController.m in Sources */,
 				4E9077FB0E9CE48800B0F6BC /* AboutViewController.m in Sources */,
 				4E8A01770E9D441C00E58774 /* NetworkReceiverViewController.m in Sources */,

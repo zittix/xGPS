@@ -13,6 +13,15 @@
 #import "RoutesManagerViewController.h"
 #import "iPhone3GController.h"
 #import "ProgressViewController.h"
+
+@interface UIApplication(Improved)
+-(void)addStatusBarImageNamed:(NSString*)name removeOnExit:(BOOL)v;
+-(void)addStatusBarImageNamed:(NSString*)name removeOnAbnormalExit:(BOOL)v;
+-(void)removeStatusBarImageNamed:(NSString*)name;
+@end
+
+
+
 @implementation MainViewController
 
 @synthesize mapview;
@@ -29,6 +38,7 @@
 	return self;
 }
 - (void)loadView {
+	
 	//NSLog(@"MainView controller loadView...");
 	self.title=@"xGPS";
 	
@@ -53,7 +63,7 @@
 	[self.view addSubview:mapview];
 	zoomview=[[ZoomView alloc] initWithFrame:CGRectMake(10,10,38,83) withDelegate:mapview];
 	[self.view addSubview:zoomview];
-	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-95.0f-2.0f-44.0f,92.0f,100.0f)];
+	speedview=[[SpeedView alloc] initWithFrame:CGRectMake(2.0f,viewRect.size.height-95.0f-2.0f-44.0f,92.0f,100.0f) delegate:self];
 	[speedview setSpeed:0];
 	
 	//[self.view addSubview:speedview];
@@ -62,9 +72,6 @@
 	
 	[self.view addSubview:speedview];
 	
-	//btnSettings=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Settings",@"Settings Button") style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
-	//btnSettings=[[UIButton alloc] initWithImage:[UIImage imageNamed:@"settingsIcon.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(settingsBtnPressed:)];
-	//btnSearch=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnPressed:)];
 	btnSettings=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
 	btnSearch=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
 	[btnSettings setImage:[UIImage imageNamed:@"settings_button.png"] forState:UIControlStateNormal];
@@ -91,13 +98,8 @@
 	drivingSearchView.autoresizingMask=UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	drivingSearchView.autoresizesSubviews=YES;
 	
-	signalView=[[GPSSignalView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-58,5,47,40) delegate:self];
-	signalView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
-	[self.view addSubview:signalView];
-	[signalView setQuality:-1];
-	
 	speedview.hidden=YES;
-	signalView.hidden=YES;
+	
 	cancelSearch=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel",@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(cancelDrivingSearch:)];
 	routesManager=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Manager",@"") style:UIBarButtonItemStyleBordered target:self action:@selector(showManager:)];
 	navView=[[NavigationInstructionView alloc] initWithFrame:CGRectMake(0,0,viewRect.size.width,50)];
@@ -105,7 +107,7 @@
 	navView.delegate=APPDELEGATE.directions;
 	wrongWay=[[WrongWayView alloc] initWithFrame:CGRectMake(viewRect.size.width-140,70,-1,-1) withDelegate:self];
 	navView.autoresizesSubviews=YES;
-
+	
 	wrongWay.autoresizingMask=UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
 	
 	
@@ -141,7 +143,7 @@
 	[tmrNightMode retain];
 	[self speedChanged:nil];
 	[self viewWillAppear:YES];
-	[self setStatusIconVisible:YES state:2];
+	[self setGPSQuality:-1];
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]>=0) {
 		NSMutableArray *road=[APPDELEGATE.dirbookmarks copyBookmarkRoadPoints:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
 		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
@@ -153,6 +155,22 @@
 	//SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
 	//[APPDELEGATE.soundcontroller addSound:s];	
 	//[s release];
+}
+-(void)setGPSQuality:(int)q {
+	
+	if(q<33) {
+		[self setStatusIconVisible:NO state:1];
+		[self setStatusIconVisible:NO state:2];
+		[self setStatusIconVisible:YES state:0];
+	} else if(q<66) {
+		[self setStatusIconVisible:NO state:2];
+		[self setStatusIconVisible:NO state:0];
+		[self setStatusIconVisible:YES state:1];
+	} else {
+		[self setStatusIconVisible:NO state:0];
+		[self setStatusIconVisible:NO state:1];
+		[self setStatusIconVisible:YES state:2];
+	}
 }
 -(void)showManager:(id)sender {
 	UIViewController *manager=[[RoutesManagerViewController alloc] initWithStyle:UITableViewStylePlain delegate:drivingSearchView];
@@ -198,20 +216,20 @@
 		[alert show];
 	} else {
 		
-			NSString *currentPosition;
-			GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
-			if(g.gps_data.fix.mode>1) {
-				float lat=g.gps_data.fix.latitude;
-				float lon=g.gps_data.fix.longitude;
-
-				currentPosition=[NSString stringWithFormat:@"%f,%f",lat,lon];
-			} else {
-				UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to get the GPS position. The GPS is not currently giving any position information.",@"GPS Dir Pos error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-				[alert show];	
-				return;
-			}
-
-
+		NSString *currentPosition;
+		GPSController *g=[[xGPSAppDelegate gpsmanager] GetCurrentGPS];
+		if(g.gps_data.fix.mode>1) {
+			float lat=g.gps_data.fix.latitude;
+			float lon=g.gps_data.fix.longitude;
+			
+			currentPosition=[NSString stringWithFormat:@"%f,%f",lat,lon];
+		} else {
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"Unable to get the GPS position. The GPS is not currently giving any position information.",@"GPS Dir Pos error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];	
+			return;
+		}
+		
+		
 		
 		if(![APPDELEGATE.directions drive:currentPosition to:homeAddress via:nil delegate:nil]) {
 			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the required information from the server: %@",@"Network error message"),NSLocalizedString(@"Unknown error",@"Unknown error")] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
@@ -219,7 +237,7 @@
 			[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 			return;
 		}
-				
+		
 		ProgressViewController *pController=[[ProgressViewController alloc] init];
 		
 		[pController.progress hideCancelButton];
@@ -402,13 +420,11 @@
 	[UIView beginAnimations:nil context:nil];
 	//[speedview removeFromSuperview];
 	speedview.hidden=YES;
-	signalView.hidden=YES;
 	[UIView commitAnimations];
 }
 -(void)showGPSStatus {
 	[UIView beginAnimations:nil context:nil];
 	//[self.view addSubview:speedview];
-	signalView.hidden=NO;
 	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowSpeed])
 		speedview.hidden=NO;
 	[UIView commitAnimations];
@@ -422,7 +438,6 @@
 	[btnSettings release];
 	[btnSearch release];
 	[settingsController release];
-	[signalView release];
 	[searchPlacesView release];
 	[gpsPos release];
 	[super dealloc];
@@ -471,13 +486,12 @@
 	navView.frame=CGRectMake(0,0,self.view.frame.size.width,50);
 	remainingView.frame=CGRectMake(self.view.frame.size.width-100,self.view.frame.size.height-60,100,70);
 	if(currentSearchType==2) {
-	[UIView beginAnimations:nil context:nil];	
-	[navView sizeToFit];
-	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
-	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
-	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
-	signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
-	[UIView commitAnimations];
+		[UIView beginAnimations:nil context:nil];	
+		[navView sizeToFit];
+		mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
+		zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
+		wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
+		[UIView commitAnimations];
 	}
 	[super viewDidAppear:animated];
 }
@@ -517,7 +531,7 @@
 		[mapview setHasGPSPos:NO];
 		[mapview refreshMap];
 		[self hideGPSStatus];
-		[signalView setQuality:-1];
+		[self setGPSQuality:-1];
 		[self hideWrongWay];
 	}
 	else if(mode==1 && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].isConnected && [[xGPSAppDelegate gpsmanager] GetCurrentGPS].validLicense){
@@ -588,7 +602,6 @@
 	mapview.frame=CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height);
 	zoomview.frame=CGRectMake(10,10,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70,wrongWay.frame.size.width,wrongWay.frame.size.height);
-	signalView.frame=CGRectMake(self.view.frame.size.width-58,5,47,40);
 	[UIView commitAnimations];
 	[APPDELEGATE.directions clearResult];
 	currentSearchType=0;
@@ -602,7 +615,6 @@
 	mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 	zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 	wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
-	signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
 	[UIView commitAnimations];
 	
 }
@@ -637,7 +649,6 @@
 			mapview.frame=CGRectMake(0,navView.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-navView.frame.size.height);
 			zoomview.frame=CGRectMake(10,10+navView.frame.size.height,38,83);
 			wrongWay.frame=CGRectMake(self.view.frame.size.width-140,70+navView.frame.size.height,wrongWay.frame.size.width,wrongWay.frame.size.height);
-			signalView.frame=CGRectMake(self.view.frame.size.width-58,5+navView.frame.size.height,47,40);
 			[UIView commitAnimations];
 			directionSearch=NO;
 			[mapview computeCachedRoad];
@@ -714,7 +725,7 @@
 			}
 			break;
 		case SIGNAL_QUALITY:
-			[signalView setQuality:[[xGPSAppDelegate gpsmanager] GetCurrentGPS].signalQuality];
+			[self setGPSQuality:[[xGPSAppDelegate gpsmanager] GetCurrentGPS].signalQuality];
 			[APPDELEGATE.gpxlogger gpsSignalChanged:[[[xGPSAppDelegate gpsmanager] GetCurrentGPS] gps_data].fix.mode>=2];
 			break;
 		case SERIAL:

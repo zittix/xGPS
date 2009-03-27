@@ -16,7 +16,6 @@
 #import "SpeedView.h"
 #import "LicenseViewController.h"
 #import "SearchPlacesView.h"
-#import "GPSSignalView.h"
 #import "DrivingDirectionsSearchView.h"
 #import "DirectionsController.h"
 #import "NavigationInstructionView.h"
@@ -37,7 +36,6 @@
 	LicenseViewController* licenseView;
 	SearchPlacesView *searchPlacesView;
 	DrivingDirectionsSearchView *drivingSearchView;
-	GPSSignalView* signalView;
 	PositionObj *gpsPos;
 	BOOL directionSearch;
 	NavigationInstructionView *navView;
@@ -55,6 +53,7 @@
 -(void)cancelDrivingSearch:(id)sender ;
 -(void)showWrongWay;
 -(void)hideWrongWay;
+-(void)setGPSQuality:(int)q;
 -(void)clearDirections;
 - (void)setStatusIconVisible:(BOOL)visible state:(int)state;
 -(void)speedChanged:(NSNotification *)notif;

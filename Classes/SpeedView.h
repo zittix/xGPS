@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "MapTile.h"
+@protocol ShowGPSDetailProtocol
+
+-(void)showGPSDetails;
+
+@end
 @interface SpeedView : UIView {
 	float _speed;
 	MapTile *speedbgd;
 	UILabel *lblspeed;
 	UILabel *lblunit;
-	
+	id delegate;
 	BOOL miles;
 }
--(id) initWithFrame:(CGRect)f;
+-(id) initWithFrame:(CGRect)f delegate:(id<ShowGPSDetailProtocol>)_delegate;
 -(void)setSpeed:(double)speed;
 @end

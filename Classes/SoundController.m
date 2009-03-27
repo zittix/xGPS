@@ -305,11 +305,10 @@ static void HandleOutputBuffer (
 	}
 	return ret;
 }
-
 -(void)playText:(NSString*)text {
 	cst_voice *v;
     cst_features *extra_feats;
-	
+
 	NSString *toPlay=text;
 	
 	//Filter out / and \ and abbreviations
