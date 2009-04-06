@@ -70,6 +70,7 @@ typedef enum RoutingType {
 	int currentBookId;
 	RoutingType routingType;
 	id tmpDelegate;
+	BOOL miles;
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;

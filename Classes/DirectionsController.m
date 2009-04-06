@@ -67,12 +67,13 @@ int roundNearest(double dist) {
 -(void)recomputeChanged:(NSNotification *)notif {
 	recomputeRoute=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRecomputeDriving];
 	enableVoice=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsEnableVoiceInstr];
+	miles=[[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSpeedUnit];
 }
 -(id)init {
 	if((self=[super init])) {
 		pos=[[PositionObj alloc] init];
 		[self recomputeChanged:nil];
-		beforeThreshold=100;
+		beforeThreshold=120;
 		farThreshold=500;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recomputeChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
 		currentBookId=-1;
@@ -414,26 +415,74 @@ int roundNearest(double dist) {
 			
 			//NSLog(@"Threshold before: %f, far: %f",beforeThresholdCalc,farThresholdCalc);
 			
+			double distConverted;	
+			BOOL bigDistance=NO;
+			if(miles)  {
+				distConverted=remainingDist*3.2808399;
+				bigDistance=NO;
+				if(remainingDist*0.000621371192>=1)
+				{
+					bigDistance=YES;
+					distConverted=remainingDist*0.000621371192;
+				}
+				//if(distConverted<1) distConverted=1;
+			} else {
+				distConverted=remainingDist;
+				
+				if(distConverted>1000)
+				{
+					bigDistance=YES;
+					distConverted=remainingDist/1000.0;
+				}
+			}
+			//NSLog(@"Dist conv: %f",distConverted);
+			
 			if(!playedSoundBeforemeters && remainingDist<=beforeThresholdCalc && instrIndex>0) {
 				playedSoundFarmeters=YES;
 				playedSoundBeforemeters=YES;
 				
 				SoundEvent *s=nil;
-				if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip])
-					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name]];
+				
+				NSString *instrText;
+				if(miles)
+					if(bigDistance)
+						instrText=[NSString stringWithFormat:@"In %d miles, %@",roundNearest(distConverted),next.name];
+					else
+						instrText=[NSString stringWithFormat:@"In %d feet, %@",roundNearest(distConverted),next.name];
 				else
-					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+					if(bigDistance)
+						instrText=[NSString stringWithFormat:@"In %d kilometers, %@",roundNearest(distConverted),next.name];
+					else
+						instrText=[NSString stringWithFormat:@"In %d meters, %@",roundNearest(distConverted),next.name];
+				
+				if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip])
+			
+					s=[[SoundEvent alloc] initWithText:instrText];
+				else
+					s=[[SoundEvent alloc] initWithText:instrText andSound:Sound_Announce];
 				[APPDELEGATE.soundcontroller addSound:s];
 				[s release];
 				
 			} else if(!playedSoundFarmeters && remainingDist<=farThresholdCalc && inBetweenDistance>farThresholdCalc && instrIndex>0) {
 				playedSoundFarmeters=YES;
 				SoundEvent *s=nil;
+				NSString *instrText;
+				if(miles)
+					if(bigDistance)
+						instrText=[NSString stringWithFormat:@"In %d miles, %@",roundNearest(distConverted),next.name];
+					else
+						instrText=[NSString stringWithFormat:@"In %d feet, %@",roundNearest(distConverted),next.name];
+					else
+						if(bigDistance)
+							instrText=[NSString stringWithFormat:@"In %d kilometers, %@",roundNearest(distConverted),next.name];
+						else
+							instrText=[NSString stringWithFormat:@"In %d meters, %@",roundNearest(distConverted),next.name];
+				
 				
 				if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDisableVoiceBip])
-					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name]];
+					s=[[SoundEvent alloc] initWithText:instrText];
 				else
-					s=[[SoundEvent alloc] initWithText:[NSString stringWithFormat:@"In %d meters, %@",roundNearest(remainingDist),next.name] andSound:Sound_Announce];
+					s=[[SoundEvent alloc] initWithText:instrText andSound:Sound_Announce];
 				[APPDELEGATE.soundcontroller addSound:s];
 				[s release];
 			}

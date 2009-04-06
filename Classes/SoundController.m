@@ -295,6 +295,8 @@ static void HandleOutputBuffer (
 		r.location=0;
 		r.length=ret.length;
 		ret=[ret stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@ ",key] withString:[NSString stringWithFormat:@" %@ ",[dic objectForKey:key]] options:NSCaseInsensitiveSearch range:r];
+		ret=[ret stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@.",key] withString:[NSString stringWithFormat:@"%@",[dic objectForKey:key]] options:NSCaseInsensitiveSearch range:r];
+		
 		r.location=0;
 		r.length=key.length+1;
 		ret=[ret stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@ ",key] withString:[NSString stringWithFormat:@"%@ ",[dic objectForKey:key]] options:NSCaseInsensitiveSearch range:r];
@@ -334,8 +336,8 @@ W: West
 	Also, make sure to get rid off slashes (/ \) and dashes (-)
 	*/
  
-	
-	NSDictionary *abrev=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Avenue",@"Street",@"Road",@"Boulevard",@"Parkway",@"Circle",@"North",@"East",@"South",@"West",@"Highway",nil] forKeys:[NSArray arrayWithObjects:@"Ave",@"St",@"Rd",@"Blvd",@"Pkwy",@"Cir",@"N",@"E",@"S",@"W",@"Hwy",nil]];
+
+	NSDictionary *abrev=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Avenue",@"Street",@"Road",@"Boulevard",@"Parkway",@"Circle",@"North",@"East",@"South",@"West",@"Highway",@"Place",@"Circuit",@"Court",@"Alley",@"Arcade",@"Branch",@"Forest",@"Lake",@"Lane",@"Lobby",@"Mountain",@"Park",@"Square",@"Track",@"Tunnel",@"Valley",@"Village",nil] forKeys:[NSArray arrayWithObjects:@"Ave",@"St",@"Rd",@"Blvd",@"Pkwy",@"Cir",@"N",@"E",@"S",@"W",@"Hwy",@"Pl",@"Cct",@"Ct",@"Aly",@"Arc",@"Br",@"Frst",@"Lk",@"Ln",@"Lbby",@"Mtn",@"Pk",@"Sq",@"Trak",@"Tunl",@"Vly",@"Vlg",nil]];
 	
 	toPlay=[self replaceAbbrev:abrev inString:toPlay];
 	//NSLog(@"Saying :%@",toPlay);
