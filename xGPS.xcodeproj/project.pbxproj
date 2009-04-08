@@ -92,6 +92,8 @@
 		4ECFA2330EE47EE20077553B /* SettingsGeneralController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2320EE47EE20077553B /* SettingsGeneralController.m */; };
 		4ECFA2A60EE48A750077553B /* SettingsMapsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECFA2A50EE48A750077553B /* SettingsMapsController.m */; };
 		4ED2BD770F4EE1BE00DDC062 /* ProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */; };
+		4ED588800F8CAB4A000D0874 /* DirectionsRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5887F0F8CAB4A000D0874 /* DirectionsRetriever.m */; };
+		4ED588850F8CAB5D000D0874 /* GoogleDirectionsRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED588840F8CAB5D000D0874 /* GoogleDirectionsRetriever.m */; };
 		4ED973340F52EBF6006E2312 /* MapsDownloadDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */; };
 		4ED974CE0F530FBF006E2312 /* HomeAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED974CD0F530FBF006E2312 /* HomeAddressViewController.m */; };
 		4ED9752C0F531675006E2312 /* ViewSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED9752B0F531675006E2312 /* ViewSearch.m */; };
@@ -379,6 +381,10 @@
 		4ECFA2A50EE48A750077553B /* SettingsMapsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsMapsController.m; sourceTree = "<group>"; };
 		4ED2BD750F4EE1BE00DDC062 /* ProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressViewController.h; sourceTree = "<group>"; };
 		4ED2BD760F4EE1BE00DDC062 /* ProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressViewController.m; sourceTree = "<group>"; };
+		4ED5887E0F8CAB4A000D0874 /* DirectionsRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsRetriever.h; sourceTree = "<group>"; };
+		4ED5887F0F8CAB4A000D0874 /* DirectionsRetriever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsRetriever.m; sourceTree = "<group>"; };
+		4ED588830F8CAB5D000D0874 /* GoogleDirectionsRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleDirectionsRetriever.h; sourceTree = "<group>"; };
+		4ED588840F8CAB5D000D0874 /* GoogleDirectionsRetriever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleDirectionsRetriever.m; sourceTree = "<group>"; };
 		4ED973320F52EBF6006E2312 /* MapsDownloadDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsDownloadDetailsViewController.h; sourceTree = "<group>"; };
 		4ED973330F52EBF6006E2312 /* MapsDownloadDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsDownloadDetailsViewController.m; sourceTree = "<group>"; };
 		4ED974CC0F530FBF006E2312 /* HomeAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeAddressViewController.h; sourceTree = "<group>"; };
@@ -853,6 +859,8 @@
 		4EE2423C0F3073FD00C41ACA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4ED588830F8CAB5D000D0874 /* GoogleDirectionsRetriever.h */,
+				4ED588840F8CAB5D000D0874 /* GoogleDirectionsRetriever.m */,
 				4E3B63FB0F3080D900130CDF /* SoundEvent.h */,
 				4E3B63FC0F3080D900130CDF /* SoundEvent.m */,
 				4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */,
@@ -869,6 +877,8 @@
 				4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */,
 				4E2396780E40F7750062A352 /* TileDB.h */,
 				4E2396790E40F7750062A352 /* TileDB.m */,
+				4ED5887E0F8CAB4A000D0874 /* DirectionsRetriever.h */,
+				4ED5887F0F8CAB4A000D0874 /* DirectionsRetriever.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1410,6 +1420,8 @@
 				4ED974CE0F530FBF006E2312 /* HomeAddressViewController.m in Sources */,
 				4ED9752C0F531675006E2312 /* ViewSearch.m in Sources */,
 				4EE410600F603C9B00510F8A /* GFiController.m in Sources */,
+				4ED588800F8CAB4A000D0874 /* DirectionsRetriever.m in Sources */,
+				4ED588850F8CAB5D000D0874 /* GoogleDirectionsRetriever.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

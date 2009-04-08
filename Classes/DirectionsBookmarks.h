@@ -18,6 +18,7 @@
 	sqlite3_stmt* getRoadPointStmt;
 	sqlite3_stmt* getInstrStmt;
 	sqlite3_stmt* deleteRoadPointStmt;
+	sqlite3_stmt* getOneBookmarkStmt;
 	sqlite3_stmt* deleteInstrStmt;
 	sqlite3_stmt* deleteBookmarkStmt;
 	BOOL closed;
@@ -28,6 +29,7 @@
 -(NSString*)getDBFilename;
 -(int)insertBookmark:(NSArray*)roadPoints withInstructions:(NSArray*)instr from:(NSString*)from via:(NSArray*)via to:(NSString*)to name:(NSString*)name;
 -(NSArray*)copyBookmarks;
+-(BOOL)getBookmarkInfo:(long)_id from:(NSString**)from to:(NSString**)to via:(NSArray**)via;
 -(void)deleteBookmark:(long)_id;
 -(void)deleteAllBookmarks;
 -(NSMutableArray*)copyBookmarkRoadPoints:(int)id;

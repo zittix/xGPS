@@ -23,12 +23,12 @@
 	[(UIWebView*)self.view loadHTMLString:license baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
 	((UIWebView*)self.view).delegate=self;
 }
-
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	NSString *path=[[request URL] path];
-	//NSLog([[request URL] scheme]);
+	NSLog(path);
 	if(path!=nil && [path isEqualToString:@"/iagree"]) {
-		[self.navigationController dismissModalViewControllerAnimated:YES];
+		//[self.modalViewController dismissModalViewControllerAnimated:YES];
+		[_delegate hideLicense];
 		return NO;
 	} else if([[[request URL] scheme] isEqualToString:@"http"]) {
 		[[xGPSAppDelegate appdelegate] openURL:[request URL]];
@@ -41,7 +41,9 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
+-(void)setDelegate:(id<HideLicenseModalController>)delegate {
+	_delegate=delegate;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; // Releases the view if it doesn't have a superview

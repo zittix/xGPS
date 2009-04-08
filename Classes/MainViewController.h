@@ -23,7 +23,7 @@
 #import "GPSDetailsViewController.h"
 #import "ViewSearch.h"
 #import "RemainingDistanceTimeView.h"
-@interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate,ShowGPSDetailProtocol,SearchPlacesViewDelegate,ViewSearchProtocol> {
+@interface MainViewController : UIViewController<UpdateProtocol,UIActionSheetDelegate,DirectionsControllerDelegate,ShowGPSDetailProtocol,SearchPlacesViewDelegate,ViewSearchProtocol,HideLicenseModalController> {
 	MapView* mapview;
 	UIButton* btnSettings;
 	UIButton* btnSearch;

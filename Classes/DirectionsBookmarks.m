@@ -69,6 +69,8 @@
 		NSAssert1(ret==SQLITE_OK, @"Failed to create database's tables with message '%s'.",error);
 		ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date,name,via FROM dirbookmarks ORDER BY date DESC",-1,&getBookmarkStmt,NULL);
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
+		ret=sqlite3_prepare(database,"SELECT id,fromPos,toPos,date,name,via FROM dirbookmarks WHERE id=?1",-1,&getOneBookmarkStmt,NULL);
+		NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
 		
 		ret=sqlite3_prepare(database,"SELECT lat,lon FROM dirb_roadpoints WHERE owner=?1 ORDER BY internalId ASC",-1,&getRoadPointStmt,NULL);
 		NSAssert1(ret==SQLITE_OK, @"Failed to prepare get query with message '%s'.",sqlite3_errmsg(database));
@@ -118,6 +120,56 @@
 	
 
 }
+-(BOOL)getBookmarkInfo:(long)_id from:(NSString**)from to:(NSString**)to via:(NSArray**)via {
+	if(closed)
+		return NO;
+	
+	if(sqlite3_bind_int64(getOneBookmarkStmt,1,_id)!=SQLITE_OK)
+		goto err;
+	
+	int r=sqlite3_step(getOneBookmarkStmt);
+	
+	if (r == SQLITE_ROW) {
+		NSString *f=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getOneBookmarkStmt,1) encoding:NSUTF8StringEncoding];
+		NSString *t=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getOneBookmarkStmt,2) encoding:NSUTF8StringEncoding];
+		NSString *viaS=[[NSString alloc] initWithCString:(const char*)sqlite3_column_text(getOneBookmarkStmt,5) encoding:NSUTF8StringEncoding];
+		NSArray *arrayVia=[viaS componentsSeparatedByString:@";"];
+		NSMutableArray *viaRet=[[NSMutableArray alloc] initWithCapacity:5];
+		for(NSString *p in arrayVia) {
+			if(p.length==0) continue;
+			NSArray *arrPoint=[p componentsSeparatedByString:@"|"];
+			if([arrPoint count]!=2) continue;
+			NSArray *arrC=[[arrPoint objectAtIndex:1] componentsSeparatedByString:@","];
+			if([arrC count]!=2) continue;
+			
+			NavigationPoint *p=[[NavigationPoint alloc] init];
+			p.name=[arrPoint objectAtIndex:0];
+			p.pos.x=[[arrC objectAtIndex:0] floatValue];
+			p.pos.y=[[arrC objectAtIndex:1] floatValue];
+			[viaRet addObject:p];
+			[p release];
+
+		}
+		[viaS release];
+		*from=f;
+		*to=t;
+		if([viaRet count]>0)
+		*via=viaRet;
+		else {
+			[viaRet release];
+			*via=nil;
+		}
+	}
+	sqlite3_reset(getOneBookmarkStmt);
+	sqlite3_clear_bindings(getOneBookmarkStmt);
+	
+	
+	return YES;
+err:
+	sqlite3_reset(getOneBookmarkStmt);
+	sqlite3_clear_bindings(getOneBookmarkStmt);	
+	return NO;
+}
 -(NSString*)getDBFilename {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -132,6 +184,7 @@
 	sqlite3_finalize(insertInstrStmt);
 	sqlite3_finalize(insertBookmarkStmt);
 	sqlite3_finalize(getBookmarkStmt);
+	sqlite3_finalize(getOneBookmarkStmt);
 	sqlite3_finalize(getRoadPointStmt);
 	sqlite3_finalize(getInstrStmt);
 	sqlite3_finalize(deleteRoadPointStmt);

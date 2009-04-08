@@ -14,6 +14,39 @@
 #import "iPhone3GController.h"
 #import "ProgressViewController.h"
 
+@interface SBMediaController : NSObject
+{
+    int _manualVolumeChangeCount;
+    NSDictionary *_nowPlayingInfo;
+}
+
++ (id)sharedInstance;
+- (id)init;
+- (void)dealloc;
+- (void)setNowPlayingInfo:(id)fp8;
+- (BOOL)hasTrack;
+- (BOOL)isFirstTrack;
+- (BOOL)isLastTrack;
+- (BOOL)isPlaying;
+- (BOOL)isMovie;
+- (id)nowPlayingArtist;
+- (id)nowPlayingTitle;
+- (id)nowPlayingAlbum;
+- (BOOL)changeTrack:(int)fp8;
+- (BOOL)beginSeek:(int)fp8;
+- (BOOL)endSeek:(int)fp8;
+- (BOOL)togglePlayPause;
+- (float)volume;
+- (void)setVolume:(float)fp8;
+- (void)handleVolumeEvent:(struct __GSEvent *)fp8;
+- (void)_registerForAVSystemControllerNotifications;
+- (void)_unregisterForAVSystemControllerNotifications;
+- (void)_serverConnectionDied:(id)fp8;
+- (void)musicPlayerDied:(id)fp8;
+- (void)_systemVolumeChanged:(id)fp8;
+- (BOOL)_performIAPCommand:(int)fp8 status:(int)fp12;
+
+@end
 @interface UIApplication(Improved)
 -(void)addStatusBarImageNamed:(NSString*)name removeOnExit:(BOOL)v;
 -(void)addStatusBarImageNamed:(NSString*)name removeOnAbnormalExit:(BOOL)v;
@@ -148,6 +181,18 @@
 		NSMutableArray *road=[APPDELEGATE.dirbookmarks copyBookmarkRoadPoints:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
 		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
 		[APPDELEGATE.directions setRoad:road instructions:instr];
+		
+		NSString *to,*from;
+		NSArray *via;
+		
+		if([APPDELEGATE.dirbookmarks getBookmarkInfo:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark] from:&from to:&to via:&via]) {
+			[APPDELEGATE.directions setTo:to];
+			[APPDELEGATE.directions setFrom:from];
+			[APPDELEGATE.directions setVia:via];
+			[to release];
+			[from release];
+			[via release];
+		}
 		[road release];
 		[instr release];
 	}
@@ -155,6 +200,9 @@
 	//SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
 	//[APPDELEGATE.soundcontroller addSound:s];	
 	//[s release];
+}
+-(void)hideLicense {
+	[self dismissModalViewControllerAnimated:YES];
 }
 -(void)setGPSQuality:(int)q {
 	
@@ -452,6 +500,13 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:[mapview zoom] forKey:kSettingsLastZoom];
 }
 -(void)viewWillAppear:(BOOL)animated {
+	
+	/*Class SBMediaController = objc_getClass("SBMediaController");
+	if (SBMediaController!=nil)
+		[[SBMediaController sharedInstance] setVolume:1];
+	else
+		NSLog(@"FUCKKKK");
+	*/
 	hidden=NO;
 	if(!directionSearch)
 		self.title=@"xGPS";
@@ -465,6 +520,7 @@
 		
 		if(licenseView==nil) {
 			licenseView=[[LicenseViewController alloc] init];
+			[licenseView setDelegate:self];
 		}
 		[self presentModalViewController:licenseView animated:YES];
 	}
@@ -628,7 +684,7 @@
 	[mapview setPosSearch:res.pos];
 	currentSearchType=1;
 }
--(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
+-(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSString*)err {
 	self.navigationItem.leftBarButtonItem.enabled=YES;
 	self.navigationItem.rightBarButtonItem.enabled=YES;
 	[self dismissModalViewControllerAnimated:YES];
@@ -663,9 +719,16 @@
 		}
 	}
 	else {
-		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions from the server: %@",@"Network error message"),[err localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-		[alert show];
-		[drivingSearchView setEditingKeyBoard];
+		if(err.length==0) {
+			
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"No driving direction can be computed using your query.",@"No driving dir. found error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+			[drivingSearchView setEditingKeyBoard];
+		} else {
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions from the server: %@",@"Network error message"),err ] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+			[drivingSearchView setEditingKeyBoard];
+		}
 	}
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 }

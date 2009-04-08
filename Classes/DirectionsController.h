@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Position.h"
 #import "NavigationInstructionView.h"
-
-typedef enum RoutingType {
-	ROUTING_NORMAL, ROUTING_AVOID_HIGHWAY, ROUTING_BY_FOOT
-} RoutingType;
-
+#import "GoogleDirectionsRetriever.h"
 @class MapView;
 @interface Instruction : NSObject
 {
@@ -29,30 +25,20 @@ typedef enum RoutingType {
 +(Instruction*)instrWithName:(NSString*)name pos:(PositionObj*)pos descr:(NSString*)descr;
 @end
 @protocol DirectionsControllerDelegate
--(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err;
+-(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSString*)err;
 -(void)nextDirectionChanged:(Instruction*)instr;
 -(void)nextDirectionDistanceChanged:(double)dist total:(double)totalDist;
 -(void)showWrongWay;
 -(void)hideWrongWay;
 @end
 
-@interface DirectionsController: NSObject<DrivingInstructionMovingProtocol> {
+@interface DirectionsController: NSObject<DrivingInstructionMovingProtocol,DirectionsRetrieverProtocol> {
 	NSString *_from;
 	NSString *_to;
 	NSArray *_via;
 	id delegate;
 	NSMutableArray* instructions;
 	NSMutableArray* roadPoints;
-	NSString *currentPlacename;
-	NSString *currentPos;
-	NSString *currentDescr;
-	NSString *startAddr;
-	NSString *stopAddr;
-	BOOL parsingPlace;
-	NSMutableString *currentProp;
-	NSMutableData *resultData;
-	BOOL computing;
-	BOOL parsingLinestring;
 	PositionObj* pos;
 	int instrIndex;
 	MapView *map;
@@ -71,6 +57,8 @@ typedef enum RoutingType {
 	RoutingType routingType;
 	id tmpDelegate;
 	BOOL miles;
+	DirectionsRetriever *dirRetriever;
+	
 }
 @property (nonatomic,retain) id delegate;
 @property (nonatomic,readonly) NSMutableArray* roadPoints;
@@ -88,4 +76,5 @@ typedef enum RoutingType {
 -(void)setRoad:(NSMutableArray*)road instructions:(NSMutableArray*)instr;
 -(void)recompute;
 -(void)saveCurrent:(NSString*)name;
++ (NSString *) urlencode: (NSString *) url encoding:(NSString*)enc;
 @end

@@ -173,7 +173,7 @@
 	
 }
 
--(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSError*)err {
+-(void)directionsGot:(NSString*)from to:(NSString*)to error:(NSString*)err {
 	[self dismissModalViewControllerAnimated:NO];
 	[pController release];
 	pController=nil;
@@ -194,8 +194,14 @@
 		}
 	}
 	else {
-		UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions from the server: %@",@"Network error message"),[err localizedDescription]] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
-		[alert show];
+		if(err.length==0) {
+			
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:NSLocalizedString(@"No driving direction can be computed using your query.",@"No driving dir. found error message") delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+		} else {
+			UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error",@"Error title") message:[NSString stringWithFormat:NSLocalizedString(@"Unable to retrieve the driving directions from the server: %@",@"Network error message"),err ] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss",@"Dismiss") otherButtonTitles:nil];
+			[alert show];
+		}
 	}
 	[UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
 	APPDELEGATE.directions.routingType=ROUTING_NORMAL;

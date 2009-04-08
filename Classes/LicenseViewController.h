@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol HideLicenseModalController
+-(void)hideLicense;
+@end
 
 
 @interface LicenseViewController : UIViewController<UIWebViewDelegate> {
-
+	id _delegate;
 }
-
+-(void)setDelegate:(id<HideLicenseModalController>)delegate;
 @end
