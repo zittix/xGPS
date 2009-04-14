@@ -163,7 +163,9 @@ static void HandleOutputBuffer (
 		);
 		 
 		UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;    // 1
+		//UInt32 sessionCategory = 'aler';
 		
+			
 		AudioSessionSetProperty (
 								 kAudioSessionProperty_AudioCategory,                        // 2
 								 sizeof (sessionCategory),                                   // 3
@@ -310,7 +312,6 @@ static void HandleOutputBuffer (
 -(void)playText:(NSString*)text {
 	cst_voice *v;
     cst_features *extra_feats;
-
 	NSString *toPlay=text;
 	
 	//Filter out / and \ and abbreviations
@@ -443,15 +444,19 @@ W: West
 	
 	//Play the queue
 	running=YES;
-	
+
 	SoundEvent *toPlay=chain;
+
+
 	if(toPlay==nil) {
 		running=NO;
-		//NSLog(@"SoundController: No more sound to play. Exiting");
 		AudioSessionSetActive (false);
 		return;
 	}
 	AudioSessionSetActive (true);
+
+	
+	
 	if(toPlay.text!=nil) {
 		[self playText:toPlay.text];
 		

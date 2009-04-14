@@ -22,7 +22,7 @@
 
 "Address book" = "En kontakt";
 
-"Altitude" = "Altitude";
+"Altitude" = "Højde";
 
 "An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "En fejl er opstået under download af valgt kort. Visse dele af kortet er muligvis ikke downloadet korrekt.";
 
@@ -30,7 +30,7 @@
 
 "Are you sure you want to delete all the recorded tracks ?" = "Er du sikker på du ønsker at slette alle optagede logfiler?";
 
-"Are you sure you want to delete all the saved bookmarks ?" = "Er du sikker på du ønsker at slette alle gemte bogmærker?";
+"Are you sure you want to delete all the saved bookmarks ?" = "Er du sikker på du ønsker at slette alle gemte ruter i Rute Manager?";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Er du sikker på du ønsker at downloade det valgte kortområde (%1$d dele ~ %2$d KB)?";
 
@@ -48,7 +48,7 @@
 
 "Blue dot for position" = "Vis blå/rund markør";
 
-"Bookmarks" = "Bogmærker";
+"Bookmarks" = "Rute Manager";
 
 "By Car" = "Med bil";
 
@@ -60,7 +60,7 @@
 
 "Clear Driving directions" = "Slet kørselsvejledning";
 
-"Clear Results" = "Slet søgeresultat";
+"Clear Results" = "Slet søgning";
 
 "Clear Search results" = "Slet søgeresultat";
 
@@ -72,13 +72,13 @@
 
 "Connected" = "Forbundet";
 
-"Create a new route" = "Lav en ny rute";
+"Create a new route" = "Lav en ny ruteplan";
 
 "Current GPS Position" = "Aktuel GPS position";
 
 "Current Position" = "Aktuel position";
 
-"Delete all bookmarks" = "Slet alle bogmærker";
+"Delete all bookmarks" = "Slet alle ruter i Rute Manager";
 
 "Delete downloaded maps" = "Slet downloadede kort";
 
@@ -90,7 +90,7 @@
 
 "Directions" = "Ruteplan";
 
-"Directions Bookmarks" = "Ruteplans bogmærker";
+"Directions Bookmarks" = "Ruteplaner i Rute Manager";
 
 "Disable Beep" = "Deaktiver beep";
 
@@ -98,7 +98,7 @@
 
 "Disconnected" = "Slukket";
 
-"Dismiss" = "Afvis";
+"Dismiss" = "Luk";
 
 "Distances and speed will be showed with the meter unit (km/h and meters)." = "Hastighed og afstande vil blive vist metrisk (km/t og meter).";
 
@@ -134,7 +134,7 @@
 
 "GMaps Terrain" = "GKort Terræn";
 
-"Go Home" = "Kør hjem";
+"Go Home" = "Kør Hjem";
 
 "Good" = "Godt";
 
@@ -150,7 +150,7 @@
 
 "GPS Enabled" = "GPS aktiveret";
 
-"GPS Information" = "GPS Information";
+"GPS Information" = "GPS information";
 
 "GPS state" = "GPS status";
 
@@ -194,11 +194,11 @@
 
 "Map" = "Kort";
 
-"Map auto-rotation" = "Kort auto-rotation";
+"Map auto-rotation" = "Kort - autorotation";
 
 "Map Database size" = "Kort databasestørrelse";
 
-"Map details" = "Kortdetaljer";
+"Map details" = "Kort detaljer";
 
 "Map name" = "Kort navn";
 
@@ -212,7 +212,7 @@
 
 "Maps downloaded successfully !" = "Kort downloadet korrekt!";
 
-"Maps Manager" = "Kort manager";
+"Maps Manager" = "Kort Manager";
 
 "Maps type" = "Kort type";
 
@@ -220,7 +220,7 @@
 
 "My GPS position is:" = "Min GPS position er:";
 
-"N/A" = "Ikke tilgængelig";
+"N/A" = "Ingen info";
 
 "Name:" = "Navn:";
 
@@ -228,7 +228,7 @@
 
 "New maps database: " = "Ny kort database: ";
 
-"New Route" = "Ny rute";
+"New Route" = "Ny ruteplan";
 
 "Night Mode" = "Nat tilstand";
 
@@ -260,7 +260,7 @@
 
 "Please select a greater map area by touching the screen with two fingers." = "Vælg et større kort ved at røre skærmen med to fingre.";
 
-"Poor" = "Dårlig";
+"Poor" = "Dårligt";
 
 "Prevent Sleep Mode" = "Undgå automatisk lås";
 
@@ -276,17 +276,17 @@
 
 "Route computation" = "Ruteplan";
 
-"Routes Manager" = "Rute manager";
+"Routes Manager" = "Rute Manager";
 
 "Satellite" = "Satellit";
 
-"Save in Bookmarks" = "Gem i bogmærker";
+"Save in Bookmarks" = "Gem i Rute Manager";
 
 "Search" = "Søg";
 
 "Search for:" = "Søg efter:";
 
-"Search Places" = "Søg steder";
+"Search Places" = "Søg Steder";
 
 "Send by Email" = "Send med email";
 
@@ -302,7 +302,7 @@
 
 "Start time" = "Start tidspunkt";
 
-"Stop time" = "Stop tid";
+"Stop time" = "Slut tidspunkt";
 
 "Take position from:" = "Sæt position fra:";
 
@@ -310,7 +310,7 @@
 
 "The directions database has been sucessfully saved." = "Rueplans databasen er blevet gemt.";
 
-"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Sprogindstillingerne bruges til at oversætte kørselsvejledning, kortet og sted/by søgeresultaterne.";
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "Sprogindstillingerne bruges til at oversætte kørselsvejledning, kort og sted/by søgeresultaterne.";
 
 "The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "Lokalitetstjenester er ikke aktiveret på din enhed. Brug Indstillinger på din Home Screen til at løse dette problem.";
 
@@ -318,7 +318,7 @@
 
 "The maps size will also grow when you browse a part of a map you have not already downloaded." = "Kortstørrelsen vil også vokse når du gennemser en del af kortet du ikke allerede har downloadet.";
 
-"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Nat tilstand gør dig i stand til at koncentere dig om vejen og ikke blive blændet af skærmen. Farverne er mørkere og skærmlyset sænkes til et minimum.";
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "Nat tilstand gør dig i stand til at koncentrere dig om vejen og undgå blænding fra skærmen. Farverne er mørkere og skærmlyset sænkes til et minimum.";
 
 "The zoom level %d corresponds to the most detailed zoom level" = "Zoom niveauet %d svarer til den mest detaljerede zoom niveau";
 
@@ -328,9 +328,9 @@
 
 "To:" = "Til:";
 
-"Total" = "Samlet";
+"Total" = "Distance i alt";
 
-"Total log files size" = "Samlet log filstørelse";
+"Total log files size" = "Samlet log filstørrelse";
 
 "Transfer" = "Overfør";
 
@@ -366,13 +366,13 @@
 
 "Version" = "Version";
 
-"Voice Instructions" = "Stemme instruktioner";
+"Voice Instructions" = "Stemmeinstruktioner";
 
-"Voice instructions work only when the language in General settings is set to English." = "Stemme instruktioner virker kun når sprog i Generelle indstillinger er sat til Engelsk.";
+"Voice instructions work only when the language in General settings is set to English." = "Stemmeinstruktioner virker kun når sprog i Indstillinger -> Generelt er sat til Engelsk.";
 
 "Walking" = "Gå";
 
-"When activated, all the searched driving directions are saved in the bookmarks." = "Når aktiveret, vil alle de søgte kørselsvejledning vil blive gemt i bogmærker.";
+"When activated, all the searched driving directions are saved in the bookmarks." = "Når aktiveret, vil alle de søgte kørselsvejledninger vil blive gemt i Rute Manager.";
 
 "When activated, it disables the sleep mode such that the screen is always on." = "Når aktiveret, deaktiveres enhedens automatiske lås, sådan at skærmen altid er tændt.";
 
@@ -380,11 +380,13 @@
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Når GPX logging er aktiveret, vil alle dine bevægelser blive optaget i en fil i GPX formatet. Filen kan derefter bruges på en pc til visuelt at følge din rute.";
 
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Når GPX Logging er aktiveret, vil alle dine bevægelser blive optaget i en fil i GPX formatet. Filen kan derefter bruges på en PC til visuelt at følge din rute.";
+
 "Wireless Transfer" = "Trådløs overførsel";
 
-"Wrong Way hidden" = "Forkert vej slået fra";
+"Wrong Way hidden" = "Forkert Vej slået fra";
 
-"Wrong\nWay" = "Forkertnvej";
+"Wrong\nWay" = "Forkert\nVej";
 
 "xGPS Error" = "xGPS fejl";
 
@@ -406,9 +408,9 @@
 
 "Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Dine downloadede kort er ikke kompatible med denne version af xGPS. De er blevet slettet";
 
-"Your home address" = "Din hjem adresse";
+"Your home address" = "Din Hjem adresse";
 
-"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Din hjem adresse vil blive brugt for at danne en kørselsvejledning til dit hjem når Hjem knappen bliver trykket.";
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Din Hjem adresse vil blive brugt for at danne en kørselsvejledning til dit hjem når Kør Hjem knappen bliver trykket.";
 
 "Your license number is invalid. Please verify and retry" = "Dit licensnummer er ugyldigt. Check venligst og prøv igen";
 

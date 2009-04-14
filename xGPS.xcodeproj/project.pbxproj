@@ -106,6 +106,7 @@
 		4ED975D00F531FD2006E2312 /* clear_results.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED975CF0F531FD2006E2312 /* clear_results.png */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
+		4EDB21BA0F924ADC008D15EF /* Celestial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDB21B90F924ADC008D15EF /* Celestial.framework */; };
 		4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE70F51E8BA00C77686 /* settings_button.png */; };
 		4EDDACEA0F51E8BA00C77686 /* search_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE80F51E8BA00C77686 /* search_button.png */; };
 		4EDDAE020F51FD0D00C77686 /* RemainingDistanceTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDDAE010F51FD0D00C77686 /* RemainingDistanceTimeView.m */; };
@@ -221,9 +222,8 @@
 		4E00D5BA0F5C30030082A147 /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5BB0F5C300F0082A147 /* cz */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cz; path = cz.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5BC0F5C30180082A147 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4E00D5BD0F5C30240082A147 /* el */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5BE0F5C302D0082A147 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4E00D5BF0F5C30DC0082A147 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E00D5BF0F5C30DC0082A147 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5C00F5C30E60082A147 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5C10F5C312F0082A147 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5C20F5C31500082A147 /* pt_PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt_PT; path = pt_PT.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -255,12 +255,11 @@
 		4E0F04FF0E87C49000D75E7D /* GeoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoEncoder.h; sourceTree = "<group>"; };
 		4E0F05000E87C49000D75E7D /* GeoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoEncoder.m; sourceTree = "<group>"; };
 		4E0F48950E8519E6001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = French; path = French.lproj/license.html; sourceTree = "<group>"; };
-		4E0F48E00E851C30001B6F51 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E0F48E00E851C30001B6F51 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E40E851C43001B6F51 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E50E851C47001B6F51 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E0F48E60E851C4B001B6F51 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E109D950EDAEDE1009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4E109D960EDAEDEE009617FC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = pl; path = pl.lproj/license.html; sourceTree = "<group>"; };
 		4E17442E0EDE94E10062ED18 /* TitleValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleValueCell.h; sourceTree = "<group>"; };
 		4E17442F0EDE94E10062ED18 /* TitleValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleValueCell.m; sourceTree = "<group>"; };
 		4E2396490E40EF800062A352 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -402,6 +401,7 @@
 		4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		4EDABC700E89115A009AF7C2 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = German; path = German.lproj/license.html; sourceTree = "<group>"; };
+		4EDB21B90F924ADC008D15EF /* Celestial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Celestial.framework; path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks/Celestial.framework; sourceTree = "<absolute>"; };
 		4EDDACE70F51E8BA00C77686 /* settings_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_button.png; sourceTree = "<group>"; };
 		4EDDACE80F51E8BA00C77686 /* search_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_button.png; sourceTree = "<group>"; };
 		4EDDAE000F51FD0D00C77686 /* RemainingDistanceTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemainingDistanceTimeView.h; sourceTree = "<group>"; };
@@ -576,6 +576,7 @@
 				4EE2433B0F3074E800C41ACA /* AudioToolbox.framework in Frameworks */,
 				4EE2433C0F3074E800C41ACA /* CoreAudio.framework in Frameworks */,
 				4E026AD10F7AC60600BB5675 /* MediaPlayer.framework in Frameworks */,
+				4EDB21BA0F924ADC008D15EF /* Celestial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,6 +677,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4EDB21B90F924ADC008D15EF /* Celestial.framework */,
 				4E026AD00F7AC60600BB5675 /* MediaPlayer.framework */,
 				4EE243390F3074E800C41ACA /* AudioToolbox.framework */,
 				4EE2433A0F3074E800C41ACA /* CoreAudio.framework */,
@@ -1438,7 +1440,6 @@
 				4E9A00900E8D4A530076EE44 /* Dutch */,
 				4EB3A5330E93B1FA004A643A /* Hebrew */,
 				4E917E760EC39EE4005ACCA9 /* zh_TW */,
-				4E109D960EDAEDEE009617FC /* pl */,
 			);
 			name = license.html;
 			sourceTree = "<group>";
@@ -1459,7 +1460,6 @@
 				4E00D5BA0F5C30030082A147 /* bg */,
 				4E00D5BB0F5C300F0082A147 /* cz */,
 				4E00D5BC0F5C30180082A147 /* da */,
-				4E00D5BD0F5C30240082A147 /* el */,
 				4E00D5BE0F5C302D0082A147 /* fi */,
 				4E00D5BF0F5C30DC0082A147 /* Japanese */,
 				4E00D5C00F5C30E60082A147 /* lt */,
@@ -1493,6 +1493,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
+				);
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1515,6 +1519,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
@@ -1549,6 +1557,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;

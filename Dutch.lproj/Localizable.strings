@@ -2,7 +2,7 @@
 
 "%.2f MB" = "%.2f MB";
 
-"%d connected clients" = "%d verbindingen";
+"%d connected clients" = "%d verbonden clients";
 
 "%f °" = "%f °";
 
@@ -14,61 +14,61 @@
 
 "About xGPS" = "Over xGPS";
 
-"Actions" = "Acties";
+"Actions" = "Handelingen";
 
-"Add / Modify:" = "Toevoegen / Veranderen:";
+"Add / Modify:" = "Toevoegen / Aanpassen:";
 
 "Address" = "Adres";
 
-"Address book" = "Adres boek";
+"Address book" = "Adresboek";
 
 "Altitude" = "Hoogte";
 
-"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Een fout is opgetreden tijdens het laden van de kaarten. Vermoedelijk zijn delen van de kaart niet correct geladen";
+"An error has occurred while downloading the selected maps. Some parts of the maps may have not been downloaded correctly." = "Een fout is opgetreden tijdens downloaden van de kaartselectie. Sommige delen van de kaart kunnen niet juist zijn verwerkt.";
 
-"Are you sure you want to delete all the downloaded maps ?" = "Bent u er zeker van de geladen kaarten te verwijderen?";
+"Are you sure you want to delete all the downloaded maps ?" = "Weet u zeker dat alle gedownloade kaarten wilt verwijderen?";
 
-"Are you sure you want to delete all the recorded tracks ?" = "Bent u er zeker van alle opgeslagen sporen/tracks te verwijderen ?";
+"Are you sure you want to delete all the recorded tracks ?" = "Weet u zeker dat u alle opgenomen routes wilt verwijderen?";
 
-"Are you sure you want to delete all the saved bookmarks ?" = "Bent u er zeker van alle opgeslagen bladwijzers te verwijderen ?";
+"Are you sure you want to delete all the saved bookmarks ?" = "Weet u zeker dat u alle opgeslagen favorieten wilt verwijderen?";
 
-"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Bent u er zeker van het geselecteerde kaartgebied te laden (%d tiles ~ %.1f KB) ?";
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f KB) ?" = "Bent u er zeker van het geselecteerde kaartgebied wilt downloaden (%d tiles ~ %.1f KB) ?";
 
-"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Bent u er zeker van het geselecteerde kaartgebied te laden (%d tiles ~ %.1f MB) ?";
+"Are you sure you want to download the selected map area (%d tiles ~ %.1f MB) ?" = "Bent u er zeker van het geselecteerde kaartgebied wilt downloaden (%d tiles ~ %.1f MB) ?";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %d KB) ?" = "Bent u er zeker van het geselecteerde kaartgebied (%d Paginafragmenten ~ %d KB) ?";
 
 "Are you sure you want to download the selected map area (%d tiles ~ %d MB) ?" = "Bent u er zeker van het geselecteerde kaartgebied (%d Paginafragmenten ~ %d MB) ?";
 
-"Are you sure you want to recompute the itinerary from the current position ?" = "Bent u er zeker van de reisroute te herberekenen vanuit uw huidige positie ?";
+"Are you sure you want to recompute the itinerary from the current position ?" = " Weet u zeker dat u de route vanaf uw huidige positie wilt herberekenen?";
 
-"Available actions:" = "Beschikbare acties:";
+"Available actions:" = "Beschikbare handelingen:";
 
 "Back" = "Terug";
 
-"Blue dot for position" = "Blauwe punt ipv pijl";
+"Blue dot for position" = "Blauwe punt i.p.v. pijl";
 
-"Bookmarks" = "Bladwijzers";
+"Bookmarks" = "Favorieten";
 
 "By Car" = "Met de Auto";
 
 "Cancel" = "Afbreken";
 
-"City name / Address" = "Plaatsnaam / Adres";
+"City name / Address" = "Stadsnaam / Adres";
 
-"Clear All" = "Alles wissen";
+"Clear All" = "Alles Wissen";
 
-"Clear Driving directions" = "Wis route";
+"Clear Driving directions" = "Wis Route";
 
-"Clear Results" = "Wis resultaat";
+"Clear Results" = "Wis Resultaten";
 
-"Clear Search results" = "Wis zoek resultaten";
+"Clear Search results" = "Wis Zoekresultaten";
 
-"Close" = "Afsluiten";
+"Close" = "Sluit";
 
 "Compute" = "Bereken";
 
-"Computing your route..." = "Berekenen route...";
+"Computing your route..." = "Berekenen van uw route...";
 
 "Connected" = "Verbonden";
 
@@ -78,49 +78,49 @@
 
 "Current Position" = "Huidige Positie";
 
-"Delete all bookmarks" = "Verwijder alle bladwijzers";
+"Delete all bookmarks" = "Wis alle favorieten";
 
-"Delete downloaded maps" = "Verwijder kaarten";
+"Delete downloaded maps" = "Wis gedownloade kaarten";
 
-"Delete GPX Log file" = "Verwijder GPX vastlegging";
+"Delete GPX Log file" = "Wis GPX Logbestand";
 
-"Device address: %@" = "Apparaat adres: %@";
+"Device address: %@" = "Apparaatadres: %@";
 
-"Device Info" = "Apparaat Info";
+"Device Info" = "Apparaatinfo";
 
 "Directions" = "Route";
 
-"Directions Bookmarks" = "Route Bladwijzers";
+"Directions Bookmarks" = "Route favorieten";
 
-"Disable Beep" = "Uitschakelen Beep";
+"Disable Beep" = "Beep uitschakelen ";
 
 "Disable GPS" = "GPS Deactiveren";
 
-"Disconnected" = "Verbroken";
+"Disconnected" = "Verbinding verbroken";
 
-"Dismiss" = "Sluiten";
+"Dismiss" = "Annuleer";
 
-"Distances and speed will be showed with the meter unit (km/h and meters)." = "Afstand en snelheid zal worden weergegeven in Meter eenheid (km/h en meters).";
+"Distances and speed will be showed with the meter unit (km/h and meters)." = "Afstanden en snelheid zullen in meters worden weergegeven (km/h en meters).";
 
-"Distances and speed will be showed with the mile unit (mph and miles)." = "Afstand en snelheid zal worden weergegeven in Mile eenheid (mph en miles).";
+"Distances and speed will be showed with the mile unit (mph and miles)." = "Afstanden en snelheid zullen in mijlen worden weergegeven (mph en miles).";
 
-"Download" = "Laden";
+"Download" = "Download";
 
-"Download maps" = "Kaarten laden";
+"Download maps" = "Download kaarten";
 
-"Downloaded maps size" = "Opgeslagen kaarten";
+"Downloaded maps size" = "Grootte gedownloade kaarten";
 
-"Downloading maps..." = "Laden van de kaarten...";
+"Downloading maps..." = "Kaarten downloaden...";
 
 "Driving directions" = "Route";
 
 "Enable GPS" = "GPS Activeren";
 
-"Enable night mode" = "Inschakelen nacht mode";
+"Enable night mode" = "Nachtmodus inschakelen";
 
-"Enable timer" = "Inschakelen timer";
+"Enable timer" = "Timer inschakelen";
 
-"Error" = "Fout";
+"Error" = "Fout!";
 
 "From / Departure" = "Van / Vertrek";
 
@@ -130,11 +130,11 @@
 
 "GMaps Hybrid" = "GMaps Hybrid";
 
-"GMaps Satellite" = "GMaps Satelliet";
+"GMaps Satellite" = "GMaps Sateliet";
 
-"GMaps Terrain" = "GMaps Terrein";
+"GMaps Terrain" = "GMaps Terrain";
 
-"Go Home" = "Naar huis";
+"Go Home" = "Naar Huis";
 
 "Good" = "Goed";
 
@@ -142,39 +142,39 @@
 
 "Google Maps Hybrid" = "Google Maps Hybrid";
 
-"Google Maps Satellite" = "Google Maps Satelliet";
+"Google Maps Satellite" = "Google Maps Sateliet";
 
-"Google Maps Terrain" = "Google Maps Terrein";
+"Google Maps Terrain" = "Google Maps Terrain";
 
 "GPS" = "GPS";
 
 "GPS Device" = "GPS Apparaat";
 
-"GPS Enabled" = "GPS ingeschakeld";
+"GPS Enabled" = "GPS Ingeschakeld";
 
 "GPS Information" = "GPS Informatie";
 
-"GPS state" = "GPS Status";
+"GPS state" = "GPS status";
 
-"GPS to use" = "GPS voor gebruik";
+"GPS to use" = "Te gebruiken GPS";
 
 "GPS Tracking" = "GPS Tracking";
 
-"GPX Log Files" = "GPX Vastleggingen";
+"GPX Log Files" = "GPX Logbestanden";
 
-"GPX Logging" = "GPX vastlegging";
+"GPX Logging" = "GPX Logging";
 
-"Home Address" = "Thuis adres";
+"Home Address" = "Thuisadres";
 
 "Hybrid" = "Hybride";
 
 "Language" = "Taal";
 
-"Large font size" = "Grote letters";
+"Large font size" = "Groter lettertype";
 
 "Latitude" = "Breedtegraad";
 
-"License checking" = "Licentie controle";
+"License checking" = "Licentie controleren";
 
 "License number" = "Licentie nummer";
 
@@ -182,7 +182,7 @@
 
 "License:" = "Licentie:";
 
-"Location / Place" = "Locatie / Plek";
+"Location / Place" = "Locatie / Plaats";
 
 "Locations" = "Locaties";
 
@@ -196,27 +196,27 @@
 
 "Map" = "Kaart";
 
-"Map auto-rotation" = "Auto-rotatie kaart";
+"Map auto-rotation" = "Kaart auto-rotatie ";
 
-"Map Database size" = "Kaarten bestands grote";
+"Map Database size" = "Grootte Kaartdatabase";
 
-"Map details" = "Kaart details";
+"Map details" = "Kaartdetails";
 
-"Map name" = "Kaart naam";
+"Map name" = "Kaartnaam";
 
-"Map Type" = "Kaart soort";
+"Map Type" = "Kaarttype";
 
 "Maps" = "Kaarten";
 
-"Maps data" = "Kaarten informatie";
+"Maps data" = "Kaartendata";
 
-"Maps Download" = "Laden Kaarten";
+"Maps Download" = "Kaarten downloaden";
 
-"Maps downloaded successfully !" = "Kaarten succesvol geladen !";
+"Maps downloaded successfully !" = "Kaarten gedownload !";
 
-"Maps Manager" = "Beheren kaarten";
+"Maps Manager" = "Kaartenbeheer";
 
-"Maps type" = "Kaarten soort";
+"Maps type" = "Kaartentype";
 
 "My GPS Position" = "Mijn GPS Positie";
 
@@ -226,107 +226,107 @@
 
 "Name:" = "Naam:";
 
-"New directions database: " = "Nieuw route bestand: ";
+"New directions database: " = "Nieuwe routes database: ";
 
-"New maps database: " = "Nieuw kaarten bestand: ";
+"New maps database: " = "Nieuw kaarten database: ";
 
 "New Route" = "Nieuwe Route";
 
-"Night Mode" = "Nacht Mode";
+"Night Mode" = "Nachtmodus";
 
 "No" = "Nee";
 
-"No driving direction can be computed using your query." = "Er kan geen route berekend worden naar aanleiding van uw verzoek.";
+"No driving direction can be computed using your query." = "Er kon geen route worden berekend aan de hand van uw aanvraag.";
 
-"No Highway" = "Geen Snelweg";
+"No Highway" = "Geen snelweg";
 
-"No License" = "Geen Licentie";
+"No License" = "Geen licentie";
 
-"No location has been found according to your query." = "Geen locatie gevonden overeenkomstig uw verzoek.";
+"No location has been found according to your query." = "Er kon geen locatie worden gevonden aan de hand van uw aanvraag.";
 
 "No name" = "Geen naam";
 
 "None" = "Geen";
 
-"Number of log files" = "Aantal vastleggingen";
+"Number of log files" = "Aantal logbestanden";
 
-"Offline mode" = "Off-line mode";
+"Offline mode" = "Offline modus";
 
-"Pick a GPS" = "Selecteer GPS apparaat";
+"Pick a GPS" = "Kies een GPS";
 
-"Places / Cities" = "Plekken / Steden";
+"Places / Cities" = "Plaatsen / Steden";
 
-"Please enter a name for your map." = "Geef a.u.b. een naam voor de kaart.";
+"Please enter a name for your map." = "Geef a.u.b. een naam voor uw kaart.";
 
-"Please enter a name for your route." = "Geef a.u.b. een naam voor de route.";
+"Please enter a name for your route." = "Geef a.u.b. een naam voor uw route.";
 
-"Please select a greater map area by touching the screen with two fingers." = "Selecteer een groter kaart gebied door met twee vingers over het scherm te bewegen.";
+"Please select a greater map area by touching the screen with two fingers." = "U kunt een grotere kaartselectie aanbrengen door het scherm met twee vingers aan te raken.";
 
 "Poor" = "Slecht";
 
-"Prevent Sleep Mode" = "Voorkom Sleep Mode";
+"Prevent Sleep Mode" = "Voorkom Slaapmodus";
 
 "Ready to receive..." = "Klaar om te ontvangen...";
 
-"Ready to transfer..." = "Klaar om over te zetten...";
+"Ready to transfer..." = "Klaar om over te verzenden...";
 
 "Receive maps" = "Ontvang kaarten";
 
 "Receiving maps" = "Ontvangen maps";
 
-"Recompute itinerary" = "Herberekenen route";
+"Recompute itinerary" = "Herbereken route";
 
 "Reset GPS" = "Reset GPS";
 
-"Return to main page" = "Terug naar hoofd pagina";
+"Return to main page" = "Terug naar hoofdpagina";
 
 "Route computation" = "Route berekening";
 
-"Routes Manager" = "Route Beheerder";
+"Routes Manager" = "Routebeheer";
 
 "Satellite" = "Satellite";
 
-"Save in Bookmarks" = "Opslaan in Bladwijzers";
+"Save in Bookmarks" = "Opslaan in Favorieten";
 
 "Search" = "Zoeken";
 
 "Search for:" = "Zoeken naar:";
 
-"Search Places" = "Zoek Plekken";
+"Search Places" = "Zoek Plaatsen";
 
-"Send by Email" = "Verzenden met Email";
+"Send by Email" = "Verstuur via Email";
 
-"Send by SMS" = "Verzenden met SMS";
+"Send by SMS" = "Verstuur via SMS";
 
 "Settings" = "Instellingen";
 
-"Show device info" = "Toon apparaat info";
+"Show device info" = "Toon apparaatinfo";
 
 "Show Speedometer" = "Toon Snelheidsmeter";
 
 "Speed" = "Snelheid";
 
-"Start time" = "Start tijd";
+"Start time" = "Starttijd";
 
-"Stop time" = "Stop tijd";
+"Stop time" = "Stoptijd";
 
-"Take position from:" = "Bepaal positie vanaf:";
+"Take position from:" = "Neem positie van:";
 
-"Tap to edit" = "Wijzigen";
+"Tap to edit" = "Tap om aan te passen";
 
-"The directions database has been sucessfully saved." = "De route bestandsgegevens zijn succesvol opgeslagen.";
+"The directions database has been sucessfully saved." = "De routedatabase is opgeslagen.";
 
-"The language setting is used to localize the driving directions, the maps and the place/city search results." = "De taal instelling wordt gebruikt om correcte zoekopdrachten van route, kaarten en plekken/steden te localiseren.";
+"The language setting is used to localize the driving directions, the maps and the place/city search results." = "De taalinstelling wordt gebruikt om routeplanning, kaarten en plaats- en stedenresultaten in de geselecteerde taal weer te geven.";
 
-"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "De Locatievoorzieningen op uw apparaat staat uit. Ga naar Home-Instellingen-Algemeen-Locatievoorzieningen en schuif knop op I om dit probleem op te lossen";
+"The Location Services are not enabled on your device. Use the Settings application on your Home screen to fix this problem." = "De Locatievoorzieningen zijn uitgeschakeld op uw apparaat. Gebruik de instellingen op uw Homescreen om dit probleem op te lossen";
 
-"The maps database has been sucessfully saved." = "De kaarten bestandsgegevens zijn succesvol opgeslagen.";
+"The maps database has been sucessfully saved." = "De kaartendatabase is opgeslagen.";
 
-"The maps size will also grow when you browse a part of a map you have not already downloaded." = "De kaart grootte zal ook groeien als u een gedeelte van de kaart bekijkt van een kaart welke u nog niet heeft geladen. ";
+"The maps size will also grow when you browse a part of a map you have not already downloaded." = "De kaartgrootte zal ook toenemen indien nog niet eerder gedownloade gedeeltes van een kaart worden doorzocht";
 
-"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "De Nacht Mode zorgt er voor dat uw aandacht op de weg niet wordt afgeleid door de schermhelderheid van de iPhone. De kleuren zijn donkerder en de schermhelderheid tot een minimum teruggebracht.";
+"The night mode allows you to concentrate on the road by not being disturbed by the iPhone screen brightness. The colors are darker and the screen brightness will be set to the minimum." = "De nachtmodus stelt u in staat om u op de weg te concentreren en niet te worden afgeleidt door de helderheid van het iPhonescherm. De kleuren zijn donkerder en de helderheid wordt tot een minumum teruggebracht";
 
-"The zoom level %d corresponds to the most detailed zoom level" = "Het zoemniveau %d komt overeen met het beste gedetailleerde ingezoemde niveau.";
+"The zoom level %d corresponds to the most detailed zoom level" = "%d is het meest gedetailleerde zoomniveau";
 
 "This feature will be implemented in a future version." = "Deze funktie zal in een toekomstige versie beschikbaar zijn";
 
@@ -336,95 +336,95 @@
 
 "Total" = "Totaal";
 
-"Total log files size" = "Totaal vastlegging grote";
+"Total log files size" = "Totale grootte logbestanden";
 
-"Transfer" = "Overdracht";
+"Transfer" = "Transfer";
 
-"Unable to download a part of the map. Check your internet connection." = "Niet in staat een gedeelte van de kaart te laden. Controleer uw internet verbinding.";
+"Unable to download a part of the map. Check your internet connection." = "Niet mogelijk om een gedeelte van de kaart te downloaden. Controleer uw internetverbinding.";
 
-"Unable to get the GPS position. The GPS is not currently giving any position information." = "Niet in staat een GPS positie te vergkrijgen. De GPS geeft momenteel geen enkele informatie over uw positie.";
+"Unable to get the GPS position. The GPS is not currently giving any position information." = "Niet mogelijk om uw GPS positie te bepalen. De GPS geeft op dit moment geen informatie over uw positie";
 
-"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Niet in staat de seriepoort te openen. Overtuig u er van dat geen andere GPS-Software op de achtergrond actief is.";
+"Unable to open the serial port. Make sure that no other GPS software is running in background." = "Niet mogelijk om de seriële poort te openen. Zorg ervoor dat er geen andere GPS software op de achtergrond actief is.";
 
-"Unable to retrieve the driving directions from the server: %@" = "Niet in staat de route terug te halen van de server: %@";
+"Unable to retrieve the driving directions from the server: %@" = "Niet mogelijk om de route van de server op te halen: %@";
 
-"Unable to retrieve the required information from the server: %@" = " Niet in staat de vereiste informatie van server op te vragen: %@";
+"Unable to retrieve the required information from the server: %@" = "Niet mogelijk om de gevraagde informatie van de server op te halen: %@";
 
 "Unknown" = "Onbekend";
 
 "Unknown error" = "Onbekende fout";
 
-"Upload a new directions database" = "Ophalen van een nieuwe route gegevens bestand";
+"Upload a new directions database" = "Upload een nieuwe routedatabase";
 
-"Upload a new maps database" = "Ophalen van een nieuwe kaarten gegevens bestand";
+"Upload a new maps database" = "Upload een nieuwe kaartendatabase";
 
-"Upload new directions database" = "Ophalen nieuw route gegevens bestand";
+"Upload new directions database" = "Upload een nieuwe routedatabase";
 
-"Upload new maps database" = "Ophalen nieuw kaarten gegevens bestand";
+"Upload new maps database" = "Upload een nieuwe kaartendatabase";
 
-"Use Miles unit" = "Gebruik eenheid Miles";
+"Use Miles unit" = "Gebruik Mijleenheid";
 
-"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Gebruik de Reset GPS optie om de GPS opnieuw te starten als er een compleet afwijkende positie wordt gegeven of de GPS niet meer reageert.";
+"Use the Reset GPS option to restart the GPS when it gives a completly wrong position or if it does not respond anymore." = "Gebruik de Reset GPS optie om deze te herstarten wanneer een onjuiste positie wordt getoond of wanneer deze niet meer reageert";
 
-"User Interface" = "Gebruiker Interface";
+"User Interface" = "Gebruikersinterface";
 
-"Verifying license number..." = "Controle Licentie nummer...";
+"Verifying license number..." = "Verifieer licentienummer...";
 
 "Version" = "Versie";
 
 "Voice Instructions" = "Gesproken instructies";
 
-"Voice instructions work only when the language in General settings is set to English." = "Gesproken instructies werken alleen als de Taal in Instellingen Algemeen is gezet op English";
+"Voice instructions work only when the language in General settings is set to English." = "Gesproken instructies werkt alleen indien de taalinstelling in Algemene Instellingen op Engels is ingesteld";
 
-"Walking" = "Te Voet";
+"Walking" = "Lopend";
 
-"When activated, all the searched driving directions are saved in the bookmarks." = "Wanneer geactiveerd, alle opgezochte routes zijn opgeslagen in de Bladwijzers.";
+"When activated, all the searched driving directions are saved in the bookmarks." = "Indien geactiveerd worden alle routes in favorieten opgeslagen.";
 
-"When activated, it disables the sleep mode such that the screen is always on." = "Wanneer geactiveerd, verbreekt het de Sleep Mode zodat het scherm altijd aan blijft.";
+"When activated, it disables the sleep mode such that the screen is always on." = "Indien geactiveerd wordt de slaapmodus uitgeschakeld en zal het scherm altijd aan blijven.";
 
 "When activated, the driving directions are recomputed when you are driving on the wrong way." = "Wanneer actief, zal de route herberekend worden indien u de verkeerde richting heeft genomen. ";
 
 "When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track." = "Wanneer GPX vastlegging is geactiveerd, worden alle bewegingen opgeslagen in een GPX formaat file. Dit file kan op een PC gebruikt worden om de track te visualiseren.";
 
-"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Wanneer GPX vastlegging is geactiveerd, zijn al je verplaatsingen vastgelegd in GPX formaat. Het bestand kan dan op een computer worden gebruikt om het spoor te visualiseren. Het logboekbestand kan door een Web-based interface worden opgehaald door gebruik te maken van de Draadloze overdracht mode.";
+"When GPX logging is activated, all your moves are recorded into a file in the GPX format. The file can then be used on a computer to visualize the track. The log file can be downloaded through the web-based interface using the Wireless Transfer mode." = "Wanneer GPX logging is geactiveerd zullen al uw bewegingen opgenomen worden in een bestand in GPX-formaat. Dit bestand kan vervolgens op een computer worden gebruikt om uw route te bekijken. Het logbestand kan worden gedownload door gebruik te maken van de Traces Manager in XGPS Map Manager.";
 
-"Wireless Transfer" = "Draadloze Overdracht";
+"Wireless Transfer" = "Wireless Transfer";
 
-"Wrong Way hidden" = "Verkeerde Richting verborgen";
+"Wrong Way hidden" = "Verkeerde Richting verbergen";
 
-"Wrong\nWay" = "Verkeerde richting";
+"Wrong\nWay" = "Verkeerde\nRichting";
 
 "xGPS Error" = "xGPS Fout";
 
 "xGPS Version" = "xGPS Versie";
 
-"xGPS Web-based Management" = "xGPS Web-based Beheerder";
+"xGPS Web-based Management" = "xGPS Web-based Management";
 
 "Yes" = "Ja";
 
-"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "U kunt geen zoekopdracht doen terwijl u in off-line mode staat.U kunt de off-line mode uitschakelen onder de Instellingen knop ";
+"You cannot do a search request while you are in the offline mode. You can switch off the offline mode by tapping the Settings button." = "U kunt de zoekfunctie niet gebruiken wanneer u zich in offlinemodus bevindt. U kunt de offlinemodus uitschakelen door op de Instellingen knop te tappen";
 
-"You cannot download maps while you are in the offline mode." = "U kunt geen kaarten laden in de offline mode.";
+"You cannot download maps while you are in the offline mode." = "U kunt geen kaarten downloaden als u in offlinemodus staat.";
 
-"You cannot have more than %d points in your route." = "U kunt niet meer dan %d punten hebben in uw route.";
+"You cannot have more than %d points in your route." = "U kunt niet meer dan %d punten in uw route opnemen.";
 
-"You have to add at least one starting and one ending point in your route." = "U moet ten minste 1 start- en 1 eindpunt toevoegen in uw route.";
+"You have to add at least one starting and one ending point in your route." = "U moet tenminste één startpunt en één eindpunt in uw route opnemen.";
 
-"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "U moet uw thuis adres invoeren in Instellingen -> Route -> Thuis adres, voordat u deze toepassing kunt gebruiken.";
+"You have to set your home address in Settings -> Driving directions -> Home Address, before using this feature." = "U moet uw Thuisadres in Instellingen -> Route -> Thuisadres invoeren voordat u deze optie kunt gebruiken";
 
-"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Uw geladen kaarten zijn niet overeenkomstig met deze versie van xGPS. Ze zijn nu gewist.";
+"Your downloaded maps are not compatible with this version of xGPS. They have been deleted." = "Uw gedownloade kaarten zijn niet compatibel met deze versie van xGPS. De kaarten zijn verwijderd";
 
-"Your home address" = "Uw thuis adres";
+"Your home address" = "Uw Thuisadres";
 
-"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Uw thuis adres zal gebruikt worden om de route te geven naar uw huis als op de Thuis adres knop gedrukt wordt.";
+"Your home address will be used to get driving directions to your home when the Home button is pressed." = "Uw thuisadres zal als routebestemming worden gebruikt wanneer u op de Thuis knop drukt.";
 
-"Your license number is invalid. Please verify and retry" = "Uw licentie nummer is niet geldig. Controleer dit nogmaals en voer het opnieuw in";
+"Your license number is invalid. Please verify and retry" = "Uw licentienummer is ongeldig. Controleer het nummer en probeer het opnieuw.";
 
-"Your license number is valid. You can now use the selected GPS." = "Uw licentie nummer is geldig. U kunt nu de geselecteerde GPS gebruiken.";
+"Your license number is valid. You can now use the selected GPS." = "Uw licentienummer is geldig. U kunt nu het geselecteerde GPS apparaat gebruiken.";
 
-"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Uw opgeslagen routes zijn niet overeenkomstig met deze versie xGPS. Ze zijn verwijderd.";
+"Your saved driving directions are not compatible with this version of xGPS. They have been deleted." = "Uw opgeslagen routes zijn niet compatibel met met deze versie van xGPS. De routes zijn verwijderd";
 
-"Zoom level to download" = "Zoemniveau te laden";
+"Zoom level to download" = "Te downloaden Zoomniveau";
 
-"Zoom level: %d" = "Zoemniveau: %d";
+"Zoom level: %d" = "Zoomniveau: %d";
 

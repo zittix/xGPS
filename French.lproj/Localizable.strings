@@ -60,7 +60,7 @@
 
 "Clear Driving directions" = "Effacer les instructions routières";
 
-"Clear Results" = "Effacer Résultats";
+"Clear Results" = "Effacer";
 
 "Clear Search results" = "Effacer le résultat de la recherche";
 
@@ -141,6 +141,8 @@
 "Google Maps" = "Google Maps";
 
 "Google Maps Hybrid" = "Google Maps Hybride";
+
+"Google Maps link to my position" = "Lien Google Maps";
 
 "Google Maps Satellite" = "Google Maps Satellite";
 
@@ -314,6 +316,8 @@
 
 "Tap to edit" = "Toucher pour éditer";
 
+"Test Voice volume" = "Test de la voix";
+
 "The directions database has been sucessfully saved." = "La base de donnée d'itinéraires a été sauvée avec succès.";
 
 "The language setting is used to localize the driving directions, the maps and the place/city search results." = "Le paramètre langage est utilisé pour traduire les instructions routières, les cartes ainsi que les résultats de recherche de villes ou places.";
@@ -376,6 +380,8 @@
 
 "Voice instructions work only when the language in General settings is set to English." = "Les instructions vocales ne fonctionnent uniquement lorsque le langage est réglé sur English dans les paramètres généraux.";
 
+"Volume" = "Volume";
+
 "Walking" = "A pieds";
 
 "When activated, all the searched driving directions are saved in the bookmarks." = "Lorsque cette option est activée, tous les itinéraires seront sauvés dans les signets.";
@@ -392,7 +398,7 @@
 
 "Wrong Way hidden" = "Mauvaise directions caché";
 
-"Wrong\nWay" = "MauvaisenDirection";
+"Wrong\nWay" = "Mauvaise\nDirection";
 
 "xGPS Error" = "Erreur xGPS";
 

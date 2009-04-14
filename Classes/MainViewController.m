@@ -196,10 +196,10 @@
 		[road release];
 		[instr release];
 	}
-	
-	//SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
-	//[APPDELEGATE.soundcontroller addSound:s];	
-	//[s release];
+	/*
+	SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
+	[APPDELEGATE.soundcontroller addSound:s];	
+	[s release];*/
 }
 -(void)hideLicense {
 	[self dismissModalViewControllerAnimated:YES];
@@ -500,13 +500,6 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:[mapview zoom] forKey:kSettingsLastZoom];
 }
 -(void)viewWillAppear:(BOOL)animated {
-	
-	/*Class SBMediaController = objc_getClass("SBMediaController");
-	if (SBMediaController!=nil)
-		[[SBMediaController sharedInstance] setVolume:1];
-	else
-		NSLog(@"FUCKKKK");
-	*/
 	hidden=NO;
 	if(!directionSearch)
 		self.title=@"xGPS";
