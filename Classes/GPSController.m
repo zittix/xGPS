@@ -236,7 +236,7 @@ error:
 		isEnabled=NO;
 		validLicense=NO;
 		started=NO;
-		//[self startDebug];
+
 		serial=[[NSString alloc] init];
 		if(self.needSerial) {
 			if(serialHandle<0) {

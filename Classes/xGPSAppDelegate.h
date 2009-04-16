@@ -51,6 +51,7 @@
 #define VERSION "1.2.5"
 #import "MainViewController.h"
 #import "SoundController.h"
+#import "Benchmark.h"
 @interface xGPSAppDelegate : UIApplication <UIApplicationDelegate> {
 	UIWindow *window;
 	UINavigationController *navController;

@@ -85,6 +85,7 @@
 		4EBAF8FB0E58CA84008916E9 /* zoomout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EBAF8F60E58CA84008916E9 /* zoomout.png */; };
 		4EC16E2E0F2F1A09003B3176 /* GPSDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */; };
 		4EC64A9E0F248385006B2408 /* GPXLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC64A9D0F248385006B2408 /* GPXLogger.m */; };
+		4EC935540F97259100B5B85D /* Benchmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC935530F97259100B5B85D /* Benchmark.m */; };
 		4EC961D10EDC9D6700B60DB8 /* DirectionsBookmarks.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */; };
 		4ECAC69A0F54537C002D5571 /* arrow_direction.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC6990F54537C002D5571 /* arrow_direction.png */; };
 		4ECAC7A90F546A0B002D5571 /* track_demo.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4ECAC7A80F546A0B002D5571 /* track_demo.gpx */; };
@@ -368,6 +369,8 @@
 		4EC16E2D0F2F1A09003B3176 /* GPSDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSDetailsViewController.m; sourceTree = "<group>"; };
 		4EC64A9C0F248385006B2408 /* GPXLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPXLogger.h; sourceTree = "<group>"; };
 		4EC64A9D0F248385006B2408 /* GPXLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPXLogger.m; sourceTree = "<group>"; };
+		4EC935520F97259100B5B85D /* Benchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Benchmark.h; sourceTree = "<group>"; };
+		4EC935530F97259100B5B85D /* Benchmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Benchmark.m; sourceTree = "<group>"; };
 		4EC961CF0EDC9D6700B60DB8 /* DirectionsBookmarks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsBookmarks.h; sourceTree = "<group>"; };
 		4EC961D00EDC9D6700B60DB8 /* DirectionsBookmarks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsBookmarks.m; sourceTree = "<group>"; };
 		4ECAC6990F54537C002D5571 /* arrow_direction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_direction.png; sourceTree = "<group>"; };
@@ -881,6 +884,8 @@
 				4E2396790E40F7750062A352 /* TileDB.m */,
 				4ED5887E0F8CAB4A000D0874 /* DirectionsRetriever.h */,
 				4ED5887F0F8CAB4A000D0874 /* DirectionsRetriever.m */,
+				4EC935520F97259100B5B85D /* Benchmark.h */,
+				4EC935530F97259100B5B85D /* Benchmark.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1424,6 +1429,7 @@
 				4EE410600F603C9B00510F8A /* GFiController.m in Sources */,
 				4ED588800F8CAB4A000D0874 /* DirectionsRetriever.m in Sources */,
 				4ED588850F8CAB5D000D0874 /* GoogleDirectionsRetriever.m in Sources */,
+				4EC935540F97259100B5B85D /* Benchmark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

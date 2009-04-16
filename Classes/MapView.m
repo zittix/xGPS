@@ -500,6 +500,7 @@
 }
 #if 1
 - (void)drawRect:(CGRect)rect{
+	BENCHMARK(nil);
 	//NSLog(@"Drawing at %f°",mapRotation/M_PI*180.0);
 	//TODO: we currently assume that rect if the full screen !
 	int winWidth=rect.size.width;
@@ -934,7 +935,7 @@
 	
 	//if(passDoubleFingersEvent)
 	//	[[self superview] drawRect:rect];
-	
+	BENCHMARK(@"Drawing");
 }
 #endif
 -(BOOL)hasGPSTracking {

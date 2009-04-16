@@ -96,15 +96,15 @@
 		ChangedState* chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 		NSLog(@"threadSerial(): started...");
 		while(!stopGPSSerial) { //Do until we are asked to sop
-
+			
 			//Do a read until we get a right GPS NMEA packet
 			while(packet.type<0 && !stopGPSSerial) {
 				ssize_t recvd;
-
+				
 				/*@ -modobserver @*/
 				recvd = read(self.serialHandle, packet.inbuffer + packet.inbuflen, sizeof(packet.inbuffer) - (packet.inbuflen));
-
-
+				
+				
 				// Error occured, ignore it for now
 				if (recvd <0) {
 					if ((errno == EAGAIN) || (errno == EINTR)) {
@@ -113,19 +113,20 @@
 						continue;
 					}
 				}
-
+				
 				//If nothing received (or timeout) continue
 				if (recvd == 0) continue;
-
+				
 				//For debugging purpose, not yet used
 				//writeDebugSerial((const char*)(packet.inbuffer + packet.inbuflen),recvd);
-			
+				
 				//parse the received data
 				packet_parse(&packet, (size_t) recvd);
 			}
-
+			//packet_reset(&packet);
+			//continue;
 			//If we are here it means that we should have a correct NMEA packet in memory or that we are stopped
-
+			BOOL foundPos=NO;
 			//For each buffered data, parse and use the packets
 			while(packet.type>=0 && !stopGPSSerial) {
 				if(packet.type==1 && isEnabled) {
@@ -134,24 +135,33 @@
 					
 					//Call callbacks according to data changes
 					/*if((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET){
-						chMsg.state=SPEED;
-#ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
-#else
-						[delegate gpsChanged:chMsg];
-#endif
-					}*/
-			
+					 chMsg.state=SPEED;
+					 #ifdef USE_UI
+					 [delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
+					 #else
+					 [delegate gpsChanged:chMsg];
+					 #endif
+					 }*/
+					
 					if((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET){
-						chMsg.state=POS;
-
-#ifdef USE_UI
-						[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
-#else
-					[delegate gpsChanged:chMsg];
-#endif
+						foundPos=true;
 					}
-				//Dirty hack to evaluate signal quality
+					//Dirty hack to evaluate signal quality
+				}
+				
+				//Parse the next packet
+				packet.type = BAD_PACKET;
+				packet_parse(&packet, 0);
+			}
+			
+			if(foundPos) {
+				chMsg.state=POS;
+				
+#ifdef USE_UI
+				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
+#else
+				[delegate gpsChanged:chMsg];
+#endif
 				if(gps_data.fix.mode<2)
 					signalQuality=0;
 				else if(gps_data.fix.mode==2)
@@ -160,12 +170,9 @@
 					signalQuality=80;
 				chMsg.state=SIGNAL_QUALITY;
 				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
-					}
 				
-				//Parse the next packet
-				packet.type = BAD_PACKET;
-				packet_parse(&packet, 0);
 			}
+			
 			//End of buffered commands, receive the other
 		}
 		[chMsg release];
