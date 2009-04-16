@@ -132,17 +132,7 @@
 				if(packet.type==1 && isEnabled) {
 					//Parse NMEA
 					unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);
-					
-					//Call callbacks according to data changes
-					/*if((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET){
-					 chMsg.state=SPEED;
-					 #ifdef USE_UI
-					 [delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:NO];
-					 #else
-					 [delegate gpsChanged:chMsg];
-					 #endif
-					 }*/
-					
+						
 					if((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET){
 						foundPos=true;
 					}

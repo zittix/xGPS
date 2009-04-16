@@ -56,9 +56,9 @@
 	memset(hashedChars,50,0);
 	NSString* inputString=[NSString stringWithFormat:@"xgpslicensenumbervalid:%@device:%@",s,[UIDevice currentDevice].uniqueIdentifier];
 	CC_SHA1([inputString UTF8String],
-			  [inputString lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
-			  hashedChars);
-
+			[inputString lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
+			hashedChars);
+	
 	NSString *computed=[NSString stringWithCString:""];
 	for(int i=0;i<20;i++) {
 		computed=[computed stringByAppendingFormat:@"%02x",hashedChars[i]];
@@ -72,8 +72,8 @@
 		[[NSUserDefaults standardUserDefaults] setObject:license forKey:kSettingsLicense];
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsLicenseOK];
 		[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:[ChangedState objWithState:CONNECTION_CHANGE andParent:self] waitUntilDone:NO];
-
-	return YES;
+		
+		return YES;
 	}else{
 		return NO;	
 	}
@@ -88,17 +88,17 @@
 }
 - (id)initWithDelegate:(id)del {
 	if((self=[super initWithDelegate:del])) {
-	version_minor=0;
-	version_major=1;
-	
-	isConnected=YES;
-	validLicense=NO;
-	isEnabled=NO;
-	
-	if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLicenseOK]) {
-		validLicense=YES;
-		license=[[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsLicense] retain];
-	}
+		version_minor=0;
+		version_major=1;
+		
+		isConnected=YES;
+		validLicense=NO;
+		isEnabled=NO;
+		
+		if([[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLicenseOK]) {
+			validLicense=YES;
+			license=[[[NSUserDefaults standardUserDefaults] objectForKey:kSettingsLicense] retain];
+		}
 	}
 	return self;
 }
@@ -112,8 +112,8 @@
 
 -(void) threadSerialGPS {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-
+	
+	
 	if(self.serialHandle>0)
 	{
 		struct gps_packet_t packet;
@@ -121,21 +121,21 @@
 		ChangedState* chMsg=[[ChangedState objWithState:SPEED andParent:self] retain];
 		NSLog(@"threadSerial(): started...");
 		while(!stopGPSSerial) {
-		
+			
 			ssize_t recvd;
 			while(packet.type<0 && !stopGPSSerial) {
 				
-
+				
 				/*@ -modobserver @*/
 				
 				//NSLog(@"Reading up to %d chars",sizeof(packet.inbuffer) - (packet.inbuflen));
 				recvd = read(self.serialHandle, packet.inbuffer + packet.inbuflen, sizeof(packet.inbuffer) - (packet.inbuflen));
-//
+				//
 				//printf("%d raw bytes read\n",
 				//		(int)recvd);
-
+				
 				if(recvd<0)
-				printf("Receive error: %s\n", strerror(errno));
+					printf("Receive error: %s\n", strerror(errno));
 				/*@ +modobserver @*/
 				if (recvd == -1) {
 					if ((errno == EAGAIN) || (errno == EINTR)) {
@@ -144,41 +144,57 @@
 						continue;
 					}
 				}
-
+				
 				if (recvd == 0) continue;
-
+				
 				
 				writeDebugSerial((const char*)(packet.inbuffer + packet.inbuflen),recvd);
-			
+				
 				
 				packet_parse(&packet, (size_t) recvd);
 				
 			}
+			BOOL foundPos=NO;
 			while(packet.type>=0 && !stopGPSSerial) {
-			//NSLog(@"End loop recept.");
-	
-			//NSLog(@"Packet type: %d",packet.type);
-
-			if(packet.type==1 && isEnabled) {
-				//NMEA
-				 writeDebugMessage([[NSString stringWithFormat:@"Received data: '%s'",packet.outbuffer] UTF8String]);
-				unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);
-				if(((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET) && validLicense){
-					chMsg.state=SPEED;
-#ifdef USE_UI
-					[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
-#else
-					[delegate gpsChanged:chMsg];
-#endif
+				//NSLog(@"End loop recept.");
+				
+				//NSLog(@"Packet type: %d",packet.type);
+				
+				if(packet.type==1 && isEnabled) {
+					//NMEA
+					unsigned int mask=nmea_parse((char*)packet.outbuffer,&gps_data);
+					
+					if(((unsigned int)(mask & SPEED_SET) == (unsigned int)SPEED_SET) && validLicense){
+						foundPos=YES;
+						
+					}
+					
+					if(((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET) && validLicense){
+						foundPos=YES;
+						
+					}
 				}
-				if(((unsigned int)(mask & LATLON_SET) == (unsigned int)LATLON_SET || (unsigned int)(mask & ALTITUDE_SET) == (unsigned int)ALTITUDE_SET) && validLicense){
-					chMsg.state=POS;
+				
+				//packet_reset(&packet);
+				packet.type = BAD_PACKET;
+				
+				packet_parse(&packet, 0);
+				
+			}
+			
+			if(foundPos) {
+				chMsg.state=POS;
 #ifdef USE_UI
-					[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
 #else
-					[delegate gpsChanged:chMsg];
+				[delegate gpsChanged:chMsg];
 #endif
-				}
+				chMsg.state=SPEED;
+#ifdef USE_UI
+				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
+#else
+				[delegate gpsChanged:chMsg];
+#endif
 				if(gps_data.fix.mode<2)
 					signalQuality=0;
 				else if(gps_data.fix.mode==2)
@@ -187,14 +203,9 @@
 					signalQuality=80;
 				chMsg.state=SIGNAL_QUALITY;
 				[delegate performSelectorOnMainThread:@selector(gpsChanged:) withObject:chMsg waitUntilDone:YES];
-			}
-
-			//packet_reset(&packet);
-			packet.type = BAD_PACKET;
-			
-				packet_parse(&packet, 0);
 				
 			}
+			
 			//NSLog(@"threadSerial(): End of analysing -> Next command");
 		}
 		[chMsg release];
@@ -202,7 +213,7 @@
 	} else {
 		NSLog(@"threadSerial(): Serial port error !");
 	}
-
+	
 	stopGPSSerial=NO;
 	[pool release];
 }
