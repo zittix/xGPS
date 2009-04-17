@@ -1,0 +1,3 @@
+#!/bin/sh
+rm -f /var/mobile/Library/Preferences/com.xwaves.xGPS.plist
+rm -f /var/mobile/Library/xGPS_*.db

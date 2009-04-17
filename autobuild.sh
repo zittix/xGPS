@@ -13,7 +13,6 @@ export cctools=/iphone/src/cctools
 export gcc=/iphone/src/gcc
 export csu=/iphone/src/csu
 export CODESIGN_ALLOCATE=/iphone/pre/bin/arm-apple-darwin9-codesign_allocate
-AUTOBUILD_COUNTER=15432454534
 # Clean up build area
 [ -f Makefile ] && make -k clean ||:
 
@@ -24,7 +23,9 @@ make
 rm -f -R debian/
 mkdir -p debian/DEBIAN/
 cp debian_control debian/DEBIAN/control
-echo "Version: 1.1-$AUTOBUILD_COUNTER" >> debian/DEBIAN/control
+cp debian_postrm debian/DEBIAN/postrm
+chmod o+x debian/DEBIAN/postrm
+echo "Version: 1.3-$AUTOBUILD_COUNTER" >> debian/DEBIAN/control
 chmod -R 0755 debian/DEBIAN
 
 make dist
