@@ -269,7 +269,8 @@ static void HandleOutputBuffer (
 			[tmrSoundCheck release];
 			tmrSoundCheck=nil;
 			
-			AudioQueueDispose(aqData.mQueue,false);
+			AudioQueueDispose(aqData.mQueue,true);
+			aqData.mQueue=nil;
 			if(aqData.w!=NULL) {
 				delete_wave(aqData.w);
 				aqData.w=NULL;
@@ -277,6 +278,7 @@ static void HandleOutputBuffer (
 			} else if(aqData.mAudioFile!=NULL) {
 				AudioFileClose(aqData.mAudioFile);
 			}
+			memset(&aqData,0,sizeof(struct AQPlayerState));
 			running=NO;
 			checkSoundCounter=0;
 			[self treatQueue];

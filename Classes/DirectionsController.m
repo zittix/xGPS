@@ -636,14 +636,20 @@ int roundNearest(double dist) {
 }
 -(void)setFrom:(NSString*)f {
 	[_from release];
+	_from=nil;
+	if(f!=nil)
 	_from=[f retain];
 }
 -(void)setTo:(NSString*)f {
 	[_to release];
+	_to=nil;
+	if(f!=nil)
 	_to=[f retain];
 }
 -(void)setVia:(NSArray*)f {
 	[_via release];
+	_via=nil;
+	if(f!=nil)
 	_via=[f retain];
 }
 -(NSArray*) via {

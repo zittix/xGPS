@@ -182,10 +182,11 @@
 		NSMutableArray *instr=[APPDELEGATE.dirbookmarks copyBookmarkInstructions:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark]];
 		[APPDELEGATE.directions setRoad:road instructions:instr];
 		
-		NSString *to,*from;
-		NSArray *via;
+		NSString *to=nil,*from=nil;
+		NSArray *via=nil;
 		
 		if([APPDELEGATE.dirbookmarks getBookmarkInfo:[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsLastUsedBookmark] from:&from to:&to via:&via]) {
+			NSLog(@"Restoring to: %@, from: %@, via:%@",to,from,via);
 			[APPDELEGATE.directions setTo:to];
 			[APPDELEGATE.directions setFrom:from];
 			[APPDELEGATE.directions setVia:via];
