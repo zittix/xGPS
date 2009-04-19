@@ -1529,6 +1529,7 @@
 					"$(inherited)",
 					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
 				);
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
@@ -1606,6 +1607,7 @@
 				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 2.0;
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5CB2FB-5A40-4FBF-9149-20AF336D1770";

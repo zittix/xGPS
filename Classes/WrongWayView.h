@@ -13,6 +13,7 @@
 	UILabel *wrongWaylbl;
 	BOOL run;
 	id delegate;
+	BOOL stopRequested;
 }
 - (id)initWithFrame:(CGRect)frame withDelegate:(MainViewController*)_del;
 -(void)startAnimate;

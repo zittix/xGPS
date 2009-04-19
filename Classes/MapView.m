@@ -197,7 +197,7 @@
 		
 		
 		if(value.tapCount==2 && [events count]==1) {
-			if(zoom>0) {
+			if(zoom>17-maxZoom) {
 				zoom--;
 				[assocZoomview setZoomoutState:zoom!=16];
 				[assocZoomview setZoominState:zoom!=0];
@@ -205,9 +205,8 @@
 				[self refreshMap];
 			}
 		}
-		if([events count]==2) {
-			UITouch *value2 = [enumerator nextObject];
-			if(zoom<16 && (value2.tapCount==2 || value.tapCount==2)) {
+		else if(value.tapCount==3 && [events count]==1) {
+			if(zoom<17) {
 				zoom++;
 				[assocZoomview setZoomoutState:zoom!=16];
 				[assocZoomview setZoominState:zoom!=0];

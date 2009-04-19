@@ -14,39 +14,6 @@
 #import "iPhone3GController.h"
 #import "ProgressViewController.h"
 
-@interface SBMediaController : NSObject
-{
-    int _manualVolumeChangeCount;
-    NSDictionary *_nowPlayingInfo;
-}
-
-+ (id)sharedInstance;
-- (id)init;
-- (void)dealloc;
-- (void)setNowPlayingInfo:(id)fp8;
-- (BOOL)hasTrack;
-- (BOOL)isFirstTrack;
-- (BOOL)isLastTrack;
-- (BOOL)isPlaying;
-- (BOOL)isMovie;
-- (id)nowPlayingArtist;
-- (id)nowPlayingTitle;
-- (id)nowPlayingAlbum;
-- (BOOL)changeTrack:(int)fp8;
-- (BOOL)beginSeek:(int)fp8;
-- (BOOL)endSeek:(int)fp8;
-- (BOOL)togglePlayPause;
-- (float)volume;
-- (void)setVolume:(float)fp8;
-- (void)handleVolumeEvent:(struct __GSEvent *)fp8;
-- (void)_registerForAVSystemControllerNotifications;
-- (void)_unregisterForAVSystemControllerNotifications;
-- (void)_serverConnectionDied:(id)fp8;
-- (void)musicPlayerDied:(id)fp8;
-- (void)_systemVolumeChanged:(id)fp8;
-- (BOOL)_performIAPCommand:(int)fp8 status:(int)fp12;
-
-@end
 @interface UIApplication(Improved)
 -(void)addStatusBarImageNamed:(NSString*)name removeOnExit:(BOOL)v;
 -(void)addStatusBarImageNamed:(NSString*)name removeOnAbnormalExit:(BOOL)v;
@@ -64,6 +31,7 @@
 	if((self=[super init])) {
 		//NSLog(@"MainView controller init...");
 		tiledb=[xGPSAppDelegate tiledb];
+		currentStatusbarIconState=-1;
 		gpsPos=[[PositionObj alloc] init];
 		[[xGPSAppDelegate gpsmanager] setDelegate:self];
 		
@@ -150,7 +118,7 @@
 	remainingView.autoresizesSubviews=YES;
 	APPDELEGATE.directions.map=mapview;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(speedChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
-	
+	[self setStatusIconVisible:YES state:0];
 	PositionObj *p=[PositionObj positionWithX:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosX] y:[[NSUserDefaults standardUserDefaults] doubleForKey:kSettingsLastPosY]];
 	if(p.x==0.0f && p.y==0.0f) {
 		p.x=46.5833333;
@@ -198,9 +166,9 @@
 		[instr release];
 	}
 	/*
-	SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
-	[APPDELEGATE.soundcontroller addSound:s];	
-	[s release];*/
+	 SoundEvent *s=[[SoundEvent alloc] initWithText:@"Hi man how are you doing today?"];
+	 [APPDELEGATE.soundcontroller addSound:s];	
+	 [s release];*/
 }
 -(void)hideLicense {
 	[self dismissModalViewControllerAnimated:YES];
@@ -208,16 +176,10 @@
 -(void)setGPSQuality:(int)q {
 	
 	if(q<33) {
-		[self setStatusIconVisible:NO state:1];
-		[self setStatusIconVisible:NO state:2];
 		[self setStatusIconVisible:YES state:0];
 	} else if(q<66) {
-		[self setStatusIconVisible:NO state:2];
-		[self setStatusIconVisible:NO state:0];
 		[self setStatusIconVisible:YES state:1];
 	} else {
-		[self setStatusIconVisible:NO state:0];
-		[self setStatusIconVisible:NO state:1];
 		[self setStatusIconVisible:YES state:2];
 	}
 }
@@ -384,8 +346,14 @@
 	}
 }
 - (void)setStatusIconVisible:(BOOL)visible state:(int)state {
-	
-	if (visible) {
+	if (visible && currentStatusbarIconState!=state) {
+		
+		if(currentStatusbarIconState>=0) {
+			[[UIApplication sharedApplication] removeStatusBarImageNamed:
+			 
+			 [NSString stringWithFormat:@"xGPS_sat_%d", currentStatusbarIconState]];
+		}
+		
 		
 		NSString *name = [NSString
 						  
@@ -401,11 +369,15 @@
 			
 			[[UIApplication sharedApplication] addStatusBarImageNamed:name removeOnAbnormalExit:YES];
 		
-	} else {
+		currentStatusbarIconState=state;
 		
-		[[UIApplication sharedApplication] removeStatusBarImageNamed:
-		 
-		 [NSString stringWithFormat:@"xGPS_sat_%d", state]];
+	} else if(!visible) {
+		if(currentStatusbarIconState==state) {
+			[[UIApplication sharedApplication] removeStatusBarImageNamed:
+			 
+			 [NSString stringWithFormat:@"xGPS_sat_%d", state]];
+			currentStatusbarIconState=-1;
+		}
 		
 	}
 	
@@ -436,9 +408,6 @@
 	} else {
 		[self timerNightMode];	
 	}
-	if(![[NSUserDefaults standardUserDefaults] boolForKey:kSettingsNightModeEnabled]) {
-		[self hideWrongWay];
-	}
 	
 	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsMapType]==0)
 		mapview.maxZoom=17;
@@ -455,8 +424,6 @@
 -(void)hideWrongWay {
 	if(wrongWay.superview==nil) return;
 	[wrongWay stopAnimate];
-	
-	[wrongWay removeFromSuperview];
 	
 }
 -(void)showWrongWay {
@@ -656,7 +623,6 @@
 	[APPDELEGATE.directions clearResult];
 	currentSearchType=0;
 	[wrongWay stopAnimate];
-	[wrongWay removeFromSuperview];
 }
 -(void)nextDirectionChanged:(Instruction*)instr {
 	[navView setText:instr.name];

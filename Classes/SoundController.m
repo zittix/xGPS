@@ -15,7 +15,7 @@
 #include "flite.h"
 #include "flite_version.h"
 #include "voxdefs.h"
-
+#import "xGPSAppDelegate.h"
 static const int kNumberBuffers = 3;                              // 1
 typedef struct AQPlayerState {
     AudioStreamBasicDescription   mDataFormat;                    // 2
@@ -32,6 +32,9 @@ typedef struct AQPlayerState {
 
 static AQPlayerState aqData;
 
+static void beepPlayed() {
+	[APPDELEGATE.soundcontroller beepPlayed];
+}
 static void DeriveBufferSize (
 							  AudioStreamBasicDescription *ASBDesc,                            // 1
 							  UInt32                      maxPacketSize,                       // 2
@@ -150,47 +153,70 @@ static void HandleOutputBuffer (
 -(void)dealloc {
 	[tmrSoundCheck release];
 	[chain dealloc];
+	[abrev release];
+	AudioServicesDisposeSystemSoundID(beepSound);
 	[super dealloc];
 }
 -(id)init {
 	if((self=[super init])) {
 		flite_init();	
+		precomputing=NO;
 		AudioSessionInitialize (
 								NULL,                            // 1
 								NULL,                            // 2
 								NULL,    // 3
 								NULL                         // 4
-		);
-		 
-		UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;    // 1
+								);
+		
+		UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;    // 1
 		//UInt32 sessionCategory = 'aler';
 		
-			
+		
 		AudioSessionSetProperty (
 								 kAudioSessionProperty_AudioCategory,                        // 2
 								 sizeof (sessionCategory),                                   // 3
 								 &sessionCategory                                            // 4
-		);
-	}
+								 );
+		
+		//Get the bundle path
+		NSString* fileToPlay=[[NSBundle mainBundle] pathForResource:@"announce_direction" ofType:@"wav" inDirectory:@"sounds"];
+		
+		CFURLRef audioFileURL =
+		CFURLCreateFromFileSystemRepresentation (           // 1
+												 NULL,                                           // 2
+												 (const UInt8 *) fileToPlay.UTF8String,                       // 3
+												 fileToPlay.length ,                              // 4
+												 false                                           // 5
+												 );
+		AudioServicesCreateSystemSoundID(audioFileURL,&beepSound);
+		AudioServicesAddSystemSoundCompletion(beepSound,NULL,NULL,&beepPlayed,NULL);
+		CFRelease (audioFileURL);   
+		abrev=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Avenue",@"Street",@"Road",@"Boulevard",@"Parkway",@"Circle",@"North",@"East",@"South",@"West",@"Highway",@"Place",@"Circuit",@"Court",@"Alley",@"Arcade",@"Branch",@"Forest",@"Lake",@"Lane",@"Lobby",@"Mountain",@"Park",@"Square",@"Track",@"Tunnel",@"Valley",@"Village",nil] forKeys:[NSArray arrayWithObjects:@"Ave",@"St",@"Rd",@"Blvd",@"Pkwy",@"Cir",@"N",@"E",@"S",@"W",@"Hwy",@"Pl",@"Cct",@"Ct",@"Aly",@"Arc",@"Br",@"Frst",@"Lk",@"Ln",@"Lbby",@"Mtn",@"Pk",@"Sq",@"Trak",@"Tunl",@"Vly",@"Vlg",nil]];
+		[abrev retain];
+		
+	}// 1
 	return self;
+}
+-(void)playBeepDirections {
+	AudioServicesPlaySystemSound(beepSound);
 }
 -(void)playFile:(NSString*)f {
 	CFURLRef audioFileURL =
-    CFURLCreateFromFileSystemRepresentation (           // 1
+	CFURLCreateFromFileSystemRepresentation (           // 1
 											 NULL,                                           // 2
 											 (const UInt8 *) f.UTF8String,                       // 3
 											 f.length ,                              // 4
 											 false                                           // 5
 											 );
 	
-    AudioFileOpenURL (                                  // 2
+	AudioFileOpenURL (                                  // 2
 					  audioFileURL,                                   // 3
 					  kAudioFileReadPermission,                                       // 4
 					  0,                                              // 5
 					  &aqData.mAudioFile                              // 6
 					  );
 	
-	CFRelease (audioFileURL);                               // 7
+	CFRelease (audioFileURL);  
 	UInt32 dataFormatSize = sizeof (aqData.mDataFormat);    // 1
 	
 	AudioFileGetProperty (                                  // 2
@@ -255,6 +281,19 @@ static void HandleOutputBuffer (
 					 NULL                                           // 4
 					 );
 }
+-(void)beepPlayed {
+	//Done, continue to process the queue
+	
+	//Remove toPlay
+	SoundEvent *next=chain.next;
+	[next retain];
+	[chain release];
+	chain=next;
+	running=NO;
+	checkSoundCounter=0;
+	[self treatQueue];
+	
+}
 -(void)checkSound {
 	if(aqData.mIsRunning == false) {
 		if(checkSoundCounter==3) {
@@ -311,51 +350,7 @@ static void HandleOutputBuffer (
 	}
 	return ret;
 }
--(void)playText:(NSString*)text {
-	cst_voice *v;
-    cst_features *extra_feats;
-	NSString *toPlay=text;
-	
-	//Filter out / and \ and abbreviations
-	/* Roger:
-	
-	
-Ave: Avenue
-St: Street
-Rd: Road
-Blvd: Boulevard
-Pkwy: Parkway
-Cir: Circle
-N: North
-E: East
-S: South
-W: West
-	
-	Also typically in the US freeways are indicated as:
-	
-	I-5 N: I Five North
-	I-605 S: I Six-O-Five South
-	
-	Also, make sure to get rid off slashes (/ \) and dashes (-)
-	*/
- 
-
-	NSDictionary *abrev=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Avenue",@"Street",@"Road",@"Boulevard",@"Parkway",@"Circle",@"North",@"East",@"South",@"West",@"Highway",@"Place",@"Circuit",@"Court",@"Alley",@"Arcade",@"Branch",@"Forest",@"Lake",@"Lane",@"Lobby",@"Mountain",@"Park",@"Square",@"Track",@"Tunnel",@"Valley",@"Village",nil] forKeys:[NSArray arrayWithObjects:@"Ave",@"St",@"Rd",@"Blvd",@"Pkwy",@"Cir",@"N",@"E",@"S",@"W",@"Hwy",@"Pl",@"Cct",@"Ct",@"Aly",@"Arc",@"Br",@"Frst",@"Lk",@"Ln",@"Lbby",@"Mtn",@"Pk",@"Sq",@"Trak",@"Tunl",@"Vly",@"Vlg",nil]];
-	
-	toPlay=[self replaceAbbrev:abrev inString:toPlay];
-	//NSLog(@"Saying :%@",toPlay);
-    extra_feats = new_features();
-	
-    
-	
-    v = REGISTER_VOX(NULL);
-    feat_copy_into(extra_feats,v->features);
-	
-	cst_wave *w=flite_text_to_wave(toPlay.UTF8String,v);
-	
-    delete_features(extra_feats);
-	
-    UNREGISTER_VOX(v);
+-(void)playText:(cst_wave*)w {
 	
 	//Volume max
 	
@@ -364,14 +359,14 @@ W: West
 	//	if(max<w->samples[l])
 	//		max=w->samples[l];
 	/*
-	float ratio=2;
-
-	if(ratio>1) {
-		for (long i = 0; i < w->num_samples; i++) {
-			w->samples[i] = (w->samples[i] * ratio);
-	}
-		
-	}*/
+	 float ratio=2;
+	 
+	 if(ratio>1) {
+	 for (long i = 0; i < w->num_samples; i++) {
+	 w->samples[i] = (w->samples[i] * ratio);
+	 }
+	 
+	 }*/
 	aqData.mDataFormat.mSampleRate=w->sample_rate;
 	
 	
@@ -446,28 +441,31 @@ W: West
 	
 	//Play the queue
 	running=YES;
-
+	
 	SoundEvent *toPlay=chain;
-
-
+	
+	
 	if(toPlay==nil) {
 		running=NO;
 		AudioSessionSetActive (false);
 		return;
 	}
 	AudioSessionSetActive (true);
-
+	
 	
 	
 	if(toPlay.text!=nil) {
-		[self playText:toPlay.text];
+		[self playText:toPlay.w];
+		toPlay.w=nil;
 		
 	} else if(toPlay.snd>=0) {
 		//Play a system sound
 		NSString *songToPlay=nil;
 		switch(toPlay.snd) {
 			case Sound_Announce:
-				songToPlay=@"announce_direction";
+				//songToPlay=@"announce_direction";
+				[self playBeepDirections];
+				return;
 				break;
 			case Sound_Radar:
 				songToPlay=@"radar_alert";
@@ -507,6 +505,7 @@ W: West
 		chain=next;
 		
 		running=NO;
+		
 		[self treatQueue];
 		return;
 		
@@ -515,6 +514,69 @@ W: West
 -(void)addSound:(SoundEvent*)s {
 	[self addSound:s after:nil];
 }
+
+-(void)precomputeSounds {
+	NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+	SoundEvent *snd=chain;
+	cst_voice *v;
+	cst_features *extra_feats;
+	extra_feats = new_features();
+	
+    
+	
+    v = REGISTER_VOX(NULL);
+    feat_copy_into(extra_feats,v->features);
+	
+	while(snd!=nil) {
+		if(snd.text!=nil) {
+			//NSLog(@"Start rendering");
+			NSString *toPlay=snd.text;
+			
+			//Filter out / and \ and abbreviations
+			/* Roger:
+			 
+			 
+			 Ave: Avenue
+			 St: Street
+			 Rd: Road
+			 Blvd: Boulevard
+			 Pkwy: Parkway
+			 Cir: Circle
+			 N: North
+			 E: East
+			 S: South
+			 W: West
+			 
+			 Also typically in the US freeways are indicated as:
+			 
+			 I-5 N: I Five North
+			 I-605 S: I Six-O-Five South
+			 
+			 Also, make sure to get rid off slashes (/ \) and dashes (-)
+			 */
+			
+			
+			
+			toPlay=[self replaceAbbrev:abrev inString:toPlay];
+			//NSLog(@"Saying :%@",toPlay);
+			//clock_t start=clock();
+			cst_wave *w=flite_text_to_wave(toPlay.UTF8String,v);
+			snd.w=w;
+			
+			//NSLog(@"Time to render voice: %f",(float)(clock()-start)/CLOCKS_PER_SEC*1000.0f);
+		}
+		snd=snd.next;
+	}
+	precomputing=NO;
+	
+    delete_features(extra_feats);
+	
+    UNREGISTER_VOX(v);
+	[self performSelectorOnMainThread:@selector(treatQueue) withObject:nil waitUntilDone:NO];
+	
+	[pool release];
+}
+
 -(void)addSound:(SoundEvent*)s after:(SoundEvent*)ePrev {
 	
 	if(chain==nil) {
@@ -547,7 +609,9 @@ W: West
 		
 		[prev.next getLast].next=prevNext;
 	}
-	[self treatQueue];
+	precomputing=YES;
+	//[NSThread detachNewThreadSelector:@selector(precomputeSounds) toTarget:self withObject:nil];
+	[self precomputeSounds];
 }
 
 @end

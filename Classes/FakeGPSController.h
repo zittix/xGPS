@@ -11,7 +11,6 @@
 #import "ChangedState.h"
 #import "GPSController.h"
 #import "Position.h"
-#define SPEED_FILTER_LENGTH 5
 @interface FakeGPSController : GPSController {
 	NSTimer *tmrGPS;
 	PositionObj *pos;

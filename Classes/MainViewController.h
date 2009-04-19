@@ -46,6 +46,7 @@
 	RemainingDistanceTimeView *remainingView;
 	ViewSearch *viewSearch;
 	BOOL hidden;
+	int currentStatusbarIconState;
 
 }
 -(void)setGPSMode:(int)mode;

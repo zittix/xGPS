@@ -29,12 +29,18 @@
 		wrongWaylbl.highlighted=YES;
 		wrongWaylbl.adjustsFontSizeToFitWidth=YES;
 		wrongWaylbl.text=NSLocalizedString(@"Wrong\nWay",@"");
-		
+		stopRequested=NO;
 		[self addSubview:wrongWaylbl];
     }
     return self;
 }
 -(void)animationFinished:(NSString *)animationID finished:(BOOL)finished context:(void *)context {
+	if(stopRequested) {
+		stopRequested=NO;
+		run=NO;
+		[self removeFromSuperview];
+	}
+	
 	if(!run) return;
 	[UIView beginAnimations:@"animWrongWay" context:nil];
 	[UIView setAnimationDelegate:self];
@@ -65,7 +71,7 @@
 	[UIView commitAnimations];
 }
 -(void)stopAnimate {
-	run=NO;
+	stopRequested=YES;
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if(buttonIndex==1) {

@@ -53,6 +53,10 @@ static SoundController * soundcontroller;
 		[[NSUserDefaults standardUserDefaults] setObject:@"20:00" forKey:kSettingsTimerNightStart];
 		[[NSUserDefaults standardUserDefaults] setObject:@"7:00" forKey:kSettingsTimerNightStop];
 	}
+	if([[NSUserDefaults standardUserDefaults] integerForKey:kSettingsVersion]<6) {
+		[[NSUserDefaults standardUserDefaults] setInteger:6 forKey:kSettingsVersion];
+		[[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:kSettingsLastUsedBookmark];
+	}
 	
 	staticObj=self;
 	txcontroller=[[TransferController alloc] init];

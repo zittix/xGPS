@@ -13,6 +13,7 @@
 @synthesize snd;
 @synthesize text;
 @synthesize next;
+@synthesize w;
 -(id)initWithSound:(Sound)_snd{
 	if((self=[super init])) {
 		snd=_snd;
