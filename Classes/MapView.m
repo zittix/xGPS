@@ -190,31 +190,7 @@
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	lastInitMove=NO;
-	NSSet *events=[event allTouches];
-	if([events count]>0) {
-		NSEnumerator *enumerator = [events objectEnumerator];
-		UITouch *value = [enumerator nextObject];
-		
-		
-		if(value.tapCount==2 && [events count]==1) {
-			if(zoom>17-maxZoom) {
-				zoom--;
-				[assocZoomview setZoomoutState:zoom!=16];
-				[assocZoomview setZoominState:zoom!=0];
-				[self computeCachedRoad];
-				[self refreshMap];
-			}
-		}
-		else if(value.tapCount==3 && [events count]==1) {
-			if(zoom<17) {
-				zoom++;
-				[assocZoomview setZoomoutState:zoom!=16];
-				[assocZoomview setZoominState:zoom!=0];
-				[self computeCachedRoad];
-				[self refreshMap];
-			}
-		}
-	}
+	
 	
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -254,7 +230,29 @@
 	lastDragPoint.x=NAN;
 	lastDragPoint.y=NAN;
 	prevDist=NAN;
-	
+	if([events count]>0) {
+		NSEnumerator *enumerator = [events objectEnumerator];
+		UITouch *value = [enumerator nextObject];
+		
+		
+		
+
+	/*if(value.tapCount==3 && [events count]==1) {
+		if(zoom<17) {
+			zoom++;
+			[assocZoomview setZoomoutState:zoom!=16];
+			[assocZoomview setZoominState:zoom!=0];
+			[self computeCachedRoad];
+		}
+	} else*/ if(value.tapCount==2 && [events count]==1) {
+		if(zoom>17-maxZoom) {
+			zoom--;
+			[assocZoomview setZoomoutState:zoom!=16];
+			[assocZoomview setZoominState:zoom!=0];
+			[self computeCachedRoad];
+		}
+	}
+			}
 	[self refreshMap];
 	
 }

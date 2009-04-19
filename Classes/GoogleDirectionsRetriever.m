@@ -340,17 +340,17 @@
 	NSString *routeType=@"";
 	switch(routingType) {
 		case ROUTING_NORMAL:
-			if([lang isEqualToString:@"jp"])
+			if([lang isEqualToString:@"ja"])
 				routeType=@"&dirflg=d";
 			break;
 		case ROUTING_AVOID_HIGHWAY:
-			if([lang isEqualToString:@"jp"])
+			if([lang isEqualToString:@"ja"])
 				routeType=@"&dirflg=dh";
 			else
 				routeType=@"&dirflg=h";
 			break;
 		case ROUTING_BY_FOOT:
-			if([lang isEqualToString:@"jp"])
+			if([lang isEqualToString:@"ja"])
 				routeType=@"&dirflg=dt";
 			else
 				routeType=@"&dirflg=w";
