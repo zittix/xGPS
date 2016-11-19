@@ -67,7 +67,7 @@
 	[lockReceivedOk unlock];
 	if(!hasReceivedOK) {
 		if(firstStart) {
-			system("/usr/bin/killall -9 iapd");
+			//system("/usr/bin/killall -9 iapd");
 			firstStart=NO;
 		}
 		if(isConnected) {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		4E026AD10F7AC60600BB5675 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E026AD00F7AC60600BB5675 /* MediaPlayer.framework */; };
+		4E026FEE1DE0550500690548 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E026FED1DE0550500690548 /* Default-568h@2x.png */; };
 		4E0827ED0F4DE9F300B1C9AF /* RoutesManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */; };
 		4E0828690F4DF11D00B1C9AF /* RouteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0828680F4DF11D00B1C9AF /* RouteCell.m */; };
 		4E0829050F4DF83300B1C9AF /* addicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E0829040F4DF83300B1C9AF /* addicon.png */; };
@@ -107,7 +108,6 @@
 		4ED975D00F531FD2006E2312 /* clear_results.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ED975CF0F531FD2006E2312 /* clear_results.png */; };
 		4EDAA0C30E87AD8A0020E8AF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C10E87AD8A0020E8AF /* AddressBook.framework */; };
 		4EDAA0C40E87AD8A0020E8AF /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDAA0C20E87AD8A0020E8AF /* AddressBookUI.framework */; };
-		4EDB21BA0F924ADC008D15EF /* Celestial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EDB21B90F924ADC008D15EF /* Celestial.framework */; };
 		4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE70F51E8BA00C77686 /* settings_button.png */; };
 		4EDDACEA0F51E8BA00C77686 /* search_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EDDACE80F51E8BA00C77686 /* search_button.png */; };
 		4EDDAE020F51FD0D00C77686 /* RemainingDistanceTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EDDAE010F51FD0D00C77686 /* RemainingDistanceTimeView.m */; };
@@ -235,6 +235,7 @@
 		4E00D5C70F5C31EF0082A147 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E00D5C80F5C31F70082A147 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4E026AD00F7AC60600BB5675 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		4E026FED1DE0550500690548 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4E0827EB0F4DE9F300B1C9AF /* RoutesManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutesManagerViewController.h; sourceTree = "<group>"; };
 		4E0827EC0F4DE9F300B1C9AF /* RoutesManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesManagerViewController.m; sourceTree = "<group>"; };
 		4E0828670F4DF11D00B1C9AF /* RouteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCell.h; sourceTree = "<group>"; };
@@ -579,7 +580,6 @@
 				4EE2433B0F3074E800C41ACA /* AudioToolbox.framework in Frameworks */,
 				4EE2433C0F3074E800C41ACA /* CoreAudio.framework in Frameworks */,
 				4E026AD10F7AC60600BB5675 /* MediaPlayer.framework in Frameworks */,
-				4EDB21BA0F924ADC008D15EF /* Celestial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,6 +640,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4E026FED1DE0550500690548 /* Default-568h@2x.png */,
 				4ECAC6990F54537C002D5571 /* arrow_direction.png */,
 				4ED975CF0F531FD2006E2312 /* clear_results.png */,
 				4ED9756A0F53196C006E2312 /* bg_search_landscape.png */,
@@ -1170,8 +1171,12 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "xGPS" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -1237,6 +1242,7 @@
 				4E0829BA0F4E027F00B1C9AF /* middleway.png in Resources */,
 				4EDDACE90F51E8BA00C77686 /* settings_button.png in Resources */,
 				4EDDACEA0F51E8BA00C77686 /* search_button.png in Resources */,
+				4E026FEE1DE0550500690548 /* Default-568h@2x.png in Resources */,
 				4ED975340F5316C3006E2312 /* home.png in Resources */,
 				4ED975350F5316C3006E2312 /* routes.png in Resources */,
 				4ED975360F5316C3006E2312 /* route_manager.png in Resources */,
@@ -1499,20 +1505,19 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xwaves.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = xGPS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "87079DB5-32DC-4FAE-89D9-74FFE37C6912";
 				STRIP_STYLE = "non-global";
@@ -1525,18 +1530,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xwaves.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = xGPS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "87079DB5-32DC-4FAE-89D9-74FFE37C6912";
 			};
@@ -1545,7 +1549,7 @@
 		4E89E8D30E8512B100E47EC5 /* Deploy */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = 4.0;
@@ -1554,7 +1558,7 @@
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos;
 			};
 			name = Deploy;
 		};
@@ -1564,17 +1568,16 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS2.2.sdk/System/Library/PrivateFrameworks,
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = xGPS_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xwaves.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = xGPS;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
 			};
@@ -1583,8 +1586,9 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = 4.0;
@@ -1594,24 +1598,24 @@
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC2E5E16-CA61-4B8B-AE1C-66A9F6B1DA00";
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mathieu Monney";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 2.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-lsqlite3";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E5CB2FB-5A40-4FBF-9149-20AF336D1770";
-				SDKROOT = iphoneos2.0;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

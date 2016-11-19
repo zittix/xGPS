@@ -183,7 +183,7 @@ static BOOL uploading=NO;
 -(NSString*)createAPI_dbUploadOK {
 	NSMutableString *outdata = [NSMutableString new];
 	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
-	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
+	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].identifierForVendor.UUIDString];
 	[outdata appendString:@"<version>"VERSION"</version>"];
 	[outdata appendFormat:@"<status>ok</status>"];
 	[outdata appendString:@"</xgpsAPI>"];
@@ -196,7 +196,7 @@ static BOOL uploading=NO;
 -(NSString*)createAPI_info {
 	NSMutableString *outdata = [NSMutableString new];
 	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
-	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
+	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].identifierForVendor.UUIDString];
 	[outdata appendString:@"<version>"VERSION"</version>"];
 	[outdata appendFormat:@"<name>%@</name>",[APPDELEGATE.txcontroller.httpServer publishedName]];
 	[outdata appendFormat:@"<tiledbsize>%.2f</tiledbsize>",[APPDELEGATE.tiledb mapsize]];
@@ -209,7 +209,7 @@ static BOOL uploading=NO;
 -(NSString*)createAPI_GPXLogFiles {
 	NSMutableString *outdata = [NSMutableString new];
 	[outdata appendString:@"<?xml version=\"1.0\"?>\n<xgpsAPI>"];
-	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].uniqueIdentifier];
+	[outdata appendFormat:@"<deviceID>%@</deviceID>", [UIDevice currentDevice].identifierForVendor.UUIDString];
 	[outdata appendString:@"<version>"VERSION"</version><gpxfiles>"];
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
