@@ -22,8 +22,8 @@
 		NSLog(@"Init manager");
 		int id_setting=[[NSUserDefaults standardUserDefaults] integerForKey: kSettingsCurrentGPS];
 		if(id_setting<=0 || id_setting>NBGPS) {
-			[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kSettingsCurrentGPS];
-			idGPS=1;
+			[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kSettingsCurrentGPS];
+			idGPS=2;
 		} else
 			idGPS=id_setting;
 		
