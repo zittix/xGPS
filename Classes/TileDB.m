@@ -509,22 +509,23 @@ err:
 	NSString *mapType=@"w2.92"; //Normal
 	NSString *url;
 	switch(type){
-		case 0: 
+		case 0:
+            //https://mts1.google.com/vt/lyrs=m@186112443&hl=x-local&src=app&x=1325&y=3143&z=13&s=Galile
 			mapType=@"w2.92"; 
-			url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+			url=[[NSString alloc] initWithFormat:@"https://mt%d.google.com/vt/src=app&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,x,y,17-zoom,lang];
 			break; //maps
 		case 2: 
-			url=[[NSString alloc] initWithFormat:@"http://khm%d.google.com/kh?v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
+			url=[[NSString alloc] initWithFormat:@"https://khm%d.google.com/kh/v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
 			break; //sat
 		case 3: 
 			//Overlay:
 			//mapType=@"w2t.88"; 
 			//url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
-			url=[[NSString alloc] initWithFormat:@"http://khm%d.google.com/kh?v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
+			url=[[NSString alloc] initWithFormat:@"https://khm%d.google.com/kh/v=36&hl=%@&x=%d&y=%d&z=%d",(x+y)%4,lang,x,y,17-zoom];
 			break; //hybride
 		case 1:
 			mapType=@"w2p.87"; 
-			url=[[NSString alloc] initWithFormat:@"http://mt%d.google.com/mt?v=%@&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,mapType,x,y,17-zoom,lang];
+			url=[[NSString alloc] initWithFormat:@"https://mt%d.google.com/vt/src=app&x=%d&y=%d&z=%d&hl=%@",(x+y)&3,x,y,17-zoom,lang];
 			break; 	//terrain
 	}
 	

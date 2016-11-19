@@ -88,7 +88,7 @@
 		}
 }
 -(NSString*)getGPSString {
-	return [NSString stringWithFormat:@"%@\n%@: %f°\n%@: %f°\n%@: %f m\n\n%@: %@",NSLocalizedString(@"My GPS position is:",@""),NSLocalizedString(@"Latitude",@""),APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,NSLocalizedString(@"Longitude",@""),APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude,NSLocalizedString(@"Altitude",@""),APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.altitude,NSLocalizedString(@"Google Maps link to my position",@""),[NSString stringWithFormat:@"http://maps.google.com/?q=%f,%f",APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude]];
+	return [NSString stringWithFormat:@"%@\n%@: %f°\n%@: %f°\n%@: %f m\n\n%@: %@",NSLocalizedString(@"My GPS position is:",@""),NSLocalizedString(@"Latitude",@""),APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,NSLocalizedString(@"Longitude",@""),APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude,NSLocalizedString(@"Altitude",@""),APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.altitude,NSLocalizedString(@"Google Maps link to my position",@""),[NSString stringWithFormat:@"https://maps.google.com/?q=%f,%f",APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.latitude,APPDELEGATE.gpsmanager.currentGPS.gps_data.fix.longitude]];
 }
 -(void)sendSMS {
 	NSString *urls=[NSString stringWithFormat:@"sms:?body=%@",[self urlencode:[self getGPSString] encoding:@"utf8"]];

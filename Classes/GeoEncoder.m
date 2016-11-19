@@ -298,7 +298,7 @@
 	
 	NSString* encURL=[GeoEncoder urlencode:search encoding:@"utf8"];
 	
-	NSString *urlT=[NSString stringWithFormat:@"http://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&q=%@&hl=%@",encURL,lang];
+	NSString *urlT=[NSString stringWithFormat:@"https://maps.google.com/maps?ie=UTF8&oe=UTF8&output=kml&q=%@&hl=%@",encURL,lang];
 	NSLog(@"Getting geoencode at %@",urlT);
 	//
 	NSURL *url = [NSURL URLWithString:urlT];
@@ -311,9 +311,10 @@
 	//[urlReq setValue:@"http://maps.google.com/maps" forHTTPHeaderField:@"Referer"];
 	
 	// create the request
-	NSURLRequest *theRequest=[NSMutableURLRequest requestWithURL:url
+	NSMutableURLRequest *theRequest=[NSMutableURLRequest requestWithURL:url
 													 cachePolicy:NSURLRequestUseProtocolCachePolicy
 												 timeoutInterval:30.0];
+    [theRequest setValue:@"application/vnd.google-earth.kml+xml" forHTTPHeaderField:@"Accept"];
 	// create the connection with the request
 	// and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
