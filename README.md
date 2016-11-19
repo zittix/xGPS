@@ -4,3 +4,7 @@ xGPS - iPhone GPS Navigation Software
 iPhone GPS Navigation software made when iOS 1 & 2 was introduced.
 
 It is supporting iPhone 3G GPS plus a variety of other GPS modules.
+
+## License
+
+This project is released under GPL v3 Open Source license. See LICENSE.md for details.
